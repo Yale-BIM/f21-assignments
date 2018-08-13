@@ -14,14 +14,19 @@ into your machine.
 
     ```bash
     # Example
-    $ git clone https://gitlab.com/<username>/cpsc659-assignments.git <path>
+    $ git clone https://gitlab.com/<username>/cpsc659-assignments.git <username>-cpsc659-assignments
     ```
+
+where \<username\> is your GitLab username.
+
 
 3. Change your directory to your cloned repository.
 
     ```bash
-    $ cd cpsc659-assignments
-    # check the status of your repository
+    # Example
+    $ cd <username>-cpsc659-assignments
+ 
+    # and check the status of your repository (you should be in the master branch of your repository)
     $ git status
     On branch master
     (...)
@@ -49,7 +54,7 @@ which contains the set of assignments and starter code.
     ```
 You should then have separate folders for each of the assignments in your repository.
 
-6. Synchronize commits from your local repository to your online Git repository in Gitlab.
+6. Synchronize commits from your local repository to your online Git repository in gitlab.com.
     ```bash
     # Example
     $ git push origin master
@@ -61,40 +66,50 @@ checking the project's page in GitLab.
 8. Ensure that your repository in GitLab has visibility set to **private** in 
 Settings -> General -> Permissions.
 
-9. Add your T.A. as a member of your GitLab repository in Settings -> Members. As role
-permission, choose the maintainer role for the T.A.
+9. Add your T.A. as a member of your GitLab repository in Settings -> Members. In the role
+permission field, choose the maintainer role for the T.A.
     
 
 ## Working on your assignment
 
-The general process that you should follow to work on an assignment is as follows:
+You should follow the steps below when working on an assignment:
+
 1. Go to the directory containing the assignment, e.g., `assignment-0`
 2. Read the README.md file and assignment instructions pdf.
 3. Do the assignment. 
-4. Use the LaTeX template in the assignment directory to write the corresponding report, e.g., using [Overleaf](https://www.overleaf.com/edu/yale#!overview).. 
-5. Whenever you want to save your progress (and your assignment report), commit your work.
+4. Whenever you want to save your code, commit your work.
+
     ```bash
     # Example
     $ git add <list-of-files-to-be-saved>
     $ git commit -m "<commit-message>"
     ```
-6. Push your work to GitLab to keep a remote copy.
+5. Push your work to GitLab to keep a remote copy.
+
     ```bash
     # Example
     $ git push
     ```
+
     > Your final version of the assignment should be pushed to GitLab before the deadline!
     
-6. Repeat steps 3-6 as many times as necessary while you work on your assignment.
+6. Write the corresponding assignment report, 
+e.g., using [Overleaf](https://www.overleaf.com/edu/yale#!overview). 
 
-7. When you are ready to submit your assignment,
+    > A LaTeX template is provided as part of this repository to help you get
+    started with your assignment reports. Feel free to edit this template and
+    modify it to suit your needs.
     
-    i. Gather the specific `commit hash` (SHA) of the version of the code 
-    that you would like to be evaluated on from GitLab. 
+7. Repeat steps 3-6 as many times as necessary while you work on the assignment.
+
+8. When you are ready to submit your assignment,
     
-        > To see all of your commits, go to your repository GitLab page and open 
-        > Repository -> Commits. Copy the commit SHA for your final version of the code
-        > and paste it in the email that you will send to the T.A. to submit your assignment.
+    i. Gather the specific `commit hash` (SHA) of the version of the code in GitLab
+    that you would like to be evaluated on. 
+    
+    > To see all of your commits, go to your repository's GitLab page and open 
+    Repository -> Commits. Copy the commit SHA for the final version of the code
+    and paste it in the email that you will send to the T.A. to submit your assignment.
         
     ii. Generate a `pdf of your LaTeX report`.
     
@@ -108,22 +123,22 @@ you can get the latest commits and integrate them into your local Git repository
 $ git pull upstream master
 ```
 
-If merge conflict happens, please always use latest
+If a merge conflict happens, please always use latest
 commit from upstream. Your work is safe as long you commit and push your code
 to GitLab regularly. 
 
 Once you have resolved any merge conflicts and all commits from
 upstream are merged successfully to your own master branch, push it 
-back to your own GitLab repository. Use the Git command:
+back to your own GitLab repository:
 ```bash
 $ git push origin master
 ```
 
-    > Note: Please consult your T.A. if you have difficulty resolving merge conflict(s).
+> Note: Please consult your T.A. if you have difficulty resolving merge conflict(s).
     
     
 ## Acknowledgements
 
-The set up instructions above were based on the 
+The instructions above are based on the 
 [Assignment repository](https://gitlab.com/DDP2-CSUI/assignment/blob/master/README.md)
  of the Foundation of Programming 2 (CSGE601021) Course at Universitas Indonesia.
