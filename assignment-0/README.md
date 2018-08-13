@@ -1,5 +1,27 @@
 # Assignment 0
 
+This is the first assignment for Yale's CPSC-659 Building Interactive Machines course.
+
+## Table of Contents
+
+* [Introduction](#introduction)
+    * [System Requirements](#system-requirements)
+    * [Background Knowledge](#background-knowledge)
+    * [Deliverables](#deliverables)
+* [Part I - Set up your workspace to work with Shutter](#part-i---setting-up-your-workspace-to-work-with-shutter)
+    * [Questions / Tasks](#questions--tasks)
+* [Part II - Bringing up Shutter](#part-ii---bringing-up-shutter)
+    * [Questions / Tasks](#questions--tasks-1)
+* [Part III. Visualize the robot state in RViz](#part-iii-visualize-the-robot-state-in-rviz)
+    * [Questions / Tasks](#questions--tasks-2)
+* [Part IV. Control one robot joint at a time](#part-iv-control-one-robot-joint-at-a-time)
+    * [Questions / Tasks](#questions--tasks-3)
+* [Part V. Create a ROS node to change joint positions programmatically](#part-v-create-a-ros-node-to-change-joint-positions-programmatically)
+    * [Questions / Tasks](#questions--tasks-4)
+
+
+## Introduction
+
 This assignment will provide you practical experience using the [Robot Operating 
 System (ROS)](http://www.ros.org/) and [git](https://git-scm.com/).
 
@@ -26,16 +48,19 @@ At the bare minimum, you should be familiar with the commands `cd`, `ls`, `rm`, 
 
 #### Deliverables
 
-- **Report:** You are expected to submit a pdf with answers to the assignment questions,
-information needed to understand your code, and the specific commit SHA of the code accompanying
-the report. Though not mandatory, you can generate this pdf 
-with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and the [LaTeX template]()
-provided as part of this assignment.
+- **Report:** You are expected to submit a pdf with answers to the questions/tasks at 
+the end of each part of the assignment. This report should also have any information needed 
+to understand and/or run your code, as well as the specific commit SHA of the version of the code
+that you would like to be evaluated on. Though not mandatory, it is recommended that you generate this pdf 
+with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this 
+[simple assignment template](https://www.overleaf.com/latex/templates/simple-assignment-template/mzkqqqjypzvd) 
+in [LaTeX](https://www.latex-project.org/).
 
-- **Code:** You are also expected to push code to your [GitLab](http://www.gitlab.com) repository
-as indicated in the [general instructions](../README.md) document for CPSC-659 assignments. 
+- **Code:** You are also expected to push code for this assignment to your 
+[GitLab](http://www.gitlab.com) repository as indicated in the [general instructions](../README.md) 
+document for CPSC-659 assignments. 
 
-## Part I - Setting up your workspace to work with Shutter
+## Part I - Set up your workspace to work with Shutter
 
 *Catkin* is the build system for ROS. To understand what it is for and why it exists, 
 read sections 1, 2 and 4 of Catkin's conceptual overview document: 
@@ -150,14 +175,15 @@ in your home directory. Follow the steps in this tutorial:
      can work properly with the code that you've added to and built in ~/catkin_ws.
                   
 
-### Questions
+### Questions / Tasks
+
 Read more about catkin workspaces [here](http://wiki.ros.org/catkin/workspaces), 
 and answer the following questions in your assignment report:
 
-- **PI-Q1.** What other directory was automatically created in ~/catkin_ws when you executed 
+- **I-1.** What other directory was automatically created in ~/catkin_ws when you executed 
 `catkin_make` and what is this directory for?
 
-- **PI-Q2.** The command `catkin_make` should have generated 3 types of setup files (setup.bash,
+- **I-2.** The command `catkin_make` should have generated 3 types of setup files (setup.bash,
 setup.sh, setup.zsh). What is the difference between these setup files?
 
 
@@ -258,18 +284,18 @@ exchange information between nodes.
     
     
 
-### Questions
+### Questions / Tasks
     
 Answer the questions and complete the tasks below based on the status of your ROS system after 
 bringing up the robot.
   
-- **PII-Q1.** Based on the graph from rqt_graph, how many topics have at least one 
+- **II-1.** Based on the graph from rqt_graph, how many topics have at least one 
 subscriber and at least one publisher in your ROS system? 
 
-- **PII-Q2.** Through which topic in specific are the /arbotix and 
+- **II-2.** Through which topic in specific are the /arbotix and 
 /robot_state_publisher node communicating in ROS?
 
-- **PII-Q3.** Using the [rostopic command-line  tool](http://wiki.ros.org/rostopic), investigate what type 
+- **II-3.** Using the [rostopic command-line  tool](http://wiki.ros.org/rostopic), investigate what type 
 of [ROS message]() is being sent/received through the ROS topic that /arbotix and /robot_state_publisher 
 are using to communicate with one another?
 
@@ -278,8 +304,7 @@ are using to communicate with one another?
     $ rostopic info <topic_name>
     ```
 
-
-- **PII-Q4.** What are the fields of the message type that is used to transmit information from 
+- **II-4.** What are the fields of the message type that is used to transmit information from 
 /arbotix to /robot_state_publisher?
 
     *Tip:* Query information about a message type with the [rosmsg command-line  tool](http://wiki.ros.org/rosmsg):
@@ -287,15 +312,15 @@ are using to communicate with one another?
     $ rosmsg show <message_type>
     ```
 
-- **PII-Q5.** Using the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) command-line tool 
+- **II-5.** Using the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) command-line tool 
 get one of the messages that is being sent from /arbotix to /robot_state_publisher. Include an example
 in your report.
 
 
-- **PII-Q6.** Use the [rostopic hz](http://wiki.ros.org/rostopic#rostopic_hz) command-line tool 
+- **II-6.** Use the [rostopic hz](http://wiki.ros.org/rostopic#rostopic_hz) command-line tool 
 to find out at what rate are messages being published to the topic of question PII-Q2.
 
-- **PII-Q5.** Besides the topic of question PII-Q2, through which other topics can the 
+- **II-5.** Besides the topic of question PII-Q2, through which other topics can the 
 /arbotix node publish messages? Provide a list of the topics and their respective 
 message types in your report.
 
@@ -353,19 +378,19 @@ then see a simplified model of the robot in rviz, as in the figure below.
     robot in rviz with your mouse.
     
     
-### Questions
+### Questions / Tasks
 
 Inspect the robot model using the properties of the RobotModel Display in rviz. Then,
 answer the questions and complete the tasks below:
 
-- **PIII-Q1.** How many links does the robot model have? List them all in your report.
+- **III-1.** How many links does the robot model have? List them all in your report.
     
-- **PIII-Q2.** Use the properties of the RobotModel Display panel to change the "alpha" 
+- **III-2.** Use the properties of the RobotModel Display panel to change the "alpha" 
 value of all of the links of the robot to 0.5, and show the coordinate axes for 5 key links in 
 the robot: "base_link", "shoulder_link", "biceps_link", "forearm_link", and "wrist_1_link". 
 The coordinate axes can be turned on and off with the "show axes" property of each of the links.
  
-    Take a picture of the robot in rviz with the 4 set of axes visible and include it
+    Take a picture of the robot in rviz with the 5 set of axes visible and include it
 in your report.
 
     > Each of the axes that you are visualizing is a coordinate frame (attached to a rigid body)
@@ -373,13 +398,11 @@ in your report.
     Additional information about tf can be found [here](http://wiki.ros.org/tf).
 
 
-## Part IV. Controlling one robot joint at a time
+## Part IV. Control one robot joint at a time
     
 Shutter has 5 key links ("base_link", "shoulder_link", "biceps_link", 
-"forearm_link", and "wrist_1_link") and 4 key revolute  
-[joints](http://wiki.ros.org/urdf/XML/joint). The joints are implemented in the real
-robot with
- [dynamixel motors](http://www.robotis.us/dynamixel/). These motors count with
+"forearm_link", and "wrist_1_link") and 4 key revolute [joints](http://wiki.ros.org/urdf/XML/joint). The joints are implemented in the real
+robot with [dynamixel motors](http://www.robotis.us/dynamixel/). These motors count with
 magnetic encoders that provide the arbotix driver an estimate of their current position. 
  
 Each joint in the robot connects two links:
@@ -404,26 +427,26 @@ rviz as in Parts II and III of this assignment.
     through the /joint_*/command topics. The /arbotix driver, which listens to these topics,
     will then send the new positions to the robot. As the robot
     starts moving, the /arbotix driver will also publish the new joint positions, which then
-    get re-published in /tf by /robot_state_publisher. Finally, the /tf transformation are used 
+    get re-published in /tf by /robot_state_publisher. Finally, the /tf transformations are used 
     by rviz to render the robot in motion.
     
-### Questions
+### Questions / Tasks
 
-- **PIV-Q1.** Now that you know that the robot has 4 joints, how can you get the current position
+- **IV-1.** Now that you know that the robot has 4 joints, how can you get the current position
 of the joints through the command line? 
 
     *Tip:* The current positions must be measured with magnetic encoders in the real 
     robot (or simulated by the arbotix driver).
 
-- **PIV-Q2.** How can you inspect through the command line the exact position that the 
+- **IV-2.** How can you inspect through the command line the exact position that the 
 arbotix_gui is requesting for a joint as you move one of the sliders in the interface? For example, 
 if you enable joint_1 in the arbotix_gui and move the slider to rotate the robot around, 
 how can you get the exact angle that you are requesting that joint to have?
 
-- **PIV-Q3.** What is the maximum and minimum angle in radians that you can set for joint_4 through
+- **IV-3.** What is the maximum and minimum angle in radians that you can set for joint_4 through
 the arbotix_gui?
 
-- **PIV-Q4.** Take a screenshot of the robot in rviz when its joints are set to:
+- **IV-4.** Take a screenshot of the robot in rviz when its joints are set to:
     - joint_1: 0 rad
     - joint_2: 0 rad
     - joint_3: -1.57 rad
@@ -431,3 +454,185 @@ the arbotix_gui?
     
     Include the screenshot in your report.
     
+- **IV-5.** What shell command can you use to request a new pose for a 
+joint of the robot? Before testing this command, close the arbotix_gui 
+so that it doesn't interfere with your pose request.
+
+    *Tip:* Use the [rostopic pub](http://wiki.ros.org/rostopic#rostopic_pub) command line tool.
+
+## Part V. Create a ROS node to change joint positions programmatically
+
+You will now create a custom package and write a ROS node in Python to 
+change the pose of the robot programmatically. The robot should iterate between the 3 poses below:
+
+- Pose 1 (*default_pose*):
+    * joint_1: 0 rad 
+    * joint_2: 0 rad
+    * joint_3: 0 rad
+    * joint_4: 0 rad
+    
+- Pose 2 (*pulled_back_pose*):
+    * joint_1: 0 rad 
+    * joint_2: -0.95 rad
+    * joint_3: 0.41 rad
+    * joint_4: -1 rad
+    
+- Pose 2 (*low_pose*):
+    * joint_1: 0 rad 
+    * joint_2: -1,45 rad
+    * joint_3: 1.45 rad
+    * joint_4: -1.53 rad
+
+More specifically, the robot should change pose from Pose 1 -> Pose 2 -> Pose 3 -> Pose 1 -> ... 
+and so on. The robot should wait about 5 seconds between changing poses.
+
+Follow the steps below to get started:
+
+1. Place your local git repository in the src directory of your workspace. For example,
+if you named your workspace ~/catkin_ws and cloned your repository in your home folder as 
+~/f18-assignments, then move the repository to the ~/catkin_ws/src directory as follows:
+
+    ```bash 
+    # Example 
+    $ cd ~
+    $ mv f18-assignments catkin_ws/src/
+    ```
+    
+    > Because you will create a ROS package for your code within your repository, placing
+    your repository in the src directory of your workspace will allow you to run your code
+    with `rosrun` from any location in your computer.
+    
+2. Create a new catkin package with the `catkin_create_pkg` tool from the [catkin_pkg](https://github.com/ros-infrastructure/catkin_pkg) ROS library.
+This package should be named "shutter_poses" and should be created within the assignment_0 
+directory of your git repository.
+
+    ```bash
+    # Example
+    $ cd ~/catkin_ws/src/f18-assignments/assignment_0
+    $ catkin_create_pkg shutter_poses rospy std_msgs 
+    ```
+
+    > The rospy and std_msgs packages are added at the end of the catkin_create_pkg command
+    so that they are automatically defined as dependencies of your package. You can always
+    add/edit/remove dependencies by editing the package.xml and CMakeLists.txt files 
+    that are created within your package. See this 
+    [tutorial](http://wiki.ros.org/ROS/Tutorials/CreatingPackage) (Sec. 5 & 6) for examples.
+
+3. Customize your package by editing the package.xml file that was created by catkin_create_pkg 
+in your package. Add a better description of the package and author information.
+
+4. Create a python node in your new package. Name the node "test_poses.py" and save it
+in the scripts folder of your package.
+
+    ```bash
+    # Example
+    $ roscd shutter_poses
+    $ mkdir scripts
+    $ touch switch_poses.py
+    ```
+    
+    You should now have a new empty file named "switch_poses.py" in 
+    f18-assignments/assignment_0/shutter_poses/scripts.
+
+5. Make the file into an executable python script. Add ```#!/usr/bin/env python``` as first
+line to your file and change permissions with 
+[chmod](https://www.howtoforge.com/tutorial/linux-chmod-command/) to allow it to run as an executable:
+
+    ```bash
+    # Example
+    $ chmod +x switch_poses.py
+    ```
+
+6. Structure the code in your node as in the publisher example of 
+[this tutorial](http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29#rospy_tutorials.2BAC8-Tutorials.2BAC8-WritingPublisherSubscriber.Writing_the_Publisher_Node)
+and write any necessary code to make the joints of the robot move according to the poses
+specified above and at a constant frame rate. 
+
+    In your node, you should first import rospy and any necessary message types at the top of the program. 
+    Then, define a function that will initialize the node and do most of the work. Finally,
+    call this function from your main function. Your program should then look like the example below:
+
+    ```python
+    #!/usr/bin/env python
+    
+    import rospy
+    from std_msgs.msg import Float64
+    # add any other python modules that you need here ...
+
+    # define joint positions per pose
+    poses_list = [
+       {'joint_1': 0, 'joint_2': 0, 'joint_3': 0, 'joint_4': 0},
+       ... # complete list of poses
+    ]
+
+    def pose_switcher():
+       # Define publishers and init your node here.
+       # Add a loop to request the robot to move its joints according to the 
+       # desired poses and at a constant rate.
+       ...
+
+    if __name__ == '__main__':
+       try: 
+           pose_switcher()
+       except rospy.ROSInterruptException:
+           pass
+    ```
+    
+7. Once you've finished writing your node, start roscore (as in Part II of this assignment), 
+bring up the robot (Part II), run rviz (Part III), and run your node with `rosrun`:
+
+    ```bash
+    # Example
+    rosrun shutter_poses switch_poses.py
+    ```
+    
+8. Check that the robot is behaving as expected in RViz. If not, close your node, edit your code,
+and run it again.
+
+    > You can leave roscore and all other nodes running while you edit your code.
+    
+9. Save your work by adding and committing your node to your local repository and 
+pushing your code to GitLab.
+
+    ```bash
+    # add files to your repository to track their changes over time
+    $ roscd shutter_poses
+    $ git add package.xml CMakeLists.txt scripts/switch_poses.py
+
+    # commit changes
+    $ git commit -m "<some useful log message>"
+
+    # push changes to your master branch in GitLab
+    $ git push origin master
+    ```
+    
+    > Continously committing your work and pushing to Gitlab will ensure that your
+    code is backed up and readily accessible at any time in the future.
+    
+### Questions / Tasks
+
+- **V-1.** Documenting ROS packages and nodes is good practice. Follow the steps below to provide
+basic information about your code in your ROS package.
+
+    * **V-1a.** Record your screen (e.g., with [kazam](https://launchpad.net/kazam)) as the 
+robot is changing its pose in RViz and reaching the desired poses. Turn this video into an animated
+gif, e.g., with ffmpeg and imagemagick as indicated in 
+[this code snipped](https://gitlab.com/snippets/1743818), and add it to your ROS package:
+
+        ```bash
+        $ roscd shutter_poses
+        $ mkdir docs
+        $ mv <path-to-gif> docs/
+        ```
+    
+    * **V-1b.** Add a README.md file in 
+    [GitLab flavored markdown](https://docs.gitlab.com/ee/user/markdown.html) format to your shutter_poses package. This file should
+    explain what the switch_poses.py node does and include the gif that you generated from PV-1 to show
+    an example execution. 
+
+        > More information on including images in GitLab's 
+    markdown can be found [here](https://docs.gitlab.com/ee/user/markdown.html#images).
+
+- **V-2.** Add the `commit SHA` that corresponds to the final version of your code to your report.
+This version of the code is what will be used to evaluate this assignment.
+
