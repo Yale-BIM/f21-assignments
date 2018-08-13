@@ -8,6 +8,7 @@ This is the first assignment for Yale's CPSC-659 Building Interactive Machines c
     * [System Requirements](#system-requirements)
     * [Background Knowledge](#background-knowledge)
     * [Deliverables](#deliverables)
+    * [Evaluation](#evaluation)
     * [Further Reading and Tutorials](#further-reading-and-tutorials)
 * [Part I - Set up your workspace to work with Shutter](#part-i---setting-up-your-workspace-to-work-with-shutter)
     * [Questions / Tasks](#questions--tasks) 
@@ -640,27 +641,20 @@ shutter_poses package. This file should briefly explain what the switch_poses.py
 
     > Documenting ROS packages and nodes is good practice!
 
-  
-    
-    * **V-1b.** Add a README.md file in 
-    [GitLab flavored markdown](https://docs.gitlab.com/ee/user/markdown.html) format to your shutter_poses package. This file should
-    explain what the switch_poses.py node does and include the gif that you generated from PV-1 to show
-    an example execution. 
-
-        > More information on including images in GitLab's 
-    markdown can be found [here](https://docs.gitlab.com/ee/user/markdown.html#images).
-
 - **V-2.** Add the `commit SHA` that corresponds to the final version of your code to your report.
 This version of the code is what will be used to evaluate this assignment.
 
-- **V-1a. (5pt extra credit)** Record your screen (e.g., with [kazam](https://launchpad.net/kazam)) as the 
+- **V-3. (5pt extra credit)** Record your screen (e.g., with [kazam](https://launchpad.net/kazam)) as the 
 robot is changing its pose in RViz and reaching the desired poses. Turn this video into an animated
 gif, e.g., with ffmpeg and imagemagick as indicated in 
 [this code snipped](https://gitlab.com/snippets/1743818), and include it to your README.md file
 to demonstrate the execution of the switch_poses.py node in your documentation. 
 
-     > Add the animated gif to your repository so that it's displayed in the GitLab page
-     when your README.md file is rendered on the web. More information on including images 
+    NOTE: We suggest that you add the animated gif to your repository so that all of your documentation
+    is contained in a single place and the animated git is displayed in 
+    GitLab when your README.md file is rendered on the web. 
+
+     > More information on including images 
      in GitLab's markdown can be found [here](https://docs.gitlab.com/ee/user/markdown.html#images).
 
 
