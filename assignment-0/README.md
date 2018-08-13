@@ -239,7 +239,7 @@ with [roslaunch](http://wiki.ros.org/roslaunch).
 
 ### Questions
     
-Complete the following tasks and answer the questions based on the status of your ROS system after
+Complete the tasks and answer the questions below based on the status of your ROS system after
 bringing up Shutter.
   
 **PII-Q1.** ROS uses [topics](http://wiki.ros.org/Topics) to communicate information between nodes. 
@@ -251,8 +251,8 @@ nodes that generate data *publish* to the relevant topic.
 There can be multiple publishers and subscribers to a topic. 
 
 Using the `rqt_graph` node in the [rqt_graph package](http://wiki.ros.org/rqt_graph), generate an 
-image of all of the nodes that are running in ROS after bringing up the robot and the topics that are used 
-to exchange information.
+image of all of the nodes that are running in ROS after bringing up the robot and the topics 
+that are currently used to exchange information.
 
 ```bash
 $ rosrun rqt_graph rqt_graph
@@ -276,7 +276,7 @@ to topics. Using the [rostopic tool](http://wiki.ros.org/rostopic), investigate 
 of [ROS message]() is being sent/received through the topic that /arbotix and /robot_state_publisher 
 are using to communicate with one another?
 
-**Tip:** Query information about a topic with:
+*Tip:* Query information about a topic with:
 ```bash
 $ rostopic info <topic_name>
 ```
@@ -285,7 +285,7 @@ $ rostopic info <topic_name>
 **PII-Q4.** What are the fields of the message type that is used to transmit information from 
 /arbotix to /robot_state_publisher?
 
-**Tip:** Query information about a message type with the [rosmsg tool](http://wiki.ros.org/rosmsg):
+*Tip:* Query information about a message type with the [rosmsg tool](http://wiki.ros.org/rosmsg):
 ```bash
 $ rosmsg show <message_type>
 ```
@@ -293,7 +293,7 @@ $ rosmsg show <message_type>
 
 **PII-Q5.** Through which other topics is the /arbotix node publishing messages? 
 
-**Tip:** Request information about a node with the [rosnode tool](wiki.ros.org/rosnode):
+*Tip:* Request information about a node with the [rosnode tool](wiki.ros.org/rosnode):
 ```bash
 $ rosnode info <node_name>
 ```
@@ -305,10 +305,14 @@ Provide the list of topics and their respective message types in your report.
 find out what is the current position and velocity of the 4 joints (motors) of the robot
 as published by the /arbotix node.
 
-**Tip:** Passing the parameter -n 1 to ```rostopic echo``` will only print a single message.
+**PII-Q7.** What does the parameter "-n 1" do when you run rostopic echo? For example,
+
+```bash
+$ rostopic echo -n 1 <topic_name>
+```
 
 
-**PII-Q7.** Find out at what rate the /arbotix node is publishing the position of the joints
+**PII-Q8.** Find out at what rate the /arbotix node is publishing the position of the joints
 of the robot with the [rostopic hz](http://wiki.ros.org/rostopic#rostopic_hz) tool.
 
     
