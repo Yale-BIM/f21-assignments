@@ -10,15 +10,15 @@ This is the first assignment for Yale's CPSC-659 Building Interactive Machines c
     * [Deliverables](#deliverables)
     * [Further Reading and Tutorials](#further-reading-and-tutorials)
 * [Part I - Set up your workspace to work with Shutter](#part-i---setting-up-your-workspace-to-work-with-shutter)
-    * [Questions / Tasks](#questions--tasks)
+    * [Questions / Tasks](#questions--tasks) 
 * [Part II - Bringing up Shutter](#part-ii---bringing-up-shutter)
-    * [Questions / Tasks](#questions--tasks-1)
+    * [Questions / Tasks](#questions--tasks-1) 
 * [Part III. Visualize the robot state in RViz](#part-iii-visualize-the-robot-state-in-rviz)
     * [Questions / Tasks](#questions--tasks-2)
 * [Part IV. Control one robot joint at a time](#part-iv-control-one-robot-joint-at-a-time)
-    * [Questions / Tasks](#questions--tasks-3)
+    * [Questions / Tasks](#questions--tasks-3) 
 * [Part V. Create a ROS node to change joint positions programmatically](#part-v-create-a-ros-node-to-change-joint-positions-programmatically)
-    * [Questions / Tasks](#questions--tasks-4)
+    * [Questions / Tasks](#questions--tasks-4) 
 
 
 ## Introduction
@@ -60,6 +60,20 @@ in [LaTeX](https://www.latex-project.org/).
 - **Code:** You are also expected to push code for this assignment to your 
 [GitLab](http://www.gitlab.com) repository as indicated in the [general instructions](../README.md) 
 document for CPSC-659 assignments. 
+
+#### Evaluation
+
+You assignment will be evaluated based on the content of your report and your code:
+
+- Report (70 pts)
+    * Part I (10 pts)
+    * Part II (25 pts)
+    * Part III (15 pts)
+    * Part IV (15 pts)
+    * Part V (5 pts + 5 pts of extra credit)
+- Code (30 pts)
+    * Part v (30 pts)
+
 
 #### Further Reading and Tutorials 
 
@@ -620,19 +634,13 @@ pushing your code to GitLab.
     
 ### Questions / Tasks
 
-- **V-1.** Documenting ROS packages and nodes is good practice. Follow the steps below to provide
-basic information about your code in your ROS package.
+- **V-1.** Add a README.md file in 
+[GitLab flavored markdown](https://docs.gitlab.com/ee/user/markdown.html) format to your 
+shutter_poses package. This file should briefly explain what the switch_poses.py node does.
 
-    * **V-1a.** Record your screen (e.g., with [kazam](https://launchpad.net/kazam)) as the 
-robot is changing its pose in RViz and reaching the desired poses. Turn this video into an animated
-gif, e.g., with ffmpeg and imagemagick as indicated in 
-[this code snipped](https://gitlab.com/snippets/1743818), and add it to your ROS package:
+    > Documenting ROS packages and nodes is good practice!
 
-        ```bash
-        $ roscd shutter_poses
-        $ mkdir docs
-        $ mv <path-to-gif> docs/
-        ```
+  
     
     * **V-1b.** Add a README.md file in 
     [GitLab flavored markdown](https://docs.gitlab.com/ee/user/markdown.html) format to your shutter_poses package. This file should
@@ -645,6 +653,15 @@ gif, e.g., with ffmpeg and imagemagick as indicated in
 - **V-2.** Add the `commit SHA` that corresponds to the final version of your code to your report.
 This version of the code is what will be used to evaluate this assignment.
 
+- **V-1a. (5pt extra credit)** Record your screen (e.g., with [kazam](https://launchpad.net/kazam)) as the 
+robot is changing its pose in RViz and reaching the desired poses. Turn this video into an animated
+gif, e.g., with ffmpeg and imagemagick as indicated in 
+[this code snipped](https://gitlab.com/snippets/1743818), and include it to your README.md file
+to demonstrate the execution of the switch_poses.py node in your documentation. 
+
+     > Add the animated gif to your repository so that it's displayed in the GitLab page
+     when your README.md file is rendered on the web. More information on including images 
+     in GitLab's markdown can be found [here](https://docs.gitlab.com/ee/user/markdown.html#images).
 
 
 
