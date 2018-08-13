@@ -48,7 +48,7 @@ in your home directory. Follow the steps in this tutorial:
 [http://wiki.ros.org/catkin/Tutorials/create_a_workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
 
     > The [tutorial](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
-    page has tabs for switching between ROS versions. Follow the tutorial for the version of
+    page has tabs for switching between ROS distributions. Follow the tutorial for the distribution of
     ROS that you have installed in your system, e.g., Kinetic.
 
 2. Download Shutter's codebase into your workspace's `src` directory.
@@ -66,13 +66,12 @@ in your home directory. Follow the steps in this tutorial:
     ```
     
     > [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) are other,
-    external projects (and also Git repositories) that have been included in 
+    external projects (Git repositories) that have been included in 
     the shutter-ros repository. These projects are needed to run the robot's base code.
     
     You should now have a number of directories in ~/catkin_ws/src/shutter-ros, including:
     
     ```bash
-    # Example
     $ cd ~/catkin_ws/src
     $ ls -C1 shutter-ros
     arbotix_ros
@@ -85,11 +84,11 @@ in your home directory. Follow the steps in this tutorial:
     Some of these directories are standard folders, other are ROS catkin packages. 
     A ROS catkin package contains:
     
-    - A [catkin compliant package.xml](http://wiki.ros.org/catkin/package.xml) file
+    * A [catkin compliant package.xml](http://wiki.ros.org/catkin/package.xml) file
     that contains basic information about the package, e.g., package name, description,
     license, author, dependencies, etc.
     
-    - A [CMakeLists.txt](http://wiki.ros.org/catkin/CMakeLists.txt) file that is 
+    * A [CMakeLists.txt](http://wiki.ros.org/catkin/CMakeLists.txt) file that is 
     used by catkin to build the software package.
     
     For example, the shutter_bringup package has the following files:
