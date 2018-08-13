@@ -503,7 +503,7 @@ change the pose of the robot programmatically. The robot should iterate between 
     
 - Pose 2 (*low_pose*):
     * joint_1: 0 rad 
-    * joint_2: -1,45 rad
+    * joint_2: -1.45 rad
     * joint_3: 1.45 rad
     * joint_4: -1.53 rad
 
