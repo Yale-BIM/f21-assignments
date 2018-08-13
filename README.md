@@ -134,7 +134,7 @@ back to your own GitLab repository:
 $ git push origin master
 ```
 
-> Note: Please consult your T.A. if you have difficulty resolving merge conflict(s).
+> NOTE: Please consult your T.A. if you have difficulty resolving merge conflict(s).
     
     
 ## Acknowledgements
