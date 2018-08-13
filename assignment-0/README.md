@@ -308,81 +308,126 @@ message types in your report.
     ```
 
 
-## Part III. Visualize the robot state in RViz
+## Part III. Visualize the robot state in RViz 
 
-First bring up Shutter as in Part I. Then, follow the steps below to visualize a simplified 
-version of the robot and its joints
+First bring up Shutter as in Part II of this assignment (though there is no need to launch rqt_graph this time). 
+Then, follow the steps below to visualize a simplified version of the robot and its joints in [rivz](http://wiki.ros.org/rviz).
+
+> rviz is a 3D visualization environment for ROS. It helps visualize sensor data and robot 
+state information. 
+
+1. Read sections 4-7 of the [rviz User Guide](http://wiki.ros.org/rviz/UserGuide). The guide will 
+provide you an overview of the Panels, Displays, and configuration options available in rviz.
  
-1. Run RViz in a new terminal. 
+2. Run `rviz` in a new terminal. 
 
     ```bash
     $ rosrun rviz rviz
     ```
+ 
+    A graphical interface should then open up in your computer.
     
-    1. Change the "Fixed Frame" under the "Global Options" panel to "base_link".
+3. Change the `Fixed Frame` to "base_link" in rviz's Global Options panel. This will ensure
+that the robot is model is shown in the middle of the grid in rviz.
     
-    2. Change your background color to a light color in the Global Options as well.
+4. Change your background color to a light color in the Global Options as well.
     
-    3. Add a "Robot Model" display to RViz by clicking on the "Add" button in the Displays panel.
-    Select the Robot Model option under the rviz folder.
-    
-    4. 
+5. Add a `RobotModel display` to rviz. Click on the "Add" button in the Displays panel, and
+a window will pop up. Then, look for the "rviz" plugins folder, and select RobotModel. You should
+then see a simplified model of the robot in rviz, as in the figure below.
 
-    > The Shutter robot is built with a WidowX arm, except that the two last
-    motors in the tip of the arm has been removed in favor of placing a camera. 
-    Each joint corresponds to one dynamixel motor in in the arm.
+    ![](docs/shutter_rviz_visualization.png)
 
-
-## Part III. Moving the robot one joint at a time
-
-First bring up Shutter as in Part I. Then, follow the steps below to move the joints of the
-robot.
-     
-1. Start [RViz](http://wiki.ros.org/rviz) with [rosrun](http://wiki.ros.org/rosbash#rosrun) to 
-visualize the current state of the simulated robot.
-
-    ```bash
-    $ roscd shutter_description/config
-    $ rosrun rviz rviz -d robotiew.rviz
-    ```
+    The [RobotModel Display type](http://wiki.ros.org/rviz/DisplayTypes/RobotModel) shows
+    the [links](http://wiki.ros.org/urdf/XML/link) of the robot according to 
+    the URDF model published by the shutter_bringup.launch script (Part II - step 2 of this assignment).
+    Each link describes a rigid body in the robot with physical, geometrical, 
+    and visual features. 
     
-    > The -d parameter of rviz tells the program to load a given configuration file. This
-    file indicates what displays, tool properties and cameras to show in the interface. 
-    See this [RViz user guide](http://wiki.ros.org/rviz/UserGuide) for more information. 
+    The RobotModel display also uses the [/tf](wiki.ros.org/tf) transform 
+    tree to position the links of the robot in their respective current location.
+    The information in the /tf topic is updated by the /robot_state_publisher node based
+    on the messages that /arbotix publishes to the /joint_states topic.
     
+    > As indicated in the user guide, you can zoom in, pan, and rotate the view of the 
+    robot in rviz with your mouse.
+    
+    
+### Questions
+
+Inspect the robot model using the properties of the RobotModel Display in rviz. Then,
+answer the questions and complete the tasks below:
+
+- **PIII-Q1.** How many links does the robot model have? List them all in your report.
+    
+- **PIII-Q2.** Use the properties of the RobotModel Display panel to change the "alpha" 
+value of all of the links of the robot to 0.5, and show the coordinate axes for 5 key links in 
+the robot: "base_link", "shoulder_link", "biceps_link", "forearm_link", and "wrist_1_link". 
+The coordinate axes can be turned on and off with the "show axes" property of each of the links.
+ 
+    Take a picture of the robot in rviz with the 4 set of axes visible and include it
+in your report.
+
+    > Each of the axes that you are visualizing is a coordinate frame (attached to a rigid body)
+    in the robot. Their relative position and orientation is provided to rviz through the /tf topic. 
+    Additional information about tf can be found [here](http://wiki.ros.org/tf).
+
+
+## Part IV. Controlling one robot joint at a time
+    
+Shutter has 5 key links ("base_link", "shoulder_link", "biceps_link", 
+"forearm_link", and "wrist_1_link") and 4 key revolute  
+[joints](http://wiki.ros.org/urdf/XML/joint). The joints are implemented in the real
+robot with
+ [dynamixel motors](http://www.robotis.us/dynamixel/). These motors count with
+magnetic encoders that provide the arbotix driver an estimate of their current position. 
+ 
+Each joint in the robot connects two links:
+- joint 1: Connects the "base_link" to the "shoulder_link"
+- joint 2: Connects the "shoulder_link" to the "bicepts_link"
+- joint 3: Connects the "bicepts_link" to the "forearm_link"
+- joint 4: Connects the "forearm_link" to the "wrist_1_link"
+ 
+You will now learn to control the positions of these 4 joints with a graphical
+interface in order to change the pose of the robot.
+
+1. If the simulated robot or rviz are not running, bring up the robot and 
+rviz as in Parts II and III of this assignment.
+
 2. Control the position of the robot's joints with the `arbotix_gui` interface.
 
     ```bash
     $ rosrun arbotix_python arbotix_gui
     ```
     
-    By moving the sliders in the GUI, you will be sending requests for new joint positions 
-    to the robot. The requests are sent from the arbotix_gui ROS node (called /controllerGUI)
-    to the arbotix driver node (/arbotix) through the /joint_*/command topic.
+    By moving the sliders in the GUI, you will be sending requests to move the joints
+    through the /joint_*/command topics. The /arbotix driver, which listens to these topics,
+    will then send the new positions to the robot. As the robot
+    starts moving, the /arbotix driver will also publish the new joint positions, which then
+    get re-published in /tf by /robot_state_publisher. Finally, the /tf transformation are used 
+    by rviz to render the robot in motion.
     
+### Questions
+
+- **PIV-Q1.** Now that you know that the robot has 4 joints, how can you get the current position
+of the joints through the command line? 
+
+    *Tip:* The current positions must be measured with magnetic encoders in the real 
+    robot (or simulated by the arbotix driver).
+
+- **PIV-Q2.** How can you inspect through the command line the exact position that the 
+arbotix_gui is requesting for a joint as you move one of the sliders in the interface? For example, 
+if you enable joint_1 in the arbotix_gui and move the slider to rotate the robot around, 
+how can you get the exact angle that you are requesting that joint to have?
+
+- **PIV-Q3.** What is the maximum and minimum angle in radians that you can set for joint_4 through
+the arbotix_gui?
+
+- **PIV-Q4.** Take a screenshot of the robot in rviz when its joints are set to:
+    - joint_1: 0 rad
+    - joint_2: 0 rad
+    - joint_3: -1.57 rad
+    - joint_4: 0 rad
     
-In the event that you 
-    ever need to, you can access the URDF string describing the robot's model with the `rosparam` 
-    command:
+    Include the screenshot in your report.
     
-    ```bash
-    # Example
-    $ rosparam get /robot_description
-    "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!-- ===================================================================================\
-    \ -->\n<!-- |    This document was autogenerated by xacro from /home/shutter/shutter_ws/src/shutter-ros/shutter_description/robots/shutter.v.0.1.urdf.xacro\
-    \ | -->\n<!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                \
-    \                 | -->\n<!-- ===================================================================================\
-    \ -->\n<robot name=\"widowx_arm\" xmlns:xacro=\"http://ros.org/wiki/xacro\">\n \
-    \ <transmission name=\"tran1\">\n    <type>transmission_interface/SimpleTransmission</type>\n\
-    \    <joint name=\"joint_1\"/>\n    <actuator name=\"motor1\">\n      <hardwareInterface>EffortJointInterface</hardwareInterface>\n\
-    \      <mechanicalReduction>1</mechanicalReduction>\n    </actuator>\n  </transmission>\n\
-    \  <transmission name=\"tran2\">\n    <type>transmission_interface/SimpleTransmission</type>\n\
-    \    <joint name=\"joint_2\"/>\n    <actuator name=\"motor2\">\n      <hardwareInterface>EffortJointInterface</hardwareInterface>\n\
-    \      <mechanicalReduction>1</mechanicalReduction>\n    </actuator>\n  </transmission>\n\
-    \  <transmission name=\"tran3\">\n    <type>transmission_interface/SimpleTransmission</type>\n\ 
-    (...)
-    ```
-    
-    or you can get it programmatically with the roscpp or rospy API as explained 
-    [here](http://wiki.ros.org/roscpp/Overview/Parameter%20Server#Getting_Parameters) and 
-    [here](http://wiki.ros.org/rospy/Overview/Parameter%20Server#Getting_parameters), respectively.
