@@ -8,6 +8,7 @@ This is the first assignment for Yale's CPSC-659 Building Interactive Machines c
     * [System Requirements](#system-requirements)
     * [Background Knowledge](#background-knowledge)
     * [Deliverables](#deliverables)
+    * [Further Reading and Tutorials](#further-reading-and-tutorials)
 * [Part I - Set up your workspace to work with Shutter](#part-i---setting-up-your-workspace-to-work-with-shutter)
     * [Questions / Tasks](#questions--tasks)
 * [Part II - Bringing up Shutter](#part-ii---bringing-up-shutter)
@@ -59,6 +60,14 @@ in [LaTeX](https://www.latex-project.org/).
 - **Code:** You are also expected to push code for this assignment to your 
 [GitLab](http://www.gitlab.com) repository as indicated in the [general instructions](../README.md) 
 document for CPSC-659 assignments. 
+
+#### Further Reading and Tutorials 
+
+Feel free to read more about ROS in its [wiki](http://wiki.ros.org/) as you work on 
+this assignment or, later, if you want to gain a deeper understanding of any of the concepts 
+mentioned below. Additional tutorials can be found in [this page of the wiki](http://wiki.ros.org/ROS/Tutorials).
+Questions (and answers) to common problems or issues with ROS can also be 
+found in [https://answers.ros.org/questions/](https://answers.ros.org/questions/).
 
 ## Part I - Set up your workspace to work with Shutter
 
@@ -635,4 +644,7 @@ gif, e.g., with ffmpeg and imagemagick as indicated in
 
 - **V-2.** Add the `commit SHA` that corresponds to the final version of your code to your report.
 This version of the code is what will be used to evaluate this assignment.
+
+
+
 
