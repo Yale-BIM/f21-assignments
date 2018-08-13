@@ -84,11 +84,11 @@ in your home directory. Follow the steps in this tutorial:
     Some of these directories are standard folders, other are ROS catkin packages. 
     A ROS catkin package contains:
     
-    * A [catkin compliant package.xml](http://wiki.ros.org/catkin/package.xml) file
+    1. A [catkin compliant package.xml](http://wiki.ros.org/catkin/package.xml) file
     that contains basic information about the package, e.g., package name, description,
     license, author, dependencies, etc.
     
-    * A [CMakeLists.txt](http://wiki.ros.org/catkin/CMakeLists.txt) file that is 
+    2. A [CMakeLists.txt](http://wiki.ros.org/catkin/CMakeLists.txt) file that is 
     used by catkin to build the software package.
     
     For example, the shutter_bringup package has the following files:
