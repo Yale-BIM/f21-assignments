@@ -136,8 +136,8 @@ in your home directory. Follow the steps in this tutorial:
     > You might want to select a different CMake build type other than Release (e.g. RelWithDebInfo or Debug).
     More options can be found in [cmake.org](http://cmake.org/cmake/help/v2.8.12/cmake.html#variable:CMAKE_BUILD_TYPE). 
 
-    Now you should have a devel space in `~/catkin_ws/devel`, which contains its own setup.*sh files.
-    Sourcing one of these setup.*sh files will `overlay` the install space onto your environment. 
+    Now you should have a devel space in `~/catkin_ws/devel`, which contains its own setup.bash file.
+    Sourcing this file will `overlay` the install space onto your environment. 
     
     > Overlaying refers to building and using a ROS package from source on top of an existing version
     of that same package (e.g., installed to the system in /opt/ros/kinetic). For more information
@@ -177,7 +177,7 @@ of nodes and programs that are pre-requisites of a ROS-based system.
        
     > You must have roscore running in order for ROS nodes to communicate.
          
-2. Open another terminal, and *bring up* a simulated robot 
+2. Open another terminal, and *bring up* a simulated version of the Shutter robot 
 with [roslaunch](http://wiki.ros.org/roslaunch).
 
     ```bash
@@ -194,8 +194,8 @@ with [roslaunch](http://wiki.ros.org/roslaunch).
     
     The shutter.launch file will then publish a 3D model of the robot (in [URDF format](http://wiki.ros.org/urdf))
     to the [ROS Parameter Server](http://wiki.ros.org/roscpp/Overview/Parameter%20Server). The model
-    has information about the the joints of the robot and its sensors, including their placement
-    relative to each other and properties. In the event that you ever need to, you can access the 
+    has information about the the joints of the robot and its sensors, including specific properties 
+    and their placement relative to each other. In the event that you ever need to, you can access the 
     URDF string describing the robot's model with the `rosparam` command:
     
     ```bash
@@ -228,12 +228,12 @@ with [roslaunch](http://wiki.ros.org/roslaunch).
     
     The shutter.launch script also runs two nodes in two different processes:
     
-    - */arbotix*: robot driver from the [arbotix_python ROS package](https://github.com/marynelv/arbotix_ros).
+    1. */arbotix*: robot driver from the [arbotix_python ROS package](https://github.com/marynelv/arbotix_ros).
     The driver provides a basic ROS interface to the robot's 
     [Arbotix RoboController](https://www.trossenrobotics.com/p/arbotix-robot-controller.aspx) 
     in its base, or equivalent simulation functionality.
     
-    - */robot_state_publisher:* [state_publisher](http://wiki.ros.org/robot_state_publisher) node which 
+    2. */robot_state_publisher:* [state_publisher](http://wiki.ros.org/robot_state_publisher) node which 
     publishes the position of the joints of the robot to [tf](ros.org/wiki/tf).
     
 
