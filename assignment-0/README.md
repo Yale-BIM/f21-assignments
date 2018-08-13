@@ -215,44 +215,62 @@ with [roslaunch](http://wiki.ros.org/roslaunch).
     2. */robot_state_publisher:* [state_publisher](http://wiki.ros.org/robot_state_publisher) node which 
     publishes the position of the joints of the robot to [tf](ros.org/wiki/tf).
     
-### Questions
-    
-Complete the tasks and answer the questions below based on the status of your ROS system after
-bringing up Shutter.
-  
-- **PII-Q1.** ROS uses [topics](http://wiki.ros.org/Topics) to communicate information between nodes. 
-
-    > ROS topics are named buses over which data messages are exchanged. 
-In general, nodes are not aware of who they are communicating with. 
-Instead, nodes that are interested in data *subscribe* to the relevant topic; 
-nodes that generate data *publish* to the relevant topic. 
-There can be multiple publishers and subscribers to a topic. 
-
-    Using the `rqt_graph` node in the [rqt_graph package](http://wiki.ros.org/rqt_graph), generate an 
-image of all of the nodes that are running in ROS after bringing up the robot and the topics 
-that are currently used to exchange information.
+3. Use [rqt_graph](http://wiki.ros.org/rqt_graph) to visualize the 
+[nodes](http://wiki.ros.org/Nodes) that are currently running
+in your ROS system and the [topics](http://wiki.ros.org/Topics) that are being used to 
+exchange information between nodes.
 
     ```bash
     $ rosrun rqt_graph rqt_graph
     ```
+    
+    Uncheck the "Debug" option under "Hide" in rqt_graph,
+    and select "Nodes/Topics(all)" to visualize all of the nodes that are sharing information
+    in the graph. You should see a total of 4 ROS nodes (displayed as ellipses) in the graph: /arbotix, 
+    /robot_state_publisher, /rqt_gui_py_node_XXXXX, and /rosout. 
+    
+    > The full name of the rqt_graph node includes numbers XXXXX, which indicate that the
+    program was run as an anonymous node. The numbers were generated 
+    automatically when the node was initialized to provide the program a unique name, e.g.,
+    in case you want to run multiple versions of rqt_graph. More information about initializing nodes
+    in C++ or Python can be found 
+    [here](http://wiki.ros.org/roscpp/Overview/Initialization%20and%20Shutdown) or 
+    [here](http://wiki.ros.org/rospy/Overview/Initialization%20and%20Shutdown), respectively.
+    
+    The nodes are connected in the graph through topics (displayed as squares). 
+    ROS topics are named buses over which data [messages](http://wiki.ros.org/Messages) are exchanged. 
+    There can be multiple publishers and subscribers to a topic. 
+    
+    > In general, nodes are not aware of who they are communicating with. 
+    Instead, nodes that are interested in data *subscribe* to the relevant topic; 
+    nodes that generate data *publish* to the relevant topic. 
+    
+    For example, the nodes /arbotix, /robot_state_publisher, and /rqt_gui_py_node_XXXXX publish
+    messages to the /rosout topic. Thus, you should see a directed edge in the graph from
+    each of these nodes to the /rosout topic. Meanwhile, the 
+    node [/rosout](http://wiki.ros.org/rosout#rosapi) subscribes to the /rosout topic. This is 
+    illustrated in the graph with an edge that goes in the opposite direction: 
+    from the /rosout topic to the /rosout node.
+    
+    > [rosout](http://wiki.ros.org/rosout) is a system-wide logging mechanism for messages
+    sent to the /rosout topic. The /rosout node subscribes to the /rosout topic to record
+    the messages into a textual log file.
+    
+    
 
-    > Rosrun allows you to run an executable in a given package from a shell. The general usage is
-    as `$ rosrun <packge_name> <executable_name> [parameters]`.
+### Questions
+    
+Answer the questions and complete the tasks below based on the status of your ROS system after 
+bringing up the robot.
+  
+- **PII-Q1.** Based on the graph from rqt_graph, how many topics have at least one 
+subscriber and at least one publisher in your ROS system? 
 
-    > rqt_graph is part of the [rqt framework](http://wiki.ros.org/rqt) for GUI development in ROS. 
-    If rqt_graph is not already installed in your system, install it with 
-    ```$ sudo apt-get install ros-kinetic-rqt ros-kinetic-rqt-common-plugins```.
-
-    Uncheck the "Debug" option in rqt_graph to visualize all of the nodes, and
-    include the graph generated with rqt_graph in your report.
-
-
-- **PII-Q2.** Based on the graph that you generated in PII-QI, through which topic are the /arbotix and 
+- **PII-Q2.** Through which topic in specific are the /arbotix and 
 /robot_state_publisher node communicating in ROS?
 
-- **PII-Q3.** Nodes communicate with each other by publishing [messages](http://wiki.ros.org/Messages) 
-to topics. Using the [rostopic tool](http://wiki.ros.org/rostopic), investigate what type 
-of [ROS message]() is being sent/received through the topic that /arbotix and /robot_state_publisher 
+- **PII-Q3.** Using the [rostopic command-line  tool](http://wiki.ros.org/rostopic), investigate what type 
+of [ROS message]() is being sent/received through the ROS topic that /arbotix and /robot_state_publisher 
 are using to communicate with one another?
 
     *Tip:* Query information about a topic with:
@@ -264,35 +282,30 @@ are using to communicate with one another?
 - **PII-Q4.** What are the fields of the message type that is used to transmit information from 
 /arbotix to /robot_state_publisher?
 
-    *Tip:* Query information about a message type with the [rosmsg tool](http://wiki.ros.org/rosmsg):
+    *Tip:* Query information about a message type with the [rosmsg command-line  tool](http://wiki.ros.org/rosmsg):
     ```bash
     $ rosmsg show <message_type>
     ```
 
+- **PII-Q5.** Using the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) command-line tool 
+get one of the messages that is being sent from /arbotix to /robot_state_publisher. Include an example
+in your report.
 
-- **PII-Q5.** Through which other topics is the /arbotix node publishing messages? 
 
-    *Tip:* Request information about a node with the [rosnode tool](wiki.ros.org/rosnode):
+- **PII-Q6.** Use the [rostopic hz](http://wiki.ros.org/rostopic#rostopic_hz) command-line tool 
+to find out at what rate are messages being published to the topic of question PII-Q2.
+
+- **PII-Q5.** Besides the topic of question PII-Q2, through which other topics can the 
+/arbotix node publish messages? Provide a list of the topics and their respective 
+message types in your report.
+
+    *Tip:* The full list of topics through which /arbotix may publish messages 
+    will not necessarily show in rqt_graph, because not all of the topics have subscribers. 
+    To query full information about a node, use instead the 
+    [rosnode command-line tool](wiki.ros.org/rosnode):
     ```bash
     $ rosnode info <node_name>
     ```
-
-    Provide the list of topics and their respective message types in your report.
-
-
-- **PII-Q6.** Using the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) tool 
-find out what is the current position and velocity of the 4 joints (motors) of the robot
-as published by the /arbotix node.
-
-- **PII-Q7.** What does the parameter "-n 1" do when you run rostopic echo? For example,
-
-    ```bash
-    $ rostopic echo -n 1 <topic_name>
-    ```
-
-
-- **PII-Q8.** Find out at what rate the /arbotix node is publishing the position of the joints
-of the robot with the [rostopic hz](http://wiki.ros.org/rostopic#rostopic_hz) tool.
 
 
 ## Part III. Visualize the robot state in RViz
