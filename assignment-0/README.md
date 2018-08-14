@@ -112,6 +112,7 @@ in your home directory. Follow the steps in this tutorial:
     # Load git submodules with ROS dependencies
     $ cd shutter-ros
     $ git submodule init
+    $ git submodule update
     ```
     
     > [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) are other,
