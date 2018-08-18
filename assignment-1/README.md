@@ -66,12 +66,8 @@ tutorial from ROS. You should get familiar with the `view_frames`,
 in /tf with [rviz](http://wiki.ros.org/rviz).
 
 ### Questions / Tasks
-Now that you know how to use basic tf tools, bring up the Shutter robot. You will inspect
-its tf tree. Being able to gather and visualize this information is important because the way the robot
-interacts with its environment is subject to the position of the robot's joints and its pose.
-For example, anything observed from Shutter's camera will be imaged from
-different point of views as the robot moves. This change in view has to considered when 
-reasoning about visual data.
+Now that you know how to use basic tf tools, bring up a simulation of the robot Shutter. 
+You will inspect its tf tree with tf tools. 
 
 > NOTE: In assignment_0, you ran `roscore` before bringing up the robot to enable ROS nodes to communicate. 
 But you can also launch `shutter.launch` directly. If roscore isn't already running, roslaunch 
@@ -80,13 +76,40 @@ will automatically start it. Try it!
 - **I-1.** Generate an image of the tf tree of Shutter with `view_frames`. 
 Include this image in your report.
 
+    *Tip:* You can also generate the image with the 
+    [rqt_tf_tree](http://wiki.ros.org/rqt_tf_tree) interface if you prefer.
+
 - **I-2.** Based on the tf tree, which links are between the robot's *base_footprint* 
 and *zed_camera_link*?
 
-- **I-3.** What is the 3D transformation from the *wrist_1_link* and the *zed_camera_link* 
-in the robot?
+- **I-3.** How are the transformations in the /tf and /tf_static topics generated?
+
+    *Tip:* You should inspect what nodes and topics are being published in your ROS system,
+    e.g., with the [rqt_graph](http://wiki.ros.org/rqt_graph) tool. You can also read the shutter.launch script and any
+    subsequent script that it launches to understand how the robot's tf tree is being generated.
+
+
+## Part II. Understanding tf messages
+The /tf and /tf_static topics have 
+[tf2_msgs/TFMessage](http://docs.ros.org/jade/api/tf2_msgs/html/msg/TFMessage.html) messages,
+ which are a list of 
+[geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) messages.0
+Each TransformStamped has:
+
+- a `header`, with a `stamp` of when the transform was published 
+and the `frame_id` of the reference frame for the transformation;
+- a `child_frame_id`, corresponding to the name of the child_frame; and
+- a `transform`, of type [geometry_msgs/Transform](http://docs.ros.org/jade/api/geometry_msgs/html/msg/Transform.html)
+with the translation and rotation of the child_frame_id in the reference frame_id.
 
 ## Part II. Computing the position of Shutter's camera relative to its base
+
+
+
+- **I-3.** What is the 3D translation and rotation of the *zed_camera_link* from 
+the *wrist_1_link* in the robot? 
+
+    *Tip:* You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool.
 
 ## Part III. Solving the Inverse Kinematics problem with MoveIt!
 
