@@ -112,6 +112,7 @@ in your home directory. Follow the steps in this tutorial:
     # Load git submodules with ROS dependencies
     $ cd shutter-ros
     $ git submodule init
+    $ git submodule update
     ```
     
     > [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) are other,
@@ -160,6 +161,13 @@ in your home directory. Follow the steps in this tutorial:
     to understand its content and general organization.
         
 3. Install other third-party dependencies with [rosdep](http://docs.ros.org/independent/api/rosdep/html/).
+If rosdep is not found in your system, first install it and initialize it as 
+indicated [here](http://docs.ros.org/independent/api/rosdep/html/overview.html). 
+You will need sudo access to complete this step. 
+
+    > If you are working on one of the machines in AKW 410, feel free to skip this
+    step. All dependencies should already be installed in the computer. Or
+    contact your T.A. to help you with this step if you think this is not the case.
  
     ```bash
     # update rosdep 
@@ -170,9 +178,6 @@ in your home directory. Follow the steps in this tutorial:
     $ rosdep install -y -r --ignore-src --rosdistro=kinetic --from-paths src
     ```
    
-    > If rosdep is not found in your system, first install it and initialize it as
-    indicated [here](http://docs.ros.org/independent/api/rosdep/html/overview.html). 
-    You will need sudo access to complete this step. 
         
 4. Build the packages in the src directory of your workspace with `catkin_make`. 
 
