@@ -20,14 +20,14 @@ You will use git to save your work to your [GitLab](http://www.gitlab.com) repos
 
 #### Background Knowledge
 
-This assignment assumes that you have already completed the first assignment ([assignment_0](/../assignment_0/README.md)) and,
+This assignment assumes that you have already completed the first assignment ([assignment_0](/../../assignment-0/README.md)) and,
 thus, have set up your catkin workspace. You are also expected to have experience with Linux shells, git, and
 the [Robot Operating System (ROS)](http://www.ros.org/). This includes being familiar with
 the `roscore`, `rosrun`, `roslaunch`, `rostopic`, `rosmsg`, `rosnode`, `rqt_graph`, and `rviz` tools. You
 should also know how to bring up a simulation of the Shutter robot in ROS, and
 control the position of its joints one at a time. If
 you are unfamiliar with any of these tools, programs, or procedures, please revisit the 
-[assignment_0](../../assignment_0/README.md).
+[assignment_0](../../assignment-0/README.md).
 
 #### Deliverables
 
