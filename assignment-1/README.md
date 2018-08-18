@@ -20,7 +20,7 @@ You will use git to save your work to your [GitLab](http://www.gitlab.com) repos
 
 #### Background Knowledge
 
-This assignment assumes that you have already completed the first assignment (assignment_0) and,
+This assignment assumes that you have already completed the first assignment ([assignment_0](/../assignment_0/README.md)) and,
 thus, have set up your catkin workspace. You are also expected to have experience with Linux shells, git, and
 the [Robot Operating System (ROS)](http://www.ros.org/). This includes being familiar with
 the `roscore`, `rosrun`, `roslaunch`, `rostopic`, `rosmsg`, `rosnode`, `rqt_graph`, and `rviz` tools. You
@@ -102,14 +102,18 @@ and the `frame_id` of the reference frame for the transformation;
 - a `transform`, of type [geometry_msgs/Transform](http://docs.ros.org/jade/api/geometry_msgs/html/msg/Transform.html)
 with the translation and rotation of the child_frame_id in the reference frame_id.
 
-## Part II. Computing the position of Shutter's camera relative to its base
 
-
+### Questions / Tasks
 
 - **I-3.** What is the 3D translation and rotation of the *zed_camera_link* from 
 the *wrist_1_link* in the robot? 
 
     *Tip:* You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool.
+    
+## Part II. Computing the position of Shutter's camera relative to its base
+
+
+
 
 ## Part III. Solving the Inverse Kinematics problem with MoveIt!
 
