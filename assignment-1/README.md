@@ -52,6 +52,32 @@ You assignment will be evaluated based on the content of your report and your co
 
 <!-- #### Further Reading and Tutorials -->
 
+## Preliminaries
+
+In this course, all reasoning in space is done in a 
+[right hand system](http://mathworld.wolfram.com/Right-HandRule.html). The orientation
+of the cross product between $`i = [1, 0, 0]`$ (in the direction of the $`x`$ axis) and 
+$`j = [0, 1, 0]`$ ($`y`$ axis) is determined by
+placing $`i`$ and $`j`$ tail-to-tail, flattening the right hand, extending it in the direction
+of $`i`$, and then curling the fingers towards $`j`$. The thumb then points in the direction
+of $`k = i \times j = [0,0,1]`$ (corresponding to the $`z`$ axis). 
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Right_hand_rule_cross_product.svg"
+width="100" alt="Right hand system from Wikipedia.org"/>
+
+We also use a [right hand rule](https://en.wikipedia.org/wiki/Right-hand_rule#Rotations) 
+for rotations: right fingers are curled in the direction of rotation and the right thumb 
+points in the positive direction of the axis.
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Right-hand_grip_rule.svg/220px-Right-hand_grip_rule.svg.png"
+width="100" alt="Right hand rule from Wikipedia.org"/>
+
+## Part I. Understanding 3D Geometric Transformations
+
+3D spatial transformations are linear mappings between two vector spaces. 
+
+
+
 
 ## Part I. Introduction to tf
 This part of the assignment will help you understand how [tf](http://wiki.ros.org/tf) works.
