@@ -54,23 +54,36 @@ You assignment will be evaluated based on the content of your report and your co
 
 ## Preliminaries
 
+### Notation
+We refer to `vectors` or column matrices with bold lower-case letters (e.g., $`\bold{x}`$).
+Other `matrices`, such as linear transformations, are indicated with capital letters (e.g., $`R`$). 
+
+### Conventions
+
 In this course, all reasoning in space is done in a 
 [right hand system](http://mathworld.wolfram.com/Right-HandRule.html). The orientation
-of the cross product between $`i = [1, 0, 0]`$ (in the direction of the $`x`$ axis) and 
-$`j = [0, 1, 0]`$ ($`y`$ axis) is determined by
-placing $`i`$ and $`j`$ tail-to-tail, flattening the right hand, extending it in the direction
-of $`i`$, and then curling the fingers towards $`j`$. The thumb then points in the direction
-of $`k = i \times j = [0,0,1]`$ (corresponding to the $`z`$ axis). 
+of the cross product between $`\bold{i} = [1, 0, 0]^T`$ (in the direction of the $`x`$ axis) and 
+$`\bold{j} = [0, 1, 0]^T`$ ($`y`$ axis) is determined by
+placing $`\bold{i}`$ and $`\bold{j}`$ tail-to-tail, flattening the right hand, extending it in the direction
+of $`\bold{i}`$, and then curling the fingers towards $`\bold{j}`$. The thumb then points in the direction
+of $`\bold{k} = \bold{i} \times \bold{j} = [0,0,1]^T`$ (corresponding to the $`z`$ axis). 
 
+<center>
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Right_hand_rule_cross_product.svg"
 width="100" alt="Right hand system from Wikipedia.org"/>
+Right Hand System (image from Wikipedia.org)
+</center>
 
 We also use a [right hand rule](https://en.wikipedia.org/wiki/Right-hand_rule#Rotations) 
 for rotations: right fingers are curled in the direction of rotation and the right thumb 
 points in the positive direction of the axis.
 
+<center>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Right-hand_grip_rule.svg/220px-Right-hand_grip_rule.svg.png"
 width="100" alt="Right hand rule from Wikipedia.org"/>
+Right Hand Rule (image from Wikipedia.org)
+</center>
+
 
 ## Part I. Understanding 3D Geometric Transformations
 
