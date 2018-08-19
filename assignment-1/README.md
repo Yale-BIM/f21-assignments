@@ -108,9 +108,9 @@ a 6 Degrees of Freedom (DoF) transformation: a translation followed by a rotatio
     0 & 0 & 1 & t_3\\
     0 & 0 & 0 & 1
     \end{bmatrix}
-    `$
+    `$<br>
     where $`t_1`$, $`t_2`$, and $`t_3`$ correspond to the respective displacements in $`x`$,
-    $`y`$, and $`z`$.
+    $`y`$, and $`z`$.<br>
     
 >- **Rotations:** A rotation in homogeneous coordinates can be expressed as:<br>
     $`R = 
@@ -129,12 +129,12 @@ the origin of $`B`$, and $`^{B}R_{A}`$ is the rotation that aligns the direction
 $`A`$'s axes with $`B`$'s, then we can express the transform $`^{B}T_{A}`$ that projects 
 a point in $`A`$'s frame to $`B`$ as:
 
-$`^{B}T_{A} = ^{B}R_{A} ^{B}t_{A} = 
+$`^{B}T_{A} = ^{B}R_{A}\ ^{B}t_{A} = 
 \begin{bmatrix}
-r_{11} & r_{12} & r_{13} & t_1\
+r_{11} & r_{12} & r_{13} & t_1\\
 r_{12} & r_{22} & r_{23} & t_2\\
 r_{13} & r_{32} & r_{33} & t_3\\
-0 & 0 & 0 & 1\\
+0 & 0 & 0 & 1
 \end{bmatrix}
 `$
 
