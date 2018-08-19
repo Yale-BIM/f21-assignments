@@ -56,7 +56,8 @@ You assignment will be evaluated based on the content of your report and your co
 
 ### Notation
 We refer to `vectors` or column matrices with bold lower-case letters (e.g., $`\bold{x}`$).
-Other `matrices`, such as linear transformations, are indicated with capital letters (e.g., $`R`$). 
+Other `matrices`, such as linear transformations, and `scalars` are written with regular
+font weight. 
 
 ### Conventions
 
@@ -97,9 +98,50 @@ with respect to a camera that observes it.
 Following [ROS conventions](http://wiki.ros.org/tf/Overview/Transformations), 
 we refer to a point $`\mathbf{p}`$ within a frame $`B`$ as $`^{B}\mathbf{p}`$. 
 We also refer to the relationship between any two frames $`A`$ and $`B`$ as 
-a 6 Degrees of Freedom (DoF) transformation: a translation followed by a rotation.
-More specifically, the pose of $`A`$ in $`B`$ is given by the translation $`^{W}T_{A}`$
-and the rotation $`^{W}R_{A}`$.
+a 6 Degrees of Freedom (DoF) transformation: a translation followed by a rotation. 
+
+>- **Translations:** A 3D translation in homogeneous coordinates can be expressed as:<br>
+    $`t =
+    \begin{matrix}
+    1 & 0 & 0 & t_1\\
+    0 & 1 & 0 & t_2\\
+    0 & 0 & 1 & t_3\\
+    0 & 0 & 0 & 1\\
+    \end{matrix}
+    `$<br>
+    where $`t_1`$, $`t_2`$, and $`t_3`$ correspond to the respective displacements in $`x`$,
+    $`y`$, and $`z`$.
+    
+>- **Rotations:** A rotation in homogeneous coordinates can be expressed as:<br>
+    $`R = 
+    \begin{matrix}
+    r_{11} & r_{12} & r_{13} & 0\
+    r_{12} & r_{22} & r_{23} & 0\\
+    r_{13} & r_{32} & r_{33} & 0\\
+    0 & 0 & 0 & 1\\
+    \end{matrix}
+    `$<br>
+
+These transformations are $`4 \times 4`$ matrices. Thus, we can easily multiply one by
+the other to compose translations and rotations into one operation. For example, if 
+$`^{B}t_{A}`$ represents the translation that brings the origin of $`A`$'s frame to 
+the origin of $`B`$, and $`^{B}R_{A}`$ is the rotation that aligns the direction of 
+$`A`$'s axes with $`B`$'s, then we can express the transform $`^{B}T_{A}`$ that projects 
+a point in $`A`$'s frame to $`B`$ as:
+
+$`^{B}T_{A} = ^{B}R_{A} ^{B}t_{A} = 
+\begin{matrix}
+r_{11} & r_{12} & r_{13} & t_1\
+r_{12} & r_{22} & r_{23} & t_2\\
+r_{13} & r_{32} & r_{33} & t_3\\
+0 & 0 & 0 & 1\\
+\end{matrix}
+`$
+
+This means that a point $`^{A}\mathbf{p}`$ in the $`A`$ frame can be
+expressed in $`B`$ as $`^{B}\mathbf{p} = {B}T_{A} ^{A}\mathbf{p}`$.
+
+
 
 
 
