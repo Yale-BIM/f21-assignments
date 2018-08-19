@@ -68,7 +68,7 @@ placing $`\bold{i}`$ and $`\bold{j}`$ tail-to-tail, flattening the right hand, e
 of $`\bold{i}`$, and then curling the fingers towards $`\bold{j}`$. The thumb then points in the direction
 of $`\bold{k} = \bold{i} \times \bold{j} = [0,0,1]^T`$ (corresponding to the $`z`$ axis). 
 
-<span style="align:center">
+<span style="display:block;text-align:center">
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Right_hand_rule_cross_product.svg"
 width="100" alt="Right hand system from Wikipedia.org"/><br>
 Right Hand System (image from Wikipedia.org)
@@ -78,7 +78,7 @@ We also use a [right hand rule](https://en.wikipedia.org/wiki/Right-hand_rule#Ro
 for rotations: right fingers are curled in the direction of rotation and the right thumb 
 points in the positive direction of the axis.
 
-<span style="align:center">
+<span style="display:block;text-align:center">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Right-hand_grip_rule.svg/220px-Right-hand_grip_rule.svg.png"
 width="100" alt="Right hand rule from Wikipedia.org"/><br>
 Right Hand Rule (image from Wikipedia.org)
