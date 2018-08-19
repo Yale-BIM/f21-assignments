@@ -100,7 +100,8 @@ we refer to a point $`\mathbf{p}`$ within a frame $`B`$ as $`^{B}\mathbf{p}`$.
 We also refer to the relationship between any two frames $`A`$ and $`B`$ as 
 a 6 Degrees of Freedom (DoF) transformation: a translation followed by a rotation. 
 
->- **Translations:** A 3D translation in homogeneous coordinates can be expressed as:<br>
+>- **Translations:** A 3D translation can be represented by a vector $`\bold{t} = [t_1, t_2, t_3]`$
+    or by a $`4 \times 4`$ matrix in homogeneous coordinates:<br>
     $`t =
     \begin{bmatrix}
     1 & 0 & 0 & t_1\\
@@ -109,10 +110,12 @@ a 6 Degrees of Freedom (DoF) transformation: a translation followed by a rotatio
     0 & 0 & 0 & 1
     \end{bmatrix}
     `$<br>
-    where $`t_1`$, $`t_2`$, and $`t_3`$ correspond to the respective displacements in $`x`$,
-    $`y`$, and $`z`$.<br>
+    The scalars $`t_1`$, $`t_2`$, and $`t_3`$ correspond to the displacements in $`x`$,
+    $`y`$, and $`z`$, respectively. Thus, a translation has 3 DoF. <br> <br>
     
->- **Rotations:** A rotation in homogeneous coordinates can be expressed as:<br>
+>- **Rotations:** A 3D rotation has 3 DoF as well (each one corresponding to one axis of the 
+    coordinate frame). In general, [ROS uses quaternions](http://wiki.ros.org/tf2/Tutorials/Quaternions) 
+    to represent rotations. Here, though, we will work with them in homogeneous coordinates:<br>
     $`R = 
     \begin{bmatrix}
     r_{11} & r_{12} & r_{13} & 0\\
@@ -122,8 +125,9 @@ a 6 Degrees of Freedom (DoF) transformation: a translation followed by a rotatio
     \end{bmatrix}
     `$
 
-These transformations are $`4 \times 4`$ matrices. Thus, we can easily multiply one by
-the other to compose translations and rotations into one operation. For example, if 
+We can multiply the translation and rotation corresponding to the relation between two
+frames to yield a single transformation that projects a point from one coordinate system to 
+another. For example, if 
 $`^{B}t_{A}`$ represents the translation that brings the origin of $`A`$'s frame to 
 the origin of $`B`$, and $`^{B}R_{A}`$ is the rotation that aligns the direction of 
 $`A`$'s axes with $`B`$'s, then we can express the transform $`^{B}T_{A}`$ that projects 
@@ -138,8 +142,8 @@ r_{13} & r_{32} & r_{33} & t_3\\
 \end{bmatrix}
 `$
 
-This means that a point $`^{A}\mathbf{p}`$ in the $`A`$ frame can be
-expressed in $`B`$ as $`^{B}\mathbf{p} = {B}T_{A} ^{A}\mathbf{p}`$.
+That is, a point $`^{A}\mathbf{p}`$ in the $`A`$ frame can be
+expressed in $`B`$ as $`^{B}\mathbf{p} = {B}T_{A}\ ^{A}\mathbf{p}`$.
 
 
 
