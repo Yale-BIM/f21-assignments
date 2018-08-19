@@ -102,25 +102,25 @@ a 6 Degrees of Freedom (DoF) transformation: a translation followed by a rotatio
 
 >- **Translations:** A 3D translation in homogeneous coordinates can be expressed as:<br>
     $`t =
-    \begin{matrix}
+    \begin{bmatrix}
     1 & 0 & 0 & t_1\\
     0 & 1 & 0 & t_2\\
     0 & 0 & 1 & t_3\\
     0 & 0 & 0 & 1\\
-    \end{matrix}
-    `$<br>
+    \end{bmatrix}
+    `$
     where $`t_1`$, $`t_2`$, and $`t_3`$ correspond to the respective displacements in $`x`$,
     $`y`$, and $`z`$.
     
 >- **Rotations:** A rotation in homogeneous coordinates can be expressed as:<br>
     $`R = 
-    \begin{matrix}
+    \begin{bmatrix}
     r_{11} & r_{12} & r_{13} & 0\
     r_{12} & r_{22} & r_{23} & 0\\
     r_{13} & r_{32} & r_{33} & 0\\
     0 & 0 & 0 & 1\\
-    \end{matrix}
-    `$<br>
+    \end{bmatrix}
+    `$
 
 These transformations are $`4 \times 4`$ matrices. Thus, we can easily multiply one by
 the other to compose translations and rotations into one operation. For example, if 
@@ -130,12 +130,12 @@ $`A`$'s axes with $`B`$'s, then we can express the transform $`^{B}T_{A}`$ that 
 a point in $`A`$'s frame to $`B`$ as:
 
 $`^{B}T_{A} = ^{B}R_{A} ^{B}t_{A} = 
-\begin{matrix}
+\begin{bmatrix}
 r_{11} & r_{12} & r_{13} & t_1\
 r_{12} & r_{22} & r_{23} & t_2\\
 r_{13} & r_{32} & r_{33} & t_3\\
 0 & 0 & 0 & 1\\
-\end{matrix}
+\end{bmatrix}
 `$
 
 This means that a point $`^{A}\mathbf{p}`$ in the $`A`$ frame can be
