@@ -20,14 +20,15 @@ You will use git to save your work to your [GitLab](http://www.gitlab.com) repos
 
 #### Background Knowledge
 
-This assignment assumes that you have already completed the first assignment ([assignment_0](/../../assignment-0/README.md)) and,
-thus, have set up your catkin workspace. You are also expected to have experience with Linux shells, git, and
+This assignment assumes that you have already completed the first assignment ([assignment-0](../../assignment-0/README.md)) and,
+thus, have set up your catkin workspace. You are also expected to have experience with Linux shells 
+(e.g., [bash](https://www.gnu.org/software/bash/)), [git](https://git-scm.com/), and
 the [Robot Operating System (ROS)](http://www.ros.org/). This includes being familiar with
 the `roscore`, `rosrun`, `roslaunch`, `rostopic`, `rosmsg`, `rosnode`, `rqt_graph`, and `rviz` tools. You
 should also know how to bring up a simulation of the Shutter robot in ROS, and
 control the position of its joints one at a time. If
 you are unfamiliar with any of these tools, programs, or procedures, please revisit the 
-[assignment_0](../../assignment-0/README.md).
+[assignment-0](../../assignment-0/README.md).
 
 #### Deliverables
 
@@ -49,7 +50,7 @@ You assignment will be evaluated based on the content of your report and your co
 
 `todo: complete`
 
-#### Further Reading and Tutorials 
+<!-- #### Further Reading and Tutorials -->
 
 
 ## Part I. Introduction to tf
@@ -57,23 +58,22 @@ This part of the assignment will help you understand how [tf](http://wiki.ros.or
 
 > tf is a package that lets the user keep track of multiple coordinate frames over time. tf 
 maintains the relationship between coordinate frames in a tree structure buffered in time, and 
-lets the user transform points, vectors, etc between any two coordinate frames at any desired 
+lets the user transform points, vectors, etc. between any two coordinate frames at any desired 
 point in time. 
 
 1. Complete the [Introduction to tf2](http://wiki.ros.org/tf2/Tutorials/Introduction%20to%20tf2)
-tutorial from ROS. You should get familiar with the `view_frames`, 
-`rqt_tf_tree`, and `tf_echo` tools. You should also learn to visualize the transforms
-in /tf with [rviz](http://wiki.ros.org/rviz).
+tutorial from ROS. You should familiarize yourself with the `view_frames` and `tf_echo` tools. 
+You should also learn to visualize the transforms in /tf and /tf_static with [rviz](http://wiki.ros.org/rviz).
 
 ### Questions / Tasks
 Now that you know how to use basic tf tools, bring up a simulation of the robot Shutter. 
 You will inspect its tf tree with tf tools. 
 
-> NOTE: In assignment_0, you ran `roscore` before bringing up the robot to enable ROS nodes to communicate. 
+> NOTE: In [assignment-0](../../assignment-0/README.md), you ran `roscore` before bringing up the robot to enable ROS nodes to communicate. 
 But you can also launch `shutter.launch` directly. If roscore isn't already running, roslaunch 
 will automatically start it. Try it!
 
-- **I-1.** Generate an image of the tf tree of Shutter with `view_frames`. 
+- **I-1.** Generate an image of the tf tree of Shutter with [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
 Include this image in your report.
 
     *Tip:* You can also generate the image with the 
@@ -90,17 +90,23 @@ and *zed_camera_link*?
 
 
 ## Part II. Understanding tf messages
-The /tf and /tf_static topics have 
-[tf2_msgs/TFMessage](http://docs.ros.org/jade/api/tf2_msgs/html/msg/TFMessage.html) messages,
- which are a list of 
-[geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) messages.0
-Each TransformStamped has:
+The /tf and /tf_static topics transmit 
+[tf2_msgs/TFMessage](http://docs.ros.org/jade/api/tf2_msgs/html/msg/TFMessage.html) messages.
+These messages are a list of transformations, encoded as 
+[geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) messages.
+
+Each [geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) 
+message has:
 
 - a `header`, with a `stamp` of when the transform was published 
 and the `frame_id` of the reference frame for the transformation;
-- a `child_frame_id`, corresponding to the name of the child_frame; and
-- a `transform`, of type [geometry_msgs/Transform](http://docs.ros.org/jade/api/geometry_msgs/html/msg/Transform.html)
+- a `child_frame_id`, corresponding to the name of the child frame; and
+- a `transform`, of type [geometry_msgs/Transform](http://docs.ros.org/jade/api/geometry_msgs/html/msg/Transform.html),
 with the translation and rotation of the child_frame_id in the reference frame_id.
+
+These type of transformations are visualized with tools like [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees)
+as:
+
 
 
 ### Questions / Tasks
