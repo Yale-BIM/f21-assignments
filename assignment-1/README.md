@@ -129,7 +129,7 @@ the origin of $`B`$, and $`^{B}R_{A}`$ is the rotation that aligns the direction
 $`A`$'s axes with $`B`$'s, then we can express the transform $`^{B}T_{A}`$ that projects 
 a point in $`A`$'s frame to $`B`$ as:
 
-$`^{B}T_{A} = ^{B}R_{A}\ ^{B}t_{A} = 
+$`^{B}T_{A}\, =\, ^{B}R_{A}\ ^{B}t_{A} = 
 \begin{bmatrix}
 r_{11} & r_{12} & r_{13} & t_1\\
 r_{12} & r_{22} & r_{23} & t_2\\
