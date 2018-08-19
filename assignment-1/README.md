@@ -106,7 +106,7 @@ a 6 Degrees of Freedom (DoF) transformation: a translation followed by a rotatio
     1 & 0 & 0 & t_1\\
     0 & 1 & 0 & t_2\\
     0 & 0 & 1 & t_3\\
-    0 & 0 & 0 & 1\\
+    0 & 0 & 0 & 1
     \end{bmatrix}
     `$
     where $`t_1`$, $`t_2`$, and $`t_3`$ correspond to the respective displacements in $`x`$,
@@ -115,10 +115,10 @@ a 6 Degrees of Freedom (DoF) transformation: a translation followed by a rotatio
 >- **Rotations:** A rotation in homogeneous coordinates can be expressed as:<br>
     $`R = 
     \begin{bmatrix}
-    r_{11} & r_{12} & r_{13} & 0\
+    r_{11} & r_{12} & r_{13} & 0\\
     r_{12} & r_{22} & r_{23} & 0\\
     r_{13} & r_{32} & r_{33} & 0\\
-    0 & 0 & 0 & 1\\
+    0 & 0 & 0 & 1
     \end{bmatrix}
     `$
 
