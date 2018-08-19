@@ -87,8 +87,14 @@ Right Hand Rule (image from Wikipedia.org)
 
 ## Part I. Understanding 3D Geometric Transformations
 
-3D spatial transformations are linear mappings between two vector spaces. 
+3D spatial transformations map 3D points from one `coordinate system` (or `frame`) to another.
+They are particularly relevant for robotics and 3D vision applications, where
+elements of interest are in different locations in the world. For example, transformations
+are useful to know the position of the camera in the Robot shutter relative to its base.
+Similarly, 3D transformations can help infer the 3D location of an object that is observed
+through a camera.
 
+In general, we will refer to a point $`\mathbf{p}`$ within a frame $`B`$ as $`^B\mathbf{p}`$. 
 
 
 
