@@ -88,13 +88,18 @@ Right Hand Rule (image from Wikipedia.org)
 ## Part I. Understanding 3D Geometric Transformations
 
 3D spatial transformations map 3D points from one `coordinate system` (or `frame`) to another.
-They are particularly relevant for robotics and 3D vision applications, where
+They are particularly relevant for robotics and 3D vision applications, where the 
 elements of interest are in different locations in the world. For example, transformations
-are useful to know the position of the camera in the Robot shutter relative to its base.
-Similarly, 3D transformations can help infer the 3D location of an object that is observed
-through a camera.
+are useful to know the position of the camera in the Robot shutter relative to one of its 
+links or its base. Similarly, 3D transformations can help infer the location of an object 
+with respect to a camera that observes it.
 
-In general, we will refer to a point $`\mathbf{p}`$ within a frame $`B`$ as $`^B\mathbf{p}`$. 
+Following [ROS conventions](http://wiki.ros.org/tf/Overview/Transformations), 
+we refer to a point $`\mathbf{p}`$ within a frame $`B`$ as $`^{B}\mathbf{p}`$. 
+We also refer to the relationship between any two frames $`A`$ and $`B`$ as 
+a 6 Degrees of Freedom (DoF) transformation: a translation followed by a rotation.
+More specifically, the pose of $`A`$ in $`B`$ is given by the translation $`^{W}T_{A}`$
+and the rotation $`^{W}R_{A}`$.
 
 
 
