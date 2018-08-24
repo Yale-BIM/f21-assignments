@@ -166,14 +166,15 @@ $`B`$.
 Note that the 3D vector with elements $`r_{11}, r_{21}, r_{31}`$ 
 from the first column of the rotation matrix $`^{B}_{A}R`$ has the same direction as the $`x`$ axis of $`A`$ 
 in the $`B`$ frame. Similarly, the elements $`r_{12}, r_{22}, r_{32}`$
-and $`r_{13}, r_{23}, r_{33}`$ have the same direction of the $y$ and $z$ axes of $`A`$ in $`B`$.
+and $`r_{13}, r_{23}, r_{33}`$ have the same direction of the $y$ and $z$ axes of 
+$`A`$ in $`B`$, respectively.
 
 ### Transforms in ROS
 
 The [tf](http://wiki.ros.org/tf) library in ROS represents transforms and coordinate frames 
 in a `tree structure` buffered in time. The tree is a directed graph, where any two 
-vertices are connected by one path. The nodes of this graph corresponds to coordinate frames, 
-the edges correspond to transforms. 
+vertices are connected by one path. The nodes of this graph corresponds to coordinate frames,
+each associated with a link, and the edges correspond to transforms between pairs of frames. 
 
 Any directed edge in the tf tree has a `parent` frame (source node), and a `child` frame 
 (target node). Let the parent frame be $`P`$ and the child be $`C`$. Then, the transform
@@ -183,7 +184,9 @@ stored in the edge parent -> child corresponds to $`^{P}_{C}T`$.
 
 The tf library quickly computes the net transform between two nodes (frames) 
 by multiplying the edges connecting them. To traverse up a directed edge from a child to a parent node, 
-tf automatically uses the inverse of the transformation that is stored in the edge.
+tf uses the inverse of the transformation that is stored in the edge.
+
+<!-- todo: say something about querying transforms over time here? -->
 
 ## Part I. Introduction to tf
 This part of the assignment will help you understand how [tf](http://wiki.ros.org/tf) lets 
@@ -207,11 +210,11 @@ Include this image in your report.
     *Tip:* You can also generate the image with the 
     [rqt_tf_tree](http://wiki.ros.org/rqt_tf_tree) interface if you prefer.
 
-- **I-2.** Based on the tf tree, which links are between the robot's *base_footprint* 
-and *zed_camera_link*?
+- **I-2.** Based on the tf tree from I-1, which frames are between the robot's *base_footprint* 
+frame and the *zed_camera_link* frame?
 
 - **I-3.** Based on the tf tree, what is the 3D transformation $`^{W}_{Z}T`$
-between the *wrist_1_link* ($`W`$) and the *zed_camera_link* ($`Z`$)? Please
+between the *wrist_1_link* frame ($`W`$) and the *zed_camera_link* frame ($`Z`$)? Please
 provide the transformation in homogeneous coordinates.
 
     *Tip:* You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool to query
@@ -220,21 +223,23 @@ provide the transformation in homogeneous coordinates.
     if you are confused about different rotation representations.
 
 - **I-4.** Similar to the previous question, what is the 3D transformation $`^{B}_{F}T`$
-between the *biceps_link* ($`B`$) and the *forearm_link* ($`F`$)? Again, please
+between the *biceps_link* frame ($`B`$) and the *forearm_link* frame ($`F`$)? Again, please
 provide the transformation in homogeneous coordinates.
 
 - **I-5.** How are the transformations in the /tf and /tf_static topics generated?
 
     *Tip:* You should inspect what nodes and topics are being published in your ROS system,
-    e.g., with the [rqt_graph](http://wiki.ros.org/rqt_graph) tool. You can also read the shutter.launch script and any
-    subsequent script that it launches to understand how the robot's tf tree is being generated.
+    e.g., with the [rqt_graph](http://wiki.ros.org/rqt_graph) tool. You can also read the shutter.launch script
+    in the shutter_bringup package (and any subsequent script that it launches) 
+    to understand how the robot's tf tree is being generated.
 
 
 ## Part II. Publishing tf messages
 The /tf and /tf_static topics transmit 
 [tf2_msgs/TFMessage](http://docs.ros.org/jade/api/tf2_msgs/html/msg/TFMessage.html) messages.
 These messages are a list of transformations, encoded as 
-[geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) messages.
+[geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) messages,
+that the tf library uses to assemble the tf tree.
 
 Each [geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) 
 message has:
@@ -245,24 +250,26 @@ and the `frame_id` of the reference frame for the transformation;
 - a `transform`, of type [geometry_msgs/Transform](http://docs.ros.org/jade/api/geometry_msgs/html/msg/Transform.html),
 with the translation and rotation of the transform $`{parent}_{child}T`$.
 
+Read [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29) 
+to understand how to publish tf transforms programmatically in Python.
+
 ### Questions / Tasks
+Let's now create a simulated moving object in ROS.
 
-- **II-1.** Make a ROS node that publishes a tf transform for a moving 
-target in front of the robot. 
-<!-- todo. complete description -->
+- **II-1.** Modify the `generate_target.py` script 
+that is provided as part of this assignment 
+to publish publish the location of a simulated object as a tf frame named "target". 
+The generate_target.py script is in the *scripts* directory of the `shutter_lookat` package.
 
-- **II-2.** To facilitate visualizing
-the target, add a publisher to your node that streams an [rviz Marker](http://wiki.ros.org/rviz/DisplayTypes/Marker) message
-with the position of the target. The marker should be a red sphere of 0.1m diameter. 
-Take a picture of the marker in front of a simulated version of Shutter in 
-[rviz](http://wiki.ros.org/rviz) and add it to your report. 
+    *Tip:* You can edit the node based on [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29) 
+    on publishing tf frames in Python. 
 
-    *Tip:* A tutorial in C++ on publishing rviz Markers can be found 
-    [here](http://wiki.ros.org/rviz/Tutorials/Markers%3A%20Basic%20Shapes). You
-    need to follow the same steps (but in Python) to publish a marker from your node.
-    First, define the publisher that will stream Markers through a topic in your node.
-    Then, create the Marker messages and publish them continuously as the position
-    of the target changes over time. 
+- **II-2.** Visualize the "target" frame of the moving object in [rviz](http://wiki.ros.org/rviz). 
+To this end, bring up the simulated robot, run your new
+  generate_target.py script, and open rviz. Then add a RobotModel and TF displays to rviz,
+   and take a picture of your screen where you can see the TF frame of the object 
+   in front of the robot model. Add this picture to your assignment report.
+
     
 
 ## Part III. Solving the Inverse Kinematics problem with MoveIt!
@@ -271,9 +278,17 @@ Take a picture of the marker in front of a simulated version of Shutter in
 2. Compute orientation of ray in world footprint frame
 3. Change the orientation of the camera to point towards the target
 
+
+
+    *Tip:* A tutorial in C++ on publishing rviz Markers can be found 
+    [here](http://wiki.ros.org/rviz/Tutorials/Markers%3A%20Basic%20Shapes). You
+    need to follow the same steps (but in Python) to publish a marker from your node.
+    First, define the publisher that will stream Markers through a topic in your node.
+    Then, create the Marker messages and publish them continuously as the position
+    of the target changes over time. 
+
 ## Part IV. Orienting Shutter's camera towards a moving target
 
 
-## Part V. Orienting towards a visual target
 
 
