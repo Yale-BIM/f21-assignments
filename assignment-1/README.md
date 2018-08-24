@@ -257,19 +257,27 @@ to understand how to publish tf transforms programmatically in Python.
 Let's now create a simulated moving object in ROS.
 
 - **II-1.** Modify the `generate_target.py` script 
-that is provided as part of this assignment 
-to publish publish the location of a simulated object as a tf frame named "target". 
-The generate_target.py script is in the *scripts* directory of the `shutter_lookat` package.
+in the `shutter_lookat` package of this assignment
+to publish the location of a simulated object as a tf frame. The object's
+frame should be named "target". It should also have the same position 
+that the node publishes for the object in the /target topic relative to
+ the "base_footprint" frame. 
+For the orientation of the frame, you should set $0$ deg rotation with respect
+to the "base_footprint" frame.
 
-    *Tip:* You can edit the node based on [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29) 
-    on publishing tf frames in Python. 
+    *Tip 1:* You can publish the tf frame as in [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29) 
+    on using the tf library in Python. 
 
-- **II-2.** Visualize the "target" frame of the moving object in [rviz](http://wiki.ros.org/rviz). 
-To this end, bring up the simulated robot, run your new
-  generate_target.py script, and open rviz. Then add a RobotModel and TF displays to rviz,
-   and take a picture of your screen where you can see the TF frame of the object 
-   in front of the robot model. Add this picture to your assignment report.
-
+    *Tip 2:* You can check that your code is working as expected by visualizing
+    the "target" frame relative to the robot Shutter in [rviz](http://wiki.ros.org/rviz).
+    To this end, bring up the simulated robot, run your new 
+    generate_target.py script, open rviz, and add a RobotModel and TF displays. You should
+    then be able to see the target moving in a circular path in front of the robot, as
+    in the gif below.
+    
+- **II-2.** Bring up the robot and run your new generate_target.py script. Then,
+    generate a new image of the tf tree in ROS, e.g., using [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
+    Add the image of the tf tree to your report.
     
 
 ## Part III. Solving the Inverse Kinematics problem with MoveIt!
