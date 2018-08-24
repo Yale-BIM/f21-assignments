@@ -154,18 +154,19 @@ see [Euler angles](https://en.wikipedia.org/wiki/Euler_angles)).
 
 ### Changing the Frame of a Point
 Let $`^{A}\mathbf{p}`$ be a 3D point in the $`A`$ frame. Its position in 
-$`B`$ can be expressed as $`^{B}\mathbf{p} = {B}_{A}T\ ^{A}\mathbf{p} = ^{B}_{A}R\ ^{B}_{A}t`$,
+$`B`$ can be expressed as $`^{B}\mathbf{p} = ^{B}_{A}T\ ^{A}\mathbf{p} = ^{B}_{A}(R \times t) ^{A}\mathbf{p}`$,
 where:
  
-- $`^{B}_{A}t`$ is the translation between the frames. The values $`t_1, t_2, t_3`$ of
-the translation are the origin of the frame $`A`$ in $`B`$.
+- $`^{B}_{A}t`$ is the transformation in homogeneous coordinates that encodes the
+ translation between the frames $`A`$ and $`B`$. In particular, the values $`t_1, t_2, t_3`$ of
+the translation $`^{B}_{A}t`$ are the origin of the frame $`A`$ in $`B`$.
 - $`^{B}_{A}R`$ is the rotation corresponding to the orientation of $`A`$'s coordinate axes in 
 $`B`$. 
 
-Note that the 3D vector with elements $`r_11, r_21, r_31`$ 
+Note that the 3D vector with elements $`r_{11}, r_{21}, r_{31}`$ 
 from the first column of the rotation matrix $`^{B}_{A}R`$ has the same direction as the $`x`$ axis of $`A`$ 
-in the $`B`$ frame. Similarly, the elements $`r_12, r_22, r_32`$
-and $`r_13, r_23, r_33`$ have the same direction of the $y$ and $z$ axes of $`A`$ in $`B`$.
+in the $`B`$ frame. Similarly, the elements $`r_{12}, r_{22}, r_{32}`$
+and $`r_{13}, r_{23}, r_{33}`$ have the same direction of the $y$ and $z$ axes of $`A`$ in $`B`$.
 
 ### Transforms in ROS
 
