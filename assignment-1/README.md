@@ -264,9 +264,9 @@ to publish the location of a simulated object as a tf frame. The object is alrea
 created in the script and its position is automatically updated, such that it moves on
 a circular path relative to the "base_footprint" frame of Shutter. 
 
-    You should publish a new frame in /tf called "target" which contains the position
+    For this part of the assignment, you should publish a new frame in /tf called "target" which contains the position
     of the simulated object in the "base_footprint" frame. For the orientation of the "target" 
-    frame, you should set $0$ deg rotation with respect to "base_footprint".
+    frame, you should set 0 deg. rotation with respect to "base_footprint".
 
     *Tip:* You can check that your code is working as expected by visualizing
     the "target" frame relative to the robot Shutter in [rviz](http://wiki.ros.org/rviz).
@@ -275,6 +275,9 @@ a circular path relative to the "base_footprint" frame of Shutter.
     then be able to see the target moving in a circular path in front of the robot, as
     in the gif below.
     <!-- todo: add gif -->
+    
+    Once the "target" tf frame is published properly, please commit your code to your
+    repository.
     
 - **II-2.** Stop any ROS processes that you are running, including roscore. Then, 
     bring up the robot, run your new generate_target.py script, and 
