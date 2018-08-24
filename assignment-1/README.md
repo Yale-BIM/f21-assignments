@@ -50,7 +50,9 @@ You assignment will be evaluated based on the content of your report and your co
 
 `todo: complete`
 
-<!-- #### Further Reading and Tutorials -->
+#### Further Reading and Tutorials
+
+- [tf: The Transform Library](http://wiki.ros.org/Papers/TePRA2013_Foote?action=AttachFile&do=get&target=TePRA2013_Foote.pdf)
 
 ## Preliminaries
 
@@ -103,7 +105,7 @@ Shutter, in particular, has 4 motors in its arm, each of which implements a revo
 Thus, Shutter has 4 DoF. 
 
 
-## Part I. Understanding 3D Geometric Transformations
+### 3D Transformations
 
 3D spatial transformations map 3D points from one `coordinate system` (or `frame`) to another.
 They are particularly relevant for robotics and 3D vision applications, where the 
@@ -115,8 +117,10 @@ with respect to a camera that observes it.
 Following [ROS conventions](http://wiki.ros.org/tf/Overview/Transformations), 
 we refer to a point $`\mathbf{p}`$ within a frame $`B`$ as $`^{B}\mathbf{p}`$. 
 We also refer to the relationship between any two frames $`A`$ and $`B`$ as 
-a 6 Degrees of Freedom (DoF) transformation $`^{B}T_{A}`$: 
-a translation followed by a rotation. 
+a 6 Degrees of Freedom (DoF) transformation: 
+a translation followed by a rotation. Specifically,
+the pose of $`A`$ in $`B`$ is given by the translation from $`B`$'s origin to $`A`$'s origin, 
+and the rotation of $`A`$'s coordinate axes in $`B`$. 
 
 >- **Translations:** A 3D translation can be represented by a vector $`\bold{t} = [t_1, t_2, t_3]`$
     or by a $`4 \times 4`$ matrix in homogeneous coordinates:<br>
@@ -132,8 +136,7 @@ a translation followed by a rotation.
     $`y`$, and $`z`$, respectively. Thus, a translation has 3 DoF. <br> <br>
     
 >- **Rotations:** A 3D rotation has 3 DoF as well. Each DoF corresponds to a rotation around one of the axes of the 
-    coordinate frame. In general, [ROS uses quaternions](http://wiki.ros.org/tf2/Tutorials/Quaternions) 
-    to represent rotations. For now, though, we will work with them in homogeneous coordinates:<br>
+    coordinate frame. We can represent rotations in homogeneous coordinates as:<br>
     $`R = 
     \begin{bmatrix}
     r_{11} & r_{12} & r_{13} & 0\\
@@ -141,37 +144,49 @@ a translation followed by a rotation.
     r_{13} & r_{32} & r_{33} & 0\\
     0 & 0 & 0 & 1
     \end{bmatrix}
-    `$
+    `$<br>
+    Note that the $`3 \times 3`$ submatrix of $`R`$ with the elements $`r_11`$ ... $`r_33`$
+    is an [orthogonal matrix](https://en.wikipedia.org/wiki/Orthogonal_matrix).
+    
+Be aware that [ROS uses quaternions](http://wiki.ros.org/tf2/Tutorials/Quaternions) 
+to represent rotations, and there are many other rotation representations (e.g., 
+see [Euler angles](https://en.wikipedia.org/wiki/Euler_angles)).
 
-We can multiply translations and rotations in homogeneous coordinates to
-compute the transformation $`^{B}T_{A}`$ that projects a point from $`A`$ to $`B`$.
-Let $`^{B}t_{A}`$ represent the translation that brings the origin of $`A`$'s frame to 
-the origin of $`B`$. Also, let $`^{B}R_{A}`$ be the rotation that aligns the direction of 
-$`A`$'s axes with $`B`$'s. We can then express the transform $`^{B}T_{A}`$ as:
+### Changing the Frame of a Point
+Let $`^{A}\mathbf{p}`$ be a 3D point in the $`A`$ frame. Its position in 
+$`B`$ can be expressed as $`^{B}\mathbf{p} = {B}_{A}T\ ^{A}\mathbf{p} = ^{B}_{A}R\ ^{B}_{A}t`$,
+where:
+ 
+- $`^{B}_{A}t`$ is the translation between the frames. The values $`t_1, t_2, t_3`$ of
+the translation are the origin of the frame $`A`$ in $`B`$.
+- $`^{B}_{A}R`$ is the rotation corresponding to the orientation of $`A`$'s coordinate axes in 
+$`B`$. 
 
-$`^{B}T_{A}\, =\, ^{B}R_{A}\ ^{B}t_{A} = 
-\begin{bmatrix}
-r_{11} & r_{12} & r_{13} & t_1\\
-r_{12} & r_{22} & r_{23} & t_2\\
-r_{13} & r_{32} & r_{33} & t_3\\
-0 & 0 & 0 & 1
-\end{bmatrix}
-`$
+Note that the 3D vector with elements $`r_11, r_21, r_31`$ 
+from the first column of the rotation matrix $`^{B}_{A}R`$ has the same direction as the $`x`$ axis of $`A`$ 
+in the $`B`$ frame. Similarly, the elements $`r_12, r_22, r_32`$
+and $`r_13, r_23, r_33`$ have the same direction of the $y$ and $z$ axes of $`A`$ in $`B`$.
 
-This means that a point $`^{A}\mathbf{p}`$ in the $`A`$ frame can be
-expressed in $`B`$ as $`^{B}\mathbf{p} = {B}T_{A}\ ^{A}\mathbf{p}`$.
+### Transforms in ROS
 
+The [tf](http://wiki.ros.org/tf) library in ROS represents transforms and coordinate frames 
+in a `tree structure` buffered in time. The tree is a directed graph, where any two 
+vertices are connected by one path. The nodes of this graph corresponds to coordinate frames, 
+the edges correspond to transforms. 
 
+Any directed edge in the tf tree has a `parent` frame (source node), and a `child` frame 
+(target node). Let the parent frame be $`P`$ and the child be $`C`$. Then, the transform
+stored in the edge parent -> child corresponds to $`^{P}_{C}T`$.
 
+<!-- todo: add image of nodes and edge with transform -->
 
+The tf library quickly computes the net transform between two nodes (frames) 
+by multiplying the edges connecting them. To traverse up a directed edge from a child to a parent node, 
+tf automatically uses the inverse of the transformation that is stored in the edge.
 
 ## Part I. Introduction to tf
-This part of the assignment will help you understand how [tf](http://wiki.ros.org/tf) works.
-
-> tf is a package that lets the user keep track of multiple coordinate frames over time. tf 
-maintains the relationship between coordinate frames in a tree structure buffered in time, and 
-lets the user transform points, vectors, etc. between any two coordinate frames at any desired 
-point in time. 
+This part of the assignment will help you understand how [tf](http://wiki.ros.org/tf) lets 
+users keep track of multiple coordinate frames over time in ROS. 
 
 1. Complete the [Introduction to tf2](http://wiki.ros.org/tf2/Tutorials/Introduction%20to%20tf2)
 tutorial from ROS. You should familiarize yourself with the `view_frames` and `tf_echo` tools. 
@@ -182,8 +197,8 @@ Now that you know how to use basic tf tools, bring up a simulation of the robot 
 You will inspect its tf tree with tf tools. 
 
 > NOTE: In [assignment-0](../../assignment-0/README.md), you ran `roscore` before bringing up the robot to enable ROS nodes to communicate. 
-But you can also launch `shutter.launch` directly. If roscore isn't already running, roslaunch 
-will automatically start it. Try it!
+But you can also launch `shutter.launch` directly, as you did in the tutorial. 
+If roscore isn't already running, roslaunch  will automatically start it. Try it!
 
 - **I-1.** Generate an image of the tf tree of Shutter with [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
 Include this image in your report.
@@ -194,14 +209,27 @@ Include this image in your report.
 - **I-2.** Based on the tf tree, which links are between the robot's *base_footprint* 
 and *zed_camera_link*?
 
-- **I-3.** How are the transformations in the /tf and /tf_static topics generated?
+- **I-3.** Based on the tf tree, what is the 3D transformation $`^{W}_{Z}T`$
+between the *wrist_1_link* ($`W`$) and the *zed_camera_link* ($`Z`$)? Please
+provide the transformation in homogeneous coordinates.
+
+    *Tip:* You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool to query
+    transformations. You will then need to assemble the $`4 \times 4`$ homogenous transformation matrix 
+    from these values. We recommend [this primer](wiki.ogre3d.org/Quaternion+and+Rotation+Primer) from Ogre
+    if you are confused about different rotation representations.
+
+- **I-4.** Similar to the previous question, what is the 3D transformation $`^{B}_{F}T`$
+between the *biceps_link* ($`B`$) and the *forearm_link* ($`F`$)? Again, please
+provide the transformation in homogeneous coordinates.
+
+- **I-5.** How are the transformations in the /tf and /tf_static topics generated?
 
     *Tip:* You should inspect what nodes and topics are being published in your ROS system,
     e.g., with the [rqt_graph](http://wiki.ros.org/rqt_graph) tool. You can also read the shutter.launch script and any
     subsequent script that it launches to understand how the robot's tf tree is being generated.
 
 
-## Part II. Understanding tf messages
+## Part II. Publishing tf messages
 The /tf and /tf_static topics transmit 
 [tf2_msgs/TFMessage](http://docs.ros.org/jade/api/tf2_msgs/html/msg/TFMessage.html) messages.
 These messages are a list of transformations, encoded as 
@@ -214,29 +242,37 @@ message has:
 and the `frame_id` of the reference frame for the transformation;
 - a `child_frame_id`, corresponding to the name of the child frame; and
 - a `transform`, of type [geometry_msgs/Transform](http://docs.ros.org/jade/api/geometry_msgs/html/msg/Transform.html),
-with the translation and rotation of the child_frame_id in the reference frame_id.
-
-These type of transformations are visualized with tools like [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees)
-as:
-
-
+with the translation and rotation of the transform $`{parent}_{child}T`$.
 
 ### Questions / Tasks
 
-- **I-3.** What is the 3D translation and rotation of the *zed_camera_link* from 
-the *wrist_1_link* in the robot? 
+- **II-1.** Make a ROS node that publishes a tf transform for a moving 
+target in front of the robot. 
+<!-- todo. complete description -->
 
-    *Tip:* You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool.
+- **II-2.** To facilitate visualizing
+the target, add a publisher to your node that streams an [rviz Marker](http://wiki.ros.org/rviz/DisplayTypes/Marker) message
+with the position of the target. The marker should be a red sphere of 0.1m diameter. 
+Take a picture of the marker in front of a simulated version of Shutter in 
+[rviz](http://wiki.ros.org/rviz) and add it to your report. 
+
+    *Tip:* A tutorial in C++ on publishing rviz Markers can be found 
+    [here](http://wiki.ros.org/rviz/Tutorials/Markers%3A%20Basic%20Shapes). You
+    need to follow the same steps (but in Python) to publish a marker from your node.
+    First, define the publisher that will stream Markers through a topic in your node.
+    Then, create the Marker messages and publish them continuously as the position
+    of the target changes over time. 
     
-## Part II. Computing the position of Shutter's camera relative to its base
-
-
-
 
 ## Part III. Solving the Inverse Kinematics problem with MoveIt!
 
-## Part IV. Orienting Shutter's camera towards a target
+1. Find ray from camera center to target
+2. Compute orientation of ray in world footprint frame
+3. Change the orientation of the camera to point towards the target
 
-## Part V. 
+## Part IV. Orienting Shutter's camera towards a moving target
+
+
+## Part V. Orienting towards a visual target
 
 
