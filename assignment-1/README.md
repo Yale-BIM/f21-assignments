@@ -226,7 +226,8 @@ provide the transformation in homogeneous coordinates.
 between the *biceps_link* frame ($`B`$) and the *forearm_link* frame ($`F`$)? Again, please
 provide the transformation in homogeneous coordinates.
 
-- **I-5.** How are the transformations in the /tf and /tf_static topics generated?
+- **I-5.** How are the transformations in the /tf and /tf_static topics generated after you 
+bring up the robot? Please explain which node(s) contribute to generating the tf tree.
 
     *Tip:* You should inspect what nodes and topics are being published in your ROS system,
     e.g., with the [rqt_graph](http://wiki.ros.org/rqt_graph) tool. You can also read the shutter.launch script
@@ -235,11 +236,12 @@ provide the transformation in homogeneous coordinates.
 
 
 ## Part II. Publishing tf messages
-The /tf and /tf_static topics transmit 
-[tf2_msgs/TFMessage](http://docs.ros.org/jade/api/tf2_msgs/html/msg/TFMessage.html) messages.
-These messages are a list of transformations, encoded as 
-[geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) messages,
-that the tf library uses to assemble the tf tree.
+As mentioned earlier, the [tf](http://wiki.ros.org/tf) library
+uses a tree structure to represent frames and transformations in ROS. These frames and transformations
+are created based on the messages streamed through the /tf and /tf_static topics. By convention,
+these topics transmit [tf2_msgs/TFMessage](http://docs.ros.org/jade/api/tf2_msgs/html/msg/TFMessage.html) messages,
+which contain a list of transformations encoded as 
+[geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) messages.
 
 Each [geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) 
 message has:
@@ -251,36 +253,43 @@ and the `frame_id` of the reference frame for the transformation;
 with the translation and rotation of the transform $`{parent}_{child}T`$.
 
 Read [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29) 
-to understand how to publish tf transforms programmatically in Python.
+to understand how to publish tf transformations programmatically to the /tf topic.
 
 ### Questions / Tasks
 Let's now create a simulated moving object in ROS.
 
-- **II-1.** Modify the `generate_target.py` script 
+- **II-1.** Modify the `generate_target.py` Python script 
 in the `shutter_lookat` package of this assignment
-to publish the location of a simulated object as a tf frame. The object's
-frame should be named "target". It should also have the same position 
-that the node publishes for the object in the /target topic relative to
- the "base_footprint" frame. 
-For the orientation of the frame, you should set $0$ deg rotation with respect
-to the "base_footprint" frame.
+to publish the location of a simulated object as a tf frame. The object is already
+created in the script and its position is automatically updated, such that it moves on
+a circular path relative to the "base_footprint" frame of Shutter. 
 
-    *Tip 1:* You can publish the tf frame as in [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29) 
-    on using the tf library in Python. 
+    You should publish a new frame in /tf called "target" which contains the position
+    of the simulated object in the "base_footprint" frame. For the orientation of the "target" 
+    frame, you should set $0$ deg rotation with respect to "base_footprint".
 
-    *Tip 2:* You can check that your code is working as expected by visualizing
+    *Tip:* You can check that your code is working as expected by visualizing
     the "target" frame relative to the robot Shutter in [rviz](http://wiki.ros.org/rviz).
     To this end, bring up the simulated robot, run your new 
     generate_target.py script, open rviz, and add a RobotModel and TF displays. You should
     then be able to see the target moving in a circular path in front of the robot, as
     in the gif below.
+    <!-- todo: add gif -->
     
-- **II-2.** Bring up the robot and run your new generate_target.py script. Then,
+- **II-2.** Stop any ROS processes that you are running, including roscore. Then, 
+    bring up the robot, run your new generate_target.py script, and 
     generate a new image of the tf tree in ROS, e.g., using [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
     Add the image of the tf tree to your report.
     
+### Part III. Querying TF
+One of the key features of the [tf](http://wiki.ros.org/tf) library is the ability
+to query transformations from the tf tree that is assembled
 
-## Part III. Solving the Inverse Kinematics problem with MoveIt!
+
+Read the [writing a tf listener](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20listener%20%28Python%29) 
+and [learning about tf and time](http://wiki.ros.org/tf/Tutorials/tf%20and%20Time%20%28Python%29) tutorials.
+
+## Part IV. Solving the Inverse Kinematics problem with MoveIt!
 
 1. Find ray from camera center to target
 2. Compute orientation of ray in world footprint frame
