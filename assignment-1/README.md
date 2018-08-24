@@ -85,6 +85,23 @@ width="75" alt="Right hand rule from Wikipedia.org"/><br>
 Right Hand Rule (image from Wikipedia.org)
 </p>
 
+### Kinematic Chains
+
+A kinematic chain is an assembly of rigid bodies or `links` connected by `joints`.
+The joints allow the links to move relative to one another
+and are typically instrumented with sensors, e.g., to measure the relative position of neihboring links.
+
+There are different types of joints but, in this assignment, we will focus on
+working with `revolute joints` because Shutter has 4 of them. Revolute joints
+have a single axis of rotation and, thus, exibit just one Degree of Freedom. The 
+`joint angle` of these revolute joints controls the displacement between the pair
+of links that are connected to it.
+
+In general, we like to think about Degrees of Freedom (DoF) as the number of independent position 
+variables that would have to be specified in order to locate all parts of a robot.
+Shutter, in particular, has 4 motors in its arm, each of which implements a revolute joint.
+Thus, Shutter has 4 DoF. 
+
 
 ## Part I. Understanding 3D Geometric Transformations
 
@@ -114,8 +131,8 @@ a translation followed by a rotation.
     The scalars $`t_1`$, $`t_2`$, and $`t_3`$ correspond to the displacements in $`x`$,
     $`y`$, and $`z`$, respectively. Thus, a translation has 3 DoF. <br> <br>
     
->- **Rotations:** A 3D rotation has 3 DoF as well (each corresponding to one of the axes of the 
-    coordinate frame). In general, [ROS uses quaternions](http://wiki.ros.org/tf2/Tutorials/Quaternions) 
+>- **Rotations:** A 3D rotation has 3 DoF as well. Each DoF corresponds to a rotation around one of the axes of the 
+    coordinate frame. In general, [ROS uses quaternions](http://wiki.ros.org/tf2/Tutorials/Quaternions) 
     to represent rotations. For now, though, we will work with them in homogeneous coordinates:<br>
     $`R = 
     \begin{bmatrix}
