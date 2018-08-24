@@ -276,8 +276,8 @@ a circular path relative to the "base_footprint" frame of Shutter.
     in the gif below.
     <!-- todo: add gif -->
     
-    Once the "target" tf frame is published properly, please commit your code to your
-    repository.
+    Once the "target" tf frame is published properly by your modified generate_target.py script, 
+    please commit your code to your repository.
     
 - **II-2.** Stop any ROS processes that you are running, including roscore. Then, 
     bring up the robot, run your new generate_target.py script, and 
