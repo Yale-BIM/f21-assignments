@@ -381,7 +381,7 @@ to the "camera_link" frame.
     e. Draw the outline of a red circle on the image. The position of the center of the circle
     should match the position of the projected moving object in the image, such that as
     the object moves, the projected circle also moves. Make
-    the radius of the circle 15 pixels, and its outline 3 pixels wide.
+    the radius of the circle 12 pixels, and its outline 3 pixels wide.
     
     ```python
     # Example code
@@ -540,11 +540,16 @@ the virtual camera that you already implemented is working correctly.
     you shouldn't commit the bag to your repository! Otherwise, you will make your repository
     unnecessarily heavy.
     
-## Part IV. Orienting Shutter's camera towards a moving target
+- **III-3.** Explain in your report what is the difference between calling the `lookup_transform`
+function from the tf2 API with rospy.Time(0) or rospy.Time.now() as third argument? 
 
+> Note that how you call the lookup_transform function can have an effect on the
+rate of operation of your virtual_camera.py node. Try changing how you call the function
+in your node and check how often are you able to publish images through the
+/virtual_camera/image_raw topic. Use the [rostopic hz](http://wiki.ros.org/rostopic) tool 
+to this end.
 
-
-### Part III. TF and Time 
+### Part IV. TF and Time 
 One of the key features of the [tf](http://wiki.ros.org/tf) library is the ability
 to query transformations from its tf tree. The transformations can be the last transformation
 received by the library or they can be queried at specific points in time. 
@@ -554,4 +559,9 @@ to learn how tf transformations can be queried in ROS. Then, complete the follow
 
 1. Launch the `generate_target.launch` script that you edited for the previous part of this
 assignment.
+    
+## Part IV. Orienting Shutter's camera towards a moving target
+
+
+
 
