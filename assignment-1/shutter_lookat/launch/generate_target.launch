@@ -1,7 +1,9 @@
 <launch>
 
     <!-- bring up the robot -->
-    <include file="$(find shutter_bringup)/launch/shutter.launch"/>
+    <include file="$(find shutter_bringup)/launch/shutter.launch">
+        <arg name="simulation" value="true"/>
+    </include>
 
     <!-- generate the simulated moving object -->
     <node name="generate_target" pkg="shutter_lookat" type="generate_target.py" output="screen"/>

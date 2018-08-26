@@ -252,10 +252,8 @@ and the `frame_id` of the reference frame for the transformation;
 - a `transform`, of type [geometry_msgs/Transform](http://docs.ros.org/jade/api/geometry_msgs/html/msg/Transform.html),
 with the translation and rotation of the transform $`{parent}_{child}T`$.
 
-You will now write code to publish the position of a simulated moving object as a ROS tf frame relative
-to the robot's camera. Read [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29) 
-to understand how to publish tf transformations programmatically to the /tf topic before following
-the steps below.
+You will use code that is already provided in this assignment to learn how to publish tf
+data as described above. To get started, follow the steps below:
 
 1. Inspect the `generate_target.py` Python script in the scripts directory of the `shutter_lookat` 
 package that is provided as part of this assignment. You should understand how the script creates a 
@@ -278,7 +276,7 @@ Let's now publish the position of the moving object as a ROS tf frame.
 
 - **II-1.** Follow the steps below to make a new ROS node that publishes 
 the position of a simulated moving object as a ROS tf frame ("target") relative
-to the robot's "camera_link" frame.
+to the robot's "camera_link" frame. 
 
     - Create a new ROS node in Python within the script directory of the `shutter_lookat` package.
 The node should be named `publish_target_relative_to_zed_camera.py`.
@@ -287,6 +285,10 @@ The node should be named `publish_target_relative_to_zed_camera.py`.
     
         - Subscribe to the `/target` topic to receive the position of the
 simulated object relative to the "base_footprint" frame.
+
+            > We suggest that you organize the code of your node
+in a Python class, as in [this tutorial on a pytalker node](http://wiki.ros.org/ROSNodeTutorialPython#The_pytalker_node),
+given the increased complexity of this node in comparison previous examples.
 
         - Transform the 3D pose of the moving object to the "camera_link" frame in Shutter.
         For this, you will have to query the transformation between the "base_footprint" frame
@@ -299,6 +301,9 @@ simulated object relative to the "base_footprint" frame.
         - Broadcast a tf transform from the "camera_link" frame to a (new) "target" frame in tf. 
         The target frame should have the same pose as the simulated object (as provided through
         the /target topic).
+        
+            > An example on broadcasting tf transformations can be found in 
+            [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29).
         
     - Edit the `generate_target.launch` script in the shutter_lookat package so that
     it runs your new node (publish_target_relative_to_zed_camera.py) 
@@ -336,13 +341,13 @@ the shutter_lookat package.
 
 2. Within your node, repeat the steps below: 
 
-    1. Query the latest transformation that maps points from the "target" frame
+    a. Query the latest transformation that maps points from the "target" frame
 to the "camera_link" frame.
 
-    2. Based on the transformation between the "target" and "camera_link" frame, compute the 3D
+    b. Based on the transformation between the "target" and "camera_link" frame, compute the 3D
 position of the moving object relative to the "camera_link" frame.
 
-    3. Project the moving object on a virtual camera positioned in the "camera_link" frame.
+    c. Project the moving object on a virtual camera positioned in the "camera_link" frame.
     This camera should output images in VGA format (640 x 480 pixels) and project 3D points
     according to the following intrinsic calibration parameters:
 
@@ -357,7 +362,7 @@ position of the moving object relative to the "camera_link" frame.
         > If you are unsure of what the above parameters mean, read more about projective cameras 
         in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book.
 
-    4. Create an image with white background using the [OpenCV library](https://opencv.org/) 
+    d. Create an image with white background using the [OpenCV library](https://opencv.org/) 
     in your node.
     
         ```python
@@ -370,7 +375,7 @@ position of the moving object relative to the "camera_link" frame.
         image[:,:] = (255,255,255) # (B, G, R)
         ```
         
-    5. Draw a filled red circle where the moving object projects onto the image. Make
+    e. Draw a filled red circle where the moving object projects onto the image. Make
     the radius of the circle 10 pixels.
     
         ```python
@@ -381,7 +386,7 @@ position of the moving object relative to the "camera_link" frame.
         > See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
         for more examples on drawing basic figures.
 
-    6. Publish the image that you created with OpenCV in ROS using the 
+    f. Publish the image that you created with OpenCV in ROS using the 
     [cv_bridge](http://wiki.ros.org/cv_bridge) library. The image should
     be published through the topic "/virtual_camera/raw"
     

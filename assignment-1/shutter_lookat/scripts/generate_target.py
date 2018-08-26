@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import rospy
+import numpy as np
 
 from geometry_msgs.msg import PoseStamped
 from visualization_msgs.msg import Marker
