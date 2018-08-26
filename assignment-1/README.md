@@ -337,9 +337,10 @@ on a virtual image captured from a camera in Shutter. Close all ROS nodes
 and launch the generate_target.launch script again before starting this part of the assignment.
 
 1. Create a new ROS node called `virtual_camera.py` in the scripts directory of
-the shutter_lookat package.
+the shutter_lookat package. This node should query transformations and publish images, as
+detailed below, at 15 Hz approximately.
 
-2. Within your node, repeat the steps below: 
+2. Implement your node such that it repeats the steps below while the program is running:
 
     a. Query the latest transformation that maps points from the "target" frame
 to the "camera_link" frame.
@@ -367,7 +368,8 @@ position of the moving object relative to the "camera_link" frame.
     
     ```python
     # Example code
-    import cv2 # import opencv
+    import cv2          # import opencv
+    import numpy as np  # import numpy
     
     # create image
     image = np.zeros((height,width,3), np.uint8)

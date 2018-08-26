@@ -31,7 +31,7 @@ class SimulatedObject(object):
 
 
 # Publishing rate for the node
-publish_rate = 10
+publish_rate = 30
 
 
 def generate_target():
