@@ -1,0 +1,12 @@
+<launch>
+
+    <!-- bring up the robot -->
+    <include file="$(find shutter_bringup)/launch/shutter.launch"/>
+
+    <!-- generate the simulated moving object -->
+    <node name="generate_target" pkg="shutter_lookat" type="generate_target.py" output="screen"/>
+
+    <!-- visualize the moving object in rviz -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find shutter_lookat)/config/rviz_target.cfg"/>
+
+</launch>

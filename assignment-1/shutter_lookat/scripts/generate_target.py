@@ -1,12 +1,8 @@
 #!/usr/bin/env python
 import rospy
-import numpy as np
 
-from geometry_msgs.msg import Vector3Stamped
-
-# Add imports here...
-
-
+from geometry_msgs.msg import PoseStamped
+from visualization_msgs.msg import Marker
 
 class SimulatedObject(object):
     """
@@ -47,9 +43,8 @@ def generate_target():
     rospy.init_node('generate_target')
 
     # Define publishers
-    vector_pub = rospy.Publisher('/target', Vector3Stamped, queue_size=5)
-
-    # Define tf2 transform broadcaster here...
+    vector_pub = rospy.Publisher('/target', PoseStamped, queue_size=5)
+    marker_pub = rospy.Publisher('/target_marker', Marker, queue_size=5)
 
     # Create the simulated object
     object = SimulatedObject()
@@ -59,16 +54,29 @@ def generate_target():
     while not rospy.is_shutdown():
 
         # publish the location of the target as a Vector3Stamped
-        vector_msg = Vector3Stamped()
-        vector_msg.header.stamp = rospy.Time.now()
-        vector_msg.header.frame_id = object.frame
-        vector_msg.vector.x = object.x
-        vector_msg.vector.y = object.center_y + np.sin(object.angle)*object.radius
-        vector_msg.vector.z = object.center_z + np.cos(object.angle)*object.radius
-        vector_pub.publish(vector_msg)
+        pose_msg = PoseStamped()
+        pose_msg.header.stamp = rospy.Time.now()
+        pose_msg.header.frame_id = object.frame
+        pose_msg.pose.position.x = object.x
+        pose_msg.pose.position.y = object.center_y + np.sin(object.angle)*object.radius
+        pose_msg.pose.position.z = object.center_z + np.cos(object.angle)*object.radius
+        vector_pub.publish(pose_msg)
 
-        # publish a tf frame for the marker here...
-
+        # publish a marker to visualize the target in RViz
+        marker_msg = Marker()
+        marker_msg.header = pose_msg.header
+        marker_msg.action = Marker.ADD
+        marker_msg.color.a = 0.5
+        marker_msg.color.r = 1.0
+        marker_msg.lifetime = rospy.Duration(1.0)
+        marker_msg.id = 0
+        marker_msg.ns = "target"
+        marker_msg.type = Marker.SPHERE
+        marker_msg.pose = pose_msg.pose
+        marker_msg.scale.x = 0.1
+        marker_msg.scale.y = 0.1
+        marker_msg.scale.z = 0.1
+        marker_pub.publish(marker_msg)
 
         # update the simulated object state
         object.step(publish_rate)

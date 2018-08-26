@@ -123,7 +123,7 @@ the pose of $`A`$ in $`B`$ is given by the translation from $`B`$'s origin to $`
 and the rotation of $`A`$'s coordinate axes in $`B`$. 
 
 >- **Translations:** A 3D translation can be represented by a vector $`\bold{t} = [t_1, t_2, t_3]`$
-    or by a $`4 \times 4`$ matrix in homogeneous coordinates:<br>
+    or by a $`4 \times 4`$ matrix:<br>
     $`t =
     \begin{bmatrix}
     1 & 0 & 0 & t_1\\
@@ -133,10 +133,12 @@ and the rotation of $`A`$'s coordinate axes in $`B`$.
     \end{bmatrix}
     `$<br>
     The scalars $`t_1`$, $`t_2`$, and $`t_3`$ correspond to the displacements in $`x`$,
-    $`y`$, and $`z`$, respectively. Thus, a translation has 3 DoF. <br> <br>
+    $`y`$, and $`z`$, respectively. Thus, a translation has 3 DoF. Note that
+    representing translations with $`4 \times 4`$ matrices as above is helpful 
+    for transforming points in homogeneous coordinates.<br> <br>
     
 >- **Rotations:** A 3D rotation has 3 DoF as well. Each DoF corresponds to a rotation around one of the axes of the 
-    coordinate frame. We can represent rotations in homogeneous coordinates as:<br>
+    coordinate frame. We can represent rotations also as $`4 \times 4`$ transformation matrices:<br>
     $`R = 
     \begin{bmatrix}
     r_{11} & r_{12} & r_{13} & 0\\
@@ -146,21 +148,22 @@ and the rotation of $`A`$'s coordinate axes in $`B`$.
     \end{bmatrix}
     `$<br>
     Note that the $`3 \times 3`$ submatrix of $`R`$ with the elements $`r_11`$ ... $`r_33`$
-    is an [orthogonal matrix](https://en.wikipedia.org/wiki/Orthogonal_matrix).
-    
-Be aware that [ROS uses quaternions](http://wiki.ros.org/tf2/Tutorials/Quaternions) 
-to represent rotations, and there are many other rotation representations (e.g., 
-see [Euler angles](https://en.wikipedia.org/wiki/Euler_angles)).
+    is an [orthogonal matrix](https://en.wikipedia.org/wiki/Orthogonal_matrix).<br>    
+    It is important to know that [ROS uses quaternions](http://wiki.ros.org/tf2/Tutorials/Quaternions) 
+    to represent rotations, but there are many other useful representations (e.g., 
+    [Euler angles](https://en.wikipedia.org/wiki/Euler_angles)).
 
 ### Changing the Frame of a Point
 Let $`^{A}\mathbf{p}`$ be a 3D point in the $`A`$ frame. Its position in 
-$`B`$ can be expressed as $`^{B}\mathbf{p} = ^{B}_{A}T\ ^{A}\mathbf{p} = ^{B}_{A}(R \times t) ^{A}\mathbf{p}`$,
-where:
+$`B`$ can be expressed as $`^{B}\mathbf{p} = ^{B}_{A}T\ ^{A}\mathbf{p}`$, where 
+$`^{B}_{A}T = ^{B}_{A}(R \times t)`$ is the $`4 \times 4`$ transformation matrix that
+results from left-multiplying the translation matrix $`^{B}_{A}t`$ by the rotation
+matrix $`^{B}_{A}R`$. In particular,
  
-- $`^{B}_{A}t`$ is the transformation in homogeneous coordinates that encodes the
- translation between the frames $`A`$ and $`B`$. In particular, the values $`t_1, t_2, t_3`$ of
+- $`^{B}_{A}t`$ is the $`4 \times 4`$ transformation matrix that encodes the
+ translation between the frames $`A`$ and $`B`$. The values $`t_1, t_2, t_3`$ of
 the translation $`^{B}_{A}t`$ are the origin of the frame $`A`$ in $`B`$.
-- $`^{B}_{A}R`$ is the rotation corresponding to the orientation of $`A`$'s coordinate axes in 
+- $`^{B}_{A}R`$ is the  $`4 \times 4`$ rotation matrix corresponding to the orientation of $`A`$'s coordinate axes in 
 $`B`$. 
 
 Note that the 3D vector with elements $`r_{11}, r_{21}, r_{31}`$ 
@@ -213,20 +216,16 @@ Include this image in your report.
 - **I-2.** Based on the tf tree from I-1, which frames are between the robot's *base_footprint* 
 frame and the *zed_camera_link* frame?
 
-- **I-3.** Based on the tf tree, what is the 3D transformation $`^{W}_{Z}T`$
+- **I-3.** Based on the tf tree, what is the $`4 \times 4`$ transformation $`^{W}_{Z}T`$
 between the *wrist_1_link* frame ($`W`$) and the *zed_camera_link* frame ($`Z`$)? Please
-provide the transformation in homogeneous coordinates.
+provide the transformation with both the rotation and translation components.
 
     *Tip:* You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool to query
     transformations. You will then need to assemble the $`4 \times 4`$ homogenous transformation matrix 
     from these values. We recommend [this primer](wiki.ogre3d.org/Quaternion+and+Rotation+Primer) from Ogre
     if you are confused about different rotation representations.
 
-- **I-4.** Similar to the previous question, what is the 3D transformation $`^{B}_{F}T`$
-between the *biceps_link* frame ($`B`$) and the *forearm_link* frame ($`F`$)? Again, please
-provide the transformation in homogeneous coordinates.
-
-- **I-5.** How are the transformations in the /tf and /tf_static topics generated after you 
+- **I-4.** How are the transformations in the /tf and /tf_static topics generated after you 
 bring up the robot? Please explain which node(s) contribute to generating the tf tree.
 
     *Tip:* You should inspect what nodes and topics are being published in your ROS system,
@@ -238,11 +237,12 @@ bring up the robot? Please explain which node(s) contribute to generating the tf
 ## Part II. Publishing tf messages
 As mentioned earlier, the [tf](http://wiki.ros.org/tf) library
 uses a tree structure to represent frames and transformations in ROS. These frames and transformations
-are created based on the messages streamed through the /tf and /tf_static topics. By convention,
-these topics transmit [tf2_msgs/TFMessage](http://docs.ros.org/jade/api/tf2_msgs/html/msg/TFMessage.html) messages,
+are created based on the messages streamed through the /tf and /tf_static topics. 
+
+By convention, the /tf and /tf_static topics 
+transmit [tf2_msgs/TFMessage](http://docs.ros.org/jade/api/tf2_msgs/html/msg/TFMessage.html) messages,
 which contain a list of transformations encoded as 
 [geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) messages.
-
 Each [geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) 
 message has:
 
@@ -252,63 +252,164 @@ and the `frame_id` of the reference frame for the transformation;
 - a `transform`, of type [geometry_msgs/Transform](http://docs.ros.org/jade/api/geometry_msgs/html/msg/Transform.html),
 with the translation and rotation of the transform $`{parent}_{child}T`$.
 
-Read [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29) 
-to understand how to publish tf transformations programmatically to the /tf topic.
+You will now write code to publish the position of a simulated moving object as a ROS tf frame relative
+to the robot's camera. Read [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29) 
+to understand how to publish tf transformations programmatically to the /tf topic before following
+the steps below.
+
+1. Inspect the `generate_target.py` Python script in the scripts directory of the `shutter_lookat` 
+package that is provided as part of this assignment. You should understand how the script creates a 
+simulated moving object and publishes its position relative to the "base_footprint" frame of 
+Shutter through the `/target` topic.
+
+2. Visualize the moving target in [rviz](http://wiki.ros.org/rviz). Before running the launch
+script below, make sure that you are not running any other node in ROS.
+
+    ```bash
+    $ roslaunch shutter_lookat generate_target.launch
+    ```
+
+    The launch script should then open rviz and display the robot and the moving target in front
+    of it. The target should be displayed as a red ball.
+   
 
 ### Questions / Tasks
-Let's now create a simulated moving object in ROS.
+Let's now publish the position of the moving object as a ROS tf frame.
 
-- **II-1.** Modify the `generate_target.py` Python script 
-in the `shutter_lookat` package of this assignment
-to publish the location of a simulated object as a tf frame. The object is already
-created in the script and its position is automatically updated, such that it moves on
-a circular path relative to the "base_footprint" frame of Shutter. 
+- **II-1.** Follow the steps below to make a new ROS node that publishes 
+the position of a simulated moving object as a ROS tf frame ("target") relative
+to the robot's "camera_link" frame.
 
-    For this part of the assignment, you should publish a new frame in /tf called "target" which contains the position
-    of the simulated object in the "base_footprint" frame. For the orientation of the "target" 
-    frame, you should set 0 deg. rotation with respect to "base_footprint".
+    1. Create a new ROS node in Python within the script directory of the `shutter_lookat` package.
+The node should be named `publish_target_relative_to_zed_camera.py`.
 
-    *Tip:* You can check that your code is working as expected by visualizing
-    the "target" frame relative to the robot Shutter in [rviz](http://wiki.ros.org/rviz).
-    To this end, bring up the simulated robot, run your new 
-    generate_target.py script, open rviz, and add a RobotModel and TF displays. You should
-    then be able to see the target moving in a circular path in front of the robot, as
-    in the gif below.
-    <!-- todo: add gif -->
+    2. Within your new node:
     
-    Once the "target" tf frame is published properly by your modified generate_target.py script, 
-    please commit your code to your repository.
+        1. Subscribe to the `/target` topic to receive the position of the
+simulated object relative to the "base_footprint" frame.
+
+        2. Transform the 3D pose of the moving object to the "camera_link" frame in Shutter.
+        For this, you will have to query the transformation between the "base_footprint" frame
+        and the "camera_link" using the `lookup_transform` function from the tf2 API, e.g., 
+        as in the ROS tutorial on [writing a tf2 listener](http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20listener%20%28Python%29).
+             
+            > You can use the [tf2_geometry_msgs](http://wiki.ros.org/tf2_geometry_msgs) API to transform the pose of the object
+            as in [this post](https://answers.ros.org/question/222306/transform-a-pose-to-another-frame-with-tf2-in-python/).
+            
+        3. Broadcast a tf transform from the "camera_link" frame to a (new) "target" frame in tf. 
+        The target frame should have the same pose as the simulated object (as provided through
+        the /target topic).
+        
+    3. Edit the `generate_target.launch` script in the shutter_lookat package so that
+    it runs your new node (publish_target_relative_to_zed_camera.py) 
+    in addition to all the nodes that it already launches.
+     
+        > [Roslaunch](http://wiki.ros.org/roslaunch) is a tool for easily launching multiple
+        ROS nodes. Roslaunch scripts are written in XML format, according to [this specification](http://wiki.ros.org/roslaunch/XML).
+
+    4. Close all your nodes in ROS and launch the `generate_target.launch` script (which
+    now includes your node). 
     
-- **II-2.** Stop any ROS processes that you are running, including roscore. Then, 
-    bring up the robot, run your new generate_target.py script, and 
-    generate a new image of the tf tree in ROS, e.g., using [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
+    5. Add a TF display to rviz, and verify that the new `target` frame that you are publishing
+    visually matches the position of the moving target (red ball). If the frame and the moving
+    object are not displayed in the same place, check your code and edit as necessary.
+    
+    6. Save your work by adding and committing your publish_target_relative_to_zed_camera.py
+    node and the generage_target.launch script to your local repository. Push your code to GitLab.
+     
+        > Remember that continously committing your work and pushing to Gitlab will ensure that your
+        code is backed up and readily accessible at any time in the future.
+    
+- **II-2.** Stop any ROS processes that you are running, relaunch your new
+    generate_target.launch script, and create a new image of the tf tree in ROS, 
+    e.g., using [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
     Add the image of the tf tree to your report.
     
-### Part III. Querying TF
-One of the key features of the [tf](http://wiki.ros.org/tf) library is the ability
-to query transformations from the tf tree that is assembled
+    
+## Part III. Making a virtual camera
+You will now project the simulated moving object from Part II of this assignment 
+on a virtual image captured from a camera in Shutter. Close all ROS nodes
+and launch the generate_target.launch script again before starting this part of the assignment.
+
+1. Create a new ROS node called `virtual_camera.py` in the scripts directory of
+the shutter_lookat package.
+
+2. Within your node, repeat the steps below: 
+
+    1. Query the latest transformation that maps points from the "target" frame
+to the "camera_link" frame.
+
+    2. Based on the transformation between the "target" and "camera_link" frame, compute the 3D
+position of the moving object relative to the "camera_link" frame.
+
+    3. Project the moving object on a virtual camera positioned in the "camera_link" frame.
+    This camera should output images in VGA format (640 x 480 pixels) and project 3D points
+    according to the following intrinsic calibration parameters:
+
+        ```python
+        cx=320       # x-coordinate of principal point in terms of pixel dimensions
+        cy=240       # y-coordinate of principal point in terms of pixel dimensions
+        fx=349       # focal length in terms of pixel dimensions in the x direction
+        fy=349       # focal length in terms of pixel dimensions in the y direction
+        # note: there's no skew.
+        ```
+    
+        > If you are unsure of what the above parameters mean, read more about projective cameras 
+        in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book.
+
+    4. Create an image with white background using the [OpenCV library](https://opencv.org/) 
+    in your node.
+    
+        ```python
+        # Example code
+        import cv2 # import opencv
+        
+        # create image
+        image = np.zeros((height,width,3), np.uint8)
+        # color image
+        image[:,:] = (255,255,255) # (B, G, R)
+        ```
+        
+    5. Draw a filled red circle where the moving object projects onto the image. Make
+    the radius of the circle 10 pixels.
+    
+        ```python
+        # Example code
+        cv2.circle(image,(x,y), radius, (0,0,255), -1)
+        ```
+        
+        > See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
+        for more examples on drawing basic figures.
+
+    6. Publish the image that you created with OpenCV in ROS using the 
+    [cv_bridge](http://wiki.ros.org/cv_bridge) library. The image should
+    be published through the topic "/virtual_camera/raw"
+    
+        > Examples on converting OpenCV images to ROS messages can be found
+        in [this tutorial](http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython).
+
+3. Visualize the images that your node is publishing using the 
+[image_view](http://wiki.ros.org/image_view) tool. You should see the red ball
+moving in a circle in the image.
+
+### Questions / Tasks
+
+- **III-1.** Record a rosbag
 
 
-Read the [writing a tf listener](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20listener%20%28Python%29) 
-and [learning about tf and time](http://wiki.ros.org/tf/Tutorials/tf%20and%20Time%20%28Python%29) tutorials.
-
-## Part IV. Solving the Inverse Kinematics problem with MoveIt!
-
-1. Find ray from camera center to target
-2. Compute orientation of ray in world footprint frame
-3. Change the orientation of the camera to point towards the target
-
-
-
-    *Tip:* A tutorial in C++ on publishing rviz Markers can be found 
-    [here](http://wiki.ros.org/rviz/Tutorials/Markers%3A%20Basic%20Shapes). You
-    need to follow the same steps (but in Python) to publish a marker from your node.
-    First, define the publisher that will stream Markers through a topic in your node.
-    Then, create the Marker messages and publish them continuously as the position
-    of the target changes over time. 
 
 ## Part IV. Orienting Shutter's camera towards a moving target
 
 
 
+### Part III. TF and Time 
+One of the key features of the [tf](http://wiki.ros.org/tf) library is the ability
+to query transformations from its tf tree. The transformations can be the last transformation
+received by the library or they can be queried at specific points in time. 
+
+Read the [learning about tf and time](http://wiki.ros.org/tf/Tutorials/tf%20and%20Time%20%28Python%29) tutorial
+to learn how tf transformations can be queried in ROS. Then, complete the following steps:
+
+1. Launch the `generate_target.launch` script that you edited for the previous part of this
+assignment.
 
