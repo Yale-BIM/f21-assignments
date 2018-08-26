@@ -405,8 +405,9 @@ to the "camera_link" frame.
 moving in a circular path in the image (as in the Figure below). If this is not the case, please check your implementation of the
 virtual_camera.py script.
 
-<img src="docs/projected_moving_object.gif" style="border: 1px solid #000" width="300"/>
-
+<kbd>
+<img src="docs/projected_moving_object.gif" width="300"/>
+</kbd>
 
 ### Questions / Tasks
 
