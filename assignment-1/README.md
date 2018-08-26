@@ -280,15 +280,15 @@ Let's now publish the position of the moving object as a ROS tf frame.
 the position of a simulated moving object as a ROS tf frame ("target") relative
 to the robot's "camera_link" frame.
 
-    1. Create a new ROS node in Python within the script directory of the `shutter_lookat` package.
+    - Create a new ROS node in Python within the script directory of the `shutter_lookat` package.
 The node should be named `publish_target_relative_to_zed_camera.py`.
 
-    2. Within your new node:
+    - Within your new node:
     
-        1. Subscribe to the `/target` topic to receive the position of the
+        - Subscribe to the `/target` topic to receive the position of the
 simulated object relative to the "base_footprint" frame.
 
-        2. Transform the 3D pose of the moving object to the "camera_link" frame in Shutter.
+        - Transform the 3D pose of the moving object to the "camera_link" frame in Shutter.
         For this, you will have to query the transformation between the "base_footprint" frame
         and the "camera_link" using the `lookup_transform` function from the tf2 API, e.g., 
         as in the ROS tutorial on [writing a tf2 listener](http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20listener%20%28Python%29).
@@ -296,25 +296,25 @@ simulated object relative to the "base_footprint" frame.
             > You can use the [tf2_geometry_msgs](http://wiki.ros.org/tf2_geometry_msgs) API to transform the pose of the object
             as in [this post](https://answers.ros.org/question/222306/transform-a-pose-to-another-frame-with-tf2-in-python/).
             
-        3. Broadcast a tf transform from the "camera_link" frame to a (new) "target" frame in tf. 
+        - Broadcast a tf transform from the "camera_link" frame to a (new) "target" frame in tf. 
         The target frame should have the same pose as the simulated object (as provided through
         the /target topic).
         
-    3. Edit the `generate_target.launch` script in the shutter_lookat package so that
+    - Edit the `generate_target.launch` script in the shutter_lookat package so that
     it runs your new node (publish_target_relative_to_zed_camera.py) 
     in addition to all the nodes that it already launches.
      
         > [Roslaunch](http://wiki.ros.org/roslaunch) is a tool for easily launching multiple
         ROS nodes. Roslaunch scripts are written in XML format, according to [this specification](http://wiki.ros.org/roslaunch/XML).
 
-    4. Close all your nodes in ROS and launch the `generate_target.launch` script (which
+    - Close all your nodes in ROS and launch the `generate_target.launch` script (which
     now includes your node). 
     
-    5. Add a TF display to rviz, and verify that the new `target` frame that you are publishing
+    - Add a TF display to rviz, and verify that the new `target` frame that you are publishing
     visually matches the position of the moving target (red ball). If the frame and the moving
     object are not displayed in the same place, check your code and edit as necessary.
     
-    6. Save your work by adding and committing your publish_target_relative_to_zed_camera.py
+    - Save your work by adding and committing your publish_target_relative_to_zed_camera.py
     node and the generage_target.launch script to your local repository. Push your code to GitLab.
      
         > Remember that continously committing your work and pushing to Gitlab will ensure that your
