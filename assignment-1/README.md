@@ -345,8 +345,8 @@ detailed below, at 15 Hz approximately.
     a. Query the latest transformation that maps points from the "target" frame
 to the "camera_link" frame.
 
-    b. Based on the transformation between the "target" and "camera_link" frame, compute the 3D
-position of the moving object relative to the "camera_link" frame.
+    b. Extract the position of the moving object relative to the "camera_link" frame from
+    the transformation queried from step (a).
 
     c. Project the moving object on a virtual camera positioned in the "camera_link" frame.
     This camera should output images in VGA format (640 x 480 pixels) and project 3D points
@@ -377,34 +377,138 @@ position of the moving object relative to the "camera_link" frame.
     image[:,:] = (255,255,255) # (B, G, R)
     ```
         
-    e. Draw a filled red circle where the moving object projects onto the image. Make
-    the radius of the circle 10 pixels.
+    e. Draw the outline of a red circle on the image. The position of the center of the circle
+    should match the position of the projected moving object in the image. Make
+    the radius of the circle 15 pixels, and its outline 3 pixels wide.
     
     ```python
     # Example code
-    cv2.circle(image,(x,y), radius, (0,0,255), -1)
+    cv2.circle(image,(x,y), radius, (0,0,255), outline_width) # (x,y) is the projected location of the object
     ```
     
     > See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
     for more examples on drawing basic figures.
 
-    f. Publish the image that you created with OpenCV in ROS using the 
-    [cv_bridge](http://wiki.ros.org/cv_bridge) library. The image should
-    be published through the topic "/virtual_camera/raw"
+    f. Publish the image that you created with OpenCV as a sensor_msgs/Image message in ROS. You
+    can use the [cv_bridge](http://wiki.ros.org/cv_bridge) library to convert the OpenCV image to
+    an Image message. Note that the Image message should have a `header` with the current time as
+    stamp and the "camera_link" frame as frame_id. The Image message should be published by your node
+    through the "/virtual_camera/image_raw" topic.
     
     > Examples on converting OpenCV images to ROS messages can be found
     in [this tutorial](http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython).
 
 3. Visualize the images that your node is publishing using the 
-[image_view](http://wiki.ros.org/image_view) tool. You should see the red ball
-moving in a circle in the image.
+[rqt_image_view](http://wiki.ros.org/rqt_image_view) tool. You should see the red circle
+moving in a circular path in the image. If you don't, please check your implementation of the
+virtual_camera.py script.
 
 ### Questions / Tasks
 
-- **III-1.** Record a rosbag
+You will now share calibration parameters for Shutter's virtual camera in ROS such that
+other programs can reason geometrically about the images that your virtual_camera.py script publishes.
 
+- **III-1.** Edit your virtual_camera.py script to also publish the calibration parameters
+of the virtual camera as a [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
+through the `/virtual_camera/camera_info` topic:
 
+    a. Import the [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
+    into your virtual_camera.py script.
+    
+    ```python
+    # Example
+    from sensor_msgs.msg import CameraInfo
+    ```
+    
+    b. Create a function that builds CameraInfo messages from the calibration parameters
+    provided in Part III of this assignment. You can use the code snippet below to this end.
+    
+    ```python
+    def make_camera_info_message(stamp, frame_id, image_width, image_height, cx, cy, fx, fy):
+        """
+        Build CameraInfo message
+        :param stamp: timestamp for the message
+        :param frame_id: frame id of the camera
+        :param image_width: image width
+        :param image_height: image height
+        :param cx: x-coordinate of principal point in terms of pixel dimensions
+        :param cy: y-coordinate of principal point in terms of pixel dimensions
+        :param fx: focal length in terms of pixel dimensions in the x direction
+        :param fy: focal length in terms of pixel dimensions in the y direction
+        :return: CameraInfo message with the camera calibration parameters.
+        """
+        camera_info_msg = CameraInfo()
+        camera_info_msg.header.stamp = stamp
+        camera_info_msg.header.frame_id = frame_id
+        camera_info_msg.width = image_width
+        camera_info_msg.height = image_height
+        camera_info_msg.K = [fx, 0, cx, 0, fy, cy, 0, 0, 1]
+        camera_info_msg.D = [0, 0, 0, 0, 0]
+        camera_info_msg.R = [1, 0, 0, 0, 1, 0, 0, 0, 1]
+        camera_info_msg.P = [fx, 0, cx, 0, 0, fy, cy, 0, 0, 0, 1, 0]
+        camera_info_msg.distortion_model = "plumb_bob"
+        return camera_info_msg
+    ```
+    
+    > Specific details about the fields of CameraInfo messages can be found 
+     in its [message definition](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html).
+    
+    b. Create a publisher for the CameraInfo messages in your node.
+    
+    ```python
+    # Example
+    camerainfo_pub = rospy.Publisher("/virtual_camera/camera_info", CameraInfo, queue_size=10)
+    ```
+    
+    c. Publish a CameraInfo message whenever your node publishes an Image message. The
+    CameraInfo message should have the same header as the Image message.
+    
+    ```python
+    # Example (assumes that image_msg is the Image message that your node publishes for the virtual camera)
+    camerainfo_msg = make_camera_info_message(image_msg.header.stamp,
+                                              image_msg.header.frame_id,
+                                              image_width,
+                                              image_height,
+                                              cx, cy,
+                                              fx, fy)
+    self.camerainfo_pub.publish(camerainfo_msg)
+    ```
+    
+    d. Finally, check that your node is publishing CameraInfo messages through the 
+    /virtual_camera/camera_info topic with the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) tool.
+    
+    Remember to commit your code whenever you want to save a snapshot of your work.
 
+- **III-2.** You will now verify that the image and the camera parameters that your node publishes 
+are consistent with one another with the help of the rviz [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera). 
+
+    > The [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera) creates a new rendering
+window in rivz from the perspective of a camera. The plugin also overlays other displays that
+you have enabled in rviz on the rendered image. Your goal is to use these overlays to verify that
+the virtual camera that you already implemented is working correctly. 
+
+    Close all running ROS nodes and re-launch the generate_target.launch script. Then run 
+    your virtual_camera.py node and, once RViz opens, add a Camera display to the rviz window.
+    Configure the camera plugin as follows:
+    
+    * Image Topic: /virtual_camera/image_raw
+    * Transport Hint: raw
+    * Image Rendering: background
+    * Overlay Alpha: 0.6
+    * Zoom Factor: 1
+
+    The red circle from your /virtual_camera/image_raw image should then align in the rviz 
+    Camera plugin with the red ball of the simulated moving object. If this is not the case,
+    edit your check and correct your implementation of the virtual_camera.py node.
+    
+    Once the image that is published by the virtual_camera.py script is consistent 
+    with what the Camera plugin shows in RViz, take a screenshot of the Camera plugin window 
+    and add it to your report. 
+    
+    > Make sure to commit to your repository the version of your virtual_camera.py script 
+    that you used when you took the screenshot for your report.
+    
+    
 ## Part IV. Orienting Shutter's camera towards a moving target
 
 
