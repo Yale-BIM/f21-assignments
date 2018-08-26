@@ -41,7 +41,7 @@ def generate_target():
     global target_angle
 
     # Init the node
-    rospy.init_node('generate_target')
+    rospy.init_node('generate_target', anonymous=True)
 
     # Define publishers
     vector_pub = rospy.Publisher('/target', PoseStamped, queue_size=5)
@@ -61,6 +61,7 @@ def generate_target():
         pose_msg.pose.position.x = object.x
         pose_msg.pose.position.y = object.center_y + np.sin(object.angle)*object.radius
         pose_msg.pose.position.z = object.center_z + np.cos(object.angle)*object.radius
+        pose_msg.pose.orientation.w = 1.0
         vector_pub.publish(pose_msg)
 
         # publish a marker to visualize the target in RViz
