@@ -17,7 +17,7 @@ class LookForwardNode():
 
         # parameters for the joint of interest
         self.joint_name = "joint_4"
-        self.desired_joint_position = np.pi*0.5
+        self.desired_joint_position = -np.pi*0.5
         self.joint_reached_desired_position = False
 
         # Publishers
@@ -32,7 +32,7 @@ class LookForwardNode():
 
             if not self.joint_reached_desired_position:
                 msg = Float64()
-                msg.data = -self.desired_joint_position
+                msg.data = self.desired_joint_position
                 self.joint_pub.publish(msg)
 
             rate.sleep()

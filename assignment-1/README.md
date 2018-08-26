@@ -337,8 +337,7 @@ on a virtual image captured from a camera in Shutter. Close all ROS nodes
 and launch the generate_target.launch script again before starting this part of the assignment.
 
 1. Create a new ROS node called `virtual_camera.py` in the scripts directory of
-the shutter_lookat package. This node should query transformations and publish images, as
-detailed below, at 15 Hz approximately.
+the shutter_lookat package.
 
 2. Implement your node such that it repeats the steps below while the program is running:
 
@@ -502,12 +501,33 @@ the virtual camera that you already implemented is working correctly.
     edit your check and correct your implementation of the virtual_camera.py node.
     
     Once the image that is published by the virtual_camera.py script is consistent 
-    with what the Camera plugin shows in RViz, take a screenshot of the Camera plugin window 
-    and add it to your report. 
+    with what the Camera plugin shows in RViz, record a ROS [bag](http://wiki.ros.org/Bags) 
+    as in [this tutorial](http://wiki.ros.org/rosbag/Tutorials/Recording%20and%20playing%20back%20data). 
+    The bag should have all of the messages that are streamed in your system for a duration of 15 seconds.
     
-    > Make sure to commit to your repository the version of your virtual_camera.py script 
-    that you used when you took the screenshot for your report.
+    ```bash
+    $ rosbag record -O assignment1_part3.bag -a --duration 15 
+    ```
     
+    > You can see a description of the arguments that `rosbag record` accepts [here](http://wiki.ros.org/rosbag/Commandline#record).
+    
+    Inspect your ROS bag with the [rosbag info]() tool to verify that it contains messages
+    for all of the following topics:
+    
+    * /arm_controller/follow_joint_trajectory/status
+    * /diagnostics
+    * /joint_states 
+    * /rosout   
+    * /target  
+    * /target_marker 
+    * /tf         
+    * /tf_static  
+    * /virtual_camera/camera_info    
+    * /virtual_camera/image_raw 
+    
+    Make sure to **submit your ROS bag to Canvas** as part of this assignment. You don't need to and 
+    you shouldn't commit the bag to your repository! Otherwise, you will make your repository
+    unnecessarily heavy.
     
 ## Part IV. Orienting Shutter's camera towards a moving target
 
