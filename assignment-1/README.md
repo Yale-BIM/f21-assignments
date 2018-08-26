@@ -402,8 +402,11 @@ to the "camera_link" frame.
 
 3. Visualize the images that your node is publishing using the 
 [rqt_image_view](http://wiki.ros.org/rqt_image_view) tool. You should see the red circle
-moving in a circular path in the image. If this is not the case, please check your implementation of the
+moving in a circular path in the image (as in the Figure below). If this is not the case, please check your implementation of the
 virtual_camera.py script.
+
+<img src="docs/projected_moving_object.gif" style="border: 1px solid #000" width="300"/>
+
 
 ### Questions / Tasks
 
