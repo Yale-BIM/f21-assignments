@@ -9,6 +9,6 @@
     <node name="generate_target" pkg="shutter_lookat" type="generate_target.py" output="screen"/>
 
     <!-- visualize the moving object in rviz -->
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find shutter_lookat)/config/rviz_target.cfg"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find shutter_lookat)/config/rviz_target.cfg.rviz"/>
 
 </launch>
