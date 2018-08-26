@@ -347,9 +347,9 @@ to the "camera_link" frame.
     b. Extract the position of the moving object relative to the "camera_link" frame from
     the transformation queried from step (a).
 
-    c. Project the moving object on a virtual camera positioned in the "camera_link" frame.
-    This camera should output images in VGA format (640 x 480 pixels) and project 3D points
-    according to the following intrinsic calibration parameters:
+    c. Project the position of the moving object to the image of a virtual camera positioned 
+    in the "camera_link" frame. The projection operation should use the following
+    intrinsic camera calibration parameters:
 
     ```python
     cx=320       # x-coordinate of principal point in terms of pixel dimensions
@@ -363,7 +363,9 @@ to the "camera_link" frame.
     in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book.
 
     d. Create an image with white background using the [OpenCV library](https://opencv.org/) 
-    in your node.
+    in your node. This image will become the output of the simulated camera that you are building
+    for Shutter. The image should be in VGA format, i.e., have a
+    dimension of 640 x 480 pixels.
     
     ```python
     # Example code
@@ -377,7 +379,8 @@ to the "camera_link" frame.
     ```
         
     e. Draw the outline of a red circle on the image. The position of the center of the circle
-    should match the position of the projected moving object in the image. Make
+    should match the position of the projected moving object in the image, such that as
+    the object moves, the projected circle also moves. Make
     the radius of the circle 15 pixels, and its outline 3 pixels wide.
     
     ```python
@@ -392,14 +395,14 @@ to the "camera_link" frame.
     can use the [cv_bridge](http://wiki.ros.org/cv_bridge) library to convert the OpenCV image to
     an Image message. Note that the Image message should have a `header` with the current time as
     stamp and the "camera_link" frame as frame_id. The Image message should be published by your node
-    through the "/virtual_camera/image_raw" topic.
+    through the `/virtual_camera/image_raw` topic.
     
     > Examples on converting OpenCV images to ROS messages can be found
     in [this tutorial](http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython).
 
 3. Visualize the images that your node is publishing using the 
 [rqt_image_view](http://wiki.ros.org/rqt_image_view) tool. You should see the red circle
-moving in a circular path in the image. If you don't, please check your implementation of the
+moving in a circular path in the image. If this is not the case, please check your implementation of the
 virtual_camera.py script.
 
 ### Questions / Tasks
