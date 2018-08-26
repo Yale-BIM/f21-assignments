@@ -351,47 +351,47 @@ position of the moving object relative to the "camera_link" frame.
     This camera should output images in VGA format (640 x 480 pixels) and project 3D points
     according to the following intrinsic calibration parameters:
 
-        ```python
-        cx=320       # x-coordinate of principal point in terms of pixel dimensions
-        cy=240       # y-coordinate of principal point in terms of pixel dimensions
-        fx=349       # focal length in terms of pixel dimensions in the x direction
-        fy=349       # focal length in terms of pixel dimensions in the y direction
-        # note: there's no skew.
-        ```
+    ```python
+    cx=320       # x-coordinate of principal point in terms of pixel dimensions
+    cy=240       # y-coordinate of principal point in terms of pixel dimensions
+    fx=349       # focal length in terms of pixel dimensions in the x direction
+    fy=349       # focal length in terms of pixel dimensions in the y direction
+    # note: there's no skew.
+    ```
     
-        > If you are unsure of what the above parameters mean, read more about projective cameras 
-        in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book.
+    > If you are unsure of what the above parameters mean, read more about projective cameras 
+    in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book.
 
     d. Create an image with white background using the [OpenCV library](https://opencv.org/) 
     in your node.
     
-        ```python
-        # Example code
-        import cv2 # import opencv
-        
-        # create image
-        image = np.zeros((height,width,3), np.uint8)
-        # color image
-        image[:,:] = (255,255,255) # (B, G, R)
-        ```
+    ```python
+    # Example code
+    import cv2 # import opencv
+    
+    # create image
+    image = np.zeros((height,width,3), np.uint8)
+    # color image
+    image[:,:] = (255,255,255) # (B, G, R)
+    ```
         
     e. Draw a filled red circle where the moving object projects onto the image. Make
     the radius of the circle 10 pixels.
     
-        ```python
-        # Example code
-        cv2.circle(image,(x,y), radius, (0,0,255), -1)
-        ```
-        
-        > See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
-        for more examples on drawing basic figures.
+    ```python
+    # Example code
+    cv2.circle(image,(x,y), radius, (0,0,255), -1)
+    ```
+    
+    > See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
+    for more examples on drawing basic figures.
 
     f. Publish the image that you created with OpenCV in ROS using the 
     [cv_bridge](http://wiki.ros.org/cv_bridge) library. The image should
     be published through the topic "/virtual_camera/raw"
     
-        > Examples on converting OpenCV images to ROS messages can be found
-        in [this tutorial](http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython).
+    > Examples on converting OpenCV images to ROS messages can be found
+    in [this tutorial](http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython).
 
 3. Visualize the images that your node is publishing using the 
 [image_view](http://wiki.ros.org/image_view) tool. You should see the red ball
