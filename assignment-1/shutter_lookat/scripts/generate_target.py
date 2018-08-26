@@ -38,7 +38,6 @@ def generate_target():
     """
     Main function. Publishes the target at a constant frame rate.
     """
-    global target_angle
 
     # Init the node
     rospy.init_node('generate_target', anonymous=True)

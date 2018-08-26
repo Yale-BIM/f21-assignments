@@ -1,5 +1,8 @@
 <launch>
 
+    <!-- make shutter look forward? -->
+    <arg name="look_forward" value="True"/>
+
     <!-- bring up the robot -->
     <include file="$(find shutter_bringup)/launch/shutter.launch">
         <arg name="simulation" value="true"/>
@@ -10,5 +13,11 @@
 
     <!-- visualize the moving object in rviz -->
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find shutter_lookat)/config/rviz_target.cfg.rviz"/>
+
+    <!-- look forward if desired -->
+    <group if="$(arg look_forward)">
+        <node name="look_forward" pkg="shutter_lookat" type="look_forward.py"/>
+    </group>
+
 
 </launch>
