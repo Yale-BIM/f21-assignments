@@ -117,24 +117,9 @@ Visualization Manager:
         target: true
       Queue Size: 100
       Value: true
-    - Alpha: 1
-      Axes Length: 1
-      Axes Radius: 0.10000000149011612
-      Class: rviz/Pose
-      Color: 255; 25; 0
-      Enabled: false
-      Head Length: 0.30000001192092896
-      Head Radius: 0.10000000149011612
-      Name: Pose
-      Shaft Length: 1
-      Shaft Radius: 0.05000000074505806
-      Shape: Arrow
-      Topic: /target
-      Unreliable: false
-      Value: false
   Enabled: true
   Global Options:
-    Background Color: 238; 238; 236
+    Background Color: 196; 196; 196
     Default Light: true
     Fixed Frame: base_footprint
     Frame Rate: 30
@@ -194,4 +179,4 @@ Window Geometry:
     collapsed: false
   Width: 1200
   X: 67
-  Y: 30
+  Y: 27
