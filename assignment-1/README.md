@@ -414,9 +414,9 @@ virtual_camera.py script.
 You will now share calibration parameters for Shutter's virtual camera in ROS such that
 other programs can reason geometrically about the images that your virtual_camera.py script publishes.
 
-- **III-1.** Edit your virtual_camera.py script to also publish the calibration parameters
-of the virtual camera as a [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
-through the `/virtual_camera/camera_info` topic:
+- **III-1.** Edit your virtual_camera.py script to enable your node to also publish the calibration parameters
+of the virtual camera. The parameters should be published as a [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
+through the `/virtual_camera/camera_info` topic, as indicated in the steps below.
 
     a. Import the [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
     into your virtual_camera.py script.
@@ -504,8 +504,12 @@ the virtual camera that you already implemented is working correctly.
     * Zoom Factor: 1
 
     The red circle from your /virtual_camera/image_raw image should then align in the rviz 
-    Camera plugin with the red ball of the simulated moving object. If this is not the case,
-    edit your check and correct your implementation of the virtual_camera.py node.
+    Camera plugin with the red ball of the simulated moving object (as in the Figure below). 
+    If this is not the case, check and correct your implementation of the virtual_camera.py node.
+       
+    <kbd>
+    <img src="docs/rviz_camera.png" width="300"/>
+    </kbd>
     
     Once the image that is published by the virtual_camera.py script is consistent 
     with what the Camera plugin shows in RViz, record a ROS [bag](http://wiki.ros.org/Bags) 
