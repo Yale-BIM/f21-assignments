@@ -155,8 +155,8 @@ and the rotation of $`A`$'s coordinate axes in $`B`$.
 
 ### Changing the Frame of a Point
 Let $`^{A}\mathbf{p}`$ be a 3D point in the $`A`$ frame. Its position in 
-$`B`$ can be expressed as $`^{B}\mathbf{p} =\, ^{B}_{A}T\ ^{A}\mathbf{p}`$, where 
-$`^{B}_{A}T =\, ^{B}_{A}(R \times t)`$ is the $`4 \times 4`$ transformation matrix that
+$`B`$ can be expressed as $`^{B}\mathbf{p} = ^{B}_{A}T\ ^{A}\mathbf{p}`$, where 
+$`^{B}_{A}T = ^{B}_{A}(R \times t)`$ is the $`4 \times 4`$ transformation matrix that
 results from left-multiplying the translation matrix $`^{B}_{A}t`$ by the rotation
 matrix $`^{B}_{A}R`$. In particular,
  
@@ -169,7 +169,7 @@ $`B`$.
 Note that the 3D vector with elements $`r_{11}, r_{21}, r_{31}`$ 
 from the first column of the rotation matrix $`^{B}_{A}R`$ has the same direction as the $`x`$ axis of $`A`$ 
 in the $`B`$ frame. Similarly, the elements $`r_{12}, r_{22}, r_{32}`$
-and $`r_{13}, r_{23}, r_{33}`$ have the same direction of the $`y`$ and $`z`$ axes of 
+and $`r_{13}, r_{23}, r_{33}`$ have the same direction of the $y$ and $z$ axes of 
 $`A`$ in $`B`$, respectively.
 
 ### Transforms in ROS
@@ -250,8 +250,7 @@ message has:
 and the `frame_id` of the reference frame for the transformation;
 - a `child_frame_id`, corresponding to the name of the child frame; and
 - a `transform`, of type [geometry_msgs/Transform](http://docs.ros.org/jade/api/geometry_msgs/html/msg/Transform.html),
-with the translation and rotation components of the transform that brings points and vectors from 
-the child frame ($`C`$) to the parent frame ($`P`$) $`^{P}_{C}T`$.
+with the translation and rotation of the transform $`{parent}_{child}T`$.
 
 You will use code that is already provided in this assignment to learn how to publish tf
 data as described above. To get started, follow the steps below:
@@ -269,11 +268,7 @@ script below, make sure that you are not running any other node in ROS.
     ```
 
     The launch script should then open rviz and display the robot and the moving target in front
-    of it. The target should be displayed as a red ball. 
-    
-    > As you launch the generate_target.launch script, you may also see the end effector link
-    of the robot rotating to point the "zed_camera" and "camera_link" frames of the robot forward.
-    This change in the pose of the robot will be useful in Part III of the assignment.
+    of it. The target should be displayed as a red ball.
    
 
 ### Questions / Tasks
@@ -339,15 +334,14 @@ given the increased complexity of this node in comparison previous examples.
 ## Part III. Making a virtual camera
 You will now project the simulated moving object from Part II of this assignment 
 on a virtual image captured from a camera in Shutter. Close all ROS nodes
-and launch your new generate_target.launch script again before starting this part of the assignment.
+and launch the generate_target.launch script again before starting this part of the assignment.
 
 1. Create a new ROS node called `virtual_camera.py` in the scripts directory of
-the shutter_lookat package. You will write all the code corresponding to this part of the
-assignment in this node.
+the shutter_lookat package.
 
-2. Implement your node such that the steps below are repeated while the program is running: 
+2. Within your node, repeat the steps below: 
 
-    a. Use the tf library to query the latest transformation that maps points from the "target" frame
+    a. Query the latest transformation that maps points from the "target" frame
 to the "camera_link" frame.
 
     b. Based on the transformation between the "target" and "camera_link" frame, compute the 3D
@@ -365,8 +359,8 @@ position of the moving object relative to the "camera_link" frame.
         # note: there's no skew.
         ```
     
-    > If you are unsure of what the above parameters mean, read more about projective cameras 
-    in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book.
+        > If you are unsure of what the above parameters mean, read more about projective cameras 
+        in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book.
 
     d. Create an image with white background using the [OpenCV library](https://opencv.org/) 
     in your node.
@@ -389,15 +383,15 @@ position of the moving object relative to the "camera_link" frame.
         cv2.circle(image,(x,y), radius, (0,0,255), -1)
         ```
         
-    > See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
-    for more examples on drawing basic figures.
+        > See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
+        for more examples on drawing basic figures.
 
     f. Publish the image that you created with OpenCV in ROS using the 
     [cv_bridge](http://wiki.ros.org/cv_bridge) library. The image should
     be published through the topic "/virtual_camera/raw"
     
-    > Examples on converting OpenCV images to ROS messages can be found
-    in [this tutorial](http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython).
+        > Examples on converting OpenCV images to ROS messages can be found
+        in [this tutorial](http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython).
 
 3. Visualize the images that your node is publishing using the 
 [image_view](http://wiki.ros.org/image_view) tool. You should see the red ball
