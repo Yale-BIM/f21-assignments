@@ -656,7 +656,7 @@ gif, e.g., with ffmpeg and imagemagick as indicated in
 to demonstrate the execution of the switch_poses.py node in your documentation. 
 
     NOTE: We suggest that you add the animated gif to your repository so that all of your documentation
-    is contained in a single place and the animated git is displayed in 
+    is contained in a single place and the animated gif is displayed in 
     GitLab when your README.md file is rendered on the web. 
 
      > More information on including images 
