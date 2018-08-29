@@ -76,7 +76,7 @@ You should follow the steps below when working on an assignment:
 
 1. Go to the directory containing the assignment, e.g., `assignment-0`
 2. Pull updates from upstream (see the next section of this README file)
-3. Read the README.md file and assignment instructions pdf.
+3. Read the README.md file inside the assignments folder for the instructions on what you have to do.
 4. Do the assignment. 
 5. Whenever you want to save your code, commit your work.
 
