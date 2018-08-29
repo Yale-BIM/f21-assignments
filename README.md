@@ -66,8 +66,8 @@ checking the project's page in GitLab.
 8. Ensure that your repository in GitLab has visibility set to **private** in 
 Settings -> General -> Permissions.
 
-9. Add your T.A. as a member of your GitLab repository in Settings -> Members. In the role
-permission field, choose the maintainer role for the T.A.
+9. Add the course instructor and the T.F. as members of your GitLab repository in Settings -> Members. In the role
+permission field, choose the maintainer role for the instructor and the T.A.
     
 
 ## Working on your assignment
