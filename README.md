@@ -2,7 +2,7 @@
 
 Assignment repository for Yale's CPSC-659 Building Interactive Machines (Fall 2018).
 
-## Set up
+## Set up (Assignment -1)
 
 Follow the instructions below to get started with your assignments. 
 
