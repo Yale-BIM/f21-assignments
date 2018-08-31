@@ -50,10 +50,10 @@ At the bare minimum, you should be familiar with the commands `cd`, `ls`, `rm`, 
 
 #### Deliverables
 
-- **Report:** You are expected to submit a pdf with answers to the questions/tasks at 
+- **Report:** You are expected to submit a pdf to Canvas with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of the version of the code
-that you would like to be evaluated on. Though not mandatory, it is recommended that you generate this pdf 
+that you would like to be evaluated on. Though not mandatory, it is recommended that you generate the report pdf 
 with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this 
 [simple assignment template](https://www.overleaf.com/latex/templates/simple-assignment-template/mzkqqqjypzvd) 
 in [LaTeX](https://www.latex-project.org/).

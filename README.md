@@ -2,7 +2,7 @@
 
 Assignment repository for Yale's CPSC-659 Building Interactive Machines (Fall 2018).
 
-## Set up
+## Set up (Assignment -1)
 
 Follow the instructions below to get started with your assignments. 
 
@@ -66,8 +66,8 @@ checking the project's page in GitLab.
 8. Ensure that your repository in GitLab has visibility set to **private** in 
 Settings -> General -> Permissions.
 
-9. Add your T.A. as a member of your GitLab repository in Settings -> Members. In the role
-permission field, choose the maintainer role for the T.A.
+9. Add the course instructor and the T.F. as members of your GitLab repository in Settings -> Members. In the role
+permission field, choose the maintainer role for the instructor and the T.A.
     
 
 ## Working on your assignment
@@ -75,16 +75,17 @@ permission field, choose the maintainer role for the T.A.
 You should follow the steps below when working on an assignment:
 
 1. Go to the directory containing the assignment, e.g., `assignment-0`
-2. Read the README.md file and assignment instructions pdf.
-3. Do the assignment. 
-4. Whenever you want to save your code, commit your work.
+2. Pull updates from upstream (see the next section of this README file)
+3. Read the README.md file inside the assignments folder for the instructions on what you have to do.
+4. Do the assignment. 
+5. Whenever you want to save your code, commit your work.
 
     ```bash
     # Example
     $ git add <list-of-files-to-be-saved>
     $ git commit -m "<commit-message>"
     ```
-5. Push your work to GitLab to keep a remote copy.
+6. Push your work to GitLab to keep a remote copy.
 
     ```bash
     # Example
@@ -93,19 +94,19 @@ You should follow the steps below when working on an assignment:
 
     > Your final version of the assignment should be pushed to GitLab before the deadline!
     
-6. Write the corresponding assignment report, 
+7. Write the corresponding assignment report, 
 e.g., using [Overleaf](https://www.overleaf.com/edu/yale#!overview). 
 
     > A LaTeX template is provided as part of this repository to help you get
     started with your assignment reports. Feel free to edit this template and
     modify it to suit your needs.
     
-7. Repeat steps 3-6 as many times as necessary while you work on the assignment.
+8. Repeat steps 3-6 as many times as necessary while you work on the assignment.
 
-8. When you are ready to submit your assignment,
+9. When you are ready to submit your assignment,
     
     i. Gather the specific `commit hash` (SHA) of the version of the code in GitLab
-    that you would like to be evaluated on. 
+    that you would like to be evaluated on. Add it to the top of your report. 
     
     > To see all of your commits, go to your repository's GitLab page and open 
     Repository -> Commits. Copy the commit SHA for the final version of the code
@@ -113,7 +114,8 @@ e.g., using [Overleaf](https://www.overleaf.com/edu/yale#!overview).
         
     ii. Generate a `pdf of your LaTeX report`.
     
-    iii. Email the commit SHA and pdf report to your T.A.
+    iii. Submit the report (with the commit SHA) as a pdf to [Canvas](https://yale.instructure.com/courses/41970). If the assignment
+    asks for other documents, submit them to Canvas as wel.
     
 ## Pulling updates from upstream
 
