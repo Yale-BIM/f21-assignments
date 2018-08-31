@@ -118,9 +118,9 @@ Following [ROS conventions](http://wiki.ros.org/tf/Overview/Transformations),
 we refer to a point $`\mathbf{p}`$ within a frame $`B`$ as $`^{B}\mathbf{p}`$. 
 We also refer to the relationship between any two frames $`A`$ and $`B`$ as 
 a 6 Degrees of Freedom (DoF) transformation: 
-a translation followed by a rotation. Specifically,
-the pose of $`A`$ in $`B`$ is given by the translation from $`B`$'s origin to $`A`$'s origin, 
-and the rotation of $`A`$'s coordinate axes in $`B`$. 
+a rotation followed by a translation. Specifically,
+the pose of $`A`$ in $`B`$ is given by the rotation of $`A`$'s coordinate axes in $`B`$
+ and the translation from $`B`$'s origin to $`A`$'s origin. 
 
 >- **Translations:** A 3D translation can be represented by a vector $`\bold{t} = [t_1, t_2, t_3]`$
     or by a $`4 \times 4`$ matrix:<br>
@@ -156,8 +156,8 @@ and the rotation of $`A`$'s coordinate axes in $`B`$.
 ### Changing the Frame of a Point
 Let $`^{A}\mathbf{p}`$ be a 3D point in the $`A`$ frame. Its position in 
 $`B`$ can be expressed as $`^{B}\mathbf{p} = ^{B}_{A}T\ ^{A}\mathbf{p}`$, where 
-$`^{B}_{A}T = ^{B}_{A}(R \times t)`$ is the $`4 \times 4`$ transformation matrix that
-results from left-multiplying the translation matrix $`^{B}_{A}t`$ by the rotation
+$`^{B}_{A}T = ^{B}_{A}(t \times R)`$ is the $`4 \times 4`$ transformation matrix that
+results from right-multiplying the translation matrix $`^{B}_{A}t`$ by the rotation
 matrix $`^{B}_{A}R`$. In particular,
  
 - $`^{B}_{A}t`$ is the $`4 \times 4`$ transformation matrix that encodes the
@@ -307,7 +307,7 @@ given the increased complexity of this node in comparison previous examples.
         
     - Edit the `generate_target.launch` script in the shutter_lookat package so that
     it runs your new node (publish_target_relative_to_zed_camera.py) 
-    in addition to all the nodes that it already launches.
+    in addition to all of the nodes that it already launches.
      
         > [Roslaunch](http://wiki.ros.org/roslaunch) is a tool for easily launching multiple
         ROS nodes. Roslaunch scripts are written in XML format, according to [this specification](http://wiki.ros.org/roslaunch/XML).
@@ -411,11 +411,12 @@ virtual_camera.py script.
 
 ### Questions / Tasks
 
-You will now share calibration parameters for Shutter's virtual camera in ROS such that
-other programs can reason geometrically about the images that your virtual_camera.py script publishes.
+You will now share the calibration parameters for Shutter's virtual camera in ROS.
+ Sharing the parameters will help other programs 
+ reason geometrically about the images that your virtual camera generates.
 
-- **III-1.** Edit your virtual_camera.py script to enable your node to also publish the calibration parameters
-of the virtual camera. The parameters should be published as a [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
+- **III-1.** Edit your virtual_camera.py script to enable your node to also publish 
+ calibration parameters. The parameters should be published as a [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
 through the `/virtual_camera/camera_info` topic, as indicated in the steps below.
 
     a. Import the [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
@@ -549,18 +550,11 @@ in your node and check how often are you able to publish images through the
 /virtual_camera/image_raw topic. Use the [rostopic hz](http://wiki.ros.org/rostopic) tool 
 to this end.
 
-### Part IV. TF and Time 
-One of the key features of the [tf](http://wiki.ros.org/tf) library is the ability
-to query transformations from its tf tree. The transformations can be the last transformation
-received by the library or they can be queried at specific points in time. 
-
-Read the [learning about tf and time](http://wiki.ros.org/tf/Tutorials/tf%20and%20Time%20%28Python%29) tutorial
-to learn how tf transformations can be queried in ROS. Then, complete the following steps:
-
-1. Launch the `generate_target.launch` script that you edited for the previous part of this
-assignment.
     
 ## Part IV. Orienting Shutter's camera towards a moving target
+You will now make your simulation of Shutter follow the red ball in front of it
+as it moves.
+
 
 
 

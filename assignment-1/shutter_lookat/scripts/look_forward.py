@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import sys
 import rospy
 import numpy as np
 from std_msgs.msg import Float64
@@ -35,6 +36,9 @@ class LookForwardNode():
                 msg.data = self.desired_joint_position
                 self.joint_pub.publish(msg)
 
+            else:
+                break # end the execution of the node
+
             rate.sleep()
 
 
@@ -68,3 +72,5 @@ if __name__ == '__main__':
         node = LookForwardNode()
     except rospy.ROSInterruptException:
         pass
+
+    sys.exit(0)
