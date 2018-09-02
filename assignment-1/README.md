@@ -701,8 +701,8 @@ parameter `close_target:=true`:
     centered in the image?
 
  
-- **IV-4. (extra credit 5pt)** Make the robot's virtual camera center the close target in its image (i.e., 
-center the target when you launch `generate_target.launch close_target:=true` as in IV-3).
+- **IV-4. (extra credit 5pt)** Modify your look_at_target.py implementation to make the robot's virtual camera center the target at 0.3m in its image (i.e., 
+center the target that results from launching `generate_target.launch close_target:=true` as in IV-3).
 The distance between the projected target and the middle of the image should be less than:
     - 80 pixels in the horizontal dimension, and 
     - 60 pixels in the vertical dimension. 
@@ -710,11 +710,12 @@ The distance between the projected target and the middle of the image should be 
     > If your answer to the question IV-3.c was negative, great work! You've already earned 
     5 extra credits for making Shutter accurately follow the target.
     
-    **a.** Commit your code to your repository and briefly explain your approach to following the target 
-    in your report.
+    **a.** Commit your code to your repository and briefly explain in your report your approach to enable the
+    robot to follow the target accurately.
     
-    **b.** Indicate the average error (and std. dev.) that you obtain after having the robot 
-    follow the close target (at 0.3 meters away from the robot) with your new look_at_target.py implementation.
+    **b.** Indicate the maximum distance that you obtain between the projected target and the center
+    of the image after having the robot follow the close target (at 0.3 meters away from the camera) 
+    with your new look_at_target.py implementation.
     
 
 **Once you get to the end of the assignment, remember to commit your code, push to GitLab, and indicate
