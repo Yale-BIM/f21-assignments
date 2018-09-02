@@ -210,7 +210,7 @@ $`B`$.
 Note that the 3D vector with elements $`r_{11}, r_{21}, r_{31}`$ 
 from the first column of the rotation matrix $`^{B}_{A}R`$ has the same direction as the $`x`$ axis of $`A`$ 
 in the $`B`$ frame. Similarly, the elements $`r_{12}, r_{22}, r_{32}`$
-and $`r_{13}, r_{23}, r_{33}`$ have the same direction of the $y$ and $z$ axes of 
+and $`r_{13}, r_{23}, r_{33}`$ have the same direction of the $`y`$ and $`z`$ axes of 
 $`A`$ in $`B`$, respectively.
 
 ### Transforms in ROS
