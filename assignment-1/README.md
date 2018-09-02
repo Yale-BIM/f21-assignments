@@ -644,7 +644,7 @@ parameter `close_target:=true`:
     Then run your virtual_camera.py and look_at_target.py nodes. You should now see the target moving
     in front of the robot at a shorter distance of 0.3 meters.
     
-    a. As the robot tries to follow the close target, record a ROS bag called 
+    - As the robot tries to follow the close target, record a ROS bag called 
     `assignment1_part4.bag` (as in Part III) with all of the information from your ROS system:
     
         ```bash
@@ -653,11 +653,11 @@ parameter `close_target:=true`:
         
         The bag should last 15 seconds. Submit the bag to Canvas as part of your assignment.
     
-    b. What maximum horizontal and vertical distances do you get now between the projected
+    - What maximum horizontal and vertical distances do you get now between the projected
     target and the middle of the image? When computing
     the maximum horizontal and vertical distances, let the robot follow the target for at least 10 seconds.
     
-    c. Did the projected location of the target appear to be moving in the image or the distance from
+    - Did the projected location of the target appear to be moving in the image or the distance from
     the projected location to the image center increased
     from IV-2 to IV-3.a? If the answer is yes, please explain why is this the case? Why isn't the target
     centered in the image?
@@ -672,10 +672,10 @@ The distance between the projected target and the middle of the image should be 
     > If your answer to the question IV-3.c was negative, great work! You've already earned 
     5 extra credits for making Shutter accurately follow the target.
     
-    a. Commit your code to your repository and briefly explain your approach to following the target 
+    - Commit your code to your repository and briefly explain your approach to following the target 
     in your report.
     
-    b. Indicate the average error (and std. dev.) that you obtain after having the robot 
+    - Indicate the average error (and std. dev.) that you obtain after having the robot 
     follow the close target (at 0.3 meters away from the robot) with your new look_at_target.py implementation.
     
 
