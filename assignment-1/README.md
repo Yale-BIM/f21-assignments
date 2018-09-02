@@ -28,9 +28,9 @@ This is the second assignment for Yale's CPSC-659 Building Interactive Machines 
 
 
 ## Introduction 
-This assignment will provide you practical experience with the [tf](ros.org/wiki/tf) ROS package and
-the [MoveIt! Motion Planning Framework](https://moveit.ros.org/). You will also practice
-a bit of math and geometry, e.g., to transform points across coordinate frames.
+This assignment will provide you practical experience with the [tf](ros.org/wiki/tf) ROS package, 
+the pinhole camera model, and inverse kinematics. You will also practice
+a bit of geometry, e.g., to transform points across coordinate frames.
 
 #### System Requirements
 As for the first assignment, you should have access to a computer with `Ubuntu 16.04` and `ROS Kinetic` to complete the homework. 
@@ -587,7 +587,9 @@ to this end.
 
     
 ## Part IV. Orienting Shutter's camera towards a moving target
-You will now make your simulation of Shutter follow the red ball in front of it. 
+You will now make your simulation of Shutter follow the red ball in front of it. For this,
+you will solve the [inverse kinematics](https://en.wikipedia.org/wiki/Inverse_kinematics) 
+problem assuming that Shutter has only two controllable joints.
 
 1. Close all your ROS nodes, and launch generate_target.launch. You should then see
 the robot in `rviz` with its virtual camera pointing forward. The moving target should be 1.5
