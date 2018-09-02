@@ -341,13 +341,13 @@ the shutter_lookat package.
 
 2. Implement your node such that it repeats the steps below while the program is running:
 
-    a. Query the latest transformation that maps points from the "target" frame
+    **a.** Query the latest transformation that maps points from the "target" frame
 to the "camera_link" frame.
 
-    b. Extract the position of the moving object relative to the "camera_link" frame from
+    **b.** Extract the position of the moving object relative to the "camera_link" frame from
     the transformation queried from step (a).
 
-    c. Project the position of the moving object to the image of a virtual camera positioned 
+    **c.** Project the position of the moving object to the image of a virtual camera positioned 
     in the "camera_link" frame. The projection operation should use the following
     intrinsic camera calibration parameters:
 
@@ -362,7 +362,7 @@ to the "camera_link" frame.
     > If you are unsure of what the above parameters mean, read more about projective cameras 
     in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book.
 
-    d. Create an image with white background using the [OpenCV library](https://opencv.org/) 
+    **d.** Create an image with white background using the [OpenCV library](https://opencv.org/) 
     in your node. This image will become the output of the simulated camera that you are building
     for Shutter. The image should be in VGA format, i.e., have a
     dimension of 640 x 480 pixels.
@@ -378,7 +378,7 @@ to the "camera_link" frame.
     image[:,:] = (255,255,255) # (B, G, R)
     ```
         
-    e. Draw the outline of a red circle on the image. The position of the center of the circle
+    **e.** Draw the outline of a red circle on the image. The position of the center of the circle
     should match the position of the projected moving object in the image, such that as
     the object moves, the projected circle also moves. Make
     the radius of the circle 12 pixels, and its outline 3 pixels wide.
@@ -391,7 +391,7 @@ to the "camera_link" frame.
     > See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
     for more examples on drawing basic figures.
 
-    f. Publish the image that you created with OpenCV as a sensor_msgs/Image message in ROS. You
+    **f.** Publish the image that you created with OpenCV as a sensor_msgs/Image message in ROS. You
     can use the [cv_bridge](http://wiki.ros.org/cv_bridge) library to convert the OpenCV image to
     an Image message. Note that the Image message should have a `header` with the current time as
     stamp and the "camera_link" frame as frame_id. The Image message should be published by your node
@@ -419,7 +419,7 @@ You will now share the calibration parameters for Shutter's virtual camera in RO
  calibration parameters. The parameters should be published as a [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
 through the `/virtual_camera/camera_info` topic, as indicated in the steps below.
 
-    a. Import the [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
+    **a.** Import the [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
     into your virtual_camera.py script.
     
     ```python
@@ -427,7 +427,7 @@ through the `/virtual_camera/camera_info` topic, as indicated in the steps below
     from sensor_msgs.msg import CameraInfo
     ```
     
-    b. Create a function that builds CameraInfo messages from the calibration parameters
+    **b.** Create a function that builds CameraInfo messages from the calibration parameters
     provided in Part III of this assignment. You can use the code snippet below to this end.
     
     ```python
@@ -460,14 +460,14 @@ through the `/virtual_camera/camera_info` topic, as indicated in the steps below
     > Specific details about the fields of CameraInfo messages can be found 
      in its [message definition](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html).
     
-    b. Create a publisher for the CameraInfo messages in your node.
+    **c.** Create a publisher for the CameraInfo messages in your node.
     
     ```python
     # Example
     camerainfo_pub = rospy.Publisher("/virtual_camera/camera_info", CameraInfo, queue_size=10)
     ```
     
-    c. Publish a CameraInfo message whenever your node publishes an Image message. The
+    **d.** Publish a CameraInfo message whenever your node publishes an Image message. The
     CameraInfo message should have the same header as the Image message.
     
     ```python
@@ -481,7 +481,7 @@ through the `/virtual_camera/camera_info` topic, as indicated in the steps below
     self.camerainfo_pub.publish(camerainfo_msg)
     ```
     
-    d. Finally, check that your node is publishing CameraInfo messages through the 
+    **e.** Finally, check that your node is publishing CameraInfo messages through the 
     /virtual_camera/camera_info topic with the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) tool.
     
     Remember to commit your code whenever you want to save a snapshot of your work.
@@ -644,7 +644,7 @@ parameter `close_target:=true`:
     Then run your virtual_camera.py and look_at_target.py nodes. You should now see the target moving
     in front of the robot at a shorter distance of 0.3 meters.
     
-    - As the robot tries to follow the close target, record a ROS bag called 
+    **a.** As the robot tries to follow the close target, record a ROS bag called 
     `assignment1_part4.bag` (as in Part III) with all of the information from your ROS system:
     
         ```bash
@@ -653,11 +653,11 @@ parameter `close_target:=true`:
         
         The bag should last 15 seconds. Submit the bag to Canvas as part of your assignment.
     
-    - What maximum horizontal and vertical distances do you get now between the projected
+    **b.** What maximum horizontal and vertical distances do you get now between the projected
     target and the middle of the image? When computing
     the maximum horizontal and vertical distances, let the robot follow the target for at least 10 seconds.
     
-    - Did the projected location of the target appear to be moving in the image or the distance from
+    **c.** Did the projected location of the target appear to be moving in the image or the distance from
     the projected location to the image center increased
     from IV-2 to IV-3.a? If the answer is yes, please explain why is this the case? Why isn't the target
     centered in the image?
@@ -672,10 +672,10 @@ The distance between the projected target and the middle of the image should be 
     > If your answer to the question IV-3.c was negative, great work! You've already earned 
     5 extra credits for making Shutter accurately follow the target.
     
-    - Commit your code to your repository and briefly explain your approach to following the target 
+    **a.** Commit your code to your repository and briefly explain your approach to following the target 
     in your report.
     
-    - Indicate the average error (and std. dev.) that you obtain after having the robot 
+    **b.** Indicate the average error (and std. dev.) that you obtain after having the robot 
     follow the close target (at 0.3 meters away from the robot) with your new look_at_target.py implementation.
     
 
