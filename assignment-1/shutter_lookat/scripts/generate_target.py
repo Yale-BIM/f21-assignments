@@ -38,7 +38,7 @@ class SimulatedObject(object):
         self.angle += 2.0 * np.pi / (10.0 * publish_rate)  # 1 full revolution in 10 secs
 
         # update x if spiral motion is desired (x_delta > 0)
-        self.x += self.x_delta
+        self.x += self.x_delta / publish_rate
         if self.x < 0.8 or self.x > 2.3:
             self.x_delta *= -1.0
 
