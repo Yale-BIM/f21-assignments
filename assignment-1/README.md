@@ -643,7 +643,7 @@ In particular, you should modify the functions:
  
 <img src="docs/shutter_following_target.gif" width="500"/>
  
-> You should not change the position of the second and third joints of the robot. These joints should
+> You should not change the position of the second and fourth joints of the robot (joint_2 and joint_4). These joints should
 remain at 0.0 and -1.571 radians after the generate_target.launch script finishes launching. Please
 don't change the main loop of the node either so that it is easy to understand how your
 code works.
