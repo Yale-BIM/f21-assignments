@@ -21,14 +21,6 @@ class SimulatedObject(object):
         self.angle = 0.0                # current angle for the object in its circular path (relative to the y axis)
         self.radius = 0.1               # radius of the object's circular path
         self.frame = "base_footprint"   # frame in which the coordinates of the object are computed
-        self.x_delta = 0.0              # delta for changing x position (generating spiral motion)
-
-    def enable_spiral_motion(self):
-        """
-        Enable spiral motion by setting self.x_delta > 0
-        """
-        self.x_delta = 0.1
-
 
     def step(self, publish_rate):
         """
@@ -36,11 +28,6 @@ class SimulatedObject(object):
         :param publish_rate: node's publish rate
         """
         self.angle += 2.0 * np.pi / (10.0 * publish_rate)  # 1 full revolution in 10 secs
-
-        # update x if spiral motion is desired (x_delta > 0)
-        self.x += self.x_delta / publish_rate
-        if self.x < 0.8 or self.x > 2.3:
-            self.x_delta *= -1.0
 
 
 # Publishing rate for the node
@@ -59,9 +46,8 @@ def generate_target():
     rospy.init_node('generate_target', anonymous=True)
 
     # Get ROS params
-    change_x_pos = rospy.get_param("~change_x_pos", default="False")
-    if change_x_pos:
-        object.enable_spiral_motion()
+    x_value = rospy.get_param("~x_value", default=1.5)
+    object.x = x_value
 
     # Define publishers
     vector_pub = rospy.Publisher('/target', PoseStamped, queue_size=5)
