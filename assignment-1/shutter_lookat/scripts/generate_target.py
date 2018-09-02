@@ -42,7 +42,7 @@ def generate_target():
     # Init the node
     rospy.init_node('generate_target', anonymous=True)
 
-    change_x_pos = rospy.get_param("change_x_pos", default="False")
+    change_x_pos = rospy.get_param("~change_x_pos", default="False")
     if change_x_pos:
         x_delta = 0.01
     else:
