@@ -135,6 +135,11 @@ have a single axis of rotation and, thus, exibit just one Degree of Freedom. The
 `joint angle` of these revolute joints controls the displacement between the pair
 of links that are connected to it.
 
+<p align="center">
+<img src="https://www.mathworks.com/help/physmod/sm/mech/ug/revolute.gif" width="280" alt="Revolute joint from mathworks.com"/><br/>
+Revolute Joint (image from Mathworks.com)
+</p>
+
 In general, we like to think about Degrees of Freedom (DoF) as the number of independent position 
 variables that would have to be specified in order to locate all parts of a robot.
 Shutter, in particular, has 4 motors in its arm, each of which implements a revolute joint.
