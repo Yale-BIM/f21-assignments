@@ -553,9 +553,135 @@ to this end.
     
 ## Part IV. Orienting Shutter's camera towards a moving target
 You will now make your simulation of Shutter follow the red ball in front of it
-as it moves.
+as it moves. 
+
+1. Close all your ROS nodes, and launch generate_target.launch. You should then see
+the robot in `rviz` with its virtual camera pointing forward. The moving target should be 1.5
+meters away from the robot's virtual camera, as in the previous part of this assignment.
+
+    ```bash
+    $ roslaunch shutter_lookat generate_target.launch
+    ```
+
+2. Run your `virtual_camera.py` node so that you can see what the robot's virtual camera
+sees in rviz. Add an image display to rviz to visualize the camera's image.
 
 
+3. Modify the node "look_at_target.py" within the scripts folder of the shutter_lookat package
+ that is provided as part of this assignment. In particular, you should modify the functions:
+ 
+    ```python
+    def solve_for_yaw(self, current_joint_states):
+        """
+        Solve for the yaw angle (joint 1) that we want the robot to have and send command to robot driver
+        :param current_joint_states: dictionary with current join values
+        :return: True if everything went well; False otherwise.
+        """
 
+        # complete this function as part of the assignment
+
+        return True
+    ```
+    
+    ```python
+    def solve_for_pitch(self, current_joint_states):
+        """
+        Solve for the pitch angle (joint 3) that we want the robot to have and send command to robot driver
+        :param current_joint_states:
+        :return: True if everything went well; False otherwise.
+        """
+
+        # complete this function as part of the assignment
+
+        return True
+    ```
+  
+ in your local copy of the script within your private repository. The first function (`solve_for_yaw()`) 
+ should send a command to Shutter's first joint (joint_1) to align its camera towards the moving target. That is,
+ this function should control the yaw angle of the robot's arm. The second function (`solve_for_pitch()`) 
+ should send
+ a command to Shutter's third joint (joint_3) to orient its forearm link towards the target and,
+ as a result, control the pitch angle of the camera. An illustrative result is shown in the image below:
+ 
+ 
+    <kbd>
+    <img src="docs/shutter_following_target.png" width="300"/>
+    </kbd>
+ 
+ You should not change the position of the second and third joints of the robot. These joints should
+ remain at 0.0 and -1.571 radians after the generate_target.launch script finishes launching. Please
+ don't change the main loop of the node either so that it is easy to understand how your
+ code works.
+
+### Questions / Tasks
+
+
+- **IV-1.** Make the robot follow the target such that the projected position 
+of the red ball appears static in the image from your virtual camera. Commit your code to your repository 
+and explain in a few words your approach to enable the robot to follow the target. 
+
+- **IV-2.** Modify your `virtual_camera.py` script from Part III of this assignment to print to the
+  screen the horizontal and vertical distance between the projected target and the center of the image. 
+  
+    ```python
+    # Example code. Assumes that the projected target is at (x,y).
+    import math    
+    image_width = 640
+    image_height = 480
+    print "Distance to center: {}, {}".format((x - image_width*0.5), (y - image_height*0.5))
+    ```
+    
+    Indicate in your report the maximum horizontal and vertical distances from the center that you get 
+    after the robot tries to follow the target for 10 seconds. 
+    
+    > Distances higher than 20 pixels or evident motion in the projected target might indicate 
+    a problem in your implementation of the look_at_target.py node. 
+    
+- **IV-3.** Close all your nodes again, relaunch the generate_target.launch script with the additional
+parameter `close_target`:
+
+    ```bash
+    $ roslaunch shutter_lookat generate_target.launch close_target:=true
+    ```
+    
+    Then run your virtual_camera.py and look_at_target.py nodes. You should now see the target moving
+    in front of the robot at a shorter distance of 0.3 meters.
+    
+    a. As the robot follows the close target, record a ROS bag called 
+    `assignment1_part4.bag` (as in Part III) with all of the information from your ROS system
+    for 15 seconds:
+    
+    ```bash
+    $ rosbag record -O assignment1_part4.bag -a --duration 15 
+    ```
+    
+    Submit the bag to Canvas as part of your assignment.
+    
+    b. What maximum horizontal and vertical distances do you get now between the projected
+    target and the middle of the image? When computing
+    the maximum horizontal and vertical distances, let the robot
+     follow the target for at least 10 seconds.
+    
+    c. Did the projected location of the target appear to be moving in the image or the distance from
+    the projected location to the image center increased
+    from IV-2 to IV-3.a? If the answer is yes, please explain why is this the case? Why isn't the target
+    centered in the image?
+
+ 
+- **IV-4. (extra credit 5pt)** Make the robot's virtual camera center the close target in its image (i.e., 
+center the target when you launch `generate_target.launch close_target:=true` as in IV-3).
+The distance between the projected target and the middle of the image should be less than:
+    - 80 pixels in the horizontal dimension, and 
+    - 60 pixels in the vertical dimension. 
+    
+    > If your answer to the question IV-3.c was negative, great work! You've already earned 
+    5 extra credits for making Shutter accurately follow the target.
+    
+    a. Commit your code to your repository and briefly explain your approach to following the target 
+    in your report.
+    
+    b. Indicate the average error (and std. dev.) that you obtain after having the robot 
+    follow the close target (at 0.3 meters away from the robot) with your new look_at_target.py implementation.
+    
 
 
