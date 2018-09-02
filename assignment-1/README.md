@@ -603,14 +603,12 @@ In particular, you should modify the functions:
  as a result, control the pitch angle of the camera. An illustrative result is shown in the image below:
  
  
-<kbd>
-<img src="docs/shutter_following_target.gif" width="300"/>
-</kbd>
+<img src="docs/shutter_following_target.gif" width="500"/>
  
- You should not change the position of the second and third joints of the robot. These joints should
- remain at 0.0 and -1.571 radians after the generate_target.launch script finishes launching. Please
- don't change the main loop of the node either so that it is easy to understand how your
- code works.
+> You should not change the position of the second and third joints of the robot. These joints should
+remain at 0.0 and -1.571 radians after the generate_target.launch script finishes launching. Please
+don't change the main loop of the node either so that it is easy to understand how your
+code works.
 
 ### Questions / Tasks
 
@@ -630,14 +628,14 @@ and explain in a few words your approach to enable the robot to follow the targe
     print "Distance to center: {}, {}".format((x - image_width*0.5), (y - image_height*0.5))
     ```
     
-    Indicate in your report the maximum horizontal and vertical distances from the center that you get 
+    Indicate in your report the maximum horizontal and vertical distances that you get 
     after the robot tries to follow the target for 10 seconds. 
     
     > Distances higher than 20 pixels or evident motion in the projected target might indicate 
     a problem in your implementation of the look_at_target.py node. 
     
 - **IV-3.** Close all your nodes again, relaunch the generate_target.launch script with the additional
-parameter `close_target`:
+parameter `close_target:=true`:
 
     ```bash
     $ roslaunch shutter_lookat generate_target.launch close_target:=true
@@ -646,20 +644,18 @@ parameter `close_target`:
     Then run your virtual_camera.py and look_at_target.py nodes. You should now see the target moving
     in front of the robot at a shorter distance of 0.3 meters.
     
-    a. As the robot follows the close target, record a ROS bag called 
-    `assignment1_part4.bag` (as in Part III) with all of the information from your ROS system
-    for 15 seconds:
+    a. As the robot tries to follow the close target, record a ROS bag called 
+    `assignment1_part4.bag` (as in Part III) with all of the information from your ROS system:
     
-    ```bash
-    $ rosbag record -O assignment1_part4.bag -a --duration 15 
-    ```
-    
-    Submit the bag to Canvas as part of your assignment.
+        ```bash
+        $ rosbag record -O assignment1_part4.bag -a --duration 15 
+        ```
+        
+        The bag should last 15 seconds. Submit the bag to Canvas as part of your assignment.
     
     b. What maximum horizontal and vertical distances do you get now between the projected
     target and the middle of the image? When computing
-    the maximum horizontal and vertical distances, let the robot
-     follow the target for at least 10 seconds.
+    the maximum horizontal and vertical distances, let the robot follow the target for at least 10 seconds.
     
     c. Did the projected location of the target appear to be moving in the image or the distance from
     the projected location to the image center increased
