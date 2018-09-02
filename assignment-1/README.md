@@ -4,6 +4,29 @@ This is the second assignment for Yale's CPSC-659 Building Interactive Machines 
 
 ## Table of Contents
 
+* [Introduction](#introduction)
+    * [System Requirements](#system-requirements)
+    * [Background Knowledge](#background-knowledge)
+    * [Deliverables](#deliverables)
+    * [Evaluation](#evaluation)
+    * [Further Reading and Tutorials](#further-reading-and-tutorials)
+* [Preliminaries](#preliminaries)
+ * [Notation](#notation)
+ * [Conventions](#conventions)
+ * [Kinematic Chains](#kinematic-chains)
+ * [3D Transformations](#3d-transformations)
+ * [Changing the Frame of a Point](#changing-the-frame-of-a-point)
+ * [Transforms in ROS](#transforms-in-ros)
+* [Part I. Introduction to tf](#part-i-introduction-to-tf)
+ * [Questions / Tasks](#questions--tasks)
+* [Part II. Publishing tf messages](#part-ii-publishing-tf-messages)
+ * [Questions / Tasks](#questions--tasks-1)
+* [Part III. Making a virtual camera](#part-iii-making-a-virtual-camera)
+ * [Questions / Tasks](#questions--tasks-2)
+* [Part IV. Orienting Shutter's camera towards a moving target](#part-iv-orienting-shutters-camera-towards-a-moving-target)
+ * [Questions / Tasks](#questions--tasks-3)
+
+
 ## Introduction 
 This assignment will provide you practical experience with the [tf](ros.org/wiki/tf) ROS package and
 the [MoveIt! Motion Planning Framework](https://moveit.ros.org/). You will also practice
@@ -32,7 +55,7 @@ you are unfamiliar with any of these tools, programs, or procedures, please revi
 
 #### Deliverables
 
-- **Report:** You are expected to submit a pdf with answers to the questions/tasks at 
+- **Report:** You are expected to submit a pdf to Canvas with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of the version of the code
 that you would like to be evaluated on. Though not mandatory, it is recommended that you generate this pdf 
@@ -40,7 +63,10 @@ with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this
 [simple assignment template](https://www.overleaf.com/latex/templates/simple-assignment-template/mzkqqqjypzvd) 
 in [LaTeX](https://www.latex-project.org/).
 
-- **Code:** You are also expected to push code for this assignment to your 
+- **ROS Bags:** You are also expected to submit two [ROS bags](http://wiki.ros.org/Bags) to Canvas (see 
+Parts III and IV of this assignment).
+
+- **Code:** Finally, you are expected to push code for this assignment to your 
 [GitLab](http://www.gitlab.com) repository as indicated in the [general instructions](../README.md) 
 document for CPSC-659 assignments. 
 
@@ -48,11 +74,20 @@ document for CPSC-659 assignments.
 
 You assignment will be evaluated based on the content of your report and your code:
 
-`todo: complete`
+- Report (30 pts)
+    * Part I (20 pts) <!-- 5 + 2 + 5 + 8 -->
+    * Part II (5 pts) <!-- 5 pts from II-2 -->
+    * Part III (5 pts) <!-- 5 pts from II-3 -->
+- Code (70 pts)
+    * Part II (15 pts) <!-- 15 -->
+    * Part III (20 pts) <!-- 12 + 8 -->
+    * Part IV (35 pts + 5 pts of extra credit) <!-- 20 + 5 + 10 ( 3 + 2 + 5 ) -->
 
 #### Further Reading and Tutorials
 
 - [tf: The Transform Library](http://wiki.ros.org/Papers/TePRA2013_Foote?action=AttachFile&do=get&target=TePRA2013_Foote.pdf)
+- [Introduction to Robotics: Mechanics and Control](https://www.pearson.com/us/higher-education/program/Craig-Introduction-to-Robotics-Mechanics-and-Control-4th-Edition/PGM91709.html) by J. Craig (see Chapters 3 and 4 for more information on
+manipulator kinematics)
 
 ## Preliminaries
 
