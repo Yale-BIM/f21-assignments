@@ -604,7 +604,7 @@ In particular, you should modify the functions:
  
  
 <kbd>
-<img src="docs/shutter_following_target.png" width="300"/>
+<img src="docs/shutter_following_target.gif" width="300"/>
 </kbd>
  
  You should not change the position of the second and third joints of the robot. These joints should
