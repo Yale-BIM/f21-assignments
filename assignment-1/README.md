@@ -75,13 +75,13 @@ document for CPSC-659 assignments.
 You assignment will be evaluated based on the content of your report and your code:
 
 - Report (30 pts)
-    * Part I (20 pts) <!-- 5 + 2 + 5 + 8 -->
-    * Part II (5 pts) <!-- 5 pts from II-2 -->
-    * Part III (5 pts) <!-- 5 pts from II-3 -->
+    * Part I (20 pts) 
+    * Part II (5 pts) 
+    * Part III (5 pts) 
 - Code (70 pts)
-    * Part II (15 pts) <!-- 15 -->
-    * Part III (20 pts) <!-- 12 + 8 -->
-    * Part IV (35 pts + 5 pts of extra credit) <!-- 20 + 5 + 10 ( 3 + 2 + 5 ) -->
+    * Part II (15 pts) 
+    * Part III (20 pts) 
+    * Part IV (35 pts + 5 pts of extra credit) 
 
 #### Further Reading and Tutorials
 
