@@ -552,8 +552,7 @@ to this end.
 
     
 ## Part IV. Orienting Shutter's camera towards a moving target
-You will now make your simulation of Shutter follow the red ball in front of it
-as it moves. 
+You will now make your simulation of Shutter follow the red ball in front of it. 
 
 1. Close all your ROS nodes, and launch generate_target.launch. You should then see
 the robot in `rviz` with its virtual camera pointing forward. The moving target should be 1.5
@@ -567,8 +566,8 @@ meters away from the robot's virtual camera, as in the previous part of this ass
 sees in rviz. Add an image display to rviz to visualize the camera's image.
 
 
-3. Modify the node "look_at_target.py" within the scripts folder of the shutter_lookat package
- that is provided as part of this assignment. In particular, you should modify the functions:
+3. Modify the node `look_at_target.py` within the scripts folder of the shutter_lookat package. 
+In particular, you should modify the functions:
  
     ```python
     def solve_for_yaw(self, current_joint_states):
@@ -604,9 +603,9 @@ sees in rviz. Add an image display to rviz to visualize the camera's image.
  as a result, control the pitch angle of the camera. An illustrative result is shown in the image below:
  
  
-    <kbd>
-    <img src="docs/shutter_following_target.png" width="300"/>
-    </kbd>
+<kbd>
+<img src="docs/shutter_following_target.png" width="300"/>
+</kbd>
  
  You should not change the position of the second and third joints of the robot. These joints should
  remain at 0.0 and -1.571 radians after the generate_target.launch script finishes launching. Please
