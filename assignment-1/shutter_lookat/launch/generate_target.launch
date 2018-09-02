@@ -2,6 +2,7 @@
 
     <!-- make shutter look forward? -->
     <arg name="look_forward" value="True"/>
+    <arg name="target_change_x_pos" default="False"/>
 
     <!-- bring up the robot -->
     <include file="$(find shutter_bringup)/launch/shutter.launch">
@@ -9,7 +10,9 @@
     </include>
 
     <!-- generate the simulated moving object -->
-    <node name="generate_target" pkg="shutter_lookat" type="generate_target.py" output="screen"/>
+    <node name="generate_target" pkg="shutter_lookat" type="generate_target.py" output="screen">
+        <param name="change_x_pos" value="$(arg target_change_x_pos)"/>
+    </node>
 
     <!-- visualize the moving object in rviz -->
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find shutter_lookat)/config/rviz_target.cfg.rviz"/>

@@ -42,6 +42,12 @@ def generate_target():
     # Init the node
     rospy.init_node('generate_target', anonymous=True)
 
+    change_x_pos = rospy.get_param("change_x_pos", default="False")
+    if change_x_pos:
+        x_delta = 0.01
+    else:
+        x_delta = 0.0
+
     # Define publishers
     vector_pub = rospy.Publisher('/target', PoseStamped, queue_size=5)
     marker_pub = rospy.Publisher('/target_marker', Marker, queue_size=5)
@@ -57,11 +63,14 @@ def generate_target():
         pose_msg = PoseStamped()
         pose_msg.header.stamp = rospy.Time.now()
         pose_msg.header.frame_id = object.frame
-        pose_msg.pose.position.x = object.x
+        pose_msg.pose.position.x = object.x + x_delta
         pose_msg.pose.position.y = object.center_y + np.sin(object.angle)*object.radius
         pose_msg.pose.position.z = object.center_z + np.cos(object.angle)*object.radius
         pose_msg.pose.orientation.w = 1.0
         vector_pub.publish(pose_msg)
+
+        if pose_msg.pose.position.x < 0.8 or pose_msg.pose.position.x > 2.3:
+            x_delta *= -1.0
 
         # publish a marker to visualize the target in RViz
         marker_msg = Marker()
