@@ -74,14 +74,15 @@ document for CPSC-659 assignments.
 
 You assignment will be evaluated based on the content of your report and your code:
 
-- Report (30 pts)
-    * Part I (20 pts) 
-    * Part II (5 pts) 
-    * Part III (5 pts) 
-- Code (70 pts)
-    * Part II (15 pts) 
-    * Part III (20 pts) 
-    * Part IV (35 pts + 5 pts of extra credit) 
+- Report (45 pts)
+    - Part I (20 pts): I-1 (5 pts) + I-2 (2 pts) + I-3 (5 pts) + I-4 (8 pts)
+    - Part II-2 (5 pts) 
+    - Part III-3 (5 pts) 
+    - Part IV (15 pts): IV-2 (5 pts) + IV-3 (10 pts)
+- Code (55 pts)
+    * Part II-1 (15 pts) 
+    * Part III (20 pts): III-1 (12 pts) + III-2 (8 pts)
+    * Part IV (20 pts + 5 pts of extra credit): IV-1 (20 pts) + IV-4 (5 pts extra)
 
 #### Further Reading and Tutorials
 
@@ -716,4 +717,5 @@ The distance between the projected target and the middle of the image should be 
     follow the close target (at 0.3 meters away from the robot) with your new look_at_target.py implementation.
     
 
-
+**Once you get to the end of the assignment, remember to commit your code, push to GitLab, and indicate
+in your assignment report the commit SHA for the final version of the code that you wish to be evaluated on.**
