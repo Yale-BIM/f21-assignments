@@ -27,7 +27,7 @@ class SimulatedObject(object):
         """
         Enable spiral motion by setting self.x_delta > 0
         """
-        self.x_delta = 0.01
+        self.x_delta = 0.1
 
 
     def step(self, publish_rate):
