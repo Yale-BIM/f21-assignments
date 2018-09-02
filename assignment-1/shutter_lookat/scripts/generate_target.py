@@ -21,6 +21,14 @@ class SimulatedObject(object):
         self.angle = 0.0                # current angle for the object in its circular path (relative to the y axis)
         self.radius = 0.1               # radius of the object's circular path
         self.frame = "base_footprint"   # frame in which the coordinates of the object are computed
+        self.x_delta = 0.0              # delta for changing x position (generating spiral motion)
+
+    def enable_spiral_motion(self):
+        """
+        Enable spiral motion by setting self.x_delta > 0
+        """
+        self.x_delta = 0.01
+
 
     def step(self, publish_rate):
         """
@@ -28,6 +36,11 @@ class SimulatedObject(object):
         :param publish_rate: node's publish rate
         """
         self.angle += 2.0 * np.pi / (10.0 * publish_rate)  # 1 full revolution in 10 secs
+
+        # update x if spiral motion is desired (x_delta > 0)
+        self.x += self.x_delta
+        if self.x < 0.8 or self.x > 2.3:
+            self.x_delta *= -1.0
 
 
 # Publishing rate for the node
@@ -39,21 +52,20 @@ def generate_target():
     Main function. Publishes the target at a constant frame rate.
     """
 
+    # Create the simulated object
+    object = SimulatedObject()
+
     # Init the node
     rospy.init_node('generate_target', anonymous=True)
 
+    # Get ROS params
     change_x_pos = rospy.get_param("~change_x_pos", default="False")
     if change_x_pos:
-        x_delta = 0.01
-    else:
-        x_delta = 0.0
+        object.enable_spiral_motion()
 
     # Define publishers
     vector_pub = rospy.Publisher('/target', PoseStamped, queue_size=5)
     marker_pub = rospy.Publisher('/target_marker', Marker, queue_size=5)
-
-    # Create the simulated object
-    object = SimulatedObject()
 
     # Publish the target at a constant ratetarget
     rate = rospy.Rate(publish_rate)
@@ -63,14 +75,11 @@ def generate_target():
         pose_msg = PoseStamped()
         pose_msg.header.stamp = rospy.Time.now()
         pose_msg.header.frame_id = object.frame
-        pose_msg.pose.position.x = object.x + x_delta
+        pose_msg.pose.position.x = object.x
         pose_msg.pose.position.y = object.center_y + np.sin(object.angle)*object.radius
         pose_msg.pose.position.z = object.center_z + np.cos(object.angle)*object.radius
         pose_msg.pose.orientation.w = 1.0
         vector_pub.publish(pose_msg)
-
-        if pose_msg.pose.position.x < 0.8 or pose_msg.pose.position.x > 2.3:
-            x_delta *= -1.0
 
         # publish a marker to visualize the target in RViz
         marker_msg = Marker()
