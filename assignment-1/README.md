@@ -11,20 +11,22 @@ This is the second assignment for Yale's CPSC-659 Building Interactive Machines 
     * [Evaluation](#evaluation)
     * [Further Reading and Tutorials](#further-reading-and-tutorials)
 * [Preliminaries](#preliminaries)
- * [Notation](#notation)
- * [Conventions](#conventions)
- * [Kinematic Chains](#kinematic-chains)
- * [3D Transformations](#3d-transformations)
- * [Changing the Frame of a Point](#changing-the-frame-of-a-point)
- * [Transforms in ROS](#transforms-in-ros)
+    * [Notation](#notation)
+    * [Conventions](#conventions)
+    * [Kinematic Chains](#kinematic-chains)
+    * [3D Transformations](#3d-transformations)
+    * [Changing the Frame of a Point](#changing-the-frame-of-a-point)
+    * [Transforms in ROS](#transforms-in-ros)
+* [Setup](#setup)<br><br>
 * [Part I. Introduction to tf](#part-i-introduction-to-tf)
- * [Questions / Tasks](#questions--tasks)
+    * [Questions / Tasks](#questions--tasks)
 * [Part II. Publishing tf messages](#part-ii-publishing-tf-messages)
- * [Questions / Tasks](#questions--tasks-1)
+    * [Questions / Tasks](#questions--tasks-1)
 * [Part III. Making a virtual camera](#part-iii-making-a-virtual-camera)
- * [Questions / Tasks](#questions--tasks-2)
+    * [Questions / Tasks](#questions--tasks-2)
 * [Part IV. Orienting Shutter's camera towards a moving target](#part-iv-orienting-shutters-camera-towards-a-moving-target)
- * [Questions / Tasks](#questions--tasks-3)
+    * [Questions / Tasks](#questions--tasks-3)
+
 
 
 ## Introduction 
@@ -231,6 +233,26 @@ by multiplying the edges connecting them. To traverse up a directed edge from a 
 tf uses the inverse of the transformation that is stored in the edge.
 
 <!-- todo: say something about querying transforms over time here? -->
+
+## Setup
+Before you start coding or answering questions for this assignment, please update
+your repository to pull the latest changes from the assignments repository and update
+the shutter-ros repository:
+
+```bash
+# update your repository with the latest version of the assignment
+$ roscd f18-assignments
+$ git pull upstream master
+
+# update the shutter-ros repository
+$ roscd shutter-ros
+$ git pull
+
+# finally, re-build your catkin workspace 
+$ roscd
+$ catkin_make
+```
+
 
 ## Part I. Introduction to tf
 This part of the assignment will help you understand how [tf](http://wiki.ros.org/tf) lets 
