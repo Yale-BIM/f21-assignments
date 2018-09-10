@@ -249,7 +249,7 @@ $ roscd shutter_bringup
 $ git pull
 
 # finally, re-build your catkin workspace 
-$ roscd
+$ cd <path-to-your-catkin-workspace-root-directory>
 $ catkin_make
 ```
 
