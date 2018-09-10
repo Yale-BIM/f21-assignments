@@ -245,7 +245,7 @@ $ roscd f18-assignments
 $ git pull upstream master
 
 # update the shutter-ros repository
-$ roscd shutter-ros
+$ roscd shutter_bringup
 $ git pull
 
 # finally, re-build your catkin workspace 
