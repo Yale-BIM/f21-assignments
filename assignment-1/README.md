@@ -241,10 +241,10 @@ the shutter-ros repository:
 
 ```bash
 # update your repository with the latest version of the assignment
-$ roscd f18-assignments
+$ cd <path-to-your-repository-in-your-workspace>
 $ git pull upstream master
 
-# update the shutter-ros repository
+# update the shutter-ros repository 
 $ roscd shutter_bringup
 $ git pull
 
