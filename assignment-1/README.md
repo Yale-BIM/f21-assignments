@@ -285,7 +285,7 @@ provide the transformation with both the rotation and translation components.
 
     *Tip:* You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool to query
     transformations. You will then need to assemble the $`4 \times 4`$ homogenous transformation matrix 
-    from these values. We recommend [this primer](wiki.ogre3d.org/Quaternion+and+Rotation+Primer) from Ogre
+    from these values. We recommend [this primer](http://wiki.ogre3d.org/Quaternion+and+Rotation+Primer) from Ogre
     if you are confused about different rotation representations.
 
 - **I-4.** How are the transformations in the /tf and /tf_static topics generated after you 
