@@ -1,0 +1,30 @@
+<launch>
+
+    <!-- arguments -->
+    <arg name="bagfile" default="$(find shutter_track_target)/data/left-seq1.bag"/>
+    <arg name="add_observation_noise" default="false"/>
+    <arg name="lower_hue_value" default="100"/>
+    <arg name="higher_hue_value" default="140"/>
+    <arg name="playback_speed" default="1.0"/>
+
+    <!-- set use_sim_time to true -->
+    <param name="use_sim_time" value="true" />
+
+    <!-- play your bag -->
+    <node pkg="rosbag" type="play" name="player" output="screen" args="--clock -r $(arg playback_speed) $(arg bagfile)"/>
+
+    <!-- run rqt_image_view -->
+    <node pkg="rqt_image_view" type="rqt_image_view" name="view_image"/>
+
+    <!-- detect the visual target -->
+    <node pkg="shutter_track_target" type="detect_visual_target.py" name="detect_visual_target" output="screen">
+        <param name="add_noise" value="$(arg add_observation_noise)"/>
+        <param name="lower_hue_value" value="$(arg lower_hue_value)"/>
+        <param name="higher_hue_value" value="$(arg higher_hue_value)"/>
+    </node>
+
+    <!-- track the detected target with the kalman_filter.py script -->
+    <!-- COMPLETE! -->
+
+
+</launch>

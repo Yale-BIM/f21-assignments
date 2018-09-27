@@ -57,6 +57,14 @@ document for CPSC-659 assignments.
 You assignment will be evaluated based on the content of your report and your code:
 
 
+- Report (25 pts)
+    - Part IV (20 pts + 3 extra points): IV-1 (4 pts) + IV-2 (4 pts) + IV-3 (4 pts) + IV-4 (2 pts) + IV-11 (3 pts) + IV-12 (3 pts) + IV-14 (3 extra pts)
+- Code (75 pts)
+    * Part I (10 pts) 
+    * Part II (5 pts)
+    * Part III (30 pts): III-1 (10 pts) + III-2 (10 pts) + III-3 (5 pts) + III-4 (5 pts)
+    * Part IV (30 pts + 2 extra points): IV-5 (6 pts) + IV-6 (6 pts) + IV-7 (4 pts) + IV-8 (2 pts) + IV-9 (2 pts) + IV-10 (5 pts) + IV-12 (2 pts) + IV-13 (3 pts) + IV-14 (2 extra pts)
+
 #### Further Reading
 
 - [Playing Catch and Juggling with a Humanoid Robot](https://www.disneyresearch.com/publication/playing-catch-and-juggling-with-a-humanoid-robot/)
@@ -163,19 +171,19 @@ $ rosrun rqt_image_view rqt_image_view # visualize the /virtual_camera/image_raw
 
 You should then see an image sequence of Marynel moving two colored cubes as in the figure below:
 
-<img src="docs/left-seq1.png" width="300"/>
+<img src="docs/left-seq1.png" width="400"/>
 <br> <br>
 
-*Tip:* ROS nodes use the /clock topic to gather information about time (see [here](http://wiki.ros.org/Clock) for more information). 
-When the `use_sim_time` parameter is set to true, ROS will stop publishing your computer's system clock
-through /clock and, instead, `rosbag play` will publish a simulated time. 
-If you are playing ROS bags and don't set use_sim_time parameter to true, then messages may be handled incorrectly by
-ROS nodes. You can check the value of the use_sim_time parameter in the [ROS parameter server](http://wiki.ros.org/Parameter%20Server) 
-with the command:
+    > ROS nodes use the /clock topic to gather information about time (see [here](http://wiki.ros.org/Clock) for more information).
+    When the use_sim_time parameter is set to true, ROS will stop publishing your computer's system clock
+    through /clock and, instead, rosbag play will publish a simulated time.
+    If you are playing ROS bags and don't set use_sim_time parameter to true, then messages may be handled incorrectly by
+    ROS nodes. You can check the value of the use_sim_time parameter in the [ROS parameter server](http://wiki.ros.org/Parameter%20Server)
+    with the command:
 
-```bash
-$ rosparam get use_sim_time
-```
+    ```bash
+    $ rosparam get use_sim_time
+    ```
 
 ### Questions / Tasks
 - **II-1.** Make a video of rqt_image_view that shows the content of the /virtual_camera/image_raw
@@ -256,12 +264,12 @@ found by the blob detection algorithm (here, only one). The function should publ
 through the "/observation" topic (self.obs_pub variable). 
 
     Before publishing the Observation message, make sure to set its 
-    header field. The header field should have the same values as the header variable 
+    `header field`. The header field should have the same values as the header variable 
     that passed to the publish_observation() function. This will ensure that the time stamp and frame of the Observation message
     matches the time stamp and frame of the image that it was generated from.
     
-    Add the detect_visual_target.py script to your repository and commit your implementation of the 
-    missing functions.
+    Once you think that your detect_visual_target.py node is properly detecting targets of a given color
+    and publishing observations, commit the script to your repository.
 
 - **III-4.** As in II-1, make a video of rqt_image_view that shows the content of the /observation_image
 topic as the left-seq1.bag rosbag plays for at least 5 seconds. Turn this video into an animated
@@ -270,6 +278,177 @@ gif, name it "keypoints.gif", and include it in the `docs` directory within the
  
 
 ## Part IV. Filtering the Target's Position
+You will now implement a linear Kalman filter to track a visual target in image space. Please read Sections 3.2.1
+ and 3.2.2 from
+Chapter 3 of the [Probabilistic Robotics book](http://www.probabilistic-robotics.org/) before starting with 
+this assigment. The Chapter is available as a Course Reserve in the CPSC-659 Canvas website.
+
+
+The `filter state` 
+$`\bold{x} \in \mathbb{R}^6`$ should contain $`\bold{x} = [p_x, p_y, v_x, v_y, a_x, a_y]^T`$, 
+where $`\mathbf{p} = (p_x, p_y)`$ corresponds to the estimated position of the target in an image, 
+$`\mathbf{v} = (v_x, v_y)`$ is its estimated velocity, and $`\mathbf{a} = (a_x, a_y)`$ is its estimated acceleration.
+
+The `transition model` of the filter should include additive gaussian noise and 
+follow the [equations of motion](https://en.wikipedia.org/wiki/Equations_of_motion):
+
+- $`\bold{p}_{t+1} = \bold{p}_t + \bold{v}_t \Delta t + \frac{1}{2} \bold{a} (\Delta t)^2`$
+- $`\bold{v}_{t+1} = \bold{v}_t + \bold{a}_t \Delta t`$
+- $`\bold{a}_{t+1} = \bold{a}_t`$
+
+The `measurement model` of the filter should correct for the predicted state based on
+the observed position of the visual target. This observation will be generated by your detect_visual_target.py
+node.
+
+You should implement your Kalman filter 
+within the `kalman_filter.py` script that is inside of the shutter_track_target/scripts 
+directory, as indicated in the tasks below. The kalman_filter.py script already provides you with
+the main logic for a filtering node, and will help you debug your filter visually. 
+ 
+### Questions / Tasks
+
+- **IV-1.** Please write down the mathematical equation for the filter's linear transition model, including
+Gaussian noise, in your report. Note that because you are not moving the target, but tracking will be
+happening based on the observed position of the target in images, your filter will have no control $`\bold{u}`$.
+
+- **IV-2.** Please write down the mathematical equation for the filter's measurement model, including Gaussian
+noise, in your report.
+
+- **IV-3.** Please write down the mathematical equation that defines the Kalman gain in your report.
+
+- **IV-4.** What happens with the values in the Kalman gain if the covariance $`Q`$ for the measurement noise 
+grows?
+
+- **IV-5.** Complete the `KF_predict_step()` function at the top of the
+kalman_filter.py script such that its predict a new belief for the state (encoded by its mean and covariance) based
+on the prior belief and the transition model of the filter.
+
+- **IV-6.** Complete the `KF_measurement_update_step()` function in the kalman_filter.py script such that
+it corrects the belief of the state of the filter based on the latest observation and the filter's
+measurement model.
+
+- **IV-7.** Implement the `assemble_A_matrix()` and `assemble_C_matrix()` methods within the KalmanFilterNode
+class of the kalman_filter.py script. The methods should set the A and C
+parameters of the transition and measurement model of the filter used by the KalmanFilterNode. Use [numpy
+arrays](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.array.html) to represent the A and C matrices.
+
+    Note that you do not need to implement the logic that passes the A and C parameters to the filter. This is
+    already done for you in the main loop of the KalmanFIlterNode class.
+    
+- **IV-8.** Implement the `initialize_process_covariance()` and `initialize_measurement_covariance()` methods
+within the KalmanFilterNode class of the kalman_filter.py script. These methods should set some fixed value
+for the Q and R covariances
+for the noise of the transition model and measurement model, respectively. Don't worry too much about the
+exact values that you set for the noise now, as you will have to tune these values later in the assignment.
+
+- **IV-9.** Implement the `assemble_observation_vector()` function within the KalmanFilterNode class of the
+kalman_filter.py script. This function should return a vector (numpy array) with the observed position for the
+target. 
+ 
+    To make this part of the assigment easy, note that the `assemble_observation_vector()` function has
+    an Observation message argument. This argument provides the latest observed position of the target as received
+    through the "/observation" topic in the KalmanFilterNode.
+
+- **IV-9.** Implement the `initialize_mu_and_sigma()` method within the KalmanFilterNode class of the
+kalman_filter.py script. This method should set the initial values for the filter belief based on the latest
+observed target position. Again, note that this observation is passed to the `initialize_mu_and_sigma()` method
+as an input argument.
+
+- **IV-10.** Once you have finished the prior tasks, complete the filter_colored_target.launch file within the shutter_track_target/launch directory.
+The launch file should run your kalman_filter.py script after playing a bag, running rqt_image_view, and 
+running your detect_visual_target.py script.
+
+    Note that the begining of the launch file already defines a set of arguments:
+    
+    - **bagfile:** path to the left-seq1.bag file.
+    - **add_observation_noise:** whether to add artificial noise to the observed target position.
+    - **lower_hue_value:** Min. hue value for the colored target that is tracked.
+    - **higher_hue_value:** Max. hue value for the colored target that is tracked.
+    - **playback_speed:** Speed at which to play the bag (1.0 simulates real time play back).
+    
+    Do NOT modify these arguments in the launch file, nor the way how the bag is launched and
+    the detect_visual_target.py node is run.
+    
+    Once you have completed the launch file, you should be able to run it as:
+    
+    ```bash
+    $ roslaunch shutter_track_target filter_colored_target.launch
+    ```
+    
+    An rqt_image_view window will then open that allows you to visualize the 3 images being streamed
+    through the ROS network: 
+    
+    - /virtual_camera/image_raw topic: the original image sequence
+    - /observation_image topic: the detected target position
+    - /tracked_image topic: the tracked target
+    
+    The images sent over the /tracked_image topic display two trajectories:
+    
+    <img src="docs/filtering.png" width="400"/>
+ 
+    The red line connects the observed locations for the target (as received through the /observations topic).
+    The thinner green line connects the estimated location for the target (from the Kalman Filter belief).
+
+
+- **IV-11.** Tune the parameters of your filter (initial belief, R, and Q) such that you can effectively 
+track the blue cube in the image sequence within the left-seq1.bag. Use the filtered_colored_target.launch
+file to quickly launch rosbag, rqt_image_view, detect_visual_target.py and kalman_filter.py. As the bag plays, use
+rqt_image_view to visualize the images being streamed through your network and debug your code.
+
+    Note you can slow down the speed at which rosbag plays the image sequence with the `playback_speed`
+    argument of the filtered_colored_target.launch file. For example,
+    
+    ```bash
+    # play the bag at half real-time speed
+    $ roslaunch shutter_track_target filter_colored_target.launch playback_speed:=0.5
+    ```
+
+    Once it looks like your filter is tracking the target, include the filter parameters that you are using
+     for this part of the assignment in your report. 
+     
+- **IV-12.** Tune the parameters of your filter such that it can track the blue cube when the argument
+add_observation_noise is set to true in filter_colored_target.launch:
+
+    ```bash
+    # play the bag at half real-time speed
+    $ roslaunch shutter_track_target filter_colored_target.launch add_observation_noise:=true [playback_speed:=0.5]
+    ```
+    
+    In the above command, the brackets [*] indicate optional arguments.
+    
+    Once it looks like your filter is tracking the target, include the filter parameters that you are using
+     for this part of the assignment in your report.  In addition, make a video of rqt_image_view that shows the images sent
+    through the /tracked_image topic for at least 5 seconds with add_observation_noise:=true. 
+    Turn this video into an animated
+    gif, name it "filtered_blue_cube_with_extra_noise.gif", and include it in the `docs` directory within the
+     shutter_track_target package. Commit the gif to your repository.
+     
+- **IV-13.** Write a README.md Markdown file inside the shutter_track_target repository that explains
+what the detect_visual_target.py and kalman_filter.py nodes do, and how the filtered_colored_target.launch script
+works. To provide visual support to the explanation of how the launch file works, include the gifs that you generated
+previously in this assignment in the README.md file.
+   
+     > More information on including images 
+     in GitLab's markdown can be found [here](https://docs.gitlab.com/ee/user/markdown.html#images).
+     
+- **IV-14. (5 extra points)** Change the hue arguments of the filter_colored_target.launch so that you
+can track the red cube in the left-seq1.bag sequence:
+
+    ```bash
+    # play the bag at half real-time speed
+    $ roslaunch shutter_track_target filter_colored_target.launch lower_hue_value:=<min_value> higher_hue_value:=<max_value> [playback_speed:=0.5]
+    ```
+    
+    You may also want to tune the parameters of your filter if tracking is not working well with the red target.
+    
+    Once it looks like your filter is tracking the red target, include the filter parameters that you are using
+     for this part of the assignment in your report.  In addition, make a video of rqt_image_view that shows the images sent
+    through the /tracked_image topic for at least 5 seconds with add_observation_noise:=true. 
+    Turn this video into an animated
+    gif, name it "filtered_red_cube.gif", and include it in the `docs` directory within the
+     shutter_track_target package. Commit the gif to your repository.
+
+
 
 
 
