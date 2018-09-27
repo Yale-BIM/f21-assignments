@@ -11,20 +11,22 @@ This is the second assignment for Yale's CPSC-659 Building Interactive Machines 
     * [Evaluation](#evaluation)
     * [Further Reading and Tutorials](#further-reading-and-tutorials)
 * [Preliminaries](#preliminaries)
- * [Notation](#notation)
- * [Conventions](#conventions)
- * [Kinematic Chains](#kinematic-chains)
- * [3D Transformations](#3d-transformations)
- * [Changing the Frame of a Point](#changing-the-frame-of-a-point)
- * [Transforms in ROS](#transforms-in-ros)
+    * [Notation](#notation)
+    * [Conventions](#conventions)
+    * [Kinematic Chains](#kinematic-chains)
+    * [3D Transformations](#3d-transformations)
+    * [Changing the Frame of a Point](#changing-the-frame-of-a-point)
+    * [Transforms in ROS](#transforms-in-ros)
+* [Setup](#setup)<br><br>
 * [Part I. Introduction to tf](#part-i-introduction-to-tf)
- * [Questions / Tasks](#questions--tasks)
+    * [Questions / Tasks](#questions--tasks)
 * [Part II. Publishing tf messages](#part-ii-publishing-tf-messages)
- * [Questions / Tasks](#questions--tasks-1)
+    * [Questions / Tasks](#questions--tasks-1)
 * [Part III. Making a virtual camera](#part-iii-making-a-virtual-camera)
- * [Questions / Tasks](#questions--tasks-2)
+    * [Questions / Tasks](#questions--tasks-2)
 * [Part IV. Orienting Shutter's camera towards a moving target](#part-iv-orienting-shutters-camera-towards-a-moving-target)
- * [Questions / Tasks](#questions--tasks-3)
+    * [Questions / Tasks](#questions--tasks-3)
+
 
 
 ## Introduction 
@@ -135,6 +137,11 @@ have a single axis of rotation and, thus, exibit just one Degree of Freedom. The
 `joint angle` of these revolute joints controls the displacement between the pair
 of links that are connected to it.
 
+<p align="center">
+<img src="https://www.mathworks.com/help/physmod/sm/mech/ug/revolute.gif" width="280" alt="Revolute joint from mathworks.com"/><br/>
+Revolute Joint (image from Mathworks.com)
+</p>
+
 In general, we like to think about Degrees of Freedom (DoF) as the number of independent position 
 variables that would have to be specified in order to locate all parts of a robot.
 Shutter, in particular, has 4 motors in its arm, each of which implements a revolute joint.
@@ -205,7 +212,7 @@ $`B`$.
 Note that the 3D vector with elements $`r_{11}, r_{21}, r_{31}`$ 
 from the first column of the rotation matrix $`^{B}_{A}R`$ has the same direction as the $`x`$ axis of $`A`$ 
 in the $`B`$ frame. Similarly, the elements $`r_{12}, r_{22}, r_{32}`$
-and $`r_{13}, r_{23}, r_{33}`$ have the same direction of the $y$ and $z$ axes of 
+and $`r_{13}, r_{23}, r_{33}`$ have the same direction of the $`y`$ and $`z`$ axes of 
 $`A`$ in $`B`$, respectively.
 
 ### Transforms in ROS
@@ -226,6 +233,26 @@ by multiplying the edges connecting them. To traverse up a directed edge from a 
 tf uses the inverse of the transformation that is stored in the edge.
 
 <!-- todo: say something about querying transforms over time here? -->
+
+## Setup
+Before you start coding or answering questions for this assignment, please update
+your repository to pull the latest changes from the assignments repository and update
+the shutter-ros repository:
+
+```bash
+# update your repository with the latest version of the assignment
+$ cd <path-to-your-repository-in-your-workspace>
+$ git pull upstream master
+
+# update the shutter-ros repository 
+$ roscd shutter_bringup
+$ git pull
+
+# finally, re-build your catkin workspace 
+$ cd <path-to-your-catkin-workspace-root-directory>
+$ catkin_make
+```
+
 
 ## Part I. Introduction to tf
 This part of the assignment will help you understand how [tf](http://wiki.ros.org/tf) lets 
@@ -258,7 +285,7 @@ provide the transformation with both the rotation and translation components.
 
     *Tip:* You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool to query
     transformations. You will then need to assemble the $`4 \times 4`$ homogenous transformation matrix 
-    from these values. We recommend [this primer](wiki.ogre3d.org/Quaternion+and+Rotation+Primer) from Ogre
+    from these values. We recommend [this primer](http://wiki.ogre3d.org/Quaternion+and+Rotation+Primer) from Ogre
     if you are confused about different rotation representations.
 
 - **I-4.** How are the transformations in the /tf and /tf_static topics generated after you 
@@ -643,7 +670,7 @@ In particular, you should modify the functions:
  
 <img src="docs/shutter_following_target.gif" width="500"/>
  
-> You should not change the position of the second and third joints of the robot. These joints should
+> You should not change the position of the second and fourth joints of the robot (joint_2 and joint_4). These joints should
 remain at 0.0 and -1.571 radians after the generate_target.launch script finishes launching. Please
 don't change the main loop of the node either so that it is easy to understand how your
 code works.
