@@ -134,8 +134,8 @@ new message type as in the [tutorial on Creating Messages and Services](http://w
     *Tip:* If for some reason catkin_make fails to generate your message, check the CMakeLists.txt and
     package.xml filtes that you edited in step 3.
     
-5. Verify that your message type is built and has the 3 fields as mentioned in the step 2 above. You
-can use with the `rosmsg` tool to this end:
+5. Verify that your message type is built and that it has the 3 fields mentioned in the step 2 above. You
+can use the `rosmsg` tool to this end:
 
     ```bash
     $ rosmsg show shutter_track_target/Observation
@@ -209,7 +209,7 @@ $ rosparam get use_sim_time
 - **II-1.** Make a video of rqt_image_view that shows the content of the /virtual_camera/image_raw
 topic as the left-seq1.bag rosbag plays for at least 3 seconds. Turn this video into an animated
 gif, e.g., with ffmpeg and imagemagick as indicated in 
-[this code snipped](https://gitlab.com/snippets/1743818), and include it in a `docs` directory within the
+[this code snippet](https://gitlab.com/snippets/1743818), and include it in a `docs` directory within the
  shutter_track_target package. Name the gif "input.gif" and commit it to your repository.
  
 
@@ -285,7 +285,7 @@ through the "/observation" topic (self.obs_pub variable).
 
     Before publishing the Observation message, make sure to set its 
     `header field`. The header field should have the same values as the header variable 
-    that passed to the publish_observation() function. This will ensure that the time stamp and frame of the Observation message
+    that is passed to the publish_observation() function. This will ensure that the time stamp and frame of the Observation message
     matches the time stamp and frame of the image that it was generated from.
     
     Once you think that your detect_visual_target.py node is properly detecting targets of a given color
