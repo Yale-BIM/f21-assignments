@@ -196,11 +196,11 @@ to understand how it works in general.
 
 For the next parts of this assignment, do NOT edit the init() and image_callback() functions of the DetectTarget class
 in the detect_visual_target.py node. Only edit the filter_image(), compute_keypoints_for_blobs(), and publish_observation()
-functions as indicated in the three tasks below. 
+functions as indicated in the tasks below. 
 
 ### Questions / Tasks
-You will now complete the detect_visual_target.py node by implementing the filter_image(), compute_keypoints_for_blobs(), and publish_observation()
-functions.
+Complete the detect_visual_target.py node by implementing the filter_image(), compute_keypoints_for_blobs(), and publish_observation()
+functions. Afterwards, make an animated video of the visual output of your node, as indicated below.
 
 - **III-1.** Read this [tutorial on Color Spaces in OpenCV](https://www.learnopencv.com/color-spaces-in-opencv-cpp-python/).
 Afterwards, implement the `filter_image()` function in the detect_visual_target.py node so that the function:
