@@ -75,7 +75,7 @@ You assignment will be evaluated based on the content of your report and your co
 
 
 - Report (20 pts + 3 extra pts)
-    - Part IV (20 pts + 3 extra pts): IV-1 (4 pts) + IV-2 (4 pts) + IV-3 (4 pts) + IV-4 (2 pts) + IV-11 (3 pts) + IV-12 (3 pts) + IV-14 (3 extra pts)
+    - Part IV (25 pts + 3 extra pts): IV-1 (5 pts) + IV-2 (5 pts) + IV-3 (5 pts) + IV-4 (4 pts) + IV-11 (3 pts) + IV-12 (3 pts) + IV-14 (3 extra pts)
 - Code (75 pts + 2 extra pts)
     * Part I (10 pts) 
     * Part II (5 pts)
