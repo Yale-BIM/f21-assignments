@@ -4,23 +4,21 @@ This is the third assignment for Yale's CPSC-659 Building Interactive Machines c
 
 ## Table of Contents
 
-* [Assignment 2](#assignment-2)
-  * [Table of Contents](#table-of-contents)
-  * [Introduction](#introduction)
+* [Introduction](#introduction)
     * [System Requirements](#system-requirements)
     * [Background Knowledge](#background-knowledge)
     * [Notation](#notation)
     * [Deliverables](#deliverables)
     * [Evaluation](#evaluation)
     * [Further Reading](#further-reading)
-  * [Part I. Creating a Custom ROS Message Type](#part-i-creating-a-custom-ros-message-type)
-     * [Questions / Tasks](#questions--tasks)
-  * [Part II. Get Data](#part-ii-get-data)
-     * [Questions / Tasks](#questions--tasks-1)
-  * [Part III. Detecting a Visual Target](#part-iii-detecting-a-visual-target)
-     * [Questions / Tasks](#questions--tasks-2)
-  * [Part IV. Filtering the Target's Position](#part-iv-filtering-the-targets-position)
-     * [Questions / Tasks](#questions--tasks-3)
+* [Part I. Creating a Custom ROS Message Type](#part-i-creating-a-custom-ros-message-type)
+    * [Questions / Tasks](#questions--tasks)
+* [Part II. Get Data](#part-ii-get-data)
+    * [Questions / Tasks](#questions--tasks-1)
+* [Part III. Detecting a Visual Target](#part-iii-detecting-a-visual-target)
+    * [Questions / Tasks](#questions--tasks-2)
+* [Part IV. Filtering the Target's Position](#part-iv-filtering-the-targets-position)
+    * [Questions / Tasks](#questions--tasks-3)
 
 
 ## Introduction 
