@@ -177,16 +177,16 @@ You should then see an image sequence of Marynel moving two colored cubes as in 
 <img src="docs/left-seq1.png" width="400"/>
 <br> <br>
 
-    > ROS nodes use the /clock topic to gather information about time (see [here](http://wiki.ros.org/Clock) for more information).
-    When the use_sim_time parameter is set to true, ROS will stop publishing your computer's system clock
-    through /clock and, instead, rosbag play will publish a simulated time.
-    If you are playing ROS bags and don't set use_sim_time parameter to true, then messages may be handled incorrectly by
-    ROS nodes. You can check the value of the use_sim_time parameter in the [ROS parameter server](http://wiki.ros.org/Parameter%20Server)
-    with the command:
+> ROS nodes use the /clock topic to gather information about time (see [here](http://wiki.ros.org/Clock) for more information).
+When the use_sim_time parameter is set to true, ROS will stop publishing your computer's system clock
+through /clock and, instead, rosbag play will publish a simulated time.
+If you are playing ROS bags and don't set use_sim_time parameter to true, then messages may be handled incorrectly by
+ROS nodes. You can check the value of the use_sim_time parameter in the [ROS parameter server](http://wiki.ros.org/Parameter%20Server)
+with the command:
 
-    ```bash
-    $ rosparam get use_sim_time
-    ```
+```bash
+$ rosparam get use_sim_time
+```
 
 ### Questions / Tasks
 - **II-1.** Make a video of rqt_image_view that shows the content of the /virtual_camera/image_raw
