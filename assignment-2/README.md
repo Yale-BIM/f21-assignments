@@ -164,7 +164,7 @@ $ rosrun rqt_image_view rqt_image_view # visualize the /virtual_camera/image_raw
 You should then see an image sequence of Marynel moving two colored cubes as in the figure below:
 
 <img src="docs/left-seq1.png" width="300"/>
-<br>
+<br> <br>
 
 *Tip:* ROS nodes use the /clock topic to gather information about time (see [here](http://wiki.ros.org/Clock) for more information). 
 When the `use_sim_time` parameter is set to true, ROS will stop publishing your computer's system clock
@@ -246,7 +246,7 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
     
     <img src="docs/keypoint.png" width="800"/>
     
-    The red circle in the right image above corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
+    The thin red circle in the right image above corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
     found by OpenCV blob's detection algorithm. The position of this keypoint is what the node outputs
     through the "/observation" topic (see the next task).
 
@@ -255,13 +255,13 @@ This function receives a `tuple (x,y)` corresponding to the location of the bigg
 found by the blob detection algorithm. The function should publish this coordinate as an Observation message
 through the "/observation" topic (self.obs_pub variable). 
 
-Before publishing the Observation message, make sure to set its 
-header field. The header field should have the same values as the header variable 
-that passed to the publish_observation() function. This will ensure that the time stamp and frame of the Observation message
-matches the time stamp and frame of the image that it was generated from.
-
-Add the detect_visual_target.py script to your repository and commit your implementation of the 
-missing functions.
+    Before publishing the Observation message, make sure to set its 
+    header field. The header field should have the same values as the header variable 
+    that passed to the publish_observation() function. This will ensure that the time stamp and frame of the Observation message
+    matches the time stamp and frame of the image that it was generated from.
+    
+    Add the detect_visual_target.py script to your repository and commit your implementation of the 
+    missing functions.
 
 - **III-4.** As in II-1, make a video of rqt_image_view that shows the content of the /observation_image
 topic as the left-seq1.bag rosbag plays. Turn this video into an animated
