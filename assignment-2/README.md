@@ -161,12 +161,13 @@ $ rosbag play --clock left-seq1.bag
 $ rosrun rqt_image_view rqt_image_view # visualize the /virtual_camera/image_raw image
 ```
 
-(You should see images of Marynel moving two colored cubes as in the figure below. These images
-were captured with the ZED camera on Shutter)
+You should then see an image sequence of Marynel moving two colored cubes as in the figure below. The images
+were captured with the ZED camera on Shutter:
 
 <kbd>
 <img src="docs/left-seq1.png" width="300"/>
 </kbd>
+<br>
 
 *Tip:* ROS nodes use the /clock topic to gather information about time (see [here](http://wiki.ros.org/Clock) for more information). 
 When the `use_sim_time` parameter is set to true, ROS will stop publishing your computer's system clock
