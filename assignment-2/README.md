@@ -30,6 +30,8 @@ the [Robot Operating System (ROS)](http://www.ros.org/). This includes being fam
 the `roscore`, `rosrun`, `roslaunch`, `rosbag`, `rostopic`, `rosmsg`, `rosnode`, `rqt_image_view`, 
 and `rviz` tools. 
 
+You are also expected to be familiar with the [numpy Python library](http://www.numpy.org/) for linear algebra. 
+If you are not, please check [this tutorial](https://docs.scipy.org/doc/numpy/user/quickstart.html) before starting the assignment.
 
 #### Notation
 We refer to `vectors` or column matrices with bold lower-case letters (e.g., $`\bold{x}`$).
@@ -314,7 +316,7 @@ the main logic for a filtering node, and will help you debug your filter visuall
 
 - **IV-1.** Please write down the mathematical equation for the filter's linear transition model, including
 Gaussian noise, in your report. Note that because you are not moving the target, but tracking will be
-happening based on the observed position of the target in images, your filter will have no control $`\bold{u}`$.
+happening only based on the observed target position, your filter will have no control $`\bold{u}`$.
 
 - **IV-2.** Please write down the mathematical equation for the filter's measurement model, including Gaussian
 noise, in your report.
