@@ -452,7 +452,7 @@ can track the red cube in the left-seq1.bag sequence:
      shutter_track_target package. Commit the gif to your repository.
 
 
-
+Once you've finished the assignment, **add the commit SHA** that you would like to be evaluate on to your report.
 
 
 
