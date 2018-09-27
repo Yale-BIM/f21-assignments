@@ -252,7 +252,7 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
 
 - **III-3.** Finally, implement the `publish_observation()` function in the detect_visual_target.py node.
 This function receives a `tuple (x,y)` corresponding to the location of the biggest keypoint 
-found by the blob detection algorithm. The function should publish this coordinate as an Observation message
+found by the blob detection algorithm (here, only one). The function should publish this coordinate as an Observation message
 through the "/observation" topic (self.obs_pub variable). 
 
     Before publishing the Observation message, make sure to set its 
