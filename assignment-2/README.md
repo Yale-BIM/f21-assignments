@@ -67,8 +67,11 @@ You assignment will be evaluated based on the content of your report and your co
 
 #### Further Reading
 
-- [Playing Catch and Juggling with a Humanoid Robot](https://www.disneyresearch.com/publication/playing-catch-and-juggling-with-a-humanoid-robot/)
-- [Discriminative Training of Kalman Filters](http://www.roboticsproceedings.org/rss01/p38.pdf)
+- [Playing Catch and Juggling with a Humanoid Robot](https://www.disneyresearch.com/publication/playing-catch-and-juggling-with-a-humanoid-robot/):
+Application of Kalman Filtering to a fun entertainment application.
+
+- [Discriminative Training of Kalman Filters](http://www.roboticsproceedings.org/rss01/p38.pdf):
+Describes systematic ways of tuning Kalman Filters given ground truth data.
 
 
 ## Part I. Creating a Custom ROS Message Type
