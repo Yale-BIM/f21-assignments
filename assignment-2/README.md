@@ -126,7 +126,7 @@ can use with the `rosmsg` tool to this end:
 - **I-1.** Add the Observation.msg, package.xml and CMakeLists.txt files to your repository.
 Commit the changes that you made to generate your new message type in the shutter_track_target package.
 
-## Part II. Get Videos to Filter Data From 
+## Part II. Get Data 
 Download the ROS bag [left-seq1.bag](https://drive.google.com/open?id=1k694YrMM54QAK85AZ_a-F7jWmtWQ1TEn) from Google 
 Drive. Then, place it inside a `data` directory within the shutter_track_target package:
 
