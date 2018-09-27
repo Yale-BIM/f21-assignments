@@ -223,7 +223,7 @@ Afterwards, implement the `filter_image()` function in the detect_visual_target.
     `rqt_image_view`. The output image (or mask) should have high values for the pixels corresponding to the blue 
     cube in the input image, as shown below.
     
-    <img src="docs/blue-target.png" width="600"/>
+    <img src="docs/blue-target.png" width="800"/><br>
 
 - **III-2.** Read this other [tutorial on Blob Detection](https://www.learnopencv.com/blob-detection-using-opencv-python-c/)
 and implement the `compute_keypoints_for_blobs()` function in the detect_visual_target.py node so that it:
@@ -231,9 +231,9 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
     1. Creates a `cv2.SimpleBlobDetector_Params()` object with all of the parameters
     for an OpenCV blob detector.
     
-    2. Creates a SimpleBlobDetector object with the params from the previous step.
+    2. Creates a SimpleBlobDetector object with the parameters from the previous step.
     
-    3. Uses the detector to detect blobs on the `filtered_image` mask that is passed to the computer_keypoints_for_blobs() function.
+    3. Uses the SimpleBlobDetector to detect blobs on the `filtered_image` mask that is input to the function.
     
     4. Returns the detected list of keypoints.
     
@@ -244,7 +244,7 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
     blob detector such that the blue cube is detected well in the left-seq1.bag
     image sequence. The result should look similar to the image below:
     
-    <img src="docs/keypoint.png" width="600"/>
+    <img src="docs/keypoint.png" width="800"/>
     
     The red circle in the right image above corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
     found by OpenCV blob's detection algorithm. The position of this keypoint is what the node outputs
