@@ -182,7 +182,7 @@ $ rosparam get use_sim_time
 topic as the left-seq1.bag rosbag plays. Turn this video into an animated
 gif, e.g., with ffmpeg and imagemagick as indicated in 
 [this code snipped](https://gitlab.com/snippets/1743818), and include it in a `docs` directory within the
- shutter_track_target package. Commit the gif to your repository.
+ shutter_track_target package. Name the gif "input.gif" and commit it to your repository.
  
 
 ## Part III. Detecting a Visual Target
@@ -265,7 +265,7 @@ through the "/observation" topic (self.obs_pub variable).
 
 - **III-4.** As in II-1, make a video of rqt_image_view that shows the content of the /observation_image
 topic as the left-seq1.bag rosbag plays. Turn this video into an animated
-gif and include it in the `docs` directory within the
+gif, name it "keypoints.gif", and include it in the `docs` directory within the
  shutter_track_target package. Commit the gif to your repository.
  
 
