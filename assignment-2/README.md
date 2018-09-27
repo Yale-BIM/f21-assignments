@@ -465,7 +465,8 @@ can track the red cube in the left-seq1.bag sequence:
     
     Once it looks like your filter is tracking the red target, include the filter parameters that you are using
      for this part of the assignment as well as the hue values that allow you to detect the red cube in your report.  
-     In addition, make a video of rqt_image_view that shows the images sent
+     
+    Finally, make a video of rqt_image_view that shows the images sent
     through the /tracked_image topic for at least 5 seconds with add_observation_noise:=true. 
     Turn this video into an animated
     gif, name it "filtered_red_cube.gif", and include it in the `docs` directory within the
