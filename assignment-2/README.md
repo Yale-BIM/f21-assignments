@@ -162,9 +162,8 @@ $ rosrun rqt_image_view rqt_image_view # visualize the /virtual_camera/image_raw
 ```
 
 You should then see an image sequence of Marynel moving two colored cubes as in the figure below:
-<kbd>
+
 <img src="docs/left-seq1.png" width="300"/>
-</kbd>
 <br>
 
 *Tip:* ROS nodes use the /clock topic to gather information about time (see [here](http://wiki.ros.org/Clock) for more information). 
@@ -224,9 +223,7 @@ Afterwards, implement the `filter_image()` function in the detect_visual_target.
     `rqt_image_view`. The output image (or mask) should have high values for the pixels corresponding to the blue 
     cube in the input image, as shown below.
     
-    <kbd>
     <img src="docs/blue-target.png" width="600"/>
-    </kbd>
 
 - **III-2.** Read this other [tutorial on Blob Detection](https://www.learnopencv.com/blob-detection-using-opencv-python-c/)
 and implement the `compute_keypoints_for_blobs()` function in the detect_visual_target.py node so that it:
@@ -247,9 +244,7 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
     blob detector such that the blue cube is detected well in the left-seq1.bag
     image sequence. The result should look similar to the image below:
     
-    <kbd>
     <img src="docs/keypoint.png" width="600"/>
-    </kbd>
     
     The red circle in the right image above corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
     found by OpenCV blob's detection algorithm. The position of this keypoint is what the node outputs
