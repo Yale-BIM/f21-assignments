@@ -161,9 +161,7 @@ $ rosbag play --clock left-seq1.bag
 $ rosrun rqt_image_view rqt_image_view # visualize the /virtual_camera/image_raw image
 ```
 
-You should then see an image sequence of Marynel moving two colored cubes as in the figure below. The images
-were captured with the ZED camera on Shutter:
-
+You should then see an image sequence of Marynel moving two colored cubes as in the figure below:
 <kbd>
 <img src="docs/left-seq1.png" width="300"/>
 </kbd>
@@ -208,27 +206,27 @@ functions.
 - **III-1.** Read this [tutorial on Color Spaces in OpenCV](https://www.learnopencv.com/color-spaces-in-opencv-cpp-python/).
 Afterwards, implement the `filter_image()` function in the detect_visual_target.py node so that the function:
 
-    1. Converts the input `cv_image` to the HSV color space.
+    1. Converts the input `cv_image` to the HSV color space with OpenCV.
     2. Filters the image in the HSV color space using the [cv2.inRange]() function from OpenCV. 
     3. Finally, returns the image (mask) output by the inRange() function.
     
     *Tip:* This [tutorial](https://pythonprogramming.net/color-filter-python-opencv-tutorial/) provides
     an example on color filtering in OpenCV. 
     
-To check that your filter_image() function is working properly, run your node with the default hue range of 100-140:
-
-```bash
-# play the left-seq1.bag as in Part II of the assignment, and then run the node:
-$ rosrun shutter_track_target detect_visual_target.py
-```
-
-You should then be able to visualize the output topic `/observation_image` for debugging purposes with 
-`rqt_image_view`. The output image (or mask) should have high values for the pixels corresponding to the blue 
-cube in the input image, as shown below.
-
-<kbd>
-<img src="docs/blue-target.png" width="600"/>
-</kbd>
+    To check that your filter_image() function is working properly, run your node with the default hue range of 100-140:
+    
+    ```bash
+    # play the left-seq1.bag as in Part II of the assignment, and then run the node:
+    $ rosrun shutter_track_target detect_visual_target.py
+    ```
+    
+    You should then be able to visualize the output topic `/observation_image` for debugging purposes with 
+    `rqt_image_view`. The output image (or mask) should have high values for the pixels corresponding to the blue 
+    cube in the input image, as shown below.
+    
+    <kbd>
+    <img src="docs/blue-target.png" width="600"/>
+    </kbd>
 
 - **III-2.** Read this other [tutorial on Blob Detection](https://www.learnopencv.com/blob-detection-using-opencv-python-c/)
 and implement the `compute_keypoints_for_blobs()` function in the detect_visual_target.py node so that it:
@@ -242,20 +240,20 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
     
     4. Returns the detected list of keypoints.
     
-*Tip:* You can read more about how the SimpleBlobDetector algorithm works on the [official OpenCV documentation](https://docs.opencv.org/2.4/modules/features2d/doc/common_interfaces_of_feature_detectors.html#SimpleBlobDetector%20:%20public%20FeatureDetector).
+    *Tip:* You can read more about how the SimpleBlobDetector algorithm works on the [official OpenCV documentation](https://docs.opencv.org/2.4/modules/features2d/doc/common_interfaces_of_feature_detectors.html#SimpleBlobDetector%20:%20public%20FeatureDetector).
 
-Once you've implemented the compute_keypoints_for_blobs() function, you can run the detect_visual_target.py 
-node to debug your code for this part of the assignment, as in the task III-1. Edit the parameters of the 
-blob detector such that the blue cube is detected well in the left-seq1.bag
-image sequence. The result should look similar to the image below:
-
-<kbd>
-<img src="docs/keypoint.png" width="600"/>
-</kbd>
-
-The red circle in the right image above corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
-found by OpenCV blob's detection algorithm. The position of this keypoint is what the node outputs
-through the "/observation" topic (see the next task).
+    Once you've implemented the compute_keypoints_for_blobs() function, you can run the detect_visual_target.py 
+    node to debug your code for this part of the assignment, as in the task III-1. Edit the parameters of the 
+    blob detector such that the blue cube is detected well in the left-seq1.bag
+    image sequence. The result should look similar to the image below:
+    
+    <kbd>
+    <img src="docs/keypoint.png" width="600"/>
+    </kbd>
+    
+    The red circle in the right image above corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
+    found by OpenCV blob's detection algorithm. The position of this keypoint is what the node outputs
+    through the "/observation" topic (see the next task).
 
 - **III-3.** Finally, implement the `publish_observation()` function in the detect_visual_target.py node.
 This function receives a `tuple (x,y)` corresponding to the location of the biggest keypoint 
