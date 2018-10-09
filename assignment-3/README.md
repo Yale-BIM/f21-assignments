@@ -287,7 +287,6 @@ function should train the network's weights using the [model's fit function](htt
         :param epochs: epochs for gradient descent
         :param learning_rate: learning rate for gradient descent
         :param batch_size: batch size for training with gradient descent
-        :return:
         """
         # normalize
         norm_train_input = normalize_data_per_row(train_input, input_mean, input_stdev)
@@ -316,22 +315,26 @@ function should train the network's weights using the [model's fit function](htt
                  callbacks=[tbCallBack, checkpointCallBack])
     ```
 
-    Note that the example above also add two callbacks to the fit() function:
+    Note that the example above also adds two callbacks to the fit() function:
     
-    - *tf.keras.callbacks.TensorBoard:* [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard) 
-    callback to write TensorBoard logs to a logs_dir directory.
-    - *tf.keras.callbacks.ModelCheckpoint:* Callback that saves the model after every epoch (see
+    - **tf.keras.callbacks.TensorBoard:** [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard) 
+    callback to write TensorBoard logs to a given directory.
+    - **tf.keras.callbacks.ModelCheckpoint:** Callback that saves the model after every epoch (see
     more information [here](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ModelCheckpoint)).
     Because we set "save_best_only = True", the callback would only save the model if the
     validation loss is smaller than the prior best validation loss.
     
+    We suggest that, as a first try, you use the [Adam optimizer](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam)
+    when you train neural works with gradient descent. The optimizer tends to work well for many problems. You can read the
+    original paper with full details of how it works here: [Diederik P. Kingma, Jimmy Ba. Adam: A Method for Stochastic Optimization](https://arxiv.org/abs/1412.6980).
+    
 4. Complete the `test_model()` function in the train_and_test_saddle_function.py script. The function
-should output predictions for the given input matrix (`test_input`) using the `model.predict()` function
-(the official documentation for the predict() function can be found [here](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model#predict)).
+should output predictions for the given input matrix (test_input) using the `model.predict()` function.
+The official documentation for the predict() function can be found [here](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model#predict).
 
 5. Complete the `compute_average_L2_error()` function in the train_and_test_saddle_function.py script.
 The function should compute the average L2-norm (or least squares) difference between the ground truth 
-(`test_target`) and the predicted values (`predicted_targets`) that are input to the function. The average
+(test_target) and the predicted values (predicted_targets) that are input to the function. The average
 should be over all of the examples in each of the input matrices.
 
     ```python
@@ -353,6 +356,9 @@ should be over all of the examples in each of the input matrices.
     ```bash
     (venv) $ ./train_and_test_saddle_function.py [--lr 1e-1] [--epochs 10]
     ```    
+    
+    The optional parameters `lr` and `epochs` correspond to the learning rate and number of 
+    epochs to use for training.
     
     Make a screen shot of the plot that you get after training your simple neural network for the
     first time with a learning rate of 1e-2 and for 100 epochs. Add the screen shot to your report.
