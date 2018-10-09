@@ -206,17 +206,17 @@ the train_and_test_saddle_function.py script.
     a. For the compute_normalization_parameters() function, you want to compute the mean
     and standard deviation for the data that is input to the function:
     
-        ```python
-        def compute_normalization_parameters(data):
-            """
-            Compute normalization parameters (mean, st. dev.)
-            :param data: matrix with data organized by rows [N x num_variables]
-            :return: mean and standard deviation per variable as row matrices of dimension [1 x num_variables]
-            """
-            mean = ...  # numpy array with num_variables elements 
-            stdev = ... # numpy array with num_varianles elements
-            return mean, stdev
-        ```
+    ```python
+    def compute_normalization_parameters(data):
+        """
+        Compute normalization parameters (mean, st. dev.)
+        :param data: matrix with data organized by rows [N x num_variables]
+        :return: mean and standard deviation per variable as row matrices of dimension [1 x num_variables]
+        """
+        mean = ...  # numpy array with num_variables elements 
+        stdev = ... # numpy array with num_varianles elements
+        return mean, stdev
+    ```
     
     Note that the input `data`
     is organized in a matrix where each row corresponds to an example. The columns of the data
@@ -226,8 +226,8 @@ the train_and_test_saddle_function.py script.
     b. For the normalize_data_per_row() function, you want to use the mean and stdev from
     (a) above to apply a whitening transformation to the data:
     
-        ```python
-        def normalize_data_per_row(data, mean, stdev):
+    ```python
+    def normalize_data_per_row(data, mean, stdev):
         """
         Normalize a give matrix of data (samples must be organized per row)
         :param data: input data
@@ -244,7 +244,7 @@ the train_and_test_saddle_function.py script.
         normalized_data = ... # Complete.
         
         return normalized_data
-        ``` 
+    ``` 
      
     For example, if an example
     feature is $`x`$, then you want to transform it into $`(x - \mu)/\sigma`$,
