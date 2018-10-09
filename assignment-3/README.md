@@ -76,11 +76,20 @@ to set up TensorFlow v. 1.11 with Python 2.7.
     $ virtualenv --version
     ```
     
-    If it is NOT installed in your machine, install it:
+    If virtualenv is NOT installed in your machine, install it:
     
     ```bash
     sudo pip install -U virtualenv # system-wide install
     ```
+    
+    And if pip is not installed in your machine, install it as well:
+    
+    ```bash
+    sudo apt install python-dev python-pip
+    ```
+    
+    and try repeating the steps above afterwards so that you install virtualenv.
+    
     
 2. Create a [virtual environment](https://realpython.com/python-virtual-environments-a-primer/) 
 named `venv` with virtualenv:
