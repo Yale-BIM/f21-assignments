@@ -270,7 +270,7 @@ features in the training and validation set using the normalize_data_per_row() f
 Then, train_model() should [compile](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model#compile) 
 the neural network model that is passed as input to the function, i.e., 
 define the optimizer to be used during training, loss, and relevant metrics. Finally, the train_model() 
-function should train the network's weights using the [Keras fit function](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model#fit).
+function should train the network's weights using the [model's fit function](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model#fit).
 
     ```python
     def train_model(model, train_input, train_target, val_input, val_target, input_mean, input_stdev,
