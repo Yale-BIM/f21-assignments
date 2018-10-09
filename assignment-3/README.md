@@ -256,8 +256,8 @@ a simple Neural Network model (with one hidden layer) using the [Keras API](http
 
     ```python
     input = tf.keras.layers.Input(shape=(num_inputs,), name="inputs")
-    hidden1 = tf.keras.layers.Dense(64, use_bias=True, activation=None)(input)
-    output = tf.keras.layers.Dense(1, use_bias=True, activation='linear')(hidden1)
+    hidden1 = tf.keras.layers.Dense(64, use_bias=True)(input)
+    output = tf.keras.layers.Dense(1, use_bias=True)(hidden1)
     model = tf.keras.models.Model(inputs=input, outputs=output, name="monkey_model")
     ```
 
