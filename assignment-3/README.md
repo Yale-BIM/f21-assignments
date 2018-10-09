@@ -252,13 +252,13 @@ the train_and_test_saddle_function.py script.
     
 2. Complete the `build_model()` function in
 the train_and_test_saddle_function.py script. This function should implement
-a simple Neural Network (with one hidden layer) using the [Keras API](https://www.tensorflow.org/guide/keras#functional_api):
+a simple Neural Network model (with one hidden layer) using the [Keras API](https://www.tensorflow.org/guide/keras#functional_api):
 
     ```python
     input = tf.keras.layers.Input(shape=(num_inputs,), name="inputs")
     hidden1 = tf.keras.layers.Dense(64, use_bias=True, activation=None)(input)
     output = tf.keras.layers.Dense(1, use_bias=True, activation='linear')(hidden1)
-    return tf.keras.models.Model(inputs=input, outputs=output, name="monkey_model")
+    model = tf.keras.models.Model(inputs=input, outputs=output, name="monkey_model")
     ```
 
     > In general, we suggest that you use [TF's Keras Functional API](https://www.tensorflow.org/guide/keras#functional_api)
