@@ -350,8 +350,16 @@ should be over all of the examples in each of the input matrices.
     
         return average_l2_err
     ```
-    
-6. You should now be able to train your network and visualize the results for the test set.
+
+6. Uncomment the last line in the main() function of the train_and_test_saddle_function.py
+script so that you can easily visualize the predictions made by your model:
+
+    ```python
+    # visualize the result (uncomment the line below to plot the predictions)
+    sfu.plot_test_predictions(test_input, test_target, predicted_targets, title="Predictions")
+    ```
+
+    You should now be able to train your network and visualize the results for the test set:
 
     ```bash
     (venv) $ ./train_and_test_saddle_function.py [--lr 1e-1] [--epochs 10]
