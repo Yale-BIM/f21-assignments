@@ -367,8 +367,8 @@ should be over all of the examples in each of the input matrices.
 Open a new terminal window, activate your virtual environment, and run:
 
     ```bash
-    $ cd assignment-3 # go to the assignment-3 directory within your private repository
-    $ tensorboard --logdir function_approximation/logs
+    (venv) $ cd assignment-3 # go to the assignment-3 directory within your private repository
+    (venv) $ tensorboard --logdir function_approximation/logs
     ```
     
     Then, go to the URL that the script provides (e.g., http://localhost:6006) in your favorite
