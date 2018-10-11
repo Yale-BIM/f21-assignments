@@ -449,15 +449,16 @@ model` and train its weights further (e.g., to resume training or for fine-tunin
     ```
     
     The model that you trained before for task II-6 should be stored as best_monkey_weights.h5
-    within the folder corresponding to your training sessions in assignments-3/function_approximation/logs.
+    within the folder corresponding to your training session in assignments-3/function_approximation/logs.
     You can pass this model as argument to your train_and_test_saddle_function.py to test the new
     functionality that you just implemented.
     
 9. Create a new function called `build_nonlinear_model()` in the train_and_test_saddle_function.py 
-script. This function should have as argument the number of input features for the data, and
-return a [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model) similar
-to the build_linear_model() function. The difference, though, is that build_nonlinear_model()
-function should implement a more complex neural network capable of approximating the monkey saddle surface
+script. This function should have as argument the number of input features for the data and should
+return a [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model), similar
+to the build_linear_model() function that you implemented before. The difference between these functions, though, 
+is that build_nonlinear_model()
+ should implement a more complex neural network capable of approximating the monkey saddle surface
 with an average L2 error of 100 of less on the test set.
 
     ```python
