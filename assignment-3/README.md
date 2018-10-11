@@ -416,8 +416,8 @@ model` and train its weights further (e.g., to resume training or for fine-tunin
                         type=str, default="")
     ```
         
-    b. Add two lines of code after the build_fn is set at the end of the script to
-    replace the build_fn with TensorFlow's Keras load_model() function:
+    b. Add two lines of code after the build_fn variable is set at the end of the script to
+    replace the value of build_fn with [TensorFlow's Keras load_model() function](https://www.tensorflow.org/api_docs/python/tf/keras/models/load_model):
     
     ```python
     ... # Set ArgumentParser arguments()
@@ -427,7 +427,7 @@ model` and train its weights further (e.g., to resume training or for fine-tunin
     ...
         
     # ---- lines to be added ----
-    # load model (and thus, ignore build function)
+    # load model (and thus, ignore prior build function)
     if len(args.load_model) > 0:
         build_fn = lambda x: tf.keras.models.load_model(args.load_model, compile=False)
     # ---- end of lines to be added ----
