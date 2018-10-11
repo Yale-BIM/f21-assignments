@@ -97,7 +97,7 @@ def compute_average_L2_error(test_target, predicted_targets):
     return average_l2_err
 
 
-def main(num_examples, epochs, lr, visualize_training_data):
+def main(num_examples, epochs, lr, visualize_training_data, build_fn=build_model):
     """
     Main function
     :param num_training: Number of examples to generate for the problem (including training, testing, and val)
@@ -129,7 +129,7 @@ def main(num_examples, epochs, lr, visualize_training_data):
     mean, stdev = compute_normalization_parameters(train_input)
 
     # build the model
-    model = build_model(train_input.shape[1])
+    model = build_fn(train_input.shape[1])
 
     # train the model
     print "\n\nTRAINING..."
