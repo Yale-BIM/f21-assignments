@@ -2,6 +2,7 @@
 # Script to train and test a neural network with TF's Keras API
 
 import os
+import sys
 import argparse
 import datetime
 import numpy as np
@@ -41,7 +42,7 @@ def normalize_data_per_row(data, mean, stdev):
     return normalized_data
 
 
-def build_model(num_inputs):
+def build_linear_model(num_inputs):
     """
     Build NN model with Keras
     :param num_inputs: number of input features for the model
@@ -97,7 +98,7 @@ def compute_average_L2_error(test_target, predicted_targets):
     return average_l2_err
 
 
-def main(num_examples, epochs, lr, visualize_training_data, build_fn=build_model):
+def main(num_examples, epochs, lr, visualize_training_data, build_fn=build_linear_model):
     """
     Main function
     :param num_training: Number of examples to generate for the problem (including training, testing, and val)
@@ -160,7 +161,17 @@ if __name__ == "__main__":
                         type=float, default=50)
     parser.add_argument("--visualize_training_data", help="visualize training data",
                         action="store_true")
+    parser.add_argument("--model", help="model to train (e.g., 'linear')",
+                        type=str, default="linear")
     args = parser.parse_args()
 
+    # define the model function that we will use to assemble the Neural Network
+    if args.model == "linear":
+        build_fn = build_linear_model # function that builds linear model
+    else:
+        print "Invalid model {}".format(args.model)
+        sys.exit(1)
+
     # run the main function
-    main(args.n, args.epochs, args.lr, args.visualize_training_data)
+    main(args.n, args.epochs, args.lr, args.visualize_training_data, build_fn=build_fn)
+    sys.exit(0)
