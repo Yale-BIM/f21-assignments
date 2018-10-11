@@ -409,44 +409,44 @@ model` and train its weights further (e.g., to resume training or for fine-tunin
 
     a. Add a "load_model" argument to the argument parser at the end of the script:
         
-        ```python
-        parser = argparse.ArgumentParser()
-        ... # other arguments
-        parser.add_argument("--load_model", help="path to model",
-                            type=str, default="")
-        ```
+    ```python
+    parser = argparse.ArgumentParser()
+    ... # other arguments
+    parser.add_argument("--load_model", help="path to the model",
+                        type=str, default="")
+    ```
         
     b. Add two lines of code after the build_fn is set at the end of the script to
     replace the build_fn with TensorFlow's Keras load_model() function:
     
-        ```python
-        ... # Set ArgumentParser arguments()
+    ```python
+    ... # Set ArgumentParser arguments()
+    
+    # define the model function that we will use to assemble the Neural Network
+    if args.build_fn == "linear":
+    ...
         
-        # define the model function that we will use to assemble the Neural Network
-        if args.build_fn == "linear":
-        ...
-            
-        # ---- lines to be added ----
-        # load model (and thus, ignore build function)
-        if len(args.load_model) > 0:
-            build_fn = lambda x: tf.keras.models.load_model(args.load_model, compile=False)
-        # ---- end of lines to be added ----
-            
-        # run the main function
-        main(args.n, args.epochs, args.lr, args.visualize_training_data, build_fn=build_fn)
-        sys.exit(0)
-        ```
+    # ---- lines to be added ----
+    # load model (and thus, ignore build function)
+    if len(args.load_model) > 0:
+        build_fn = lambda x: tf.keras.models.load_model(args.load_model, compile=False)
+    # ---- end of lines to be added ----
         
-        > Note that the load_model() function above is passed the compile argument as `compile=False`.
-        This means that the model should not be compiled after loading, because the train_model() function
-        that you implemented before does this already.
+    # run the main function
+    main(args.n, args.epochs, args.lr, args.visualize_training_data, build_fn=build_fn)
+    sys.exit(0)
+    ```
+        
+    > Note that the load_model() function above is passed the compile argument as `compile=False`.
+    This means that the model should not be compiled after loading, because the train_model() function
+    that you implemented before does this already.
         
     c. Test your code. Your script should now be able to load a model from a file and continue training
     its weights thereafter:
     
-        ```bash
-        (venv) $ ./train_and_test_saddle_function.py --load_model <path_to_model_h5_file> [--lr 1e-2] [--epochs 500]
-        ```
+    ```bash
+    (venv) $ ./train_and_test_saddle_function.py --load_model <path_to_model_h5_file> [--lr 1e-2] [--epochs 500]
+    ```
     
     The model that you trained before for task II-6 should be stored as best_monkey_weights.h5
     within the folder corresponding to your training sessions in assignments-3/function_approximation/logs.
