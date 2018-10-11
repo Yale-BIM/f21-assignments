@@ -259,7 +259,7 @@ the train_and_test_saddle_function.py script.
     feature is $`x`$, then you want to transform it into $`(x - \mu)/\sigma`$,
     where $`\sigma`$ corresponds to the standard deviation for that feature.
     
-2. Complete the `build_model()` function in
+2. Complete the `build_linear_model()` function in
 the train_and_test_saddle_function.py script. This function should implement
 a simple Neural Network model (with one hidden layer) using the [Keras API](https://www.tensorflow.org/guide/keras#functional_api):
 
@@ -378,7 +378,8 @@ script so that you can easily visualize the predictions made by your model:
     epochs to use for training.
     
     Make a screen shot of the plot that you get after training your simple neural network for the
-    first time with a learning rate of 1e-2 and for 100 epochs. Add the screen shot to your report.
+    first time with a learning rate of 1e-2 and for 100 epochs. Add the screen shot to your report 
+    and explain why the neural network is performing poorly.
     
 7. Visualize the learning curves and your model using [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard).
 Open a new terminal window, activate your virtual environment, and run:
@@ -395,4 +396,45 @@ Open a new terminal window, activate your virtual environment, and run:
     [computation graph](https://www.tensorflow.org/guide/graph_viz) for your simple neural network model.
     
     Make a screen shot of your computation graph and include it in your project report.
+    
+    > NOTE: In general, we recommend that you use TensorBoard to check your models' computation
+    graphs and training/validation performance for all of the other tasks in this assignment. 
+    This 30min [TensorBoard tutorial](https://www.youtube.com/watch?v=eBbEDRsCmv4)
+    provides good examples on how the interface can help you debug many issues!
+    
+8. Create a new function called `build_nonlinear_model()` in the train_and_test_saddle_function.py 
+script. This function should have as argument the number of input features for the data, and
+return a [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model) similar
+to the build_linear_model() function. The difference, though, is that build_nonlinear_model()
+function should implement a more complex neural network capable of approximating the monkey saddle surface
+with an average L2 error of 100 of less on the test set.
+
+    ```python
+    def build_nonlinear_model(num_inputs):
+    """
+    Build nonlinear NN model with Keras
+    :param num_inputs: number of input features for the model
+    :return: Keras model
+    """
+    ... # complete
+    ```
+    
+    Once you've implemented the function, edit the last lines of the train_and_test_saddle_function.py 
+    script to be able to change the model that is trained through the command line:
+    
+    ```python
+    # define the model function that we will use to assemble the Neural Network
+    if args.model == "linear":
+        build_fn = build_linear_model # function that builds linear model
+    if args.model == "nonlinear":
+        build_fn = build_nonlinear_model # function that builds non-linear model
+    else:
+        print "Invalid model {}".format(args.model)
+        sys.exit(1)
+    ```
+    
+    You should then be able to train and test your model as:
+    ```bash
+    (venv) $ ./train_and_test_saddle_function.py --model nonlinear [--lr 1e-1] [--epochs 10]
+    ```
     
