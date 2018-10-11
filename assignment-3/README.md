@@ -1,4 +1,4 @@
-# Assignment 2
+# Assignment 3
 
 This is the fourth assignment for Yale's CPSC-659 Building Interactive Machines course.
 
@@ -269,6 +269,9 @@ a simple Neural Network model (with one hidden layer) using the [Keras API](http
     output = tf.keras.layers.Dense(1, use_bias=True)(hidden1)
     model = tf.keras.models.Model(inputs=input, outputs=output, name="monkey_model")
     ```
+
+    The function should return the [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model)
+    specified above.
 
     > In general, we suggest that you use [TF's Keras Functional API](https://www.tensorflow.org/guide/keras#functional_api)
     to build your model as in the script above.
