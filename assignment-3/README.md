@@ -484,7 +484,7 @@ with an average L2 error of 100 of less on the test set.
     if args.model == "nonlinear":
         build_fn = build_nonlinear_model # function that builds non-linear model
     else:
-        print "Invalid model {}".format(args.model)
+        print "Invalid build function name {}".format(args.build_fn)
         sys.exit(1)
     ```
     

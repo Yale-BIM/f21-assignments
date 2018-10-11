@@ -169,7 +169,7 @@ if __name__ == "__main__":
     if args.build_fn == "linear":
         build_fn = build_linear_model # function that builds linear model
     else:
-        print "Invalid model {}".format(args.build_fn)
+        print "Invalid build function name {}".format(args.build_fn)
         sys.exit(1)
 
     # run the main function
