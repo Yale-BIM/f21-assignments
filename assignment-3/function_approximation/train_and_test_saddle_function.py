@@ -98,7 +98,7 @@ def compute_average_L2_error(test_target, predicted_targets):
     return average_l2_err
 
 
-def main(num_examples, epochs, lr, visualize_training_data, build_fn=build_linear_model):
+def main(num_examples, epochs, lr, visualize_training_data, build_fn=build_linear_model, batch_size=16):
     """
     Main function
     :param num_training: Number of examples to generate for the problem (including training, testing, and val)
@@ -134,7 +134,8 @@ def main(num_examples, epochs, lr, visualize_training_data, build_fn=build_linea
 
     # train the model
     print "\n\nTRAINING..."
-    train_model(model, train_input, train_target, val_input, val_target, mean, stdev, epochs=epochs, learning_rate=lr)
+    train_model(model, train_input, train_target, val_input, val_target, mean, stdev,
+                epochs=epochs, learning_rate=lr, batch_size=batch_size)
 
     # test the model
     print "\n\nTESTING..."
@@ -155,6 +156,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--n", help="total number of examples (including training, testing, and validation)",
                         type=int, default=600)
+    parser.add_argument("--batch_size", help="batch size used for training",
+                        type=int, default=16)
     parser.add_argument("--epochs", help="number of epochs for training",
                         type=int, default=50)
     parser.add_argument("--lr", help="learning rate for training",
@@ -173,5 +176,5 @@ if __name__ == "__main__":
         sys.exit(1)
 
     # run the main function
-    main(args.n, args.epochs, args.lr, args.visualize_training_data, build_fn=build_fn)
+    main(args.n, args.epochs, args.lr, args.visualize_training_data, build_fn=build_fn, batch_size=args.batch_size)
     sys.exit(0)

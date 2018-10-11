@@ -374,15 +374,15 @@ script so that you can easily visualize the predictions made by your model:
     You should now be able to train your network and visualize the results for the test set:
 
     ```bash
-    (venv) $ ./train_and_test_saddle_function.py [--lr 1e-1] [--epochs 10]
+    (venv) $ ./train_and_test_saddle_function.py [--lr 1e-1] [--epochs 10] [--batch_size 16]
     ```    
     
-    The optional parameters `lr` and `epochs` correspond to the learning rate and number of 
-    epochs to use for training.
+    The optional parameters `lr`, `epochs`, and `batch_size` correspond to the learning rate,
+    number of epochs, and bath size to use at training time.
     
-    Make a screen shot of the plot that you get after training your simple neural network for the
+    Make a screenshot of the plot that you get after training your simple neural network for the
     first time with a learning rate of 1e-2 and for 500 epochs. Then, add to your report:
-    - the screen shot of the plot that you yook;
+    - the screenshot of the plot that you yook;
     - the average L2 error that you got on the testing set after training as indicated; and 
     - an explanation of why the neural network is performing poorly.
     
@@ -400,7 +400,7 @@ Open a new terminal window, activate your virtual environment, and run:
     loss in the validation set). The `GRAPHS` tab of the TensorBoard interface should show a 
     [computation graph](https://www.tensorflow.org/guide/graph_viz) for your simple neural network model.
     
-    Make a screen shot of your computation graph and include it in your project report.
+    Make a screenshot of your computation graph and include it in your project report.
     
     > NOTE: In general, we recommend that you use TensorBoard to check your models' computation
     graphs and training/validation performance for all of the other tasks in this assignment. 
@@ -448,7 +448,7 @@ model` and train its weights further (e.g., to resume training or for fine-tunin
     its weights thereafter:
     
     ```bash
-    (venv) $ ./train_and_test_saddle_function.py --load_model <path_to_model_h5_file> [--lr 1e-2] [--epochs 500]
+    (venv) $ ./train_and_test_saddle_function.py --load_model <path_to_model_h5_file> [--lr 1e-2] [--epochs 500] [--batch_size 16]
     ```
     
     The model that you trained before for task II-6 should be stored as best_monkey_weights.h5
@@ -462,7 +462,7 @@ return a [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/model
 to the build_linear_model() function that you implemented before. The difference between these functions, though, 
 is that build_nonlinear_model()
  should implement a more complex neural network capable of approximating the monkey saddle surface
-with an average L2 error of 100 of less on the test set.
+with an **average L2 error of 150 of less on the test set**.
 
     ```python
     def build_nonlinear_model(num_inputs):
@@ -490,13 +490,17 @@ with an average L2 error of 100 of less on the test set.
     
     You should then be able to train and test your model as:
     ```bash
-    (venv) $ ./train_and_test_saddle_function.py --build_fn nonlinear [--lr 1e-1] [--epochs 10]
+    (venv) $ ./train_and_test_saddle_function.py --build_fn nonlinear [--lr 1e-1] [--epochs 10] [--batch_size 16]
     ```
     
     Change your nonlinear model, the learning rate, and number of epochs that you are training for
-    until you achieve an average test error of 100 or less. Afterwards, take a new screenshot of the plot
-    that you get after training (as in task 6 above) and include it in your report. Also report what
-    average L2 error did you get on the test set this time. 
+    until you achieve an average test error of 150 or less. Afterwards, take a new screenshot of the plot
+    that you get after training (as in task 6 above). Include in your report:
+     
+    - The screenshot of the plot after training;
+    - what average L2 error did you get on the test set this time;
+    - what neural network model you used; and
+    - whatever parameters you used for training it (e.g., batch size, learning rate, and number of epochs).
     
 10. Train your nonlinear neural network such that it `overfits` on the training data. 
 
