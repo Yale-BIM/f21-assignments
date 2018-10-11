@@ -508,4 +508,5 @@ with an **average L2 error of 150 of less on the test set**.
     in your report of the plots from TensorBoard corresponding to the `mean absolute error` on the training and validation
     sets. Explain how you concluded that your model overfit in the report.
     
-    
+11. What happens with the loss per epoch on the training set if you train with a batch size of 1?
+Intuitively, why is the phenomenon (or phenomena) that you observe occurring?
