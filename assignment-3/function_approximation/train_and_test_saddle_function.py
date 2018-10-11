@@ -161,15 +161,15 @@ if __name__ == "__main__":
                         type=float, default=50)
     parser.add_argument("--visualize_training_data", help="visualize training data",
                         action="store_true")
-    parser.add_argument("--model", help="model to train (e.g., 'linear')",
+    parser.add_argument("--build_fn", help="model to train (e.g., 'linear')",
                         type=str, default="linear")
     args = parser.parse_args()
 
     # define the model function that we will use to assemble the Neural Network
-    if args.model == "linear":
+    if args.build_fn == "linear":
         build_fn = build_linear_model # function that builds linear model
     else:
-        print "Invalid model {}".format(args.model)
+        print "Invalid model {}".format(args.build_fn)
         sys.exit(1)
 
     # run the main function

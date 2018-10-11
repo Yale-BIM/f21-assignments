@@ -378,8 +378,10 @@ script so that you can easily visualize the predictions made by your model:
     epochs to use for training.
     
     Make a screen shot of the plot that you get after training your simple neural network for the
-    first time with a learning rate of 1e-2 and for 100 epochs. Add the screen shot to your report 
-    and explain why the neural network is performing poorly.
+    first time with a learning rate of 1e-2 and for 500 epochs. Then, add to your report:
+    - the screen shot of the plot that you yook;
+    - the average L2 error that you got on the testing set after training as indicated; and 
+    - an explanation of why the neural network is performing poorly.
     
 7. Visualize the learning curves and your model using [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard).
 Open a new terminal window, activate your virtual environment, and run:
@@ -402,7 +404,56 @@ Open a new terminal window, activate your virtual environment, and run:
     This 30min [TensorBoard tutorial](https://www.youtube.com/watch?v=eBbEDRsCmv4)
     provides good examples on how the interface can help you debug many issues!
     
-8. Create a new function called `build_nonlinear_model()` in the train_and_test_saddle_function.py 
+8. Modify the train_and_test_saddle_function.py script so that you can load a `pre-trained
+model` and train its weights further (e.g., to resume training or for fine-tuning on a new task).
+
+    a. Add a "load_model" argument to the argument parser at the end of the script:
+        
+        ```python
+        parser = argparse.ArgumentParser()
+        ... # other arguments
+        parser.add_argument("--load_model", help="path to model",
+                            type=str, default="")
+        ```
+        
+    b. Add two lines of code after the build_fn is set at the end of the script to
+    replace the build_fn with TensorFlow's Keras load_model() function:
+    
+        ```python
+        ... # Set ArgumentParser arguments()
+        
+        # define the model function that we will use to assemble the Neural Network
+        if args.build_fn == "linear":
+        ...
+            
+        # ---- lines to be added ----
+        # load model (and thus, ignore build function)
+        if len(args.load_model) > 0:
+            build_fn = lambda x: tf.keras.models.load_model(args.load_model, compile=False)
+        # ---- end of lines to be added ----
+            
+        # run the main function
+        main(args.n, args.epochs, args.lr, args.visualize_training_data, build_fn=build_fn)
+        sys.exit(0)
+        ```
+        
+        > Note that the load_model() function above is passed the compile argument as `compile=False`.
+        This means that the model should not be compiled after loading, because the train_model() function
+        that you implemented before does this already.
+        
+    c. Test your code. Your script should now be able to load a model from a file and continue training
+    its weights thereafter:
+    
+        ```bash
+        (venv) $ ./train_and_test_saddle_function.py --load_model <path_to_model_h5_file> [--lr 1e-2] [--epochs 500]
+        ```
+    
+    The model that you trained before for task II-6 should be stored as best_monkey_weights.h5
+    within the folder corresponding to your training sessions in assignments-3/function_approximation/logs.
+    You can pass this model as argument to your train_and_test_saddle_function.py to test the new
+    functionality that you just implemented.
+    
+9. Create a new function called `build_nonlinear_model()` in the train_and_test_saddle_function.py 
 script. This function should have as argument the number of input features for the data, and
 return a [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model) similar
 to the build_linear_model() function. The difference, though, is that build_nonlinear_model()
@@ -435,6 +486,16 @@ with an average L2 error of 100 of less on the test set.
     
     You should then be able to train and test your model as:
     ```bash
-    (venv) $ ./train_and_test_saddle_function.py --model nonlinear [--lr 1e-1] [--epochs 10]
+    (venv) $ ./train_and_test_saddle_function.py --build_fn nonlinear [--lr 1e-1] [--epochs 10]
     ```
     
+    Change your nonlinear model, the learning rate, and number of epochs that you are training for
+    until you achieve an average test error of 100 or less. Afterwards, take a new screenshot of the plot
+    that you get after training (as in task 6 above) and include it in your report. Also report what
+    average L2 error did you get on the test set this time. 
+    
+10. Train your nonlinear neural network such that it `overfits` on the training data. 
+
+    After training, include a picture
+    in your report of the plots from TensorBoard corresponding to the  mean absolute error on the training and validation
+    sets. Explain how you concluded that your model overfit in the report.
