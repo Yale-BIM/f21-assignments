@@ -500,3 +500,5 @@ with an average L2 error of 100 of less on the test set.
     After training, include a picture
     in your report of the plots from TensorBoard corresponding to the  mean absolute error on the training and validation
     sets. Explain how you concluded that your model overfit in the report.
+    
+    
