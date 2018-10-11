@@ -499,7 +499,7 @@ with an **average L2 error of 150 of less on the test set**.
      
     - The screenshot of the plot after training;
     - what average L2 error did you get on the test set this time;
-    - what neural network model you used; and
+    - a description of the neural network model that you used to approximate the monkey saddle surface; and
     - whatever parameters you used for training it (e.g., batch size, learning rate, and number of epochs).
     
 10. Train your nonlinear neural network such that it `overfits` on the training data. 
