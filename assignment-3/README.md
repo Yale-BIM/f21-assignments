@@ -148,7 +148,7 @@ have to activate the environment before starting to run your deep learning code 
 assignment (as in step 3 above). To exit your virtual environment at any time, you can run the command: 
 ``` (venv) $ deactivate ```.
 
-## Questions / Tasks 
+### Questions / Tasks 
 
 1. In general, committing virtual environments to your repository is bad practice (e.g., paths might differ
 in different computers and this may render your environment unusable). Instead, what people generally
@@ -177,7 +177,7 @@ used to install all required Python models with pip.
     within your virtual environment.
 
 
-# Part II. Approximating a Non-Linear Function
+## Part II. Approximating a Non-Linear Function
 
 Read the [Primer on Universal Function Approximation with Deep Learning](https://cartesianfaith.com/2016/09/23/a-primer-on-universal-function-approximation-with-deep-learning-in-torch-and-r/) 
 by Brian Yung Rowe. 
@@ -207,7 +207,7 @@ as in the figure below:
 
 <img src="docs/training-val-data.png" width="600"/>
 
-## Questions/Tasks
+### Questions/Tasks
 
 1. Complete the `compute_normalization_parameters()` and `normalize_data_per_row()` functions in
 the train_and_test_saddle_function.py script.
@@ -339,6 +339,7 @@ function should train the network's weights using the [model's fit function](htt
     We suggest that, as a first try, you use the [Adam optimizer](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam)
     when you train neural works with gradient descent. The optimizer tends to work well for many problems. You can read the
     original paper with full details of how it works here: [Diederik P. Kingma, Jimmy Ba. Adam: A Method for Stochastic Optimization](https://arxiv.org/abs/1412.6980).
+    A bit more information about the TensorFlow implementation can be found here: [tf.train.AdamOptimizer](https://www.tensorflow.org/api_docs/python/tf/train/AdamOptimizer).
     
 4. Complete the `test_model()` function in the train_and_test_saddle_function.py script. The function
 should output predictions for the given input matrix (test_input) using the `model.predict()` function.
@@ -510,3 +511,6 @@ with an **average L2 error of 150 of less on the test set**.
     
 11. What happens with the loss per epoch on the training set if you train with a batch size of 1?
 Intuitively, why is the phenomenon (or phenomena) that you observe occurring?
+
+## Part III
+
