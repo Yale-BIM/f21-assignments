@@ -479,9 +479,9 @@ with an average L2 error of 100 of less on the test set.
     
     ```python
     # define the model function that we will use to assemble the Neural Network
-    if args.model == "linear":
+    if args.build_fn == "linear":
         build_fn = build_linear_model # function that builds linear model
-    if args.model == "nonlinear":
+    elif args.build_fn == "nonlinear":
         build_fn = build_nonlinear_model # function that builds non-linear model
     else:
         print "Invalid build function name {}".format(args.build_fn)
@@ -501,7 +501,7 @@ with an average L2 error of 100 of less on the test set.
 10. Train your nonlinear neural network such that it `overfits` on the training data. 
 
     After training, include a picture
-    in your report of the plots from TensorBoard corresponding to the  mean absolute error on the training and validation
+    in your report of the plots from TensorBoard corresponding to the `mean absolute error` on the training and validation
     sets. Explain how you concluded that your model overfit in the report.
     
     
