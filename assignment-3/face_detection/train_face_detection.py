@@ -32,7 +32,7 @@ def main(npz_data_file, epochs, lr, val):
     N = input.shape[0]
     assert N == target.shape[0], \
         "The input and target arrays had different amounts of data ({} vs {})".format(N, target.shape[0]) # sanity check!
-    print "Loaded {} training examples".format(N)
+    print "Loaded {} training examples.".format(N)
 
     # TODO. Complete. Implement code to train a network for image classification
 
@@ -48,8 +48,7 @@ if __name__ == "__main__":
                         type=float, default=50)
     parser.add_argument("--val", help="percent of training data to use for validation",
                         type=float, default=0.8)
-    parser.add_argument("--input", help="input file (npz format)",
-                        type=str)
+    parser.add_argument("--input", help="input file (npz format)", type=str, required=True)
     args = parser.parse_args()
 
     # run the main function
