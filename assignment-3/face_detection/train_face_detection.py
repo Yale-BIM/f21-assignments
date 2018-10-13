@@ -62,7 +62,7 @@ if __name__ == "__main__":
         args.logs_dir = 'logs/log_{}'.format(datetime.datetime.now().strftime("%m-%d-%Y-%H-%M"))
 
     if not os.path.isdir(args.logs_dir):
-        sys.mkdirs(args.logs_dir)
+        os.makedirs(args.logs_dir)
 
     # run the main function
     main(args.input, args.batch_size, args.epochs, args.lr, args.val, args.logs_dir)
