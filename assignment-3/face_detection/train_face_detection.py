@@ -47,9 +47,9 @@ if __name__ == "__main__":
     parser.add_argument("--epochs", help="number of epochs for training",
                         type=int, default=50)
     parser.add_argument("--batch_size", help="batch size used for training",
-                        type=int, default=16)
+                        type=int, default=100)
     parser.add_argument("--lr", help="learning rate for training",
-                        type=float, default=50)
+                        type=float, default=1e3)
     parser.add_argument("--val", help="percent of training data to use for validation",
                         type=float, default=0.8)
     parser.add_argument("--input", help="input file (npz format)",
