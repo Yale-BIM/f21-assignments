@@ -19,7 +19,7 @@ def load_data_from_npz_file(file_path):
     return data['input'], data['target']
 
 
-def main(npz_data_file, batch_size, epochs, lr, val):
+def main(npz_data_file, batch_size, epochs, lr, val, logs_dir):
     """
     Main function that performs training and test on a validation set
     :param npz_data_file: npz input file with training data
@@ -27,6 +27,7 @@ def main(npz_data_file, batch_size, epochs, lr, val):
     :param epochs: number of epochs to train for
     :param lr: learning rate
     :param val: percentage of the training data to use as validation
+    :param logs_dir: directory where to save logs and trained parameters/weights
     """
 
     input, target = load_data_from_npz_file(npz_data_file)
@@ -51,9 +52,15 @@ if __name__ == "__main__":
                         type=float, default=50)
     parser.add_argument("--val", help="percent of training data to use for validation",
                         type=float, default=0.8)
-    parser.add_argument("--input", help="input file (npz format)", type=str, required=True)
+    parser.add_argument("--input", help="input file (npz format)",
+                        type=str, required=True)
+    parser.add_argument("--logs_dir", help="logs directory",
+                        type=str, default="")
     args = parser.parse_args()
 
+    if len(args.logs_dir) == 0: # parameter was not specified
+        args.logs_dir = 'logs/log_{}'.format(datetime.datetime.now().strftime("%m-%d-%Y-%H-%M"))
+
     # run the main function
-    main(args.input, args.batch_size, args.epochs, args.lr, args.val)
+    main(args.input, args.batch_size, args.epochs, args.lr, args.val, args.logs_dir)
     sys.exit(0)
