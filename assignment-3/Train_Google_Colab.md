@@ -35,7 +35,7 @@ You should then be prompted to upload files to Google Colab.
     for a password to authenticate. 
     
 6. Run the second cell to move your keys to the /root/.ssh directory, set permissions for
-your keys so that only you can read them (```python $ chmod -R 777 ...``), and add gitlab
+your keys so that only you can read them (```chmod -R 777 ...``), and add gitlab
 as a known host for ssh.
 
 7. Edit the third cell to point to your private Gitlab repository and run it. Your code should
