@@ -62,7 +62,12 @@ A `quick tutorial` on using Google Colab for this assignment is provided in the
 [Train_Google_Colab.md](Train_Google_Colab.md) file.
 
 ##### Training on Google Cloud
-Another option is to use [Google Cloud](https://cloud.google.com). 
+Another option is to use [Google Cloud](https://cloud.google.com). This option is not free,
+but you can customize virtual machines with as many resources as you need. Use your 
+credits judiciously. 
+
+A `quick tutorial` on using Google Cloud for this assignment is provided in the
+[Train_Google_Cloud_Engine.md](Train_Google_Cloud_Engine.md) file.
 
 #### Deliverables
 
