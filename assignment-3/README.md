@@ -835,7 +835,7 @@ that runs your face detection model over images received through the the topic "
 The node should detect faces using the sliding window approach of part III-3 of this assignment. It is OK
 if your node runs slow.
 
-    > NOTE. You will need Ubuntu 16.04 (or 18.04) to test your node.
+    > NOTE. You will need ROS with Ubuntu 16.04 (or 18.04) to test your node.
 
 - **III-6. (3pt extra credit)** Run your detect_faces.py node (from part III-5) on images
 received through Shutter's ZED camera. For this part of the assignment, you will have to run your
