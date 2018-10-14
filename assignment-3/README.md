@@ -113,7 +113,7 @@ project. Run cells 6 and 7 to see what data what logged (edit the path in cell 7
 by changing the Notebook settings for a project in Edit -> Notebook settings. Select GPU or
 TPU as hardware accelerator.
 
-    > If your model is small, it might just train faster without hardware acceleration.
+    > If your model is small, it might just train faster in the cloud without hardware acceleration.
 
 2. **Google Colab works with Google Drive.**
 You can load files from your Google Drive account into Google Colab, as explained 
