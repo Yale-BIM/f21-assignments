@@ -517,10 +517,11 @@ Intuitively, why is the phenomenon (or phenomena) that you observe occurring?
 Now that you are familiar with training deep learning models, you will create your own face 
 classifier. 
 
-1. Download the dataset from [this link](https://drive.google.com/open?id=1JIIalRu5WZQ01p-S6mBxzHV8ZMqAJcdH)
-and place it in the assignment-3/face_detection directory (there is no need to commit the data to your repository).
+1. Download a subset of the [Face Detection Dataset and Benchmark](http://vis-www.cs.umass.edu/fddb/) 
+from [this link](https://drive.google.com/open?id=1JIIalRu5WZQ01p-S6mBxzHV8ZMqAJcdH) and place it in 
+the assignment-3/face_detection directory (there is no need to commit the data to your repository).
 
-   > The data is provided as a [numpy npz file](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.savez.html). 
+   > The data is provided as a [numpy npz file](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.savez.html) for this assignment. 
    The .npz file format is a zipped archive of files named after the variables they contain. 
    The archive is not compressed and each file in the archive contains one variable in .npy format. 
    For a description of the .npy format, see [numpy.lib.format](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.lib.format.html#module-numpy.lib.format).
@@ -537,7 +538,17 @@ and place it in the assignment-3/face_detection directory (there is no need to c
    >>> data = np.load("64x64_data.npz")
    >>> data.files
    ['input', 'target']
+   >>> image_0 = data['input'][0,:,:,:]
+   >>> 
+   >>> # visualize the first image in the dataset with opencv 
+   >>> import cv2 
+   >>> cv2.imshow("image", image_0)
+   >>> cv2.waitKey(0)
    ```
+   
+   You should then be able to see the image:
+   
+   <img src="docs/face_example.png" alt="Face example from the dataset"/>
    
 2. Read the `train_face_detection.py` skeleton code in the assignment-3/face_detection directory. 
 This code is provided to get you started on building your custom face classifier. You should be able to run the code
