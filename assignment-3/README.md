@@ -548,9 +548,6 @@ and load the training data with the following command:
    Loaded 11038 training examples.
    ```
    
-   The main function in the script would then print the number of examples that were loaded from
-   the dataset. 
-   
    Note that the `input` is organized as a 4-D tensor of dimension NxWxHxC, where N
    corresponds to the number of examples, W is the width of input images, H is their height, and C
    is the number of channels per image. In general, the dataset has color images of 64x64 pixels 
@@ -559,8 +556,8 @@ and load the training data with the following command:
    The `target` is a single number: 1 if the corresponding input image shows a face, or 0 otherwise.
    Thus, the target tensor is 2D. It has shape Nx1.
    
-3. Your main task in this assignment is to complete the train_face_detection.py script so that
-it:
+3. Your main task in this assignment is to complete the `main` function of the 
+train_face_detection.py script so that it:
 
    a. Splits the input data into a training and validation set.
    
