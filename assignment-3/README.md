@@ -768,7 +768,7 @@ train your model using the 64x64_data.npz dataset:
     
     The script should print to the screen the "Best threshold" that was found given the ROC values
     for the thresholds ```python [x/100.0 for x in range(0,100,2)]```. Once your script is
-    working as desired, commit it to your repository and add to your report what was the best
+    working as desired, commit it to your repository. In addition, add to your report what was the best
     threshold that you found for your model when you ran the script on the 64x64_data.npz file.
    
 - **III-3.** Complete the make_predictions() function in the 
@@ -816,13 +816,15 @@ For example, given the following input image from the Yale Computer Science webs
     
     Test your window_detection.py script using the best threshold for the predicted probabilities
     from part III-2 and the images "cs50_2.jpg" and "shaocrew_0.jpg" 
-    within the assignment-3/docs directory. Include in your report:
+    within the assignment-3/docs directory. It is OK if your model makes mistakes, as 
+    long as your code uses the best classification threshold from the ROC
+     curve. Include in your report:
      
     - images of your bounding boxes predictions (after non maximum suppression) on "cs50_2.jpg" 
     and "shaocrew_0.jpg". 
     
     - if your model missed out faces or had too many false positives, explain in your report
-    what could you do to minimize these issues in the future.
+    what could you do to address these issues in the future.
     
 - **III-4.** Explain in your report how could you change the structure of your neural network
 to detect faces in a more efficient way.
