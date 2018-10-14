@@ -45,11 +45,16 @@ If you are not, please check [this tutorial](https://docs.scipy.org/doc/numpy/us
 
 #### Preliminaries
 You will be training Neural Networks for this assignment. It is possible to complete all
-of the tasks using CPUs, but it would be much faster to train on a GPU for Part III.
+of the tasks using your local CPU, but it might be faster at times to train on the cloud and
+using hardware acceleration (e.g., GPU).
+
+> Whether or not you use the cloud to train your neural networks, the deliverables are the same.
+You should submit code in your private Gitlab repository. You should also submit a report 
+and model parameter files to Canvas.
 
 ##### Training on Google Colaboratory
 One option to train a network on the cloud is to use [Google Colaboratory](https://colab.research.google.com).
-Google Colaboratory (or Colab) is a free research tool for machine learning education and research. It's a 
+Google Colaboratory (or Colab) is a **free** research tool for machine learning education and research. It's a 
 [Jupyter notebook](http://jupyter.org/) environment that requires no setup to use. For more information
 on using Google Colab such as usage limits, read the official [F.A.Q](https://research.google.com/colaboratory/faq.html).
 
@@ -65,9 +70,13 @@ Another option is to use [Google Cloud](https://cloud.google.com).
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of the version of the code
 that you would like to be evaluated on. Though not mandatory, it is recommended that you generate this pdf 
+that you would like to be evaluated on. Though not mandatory, it is recommended that you generate this pdf 
 with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this 
 [simple assignment template](https://www.overleaf.com/latex/templates/simple-assignment-template/mzkqqqjypzvd) 
 in [LaTeX](https://www.latex-project.org/).
+
+- **Model weights and input normalization parameters:** You should upload trained models and parameters
+to canvas.
 
 - **Code:** Finally, you are expected to push code for this assignment to your 
 [GitLab](http://www.gitlab.com) repository as indicated in the [general instructions](../README.md) 
