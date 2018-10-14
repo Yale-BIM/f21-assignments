@@ -72,7 +72,7 @@ def non_max_suppression(boxes, overlapThresh):
 
     # return only the bounding boxes that were picked using the
     # integer data type
-    return boxes[pick].astype("int")
+    return boxes[pick]
 
 
 def visualize_boxes(image, boxes):
@@ -83,7 +83,7 @@ def visualize_boxes(image, boxes):
     """
     result = copy.deepcopy(image)
     for b in range(boxes.shape[0]):
-        cv2.rectangle(result, (boxes[b,0], boxes[b,1]), (boxes[b,2], boxes[b,3]), (0, 255, 0), 3)
+        cv2.rectangle(result, (int(boxes[b,0]), int(boxes[b,1])), (int(boxes[b,2]), int(boxes[b,3])), (0, 255, 0), 3)
     cv2.imshow("Detections", result)
 
     cv2.waitKey(0)
