@@ -548,8 +548,8 @@ and load the training data with the following command:
    Loaded 11038 training examples.
    ```
    
-   Note that the `input` is organized as a 4-D tensor of dimension NxWxHxC, where N
-   corresponds to the number of examples, W is the width of input images, H is their height, and C
+   Note that the `input` is organized as a 4-D tensor of dimension NxHxWxC, where N
+   corresponds to the number of examples, H is the height of input images, W is their width, and C
    is the number of channels per image. In general, the dataset has color images of 64x64 pixels 
    (i.e., W=H=64 and C=3). The channels are organized in Blue-Gree-Red (bgr) order.
    
