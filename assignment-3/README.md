@@ -43,11 +43,6 @@ This assignment assumes that you have already completed the prior assignments an
 (e.g., [bash](https://www.gnu.org/software/bash/)), and [git](https://git-scm.com/). You are also expected to be familiar with the [numpy Python library](http://www.numpy.org/) for linear algebra. 
 If you are not, please check [this tutorial](https://docs.scipy.org/doc/numpy/user/quickstart.html) before starting the assignment.
 
-#### Notation
-We refer to `vectors` or column matrices with bold lower-case letters (e.g., $`\bold{x}`$).
-Other `matrices`, such as linear transformations, and `scalars` are written with regular
-font weight. 
-
 #### Preliminaries
 You will be training Neural Networks for this assignment. It is possible to complete all
 of the tasks using CPUs, but it would be much faster to train on a GPU for Part III.
@@ -673,8 +668,8 @@ train your model using the 64x64_data.npz dataset:
     - **batch_size:** batch size used for training 
 
     Commit your modified train_face_detection.py
-    script to your repository once you are happy with your model. Submit your weights.h5 and 
-    normalization_params.npz files to Canvas as part of your assignment.
+    script to your repository once you are happy with your model. **Submit your weights.h5 and 
+    normalization_params.npz files to Canvas as part of your assignment.**
     
     **NOTE:** The `performance` of your model will be evaluated using the `evaluate_face_detection.py` script
     within the assignment-3/face_detection directory. The script will be run on a test set (that is not provided
@@ -825,12 +820,31 @@ For example, given the following input image from the Yale Computer Science webs
 to detect faces in a more efficient way.
 
 - **III-5. (5pt extra credit)** Create a ROS package named "shutter_face_detection" within the
-assignment 3 directory. Within this package, create a ROS node (Python script) named "detect_faces.py"
-that runs your face detection model over images received through the the topic "/virtual_camera/image_raw". 
-The node should detect faces using the sliding window approach of part III-3 of this assignment. It is OK
-if your node runs slow.
+assignment 3 directory. Within this package, create a ROS node (Python script) named `detect_faces.py`
+that runs your face classification model over images received through the the topic "/virtual_camera/image_raw". 
 
-    > NOTE. You will need ROS with Ubuntu 16.04 (or 18.04) to test your node.
+    The node should:
+    
+    - detect faces using the sliding window approach of part III-3 of this assignment.
+    - display the result visually by rendering the detection boxes (after non maximum suppression) on 
+the input image.
+    - get the path to your model's weights/parameters using the [rospy.get_param()](http://wiki.ros.org/rospy/Overview/Parameter%20Server) function,
+    sot that the path to the files is not hardcoded and can be changed upon node execution.
+
+    **NOTE:** You will need ROS with Ubuntu 16.04 (or 18.04) to test your node. You can use a rosbag,
+    like the one used for tracking in assignment-2, to test your face classifier as it already
+    provides images through the /virtual_camera/image_raw topic. Or you can
+    use [another node](https://gitlab.com/cpsc659-bim/assignments/f18-assignments/snippets/1763147) to
+    load a video with OpenCV and stream its images over ROS through that same topic.
+    
+    It is OK if your node runs slow. Once your node is working, take a screen shot of an image that was processed with it and
+    add it to a `README.md` file in the assignment-3/shutter_face_detection directory. The README.md should serve
+    to document your ROS package. It should briefly explain how your node works and how it should be run.
+
+    Commit to your repository all of the package files (package.xml, CMakeLists.txt, your detect_faces.py
+    node and any other code needed to run your model). You do not need to add your model's 
+    weights.h5 and normalization_params.npz to the repository, as you are submitting that 
+    already through Canvas (part III-1).
 
 - **III-6. (3pt extra credit)** Run your detect_faces.py node (from part III-5) on images
 received through Shutter's ZED camera. For this part of the assignment, you will have to run your
@@ -839,7 +853,7 @@ code in one of the machines in AKW 410 that are connected to a Jetson TX2 Develo
     Add to your report a picture of one of the images that you processed on the Jetson TX2 Development Kit.
     Also, indicate in your report how long it took for your node to process one image from the ZED camera.
 
-    > You will need to set up an appointment with Sherry or Marynel before the assignment is due 
-    to complete this last extra credit. They will explain to you how to stream images from the 
-    ZED camera to the Jetson computer.
+    > You will need to set up an appointment on a weekday (during regular working hours)
+    with Sherry or Marynel before the assignment is due to complete this last extra credit. 
+    They will explain to you how to stream images from the ZED camera to the Jetson computer.
     
