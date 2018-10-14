@@ -748,7 +748,8 @@ For example, given the following input image from the Yale Computer Science webs
      [ 510.           10.          560.           60.            0.99526775]
      [ 150.            0.          200.           50.            0.96062028]]
     ```
-    where each row of the printed matrix contains [min_x, min_y, max_x, max_y, prob]. The first
+    where each row of the printed matrix contains [min_x, min_y, max_x, max_y, prob] for a given
+    face detection. The first
     four columns are the top-left (min_x, min_y) and bottom-right (max_x, max_y) coordinates of 
     the bounding box corresponding to a face detection. The last column is the detection probability
     output by your model.
