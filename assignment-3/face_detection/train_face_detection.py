@@ -19,6 +19,23 @@ def load_data_from_npz_file(file_path):
     return data['input'], data['target']
 
 
+def normalize_data_per_row(data, mean, stdev):
+    """
+    Normalize a give matrix of data (samples must be organized per row)
+    :param data: input data
+    :param mean: mean for normalization
+    :param stdev: standard deviation for normalization
+    :return: whitened data, (data - mean) / stdev
+    """
+
+    # sanity checks!
+    assert len(data.shape) == 4, "Expected the input data to be a 4D matrix"
+    assert data.shape[1:] == mean.shape, "Data - Mean size mismatch ({} vs {})".format(data.shape[1:], mean.shape)
+    assert data.shape[1:] == stdev.shape, "Data - StDev size mismatch ({} vs {})".format(data.shape[1:], stdev.shape)
+
+    # TODO. Complete.
+
+
 def main(npz_data_file, batch_size, epochs, lr, val, logs_dir):
     """
     Main function that performs training and test on a validation set
