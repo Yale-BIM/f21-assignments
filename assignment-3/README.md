@@ -82,6 +82,13 @@ document for CPSC-659 assignments.
 
 You assignment will be evaluated based on the content of your report and your code.
 
+- Report (50 pts + 5 extra pts)
+    * Part I (5 pts)
+    * Part II (30 pts): II-6 (10 pts) + II-7 (4 pts) + II-9 (10 pts) + II-10 (3 pts) + II-11 (3 pts)
+    * Part III (15 pts + 5 extra pts): III-2 (3 pts) + III-3 (5 pts) + III-4 (7 pts) + III-6 (5 pts extra credit)
+- Code (50 pts + 3 extra pts)
+    * Part II (24 pts): II-1 (4 pts) + II-2 (2 pts) + II-3 (2 pts) + II-4 (4 pts) + II-5 (4 pts) + II-8 (2 pts) + II-8 (6 pts)
+    * Part III (26 pts + 5 extra pts): III-1 (12 pts) + III-2 (4 pts) + III-3 (10 pts) + III-5 (5 pts extra credit)
 
 #### Further Reading
 
@@ -828,7 +835,7 @@ if your node runs slow.
 
     > NOTE. You will need Ubuntu 16.04 (or 18.04) to test your node.
 
-- **III-6. (5pt extra credit)** Run your detect_faces.py node (from part III-5) on images
+- **III-6. (3pt extra credit)** Run your detect_faces.py node (from part III-5) on images
 received through Shutter's ZED camera. For this part of the assignment, you will have to run your
 code in one of the machines in AKW 410 that are connected to a Jetson TX2 Develoment Kit computer. 
 
