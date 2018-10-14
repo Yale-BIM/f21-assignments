@@ -638,11 +638,93 @@ train your model using the 64x64_data.npz dataset:
     
     **NOTE:** The `performance` of your model will be evaluated using the `evaluate_face_detection.py` script
     within the assignment-3/face_detection directory. The script will be run on a test set (that is not provided
-    as part of this assignment) but that you can assume has a similar image distribution as
+    as part of this assignment) but that you can assume comes from the same image distribution as
     the data that is provided in the 64x64_data.npz file. The expectation is that your model should
-    reach at least **90% accuracy** on the test set.
+    reach at least **90% accuracy** on the (unseen) test set.
     
     In general, we recommend that you use [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard) 
     to monitor the performance of your model in a validation set as it trains.
     
+- **III-2.** Make a copy of the evaluate_face_detection.py script and name it `plot_roc_curve.py`:
+
+    ```bash
+    (venv) $ cd assignment-3/face_detection
+    (venv) $ cp evaluate_face_detection.py plot_roc_curve.py
+    ```
+    
+    Then, edit the new plot_roc_curve.py script so that instead of evaluating the model on a given
+    test set, it computes predictions for all of the examples on the input data. Based on these
+    predictions and the target values, the script should then plot a [Receiver Operating Characteristic (ROC)](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) 
+    curve like the one below:
+   
+    <img src="docs/roc.png" alt="ROC curve"/>
+        
+    The curve shows the performance of the model based on the False Positive Rate (FPR) and the
+    True Positive Rate (TPR), which are defined as:
+    
+    - **TPR:** The number of correct face predictions over the total number of positive (face) examples
+    in the input data.
+    - **FPR:** The number of false (or incorrect) face predictions over the total number of negative examples in the
+    input data.
+
+    You should organize the main file of your plot_roc_curve.py script as follows:
+    
+    ```python
+    # Example code
+  
+    def main(input_file, weights_file, norm_file):
+        """
+        Evaluate the model on the given input data
+        :param input_file: npz data
+        :param weights_file: h5 file with model definition and weights
+        :param norm_file: normalization params
+        """
+        # load data
+        input, target = load_data_from_npz_file(input_file)
+        N = input.shape[0]
+        ... # load normalization params, normalize the inputs, output predictions on "prob" variable
+  
+        # generate roc thresholds
+        thresholds = [x/100.0 for x in range(0,100,2)]
+        
+        tpr = [] # list of true positive rate per threshold
+        fpr = [] # list of false positive rate per threshold
+      
+        # compute the true positive rate and the false positive rate for each of the thresholds
+        for t in thresholds:
+      
+            # turn predicted probabilities to 0-1 values based on the threshold
+            prediction = np.zeros(prob.shape)
+            prediction[prob > t] = 1
+          
+            # compute tpr and fpr based on the predictions and the target values from the dataset     
+            # TO-DO. complete
+            current_tpr = ...
+            current_fpr = ...
+  
+            tpr.append(current_tpr)
+            fpr.append(current_fpr)
+          
+        # pick threshold that minimizes l2 distance to top-left corner of the graph (fpr = 0, tpr = 1)
+        # TODO. Complete.
+        index = ... # index of the threshold for which (fpr, tpr) get closest to (0,1) in the Euclidean sense
+        print "Best threshold was: {} (TPR = {}, FPR = {})".format(thresholds[index], tpr[index], fpr[index])
+  
+        # plot the ROC curve
+        plt.plot(fpr, tpr)
+        plt.scatter(fpr[index], tpr[index], s=20, c='r')
+        plt.xlabel('False positive rate')
+        plt.ylabel('True positive rate')
+        plt.xlim([0,1])
+        plt.ylim([0,1])
+        plt.title('ROC Curve')
+        plt.show()
+    ```
+    
+    The script should print to the screen the "Best threshold" that was found given the ROC values
+    for the thresholds ```python [x/100.0 for x in range(0,100,2)]```. Once your script is
+    working as desired, commit it to your repository and add to your report what was the best
+    threshold that you found for your model when you ran the script on the 64x64_data.npz file.
+    
+- **III-3.** Implement a 
     
