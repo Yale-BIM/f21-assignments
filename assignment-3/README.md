@@ -725,6 +725,45 @@ train your model using the 64x64_data.npz dataset:
     for the thresholds ```python [x/100.0 for x in range(0,100,2)]```. Once your script is
     working as desired, commit it to your repository and add to your report what was the best
     threshold that you found for your model when you ran the script on the 64x64_data.npz file.
+   
+- **III-3.** Complete the make_predictions() function in the 
+`window_detection.py` script within your assignment-3/face_detection directory
+to run your face classifier on a sliding window over an input image. The script should enable you to
+detect multiple faces on the input by sliding a window of various scales. 
+For example, given the following input image from the Yale Computer Science website:
+
+    <img src="doc/cs50_2.jpg" width="600" alt="example input image"/>
     
-- **III-3.** Implement a 
+    The script should output face predictions to the screen:
     
+    ```bash
+    (venv) $ ./window_detection.py --input cs50_2.jpg --logs_dir <path-to-logs-folder>
+    ...
+    DETECTIONS:
+    [[ 280.           70.          330.          120.            0.97373563]
+     [ 190.           10.          290.          110.            0.95309627]
+     [ 290.            0.          390.          100.            0.96896017]
+     [ 460.           40.          510.           90.            0.95603698]
+     [ 410.           20.          460.           70.            0.99236625]
+     [ 510.           10.          560.           60.            0.99526775]
+     [ 150.            0.          200.           50.            0.96062028]]
+    ```
+    where each row of the printed matrix contains [min_x, min_y, max_x, max_y, prob]. The first
+    four columns are the top-left (min_x, min_y) and bottom-right (max_x, max_y) coordinates of 
+    the bounding box corresponding to a face detection. The last column is the detection probability
+    output by your model.
+
+    When the script finishes, it should also show an image with the boxes:
+
+    <img src="doc/faces.png" alt="example input image"/>
+    
+    **Tip:** When you slide a window over the image to make predictions, it is possible that 
+    many windows will fire over the same region in the image:
+    
+       <img src="doc/faces_before_maximum.png" alt="example input image"/>
+    
+    To help you group overlapping boxes together through `non maximum suppression`, the 
+    window_detection.py script provides the non_max_suppression() function. More information
+    about this procedure can be found 
+    in [this blog](https://www.pyimagesearch.com/2015/02/16/faster-non-maximum-suppression-python/)
+    by A. Rosebrock.
