@@ -732,7 +732,7 @@ to run your face classifier on a sliding window over an input image. The script 
 detect multiple faces on the input by sliding a window of various scales. 
 For example, given the following input image from the Yale Computer Science website:
 
-    <img src="doc/cs50_2.jpg" width="600" alt="example input image"/>
+    <img src="docs/cs50_2.jpg" width="600" alt="example input image"/>
     
     The script should output face predictions to the screen:
     
@@ -755,12 +755,12 @@ For example, given the following input image from the Yale Computer Science webs
 
     When the script finishes, it should also show an image with the boxes:
 
-    <img src="doc/faces.png" alt="example input image"/>
+    <img src="docs/faces.png" alt="example input image"/>
     
     **Tip:** When you slide a window over the image to make predictions, it is possible that 
     many windows will fire over the same region in the image:
     
-       <img src="doc/faces_before_maximum.png" alt="example input image"/>
+       <img src="docs/faces_before_maximum.png" alt="example input image"/>
     
     To help you group overlapping boxes together through `non maximum suppression`, the 
     window_detection.py script provides the non_max_suppression() function. More information
