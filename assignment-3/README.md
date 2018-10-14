@@ -832,7 +832,8 @@ if your node runs slow.
 received through Shutter's ZED camera. For this part of the assignment, you will have to run your
 code in one of the machines in AKW 410 that are connected to a Jetson TX2 Develoment Kit computer. 
 
-    Indicate in your report how long it took for your node to process one image from the ZED camera.
+    Add to your report a picture of one of the images that you processed on the Jetson TX2 Development Kit.
+    Also, indicate in your report how long it took for your node to process one image from the ZED camera.
 
     > You will need to set up an appointment with Sherry or Marynel before the assignment is due 
     to complete this last extra credit. They will explain to you how to stream images from the 
