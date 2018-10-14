@@ -150,7 +150,7 @@ assignment (as in step 3 above). To exit your virtual environment at any time, y
 
 ### Questions / Tasks 
 
-1. In general, committing virtual environments to your repository is bad practice (e.g., paths might differ
+- **I-1.** In general, committing virtual environments to your repository is bad practice (e.g., paths might differ
 in different computers and this may render your environment unusable). Instead, what people generally
 do is create a requirements.txt file with all of the dependencies for a project. This file can then be 
 used to install all required Python models with pip.
@@ -209,7 +209,7 @@ as in the figure below:
 
 ### Questions/Tasks
 
-1. Complete the `compute_normalization_parameters()` and `normalize_data_per_row()` functions in
+- **II-1.** Complete the `compute_normalization_parameters()` and `normalize_data_per_row()` functions in
 the train_and_test_saddle_function.py script.
 
     a. For the compute_normalization_parameters() function, you want to compute the mean
@@ -259,7 +259,7 @@ the train_and_test_saddle_function.py script.
     feature is $`x`$, then you want to transform it into $`(x - \mu)/\sigma`$,
     where $`\sigma`$ corresponds to the standard deviation for that feature.
     
-2. Complete the `build_linear_model()` function in
+- **II-2.** Complete the `build_linear_model()` function in
 the train_and_test_saddle_function.py script. This function should implement
 a simple Neural Network model (with one hidden layer) using the [Keras API](https://www.tensorflow.org/guide/keras#functional_api):
 
@@ -276,7 +276,7 @@ a simple Neural Network model (with one hidden layer) using the [Keras API](http
     > In general, we suggest that you use [TF's Keras Functional API](https://www.tensorflow.org/guide/keras#functional_api)
     to build your model as in the script above.
 
-3. Complete the `train_model()` function in
+- **II-3.** Complete the `train_model()` function in
 the train_and_test_saddle_function.py script. This function should first normalize the input
 features in the training and validation set using the normalize_data_per_row() function from step 1 above. 
 Then, train_model() should [compile](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model#compile) 
@@ -341,11 +341,11 @@ function should train the network's weights using the [model's fit function](htt
     original paper with full details of how it works here: [Diederik P. Kingma, Jimmy Ba. Adam: A Method for Stochastic Optimization](https://arxiv.org/abs/1412.6980).
     A bit more information about the TensorFlow implementation can be found here: [tf.train.AdamOptimizer](https://www.tensorflow.org/api_docs/python/tf/train/AdamOptimizer).
     
-4. Complete the `test_model()` function in the train_and_test_saddle_function.py script. The function
+- **II-4.** Complete the `test_model()` function in the train_and_test_saddle_function.py script. The function
 should output predictions for the given input matrix (test_input) using the `model.predict()` function.
 The official documentation for the predict() function can be found [here](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model#predict).
 
-5. Complete the `compute_average_L2_error()` function in the train_and_test_saddle_function.py script.
+- **II-5.** Complete the `compute_average_L2_error()` function in the train_and_test_saddle_function.py script.
 The function should compute the average L2-norm (or least squares) difference between the ground truth 
 (test_target) and the predicted values (predicted_targets) that are input to the function. The average
 should be over all of the examples in each of the input matrices.
@@ -364,7 +364,7 @@ should be over all of the examples in each of the input matrices.
         return average_l2_err
     ```
 
-6. Uncomment the last line in the main() function of the train_and_test_saddle_function.py
+- **II-6.** Uncomment the last line in the main() function of the train_and_test_saddle_function.py
 script so that you can easily visualize the predictions made by your model:
 
     ```python
@@ -387,7 +387,7 @@ script so that you can easily visualize the predictions made by your model:
     - the average L2 error that you got on the testing set after training as indicated; and 
     - an explanation of why the neural network is performing poorly.
     
-7. Visualize the learning curves and your model using [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard).
+- **II-7.** Visualize the learning curves and your model using [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard).
 Open a new terminal window, activate your virtual environment, and run:
 
     ```bash
@@ -408,7 +408,7 @@ Open a new terminal window, activate your virtual environment, and run:
     This 30min [TensorBoard tutorial](https://www.youtube.com/watch?v=eBbEDRsCmv4)
     provides good examples on how the interface can help you debug many issues!
     
-8. Modify the train_and_test_saddle_function.py script so that you can load a `pre-trained
+- **II-8.** Modify the train_and_test_saddle_function.py script so that you can load a `pre-trained
 model` and train its weights further (e.g., to resume training or for fine-tuning on a new task).
 
     a. Add a "load_model" argument to the argument parser at the end of the script:
@@ -457,7 +457,7 @@ model` and train its weights further (e.g., to resume training or for fine-tunin
     You can pass this model as argument to your train_and_test_saddle_function.py to test the new
     functionality that you just implemented.
     
-9. Create a new function called `build_nonlinear_model()` in the train_and_test_saddle_function.py 
+- **II-9.** Create a new function called `build_nonlinear_model()` in the train_and_test_saddle_function.py 
 script. This function should have as argument the number of input features for the data and should
 return a [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model), similar
 to the build_linear_model() function that you implemented before. The difference between these functions, though, 
@@ -503,14 +503,136 @@ with an **average L2 error of 150 of less on the test set**.
     - a description of the neural network model that you used to approximate the monkey saddle surface; and
     - whatever parameters you used for training it (e.g., batch size, learning rate, and number of epochs).
     
-10. Train your nonlinear neural network such that it `overfits` on the training data. 
+- **II-10.** Train your nonlinear neural network such that it `overfits` on the training data. 
 
     After training, include a picture
     in your report of the plots from TensorBoard corresponding to the `mean absolute error` on the training and validation
     sets. Explain how you concluded that your model overfit in the report.
     
-11. What happens with the loss per epoch on the training set if you train with a batch size of 1?
+- **II-11.** What happens with the loss per epoch on the training set if you train with a batch size of 1?
 Intuitively, why is the phenomenon (or phenomena) that you observe occurring?
 
-## Part III
+## Part III. Building a Face Classifier
 
+Now that you are familiar with training deep learning models, you will create your own face 
+classifier. 
+
+1. Download the dataset from [this link](https://drive.google.com/open?id=1JIIalRu5WZQ01p-S6mBxzHV8ZMqAJcdH)
+and place it in the assignment-3/face_detection directory (there is no need to commit the data to your repository).
+
+   > The data is provided as a [numpy npz file](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.savez.html). 
+   The .npz file format is a zipped archive of files named after the variables they contain. 
+   The archive is not compressed and each file in the archive contains one variable in .npy format. 
+   For a description of the .npy format, see [numpy.lib.format](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.lib.format.html#module-numpy.lib.format).
+
+   Check that you can open the data in python and that it has inputs and target values:
+   
+   ```bash
+   (venv) $ cd assignment-3/face_detection/ # go to the assignment-3/face_detection directory within your private repository
+   (venv) $ python 
+   Python 2.7.15rc1 (default, Apr 15 2018, 21:51:34) 
+   [GCC 7.3.0] on linux2
+   Type "help", "copyright", "credits" or "license" for more information.
+   >>> import numpy as np
+   >>> data = np.load("64x64_data.npz")
+   >>> data.files
+   ['input', 'target']
+   ```
+   
+2. Read the `train_face_detection.py` skeleton code in the assignment-3/face_detection directory. 
+This code is provided to get you started on building your custom face classifier. You should be able to run the code
+and load the training data with the following command:
+
+   ```bash
+   (venv) $ ./train_face_detection.py --input 64x64_data.npz
+   Loaded 11038 training examples.
+   ```
+   
+   The main function in the script would then print the number of examples that were loaded from
+   the dataset. 
+   
+   Note that the `input` is organized as a 4-D tensor of dimension NxWxHxC, where N
+   corresponds to the number of examples, W is the width of input images, H is their height, and C
+   is the number of channels per image. In general, the dataset has color images of 64x64 pixels 
+   (i.e., W=H=64 and C=3). The channels are organized in Blue-Gree-Red (bgr) order.
+   
+   The `target` is a single number: 1 if the corresponding input image shows a face, or 0 otherwise.
+   Thus, the target tensor is 2D. It has shape Nx1.
+   
+3. Your main task in this assignment is to complete the train_face_detection.py script so that
+it:
+
+   a. Splits the input data into a training and validation set.
+   
+   b. Computes normalization parameters for the inputs based on the training data.
+   
+   c. Builds a convolutional neural network model with the TensorFlow Keras API to predict 
+   whether the input image corresponds to the face of a person or not. The output of the
+   network should be a probability (i.e., a float between 0 and 1) corresponding to the 
+   likelihood that the input image shows a human face.
+   
+   d. Trains the model.
+   
+   The script should have saved two main files to disk after finishing training:
+   
+   - **weights.h5:** model parameters. 
+   
+       > We highly recommend that you use the 
+       [tf.keras.callbacks.ModelCheckpoint]() function to generate the best weights.h5 
+       file based on validation data, as in Part II of this assignment.
+   
+   - **normalization_params.npz:** npz file with mean and st. dev. for the inputs so that the data
+   can be whitened before passing it to your neural network. 
+   
+       >Assuming that the variables `mean` and
+       `stdev` contain the normalization parameters, then you can generate the normalization_params.npz
+       file with the numpy [savez method](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.savez.html) as follows:
+       ```python
+       np.savez(<output_path>, mean=mean, stdev=stdev)
+       ```
+       
+   Many different convolutional neural networks have been proposed in the past for image classification. 
+   If you are unsure of what model to implement, we suggest that you look at the
+   [Tiny DarkNet Network](https://pjreddie.com/darknet/tiny-darknet/) as a reference. You can implement a
+   small network like that one for this assignment. However, keep in mind that you will have to adjust 
+   the structure of your network according to the input data that is provided.
+   
+   For the loss and metric that you use while training your model, we 
+   suggest that you use `binary_crossentropy` and `binary_accuracy` respectively. You can set
+   this loss and metric when you compile your model. For example:
+   
+   ```python
+   model.compile(optimizer=tf.keras.optimizers.Adam(lr=learning_rate),
+                 loss='binary_crossentropy',
+                 metrics=['binary_accuracy'])
+   ```
+       
+### Questions / Tasks
+
+- **III-1.** Implement your image classification model in the train_face_detection.py script, and
+train your model using the 64x64_data.npz dataset:
+
+    ```bash
+    (venv) $ ./train_face_detection.py --input 64x64_data.npz [--lr 1e-4] [--epochs 100] [--batch_size 200]
+    ```
+
+    Make sure to search for good hyper-parameter values:
+    
+    - **lr:** learning rate
+    - **epochs:** number of epochs to train for
+    - **batch_size:** batch size used for training 
+
+    Commit your modified train_face_detection.py
+    script to your repository once you are happy with your model. Submit your weights.h5 and 
+    normalization_params.npz files to Canvas as part of your assignment.
+    
+    **NOTE:** The `performance` of your model will be evaluated using the `evaluate_face_detection.py` script
+    within the assignment-3/face_detection directory. The script will be run on a test set (that is not provided
+    as part of this assignment) but that you can assume has a similar image distribution as
+    the data that is provided in the 64x64_data.npz file. The expectation is that your model should
+    reach at least **90% accuracy** on the test set.
+    
+    In general, we recommend that you use [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard) 
+    to monitor the performance of your model in a validation set as it trains.
+    
+    
