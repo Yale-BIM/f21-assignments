@@ -32,9 +32,6 @@ This assignment can all be completed using Python 2.7 in Ubuntu 16.04 (or 18.04)
  it can also be completed in OS X or Windows (except for the extra credit). For training neural networks,
 we recommend that you use cloud services if your don't have access to a local GPU.
 
-> If you are using OS X,
-you may need to install packages like pip with [Homebrew](https://brew.sh/). 
-
 You should also have `git` installed in the machine that you are using to work on your assignment.
 You will use git to save your work to your [GitLab](http://www.gitlab.com) repository.
 
@@ -43,9 +40,7 @@ You will use git to save your work to your [GitLab](http://www.gitlab.com) repos
 
 This assignment assumes that you have already completed the prior assignments and, thus, you
  have experience with Linux shells 
-(e.g., [bash](https://www.gnu.org/software/bash/)), and [git](https://git-scm.com/).
-
-You are also expected to be familiar with the [numpy Python library](http://www.numpy.org/) for linear algebra. 
+(e.g., [bash](https://www.gnu.org/software/bash/)), and [git](https://git-scm.com/). You are also expected to be familiar with the [numpy Python library](http://www.numpy.org/) for linear algebra. 
 If you are not, please check [this tutorial](https://docs.scipy.org/doc/numpy/user/quickstart.html) before starting the assignment.
 
 #### Notation
