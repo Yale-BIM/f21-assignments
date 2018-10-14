@@ -877,3 +877,6 @@ code in one of the machines in AKW 410 that are connected to a Jetson TX2 Develo
     with Sherry or Marynel before the assignment is due to complete this last extra credit. 
     They will explain to you how to stream images from the ZED camera to the Jetson computer.
     
+
+Once you've finished the assignment, **add the commit SHA** that you would like to be evaluate on to your report.
+
