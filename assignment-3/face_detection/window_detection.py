@@ -104,7 +104,7 @@ def make_predictions(im, model, mean, stdev, scales=[50], stride = 10):
     """
 
     # TO-DO. Remove the line below and complete the function so that it returns bounding boxes.
-    return numpy.empty((0,5))
+    return np.empty((0,5))
 
 
 def main(input_file, weights_file, norm_file):
