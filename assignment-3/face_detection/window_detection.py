@@ -96,7 +96,7 @@ def make_predictions(im, model, mean, stdev, scales=[50], stride = 10):
     :param model: keras model
     :param mean: mean for input normalization
     :param stdev: st. dev for input normalization
-    :param scales: list of scales for the sliding window (in pixels)
+    :param scales: list of scales for the sliding window in pixels (e.g., [50] corresponds to one window of 50x50 pixels)
     :param stride: stride for the sliding window (in pixels)
     :return: numpy array of Nx5 dimension, where N is the number of detected faces (>=0) and the 5 columns
     correspond to: min_x, min_y, max_x, max_y, prob. The bounding box of a face is defined the by top-left

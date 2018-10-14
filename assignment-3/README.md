@@ -11,10 +11,13 @@ familiar with [TensorFlow's Keras API](https://www.tensorflow.org/guide/keras).
 
 
 #### System Requirements
-As for the prior assignments, you should have access to a computer with `Ubuntu 16.04` and `ROS Kinetic` to complete the homework. 
+This assignment can all be completed using Python 2.7 in Ubuntu 16.04 (or 18.04). Potentially,
+ it can also be completed in OS X or Windows (though this was not fully tested at the time the assignment
+was made public). For training neural networks,
+we recommend that you use cloud services if your don't have access to a GPU.
 
-> NOTE: If you have Ubuntu 18.04, you can also complete this homework 
-using ROS Melodic. 
+> If you are using OS X,
+you may need to install packages like pip with [Homebrew](https://brew.sh/). 
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
 You will use git to save your work to your [GitLab](http://www.gitlab.com) repository.
@@ -23,11 +26,8 @@ You will use git to save your work to your [GitLab](http://www.gitlab.com) repos
 #### Background Knowledge
 
 This assignment assumes that you have already completed the prior assignments and, thus, you
-have set up your catkin workspace. You are also expected to have experience with Linux shells 
-(e.g., [bash](https://www.gnu.org/software/bash/)), [git](https://git-scm.com/), and
-the [Robot Operating System (ROS)](http://www.ros.org/). This includes being familiar with
-the `roscore`, `rosrun`, `roslaunch`, `rosbag`, `rostopic`, `rosmsg`, `rosnode`, `rqt_image_view`, 
-and `rviz` tools. 
+ have experience with Linux shells 
+(e.g., [bash](https://www.gnu.org/software/bash/)), and [git](https://git-scm.com/).
 
 You are also expected to be familiar with the [numpy Python library](http://www.numpy.org/) for linear algebra. 
 If you are not, please check [this tutorial](https://docs.scipy.org/doc/numpy/user/quickstart.html) before starting the assignment.
@@ -37,6 +37,15 @@ We refer to `vectors` or column matrices with bold lower-case letters (e.g., $`\
 Other `matrices`, such as linear transformations, and `scalars` are written with regular
 font weight. 
 
+#### Preliminaries
+You will be training Neural Networks for this assignment. It is possible to complete all
+of the tasks using CPUs, but it would be much faster to train on a GPU for Part III.
+
+##### Training on Google Colaboratory
+One option to train a network on the cloud is to use [Google Colab](https://colab.research.google.com).
+
+##### Training on Google Cloud
+Another option is to use [Google Cloud](https://cloud.google.com).
 
 #### Deliverables
 
@@ -60,7 +69,8 @@ You assignment will be evaluated based on the content of your report and your co
 
 #### Further Reading
 
-
+- [SqueezeNet](https://arxiv.org/abs/1602.07360) - A small network for image classification
+- [Tiny Darknet](https://pjreddie.com/darknet/tiny-darknet/) - An even smaller network for image classification
 
 
 ## Part I. Set Up TensorFlow Locally
@@ -70,7 +80,21 @@ machine that you are using to develop code. Follow the instructions below, which
 TensorFlow installation page](https://www.tensorflow.org/install/pip?lang=python2), 
 to set up TensorFlow v. 1.11 with Python 2.7.
 
-1. Check that [virtualenv](https://virtualenv.pypa.io/en/stable/) is already installed:
+1. Check that [pip]() in installed in your machine:
+
+    ```bash
+    $ pip --version
+    ```
+    
+    If it's not installed and you are using Ubuntu, then install it with:
+    
+    ```bash
+    sudo apt install python-dev python-pip
+    ```
+    
+    > If you are using OS X or Windows, see [the official TensorFlow install instructions](https://www.tensorflow.org/install/pip).
+
+2. Check that [virtualenv](https://virtualenv.pypa.io/en/stable/) is already installed:
 
     ```bash
     $ virtualenv --version
@@ -82,29 +106,18 @@ to set up TensorFlow v. 1.11 with Python 2.7.
     sudo pip install -U virtualenv # system-wide install
     ```
     
-    And if pip is not installed in your machine, install it as well:
-    
-    ```bash
-    sudo apt install python-dev python-pip
-    ```
-    
-    and try repeating the steps above afterwards so that you install virtualenv.
-    
-    
-2. Create a [virtual environment](https://realpython.com/python-virtual-environments-a-primer/) 
+    > Again, if you are using OS X or Windows, see [the official TensorFlow install instructions](https://www.tensorflow.org/install/pip).
+
+  
+3. Create a [virtual environment](https://realpython.com/python-virtual-environments-a-primer/) 
 named `venv` with virtualenv:
 
     ```bash
     $ cd assignment-3 # enter this assignments directory within your assignments private repository
-    $ virtualenv --system-site-packages -p python2.7 venv
+    $ virtualenv -p python2.7 venv
     ```
     
-    > NOTE: The system-site-packages makes your newly created virtual environment inherit packages
-    from your python system-wide installation (i.e., wherever your global site-packages directory is).
-    If you have installed ROS, the system-site-packages option would include ROS python packages 
-    into your virtual environment.
-     
-3. Activate your virtual environment:
+4. Activate your virtual environment:
 
    ```bash
    $ source ./venv/bin/activate
@@ -112,13 +125,13 @@ named `venv` with virtualenv:
    
    Now your terminal prompt should start with `(venv)` indicating that you are within the environment.
     
-4. Upgrade pip within your virtual environment:
+5. Upgrade pip within your virtual environment:
    
    ```bash
    (venv) $ pip install --upgrade pip
    ```
    
-5. Install TensorFlow (TF):
+6. Install TensorFlow (TF):
 
     - If your machine has no GPU:
     
@@ -134,7 +147,7 @@ named `venv` with virtualenv:
         (venv) $ pip install --upgrade tensorflow-gpu
         ```
         
-6. Verify the install:
+7. Verify the install:
 
     ```bash
     (venv) $ python -c "import tensorflow as tf; print(tf.__version__)"
@@ -142,10 +155,15 @@ named `venv` with virtualenv:
     
     The command should print "1.11.0".
 
+8. Install opencv and matplotlib:
 
-> NOTE: Because you have installed TF within a virtual environment, you will always
-have to activate the environment before starting to run your deep learning code for this
-assignment (as in step 3 above). To exit your virtual environment at any time, you can run the command: 
+    ```bash
+    (venv) $ pip install matplotlib opencv-python
+    ```
+
+> NOTE: Because you have installed the packages that you need to complete this assignment within 
+a virtual environment, you will always have to activate the environment before starting to run your code 
+(as in step 3 above). To exit your virtual environment at any time, you can run the command: 
 ``` (venv) $ deactivate ```.
 
 ### Questions / Tasks 
@@ -162,12 +180,16 @@ used to install all required Python models with pip.
     
     ```text
     tensorflow==1.11.0
+    opencv-python==3.4.3.18
+    matplotlib==2.1.1
     ```
     
     or if you installed `tensorflow-gpu` before,
     
     ```text
     tensorflow-gpu==1.11.0
+    opencv-python==3.4.3.18
+    matplotlib==2.1.1
     ```
     
     Commit the requirements.txt file to your private assignments repository. 
@@ -768,3 +790,16 @@ For example, given the following input image from the Yale Computer Science webs
     about this procedure can be found 
     in [this blog](https://www.pyimagesearch.com/2015/02/16/faster-non-maximum-suppression-python/)
     by A. Rosebrock.
+    
+    Test your window_detection.py script using the face images "cs50_2.jpg" and "shaocrew_0.jpg" 
+    within the assignment-3/docs directory and the best threshold for the predicted probabilities
+    from part III-2. Use window Include in your report:
+     
+    - images of your bounding boxes predictions (after non maximum suppression) on "cs50_2.jpg" 
+    and "shaocrew_0.jpg". 
+    
+    - if your model missed out faces or had too many false positives, explain in your report
+    what could you do to minimize these issues in the future.
+    
+- **III-4.** Explain in your report how could you change the structure of your neural network
+to detect faces in a more efficient way.
