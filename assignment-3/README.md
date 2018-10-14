@@ -170,10 +170,10 @@ a virtual environment, you will always have to activate the environment before s
 
 - **I-1.** In general, committing virtual environments to your repository is bad practice (e.g., paths might differ
 in different computers and this may render your environment unusable). Instead, what people generally
-do is create a requirements.txt file with all of the dependencies for a project. This file can then be 
+do is create a `requirements.txt` file with all of the dependencies for a project. This file can then be 
 used to install all required Python models with pip.
 
-    For this part of the assignment, create a requirements.txt file so that you remember what needs
+    For this part of the assignment, **create a requirements.txt** file so that you remember what needs
     to be installed to run your assignment. The file should be placed within the assignment-3 directory
     of your private assignments repository. Below is an example of how the requirements.txt file would 
     look like:
