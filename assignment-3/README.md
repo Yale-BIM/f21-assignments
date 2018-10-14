@@ -4,6 +4,23 @@ This is the fourth assignment for Yale's CPSC-659 Building Interactive Machines 
 
 ## Table of Contents
 
+* [Introduction](#introduction)
+    * [System Requirements](#system-requirements)
+    * [Background Knowledge](#background-knowledge)
+    * [Notation](#notation)
+    * [Preliminaries](#preliminaries)
+       * [Training on Google Colaboratory](#training-on-google-colaboratory)
+       * [Training on Google Cloud](#training-on-google-cloud)
+    * [Deliverables](#deliverables)
+    * [Evaluation](#evaluation)
+    * [Further Reading](#further-reading)
+* [Part I. Set Up TensorFlow Locally](#part-i-set-up-tensorflow-locally)
+    * [Questions / Tasks](#questions--tasks)
+* [Part II. Approximating a Non-Linear Function](#part-ii-approximating-a-non-linear-function)
+    * [Questions/Tasks](#questionstasks)
+* [Part III. Building a Face Classifier](#part-iii-building-a-face-classifier)
+    * [Questions / Tasks](#questions--tasks-1)
+
 
 ## Introduction 
 This assignment will provide you practical experience with deep learning. In particular, you'll become
@@ -12,9 +29,8 @@ familiar with [TensorFlow's Keras API](https://www.tensorflow.org/guide/keras).
 
 #### System Requirements
 This assignment can all be completed using Python 2.7 in Ubuntu 16.04 (or 18.04). Potentially,
- it can also be completed in OS X or Windows (though this was not fully tested at the time the assignment
-was made public). For training neural networks,
-we recommend that you use cloud services if your don't have access to a GPU.
+ it can also be completed in OS X or Windows (except for the extra credit). For training neural networks,
+we recommend that you use cloud services if your don't have access to a local GPU.
 
 > If you are using OS X,
 you may need to install packages like pip with [Homebrew](https://brew.sh/). 
@@ -803,3 +819,20 @@ For example, given the following input image from the Yale Computer Science webs
     
 - **III-4.** Explain in your report how could you change the structure of your neural network
 to detect faces in a more efficient way.
+
+- **III-5. (5pt extra credit)** Create a ROS package named "shutter_face_detection" within the
+assignment 3 directory. Within this package, create a ROS node (Python script) named "detect_faces.py"
+that runs your face detection model over images received through the the topic "/virtual_camera/image_raw". 
+The node should detect faces using the sliding window approach of part III-3 of this assignment. It is OK
+if your node runs slow.
+
+    > NOTE. You will need Ubuntu 16.04 (or 18.04) to test your node.
+
+- **III-6. (5pt extra credit)** Run your detect_faces.py node (from part III-5) on images
+received through Shutter's ZED camera. For this part of the assignment, you will have to run your
+code in one of the machines in AKW 410 that are connected to a Jetson TX2 Develoment Kit computer. 
+
+    > You will need to set up an appointment with Sherry or Marynel before the assignment is due 
+    to complete this last extra credit. They will explain to you how to stream images from the 
+    ZED camera to the Jetson computer.
+    
