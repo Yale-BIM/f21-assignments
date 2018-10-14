@@ -95,5 +95,5 @@ Google Colab Project. First, install the module in Colab:
     
     ```text
     TensorBoard link:
-    http://1701b3f2.ngrok.io
+    http://<some numbers and letters>.ngrok.io
     ```
