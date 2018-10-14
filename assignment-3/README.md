@@ -761,7 +761,7 @@ For example, given the following input image from the Yale Computer Science webs
     **Tip:** When you slide a window over the image to make predictions, it is possible that 
     many windows will fire over the same region in the image:
     
-       <img src="docs/faces_before_maximum.png" alt="example input image"/>
+    <img src="docs/faces_before_maximum.png" alt="example input image"/>
     
     To help you group overlapping boxes together through `non maximum suppression`, the 
     window_detection.py script provides the non_max_suppression() function. More information
