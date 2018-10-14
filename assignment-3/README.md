@@ -61,8 +61,8 @@ and train your model on a CPU or a machine with a hardware accelerator (GPU or [
 ###### Example: Training a Model in Google Colab
 This assignment provides an example Python Notebook script to show you how you can train
 the model from task II-6 in Google Colab using your Gitlab repository (as suggested [here](https://stackoverflow.com/questions/48350226/methods-for-using-git-with-google-colab)). 
-You should have completed the script train_and_test_saddle_function.py
-script in your private Gitlab repository before training the model as explained below.
+You should have completed the train_and_test_saddle_function.py
+script and pushed it to your private Gitlab repository before training the model as explained below.
 
 1. If you haven't done this already in your local machine, create a SSH key pair for
 Gitlab as in [this tutorial](https://docs.gitlab.com/ee/ssh/). Leave the passphrase empty.
