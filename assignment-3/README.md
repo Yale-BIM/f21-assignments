@@ -579,7 +579,9 @@ train_face_detection.py script so that it:
    network should be a probability (i.e., a float between 0 and 1) corresponding to the 
    likelihood that the input image shows a human face.
    
-   d. Trains the model.
+   d. Trains the model based on the input arguments: batch_size, epochs, lr, val, logs_dir.
+   These arguments are all defined in the bottom section of the script, when they are
+   added to the [ArgumentParser](https://docs.python.org/2/library/argparse.html).
    
    The script should have saved two main files to disk after finishing training:
    
