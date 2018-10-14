@@ -807,9 +807,9 @@ For example, given the following input image from the Yale Computer Science webs
     in [this blog](https://www.pyimagesearch.com/2015/02/16/faster-non-maximum-suppression-python/)
     by A. Rosebrock.
     
-    Test your window_detection.py script using the face images "cs50_2.jpg" and "shaocrew_0.jpg" 
-    within the assignment-3/docs directory and the best threshold for the predicted probabilities
-    from part III-2. Use window Include in your report:
+    Test your window_detection.py script using the best threshold for the predicted probabilities
+    from part III-2 and the images "cs50_2.jpg" and "shaocrew_0.jpg" 
+    within the assignment-3/docs directory. Include in your report:
      
     - images of your bounding boxes predictions (after non maximum suppression) on "cs50_2.jpg" 
     and "shaocrew_0.jpg". 
