@@ -87,6 +87,9 @@ to canvas.
 [GitLab](http://www.gitlab.com) repository as indicated in the [general instructions](../README.md) 
 document for CPSC-659 assignments. 
 
+> NOTE: If you are using late days to submit this assignment after the official deadline,
+you should let Sherry and Marynel know about this before the deadline is due! Otherwise, you
+won't be able to submit your report through Canvas.
 
 #### Evaluation
 
