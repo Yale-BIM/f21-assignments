@@ -440,7 +440,7 @@ script so that you can easily visualize the predictions made by your model:
     
     Make a screenshot of the plot that you get after training your simple neural network for the
     first time with a learning rate of 1e-2 and for 500 epochs. Then, add to your report:
-    - the screenshot of the plot that you yook;
+    - the screenshot of the plot that you took;
     - the average L2 error that you got on the testing set after training as indicated; and 
     - an explanation of why the neural network is performing poorly.
     
@@ -619,7 +619,7 @@ and load the training data with the following command:
    Note that the `input` is organized as a 4-D tensor of dimension NxHxWxC, where N
    corresponds to the number of examples, H is the height of input images, W is their width, and C
    is the number of channels per image. In general, the dataset has color images of 64x64 pixels 
-   (i.e., W=H=64 and C=3). The channels are organized in Blue-Gree-Red (bgr) order.
+   (i.e., W=H=64 and C=3). The channels are organized in Blue-Green-Red (bgr) order.
    
    The `target` is a single number: 1 if the corresponding input image shows a face, or 0 otherwise.
    Thus, the target tensor is 2D. It has shape Nx1.
