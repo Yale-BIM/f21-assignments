@@ -1,6 +1,6 @@
 # Training a Neural Network with Google Cloud
 
-There are many ways to trian models with Google Cloud, e.g., using a virtual machine in the Compute Engine, using the 
+There are many ways to train models with Google Cloud, e.g., using a virtual machine in the Compute Engine, using the 
 cloud ML Engine, etc. Here, we recommend that you use a Virtual Machine (VM) as that is the closest
 setup to working with a local machine.
 
@@ -57,7 +57,7 @@ CPSC-659. This boot disk image is already set up with:
 - Matplotlib
     
 The image also has the 64x64_data.npz dataset for Part III of the assignment
-in the folder /home/marynel_vazquez. You don't need to waist time (and credits) 
+in the folder /home/marynel_vazquez. You don't need to waste time (and credits) 
 downloading the data again into your VM. Instead, move the data to your own home folder
 once you SSH into your VM:
 
