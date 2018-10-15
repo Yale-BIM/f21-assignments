@@ -75,7 +75,6 @@ A `quick tutorial` on using Google Cloud for this assignment is provided in the
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of the version of the code
 that you would like to be evaluated on. Though not mandatory, it is recommended that you generate this pdf 
-that you would like to be evaluated on. Though not mandatory, it is recommended that you generate this pdf 
 with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this 
 [simple assignment template](https://www.overleaf.com/latex/templates/simple-assignment-template/mzkqqqjypzvd) 
 in [LaTeX](https://www.latex-project.org/).
@@ -96,7 +95,7 @@ won't be able to submit your report through Canvas.
 You assignment will be evaluated based on the content of your report and your code.
 
 - Report (48 pts + 3 extra pts)
-    * Part II (33 pts): II-6 (10 pts) + II-7 (4 pts) + II-9 (10 pts) + II-10 (5 pts) + II-11 (3 pts)
+    * Part II (33 pts): II-6 (10 pts) + II-7 (4 pts) + II-9 (10 pts) + II-10 (5 pts) + II-11 (4 pts)
     * Part III (15 pts + 3 extra pts): III-2 (3 pts) + III-3 (5 pts) + III-4 (7 pts) + III-6 (3 pts extra credit)
 - Code (52 pts + 5 extra pts)
     * Part I (2 pts)
