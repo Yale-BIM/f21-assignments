@@ -86,22 +86,23 @@ Once you've created your VM in Google Cloud. You can download your code from Git
 and commit back things to your repository as necessary. 
 
 ### TensorBoard 
-It is also possible to run TensorBoard on a Google Cloud VM and open it up on your local browser.
-To succeed running the steps below, you will need to install the [Google Cloud (gcloud) sdk](https://cloud.google.com/sdk/gcloud/):
+It is also possible to use port forwarding (as discussed in [here](https://stackoverflow.com/questions/45060922/tensorboard-execution-from-google-cloud-machine)) to 
+run TensorBoard on a Google Cloud VM and visualize your results on a local browser.
+To succeed running the steps below, you will need to install the [Google Cloud (gcloud) sdk](https://cloud.google.com/sdk/gcloud/).
 
 Run the following commands on a terminal in your host machine:
 
-1.  Authenticate
+1.  Authenticate.
     ```bash
     $ gcloud auth login
     ```
     
-2. Set firewall rules for allowing connections to your VM through the 6006 port
+2. Set firewall rules for allowing connections to your VM through the 6006 port.
     ```bash
     $ gcloud compute firewall-rules create tensorboard-port --allow tcp:6006
     ```
     
-3. Configure port forwarding:
+3. Configure port forwarding.
     ```bash
     $ gcloud compute ssh <vm-name> --ssh-flag="-R" --ssh-flag="6006:localhost:6006"
     ```
@@ -114,3 +115,4 @@ Then, start tensorboard on the VM in the port 6006:
     
 Finally, get the external IP of your VM from the google cloud VM console. Connect from your
 local machine by opening up the address http://<vm-external-ip>:6006/ in a browser.
+
