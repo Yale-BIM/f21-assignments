@@ -109,9 +109,9 @@ Run the following commands on a terminal in your host machine:
     
 Then, start tensorboard on the VM in the port 6006:
 
-    ```bash
-    $ tensorboard --logdir <path_to_logs> --port 6006
-    ```
+```bash
+$ tensorboard --logdir <path_to_logs> --port 6006
+```
     
 Finally, get the external IP of your VM from the google cloud VM console. Connect from your
 local machine by opening up the address http://<vm-external-ip>:6006/ in a browser.
