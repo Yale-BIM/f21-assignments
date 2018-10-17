@@ -851,7 +851,7 @@ that runs your face classification model over images received through the the to
     - display the result visually by rendering the detection boxes (after non maximum suppression) on 
 the input image.
     - get the path to your model's weights/parameters using the [rospy.get_param()](http://wiki.ros.org/rospy/Overview/Parameter%20Server) function,
-    sot that the path to the files is not hardcoded and can be changed upon node execution.
+    so that the path to the files is not hardcoded and can be changed upon node execution.
 
     **NOTE:** You will need ROS with Ubuntu 16.04 (or 18.04) to test your node. You can use a rosbag,
     like the one used for tracking in assignment-2, to test your face classifier as it already
