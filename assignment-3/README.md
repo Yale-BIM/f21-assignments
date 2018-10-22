@@ -403,7 +403,7 @@ should output predictions for the given input matrix (test_input) using the `mod
 The official documentation for the predict() function can be found [here](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model#predict).
 
 - **II-5.** Complete the `compute_average_L2_error()` function in the train_and_test_saddle_function.py script.
-The function should compute the average L2-norm (or least squares) difference between the ground truth 
+The function should compute the average [L2 difference](http://mathworld.wolfram.com/L2-Norm.html) between the ground truth 
 (test_target) and the predicted values (predicted_targets) that are input to the function. The average
 should be over all of the examples in each of the input matrices.
 
