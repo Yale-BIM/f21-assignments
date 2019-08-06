@@ -1,6 +1,6 @@
 # Assignment 0
 
-This is the first assignment for Yale's CPSC-659 Building Interactive Machines course.
+This is the first assignment for Yale's CPSC-459/559 Building Interactive Machines course.
 
 ## Table of Contents
 
@@ -28,14 +28,11 @@ This assignment will provide you practical experience using the [Robot Operating
 System (ROS)](http://www.ros.org/) and [git](https://git-scm.com/).
 
 #### System Requirements
-You should have access to a computer with `Ubuntu 16.04` and `ROS Kinetic` to complete the homework. 
+You should have access to a computer with `Ubuntu 18.04` and `ROS Melodic` to complete the homework. 
 The instructions below assume that you are using a [bash shell](https://www.gnu.org/software/bash/) 
-to do the assignment, and that have installed the *desktop-full* Kinetic version of ROS 
+to do the assignment, and that have installed the *desktop-full* Melodic version of ROS 
 using `apt-get` as in this guide: 
-[http://wiki.ros.org/kinetic/Installation/Ubuntu](http://wiki.ros.org/kinetic/Installation/Ubuntu).
-
-> NOTE: If you have Ubuntu 18.04, you can also complete this homework 
-using ROS Melodic. Make sure to follow the Melodic versions of the ROS tutorials linked below.
+[http://wiki.ros.org/melodic/Installation/Ubuntu](http://wiki.ros.org/melodic/Installation/Ubuntu).
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
 You will use git to save your work to your [GitLab](http://www.gitlab.com) repository.
@@ -237,7 +234,7 @@ of nodes and programs that are pre-requisites of a ROS-based system.
 with [roslaunch](http://wiki.ros.org/roslaunch).
 
     ```bash
-    $ roslaunch shutter_bringup shutter.launch simulation:=true 
+    $ roslaunch shutter_bringup shutter_with_face.launch simulation:=true 
     ```
     
     > The term *bring up* is often used in ROS to denote the process of starting 
@@ -248,10 +245,11 @@ with [roslaunch](http://wiki.ros.org/roslaunch).
     in ROS' [Parameter Server](http://wiki.ros.org/Parameter%20Server). You will make your
     own launch file later in this assignment.
     
-    The shutter.launch file will then publish a 3D model of the robot (in [URDF format](http://wiki.ros.org/urdf))
+    The shutter_with_face.launch file will then publish a 3D model of the robot (in [URDF format](http://wiki.ros.org/urdf))
     to the [ROS Parameter Server](http://wiki.ros.org/roscpp/Overview/Parameter%20Server).
     The model has information about the the joints of the robot 
     and its sensors, including specific properties and relative placement. 
+    The shutter face renderer will also run and open.
     
     > The ROS Parameter Server is a shared, multi-variate dictionary that is accessible via network APIs. 
     Nodes use this server to store and retrieve parameters at runtime. As it is not designed for 
@@ -259,7 +257,7 @@ with [roslaunch](http://wiki.ros.org/roslaunch).
     It is meant to be globally viewable so that tools can easily inspect the configuration state of 
     the system and modify if necessary. 
     
-    The shutter.launch script also runs two [ROS nodes](http://wiki.ros.org/Nodes) as two 
+    The shutter.launch script also runs five [ROS nodes](http://wiki.ros.org/Nodes) as five 
     different processes:
     
     1. */arbotix*: robot driver from the [arbotix_python ROS package](https://github.com/marynelv/arbotix_ros).
@@ -269,6 +267,12 @@ with [roslaunch](http://wiki.ros.org/roslaunch).
     
     2. */robot_state_publisher:* [state_publisher](http://wiki.ros.org/robot_state_publisher) node which 
     publishes the position of the joints of the robot to [tf](ros.org/wiki/tf).
+    
+    3. */motor_stopper:* publishes messages from /joint_X/command_safe topics to /joint_X/command topics.
+  
+    4. */gaze_master:* calculates and publishes data related to the gaze direction of shutter's eyes.
+    
+    5. */simple_face:* uses information from gaze_master as well as preset conditions to draw shutter's face.
     
 3. Use [rqt_graph](http://wiki.ros.org/rqt_graph) to visualize the 
 [nodes](http://wiki.ros.org/Nodes) that are currently running
@@ -281,8 +285,8 @@ exchange information between nodes.
     
     Uncheck the "Debug" option under "Hide" in rqt_graph,
     and select "Nodes/Topics(all)" to visualize all of the nodes that are sharing information
-    in the graph. You should see a total of 4 ROS nodes (displayed as ellipses) in the graph: /arbotix, 
-    /robot_state_publisher, /rqt_gui_py_node_XXXXX, and /rosout. 
+    in the graph. You should see a total of 7 ROS nodes (displayed as ellipses) in the graph: /arbotix, 
+    /robot_state_publisher, /motor_stopper, /gaze_master, /simple_face, /rqt_gui_py_node_XXXXX, and /rosout. 
     
     > The full name of the rqt_graph node includes numbers XXXXX, which indicate that the
     program was run as an anonymous node. The numbers were generated 
@@ -394,7 +398,7 @@ then see a simplified model of the robot in rviz, as in the figure below.
 
     The [RobotModel Display type](http://wiki.ros.org/rviz/DisplayTypes/RobotModel) shows
     the [links](http://wiki.ros.org/urdf/XML/link) of the robot according to 
-    the URDF model published by the shutter_bringup.launch script (Part II - step 2 of this assignment).
+    the URDF model published by the shutter_with_face.launch script (Part II - step 2 of this assignment).
     Each link describes a rigid body in the robot with physical, geometrical, 
     and visual features. 
     
@@ -453,7 +457,7 @@ rviz as in Parts II and III of this assignment.
     ```
     
     By moving the sliders in the GUI, you will be sending requests to move the joints
-    through the /joint_*/command topics. The /arbotix driver, which listens to these topics,
+    through the /joint_X/command topics. The /arbotix driver, which listens to these topics,
     will then send the new positions to the robot. As the robot
     starts moving, the /arbotix driver will also publish the new joint positions, which then
     get re-published in /tf by /robot_state_publisher. Finally, the /tf transformations are used 
@@ -662,5 +666,14 @@ to demonstrate the execution of the switch_poses.py node in your documentation.
      > More information on including images 
      in GitLab's markdown can be found [here](https://docs.gitlab.com/ee/user/markdown.html#images).
 
+## Part VI. Run your code on the real robot (grad students only)
+
+Try running your motor pose code on the real robot by changing the simulation argument when launching the robot:
+
+```bash
+    $ roslaunch shutter_bringup shutter_with_face.launch simulation:=false 
+```
+
+Then run your node. Make sure it works in simulation first!
 
 

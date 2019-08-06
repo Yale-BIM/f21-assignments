@@ -1,6 +1,6 @@
 # Assignment 2
 
-This is the third assignment for Yale's CPSC-659 Building Interactive Machines course.
+This is the third assignment for Yale's CPSC-459/559 Building Interactive Machines course.
 
 ## Table of Contents
 
@@ -27,10 +27,7 @@ This assignment will provide you practical experience with custom messages in RO
 
 
 #### System Requirements
-As for the prior assignments, you should have access to a computer with `Ubuntu 16.04` and `ROS Kinetic` to complete the homework. 
-
-> NOTE: If you have Ubuntu 18.04, you can also complete this homework 
-using ROS Melodic. 
+As for the prior assignments, you should have access to a computer with `Ubuntu 18.04` and `ROS Melodic` to complete the homework. 
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
 You will use git to save your work to your [GitLab](http://www.gitlab.com) repository.
@@ -171,14 +168,14 @@ Inspect the bag to make sure that it was downloaded properly:
 $ rosbag info left-seq1.bag
 path:        left-seq1.bag
 version:     2.0
-duration:    11.5s
-start:       Sep 26 2018 21:49:02.76 (1538012942.76)
-end:         Sep 26 2018 21:49:14.23 (1538012954.23)
-size:        630.3 MB
-messages:    239
-compression: none [239/239 chunks]
+duration:    12.4s
+start:       Aug 02 2019 11:41:41.56 (1564760501.56)
+end:         Aug 02 2019 11:41:53.99 (1564760513.99)
+size:        326.2 MB
+messages:    371
+compression: none [371/371 chunks]
 types:       sensor_msgs/Image [060021388200f6f0f447d0fcd9c64743]
-topics:      /virtual_camera/image_raw   239 msgs    : sensor_msgs/Image
+topics:      /camera/color/image_raw   371 msgs    : sensor_msgs/Image
 ```
 
 And play the bag to see its content: 
@@ -186,7 +183,7 @@ And play the bag to see its content:
 ```bash
 $ rosparam set use_sim_time true # necessary if the use_sim_time parameter is not set in ROS or it is set to false
 $ rosbag play --clock left-seq1.bag
-$ rosrun rqt_image_view rqt_image_view # visualize the /virtual_camera/image_raw image
+$ rosrun rqt_image_view rqt_image_view # visualize the /camera/color/image_raw
 ```
 
 You should then see an image sequence of Marynel moving two colored cubes as in the figure below:
@@ -206,7 +203,7 @@ $ rosparam get use_sim_time
 ```
 
 ### Questions / Tasks
-- **II-1.** Make a video of rqt_image_view that shows the content of the /virtual_camera/image_raw
+- **II-1.** Make a video of rqt_image_view that shows the content of the /camera/color/image_raw
 topic as the left-seq1.bag rosbag plays for at least 3 seconds. Turn this video into an animated
 gif, e.g., with ffmpeg and imagemagick as indicated in 
 [this code snippet](https://gitlab.com/snippets/1743818), and include it in a `docs` directory within the
@@ -251,7 +248,9 @@ Afterwards, implement the `filter_image()` function in the detect_visual_target.
     `rqt_image_view`. The output image (or mask) should have high values for the pixels corresponding to the blue 
     cube in the input image, as shown below.
     
-    <img src="docs/blue-target.png" width="800"/><br>
+    <img src="docs/mask1.png" width="400"/>
+    <img src="docs/mask2.png" width="400"/>
+    <br>
 
 - **III-2.** Read this other [tutorial on Blob Detection](https://www.learnopencv.com/blob-detection-using-opencv-python-c/)
 and implement the `compute_keypoints_for_blobs()` function in the detect_visual_target.py node so that it:
@@ -272,7 +271,9 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
     blob detector such that the blue cube is detected well in the left-seq1.bag
     image sequence. The result should look similar to the image below:
     
-    <img src="docs/keypoint.png" width="800"/>
+    <img src="docs/keypoint1.png" width="400"/>
+    <img src="docs/keypoint2.png" width="400"/>
+    <br>
     
     The thin red circle in the right image above corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
     found by OpenCV blob's detection algorithm. The position of this keypoint is what the node outputs
@@ -400,7 +401,7 @@ running your detect_visual_target.py script.
     An rqt_image_view window will then open that allows you to visualize the 3 images being streamed
     through the ROS network: 
     
-    - /virtual_camera/image_raw topic: the original image sequence
+    - /camera/color/image_raw topic: the original image sequence
     - /observation_image topic: the detected target position
     - /tracked_image topic: the tracked target
     

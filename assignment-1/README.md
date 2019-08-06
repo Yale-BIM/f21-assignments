@@ -1,6 +1,6 @@
 # Assignment 1
 
-This is the second assignment for Yale's CPSC-659 Building Interactive Machines course.
+This is the second assignment for Yale's CPSC-459/559 Building Interactive Machines course.
 
 ## Table of Contents
 
@@ -35,10 +35,7 @@ the pinhole camera model, and inverse kinematics. You will also practice
 a bit of geometry, e.g., to transform points across coordinate frames.
 
 #### System Requirements
-As for the first assignment, you should have access to a computer with `Ubuntu 16.04` and `ROS Kinetic` to complete the homework. 
-
-> NOTE: If you have Ubuntu 18.04, you can also complete this homework 
-using ROS Melodic. 
+As for the first assignment, you should have access to a computer with `Ubuntu 18.04` and `ROS Melodic` to complete the homework. 
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
 You will use git to save your work to your [GitLab](http://www.gitlab.com) repository.
@@ -277,10 +274,10 @@ Include this image in your report.
     [rqt_tf_tree](http://wiki.ros.org/rqt_tf_tree) interface if you prefer.
 
 - **I-2.** Based on the tf tree from I-1, which frames are between the robot's *base_footprint* 
-frame and the *zed_camera_link* frame?
+frame and the *camera_color_optical_frame* frame?
 
 - **I-3.** Based on the tf tree, what is the $`4 \times 4`$ transformation $`^{W}_{Z}T`$
-between the *wrist_1_link* frame ($`W`$) and the *zed_camera_link* frame ($`Z`$)? Please
+between the *wrist_1_link* frame ($`W`$) and the *camera_color_optical_frame* frame ($`Z`$)? Please
 provide the transformation with both the rotation and translation components.
 
     *Tip:* You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool to query
@@ -339,7 +336,7 @@ Let's now publish the position of the moving object as a ROS tf frame.
 
 - **II-1.** Follow the steps below to make a new ROS node that publishes 
 the position of a simulated moving object as a ROS tf frame ("target") relative
-to the robot's "camera_link" frame. 
+to the robot's "camera_color_optical_frame" frame. 
 
     - Create a new ROS node in Python within the script directory of the `shutter_lookat` package.
 The node should be named `publish_target_relative_to_zed_camera.py`.
@@ -353,15 +350,15 @@ simulated object relative to the "base_footprint" frame.
 in a Python class, as in [this tutorial on a pytalker node](http://wiki.ros.org/ROSNodeTutorialPython#The_pytalker_node),
 given the increased complexity of this node in comparison previous examples.
 
-        - Transform the 3D pose of the moving object to the "camera_link" frame in Shutter.
+        - Transform the 3D pose of the moving object to the "camera_color_optical_frame" frame in Shutter.
         For this, you will have to query the transformation between the "base_footprint" frame
-        and the "camera_link" using the `lookup_transform` function from the tf2 API, e.g., 
+        and the "camera_color_optical_frame" using the `lookup_transform` function from the tf2 API, e.g., 
         as in the ROS tutorial on [writing a tf2 listener](http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20listener%20%28Python%29).
              
             > You can use the [tf2_geometry_msgs](http://wiki.ros.org/tf2_geometry_msgs) API to transform the pose of the object
             as in [this post](https://answers.ros.org/question/222306/transform-a-pose-to-another-frame-with-tf2-in-python/).
             
-        - Broadcast a tf transform from the "camera_link" frame to a (new) "target" frame in tf. 
+        - Broadcast a tf transform from the "camera_color_optical_frame" frame to a (new) "target" frame in tf. 
         The target frame should have the same pose as the simulated object (as provided through
         the /target topic).
         
@@ -405,13 +402,13 @@ the shutter_lookat package.
 2. Implement your node such that it repeats the steps below while the program is running:
 
     **a.** Query the latest transformation that maps points from the "target" frame
-to the "camera_link" frame.
+to the "camera_color_optical_frame" frame.
 
-    **b.** Extract the position of the moving object relative to the "camera_link" frame from
+    **b.** Extract the position of the moving object relative to the "camera_color_optical_frame" frame from
     the transformation queried from step (a).
 
     **c.** Project the position of the moving object to the image of a virtual camera positioned 
-    in the "camera_link" frame. The projection operation should use the following
+    in the "camera_color_optical_frame" frame. The projection operation should use the following
     intrinsic camera calibration parameters:
 
     ```python
@@ -457,7 +454,7 @@ to the "camera_link" frame.
     **f.** Publish the image that you created with OpenCV as a sensor_msgs/Image message in ROS. You
     can use the [cv_bridge](http://wiki.ros.org/cv_bridge) library to convert the OpenCV image to
     an Image message. Note that the Image message should have a `header` with the current time as
-    stamp and the "camera_link" frame as frame_id. The Image message should be published by your node
+    stamp and the "camera_color_optical_frame" frame as frame_id. The Image message should be published by your node
     through the `/virtual_camera/image_raw` topic.
     
     > Examples on converting OpenCV images to ROS messages can be found
