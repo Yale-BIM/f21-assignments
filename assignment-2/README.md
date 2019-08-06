@@ -186,7 +186,7 @@ $ rosbag play --clock left-seq1.bag
 $ rosrun rqt_image_view rqt_image_view # visualize the /camera/color/image_raw
 ```
 
-You should then see an image sequence of Marynel moving two colored cubes as in the figure below:
+You should then see an image sequence of Burton moving two colored squares as in the figure below:
 
 <img src="docs/left-seq1.png" width="400"/>
 <br> <br>
@@ -211,7 +211,7 @@ gif, e.g., with ffmpeg and imagemagick as indicated in
  
 
 ## Part III. Detecting a Visual Target
-You will now use simple image processing techniques to detect the blue cube in the images within the left-seq1.bag.
+You will now use simple image processing techniques to detect the blue square in the images within the left-seq1.bag.
 These detections will be observations for the location of the target, which you will then filter in the next part
 of the assignment.
 
@@ -246,7 +246,7 @@ Afterwards, implement the `filter_image()` function in the detect_visual_target.
     
     You should then be able to visualize the output topic `/observation_image` for debugging purposes with 
     `rqt_image_view`. The output image (or mask) should have high values for the pixels corresponding to the blue 
-    cube in the input image, as shown below.
+    square in the input image, as shown below.
     
     <img src="docs/mask1.png" width="400"/>
     <img src="docs/mask2.png" width="400"/>
@@ -268,7 +268,7 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
 
     Once you've implemented the compute_keypoints_for_blobs() function, you can run the detect_visual_target.py 
     node to debug your code for this part of the assignment, as in the task III-1. Edit the parameters of the 
-    blob detector such that the blue cube is detected well in the left-seq1.bag
+    blob detector such that the blue square is detected well in the left-seq1.bag
     image sequence. The result should look similar to the image below:
     
     <img src="docs/keypoint1.png" width="400"/>
@@ -414,7 +414,7 @@ running your detect_visual_target.py script.
 
 
 - **IV-11.** Tune the parameters of your filter (initial belief, R, and Q) such that you can effectively 
-track the blue cube in the image sequence within the left-seq1.bag. Use the filtered_colored_target.launch
+track the blue square in the image sequence within the left-seq1.bag. Use the filtered_colored_target.launch
 file to quickly launch rosbag, rqt_image_view, detect_visual_target.py and kalman_filter.py. As the bag plays, use
 rqt_image_view to visualize the images being streamed through your network and debug your code.
 
@@ -429,7 +429,7 @@ rqt_image_view to visualize the images being streamed through your network and d
     Once it looks like your filter is tracking the target, include the filter parameters that you are using
      for this part of the assignment in your report. 
      
-- **IV-12.** Tune the parameters of your filter such that it can track the blue cube when the argument
+- **IV-12.** Tune the parameters of your filter such that it can track the blue square when the argument
 add_observation_noise is set to true in filter_colored_target.launch:
 
     ```bash
@@ -443,7 +443,7 @@ add_observation_noise is set to true in filter_colored_target.launch:
      for this part of the assignment in your report.  In addition, make a video of rqt_image_view that shows the images sent
     through the /tracked_image topic for at least 5 seconds with add_observation_noise:=true. 
     Turn this video into an animated
-    gif, name it "filtered_blue_cube_with_extra_noise.gif", and include it in the `docs` directory within the
+    gif, name it "filtered_blue_square_with_extra_noise.gif", and include it in the `docs` directory within the
      shutter_track_target package. Commit the gif to your repository.
      
 - **IV-13.** Write a README.md Markdown file inside the shutter_track_target repository that explains
@@ -455,7 +455,7 @@ previously in this assignment in the README.md file.
      in GitLab's markdown can be found [here](https://docs.gitlab.com/ee/user/markdown.html#images).
      
 - **IV-14. (5 extra points)** Change the hue arguments of the filter_colored_target.launch so that you
-can track the red cube in the left-seq1.bag sequence:
+can track the square in the left-seq1.bag sequence:
 
     ```bash
     # play the bag at half real-time speed
@@ -465,12 +465,12 @@ can track the red cube in the left-seq1.bag sequence:
     You may also want to tune the parameters of your filter if tracking is not working well with the red target.
     
     Once it looks like your filter is tracking the red target, include the filter parameters that you are using
-     for this part of the assignment as well as the hue values that allow you to detect the red cube in your report.  
+     for this part of the assignment as well as the hue values that allow you to detect the red square in your report.  
      
     Finally, make a video of rqt_image_view that shows the images sent
     through the /tracked_image topic for at least 5 seconds with add_observation_noise:=true. 
     Turn this video into an animated
-    gif, name it "filtered_red_cube.gif", and include it in the `docs` directory within the
+    gif, name it "filtered_red_square.gif", and include it in the `docs` directory within the
      shutter_track_target package. Commit the gif to your repository.
 
 
