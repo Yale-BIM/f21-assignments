@@ -26,7 +26,7 @@ class DetectTarget():
         self.obs_image_pub = rospy.Publisher("/observation_image", Image, queue_size=5)
 
         # Subscriber
-        self.image_sub = rospy.Subscriber("/virtual_camera/image_raw", Image, self.image_callback, queue_size=5)
+        self.image_sub = rospy.Subscriber("/camera/color/image_raw", Image, self.image_callback, queue_size=5)
 
         # OpenCV - ROS bridge
         self.bridge = CvBridge()
