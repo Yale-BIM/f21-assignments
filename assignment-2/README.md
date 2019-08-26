@@ -35,7 +35,8 @@ using `apt-get` as in this guide:
 [http://wiki.ros.org/melodic/Installation/Ubuntu](http://wiki.ros.org/melodic/Installation/Ubuntu).
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
-You will use git to save your work to your [GitLab](http://www.gitlab.com) repository.
+You will use git to save your work to your [GitLab](http://www.gitlab.com) repository, as explained in 
+[Assignment 1](../assignment-1).
 
 #### Background Knowledge
 
