@@ -1,6 +1,6 @@
 # CPSC-459/559 Fall 2019. Assignments
 
-Assignment repository for Yale's CPSC-459/559 Building Interactive Machines (Fall 2019).
+Assignment repository for Yale's [CPSC-459/559 Building Interactive Machines](https://cpsc459-bim.gitlab.io/f19/) (Fall 2019).
 
 ## General Instructions
 
