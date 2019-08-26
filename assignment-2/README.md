@@ -325,13 +325,13 @@ exchange information between nodes.
 Answer the questions and complete the tasks below based on the status of your ROS system after 
 bringing up the robot.
   
-- **II-1.** Based on the graph from rqt_graph, how many topics have at least one 
+- **II-Q1.** Based on the graph from rqt_graph, how many topics have at least one 
 subscriber and at least one publisher in your ROS system? 
 
-- **II-2.** Through which topic in specific are the /arbotix and 
+- **II-Q2.** Through which topic in specific are the /arbotix and 
 /robot_state_publisher node communicating in ROS?
 
-- **II-3.** Using the [rostopic command-line  tool](http://wiki.ros.org/rostopic), investigate what type 
+- **II-Q3.** Using the [rostopic command-line  tool](http://wiki.ros.org/rostopic), investigate what type 
 of [ROS message]() is being sent/received through the ROS topic that /arbotix and /robot_state_publisher 
 are using to communicate with one another?
 
@@ -340,7 +340,7 @@ are using to communicate with one another?
     $ rostopic info <topic_name>
     ```
 
-- **II-4.** What are the fields of the message type that is used to transmit information from 
+- **II-Q4.** What are the fields of the message type that is used to transmit information from 
 /arbotix to /robot_state_publisher?
 
     *Tip:* Query information about a message type with the [rosmsg command-line  tool](http://wiki.ros.org/rosmsg):
@@ -348,15 +348,15 @@ are using to communicate with one another?
     $ rosmsg show <message_type>
     ```
 
-- **II-5.** Using the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) command-line tool 
+- **II-Q5.** Using the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) command-line tool 
 get one of the messages that is being sent from /arbotix to /robot_state_publisher. Include an example
 in your report.
 
 
-- **II-6.** Use the [rostopic hz](http://wiki.ros.org/rostopic#rostopic_hz) command-line tool 
+- **II-Q6.** Use the [rostopic hz](http://wiki.ros.org/rostopic#rostopic_hz) command-line tool 
 to find out at what rate are messages being published to the topic of question PII-Q2.
 
-- **II-7.** Besides the topic of question PII-Q2, through which other topics can the 
+- **II-Q7.** Besides the topic of question PII-Q2, through which other topics can the 
 /arbotix node publish messages? Provide a list of the topics and their respective 
 message types in your report.
 
@@ -401,7 +401,7 @@ then see a simplified model of the robot in rviz, as in the figure below.
 
     The [RobotModel Display type](http://wiki.ros.org/rviz/DisplayTypes/RobotModel) shows
     the [links](http://wiki.ros.org/urdf/XML/link) of the robot according to 
-    the URDF model published by the shutter_with_face.launch script (Part II - step 2 of this assignment).
+    the URDF model published by the shutter.launch script (Part II - step 2 of this assignment).
     Each link describes a rigid body in the robot with physical, geometrical, 
     and visual features. 
     
@@ -419,17 +419,17 @@ then see a simplified model of the robot in rviz, as in the figure below.
 Inspect the robot model using the properties of the RobotModel Display in rviz. Then,
 answer the questions and complete the tasks below:
 
-- **III-1.** How many links does the robot model have? List them all in your report.
+- **III-Q1.** How many links does the robot model have? List them all in your report.
     
-- **III-2.** Use the properties of the RobotModel Display panel to change the "alpha" 
+- **III-Q2.** Use the properties of the RobotModel Display panel to change the "alpha" 
 value of all of the links of the robot to 0.5, and show the coordinate axes for 5 key links in 
-the robot: "base_link", "shoulder_link", "biceps_link", "forearm_link", and "wrist_1_link". 
+the robot: "base_link", "shoulder_link", "biceps_link", "forearm_link", and "wrist_link". 
 The coordinate axes can be turned on and off with the "show axes" property of each of the links.
  
     Take a picture of the robot in rviz with the 5 set of axes visible and include it
 in your report.
 
-    > Each of the axes that you are visualizing is a coordinate frame (attached to a rigid body)
+    > Each of the axes that you are visualizing is a coordinate frame (attached to a rigid body, i.e., a link)
     in the robot. Their relative position and orientation is provided to rviz through the /tf topic. 
     Additional information about tf can be found [here](http://wiki.ros.org/tf).
 
