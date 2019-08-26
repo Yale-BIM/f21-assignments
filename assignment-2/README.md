@@ -53,7 +53,7 @@ the end of each part of the assignment. This report should also have any informa
 to understand and/or run your code, as well as the specific commit SHA of the version of the code
 that you would like to be evaluated on. Though not mandatory, it is recommended that you generate the report pdf 
 with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this 
-[assignment template]() 
+[assignment template](https://www.overleaf.com/latex/templates/assignment-template-for-yale-cpsc-459-559/nbysxxygbysk) 
 in [LaTeX](https://www.latex-project.org/).
 
 - **Code:** You are also expected to push code for this assignment to your 

@@ -190,7 +190,7 @@ e.g., using [Overleaf](https://www.overleaf.com/edu/yale#!overview).
 
 	> After pushing, you should be able to see the change in the README.md within the GitLab web interface.
 
-2. Create a pdf report for this assignment using this [template]() in Overleaf.
+2. Create a pdf report for this assignment using this [template](https://www.overleaf.com/latex/templates/assignment-template-for-yale-cpsc-459-559/nbysxxygbysk) in Overleaf.
 	
 	* Change the header of the template to add your name, id, email. Update the assignment number (i.e., change "X" for "1").
 	* Once you've pushed your assignment to your own repository in GitLab, add the commit hash of your repository to the report (e.g., add it below the title).
