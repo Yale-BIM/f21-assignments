@@ -64,8 +64,8 @@ in [LaTeX](https://www.latex-project.org/).
 You assignment will be evaluated over 100pts, based on the content of your report and your code:
 
 - Report (70 pts)
-    * Part I (10 pts)
-    * Part II (22 pts)
+    * Part I (10 pts): I-1 (5 pts) + I-2 (5 pts)
+    * Part II (22 pts): II-1 (4 pts) + II-2 (3 pts) + II-3 (3 pts) + II-4 (3 pts) + II-5 (3 pts) + II-6 (3 pts) + II-7 (3 pts)     
     * Part III (15 pts)
     * Part IV (15 pts)
     * Part V (8 pts)
