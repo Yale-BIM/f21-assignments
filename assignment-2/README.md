@@ -356,7 +356,7 @@ in your report.
 - **II-6.** Use the [rostopic hz](http://wiki.ros.org/rostopic#rostopic_hz) command-line tool 
 to find out at what rate are messages being published to the topic of question PII-Q2.
 
-- **II-5.** Besides the topic of question PII-Q2, through which other topics can the 
+- **II-7.** Besides the topic of question PII-Q2, through which other topics can the 
 /arbotix node publish messages? Provide a list of the topics and their respective 
 message types in your report.
 
@@ -389,9 +389,9 @@ provide you an overview of the Panels, Displays, and configuration options avail
     A graphical interface should then open up in your computer.
     
 3. Change the `Fixed Frame` to "base_link" in rviz's Global Options panel. This will ensure
-that the robot is model is shown in the middle of the grid in rviz.
+that the robot's model is shown straight up in the middle of the 3D visualization area of rviz.
     
-4. Change your background color to a light color in the Global Options as well.
+4. Change your background color to a light color (e.g., light gray) in the Global Options as well.
     
 5. Add a `RobotModel display` to rviz. Click on the "Add" button in the Displays panel, and
 a window will pop up. Then, look for the "rviz" plugins folder, and select RobotModel. You should
