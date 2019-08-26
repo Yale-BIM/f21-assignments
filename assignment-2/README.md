@@ -65,10 +65,10 @@ You assignment will be evaluated over 100pts, based on the content of your repor
 
 - Report (70 pts)
     * Part I (10 pts)
-    * Part II (25 pts)
+    * Part II (22 pts)
     * Part III (15 pts)
     * Part IV (15 pts)
-    * Part V (5 pts + 5 pts of extra credit)
+    * Part V (8 pts)
 - Code (30 pts)
     * Part v (30 pts)
 
@@ -274,7 +274,7 @@ with [roslaunch](http://wiki.ros.org/roslaunch).
     2. */robot_state_publisher:* [state_publisher](http://wiki.ros.org/robot_state_publisher) node which 
     publishes the position of the joints of the robot to [tf](ros.org/wiki/tf).
     
-    3. */motor_stopper:* node to safely send joint commands to the robot.
+    3. */motor_stopper:* node to safely send joint commands to the robot. By safe, we mean that the commands can be interrupted if desired. 
   
     
 3. Use [rqt_graph](http://wiki.ros.org/rqt_graph) to visualize the 
@@ -288,10 +288,10 @@ exchange information between nodes.
     
     Uncheck the "Debug" option under "Hide" in rqt_graph,
     and select "Nodes/Topics(all)" to visualize all of the nodes that are sharing information
-    in the graph. You should see a total of 7 ROS nodes (displayed as ellipses) in the graph: /arbotix, 
-    /robot_state_publisher, /motor_stopper, /gaze_master, /simple_face, /rqt_gui_py_node_XXXXX, and /rosout. 
+    in the graph. You should see a total of 5 `ROS nodes` (displayed as ellipses) in the graph: /arbotix, 
+    /robot_state_publisher, /motor_stopper, /rqt_gui_py_node_XXXX, and /rosout. 
     
-    > The full name of the rqt_graph node includes numbers XXXXX, which indicate that the
+    > The full name of the rqt_graph node includes numbers XXXX, which indicate that the
     program was run as an anonymous node. The numbers were generated 
     automatically when the node was initialized to provide the program a unique name, e.g.,
     in case you want to run multiple versions of rqt_graph. More information about initializing nodes
@@ -299,7 +299,7 @@ exchange information between nodes.
     [here](http://wiki.ros.org/roscpp/Overview/Initialization%20and%20Shutdown) or 
     [here](http://wiki.ros.org/rospy/Overview/Initialization%20and%20Shutdown), respectively.
     
-    The nodes are connected in the graph through topics (displayed as squares). 
+    The nodes are connected in the graph through `ROS topics` (displayed as squares). 
     ROS topics are named buses over which data [messages](http://wiki.ros.org/Messages) are exchanged. 
     There can be multiple publishers and subscribers to a topic. 
     
@@ -307,16 +307,16 @@ exchange information between nodes.
     Instead, nodes that are interested in data *subscribe* to the relevant topic; 
     nodes that generate data *publish* to the relevant topic. 
     
-    For example, the nodes /arbotix, /robot_state_publisher, and /rqt_gui_py_node_XXXXX publish
+    For example, the nodes /arbotix, /robot_state_publisher, and /rqt_gui_py_node_XXXX publish
     messages to the /rosout topic. Thus, you should see a directed edge in the graph from
     each of these nodes to the /rosout topic. Meanwhile, the 
     node [/rosout](http://wiki.ros.org/rosout#rosapi) subscribes to the /rosout topic. This is 
     illustrated in the graph with an edge that goes in the opposite direction: 
     from the /rosout topic to the /rosout node.
     
-    > [rosout](http://wiki.ros.org/rosout) is a system-wide logging mechanism for messages
+    > The node [rosout](http://wiki.ros.org/rosout) implements a system-wide logging mechanism for messages
     sent to the /rosout topic. The /rosout node subscribes to the /rosout topic to record
-    the messages into a textual log file.
+    the messages into a log file.
     
     
 
