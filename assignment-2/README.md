@@ -65,10 +65,11 @@ You assignment will be evaluated over 100pts, based on the content of your repor
 
 - Report (70 pts)
     * Part I (10 pts): I-1 (5 pts) + I-2 (5 pts)
-    * Part II (22 pts): II-1 (4 pts) + II-2 (3 pts) + II-3 (3 pts) + II-4 (3 pts) + II-5 (3 pts) + II-6 (3 pts) + II-7 (3 pts)     
-    * Part III (15 pts)
+    * Part II (22 pts): II-1 (6 pts) + II-2 (3 pts) + II-3 (3 pts) + II-4 (3 pts) + II-5 (3 pts) + II-6 (1 pts) + II-7 (3 pts)     
+    * Part III (8 pts): III-1 (5 pts) + III-2 (5 pts)
     * Part IV (15 pts)
     * Part V (8 pts)
+    * Part VI (7 pts)
 - Code (30 pts)
     * Part v (30 pts)
 
@@ -424,7 +425,8 @@ answer the questions and complete the tasks below:
 - **III-Q2.** Use the properties of the RobotModel Display panel to change the "alpha" 
 value of all of the links of the robot to 0.5, and show the coordinate axes for 5 key links in 
 the robot: "base_link", "shoulder_link", "biceps_link", "forearm_link", and "wrist_link". 
-The coordinate axes can be turned on and off with the "show axes" property of each of the links.
+The coordinate axes can be turned on and off with the "Show Axes" property of each of the links 
+in the RobotModel Display panel.
  
     Take a picture of the robot in rviz with the 5 set of axes visible and include it
 in your report.
