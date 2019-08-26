@@ -1,6 +1,6 @@
-# Assignment 0
+# Assignment 2
 
-This is the first assignment for Yale's CPSC-459/559 Building Interactive Machines course.
+This is the second assignment for Yale's CPSC-459/559 Building Interactive Machines course.
 
 ## Table of Contents
 
@@ -53,16 +53,15 @@ the end of each part of the assignment. This report should also have any informa
 to understand and/or run your code, as well as the specific commit SHA of the version of the code
 that you would like to be evaluated on. Though not mandatory, it is recommended that you generate the report pdf 
 with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this 
-[simple assignment template](https://www.overleaf.com/latex/templates/simple-assignment-template/mzkqqqjypzvd) 
+[assignment template]() 
 in [LaTeX](https://www.latex-project.org/).
 
 - **Code:** You are also expected to push code for this assignment to your 
-[GitLab](http://www.gitlab.com) repository as indicated in the [general instructions](../README.md) 
-document for CPSC-659 assignments. 
+[GitLab](http://www.gitlab.com) repository as in [Assignment 1](../assignment-1). 
 
 #### Evaluation
 
-You assignment will be evaluated based on the content of your report and your code:
+You assignment will be evaluated over 100pts, based on the content of your report and your code:
 
 - Report (70 pts)
     * Part I (10 pts)
@@ -96,7 +95,7 @@ in your home directory. Follow the steps in this tutorial:
 
     > The [tutorial](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
     page has tabs for switching between ROS distributions. Follow the tutorial for the distribution of
-    ROS that you have installed in your system, e.g., Kinetic.
+    ROS that you have installed in your system, i.e., Melodic.
 
 2. Download Shutter's codebase into your workspace's `src` directory.
 
@@ -123,7 +122,7 @@ in your home directory. Follow the steps in this tutorial:
     $ cd ~/catkin_ws/src
     $ ls -C1 shutter-ros
     arbotix_ros
-    moveit
+    documentation
     shutter_bringup
     shutter_description
     (...)
@@ -152,11 +151,11 @@ in your home directory. Follow the steps in this tutorial:
     ```
     
     > Each ROS package must have its own folder. This means that there cannot be
-    nester packages. Multiple packages cannot share the same directory.
+    nested packages. Multiple packages cannot share the same directory.
     
     Read the README.md file in the root level of the 
     [shutter-ros](https://gitlab.com/interactive-machines/shutter/shutter-ros.git) repository
-    to understand its content and general organization.
+    to understand its content and general organization. You can also access the documentation for shutter-ros at [https://shutter-ros.readthedocs.io](https://shutter-ros.readthedocs.io). 
         
 3. Install other third-party dependencies with [rosdep](http://docs.ros.org/independent/api/rosdep/html/).
 If rosdep is not found in your system, first install it and initialize it as 
@@ -173,10 +172,9 @@ You will need sudo access to complete this step.
 
     # install dependencies for Shutter
     $ cd ~/catkin_ws
-    $ rosdep install -y -r --ignore-src --rosdistro=kinetic --from-paths src
+    $ rosdep install -y -r --ignore-src --rosdistro=melodic --from-paths src
     ```
-   
-        
+           
 4. Build the packages in the src directory of your workspace with `catkin_make`. 
 
     ```bash
@@ -192,7 +190,7 @@ You will need sudo access to complete this step.
     Sourcing this file will `overlay` the install space onto your environment. 
     
     > Overlaying refers to building and using a ROS package from source on top of an existing version
-    of that same package (e.g., installed to the system in /opt/ros/kinetic). For more information
+    of that same package (e.g., installed to the system in /opt/ros/melodic). For more information
     on overlaying, read [this tutorial](http://wiki.ros.org/catkin/Tutorials/workspace_overlaying).
     
     > Add ```source ~/catkin_ws/devel/setup.bash``` at the end of your `.bashrc` file
