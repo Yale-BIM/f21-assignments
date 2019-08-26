@@ -2,6 +2,18 @@
 
 This is the first assignment for Yale's CPSC 459/559 Building Interactive Machines course. 
 
+## Table of Contents
+
+  * [Introduction](#introduction)
+    * [System Requirements](#system-requirements)
+    * [Background Knowledge](#background-knowledge)
+    * [Deliverables](#deliverables)
+    * [Evaluation](#evaluation)
+  * [Part I\. Set up Gitlab Repository](#part-i-set-up-gitlab-repository)
+    * [Tasks](#tasks)
+  * [Working on your assignment](#working-on-your-assignment)
+    * [Tasks](#tasks-1)
+
 ## Introduction
 
 This assignment will teach you how to setup your main [git repository](https://git-scm.com/) for the course, and walk you through the process of creating an assignment report with [LaTeX](https://www.latex-project.org/) - a typesetting system often used for writing academic papers. These two tasks are essential for all future programming assignments. 
