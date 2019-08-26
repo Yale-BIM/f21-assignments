@@ -164,7 +164,7 @@ You will need sudo access to complete this step.
 
     > If you are working on one of the machines in AKW 410, feel free to skip this
     step. All dependencies should already be installed in the computer. Or
-    contact your T.A. to help you with this step if you think this is not the case.
+    contact your T.F. to help you with this step if you think this is not the case.
  
     ```bash
     # update rosdep 
@@ -173,7 +173,14 @@ You will need sudo access to complete this step.
     # install dependencies for Shutter
     $ cd ~/catkin_ws
     $ rosdep install -y -r --ignore-src --rosdistro=melodic --from-paths src
+
+    # install python dependencies for Shutter's face renderer
+    $ roscd shutter_face
+    $ pip install -r requirements.txt --user
     ```
+
+    > If you don't have pip installed, follow [these instructions](https://linuxconfig.org/how-to-install-pip-on-ubuntu-18-04-bionic-beaver) to install it before installing the Python dependencies for shutter_face.
+
            
 4. Build the packages in the src directory of your workspace with `catkin_make`. 
 
