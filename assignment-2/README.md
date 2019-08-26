@@ -64,11 +64,11 @@ in [LaTeX](https://www.latex-project.org/).
 You assignment will be evaluated over 100pts, based on the content of your report and your code:
 
 - Report (70 pts)
-    * Part I (10 pts): I-1 (5 pts) + I-2 (5 pts)
-    * Part II (22 pts): II-1 (6 pts) + II-2 (3 pts) + II-3 (3 pts) + II-4 (3 pts) + II-5 (3 pts) + II-6 (1 pts) + II-7 (3 pts)     
-    * Part III (8 pts): III-1 (5 pts) + III-2 (5 pts)
-    * Part IV (22 pts): IV-1 (4 pts) + IV-2 (3 pts) + IV-3 (5 pts) + IV-4 (5 pts) + IV-5 (5 pts)
-    * Part V (8 pts)
+    * Part I (10 pts): I-Q1 (5 pts) + I-Q2 (5 pts)
+    * Part II (22 pts): II-Q1 (6 pts) + II-Q2 (3 pts) + II-Q3 (3 pts) + II-Q4 (3 pts) + II-Q5 (3 pts) + II-Q6 (1 pts) + II-Q7 (3 pts)     
+    * Part III (8 pts): III-Q1 (5 pts) + III-Q2 (5 pts)
+    * Part IV (22 pts): IV-Q1 (4 pts) + IV-Q2 (3 pts) + IV-Q3 (5 pts) + IV-Q4 (5 pts) + IV-Q5 (5 pts)
+    * Part V (8 pts): V-Q1 (4 pts) + V-Q3(4 pts)
 - Code (30 pts)
     * Part v (30 pts)
 
@@ -529,12 +529,12 @@ Follow the steps below to get started:
 
 1. Place your local git repository in the src directory of your workspace. For example,
 if you named your workspace ~/catkin_ws and cloned your repository in your home folder as 
-~/f18-assignments, then move the repository to the ~/catkin_ws/src directory as follows:
+~/\<username\>-cpsc459-assignments, then move the repository to the ~/catkin_ws/src directory as follows:
 
     ```bash 
     # Example 
     $ cd ~
-    $ mv f18-assignments catkin_ws/src/
+    $ mv <username>-cpsc459-assignments catkin_ws/src/
     ```
     
     > Because you will create a ROS package for your code within your repository, placing
@@ -542,12 +542,12 @@ if you named your workspace ~/catkin_ws and cloned your repository in your home 
     with `rosrun` from any location in your computer.
     
 2. Create a new catkin package with the `catkin_create_pkg` tool from the [catkin_pkg](https://github.com/ros-infrastructure/catkin_pkg) ROS library.
-This package should be named "shutter_poses" and should be created within the assignment_0 
+This package should be named "shutter_poses" and should be created within the assignment-2 
 directory of your git repository.
 
     ```bash
     # Example
-    $ cd ~/catkin_ws/src/f18-assignments/assignment_0
+    $ cd ~/catkin_ws/src/<username>-cpsc459-assignments/assignment-2
     $ catkin_create_pkg shutter_poses rospy std_msgs 
     ```
 
@@ -570,8 +570,8 @@ in the scripts folder of your package.
     $ touch switch_poses.py
     ```
     
-    You should now have a new empty file named "switch_poses.py" in 
-    f18-assignments/assignment_0/shutter_poses/scripts.
+    You should now have a new empty file named "switch_poses.py" in the 
+    <username>-cpsc459-assignments/assignment-2/shutter_poses/scripts directory.
 
 5. Make the file into an executable python script. Add ```#!/usr/bin/env python``` as first
 line to your file and change permissions with 
@@ -650,16 +650,16 @@ pushing your code to GitLab.
     
 ### Questions / Tasks
 
-- **V-1.** Add a README.md file in 
+- **V-Q1.** Add a README.md file in 
 [GitLab flavored markdown](https://docs.gitlab.com/ee/user/markdown.html) format to your 
-shutter_poses package. This file should briefly explain what the switch_poses.py node does.
+shutter_poses package. This file should explain how the switch_poses.py node works. What does it do? What topics does it subscribe to? What does it publish?
 
     > Documenting ROS packages and nodes is good practice!
 
-- **V-2.** Add the `commit SHA` that corresponds to the final version of your code to your report.
+- **V-Q2.** Add the `commit SHA` that corresponds to the final version of your code to your report.
 This version of the code is what will be used to evaluate this assignment.
 
-- **V-3.** Record your screen (e.g., with [kazam](https://launchpad.net/kazam)) as the 
+- **V-Q3.** Record your screen (e.g., with [kazam](https://launchpad.net/kazam)) as the 
 robot is changing its pose in RViz and reaching the desired poses. Turn this video into an animated
 gif, e.g., with ffmpeg and imagemagick as indicated in 
 [this code snipped](https://gitlab.com/snippets/1743818), and include it to your README.md file
