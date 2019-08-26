@@ -27,7 +27,7 @@ You should have access to a computer with [git](https://git-scm.com/). The instr
 If you do not have much experience working with a Linux shell, please read this 
 [introduction to bash](http://cs.lmu.edu/~ray/notes/bash/) by R. Toal and 
 [What Is The Bashrc File Used For? ](https://www.lifewire.com/bashrc-file-4101947) by G. Newell. 
-At the bare minimum, you should be familiar with the commands `cd`, `ls`, `rm`, `mkdir`, `echo`, `nano` before starting Part I of the assignment.
+At the bare minimum, you should be familiar with the commands `cd`, `ls`, `rm` before starting Part I of the assignment.
 
 ### Deliverables
 
