@@ -67,9 +67,8 @@ You assignment will be evaluated over 100pts, based on the content of your repor
     * Part I (10 pts): I-1 (5 pts) + I-2 (5 pts)
     * Part II (22 pts): II-1 (6 pts) + II-2 (3 pts) + II-3 (3 pts) + II-4 (3 pts) + II-5 (3 pts) + II-6 (1 pts) + II-7 (3 pts)     
     * Part III (8 pts): III-1 (5 pts) + III-2 (5 pts)
-    * Part IV (15 pts)
+    * Part IV (22 pts): IV-1 (4 pts) + IV-2 (3 pts) + IV-3 (5 pts) + IV-4 (5 pts) + IV-5 (5 pts)
     * Part V (8 pts)
-    * Part VI (7 pts)
 - Code (30 pts)
     * Part v (30 pts)
 
@@ -438,16 +437,16 @@ in your report.
 
 ## Part IV. Control one robot joint at a time
     
-Shutter has 5 key links ("base_link", "shoulder_link", "biceps_link", 
-"forearm_link", and "wrist_1_link") and 4 key revolute [joints](http://wiki.ros.org/urdf/XML/joint). The joints are implemented in the real
-robot with [dynamixel motors](http://www.robotis.us/dynamixel/). These motors count with
+Shutter's body has 5 key links ("base_link", "shoulder_link", "biceps_link", 
+"forearm_link", and "wrist_link") and 4 revolute [joints](http://wiki.ros.org/urdf/XML/joint). The joints are implemented in the real
+robot with [dynamixel MX-64M and MX-28M motors](http://www.robotis.us/dynamixel/). These motors count with
 magnetic encoders that provide the arbotix driver an estimate of their current position. 
  
 Each joint in the robot connects two links:
-- joint 1: Connects the "base_link" to the "shoulder_link"
-- joint 2: Connects the "shoulder_link" to the "bicepts_link"
-- joint 3: Connects the "bicepts_link" to the "forearm_link"
-- joint 4: Connects the "forearm_link" to the "wrist_1_link"
+- **joint 1:** Connects the "base_link" to the "shoulder_link"
+- **joint 2:** Connects the "shoulder_link" to the "bicepts_link"
+- **joint 3:** Connects the "bicepts_link" to the "forearm_link"
+- **joint 4:** Connects the "forearm_link" to the "wrist_link"
  
 You will now learn to control the positions of these 4 joints with a graphical
 interface in order to change the pose of the robot.
@@ -461,16 +460,18 @@ rviz as in Parts II and III of this assignment.
     $ rosrun arbotix_python arbotix_gui
     ```
     
-    By moving the sliders in the GUI, you will be sending requests to move the joints
+    By enabling and moving the sliders in the GUI, you will be sending requests to move the joints
     through the /joint_X/command topics. The /arbotix driver, which listens to these topics,
-    will then send the new positions to the robot. As the robot
-    starts moving, the /arbotix driver will also publish the new joint positions, which then
-    get re-published in /tf by /robot_state_publisher. Finally, the /tf transformations are used 
-    by rviz to render the robot in motion.
+    will then send the new positions to the robot. 
+    
+    How does rviz update the visualization of the robot model? As the robot
+    starts moving, the /arbotix driver will publish the new joint positions, which then
+    get re-published in /tf as transformations by the /robot_state_publisher node. The /tf 
+    transformations and the robot URDF model are used by rviz to render the robot in motion.
     
 ### Questions / Tasks
 
-- **IV-1.** Now that you know that the robot has 4 joints, how can you get the current position
+- **IV-Q1.** Now that you know that the robot has 4 joints, how can you get the current position
 of the joints through the command line? 
 
     *Tip:* The current positions must be measured with magnetic encoders in the real 
