@@ -47,7 +47,7 @@ You assignment will be evaluated based on the content of your repository and you
 
 	> If you already have a GitLab account associated to your Yale email, you can skip this step.
 
-2. Create an empty, `private project` in GitLab called *cpsc459-assignments* or  *cpsc559-assignments* based on whether you are taking the undergrad (CPSC 459) or graduate (CPSC 559) version of the course. The GiLab project will be used to store your assignment's code.
+2. Create an empty, `private project` in GitLab called *cpsc459-assignments* or  *cpsc559-assignments* based on whether you are fulfilling the undergrad (CPSC 459) or graduate (CPSC 559) requirements for the course. The GiLab project will be used to store your assignment's code.
 
 2. Open the project page, copy the HTTPS URL, and paste it in a terminal to `clone your project` into your machine. For example:
 
