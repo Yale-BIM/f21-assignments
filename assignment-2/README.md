@@ -175,7 +175,7 @@ You will need sudo access to complete this step.
     $ rosdep install -y -r --ignore-src --rosdistro=melodic --from-paths src
 
     # install python dependencies for Shutter's face renderer
-    $ roscd shutter_face
+    $ cd src/shutter-ros/shutter_face/
     $ pip install -r requirements.txt --user
     ```
 
