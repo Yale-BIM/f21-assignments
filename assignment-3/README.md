@@ -179,8 +179,8 @@ the pose of $`A`$ in $`B`$ is given by the rotation of $`A`$'s coordinate axes i
     $`R = 
     \begin{bmatrix}
     r_{11} & r_{12} & r_{13} & 0\\
-    r_{12} & r_{22} & r_{23} & 0\\
-    r_{13} & r_{32} & r_{33} & 0\\
+    r_{21} & r_{22} & r_{23} & 0\\
+    r_{31} & r_{32} & r_{33} & 0\\
     0 & 0 & 0 & 1
     \end{bmatrix}
     `$<br>
