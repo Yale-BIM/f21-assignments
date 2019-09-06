@@ -273,8 +273,8 @@ Include this image in your report.
 - **I-2.** Based on the tf tree from I-1, which frames are between the robot's *base_footprint* 
 frame and the *camera_color_optical_frame* frame?
 
-- **I-3.** Based on the tf tree, what is the $`4 \times 4`$ transformation $`^{W}_{Z}T`$
-between the *wrist_1_link* frame ($`W`$) and the *camera_color_optical_frame* frame ($`Z`$)? Please
+- **I-3.** Based on the tf tree, what is the $`4 \times 4`$ transformation $`^{C}_{O}T`$
+between the *camera_link* frame ($`C`$) and the *camera_color_optical_frame* frame ($`O`$)? Please
 provide the transformation with both the rotation and translation components.
 
     *Tip:* You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool to query
