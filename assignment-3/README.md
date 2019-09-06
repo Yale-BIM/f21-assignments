@@ -260,7 +260,7 @@ You should also learn to visualize the transforms in /tf and /tf_static with [rv
 Now that you know how to use basic tf tools, bring up a simulation of the robot Shutter. 
 You will inspect its tf tree with tf tools. 
 
-> NOTE: In [assignment-0](../../assignment-0/README.md), you ran `roscore` before bringing up the robot to enable ROS nodes to communicate. 
+> NOTE: In [assignment-2](../../assignment-2/README.md), you ran `roscore` before bringing up the robot to enable ROS nodes to communicate. 
 But you can also launch `shutter.launch` directly, as you did in the tutorial. 
 If roscore isn't already running, roslaunch  will automatically start it. Try it!
 
