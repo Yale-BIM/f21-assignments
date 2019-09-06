@@ -229,7 +229,7 @@ tf uses the inverse of the transformation that is stored in the edge.
 <!-- todo: say something about querying transforms over time here? -->
 
 ## Setup
-Before you start coding or answering questions for this assignment, please update
+Before you start implementing or answering questions for this assignment, please update
 your repository to pull the latest changes from the assignments repository and update
 the shutter-ros repository:
 
@@ -244,7 +244,7 @@ $ git pull
 
 # finally, re-build your catkin workspace 
 $ cd <path-to-your-catkin-workspace-root-directory>
-$ catkin_make
+$ catkin_make -DCMAKE_BUILD_TYPE=Release
 ```
 
 
