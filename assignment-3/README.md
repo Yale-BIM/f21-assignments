@@ -138,7 +138,7 @@ Revolute Joint (image from Mathworks.com)
 
 In general, we like to think about Degrees of Freedom (DoF) as the number of independent position 
 variables that would have to be specified in order to locate all parts of a robot.
-Shutter, in particular, has 4 motors in its arm, each of which implements a revolute joint.
+Shutter, in particular, has 4 servos in its arm, each of which implements a revolute joint.
 Thus, Shutter has 4 DoF. 
 
 
@@ -172,7 +172,7 @@ the pose of $`A`$ in $`B`$ is given by the rotation of $`A`$'s coordinate axes i
     The scalars $`t_1`$, $`t_2`$, and $`t_3`$ correspond to the displacements in $`x`$,
     $`y`$, and $`z`$, respectively. Thus, a translation has 3 DoF. Note that
     representing translations with $`4 \times 4`$ matrices as above is helpful 
-    for transforming points in homogeneous coordinates.<br> <br>
+    for transforming points in homogeneous coordinates.
     
 >- **Rotations:** A 3D rotation has 3 DoF as well. Each DoF corresponds to a rotation around one of the axes of the 
     coordinate frame. We can represent rotations also as $`4 \times 4`$ transformation matrices:<br>
@@ -184,7 +184,7 @@ the pose of $`A`$ in $`B`$ is given by the rotation of $`A`$'s coordinate axes i
     0 & 0 & 0 & 1
     \end{bmatrix}
     `$<br>
-    Note that the $`3 \times 3`$ submatrix of $`R`$ with the elements $`r_11`$ ... $`r_33`$
+    Note that the $`3 \times 3`$ submatrix of $`R`$ with the elements $`r_{11}`$ ... $`r_{33}`$
     is an [orthogonal matrix](https://en.wikipedia.org/wiki/Orthogonal_matrix).<br>    
     It is important to know that [ROS uses quaternions](http://wiki.ros.org/tf2/Tutorials/Quaternions) 
     to represent rotations, but there are many other useful representations (e.g., 
