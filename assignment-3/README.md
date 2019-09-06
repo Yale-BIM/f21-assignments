@@ -49,25 +49,23 @@ the [Robot Operating System (ROS)](http://www.ros.org/). This includes being fam
 the `roscore`, `rosrun`, `roslaunch`, `rostopic`, `rosmsg`, `rosnode`, `rqt_graph`, and `rviz` tools. You
 should also know how to bring up a simulation of the Shutter robot in ROS, and
 control the position of its joints one at a time. If
-you are unfamiliar with any of these tools, programs, or procedures, please revisit  
-[assignment-2](https://gitlab.com/cpsc459-bim/assignments/f19-assignments/tree/master/assignment-2).
+you are unfamiliar with any of these tools, programs, or procedures, please revisit [assignment-2](https://gitlab.com/cpsc459-bim/assignments/f19-assignments/tree/master/assignment-2).
 
 #### Deliverables
 
 - **Report:** You are expected to submit a pdf to Canvas with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of the version of the code
-that you would like to be evaluated on. Though not mandatory, it is recommended that you generate this pdf 
+that you would like to be evaluated on. It is recommended that you generate this pdf 
 with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this 
-[simple assignment template](https://www.overleaf.com/latex/templates/simple-assignment-template/mzkqqqjypzvd) 
+[assignment template](https://www.overleaf.com/latex/templates/assignment-template-for-yale-cpsc-459-559/nbysxxygbysk) 
 in [LaTeX](https://www.latex-project.org/).
 
 - **ROS Bags:** You are also expected to submit two [ROS bags](http://wiki.ros.org/Bags) to Canvas (see 
 Parts III and IV of this assignment).
 
 - **Code:** Finally, you are expected to push code for this assignment to your 
-[GitLab](http://www.gitlab.com) repository as indicated in the [general instructions](../README.md) 
-document for CPSC-659 assignments. 
+[GitLab](http://www.gitlab.com) repository as explained in the [first](https://gitlab.com/cpsc459-bim/assignments/f19-assignments/tree/master/assignment-1) assignment.
 
 #### Evaluation
 
@@ -86,8 +84,7 @@ You assignment will be evaluated based on the content of your report and your co
 #### Further Reading and Tutorials
 
 - [tf: The Transform Library](http://wiki.ros.org/Papers/TePRA2013_Foote?action=AttachFile&do=get&target=TePRA2013_Foote.pdf)
-- [Introduction to Robotics: Mechanics and Control](https://www.pearson.com/us/higher-education/program/Craig-Introduction-to-Robotics-Mechanics-and-Control-4th-Edition/PGM91709.html) by J. Craig (see Chapters 3 and 4 for more information on
-manipulator kinematics)
+- [Introduction to Robotics: Mechanics and Control](https://www.pearson.com/us/higher-education/program/Craig-Introduction-to-Robotics-Mechanics-and-Control-4th-Edition/PGM91709.html) by J. Craig (see Chapters 3 and 4 for more information on manipulator kinematics)
 
 ## Preliminaries
 
