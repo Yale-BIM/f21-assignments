@@ -1,6 +1,6 @@
-# Assignment 1
+# Assignment 3
 
-This is the second assignment for Yale's CPSC-459/559 Building Interactive Machines course.
+This is the third assignment for Yale's CPSC-459/559 Building Interactive Machines course.
 
 ## Table of Contents
 
@@ -42,15 +42,15 @@ You will use git to save your work to your [GitLab](http://www.gitlab.com) repos
 
 #### Background Knowledge
 
-This assignment assumes that you have already completed the first assignment ([assignment-0](../../assignment-0/README.md)) and,
-thus, have set up your catkin workspace. You are also expected to have experience with Linux shells 
+This assignment assumes that you have already completed the [first](https://gitlab.com/cpsc459-bim/assignments/f19-assignments/tree/master/assignment-1) and [second](https://gitlab.com/cpsc459-bim/assignments/f19-assignments/tree/master/assignment-2) assignments and,
+thus, have set up your repository and catkin workspace. You are also expected to have experience with Linux shells 
 (e.g., [bash](https://www.gnu.org/software/bash/)), [git](https://git-scm.com/), and
 the [Robot Operating System (ROS)](http://www.ros.org/). This includes being familiar with
 the `roscore`, `rosrun`, `roslaunch`, `rostopic`, `rosmsg`, `rosnode`, `rqt_graph`, and `rviz` tools. You
 should also know how to bring up a simulation of the Shutter robot in ROS, and
 control the position of its joints one at a time. If
-you are unfamiliar with any of these tools, programs, or procedures, please revisit the 
-[assignment-0](../../assignment-0/README.md).
+you are unfamiliar with any of these tools, programs, or procedures, please revisit  
+[assignment-2](https://gitlab.com/cpsc459-bim/assignments/f19-assignments/tree/master/assignment-2).
 
 #### Deliverables
 
