@@ -585,7 +585,7 @@ line to your file and change permissions with
 6. Structure the code in your node as in the publisher example of 
 [this tutorial](http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29#rospy_tutorials.2BAC8-Tutorials.2BAC8-WritingPublisherSubscriber.Writing_the_Publisher_Node)
 and write any necessary code to make the joints of the robot move according to the poses
-specified above and at a constant frame rate. 
+specified above. Don't worry about adjusting the speed of the servos as the robot is moving from one pose to the next as that is taken care by the robot's arbotix driver. 
 
     In your node, you should first import rospy and any necessary message types at the top of the program. 
     Then, define a function that will initialize the node and do most of the work. Finally,
@@ -607,7 +607,7 @@ specified above and at a constant frame rate.
     def pose_switcher():
        # Define publishers and init your node here.
        # Add a loop to request the robot to move its joints according to the 
-       # desired poses and at a constant rate.
+       # desired poses.
        ...
 
     if __name__ == '__main__':
