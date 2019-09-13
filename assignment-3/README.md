@@ -306,7 +306,7 @@ Each [geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs
 message has:
 
 - a `header`, with a `stamp` of when the transform was published 
-and the `frame_id` of the reference frame for the transformation;
+and the `frame_id` of the parent frame for the transformation;
 - a `child_frame_id`, corresponding to the name of the child frame; and
 - a `transform`, of type [geometry_msgs/Transform](http://docs.ros.org/jade/api/geometry_msgs/html/msg/Transform.html),
 with the translation and rotation of the transform $`{parent}_{child}T`$.
