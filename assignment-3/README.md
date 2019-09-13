@@ -338,7 +338,7 @@ the position of a simulated moving object as a ROS tf frame ("target") relative
 to the robot's "camera_color_optical_frame" frame. 
 
     - Create a new ROS node in Python within the script directory of the `shutter_lookat` package.
-The node should be named `publish_target_relative_to_zed_camera.py`.
+The node should be named `publish_target_relative_to_realsense_camera.py`. The python script should have executable permissions.
 
     - Within your new node:
     
@@ -365,7 +365,7 @@ given the increased complexity of this node in comparison previous examples.
             [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29).
         
     - Edit the `generate_target.launch` script in the shutter_lookat package so that
-    it runs your new node (publish_target_relative_to_zed_camera.py) 
+    it runs your new node (publish_target_relative_to_realsense_camera.py) 
     in addition to all of the nodes that it already launches.
      
         > [Roslaunch](http://wiki.ros.org/roslaunch) is a tool for easily launching multiple
