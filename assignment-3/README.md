@@ -392,7 +392,7 @@ given the increased complexity of this node in comparison previous examples.
     
 ## Part III. Making a virtual camera
 You will now project the simulated moving object from Part II of this assignment 
-on a virtual image captured from a camera in Shutter. Close all ROS nodes
+on a virtual image captured from Shutter. Close all ROS nodes
 and launch the generate_target.launch script again before starting this part of the assignment.
 
 1. Create a new ROS node called `virtual_camera.py` in the scripts directory of
@@ -450,7 +450,7 @@ to the "camera_color_optical_frame" frame.
     > See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
     for more examples on drawing basic figures.
 
-    **f.** Publish the image that you created with OpenCV as a sensor_msgs/Image message in ROS. You
+    **f.** Publish the image that you created with OpenCV as a [sensor_msgs/Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html) message in ROS. You
     can use the [cv_bridge](http://wiki.ros.org/cv_bridge) library to convert the OpenCV image to
     an Image message. Note that the Image message should have a `header` with the current time as
     stamp and the "camera_color_optical_frame" frame as frame_id. The Image message should be published by your node
