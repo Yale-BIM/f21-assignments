@@ -378,11 +378,11 @@ given the increased complexity of this node in comparison previous examples.
     visually matches the position of the moving target (red ball). If the frame and the moving
     object are not displayed in the same place, check your code and edit as necessary.
     
-    - Save your work by adding and committing your publish_target_relative_to_zed_camera.py
+    - Save your work by adding and committing your publish_target_relative_to_realsense_camera.py
     node and the generage_target.launch script to your local repository. Push your code to GitLab.
      
         > Remember that continously committing your work and pushing to Gitlab will ensure that your
-        code is backed up and readily accessible at any time in the future.
+        code is backed up and readily accessible in the future.
     
 - **II-2.** Stop any ROS processes that you are running, relaunch your new
     generate_target.launch script, and create a new image of the tf tree in ROS, 
