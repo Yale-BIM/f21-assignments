@@ -138,7 +138,7 @@ Revolute Joint (image from Mathworks.com)
 
 In general, we like to think about Degrees of Freedom (DoF) as the number of independent position 
 variables that would have to be specified in order to locate all parts of a robot.
-Shutter, in particular, has 4 servos in its arm, each of which implements a revolute joint.
+Shutter, has 4 servos in its arm, each of which implements a revolute joint.
 Thus, Shutter has 4 DoF. 
 
 
@@ -147,7 +147,7 @@ Thus, Shutter has 4 DoF.
 3D spatial transformations map 3D points from one `coordinate system` (or `frame`) to another.
 They are particularly relevant for robotics and 3D vision applications, where the 
 elements of interest are in different locations in the world. For example, transformations
-are useful to know the position of the camera in the Robot shutter relative to one of its 
+are useful to know the position of the camera in Shutter relative to one of its 
 links or its base. Similarly, 3D transformations can help infer the location of an object 
 with respect to a camera that observes it.
 
@@ -173,7 +173,6 @@ the pose of $`A`$ in $`B`$ is given by the rotation of $`A`$'s coordinate axes i
     $`y`$, and $`z`$, respectively. Thus, a translation has 3 DoF. Note that
     representing translations with $`4 \times 4`$ matrices as above is helpful 
     for transforming points in homogeneous coordinates.
-    
 >- **Rotations:** A 3D rotation has 3 DoF as well. Each DoF corresponds to a rotation around one of the axes of the 
     coordinate frame. We can represent rotations also as $`4 \times 4`$ transformation matrices:<br>
     $`R = 
