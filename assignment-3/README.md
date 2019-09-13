@@ -678,7 +678,7 @@ code works.
 
 - **IV-1.** Make the robot follow the target such that the projected position 
 of the red ball appears static in the image from your virtual camera. Commit your code to your repository 
-and explain in a few words your approach to enable the robot to follow the target. 
+and explain your approach to enable the robot to follow the target.
 
 - **IV-2.** Modify your `virtual_camera.py` script from Part III of this assignment to print to the
   screen the horizontal and vertical distance between the projected target and the center of the image. 
