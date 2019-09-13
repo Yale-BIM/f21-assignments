@@ -589,6 +589,7 @@ the virtual camera that you already implemented is working correctly.
         * /arm_controller/follow_joint_trajectory/status
         * /diagnostics
         * /joint_states 
+        * /motors_enabled
         * /rosout   
         * /target  
         * /target_marker 
@@ -604,11 +605,11 @@ the virtual camera that you already implemented is working correctly.
 - **III-3.** Explain in your report what is the difference between calling the `lookup_transform`
 function from the tf2 API with rospy.Time(0) or rospy.Time.now() as third argument? 
 
-> Note that how you call the lookup_transform function can have an effect on the
-rate of operation of your virtual_camera.py node. Try changing how you call the function
-in your node and check how often are you able to publish images through the
-/virtual_camera/image_raw topic. Use the [rostopic hz](http://wiki.ros.org/rostopic) tool 
-to this end.
+    > Note that how you call the lookup_transform function can have an effect on the
+    rate of operation of your virtual_camera.py node. Try changing how you call the function
+    in your node and check how often are you able to publish images through the
+    /virtual_camera/image_raw topic. Use the [rostopic hz](http://wiki.ros.org/rostopic) tool 
+    to this end.
 
     
 ## Part IV. Orienting Shutter's camera towards a moving target
