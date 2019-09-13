@@ -557,11 +557,11 @@ the virtual camera that you already implemented is working correctly.
     your virtual_camera.py node and, once RViz opens, add a Camera display to the rviz window.
     Configure the camera plugin as follows:
     
-    * Image Topic: /virtual_camera/image_raw
-    * Transport Hint: raw
-    * Image Rendering: background
-    * Overlay Alpha: 0.6
-    * Zoom Factor: 1
+        * Image Topic: /virtual_camera/image_raw
+        * Transport Hint: raw
+        * Image Rendering: background
+        * Overlay Alpha: 0.6
+        * Zoom Factor: 1
 
     The red circle from your /virtual_camera/image_raw image should then align in the rviz 
     Camera plugin with the red ball of the simulated moving object (as in the Figure below). 
@@ -574,27 +574,28 @@ the virtual camera that you already implemented is working correctly.
     Once the image that is published by the virtual_camera.py script is consistent 
     with what the Camera plugin shows in RViz, record a ROS [bag](http://wiki.ros.org/Bags) 
     as in [this tutorial](http://wiki.ros.org/rosbag/Tutorials/Recording%20and%20playing%20back%20data). 
-    The bag should have all of the messages that are streamed in your system for a duration of 15 seconds.
+    The bag should have all of the messages that are streamed in your system for a duration of 8 seconds.
     
     ```bash
-    $ rosbag record -O assignment1_part3.bag -a --duration 15 
+    $ rosbag record -O assignment1_part3.bag -a --duration 8 
     ```
     
-    > You can see a description of the arguments that `rosbag record` accepts [here](http://wiki.ros.org/rosbag/Commandline#record).
+    > You can see a description of the arguments that `rosbag record` accepts [here](http://wiki.ros.org/rosbag/Commandline#record). Make sure to start 
+    the generate_target.launch file and your virtual camera before starting to record the bag, or the bag might end up being empty!
     
-    Inspect your ROS bag with the [rosbag info]() tool to verify that it contains messages
+    Inspect your ROS bag with the [rosbag info](http://wiki.ros.org/rosbag/Commandline#rosbag_info) tool to verify that it contains messages
     for all of the following topics:
-    
-    * /arm_controller/follow_joint_trajectory/status
-    * /diagnostics
-    * /joint_states 
-    * /rosout   
-    * /target  
-    * /target_marker 
-    * /tf         
-    * /tf_static  
-    * /virtual_camera/camera_info    
-    * /virtual_camera/image_raw 
+        
+        * /arm_controller/follow_joint_trajectory/status
+        * /diagnostics
+        * /joint_states 
+        * /rosout   
+        * /target  
+        * /target_marker 
+        * /tf         
+        * /tf_static  
+        * /virtual_camera/camera_info    
+        * /virtual_camera/image_raw 
     
     Make sure to **submit your ROS bag to Canvas** as part of this assignment. You don't need to and 
     you shouldn't commit the bag to your repository! Otherwise, you will make your repository
