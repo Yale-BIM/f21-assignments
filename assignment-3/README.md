@@ -299,8 +299,8 @@ uses a tree structure to represent frames and transformations in ROS. These fram
 are created based on the messages streamed through the /tf and /tf_static topics. 
 
 By convention, the /tf and /tf_static topics 
-transmit [tf2_msgs/TFMessage](http://docs.ros.org/jade/api/tf2_msgs/html/msg/TFMessage.html) messages,
-which contain a list of transformations encoded as 
+transmit messages of the type [tf2_msgs/TFMessage](http://docs.ros.org/jade/api/tf2_msgs/html/msg/TFMessage.html). In turn, these messages
+ contain a list of transformations encoded as 
 [geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) messages.
 Each [geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) 
 message has:
