@@ -577,7 +577,7 @@ the virtual camera that you already implemented is working correctly.
     The bag should have all of the messages that are streamed in your system for a duration of 8 seconds.
     
     ```bash
-    $ rosbag record -O assignment1_part3.bag -a --duration 8 
+    $ rosbag record -O assignment3_part3.bag -a --duration 8 
     ```
     
     > You can see a description of the arguments that `rosbag record` accepts [here](http://wiki.ros.org/rosbag/Commandline#record). Make sure to start 
