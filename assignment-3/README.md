@@ -172,7 +172,7 @@ the pose of $`A`$ in $`B`$ is given by the rotation of $`A`$'s coordinate axes i
     The scalars $`t_1`$, $`t_2`$, and $`t_3`$ correspond to the displacements in $`x`$,
     $`y`$, and $`z`$, respectively. Thus, a translation has 3 DoF. Note that
     representing translations with $`4 \times 4`$ matrices as above is helpful 
-    for transforming points in homogeneous coordinates.
+    for transforming points in homogeneous coordinates.<br>
 >- **Rotations:** A 3D rotation has 3 DoF as well. Each DoF corresponds to a rotation around one of the axes of the 
     coordinate frame. We can represent rotations also as $`4 \times 4`$ transformation matrices:<br>
     $`R = 
@@ -211,7 +211,7 @@ $`A`$ in $`B`$, respectively.
 ### Transforms in ROS
 
 The [tf](http://wiki.ros.org/tf) library in ROS represents transforms and coordinate frames 
-in a `tree structure` buffered in time. The tree is a directed graph, where any two 
+in a `tree structure` buffered in time. The tree is a directed graph with a root, and where any two 
 vertices are connected by one path. The nodes of this graph corresponds to coordinate frames,
 each associated with a link, and the edges correspond to transforms between pairs of frames. 
 
