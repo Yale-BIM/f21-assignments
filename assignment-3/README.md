@@ -543,7 +543,7 @@ through the `/virtual_camera/camera_info` topic, as indicated in the steps below
     **e.** Finally, check that your node is publishing CameraInfo messages through the 
     /virtual_camera/camera_info topic with the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) tool.
     
-    Remember to commit your code whenever you want to save a snapshot of your work.
+    > Remember to commit your code whenever you want to save a snapshot of your work.
 
 - **III-2.** You will now verify that the image and the camera parameters that your node publishes 
 are consistent with one another with the help of the rviz [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera). 
