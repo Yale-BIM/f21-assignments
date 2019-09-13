@@ -309,7 +309,7 @@ message has:
 and the `frame_id` of the parent frame for the transformation;
 - a `child_frame_id`, corresponding to the name of the child frame; and
 - a `transform`, of type [geometry_msgs/Transform](http://docs.ros.org/jade/api/geometry_msgs/html/msg/Transform.html),
-with the translation and rotation of the transform $`{parent}_{child}T`$.
+with the translation and rotation of the transform <sup>parent</sup><sub>child</sub>$`T`$.
 
 You will use code that is already provided in this assignment to learn how to publish tf
 data as described above. To get started, follow the steps below:
