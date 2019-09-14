@@ -73,7 +73,7 @@ You assignment will be evaluated based on the content of your report and your co
 
 - Report (45 pts)
     - Part I (20 pts): I-1 (5 pts) + I-2 (2 pts) + I-3 (5 pts) + I-4 (8 pts)
-    - Part II-2 (5 pts) 
+    - Part II (10 pts): II-2 (5 pts) + II-3 (5 pts) 
     - Part III-3 (5 pts)
     - Part IV (15 pts): IV-2 (5 pts) + IV-3 (10 pts)
 - Code (55 pts)
@@ -269,7 +269,7 @@ If roscore isn't already running, roslaunch  will automatically start it. Try it
 - **I-1.** Generate an image of the tf tree of Shutter with [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
 Include this image in your report.
 
-    *Tip:* You can also generate the image with the 
+    > Tip: You can also generate the image with the 
     [rqt_tf_tree](http://wiki.ros.org/rqt_tf_tree) interface if you prefer.
 
 - **I-2.** Based on the tf tree from I-1, which frames are between the robot's *base_footprint* 
@@ -279,7 +279,7 @@ frame and the *camera_color_optical_frame* frame?
 between the *camera_link* frame ($`C`$) and the *camera_color_optical_frame* frame ($`O`$)? Please
 provide the transformation with both the rotation and translation components.
 
-    *Tip:* You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool to query
+    > Tip: You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool to query
     transformations. You will then need to assemble the $`4 \times 4`$ homogenous transformation matrix 
     from these values. We recommend [this primer](http://wiki.ogre3d.org/Quaternion+and+Rotation+Primer) from Ogre
     if you are confused about different rotation representations.
@@ -287,7 +287,7 @@ provide the transformation with both the rotation and translation components.
 - **I-4.** How are the transformations in the /tf and /tf_static topics generated after you 
 bring up the robot? Please explain which node(s) contribute to generating the tf tree.
 
-    *Tip:* You should inspect what nodes and topics are being published in your ROS system,
+    > Tip: You should inspect what nodes and topics are being published in your ROS system,
     e.g., with the [rqt_graph](http://wiki.ros.org/rqt_graph) tool. You can also read the shutter.launch script
     in the shutter_bringup package (and any subsequent script that it launches) 
     to understand how the robot's tf tree is being generated.
@@ -345,23 +345,25 @@ The node should be named `publish_target_relative_to_realsense_camera.py`. The p
         - Subscribe to the `/target` topic to receive the position of the
 simulated object relative to the "base_footprint" frame.
 
-            > We suggest that you organize the code of your node
+            > Tip: We suggest that you organize the code of your node
 in a Python class, as in [this tutorial on a pytalker node](http://wiki.ros.org/ROSNodeTutorialPython#The_pytalker_node),
 given the increased complexity of this node in comparison previous examples.
 
         - Transform the 3D pose of the moving object to the "camera_color_optical_frame" frame in Shutter.
-        For this, you will have to query the transformation between the "base_footprint" frame
-        and the "camera_color_optical_frame" using the `lookup_transform` function from the tf2 API, e.g., 
-        as in the ROS tutorial on [writing a tf2 listener](http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20listener%20%28Python%29).
+        For this, you will have to query the transformation between the "base_footprint" frame in which the target pose is provided
+        and the "camera_color_optical_frame" using the `lookup_transform` function from the tf2 API. 
+        Make sure to query the transformation at the time when the target pose was computed.
+
+            > Tip 1: You can take a look at this ROS tutorial on [writing a tf2 listener](http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20listener%20%28Python%29)
+            for some examples on using the tf2 API.
              
-            > You can use the [tf2_geometry_msgs](http://wiki.ros.org/tf2_geometry_msgs) API to transform the pose of the object
+            > Tip 2: You can use the [tf2_geometry_msgs](http://wiki.ros.org/tf2_geometry_msgs) API to transform the pose of the object
             as in [this post](https://answers.ros.org/question/222306/transform-a-pose-to-another-frame-with-tf2-in-python/).
             
-        - Broadcast a tf transform from the "camera_color_optical_frame" frame to a (new) "target" frame in tf. 
-        The target frame should have the same pose as the simulated object (as provided through
-        the /target topic).
+        - Broadcast a tf transform between the "camera_color_optical_frame" frame (parent) and a new "target" frame (child) in tf. 
+        The target frame should match the pose of the simulated object in the camera_color_optical_frame.
         
-            > An example on broadcasting tf transformations can be found in 
+            > Tip: An example on broadcasting tf transformations can be found in 
             [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29).
         
     - Edit the `generate_target.launch` script in the shutter_lookat package so that
@@ -389,6 +391,14 @@ given the increased complexity of this node in comparison previous examples.
     e.g., using [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
     Add the image of the tf tree to your report.
     
+
+- **II-3.** Explain in your report what is the difference between calling the `lookup_transform`
+function from the tf2 API with rospy.Time(0) or rospy.Time.now() as third argument? 
+
+    > Note that how you call the lookup_transform function can have an effect on the
+    rate of operation of your publish_target_relative_to_realsense_camera.py node. Try changing how you call the function
+    in your node and check how often are you able to publish transforms. Use the [rostopic hz](http://wiki.ros.org/rostopic) tool 
+    to this end.
     
 ## Part III. Making a virtual camera
 Assume that the moving object from Part II of this assignment is a sphere. Now, you will 
@@ -546,7 +556,7 @@ through the `/virtual_camera/camera_info` topic, as indicated in the steps below
     > Remember to commit your code whenever you want to save a snapshot of your work.
 
 - **III-2.** You will now verify that the image and the camera parameters that your node publishes 
-are consistent with one another with the help of the rviz [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera). 
+are consistent with one another with the help of the RViz [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera). 
 
     > The [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera) creates a new rendering
 window in RViz from the perspective of a camera using the CameraInfo message that your virtual_camera.py node publishes. 
@@ -604,14 +614,6 @@ the virtual camera that you already implemented is working correctly.
     you shouldn't commit the bag to your repository! Otherwise, you will make your repository
     unnecessarily heavy.
     
-- **III-3.** Explain in your report what is the difference between calling the `lookup_transform`
-function from the tf2 API with rospy.Time(0) or rospy.Time.now() as third argument? 
-
-    > Note that how you call the lookup_transform function can have an effect on the
-    rate of operation of your virtual_camera.py node. Try changing how you call the function
-    in your node and check how often are you able to publish images through the
-    /virtual_camera/image_raw topic. Use the [rostopic hz](http://wiki.ros.org/rostopic) tool 
-    to this end.
 
 - **III-4.** Modify your virtual_camera.py node so that the circle is only drawn if the target is in front of the camera.
 That is, the circle should be drawn only if the Z component of the target's position is
@@ -628,24 +630,7 @@ positive in the camera coordinate frame. Explain in your report how you modified
 it computes the outline of the target as seen by the camera and projects points on that outline onto the image.
 Note that the shape of the outline depends on the relative position of the target in the camera frame.
 
-    **a.** Add an internal node parameter to your virtual_camera.py program that allows you to
-    know the radius of the target when the node is run. For example:
-
-    ```python
-    # Example
-    radius = rospy.get_param("~radius", default=0.1)
-    ```
-
-    You should then be able to run your node with the optional parameter `radius`:
-
-    ```bash
-    $ rosrun shutter_lookat virtual_camera.py _radius:=<new radius>
-    ```
-
-    Check that you do get the input parameter into your node when you call your program as above.
-    You'll need access to this input parameter to verify the next task.
-
-    **b.** Let $`\bold{t}` = (t_x, t_y, t_z)$ be the vector from the camera center to the center of the target 
+    **a.** Let $`\bold{t}` = (t_x, t_y, t_z)$ be the vector from the camera center to the center of the target 
     in the camera coordinate frame. Additionally, let the camera coordinate frame be oriented such that the $z$ axis points
     forward. How can you compute the vector $`\bold{q}`$ perpendicular to both $`\bold{t}`$ and the horizontal axis of the
     camera coordinate frame?
