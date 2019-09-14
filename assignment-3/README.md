@@ -391,8 +391,8 @@ given the increased complexity of this node in comparison previous examples.
     
     
 ## Part III. Making a virtual camera
-You will now project the simulated moving object from Part II of this assignment 
-on a virtual image captured from Shutter. Close all ROS nodes
+Assume that the moving object from Part II of this assignment is a sphere. Now, you will 
+work on projecting the simulated object on a virtual image captured from Shutter. Close all ROS nodes
 and launch the generate_target.launch script again before starting this part of the assignment.
 
 1. Create a new ROS node called `virtual_camera.py` in the scripts directory of
@@ -613,9 +613,9 @@ function from the tf2 API with rospy.Time(0) or rospy.Time.now() as third argume
     /virtual_camera/image_raw topic. Use the [rostopic hz](http://wiki.ros.org/rostopic) tool 
     to this end.
 
-- **III-4.** Modify your virtual_camera.py node so that if the target is behind the camera, the circle is not drawn.
-That is, the circle should not be drawn if the Z component of the target's position is
-negative in the camera coordinate frame. Explain in your report how you modified your code to take into account these situations.
+- **III-4.** Modify your virtual_camera.py node so that the circle is only drawn if the target is in front of the camera.
+That is, the circle should be drawn only if the Z component of the target's position is
+positive in the camera coordinate frame. Explain in your report how you modified your code to take into account these situations.
 
     > Tip: You can test that your virtual camera is working properly by launching the `generate_target.launch`
     with the optional parameter `target_x_plane:=<x>`, where \<x\> corresponds to the target's
@@ -624,11 +624,12 @@ negative in the camera coordinate frame. Explain in your report how you modified
     as in question III-2.
 
 
-- **III-5.** Modify your virtual_camera.py node so that instead of drawing the circle of the target
-with a fixed radius, it computes the radius of the projected target on the image and draws it based on how far the target is from the camera.
+- **III-5.** Modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
+it computes the outline of the target as seen by the camera and projects points on that outline onto the image.
+Note that the shape of the outline depends on the relative position of the target in the camera frame.
 
     **a.** Add an internal node parameter to your virtual_camera.py program that allows you to
-    change the radius of the target when the node is run. For example:
+    know the radius of the target when the node is run. For example:
 
     ```python
     # Example
@@ -643,6 +644,13 @@ with a fixed radius, it computes the radius of the projected target on the image
 
     Check that you do get the input parameter into your node when you call your program as above.
     You'll need access to this input parameter to verify the next task.
+
+    **b.** Let $`\bold{t}` = (t_x, t_y, t_z)$ be the vector from the camera center to the center of the target 
+    in the camera coordinate frame. Additionally, let the camera coordinate frame be oriented such that the $z$ axis points
+    forward. How can you compute the vector $`\bold{q}`$ perpendicular to both $`\bold{t}`$ and the horizontal axis of the
+    camera coordinate frame?
+
+    **c.** A point in the edge of the target sche
 
     **b.** Modify your virtual_camera.py node to compute the radius of the drawn circle
     as a function of the target's 3D position relative to the camera and the radius parameter (III-5a).
