@@ -615,7 +615,7 @@ function from the tf2 API with rospy.Time(0) or rospy.Time.now() as third argume
 
 - **III-4.** Modify your virtual_camera.py node so that if the target is behind the camera, the circle is not drawn.
 That is, the circle should not be drawn if the Z component of the target's position is
-negative in the camera coordinate frame.
+negative in the camera coordinate frame. Explain in your report how you modified your code to take into account these situations.
 
     > Tip: You can test that your virtual camera is working properly by launching the `generate_target.launch`
     with the optional parameter `target_x_plane:=<x>`, where \<x\> corresponds to the target's
@@ -623,13 +623,34 @@ negative in the camera coordinate frame.
     behind the robot's camera to see if your generated image matches the render by the camera plugin in RViz, 
     as in question III-2.
 
+
 - **III-5.** Modify your virtual_camera.py node so that instead of drawing the circle of the target
 with a fixed radius, it computes the radius of the projected target on the image and draws it based on how far the target is from the camera.
-You can assume that the moving target is a sphere with radius 0.1 meters in the 3D world captured
-by the virtual camera. Note that this physical dimension matches the red spherical marker that you can visualize
-in RViz when the generate_target.launch script launches.
 
-    
+    **a.** Add an internal node parameter to your virtual_camera.py program that allows you to
+    change the radius of the target when the node is run. For example:
+
+        ```python
+        # Example
+        radius = rospy.get_param("~radius", default=0.1)
+        ```
+
+        You should then be able to run your node with the optional parameter `radius`:
+
+        ```bash
+        $ rosrun shutter_lookat virtual_camera.py _radius:=<new radius>
+        ```
+
+    **b.** Modify your virtual_camera.py node to compute the radius of the drawn circle
+    as a function of its position relative to the camera and the radius parameter (III-5a).
+    Explain in detail in your report how you compute the radius of the target on the image. 
+    Include drawings of the geometric relations that you used to help explain your solution.
+
+    > Tip: As before, you can test that your virtual camera is working properly by launching the `generate_target.launch`
+    with the optional parameter `target_radius:=<radius>`, where \<radius\> corresponds to the target's
+    radius in the 3D virtual world of the simulated robot. Then, run your node with the same target radius
+    and check in RViz if your image matches the rendering by the camera plugin.
+
 ## Part IV. 
 
 ### Questions / Tasks
