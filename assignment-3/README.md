@@ -74,7 +74,7 @@ You assignment will be evaluated based on the content of your report and your co
 - Report (45 pts)
     - Part I (20 pts): I-1 (5 pts) + I-2 (2 pts) + I-3 (5 pts) + I-4 (8 pts)
     - Part II-2 (5 pts) 
-    - Part III-3 (5 pts) 
+    - Part III-3 (5 pts)
     - Part IV (15 pts): IV-2 (5 pts) + IV-3 (10 pts)
 - Code (55 pts)
     * Part II-1 (15 pts) 
@@ -253,7 +253,7 @@ users keep track of multiple coordinate frames over time in ROS.
 
 1. Complete the [Introduction to tf2](http://wiki.ros.org/tf2/Tutorials/Introduction%20to%20tf2)
 tutorial from ROS. You should familiarize yourself with the `view_frames` and `tf_echo` tools. 
-You should also learn to visualize the transforms in /tf and /tf_static with [rviz](http://wiki.ros.org/rviz).
+You should also learn to visualize the transforms in /tf and /tf_static with [RViz](http://wiki.ros.org/rviz).
 
     > If you are using the bim laptops, then `ros-melodic-turtle-tf2`, `ros-melodic-tf2-tools`, and `ros-melodic-tf` should already be installed in the computer.
 
@@ -319,14 +319,14 @@ package that is provided as part of this assignment. You should understand how t
 simulated moving object and publishes its position relative to the "base_footprint" frame of 
 Shutter through the `/target` topic.
 
-2. Visualize the moving target in [rviz](http://wiki.ros.org/rviz). Before running the launch
+2. Visualize the moving target in [RViz](http://wiki.ros.org/rviz). Before running the launch
 script below, make sure that you are not running any other node in ROS.
 
     ```bash
     $ roslaunch shutter_lookat generate_target.launch
     ```
 
-    The launch script should then open rviz and display the robot and the moving target in front
+    The launch script should then open RViz and display the robot and the moving target in front
     of it. The target should be displayed as a red ball.
    
 
@@ -374,7 +374,7 @@ given the increased complexity of this node in comparison previous examples.
     - Close all your nodes in ROS and launch the `generate_target.launch` script (which
     now includes your node). 
     
-    - Add a TF display to rviz, and verify that the new `target` frame that you are publishing
+    - Add a TF display to RViz, and verify that the new `target` frame that you are publishing
     visually matches the position of the moving target (red ball). If the frame and the moving
     object are not displayed in the same place, check your code and edit as necessary.
     
@@ -550,11 +550,11 @@ are consistent with one another with the help of the rviz [Camera Plugin](http:/
 
     > The [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera) creates a new rendering
 window in rivz from the perspective of a camera. The plugin also overlays other displays that
-you have enabled in rviz on the rendered image. Your goal is to use these overlays to verify that
+you have enabled in RViz on the rendered image. Your goal is to use these overlays to verify that
 the virtual camera that you already implemented is working correctly. 
 
     Close all running ROS nodes and re-launch the generate_target.launch script. Then run 
-    your virtual_camera.py node and, once RViz opens, add a Camera display to the rviz window.
+    your virtual_camera.py node and, once RViz opens, add a Camera display to the RViz window.
     Configure the camera plugin as follows:
     
         * Image Topic: /virtual_camera/image_raw
@@ -563,7 +563,7 @@ the virtual camera that you already implemented is working correctly.
         * Overlay Alpha: 0.6
         * Zoom Factor: 1
 
-    The red circle from your /virtual_camera/image_raw image should then align in the rviz 
+    The red circle from your /virtual_camera/image_raw image should then align in the RViz 
     Camera plugin with the red ball of the simulated moving object (as in the Figure below). 
     If this is not the case, check and correct your implementation of the virtual_camera.py node.
        
@@ -577,7 +577,7 @@ the virtual camera that you already implemented is working correctly.
     The bag should have all of the messages that are streamed in your system for a duration of 8 seconds.
     
     ```bash
-    $ rosbag record -O assignment3_part3.bag -a --duration 8 
+    $ rosbag record -O assignment3_part3-2.bag -a --duration 8 
     ```
     
     > You can see a description of the arguments that `rosbag record` accepts [here](http://wiki.ros.org/rosbag/Commandline#record). Make sure to start 
@@ -611,137 +611,22 @@ function from the tf2 API with rospy.Time(0) or rospy.Time.now() as third argume
     /virtual_camera/image_raw topic. Use the [rostopic hz](http://wiki.ros.org/rostopic) tool 
     to this end.
 
+- **III-4.** Modify your virtual_camera.py node so that instead of drawing the circle of the target
+with a fixed radius, it computes the radius of the projected target on the image and draws it based on how far the target is from the camera.
+You can assume that the moving target is a sphere with radius 0.1 meters in the 3D world captured
+by the virtual camera. Note that these dimensions match the red spherical marker that you can visualize
+in RViz when the generate_target.launch script launches.
+
+    > Tip. You can test that your virtual camera is working properly by launching the `generate_target.launch`
+    with the optional parameter `target_depth:=<distance>`, where <distance> corresponds to the desired
+    distance between the target and the robot's base (not the camera). Then, you can visualize your generated
+    image with the camera plugin, to make sure that your projected target matches the projection automatically
+    generated by RViz, as in question III-2.
+
     
-## Part IV. Orienting Shutter's camera towards a moving target
-You will now make your simulation of Shutter follow the red ball in front of it. For this,
-you will solve the [inverse kinematics](https://en.wikipedia.org/wiki/Inverse_kinematics) 
-problem assuming that Shutter has only two controllable joints.
-
-1. Close all your ROS nodes, and launch generate_target.launch. You should then see
-the robot in `rviz` with its virtual camera pointing forward. The moving target should be 1.5
-meters away from the robot's virtual camera, as in the previous part of this assignment.
-
-    ```bash
-    $ roslaunch shutter_lookat generate_target.launch
-    ```
-
-2. Run your `virtual_camera.py` node so that you can see what the robot's virtual camera
-sees in rviz. Add an image display to rviz to visualize the camera's image.
-
-
-3. Modify the node `look_at_target.py` within the scripts folder of the shutter_lookat package. 
-In particular, you should modify the functions:
- 
-    ```python
-    def solve_for_yaw(self, current_joint_states):
-        """
-        Solve for the yaw angle (joint 1) that we want the robot to have and send command to robot driver
-        :param current_joint_states: dictionary with current join values
-        :return: True if everything went well; False otherwise.
-        """
-
-        # complete this function as part of the assignment
-
-        return True
-    ```
-    
-    ```python
-    def solve_for_pitch(self, current_joint_states):
-        """
-        Solve for the pitch angle (joint 3) that we want the robot to have and send command to robot driver
-        :param current_joint_states:
-        :return: True if everything went well; False otherwise.
-        """
-
-        # complete this function as part of the assignment
-
-        return True
-    ```
-  
- in your local copy of the script within your private repository. The first function (`solve_for_yaw()`) 
- should send a command to Shutter's first joint (joint_1) to align its camera towards the moving target. That is,
- this function should control the yaw angle of the robot's arm. The second function (`solve_for_pitch()`) 
- should send
- a command to Shutter's third joint (joint_3) to orient its forearm link towards the target and,
- as a result, control the pitch angle of the camera. An illustrative result is shown in the image below:
- 
- 
-<img src="docs/shutter_following_target.gif" width="500"/>
- 
-> You should not change the position of the second and fourth joints of the robot (joint_2 and joint_4). These joints should
-remain at 0.0 and -1.571 radians after the generate_target.launch script finishes launching. Please
-don't change the main loop of the node either so that it is easy to understand how your
-code works.
+## Part IV. 
 
 ### Questions / Tasks
-
-
-- **IV-1.** Make the robot follow the target such that the projected position 
-of the red ball appears static in the image from your virtual camera. Commit your code to your repository 
-and explain your approach to enable the robot to follow the target.
-
-- **IV-2.** Modify your `virtual_camera.py` script from Part III of this assignment to print to the
-  screen the horizontal and vertical distance between the projected target and the center of the image. 
-  
-    ```python
-    # Example code. Assumes that the projected target is at (x,y).
-    import math    
-    image_width = 640
-    image_height = 480
-    print "Distance to center: {}, {}".format((x - image_width*0.5), (y - image_height*0.5))
-    ```
-    
-    Indicate in your report the maximum horizontal and vertical distances that you get 
-    after the robot tries to follow the target for 10 seconds. 
-    
-    > Distances higher than 20 pixels or evident motion in the projected target might indicate 
-    a problem in your implementation of the look_at_target.py node. 
-    
-- **IV-3.** Close all your nodes again, relaunch the generate_target.launch script with the additional
-parameter `close_target:=true`:
-
-    ```bash
-    $ roslaunch shutter_lookat generate_target.launch close_target:=true
-    ```
-    
-    Then run your virtual_camera.py and look_at_target.py nodes. You should now see the target moving
-    in front of the robot at a shorter distance of 0.3 meters.
-    
-    **a.** As the robot tries to follow the close target, record a ROS bag called 
-    `assignment1_part4.bag` (as in Part III) with all of the information from your ROS system:
-    
-        ```bash
-        $ rosbag record -O assignment1_part4.bag -a --duration 15 
-        ```
-        
-        The bag should last 15 seconds. Submit the bag to Canvas as part of your assignment.
-    
-    **b.** What maximum horizontal and vertical distances do you get now between the projected
-    target and the middle of the image? When computing
-    the maximum horizontal and vertical distances, let the robot follow the target for at least 10 seconds.
-    
-    **c.** Did the projected location of the target appear to be moving in the image or the distance from
-    the projected location to the image center increased
-    from IV-2 to IV-3.a? If the answer is yes, please explain why is this the case? Why isn't the target
-    centered in the image?
-
- 
-- **IV-4. (extra credit 5pt)** Modify your look_at_target.py implementation to make the robot's virtual camera center the target at 0.3m in its image (i.e., 
-center the target that results from launching `generate_target.launch close_target:=true` as in IV-3).
-The distance between the projected target and the middle of the image should be less than:
-    - 80 pixels in the horizontal dimension, and 
-    - 60 pixels in the vertical dimension. 
-    
-    > If your answer to the question IV-3.c was negative, great work! You've already earned 
-    5 extra credits for making Shutter accurately follow the target.
-    
-    **a.** Commit your code to your repository and briefly explain in your report your approach to enable the
-    robot to follow the target accurately.
-    
-    **b.** Indicate the maximum distance that you obtain between the projected target and the center
-    of the image after having the robot follow the close target (at 0.3 meters away from the camera) 
-    with your new look_at_target.py implementation.
-    
 
 **Once you get to the end of the assignment, remember to commit your code, push to GitLab, and indicate
 in your assignment report the commit SHA for the final version of the code that you wish to be evaluated on.**
