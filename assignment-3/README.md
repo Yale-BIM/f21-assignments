@@ -401,7 +401,7 @@ and launch the generate_target.launch script again before starting this part of 
 the new file in the `scripts` directory of the shutter_lookat package. Edit the name of your node (e.g., in the `rospy.init_node()` function)
 and any other relevant documentation in your code to indicate that the program implements a virtual camera for Shutter.
 
-2. Edit your node such that it repeats the steps below every time a new target message is received while the program is running:
+2. Edit your node such that it repeats the steps below every time a new message from the /target topic is received:
 
     **a.** Compute the target's pose in the "camera_color_optical_frame" frame (as in Part II of this assignment).
 
@@ -543,10 +543,10 @@ function from the tf2 API with the time of the target's pose, rospy.Time(0), or 
     ```
 
     > Note: If the code of your node was organized into a class structure, then you could create the camerainfo_msg
-    message when the class is initialized and save it as a member of an object instance. When the images are then created, you
-    would just need to copy the header of the image message into the pre-computed camerainfo_msg, and publish. While in practice
-    organizing the code this way won't make your program in this part of the assignment much faster, thinking about ways to optimize the operation
-    of your ROS nodes is important for real-time interactive systems.
+    message when a class instance is initialized and save it as a member of the instance for future use. When the images are then created, you
+    would just need to copy the header of the image message into the pre-computed camerainfo_msg, and publish it. While in practice
+    organizing the code this way won't make your program in this part of the assignment much faster given the speed of computers today, thinking about ways 
+    to optimize the operation of your ROS nodes so that the same computation is not repeated over an over unnecessarily is important for real-time systems.
     
     **e.** Finally, check that your node is publishing CameraInfo messages through the 
     /virtual_camera/camera_info topic with the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) tool.
@@ -587,7 +587,7 @@ the virtual camera that you already implemented is working correctly.
     The bag should have all of the messages that are streamed in your system for a duration of 8 seconds.
     
     ```bash
-    $ rosbag record -O assignment3_part3-2.bag -a --duration 8 
+    $ rosbag record -O assignment3_part3-3.bag -a --duration 8 
     ```
     
     > You can see a description of the arguments that `rosbag record` accepts [here](http://wiki.ros.org/rosbag/Commandline#record). Make sure to start 
@@ -613,22 +613,23 @@ the virtual camera that you already implemented is working correctly.
     unnecessarily heavy.
 
 - **III-4.** Explain in your report what happens with the projection of the target on the image
-when the target is behind the camera? Why is the image changed? To visualize this result, you
+when the target is behind the camera? How and why is the image changed? To visualize this result, you
 can launch the `generate_target.launch` script with the optional parameter `target_x_plane:=<x>`, where \<x\> corresponds to the target's
-x coordinate on the robot's "base_footprint" frame. Then check the image that your node generated.
+x coordinate on the robot's "base_footprint" frame. Then inspect the images that your node generates.
 
 - **III-5.** Your virtual camera could see behind it, but real cameras don't do that. Modify your virtual_camera.py node so that 
 the part of your code that computes the projection of the target and draws the circle only executes if the target is in front of the camera. 
-That is, these parts of your program should only execute if the Z component of the target's position is positive in the camera coordinate frame. 
-If the Z component is zero or negative, have your node instead print a warning message:
+That is, these parts of your program should only execute if the Z component of the target's position in the camera coordinate frame is positive. 
+If the Z component is zero or negative, have your node instead publish an empty (white) image along with the CameraInfo message. In the latter case,
+the node should also print a warning message:
 
     ```python
     # example warning
-    print("Warning: Target is behind the camera (z={})".format(z))
+    print("Warning: Target is behind the camera (z={})".format(z)) # z is the z coordinate for the target's center point relative to the camera frame
     ```
 
 - **III-6.** You will now modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
-it computes the true outline of the target as seen by the camera and projects points on that outline onto the image. To this end, you should
+it draws the true outline of the spherical target as seen by the camera. To this end, you should
 first compute a direction vector $`\bold{q'}`$ from the center of the target to the edge of the sphere seen by the camera. Then, you will be able to
 draw the target's true shape by rotating the vector along a rotation axis in the direction of the target, and projecting the resulting points along the edge 
 into the camera image. The steps below guide you through most of this process:
@@ -664,7 +665,19 @@ into the camera image. The steps below guide you through most of this process:
     The resulting image from your virtual camera should now show both the original circle (that was drawn for part III) and the blue polygon on top, 
     as shown below:
 
-    **g.** Take a picture of your resulting image when the target is nearby the edge of the image. Include this image in your report.
+    <kbd>
+    <img src="docs/ball_outline.png" width="300"/>
+    </kbd>
+
+    **g.** Restart ROS and re-run the generate_target.launch with the ball updating at a lower speed, and being closer to the camera:
+    
+    ```bash
+    $ roslaunch shutter_lookat generate_target.launch target_x_plane:=0.5 publish_rate:=10
+    ```
+
+    Then restart your virtual_camera.py node and take a picture of your resulting image when the target is nearby the edge of the image. The image show show
+    the target being elongated; not having a perfectly circlular shape anymore. Include this image in your report and explain why the target does not
+    appear to be  perfectly round, especially towards the edge of the image.
 
 
 ## Part IV. 
