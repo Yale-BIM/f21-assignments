@@ -1,6 +1,6 @@
 # Shutter Look At Package
 
-This ROS package has starting code for the [Assignment 1](../README.md) of CPSC-659 Building Interactive Machines.
+This ROS package has starting code for the [Assignment 3](../README.md).
 
 ## Python Nodes (whitin the scripts directory)
 
@@ -8,9 +8,6 @@ This ROS package has starting code for the [Assignment 1](../README.md) of CPSC-
 is looking forward.
 
 - **generate_target.py:** Node that publishes the location of a simulated target in front of the robot.
-
-- **look_at_target.py:** Base code for Part IV of the assignment.
-
 
 ## Launch files
 
