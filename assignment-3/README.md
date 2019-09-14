@@ -401,7 +401,7 @@ and launch the generate_target.launch script again before starting this part of 
 the new file in the `scripts` directory of the shutter_lookat package. Edit the name of your node (e.g., in the `rospy.init_node()` function)
 and any other relevant documentation in your code to indicate that the program implements a virtual camera for Shutter.
 
-2. Edit your node such that it repeats the steps below every time a new target message is received while the program is running:
+2. Edit your node such that it repeats the steps below every time a new message from the /target topic is received:
 
     **a.** Compute the target's pose in the "camera_color_optical_frame" frame (as in Part II of this assignment).
 
