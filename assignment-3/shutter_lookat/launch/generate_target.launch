@@ -4,6 +4,7 @@
     <arg name="look_forward" value="True"/>
     <arg name="target_x_plane" default="1.5"/>
     <arg name="target_radius" default="0.05"/>
+    <arg name="publish_rate" default="30"/>
 
     <!-- bring up the robot -->
     <include file="$(find shutter_bringup)/launch/shutter.launch">
@@ -14,6 +15,7 @@
     <node name="generate_target" pkg="shutter_lookat" type="generate_target.py" output="screen">
     	  <param name="x_value" value="$(arg target_x_plane)"/>
 	  <param name="radius" value="$(arg target_radius)"/>
+	  <param name="publish_rate" value="$(arg publish_rate)"/>
     </node>
     
     <!-- visualize the moving object in rviz -->

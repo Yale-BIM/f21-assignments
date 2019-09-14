@@ -23,16 +23,13 @@ class SimulatedObject(object):
         self.radius = 0.1               # radius of the object's circular path
         self.frame = "base_footprint"   # frame in which the coordinates of the object are computed
 
-    def step(self, publish_rate):
+    def step(self):
         """
         Update the position of the target based on the publishing rate of the node
         :param publish_rate: node's publish rate
         """
-        self.angle += 2.0 * np.pi / (10.0 * publish_rate)  # 1 full revolution in 10 secs
+        self.angle += 2.0 * np.pi / 300  # 1 full revolution in 10 secs at 30 Hz
 
-
-# Publishing rate for the node
-publish_rate = 30
 
 
 def generate_target():
@@ -49,6 +46,8 @@ def generate_target():
     # Get ROS params
     x_value = rospy.get_param("~x_value", default=1.5)
     radius = rospy.get_param("~radius", default=0.1)
+    publish_rate = rospy.get_param("~publish_rate", default=30)
+    
     object.x = x_value
 
     # Define publishers
@@ -90,7 +89,7 @@ def generate_target():
         marker_pub.publish(marker_msg)
 
         # update the simulated object state
-        object.step(publish_rate)
+        object.step()
 
         # sleep to keep the desired publishing rate
         rate.sleep()
