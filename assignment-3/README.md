@@ -625,7 +625,7 @@ the node should also print a warning message:
 
     ```python
     # example warning
-    print("Warning: Target is behind the camera (z={})".format(z))
+    print("Warning: Target is behind the camera (z={})".format(z)) # z is the z coordinate for the target's center point relative to the camera frame
     ```
 
 - **III-6.** You will now modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
