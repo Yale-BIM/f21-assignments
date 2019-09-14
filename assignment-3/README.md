@@ -620,7 +620,8 @@ x coordinate on the robot's "base_footprint" frame. Then inspect the images that
 - **III-5.** Your virtual camera could see behind it, but real cameras don't do that. Modify your virtual_camera.py node so that 
 the part of your code that computes the projection of the target and draws the circle only executes if the target is in front of the camera. 
 That is, these parts of your program should only execute if the Z component of the target's position in the camera coordinate frame is positive. 
-If the Z component is zero or negative, have your node instead publish an empty (white) image and print a warning message:
+If the Z component is zero or negative, have your node instead publish an empty (white) image along with the CameraInfo message. In the latter case,
+the node should also print a warning message:
 
     ```python
     # example warning
