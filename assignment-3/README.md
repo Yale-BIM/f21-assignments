@@ -73,8 +73,8 @@ You assignment will be evaluated based on the content of your report and your co
 
 - Report (45 pts)
     - Part I (20 pts): I-1 (5 pts) + I-2 (2 pts) + I-3 (5 pts) + I-4 (8 pts)
-    - Part II (10 pts): II-2 (5 pts) + II-3 (5 pts) 
-    - Part III-3 (5 pts)
+    - Part II (10 pts): II-2 (5 pts) 
+    - Part III (pts): III-1 (5pts), III-3 (5 pts)
     - Part IV (15 pts): IV-2 (5 pts) + IV-3 (10 pts)
 - Code (55 pts)
     * Part II-1 (15 pts) 
@@ -391,32 +391,21 @@ given the increased complexity of this node in comparison previous examples.
     e.g., using [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
     Add the image of the tf tree to your report.
     
-
-- **II-3.** Explain in your report what is the difference between calling the `lookup_transform`
-function from the tf2 API with rospy.Time(0) or rospy.Time.now() as third argument? 
-
-    > Note that how you call the lookup_transform function can have an effect on the
-    rate of operation of your publish_target_relative_to_realsense_camera.py node. Try changing how you call the function
-    in your node and check how often are you able to publish transforms. Use the [rostopic hz](http://wiki.ros.org/rostopic) tool 
-    to this end.
     
 ## Part III. Making a virtual camera
 Assume that the moving object from Part II of this assignment is a sphere. Now, you will 
 work on projecting the simulated object on a virtual image captured from Shutter. Close all ROS nodes
 and launch the generate_target.launch script again before starting this part of the assignment.
 
-1. Create a new ROS node called `virtual_camera.py` in the scripts directory of
-the shutter_lookat package.
+1. Copy your publish_target_relative_to_realsense_camera.py script into a new file, called `virtual_camera.py`. Place
+the new file in the `scripts` directory of the shutter_lookat package. Edit the name of your node (e.g., in the `rospy.init_node()` function)
+and any other relevant documentation in your code to indicate that the program implements a virtual camera for Shutter.
 
-2. Implement your node such that it repeats the steps below while the program is running:
+2. Edit your node such that it repeats the steps below every time a new target message is received while the program is running:
 
-    **a.** Query the latest transformation that maps points from the "target" frame
-to the "camera_color_optical_frame" frame.
+    **a.** Compute the target's pose in the "camera_color_optical_frame" frame (as in Part II of this assignment).
 
-    **b.** Extract the position of the moving object relative to the "camera_color_optical_frame" frame from
-    the transformation queried from step (a).
-
-    **c.** Project the position of the moving object to the image of a virtual camera positioned 
+    **b.** Project the position of the moving object to the image of a virtual camera positioned 
     in the "camera_color_optical_frame" frame. The projection operation should use the following
     intrinsic camera calibration parameters:
 
@@ -425,13 +414,13 @@ to the "camera_color_optical_frame" frame.
     cy=240       # y-coordinate of principal point in terms of pixel dimensions
     fx=349       # focal length in terms of pixel dimensions in the x direction
     fy=349       # focal length in terms of pixel dimensions in the y direction
-    # note: there's no skew.
+    # note: assume there's no skew.
     ```
     
-    > If you are unsure of what the above parameters mean, read more about projective cameras 
+    > Tip: If you are unsure of what the above parameters mean, read more about projective cameras 
     in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book.
 
-    **d.** Create an image with white background using the [OpenCV library](https://opencv.org/) 
+    **c.** Create an image with white background using the [OpenCV library](https://opencv.org/) 
     in your node. This image will become the output of the simulated camera that you are building
     for Shutter. The image should be in VGA format, i.e., have a
     dimension of 640 x 480 pixels.
@@ -442,12 +431,12 @@ to the "camera_color_optical_frame" frame.
     import numpy as np  # import numpy
     
     # create image
-    image = np.zeros((height,width,3), np.uint8)
+    image = np.zeros((height,width,3), np.uint8) # width and height are the dimensions of the image
     # color image
     image[:,:] = (255,255,255) # (B, G, R)
     ```
         
-    **e.** Draw the outline of a red circle on the image. The position of the center of the circle
+    **d.** Draw the outline of a red circle on the image. The position of the center of the circle
     should match the position of the projected moving object in the image, such that as
     the object moves, the projected circle also moves. Make
     the radius of the circle 12 pixels, and its outline 3 pixels wide.
@@ -460,13 +449,13 @@ to the "camera_color_optical_frame" frame.
     > See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
     for more examples on drawing basic figures.
 
-    **f.** Publish the image that you created with OpenCV as a [sensor_msgs/Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html) message in ROS. You
+    **e.** Publish the image that you created with OpenCV as a [sensor_msgs/Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html) message in ROS. You
     can use the [cv_bridge](http://wiki.ros.org/cv_bridge) library to convert the OpenCV image to
     an Image message. Note that the Image message should have a `header` with the current time as
     stamp and the "camera_color_optical_frame" frame as frame_id. The Image message should be published by your node
     through the `/virtual_camera/image_raw` topic.
     
-    > Examples on converting OpenCV images to ROS messages can be found
+    > Tip: Examples on converting OpenCV images to ROS messages can be found
     in [this tutorial](http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython).
 
 3. Visualize the images that your node is publishing using the 
@@ -480,13 +469,16 @@ virtual_camera.py script.
 
 ### Questions / Tasks
 
-You will now share the calibration parameters for Shutter's virtual camera in ROS.
- Sharing the parameters will help other programs 
- reason geometrically about the images that your virtual camera generates.
+- **III-1.** Explain in your report what is the difference between calling the `lookup_transform`
+function from the tf2 API with the time of the target's pose, rospy.Time(0), or rospy.Time.now() as third argument?
 
-- **III-1.** Edit your virtual_camera.py script to enable your node to also publish 
- calibration parameters. The parameters should be published as a [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
-through the `/virtual_camera/camera_info` topic, as indicated in the steps below.
+    > Note: How you call the lookup_transform function can have an effect on the
+    rate of operation of your virtual_camera.py node and how often it can publish images. 
+    You can use the [rostopic hz](http://wiki.ros.org/rostopic) tool to check how fast messages are published by the node.
+    
+- **III-2.** Edit your virtual_camera.py script to enable your node to also publish 
+ calibration parameters. Sharing the parameters will help other programs 
+ reason geometrically about the images that your virtual camera generates. Note that the parameters should be published as a [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message through the `/virtual_camera/camera_info` topic, as indicated in the steps below.
 
     **a.** Import the [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
     into your virtual_camera.py script.
@@ -526,7 +518,7 @@ through the `/virtual_camera/camera_info` topic, as indicated in the steps below
         return camera_info_msg
     ```
     
-    > Specific details about the fields of CameraInfo messages can be found 
+    > Note: Specific details about the fields of CameraInfo messages can be found 
      in its [message definition](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html).
     
     **c.** Create a publisher for the CameraInfo messages in your node.
@@ -549,13 +541,19 @@ through the `/virtual_camera/camera_info` topic, as indicated in the steps below
                                               fx, fy)
     self.camerainfo_pub.publish(camerainfo_msg)
     ```
+
+    > Note: If the code of your node was organized into a class structure, then you could create the camerainfo_msg
+    message when the class is initialized and save it as a member of an object instance. When the images are then created, you
+    would just need to copy the header of the image message into the pre-computed camerainfo_msg, and publish. While in practice
+    organizing the code this way won't make your program in this part of the assignment much faster, thinking about ways to optimize the operation
+    of your ROS nodes is important for real-time interactive systems.
     
     **e.** Finally, check that your node is publishing CameraInfo messages through the 
     /virtual_camera/camera_info topic with the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) tool.
-    
-    > Remember to commit your code whenever you want to save a snapshot of your work.
 
-- **III-2.** You will now verify that the image and the camera parameters that your node publishes 
+    > Remember to commit your code whenever you want to save a snapshot of your work. 
+
+- **III-3.** You will now verify that the image and the camera parameters that your node publishes 
 are consistent with one another with the help of the RViz [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera). 
 
     > The [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera) creates a new rendering
@@ -567,11 +565,11 @@ the virtual camera that you already implemented is working correctly.
     your virtual_camera.py node and, once RViz opens, add a Camera display to the RViz window.
     Configure the camera plugin as follows:
     
-        * Image Topic: /virtual_camera/image_raw
-        * Transport Hint: raw
-        * Image Rendering: background
-        * Overlay Alpha: 0.6
-        * Zoom Factor: 1
+        Image Topic: /virtual_camera/image_raw
+        Transport Hint: raw
+        Image Rendering: background
+        Overlay Alpha: 0.6
+        Zoom Factor: 1
 
     The red circle from your /virtual_camera/image_raw image should then align in the RViz 
     Camera plugin with the red ball of the simulated moving object (as in the Figure below). 
@@ -581,7 +579,7 @@ the virtual camera that you already implemented is working correctly.
     <img src="docs/rviz_camera.png" width="300"/>
     </kbd>
 
-    > If parts of the robot are displayed in the camera plugin image, then you can remove them by temporarily disabling the RobotModel plugin in Rviz.
+    > Tip: If parts of the robot are displayed in the camera plugin image, then you can remove them by temporarily disabling the RobotModel plugin in Rviz.
     
     Once the image that is published by the virtual_camera.py script is consistent 
     with what the Camera plugin shows in RViz, record a ROS [bag](http://wiki.ros.org/Bags) 
@@ -613,20 +611,23 @@ the virtual camera that you already implemented is working correctly.
     Make sure to **submit your ROS bag to Canvas** as part of this assignment. You don't need to and 
     you shouldn't commit the bag to your repository! Otherwise, you will make your repository
     unnecessarily heavy.
-    
 
-- **III-4.** Modify your virtual_camera.py node so that the circle is only drawn if the target is in front of the camera.
-That is, the circle should be drawn only if the Z component of the target's position is
-positive in the camera coordinate frame. Explain in your report how you modified your code to take into account these situations.
+- **III-4.** Explain in your report what happens with the projection of the target on the image
+when the target is behind the camera? Why is the image changed? To visualize this result, you
+can launch the `generate_target.launch` script with the optional parameter `target_x_plane:=<x>`, where \<x\> corresponds to the target's
+x coordinate on the robot's "base_footprint" frame. Then check the image that your node generated.
 
-    > Tip: You can test that your virtual camera is working properly by launching the `generate_target.launch`
-    with the optional parameter `target_x_plane:=<x>`, where \<x\> corresponds to the target's
-    x coordinate on the robot's base_footprint frame. Run the launch file with the target 
-    behind the robot's camera to see if your generated image matches the render by the camera plugin in RViz, 
-    as in question III-2.
+- **III-5.** Your virtual camera could so far see behind it, but real cameras don't do that. Modify your virtual_camera.py node so that 
+the circle is only drawn if the target is in front of the camera. That is, the circle should be drawn only if the Z component of the target's position is
+positive in the camera coordinate frame. If the Z component is zero or negative, have your node
+print a warning message:
 
+    ```python
+    # example warning
+    print("Warning: Target is behind the camera (z={})".format(z))
+    ```
 
-- **III-5.** Modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
+- **III-6.** Modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
 it computes the outline of the target as seen by the camera and projects points on that outline onto the image.
 Note that the shape of the outline depends on the relative position of the target in the camera frame.
 
