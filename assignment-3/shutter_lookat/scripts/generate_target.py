@@ -2,6 +2,7 @@
 import rospy
 import numpy as np
 
+from shutter_lookat.msg import Target
 from geometry_msgs.msg import PoseStamped
 from visualization_msgs.msg import Marker
 
@@ -47,10 +48,11 @@ def generate_target():
 
     # Get ROS params
     x_value = rospy.get_param("~x_value", default=1.5)
+    radius = rospy.get_param("~radius", default=0.1)
     object.x = x_value
 
     # Define publishers
-    vector_pub = rospy.Publisher('/target', PoseStamped, queue_size=5)
+    vector_pub = rospy.Publisher('/target', Target, queue_size=5)
     marker_pub = rospy.Publisher('/target_marker', Marker, queue_size=5)
 
     # Publish the target at a constant ratetarget
@@ -65,7 +67,11 @@ def generate_target():
         pose_msg.pose.position.y = object.center_y + np.sin(object.angle)*object.radius
         pose_msg.pose.position.z = object.center_z + np.cos(object.angle)*object.radius
         pose_msg.pose.orientation.w = 1.0
-        vector_pub.publish(pose_msg)
+
+        target_msg = Target()
+        target_msg.pose = pose_msg
+        target_msg.radius = radius
+        vector_pub.publish(target_msg)
 
         # publish a marker to visualize the target in RViz
         marker_msg = Marker()
@@ -78,9 +84,9 @@ def generate_target():
         marker_msg.ns = "target"
         marker_msg.type = Marker.SPHERE
         marker_msg.pose = pose_msg.pose
-        marker_msg.scale.x = 0.1
-        marker_msg.scale.y = 0.1
-        marker_msg.scale.z = 0.1
+        marker_msg.scale.x = radius
+        marker_msg.scale.y = radius
+        marker_msg.scale.z = radius
         marker_pub.publish(marker_msg)
 
         # update the simulated object state

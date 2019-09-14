@@ -2,7 +2,8 @@
 
     <!-- make shutter look forward? -->
     <arg name="look_forward" value="True"/>
-    <arg name="target_depth" default="1.5"/>
+    <arg name="target_x_plane" default="1.5"/>
+    <arg name="target_radius" default="0.1"/>
 
     <!-- bring up the robot -->
     <include file="$(find shutter_bringup)/launch/shutter.launch">
@@ -11,7 +12,8 @@
 
     <!-- generate the simulated moving object -->
     <node name="generate_target" pkg="shutter_lookat" type="generate_target.py" output="screen">
-    	  <param name="x_value" value="$(arg target_depth)"/>
+    	  <param name="x_value" value="$(arg target_x_plane)"/>
+	  <param name="radius" value="$(arg target_radius)"/>
     </node>
     
     <!-- visualize the moving object in rviz -->
