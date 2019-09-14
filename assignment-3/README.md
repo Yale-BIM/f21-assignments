@@ -652,12 +652,13 @@ into the camera image. The steps below guide you through most of this process:
 
     **e.** Add code to your node that projects the 3D points from III-6d onto the image.
 
-    **f.** Draw a blue polygon on your image using OpenCV. The polygon should connect the projected points on the image:
+    **f.** Draw a blue contour for the sphere on your image using OpenCV. The contour should connect the projected points on the image:
 
     ```python
     # Example
-    points_list = [(x1,y1), (x2,y2), ...]
-    cv2.draw_polygon()
+    pixel_array = np.zeros((N,2), dtype=np.int32) # N is the number of points on the contour
+    (...) # compute the points as in III-6a - III-6e
+    cv2.drawContours(image, [pixel_array], 0, (255,0,0), 3)
     ```
 
     The resulting image from your virtual camera should now show both the original circle (that was drawn for part III) and the blue polygon on top, 
