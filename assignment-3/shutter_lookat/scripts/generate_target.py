@@ -84,9 +84,9 @@ def generate_target():
         marker_msg.ns = "target"
         marker_msg.type = Marker.SPHERE
         marker_msg.pose = pose_msg.pose
-        marker_msg.scale.x = radius
-        marker_msg.scale.y = radius
-        marker_msg.scale.z = radius
+        marker_msg.scale.x = 2.0*radius
+        marker_msg.scale.y = 2.0*radius
+        marker_msg.scale.z = 2.0*radius
         marker_pub.publish(marker_msg)
 
         # update the simulated object state

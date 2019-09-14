@@ -3,7 +3,7 @@
     <!-- make shutter look forward? -->
     <arg name="look_forward" value="True"/>
     <arg name="target_x_plane" default="1.5"/>
-    <arg name="target_radius" default="0.1"/>
+    <arg name="target_radius" default="0.05"/>
 
     <!-- bring up the robot -->
     <include file="$(find shutter_bringup)/launch/shutter.launch">
