@@ -652,7 +652,8 @@ with a fixed radius, it computes the radius of the projected target on the image
     > Tip: As before, you can test that your virtual camera is working properly by launching the `generate_target.launch`
     script with the optional `target_x_plane:=<x>` and `target_radius:=<radius>` parameters. Here, \<radius\> corresponds to the
     radius of the target's marker published by the generate_target.py script. Then, run your node with the same target radius
-    used for the generate_larget.launch script, and check in RViz if your image matches the rendering by the camera plugin.
+    used for the generate_larget.launch script, and check in RViz if your image matches the rendering by the camera plugin. 
+    You only need to worry about rendering the target when it's in front of the camera.
 
 ## Part IV. 
 
