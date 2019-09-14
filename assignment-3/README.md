@@ -587,7 +587,7 @@ the virtual camera that you already implemented is working correctly.
     The bag should have all of the messages that are streamed in your system for a duration of 8 seconds.
     
     ```bash
-    $ rosbag record -O assignment3_part3-2.bag -a --duration 8 
+    $ rosbag record -O assignment3_part3-3.bag -a --duration 8 
     ```
     
     > You can see a description of the arguments that `rosbag record` accepts [here](http://wiki.ros.org/rosbag/Commandline#record). Make sure to start 
@@ -613,14 +613,14 @@ the virtual camera that you already implemented is working correctly.
     unnecessarily heavy.
 
 - **III-4.** Explain in your report what happens with the projection of the target on the image
-when the target is behind the camera? Why is the image changed? To visualize this result, you
+when the target is behind the camera? How and why is the image changed? To visualize this result, you
 can launch the `generate_target.launch` script with the optional parameter `target_x_plane:=<x>`, where \<x\> corresponds to the target's
-x coordinate on the robot's "base_footprint" frame. Then check the image that your node generated.
+x coordinate on the robot's "base_footprint" frame. Then inspect the images that your node generates.
 
 - **III-5.** Your virtual camera could see behind it, but real cameras don't do that. Modify your virtual_camera.py node so that 
 the part of your code that computes the projection of the target and draws the circle only executes if the target is in front of the camera. 
-That is, these parts of your program should only execute if the Z component of the target's position is positive in the camera coordinate frame. 
-If the Z component is zero or negative, have your node instead print a warning message:
+That is, these parts of your program should only execute if the Z component of the target's position in the camera coordinate frame is positive. 
+If the Z component is zero or negative, have your node instead publish an empty (white) image and print a warning message:
 
     ```python
     # example warning
