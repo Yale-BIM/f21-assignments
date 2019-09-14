@@ -613,16 +613,21 @@ function from the tf2 API with rospy.Time(0) or rospy.Time.now() as third argume
     /virtual_camera/image_raw topic. Use the [rostopic hz](http://wiki.ros.org/rostopic) tool 
     to this end.
 
-- **III-4.** Modify your virtual_camera.py node so that instead of drawing the circle of the target
+- **III-4.** Modify your virtual_camera.py node so that if the target is behind the camera, the circle is not drawn.
+That is, the circle should not be drawn if the Z component of the target's position is
+negative in the camera coordinate frame.
+
+    > Tip: You can test that your virtual camera is working properly by launching the `generate_target.launch`
+    with the optional parameter `target_x_plane:=<x>`, where \<x\> corresponds to the target's
+    x coordinate on the robot's base_footprint frame. Run the launch file with the target 
+    behind the robot's camera to see if your generated image matches the render by the camera plugin in RViz, 
+    as in question III-2.
+
+- **III-5.** Modify your virtual_camera.py node so that instead of drawing the circle of the target
 with a fixed radius, it computes the radius of the projected target on the image and draws it based on how far the target is from the camera.
 You can assume that the moving target is a sphere with radius 0.1 meters in the 3D world captured
 by the virtual camera. Note that this physical dimension matches the red spherical marker that you can visualize
 in RViz when the generate_target.launch script launches.
-
-    > Tip: You can test that your virtual camera is working properly by launching the `generate_target.launch`
-    with the optional parameter `target_depth:=<distance>`, where \<distance\> corresponds to the desired
-    distance between the target and the robot's base (not the camera). Run the launch file with the target at
-    different distances to see if your generated image matches the render by the camera plugin in RViz, as in question III-2.
 
     
 ## Part IV. 
