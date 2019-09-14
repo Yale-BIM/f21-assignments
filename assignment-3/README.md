@@ -549,8 +549,8 @@ through the `/virtual_camera/camera_info` topic, as indicated in the steps below
 are consistent with one another with the help of the rviz [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera). 
 
     > The [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera) creates a new rendering
-window in rivz from the perspective of a camera. The plugin also overlays other displays that
-you have enabled in RViz on the rendered image. Your goal is to use these overlays to verify that
+window in RViz from the perspective of a camera using the CameraInfo message that your virtual_camera.py node publishes. 
+The plugin also lets you overlay other displays that you have enabled in RViz on the rendered image. Your goal is to use these overlays to verify that
 the virtual camera that you already implemented is working correctly. 
 
     Close all running ROS nodes and re-launch the generate_target.launch script. Then run 
@@ -570,6 +570,8 @@ the virtual camera that you already implemented is working correctly.
     <kbd>
     <img src="docs/rviz_camera.png" width="300"/>
     </kbd>
+
+        > If parts of the robot are displayed in the camera plugin image, then you can remove them by temporarily disabling the RobotModel plugin in Rviz.
     
     Once the image that is published by the virtual_camera.py script is consistent 
     with what the Camera plugin shows in RViz, record a ROS [bag](http://wiki.ros.org/Bags) 
