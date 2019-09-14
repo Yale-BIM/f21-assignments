@@ -617,37 +617,54 @@ when the target is behind the camera? Why is the image changed? To visualize thi
 can launch the `generate_target.launch` script with the optional parameter `target_x_plane:=<x>`, where \<x\> corresponds to the target's
 x coordinate on the robot's "base_footprint" frame. Then check the image that your node generated.
 
-- **III-5.** Your virtual camera could so far see behind it, but real cameras don't do that. Modify your virtual_camera.py node so that 
-the circle is only drawn if the target is in front of the camera. That is, the circle should be drawn only if the Z component of the target's position is
-positive in the camera coordinate frame. If the Z component is zero or negative, have your node
-print a warning message:
+- **III-5.** Your virtual camera could see behind it, but real cameras don't do that. Modify your virtual_camera.py node so that 
+the part of your code that computes the projection of the target and draws the circle only executes if the target is in front of the camera. 
+That is, these parts of your program should only execute if the Z component of the target's position is positive in the camera coordinate frame. 
+If the Z component is zero or negative, have your node instead print a warning message:
 
     ```python
     # example warning
     print("Warning: Target is behind the camera (z={})".format(z))
     ```
 
-- **III-6.** Modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
-it computes the outline of the target as seen by the camera and projects points on that outline onto the image.
-Note that the shape of the outline depends on the relative position of the target in the camera frame.
+- **III-6.** You will now modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
+it computes the true outline of the target as seen by the camera and projects points on that outline onto the image. To this end, you should
+first compute a direction vector $`\bold{q'}`$ from the center of the target to the edge of the sphere seen by the camera. Then, you will be able to
+draw the target's true shape by rotating the vector along a rotation axis in the direction of the target, and projecting the resulting points along the edge 
+into the camera image. The steps below guide you through most of this process:
 
-    **a.** Let $`\bold{t}` = (t_x, t_y, t_z)$ be the vector from the camera center to the center of the target 
-    in the camera coordinate frame. Additionally, let the camera coordinate frame be oriented such that the $z$ axis points
-    forward. How can you compute the vector $`\bold{q}`$ perpendicular to both $`\bold{t}`$ and the horizontal axis of the
-    camera coordinate frame?
+    **a.** To get started, let $`\bold{t} = [t_x\ t_y\ t_z]^T`$ be the vector from the camera center to the center of the target 
+    in the camera coordinate frame. Additionally, let the camera coordinate frame be oriented such that the $`z`$ axis points
+    forward. How can you mathematically calculate a vector $`\bold{q}`$ perpendicular to both $`\bold{t}`$ and the horizontal axis of the
+    camera coordinate frame? Explain in your report.
 
-    **c.** A point in the edge of the target sche
+    **b.** Now that you have computed a vector perpendicular to the direction towards the target (as seen by the camera), explain
+    how you can scale this vector to have a length equal to the radius $`R`$ of the moving 3D sphere. Provide the equation that scales $`\bold{q}`$ as desired while
+    preserving its direction in your report.
 
-    **b.** Modify your virtual_camera.py node to compute the radius of the drawn circle
-    as a function of the target's 3D position relative to the camera and the radius parameter (III-5a).
-    Explain in detail in your report how you compute the radius of the target on the image. 
-    Include drawings of the geometric relations that you used to help explain your solution.
+    **c.** Let $`\bold{q'}`$ be the scaled vector from question III-6b. Explain mathematically in your report how can rotate this vector by an angle $`\alpha`$ along a normalized rotation axis aligned with the vector $`\bold{t}`$ from question III-6a.
 
-    > Tip: As before, you can test that your virtual camera is working properly by launching the `generate_target.launch`
-    script with the optional `target_x_plane:=<x>` and `target_radius:=<radius>` parameters. Here, \<radius\> corresponds to the
-    radius of the target's marker published by the generate_target.py script. Then, run your node with the same target radius
-    used for the generate_larget.launch script, and check in RViz if your image matches the rendering by the camera plugin. 
-    You only need to worry about rendering the target when it's in front of the camera.
+    > Tip. [Wikipedia](https://en.wikipedia.org/wiki/Axis%E2%80%93angle_representation) is an easy place to learn more about the axis-angle parameterization of rotations.
+
+    **d.** Points along the edge of the sphere (as seen by the camera), can now be computed as: $`\bold{p} + rotate(\bold{q'}, \alpha)`$, where
+    rotate is a function that implements III-6c. Modify your virtual camera node to compute at least 20 3D points equally distributed along the edge
+    of the sphere that is seen by the camera.
+
+    **e.** Add code to your node that projects the 3D points from III-6d onto the image.
+
+    **f.** Draw a blue polygon on your image using OpenCV. The polygon should connect the projected points on the image:
+
+    ```python
+    # Example
+    points_list = [(x1,y1), (x2,y2), ...]
+    cv2.draw_polygon()
+    ```
+
+    The resulting image from your virtual camera should now show both the original circle (that was drawn for part III) and the blue polygon on top, 
+    as shown below:
+
+    **g.** Take a picture of your resulting image when the target is nearby the edge of the image. Include this image in your report.
+
 
 ## Part IV. 
 
