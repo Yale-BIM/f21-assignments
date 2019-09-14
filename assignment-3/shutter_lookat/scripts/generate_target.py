@@ -15,7 +15,7 @@ class SimulatedObject(object):
         """
         Constructor
         """
-        self.x = 1.5                    # constant x coordinate for the object
+        self.x = 1.5                    # x coordinate for the center of the object
         self.center_y = 0.0             # y coordinate for the center of the object's path
         self.center_z = 0.50            # z coordinate for the center of the object's path
         self.angle = 0.0                # current angle for the object in its circular path (relative to the y axis)
