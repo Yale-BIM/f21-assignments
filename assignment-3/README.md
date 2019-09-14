@@ -629,7 +629,7 @@ the node should also print a warning message:
     ```
 
 - **III-6.** You will now modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
-it computes the true outline of the target as seen by the camera and projects points on that outline onto the image. To this end, you should
+it draws the true outline of the spherical target as seen by the camera. To this end, you should
 first compute a direction vector $`\bold{q'}`$ from the center of the target to the edge of the sphere seen by the camera. Then, you will be able to
 draw the target's true shape by rotating the vector along a rotation axis in the direction of the target, and projecting the resulting points along the edge 
 into the camera image. The steps below guide you through most of this process:
