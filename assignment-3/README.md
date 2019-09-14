@@ -571,7 +571,7 @@ the virtual camera that you already implemented is working correctly.
     <img src="docs/rviz_camera.png" width="300"/>
     </kbd>
 
-        > If parts of the robot are displayed in the camera plugin image, then you can remove them by temporarily disabling the RobotModel plugin in Rviz.
+    > If parts of the robot are displayed in the camera plugin image, then you can remove them by temporarily disabling the RobotModel plugin in Rviz.
     
     Once the image that is published by the virtual_camera.py script is consistent 
     with what the Camera plugin shows in RViz, record a ROS [bag](http://wiki.ros.org/Bags) 
