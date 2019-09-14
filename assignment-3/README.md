@@ -630,19 +630,19 @@ with a fixed radius, it computes the radius of the projected target on the image
     **a.** Add an internal node parameter to your virtual_camera.py program that allows you to
     change the radius of the target when the node is run. For example:
 
-        ```python
-        # Example
-        radius = rospy.get_param("~radius", default=0.1)
-        ```
+    ```python
+    # Example
+    radius = rospy.get_param("~radius", default=0.1)
+    ```
 
-        You should then be able to run your node with the optional parameter `radius`:
+    You should then be able to run your node with the optional parameter `radius`:
 
-        ```bash
-        $ rosrun shutter_lookat virtual_camera.py _radius:=<new radius>
-        ```
+    ```bash
+    $ rosrun shutter_lookat virtual_camera.py _radius:=<new radius>
+    ```
 
-        Check that you do get the input parameter into your node when you call your program as above.
-        You'll need access to this input parameter to verify the next task.
+    Check that you do get the input parameter into your node when you call your program as above.
+    You'll need access to this input parameter to verify the next task.
 
     **b.** Modify your virtual_camera.py node to compute the radius of the drawn circle
     as a function of the target's 3D position relative to the camera and the radius parameter (III-5a).
