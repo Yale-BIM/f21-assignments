@@ -641,15 +641,18 @@ with a fixed radius, it computes the radius of the projected target on the image
         $ rosrun shutter_lookat virtual_camera.py _radius:=<new radius>
         ```
 
+        Check that you do get the input parameter into your node when you call your program as above.
+        You'll need access to this input parameter to verify the next task.
+
     **b.** Modify your virtual_camera.py node to compute the radius of the drawn circle
-    as a function of its position relative to the camera and the radius parameter (III-5a).
+    as a function of the target's 3D position relative to the camera and the radius parameter (III-5a).
     Explain in detail in your report how you compute the radius of the target on the image. 
     Include drawings of the geometric relations that you used to help explain your solution.
 
     > Tip: As before, you can test that your virtual camera is working properly by launching the `generate_target.launch`
-    with the optional parameter `target_radius:=<radius>`, where \<radius\> corresponds to the target's
-    radius in the 3D virtual world of the simulated robot. Then, run your node with the same target radius
-    and check in RViz if your image matches the rendering by the camera plugin.
+    script with the optional `target_x_plane:=<x>` and `target_radius:=<radius>` parameters. Here, \<radius\> corresponds to the
+    radius of the target's marker published by the generate_target.py script. Then, run your node with the same target radius
+    used for the generate_larget.launch script, and check in RViz if your image matches the rendering by the camera plugin.
 
 ## Part IV. 
 
