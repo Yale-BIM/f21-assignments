@@ -664,7 +664,19 @@ into the camera image. The steps below guide you through most of this process:
     The resulting image from your virtual camera should now show both the original circle (that was drawn for part III) and the blue polygon on top, 
     as shown below:
 
-    **g.** Take a picture of your resulting image when the target is nearby the edge of the image. Include this image in your report.
+    <kbd>
+    <img src="docs/ball_outline.png" width="300"/>
+    </kbd>
+
+    **g.** Restart ROS and re-run the generate_target.launch with the ball updating at a lower speed, and being closer to the camera:
+    
+    ```bash
+    $ roslaunch shutter_lookat generate_target.launch target_x_plane:=0.5 publish_rate:=10
+    ```
+
+    Then restart your virtual_camera.py node and take a picture of your resulting image when the target is nearby the edge of the image. The image show show
+    the target being elongated; not having a perfectly circlular shape anymore. Include this image in your report and explain why the target does not
+    appear to be  perfectly round, especially towards the edge of the image.
 
 
 ## Part IV. 
