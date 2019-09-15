@@ -707,9 +707,9 @@ However, it sometimes happens that one only cares about observing the world from
 ## Part V. Estimating depth from images (only for students taking CPSC-559)
 
 In general, it is impossible based on the images alone to estimate the absolute scale of the scene. However, if we know the true size of an object in the world,
-we can take advantage of this piece of information to estimate how far the object is from the camera (i.e., its depth). 
+we can take advantage of this piece of information to estimate how far the object is from the camera (i.e., its depth). This is your goal for this part of the assignment.
 
-To work on the problem of estimating the depth of an object in an image, this assignment provides you:
+To work on the problem of estimating the depth of an object in an image, the assignment provides you:
 
 1. Data from a RealSense camera in numpy format: [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing). The data includes:
     - Image captured by the camera and converted to grayscale format (i.e., the data is a 2D matrix of 8-bit integer pixel values)
@@ -726,7 +726,7 @@ To work on the problem of estimating the depth of an object in an image, this as
     - Third, a Hartly and Zisserman's book was placed on the table, as shown in the pointcloud below.
         <img src="docs/book3d.png" width="300"/>
         <br>
-    - Fourth, the depth/save_images.py script was run to save to disk what the camera was currently observing. The resulting depth and gray images are shown below: <br>
+    - Fourth, the depth/save_images.py script was run to save to disk what the camera was currently observing. The resulting depth (left) and gray (right) images are shown below: <br>
         <img src="docs/book.png" width="600"/>
         <br>
 3. Sample script to load the data. See the `depth/process_images.py` script.
