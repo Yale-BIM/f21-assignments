@@ -73,15 +73,18 @@ Parts III of this assignment).
 
 You assignment will be evaluated based on the content of your report and your code:
 
-- Report (45 pts)
+- Report / Other Deliverables (45 pts)
     - Part I (20 pts): I-1 (5 pts) + I-2 (2 pts) + I-3 (5 pts) + I-4 (8 pts)
     - Part II (10 pts): II-2 (5 pts) 
-    - Part III (pts): III-1 (5pts), III-3 (5 pts)
-    - Part IV (15 pts): IV-2 (5 pts) + IV-3 (10 pts)
+    - Part III (22 pts): III-1 (5pts), III-4 (5 pts) + III-6a (3 pts) + III-6b (2 pts) + III-6c (4 pts) + III-6g (3 pts)
+    - Part IV (8 pts): IV-1 (8 pts)
+    - Part V (10 pts): V-1 (5 pts) + V-3 (1 pts) + V-4a (1 pts) + V-4e (3 pts)
 - Code (55 pts)
     * Part II-1 (15 pts) 
-    * Part III (20 pts): III-1 (12 pts) + III-2 (8 pts)
-    * Part IV (20 pts + 5 pts of extra credit): IV-1 (20 pts) + IV-4 (5 pts extra)
+    * Part III (38 pts): Virtual Camera and III-2 (20 pts) + III-3 (8 pts) + III-5 (2 pts) + III-6d (4 pts) + III-6e (2 pts) + III-6f (2 pts) 
+    * Part V (10 pts): V-2 (3 pts) + V-3 (5 pts) + V-4d (2 pts) 
+
+Students taking CPSC-459 will be evaluated over 100 pts. Those taking CPSC-559, will be evaluated over 130 pts.
 
 #### Further Reading and Tutorials
 
