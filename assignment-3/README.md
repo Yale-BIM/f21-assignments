@@ -693,7 +693,7 @@ However, it sometimes happens that one only cares about observing the world from
 ### Questions / Tasks
 
 
-- **IV-1.** Assume that a camera has no skew and no distortion, as the virtual camera that you implemented for Shutter in Part III of this assignment. Then, compute the camera's intrinsic parameters $`K`$ using Least Squares. To this end, you should use the set of 3D - 2D correspondences in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ 3D coordinates of the points, meanwhile the last two columns are the corresponding pixel locations $`x, y`$. 
+- **IV-1.** Assume that a camera has no skew and no distortion, as the virtual camera that you implemented for Shutter in Part III of this assignment. Then, compute the camera's intrinsic parameters $`K`$ using Least Squares. To this end, you should use the set of 3D - 2D correspondences in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ 3D coordinates of the points, meanwhile the last two columns are the corresponding pixel locations $`x, y`$. Assume that the pixel locations in homogeneous coordinates are simply $`[x, y, 1]`$.
 
     Implement a script to solve for the instrinsics in Python. Your script should take as input the path to the correspondences.txt file, and print the estimated
     matrix $`K`$. Name your script `calibrate_K.py` and save it in the `calibration` directory of this assignment within
