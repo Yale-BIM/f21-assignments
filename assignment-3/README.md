@@ -731,6 +731,7 @@ To work on the problem of estimating the depth of an object in an image, the ins
     <img src="docs/book.png" width="600"/>
     
 The above process resulted in the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) data file, which you should download to complete this part of the assignment. The data includes:
+
     - The image captured by the camera and converted to grayscale format (i.e., the data is a 2D matrix of 8-bit integer pixel values).
     - The depth image (aligned with the grayscale image). The data is a 2D matrix of floats (in meters).
     - The width of the images.
