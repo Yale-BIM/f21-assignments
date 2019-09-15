@@ -693,7 +693,7 @@ However, it sometimes happens that one only cares about observing the world from
 ### Questions / Tasks
 
 
-- **IV-1.** Assuming that the camera has no skew, compute its intrinsic parameters $`K`$ using Least Squares given the set of 3D - 2D correspondences in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ coordinates of the points in the world, meanwhile the last two columns are the $`x,y`$ corresponding pixel locations. 
+- **IV-1.** Assuming that the camera has no skew, compute its intrinsic parameters $`K`$ using Least Squares given the set of 3D - 2D correspondences in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ coordinates of the points in the world, meanwhile the last two columns are the $`x,y`$ corresponding pixel locations ($`\mathbf{x} = [x\ y\ 1]^T`$).
 
     Implement a script to solve for the instrinsics in Python. Your script should take as input the path to the correspondences.txt file, and print the estimated
     matrix $`K`$. Name your script `calibrate_K.py` and save it in the `calibration` directory of this assignment within
