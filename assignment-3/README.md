@@ -775,7 +775,31 @@ parameters ($`K`$) of the camera used to get the grayscale image, and the positi
 
     > Tip: The book is not perfectly parallel to the horizontal and vertical axes of the camera's frame, thus the book does not appear in the image as a perfect rectangle. This is OK for this part of the assignment, though. The important detail when selecting the book in the image is that the top and bottom part of the green rectangle align as best as possible with the top and bottom edge of the book's cover.
 
-- **V-3.** Compare your estimated value with the average depth of the book in the depth image.
+- **V-3.** Compare your estimated value with the average depth of the book in the depth image. To this end, first gather
+the depth values corresponding to the book from the depth image, and filter out zero values (these cells of the depth image correspond to
+pixels in the grayscale image for which depth could not be estimated). Then compute the average depth of the resulting filtered values, and
+the difference between the latter result and your estimated depth from the grayscale image alone.
+
+    Once the above steps are implemented, your process_images.py script should print the estimated depth from the depth image, and the
+    difference between the two depth estimates:
+
+    ```python
+    # Example
+    print("Estimated depth from depth image: {}m".format(average_depth)) # where average_depth is computed from the depth image
+    print("Difference between estimates: {}".format(average_depth - Z))
+    ```
+
+    Thus, the output of your process_images.py script should now look like:
+
+    ```bash
+    $ ./process_images.py images.npz <book's height>
+    Loading images.npz
+    (...)
+    Estimated depth: ... <- your result from V-2
+    Estimated depth from depth image: ... <- result from V-3
+    Difference between estimates: ... <- result from V-3
+    ```
+
 
 **Once you get to the end of the assignment, remember to commit your code, push to GitLab, and indicate
 in your assignment report the commit SHA for the final version of the code that you wish to be evaluated on.**
