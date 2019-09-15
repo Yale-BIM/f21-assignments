@@ -632,15 +632,15 @@ the node should also print a warning message:
 it draws the true outline of the spherical target as seen by the camera. To this end, you should
 first compute a direction vector $`\bold{q'}`$ from the center of the target to the edge of the sphere seen by the camera. Then, you will be able to
 draw the target's true shape by rotating the vector along a rotation axis in the direction of the target, and projecting the resulting points along the edge 
-into the camera image. The steps below guide you through most of this process:
+into the camera image.
+
+    <img src="docs/diagram_a3.png" width="500"/>
+
+    The steps below guide you through most of this process:
 
     **a.** To get started, let $`\bold{t} = [t_x\ t_y\ t_z]^T`$ be the vector from the camera center to the center of the target 
     in the camera coordinate frame. Additionally, let the camera coordinate frame be oriented such that the $`z`$ axis points
-    forward, as in the image below:
-    
-    <img src="docs/diagram_a3.png" width="450"/>
-
-    How can you mathematically calculate a vector $`\bold{q}`$ perpendicular to both $`\bold{t}`$ and the horizontal axis of the
+    forward. How can you mathematically calculate a vector $`\bold{q}`$ perpendicular to both $`\bold{t}`$ and the horizontal axis of the
     camera coordinate frame? Explain in your report.
 
     **b.** Now that you have computed a vector perpendicular to the direction towards the target (as seen by the camera), explain
