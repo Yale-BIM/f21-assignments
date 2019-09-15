@@ -803,13 +803,15 @@ the difference between the latter result and your estimated depth from the grays
 
 - **V-4.** Now that you have tools to compute the depth of objects captured by a RealSense image, try this approach on a new image captured from a camera in one of the Shutter robots in AKW 411. The necessary RealSense driver is already installed in the laptops connected to the robots, but you will need to follow the steps below to setup the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros.git) in your catkin workspace and collect a new image:
 
-    **a.** Check that the camera is working when connected to one of the laptops in AKW411:
+    **a.** Decide on an object that you want to image in this part of the assigment. Measure it's height.
+
+    **b.** Check that the camera is working when connected to one of the laptops in AKW411:
 
     ```bash
     $ realsense-viewer # and enable the RGB camera 
     ```
 
-    **b.** Install the realsense2_camera package in your catkin workspace:
+    **c.** Install the realsense2_camera package in your catkin workspace:
 
     ```bash
     $ roscd; cd ../src # go to the src folder of your workspace
@@ -820,11 +822,10 @@ the difference between the latter result and your estimated depth from the grays
     $ roslaunch realsense2_camera rs_camera.launch align_depth:=true # check that you can run the camera driver from ROS and visualize the images, e.g., using rqt_image_view
     ```
 
-    **c.** While the camera driver is running, generate a new images.npz file with a new image captured by you in the lab. You can
-    capture the image by running the `depth/save_images.py` script. Submit the resulting images.npz file as part of your assignment to Canvas.
+    **d.** While the camera driver is running, place the object in a steady position in front of the camera, and generate a new images.npz file with the pictures of the objects captured by you in the lab. You can capture the images by running the `depth/save_images.py` script from the terminal. Inspect the images.npz file to make sure that the desired image was properly capatured, and submit the images.npz file as part of your assignment to Canvas.
 
-    **d.** Run your process_images.py script on the new images.npz file. Include a screenshot of the depth and grayscale images shown by your
-    script when it loads the images.npz file in your report. Also report the estimated depth with the grayscale image only, and using the depth image.
+    **e.** Run your process_images.py script on the new images.npz file. Include in your report a screenshot of the depth and grayscale images shown by your
+    script when it loads the images.npz file. Also report the estimated depths for the object (with the grayscale image only, and using the depth image).
 
 
 **Once you get to the end of the assignment, remember to commit your code, push to GitLab, and indicate
