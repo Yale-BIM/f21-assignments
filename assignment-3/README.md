@@ -714,17 +714,20 @@ To work on the problem of estimating the depth of an object in an image, the ins
 1. First, the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros.git) was installed in the catkin_repository of the assignment.
 
 2. Second, the driver for the RealSense D435 camera was started to stream images through the ROS network:
+
     ```bash
     $ roslaunch realsense2_camera rs_camera.launch align_depth:=true
     ```
-The aligned depth option told the driver to generate depth images that are aligned with the RGB images captured by the camera. This means
-that the depth of a pixel $`(x,y)`$ in the RGB image can be obtained from the same location in the depth image. 
+
+    The aligned depth option told the driver to generate depth images that are aligned with the RGB images captured by the camera. This means
+    that the depth of a pixel $`(x,y)`$ in the RGB image can be obtained from the same location in the depth image. 
 
 3. Third, a Hartly and Zisserman's book was placed on the table, as shown in the pointcloud below.
+
     <img src="docs/book3d.png" width="300"/>
     
-
 4. Fourth, the `depth/save_images.py` script was run to save to disk what the camera was currently observing. The resulting depth (left) and gray (right) images are shown below:
+
     <img src="docs/book.png" width="600"/>
     
 The above process resulted in the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) data file, which you should download to complete this part of the assignment. The data includes:
