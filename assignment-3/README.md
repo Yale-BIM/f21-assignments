@@ -693,17 +693,17 @@ However, it sometimes happens that one only cares about observing the world from
 ### Questions / Tasks
 
 
-- **IV-1.** Assume that a camera has no skew and no distortion, as the virtual camera that you implemented for Shutter in Part III of this assignment. Then, compute the camera's intrinsic parameters $`K`$ by minimizing the error $`\sum_i \|\mathbf{x}_i - K[I|\bold{0}]\mathbf{X}_i\|`$ using Least Squares. To this end, you should use the set of 3D - 2D correspondences in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ 3D coordinates of the points, meanwhile the last two columns are the corresponding pixel locations $`x, y`$. Assume that the pixel locations in homogeneous coordinates are simply $`[x, y, 1]`$.
+- **IV-1.** Assume that a camera has no skew and no distortion, as the virtual camera that you implemented for Shutter in Part III of this assignment. Then, compute the camera's intrinsic parameters $`K`$ by minimizing the error $`\sum_i \|\mathbf{x}_i - K[I|\bold{0}]\mathbf{X}_i\|^2`$ using Least Squares. To this end, you should use the set of 3D - 2D correspondences in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ 3D coordinates of the points, meanwhile the last two columns are the corresponding pixel locations $`x, y`$. Assume that the pixel locations in homogeneous coordinates are simply $`[x, y, 1]`$.
 
     Implement a script to solve for the instrinsics in Python. Your script should take as input the path to the correspondences.txt file, and print the estimated
     matrix $`K`$. Name your script `calibrate_K.py` and save it in the `calibration` directory of this assignment within
     your repository. 
     
-    Explain in your report how your calibrate_K.py script should be run, how you formulated a system of equations to solve for $`K`$, and how you solved the system. Provide the resulting value for $`K`$ in your report as well.
+    Explain in your report how your calibrate_K.py script should be run, how you formulated a system of equations to solve for $`K`$, and how you solved the system. Provide the resulting value for $`K`$ in your report as well as the squared error $`\sum_i \|\mathbf{x}_i - K[I|\bold{0}]\mathbf{X}_i\|^2`$.
 
-    > Note: It is allowed to use numeric libraries like numpy in your implementation. But even if you do, explain how you solved the problem in your report.
+    > Note1: It is allowed to use numeric libraries like numpy in your implementation. But even if you do, explain how you solved the problem in your report.
 
-    > Tip: The values in $`\mathbf{x} = [x, y, 1]`$ have different scales. While $`x, y`$ are in the hundreds (potentially, in the thousands), 1 is small. Unfortunately, this can make your system of equations poorly conditioned. As suggested in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book, it is recommended that you normalize the first two dimensions of $`\mathbf{x}`$ using a similarity transformation before solving for instrinsic parameters. You should then denormalize the estimated parameters to get the values in the right scale. See page 107, Sec. 4.4.4, and page 181, Algorithm 7.1, in the book.
+    > Note2: The values in $`\mathbf{x} = [x, y, 1]`$ have different scales. While $`x, y`$ are in the hundreds (potentially, in the thousands), 1 is small. Unfortunately, this can make your system of equations poorly conditioned at times. As suggested in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book, it is generally recommended that you normalize the first two dimensions of $`\mathbf{x}`$ using a similarity transformation before solving for instrinsic parameters. If you normalize the values, you should then denormalize the estimated parameters to get them in the right scale. See page 107, Sec. 4.4.4, and page 181, Algorithm 7.1, in the book.
 
 ## Part V. Estimating depth from images (only for students taking CPSC-559)
 
