@@ -693,7 +693,7 @@ However, it sometimes happens that one only cares about observing the world from
 ### Questions / Tasks
 
 
-- **IV-1.** Assume that a camera has no skew and no distortion, as the virtual camera that you implemented for Shutter in Part III of this assignment. Then, compute the camera's intrinsic parameters $`K`$ using Least Squares. To this end, you should use the set of 3D - 2D correspondences in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ 3D coordinates of the points, meanwhile the last two columns are the corresponding pixel locations $`x, y`$. Assume that the pixel locations in homogeneous coordinates are simply $`[x, y, 1]`$.
+- **IV-1.** Assume that a camera has no skew and no distortion, as the virtual camera that you implemented for Shutter in Part III of this assignment. Then, compute the camera's intrinsic parameters $`K`$ by minimizing the error $`\sum_i \|\mathbf{x}_i - K[I|\bold{0}]\mathbf{X}_i\|`$ using Least Squares. To this end, you should use the set of 3D - 2D correspondences in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ 3D coordinates of the points, meanwhile the last two columns are the corresponding pixel locations $`x, y`$. Assume that the pixel locations in homogeneous coordinates are simply $`[x, y, 1]`$.
 
     Implement a script to solve for the instrinsics in Python. Your script should take as input the path to the correspondences.txt file, and print the estimated
     matrix $`K`$. Name your script `calibrate_K.py` and save it in the `calibration` directory of this assignment within
@@ -701,7 +701,7 @@ However, it sometimes happens that one only cares about observing the world from
     
     Explain in your report how your calibrate_K.py script should be run, how you formulated a system of equations to solve for $`K`$, and how you solved the system. Provide the resulting value for $`K`$ in your report as well.
 
-    > Tip: The 3D and 2D points are in very different scales, and this can make your system of equations poorly conditioned. As suggested in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book (pp. 181, Algorithm 7.1), it is recommended that you normalize the data before solving for instrinsic parameters, and that you then denormalize the estimated parameters to get the values in the right scale.
+    > Tip: The 3D and 2D points are in very different scales, and this can make your system of equations poorly conditioned. As suggested in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book, it is recommended that you normalize the data before solving for instrinsic parameters, and that you then denormalize the estimated parameters to get the values in the right scale. See page 107, Sec. 4.4.4, and page 181, Algorithm 7.1, in the book.
 
 ## Part V. Estimating depth from images (only for students taking CPSC-559)
 
