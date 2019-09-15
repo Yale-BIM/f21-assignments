@@ -803,7 +803,7 @@ the difference between the latter result and your estimated depth from the grays
 
 - **V-4.** Now that you have tools to compute the depth of objects captured by a RealSense image, try this approach on a new image captured from a camera in one of the Shutter robots in AKW 411. The necessary RealSense driver is already installed in the laptops connected to the robots, but you will need to follow the steps below to setup the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros.git) in your catkin workspace and collect a new image:
 
-    **a.** Decide on an object that you want to image in this part of the assigment. Measure it's height.
+    **a.** Decide on an object that you want to image in this part of the assigment. Measure it's height. Provide a description of the object and its height in your report.
 
     **b.** Check that the camera is working when connected to one of the laptops in AKW411:
 
