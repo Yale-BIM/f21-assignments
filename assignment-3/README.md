@@ -701,7 +701,9 @@ However, it sometimes happens that one only cares about observing the world from
     
     Explain in your report how your calibrate_K.py script should be run, how you formulated a system of equations to solve for $`K`$, and how you solved the system. Provide the resulting value for $`K`$ in your report as well.
 
-    > Tip: The 3D and 2D points are in very different scales, and this can make your system of equations poorly conditioned. As suggested in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book, it is recommended that you normalize the data before solving for instrinsic parameters, and that you then denormalize the estimated parameters to get the values in the right scale. See page 107, Sec. 4.4.4, and page 181, Algorithm 7.1, in the book.
+    > Note: It is allowed to use numeric libraries like numpy in your implementation. But even if you do, explain how you solved the problem in your report.
+
+    > Tip: The values in $`\mathbf{x} = [x, y, 1]`$ have different scales. While $`x, y`$ are in the hundreds (potentially, in the thousands), 1 is small. Unfortunately, this can make your system of equations poorly conditioned. As suggested in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book, it is recommended that you normalize the first two dimensions of $`\mathbf{x}`$ using a similarity transformation before solving for instrinsic parameters. You should then denormalize the estimated parameters to get the values in the right scale. See page 107, Sec. 4.4.4, and page 181, Algorithm 7.1, in the book.
 
 ## Part V. Estimating depth from images (only for students taking CPSC-559)
 
