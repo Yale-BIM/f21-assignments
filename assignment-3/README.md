@@ -717,8 +717,8 @@ To work on the problem of estimating the depth of an object in an image, the ins
     ```bash
     $ roslaunch realsense2_camera rs_camera.launch align_depth:=true
     ```
-    The aligned depth option told the driver to generate depth images that are aligned with the RGB images captured by the camera. This means
-    that the depth of a pixel $`(x,y)`$ in the RGB image can be obtained from the $`(x,y)`$ element in the depth image. 
+The aligned depth option told the driver to generate depth images that are aligned with the RGB images captured by the camera. This means
+that the depth of a pixel $`(x,y)`$ in the RGB image can be obtained from the same location in the depth image. 
 
 3. Third, a Hartly and Zisserman's book was placed on the table, as shown in the pointcloud below.
     <img src="docs/book3d.png" width="300"/>
