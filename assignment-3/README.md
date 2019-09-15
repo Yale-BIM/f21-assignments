@@ -711,7 +711,7 @@ we can take advantage of this piece of information to estimate how far the objec
 
 To work on the problem of estimating the depth of an object in an image, the instructor followed the steps below to gather data from a RealSense camera -- like the one in Shutter.
 
-1. First, the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros.git) was installed in the catkin_repository of the assignment.
+1. First, the [RealSense driver](https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md) and the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros.git) were installed to use the camera in Ubuntu. 
 
 2. Second, the driver for the RealSense D435 camera was started to stream images through the ROS network:
 
@@ -800,6 +800,31 @@ the difference between the latter result and your estimated depth from the grays
     Estimated depth from depth image: ... <- result from V-3
     Difference between estimates: ... <- result from V-3
     ```
+
+- **V-4.** Now that you have tools to compute the depth of objects captured by a RealSense image, try this approach on a new image captured from a camera in one of the Shutter robots in AKW 411. The necessary RealSense driver is already installed in the laptops connected to the robots, but you will need to follow the steps below to setup the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros.git) in your catkin workspace and collect a new image:
+
+    **a.** Check that the camera is working when connected to one of the laptops in AKW411:
+
+    ```bash
+    $ realsense-viewer # and enable the RGB camera 
+    ```
+
+    **b.** Install the realsense2_camera package in your catkin workspace:
+
+    ```bash
+    $ roscd; cd ../src # go to the src folder of your workspace
+    $ git clone https://github.com/IntelRealSense/realsense-ros.git # clone the realsense2_camera repository into your workspace's src folder
+    $ cd realsense-ros; git checkout 2.2.8 # get a stable version of the realsense2_camera code
+    $ roscd; cd .. # go back to the root of your catkin workspace
+    $ catkin_make -DCMAKE_BUILD_TYPE=Release # compile your catkin workspace
+    $ roslaunch realsense2_camera rs_camera.launch align_depth:=true # check that you can run the camera driver from ROS and visualize the images, e.g., using rqt_image_view
+    ```
+
+    **c.** While the camera driver is running, generate a new images.npz file with a new image captured by you in the lab. You can
+    capture the image by running the `depth/save_images.py` script. Submit the resulting images.npz file as part of your assignment to Canvas.
+
+    **d.** Run your process_images.py script on the new images.npz file. Include a screenshot of the depth and grayscale images shown by your
+    script when it loads the images.npz file in your report. Also report the estimated depth with the grayscale image only, and using the depth image.
 
 
 **Once you get to the end of the assignment, remember to commit your code, push to GitLab, and indicate
