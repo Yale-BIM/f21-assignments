@@ -61,8 +61,10 @@ with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this
 [assignment template](https://www.overleaf.com/latex/templates/assignment-template-for-yale-cpsc-459-559/nbysxxygbysk) 
 in [LaTeX](https://www.latex-project.org/).
 
-- **ROS Bags:** You are also expected to submit two [ROS bags](http://wiki.ros.org/Bags) to Canvas (see 
-Parts III and IV of this assignment).
+- **ROS Bag:** You are expected to submit a [ROS bags](http://wiki.ros.org/Bags) to Canvas (see 
+Parts III of this assignment).
+
+- **images.npz:** Students taking CPSC-559 are also expected to submit a Numpy NPZ file with data for Part V-3 of this assignment.
 
 - **Code:** Finally, you are expected to push code for this assignment to your 
 [GitLab](http://www.gitlab.com) repository as explained in the [first](https://gitlab.com/cpsc459-bim/assignments/f19-assignments/tree/master/assignment-1) assignment.
