@@ -706,7 +706,7 @@ However, it sometimes happens that one only cares about observing the world from
 
 ## Part V. Estimating depth from images (only for students taking CPSC-559)
 
-In general, it is impossible based on an image alone to estimate the absolute scale of a scene observed through the picture. However, if we know the true size of an object in the world,
+In general, it is impossible to estimate the absolute scale of a scene based only on an image of it. However, if we know the true size of an object in the world,
 we can take advantage of this piece of information to estimate how far the object is from the camera (i.e., its depth). This is your goal for this part of the assignment.
 
 To work on the problem of estimating the depth of an object in an image, the instructor followed the steps below to gather data from a RealSense camera -- like the one in Shutter.
