@@ -686,22 +686,23 @@ into the camera image.
 
 ## Part IV. Solving for the intrinsics (only for students taking CPSC-559)
 
-Full camera calibration consists of findings the intrinsic and extrinsic camera parameters
-that define the projective operation $`\mathbf{x} = P\mathbf{X}`$, where $`\mathbf{X}=[X\ Y\ Z\ 1]^T`$ is a point in homogeneous coordinates in the world coordinate frame. 
-However, it sometimes happens that one only cares about observing the world from a camera and an external coordinate frame is irrelevant for the application. In these situations, we only care about the intrinsic camera parameters $`K`$, such that $`\mathbf{x} = K[X\ Y\ Z]^T`$.
+[Full camera calibration](https://www.mathworks.com/help/vision/ug/camera-calibration.html) consists of findings the intrinsic and extrinsic camera parameters
+that define the projective operation $`\mathbf{x} = P\mathbf{X}`$, where $`\mathbf{X}=[X\ Y\ Z\ 1]^T`$ is a point in homogeneous coordinates in the world coordinate frame and $`\mathbf{x}`$ is the point's projection on the image. 
+However, it sometimes happens that one only cares about observing the world from a camera and an external coordinate frame is irrelevant for the application. In these situations, we only care about the intrinsic camera parameters $`K`$, such that $`\mathbf{x} = K[I|\bold{0}][X\ Y\ Z\ 1]^T`$, where $`I`$ is the $`3 \times 3`$ identity matrix and $`\bold{0}`$ is the 3-dimensional zero vector.
 
 ### Questions / Tasks
 
 
-- **IV-1.** Assuming that the camera has no skew, compute its intrinsic parameters $`K`$ using Least Squares given the set of 3D - 2D correspondences in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ coordinates of the points in the world, meanwhile the last two columns are the $`x,y`$ corresponding pixel locations. 
+- **IV-1.** Assume that a camera has no skew and no distortion, as the virtual camera that you implemented for Shutter in Part III of this assignment. Then, compute the camera's intrinsic parameters $`K`$ by minimizing the $`error = \sum_i \|\mathbf{x}_i - K[I|\bold{0}]\mathbf{X}_i\|^2`$ using Least Squares, where $`i`$ indexes a set of sample correspondences \<$`\mathbf{x}_i`$, $`\mathbf{X}_i`$\>. This set of 3D - 2D correspondences is provided for you in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ 3D coordinates of the points, meanwhile the last two columns are the corresponding pixel locations $`x, y`$. Assume that the pixel locations in homogeneous coordinates are simply $`[x, y, 1]`$.
 
     Implement a script to solve for the instrinsics in Python. Your script should take as input the path to the correspondences.txt file, and print the estimated
-    matrix $`K`$. Name your script `calibrate_K.py` and save it in the `calibration` directory of this assignment within
+    matrix $`K`$ and the $`error`$ for your solution. Name your script `calibrate_K.py` and save it in the `calibration` directory of this assignment within
     your repository. 
     
-    Explain in your report how your calibrate_K.py script should be run, how you formulated a system of equations to solve for $`K`$, and how you solved the system. Provide the resulting value for $`K`$ in your report as well.
+    Explain in your report how your calibrate_K.py script should be run, how you formulated a system of equations to solve for $`K`$, and how you solved the system in your implementation. Provide the resulting value for $`K`$ in your report as well as the $`error`$.
 
-    > Tip: The 3D and 2D points are in very different scales, and this can make your system of equations poorly conditioned. As suggested in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book, it is recommended that you normalize the data before solving for instrinsic parameters, and that you then unnormalize the estimated parameters to get the values in the right scale.
+    > Note: It is allowed to use numeric libraries like numpy in your implementation. But even if you do, explain how you solved the problem in your report.
+
 
 ## Part V. Estimating depth from images (only for students taking CPSC-559)
 
