@@ -762,6 +762,14 @@ parameters ($`K`$) of the camera used to get the grayscale image, and the positi
     print("Estimated depth: {}m".format(Z))
     ```
 
+    Then, you should be able to run the script, providing the book's height, and see the estimated depth printed in the terminal:
+
+    ```bash
+    $ ./process_images.py images.npz <book's height>
+    ```
+
+    Don't forget to commit your modified script to your repository.
+
 - **V-3.** Compare your estimated value with the average depth of the book in the depth image.
 
 **Once you get to the end of the assignment, remember to commit your code, push to GitLab, and indicate
