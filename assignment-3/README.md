@@ -688,7 +688,7 @@ into the camera image.
 
 ## Part IV. Solving for the intrinsics (only for students taking CPSC-559)
 
-> NOTE: This part of the assignment is only for students taking CPSC-559. Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. However, their answers to the questions of Part IV will not be considered in their evaluation of this assignment.
+> NOTE: This part of the assignment is only for students taking CPSC-559. Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. However, their answers to the questions of Part IV will not be considered during grading.
 
 [Full camera calibration](https://www.mathworks.com/help/vision/ug/camera-calibration.html) consists of findings the intrinsic and extrinsic camera parameters
 that define the projective operation $`\mathbf{x} = P\mathbf{X}`$, where $`\mathbf{X}=[X\ Y\ Z\ 1]^T`$ is a point in homogeneous coordinates in the world coordinate frame and $`\mathbf{x}`$ is the point's projection on the image. 
@@ -710,7 +710,7 @@ However, it sometimes happens that one only cares about observing the world from
 
 ## Part V. Estimating depth from images
 
-> NOTE: This part of the assignment is only for students taking CPSC-559. Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. However, their answers to the questions of Part V will not be considered in their evaluation of this assignment.
+> NOTE: This part of the assignment is only for students taking CPSC-559. Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. However, their answers to the questions of Part V will not be considered during grading.
 
 In general, it is impossible to estimate the absolute scale of a scene based only on an image of it. However, if we know the true size of an object in the world,
 we can take advantage of this piece of information to estimate how far the object is from the camera (i.e., its depth). This is your goal for this part of the assignment.
