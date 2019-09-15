@@ -748,6 +748,8 @@ parameters ($`K`$) of the camera used to get the grayscale image, and the positi
 
     <img src="docs/book_select.png" width="300"/>
 
+    > Tip: We recommend that you draw the geometric relations of the known and unknown variables for this problem. Include in your report this drawing to help explain your answer to this question. 
+
 - **V-2.** Modify the `docs/process_images.py` script to implement your solution to the task V-1. To this end, first add an additional input argument to the script for gathering the height of the object of interest (in this case, the book):
 
     ```python
