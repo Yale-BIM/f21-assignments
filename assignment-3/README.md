@@ -636,7 +636,11 @@ into the camera image. The steps below guide you through most of this process:
 
     **a.** To get started, let $`\bold{t} = [t_x\ t_y\ t_z]^T`$ be the vector from the camera center to the center of the target 
     in the camera coordinate frame. Additionally, let the camera coordinate frame be oriented such that the $`z`$ axis points
-    forward. How can you mathematically calculate a vector $`\bold{q}`$ perpendicular to both $`\bold{t}`$ and the horizontal axis of the
+    forward, as in the image below:
+    
+    <img src="docs/diagram_3a.png" width="450"/>
+
+    How can you mathematically calculate a vector $`\bold{q}`$ perpendicular to both $`\bold{t}`$ and the horizontal axis of the
     camera coordinate frame? Explain in your report.
 
     **b.** Now that you have computed a vector perpendicular to the direction towards the target (as seen by the camera), explain
