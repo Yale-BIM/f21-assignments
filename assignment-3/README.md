@@ -686,7 +686,7 @@ into the camera image.
     appear to be  perfectly round, especially towards the edge of the image.
 
 
-## Part IV. Solving for the intrinsics (only for students taking CPSC-559)
+## Part IV. Solving for the intrinsics
 
 > NOTE: This part of the assignment is only for students taking CPSC-559. Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. However, their answers to the questions of Part IV will not be considered during grading.
 
