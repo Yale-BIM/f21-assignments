@@ -743,12 +743,12 @@ To load the data from the image.npz file, you can use the sample script `depth/p
 
 ### Questions / Tasks
 
-- **V-1.** The book has a true height of $`h=24.5`$ cm. How can you compute how far the book is from the camera in the grayscale image of the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) file? Explain your report, given the books true height, the intrinsic camera
+- **V-1.** The book has a true height of $`h=24.5`$ cm. How can you compute how far the book is from the camera in the grayscale image of the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) file? Explain your answer to this question in your report, given the book's true height, the intrinsic 
 parameters ($`K`$) of the camera used to get the grayscale image, and the position of the top-left ($`\bold{x_1} = (x_1,y_1)`$) and bottom-right ($`\bold{x_2} = (x_2,y_2)`$) corners of a box surrounding the book's front cover in the image, as illustrated in the image below.
 
     <img src="docs/book_select.png" width="300"/>
 
-    > Tip: We recommend that you draw the geometric relations of the known and unknown variables for this problem. Include in your report this drawing to help explain your answer to this question. 
+    > Tip: We recommend that you draw the geometric relations of the known and unknown variables for this problem. Include this drawing in your report to help explain your answer to this question. 
 
 - **V-2.** Modify the `docs/process_images.py` script to implement your solution to the task V-1. To this end, first add an additional input argument to the script for gathering the height of the object of interest (in this case, the book):
 
