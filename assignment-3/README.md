@@ -24,10 +24,10 @@ This is the third assignment for Yale's CPSC-459/559 Building Interactive Machin
     * [Questions / Tasks](#questions--tasks-1)
 * [Part III. Making a virtual camera](#part-iii-making-a-virtual-camera)
     * [Questions / Tasks](#questions--tasks-2)
-* [Part IV. Orienting Shutter's camera towards a moving target](#part-iv-orienting-shutters-camera-towards-a-moving-target)
-    * [Questions / Tasks](#questions--tasks-3)
-
-
+* [Part IV. Solving for the intrinsics (only for students taking CPSC-559)](#part-iv-solving-for-the-intrinsics--only-for-students-taking-cpsc-559-)
+    * [Questions / Tasks](#questions---tasks-3)
+* [Part V. Estimating depth from images (only for students taking CPSC-559)](#part-v-estimating-depth-from-images--only-for-students-taking-cpsc-559-)
+    * [Questions / Tasks](#questions---tasks-4)
 
 ## Introduction 
 This assignment will provide you practical experience with the [tf](ros.org/wiki/tf) ROS package, 
