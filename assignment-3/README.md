@@ -762,13 +762,15 @@ parameters ($`K`$) of the camera used to get the grayscale image, and the positi
     print("Estimated depth: {}m".format(Z))
     ```
 
-    Then, you should be able to run the script, providing the book's height, and see the estimated depth printed in the terminal:
+    Then, you should be able to run the script, providing the book's height, select the book in the grayscale image, and see the estimated depth printed in the terminal:
 
     ```bash
     $ ./process_images.py images.npz <book's height>
     ```
 
     Don't forget to commit your modified script to your repository.
+
+    > Tip: The book is not perfectly parallel to the horizontal axis of the camera's frame, thus the book does not appear in the image as a perfect rectangle. This is OK for this part of the assignment, though. The important detail when selecting the book in the image is that the top and bottom part of the green rectangle align with the top and bottom edge of the book's cover.
 
 - **V-3.** Compare your estimated value with the average depth of the book in the depth image.
 
