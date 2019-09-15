@@ -699,12 +699,40 @@ However, it sometimes happens that one only cares about observing the world from
     matrix $`K`$ and the $`error`$ for your solution. Name your script `calibrate_K.py` and save it in the `calibration` directory of this assignment within
     your repository. 
     
-    Explain in your report how your calibrate_K.py script should be run, how you formulated a system of equations to solve for $`K`$, and how you solved the system in your implementation. Provide the resulting value for $`K`$ in your report as well as the $`error`$.
+    Explain in your report how your calibrate_K.py script should be run, how you formulated a system of equations to solve for $`K`$, and how you solved the system in your implementation. Provide the resulting value for $`K`$ in your report as well as the $`error`$, as defined above.
 
     > Note: It is allowed to use numeric libraries like numpy in your implementation. But even if you do, explain how you solved the problem in your report.
 
 
 ## Part V. Estimating depth from images (only for students taking CPSC-559)
+
+In general, it is impossible based on the images alone to estimate the absolute scale of the scene. However, if we know the true size of an object in the world,
+we can take advantage of this piece of information to estimate how far the object is from the camera (i.e., its depth). 
+
+To work on the problem of estimating the depth of an object in an image, this assignment provides you:
+
+1. Data from a RealSense camera in numpy format: [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing). The data includes:
+    - Image captured by the camera and converted to grayscale format (i.e., the data is a 2D matrix of 8-bit integer pixel values)
+    - Aligned depth image (transformed to match the grayscale image). The data is a 2D matrix of floats (in meters).
+    - The width of the images 
+    - The height of the images
+    - The intrinsics matrix K for the camera that captured the grayscale image
+2. Script with which the data was generated (see `depth/save_images.py` within this assignment). The process to capture the data was as follows:
+    - First, the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros.git) was installed in the catkin_repository of the assignment.
+    - Second, the camera driver was started to stream images through the ROS network:
+        ```bash
+        $ roslaunch realsense2_camera rs_camera.launch align_depth:=true
+        ```
+    - Third, a Hartly and Zisserman's book was placed on the table, as shown in the pointcloud below.
+        <kbd>
+        <img src="docs/book3d.png" width="300"/>
+        </kbd><br>
+    - Fourth, the depth/save_images.py script was run to save to disk what the camera was currently observing. The resulting depth and gray images are shown below:
+        <kbd>
+        <img src="docs/book.png" width="600"/>
+        </kbd><br>
+3. Sample script to load the data. See the `depth/process_images.py` script.
+
 
 ### Questions / Tasks
 
