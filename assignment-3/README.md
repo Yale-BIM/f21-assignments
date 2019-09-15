@@ -684,9 +684,28 @@ into the camera image.
     appear to be  perfectly round, especially towards the edge of the image.
 
 
-## Part IV. 
+## Part IV. Solving for the intrinsics (only for students taking CPSC-559)
+
+Full camera calibration consists of findings the intrinsic and extrinsic camera parameters
+that define the projective operation $`\mathbf{x} = P\mathbf{X}`$, where $`\mathbf{X}=[X\ Y\ Z\ 1]^T`$ is a point in homogeneous coordinates in the world coordinate frame. 
+However, it sometimes happens that one only cares about observing the world from a camera and an external coordinate frame is irrelevant for the application. In these situations, we only care about the intrinsic camera parameters $`K`$, such that $`\mathbf{x} = K[X\ Y\ Z]^T`$.
 
 ### Questions / Tasks
+
+
+- **IV-1.** Assuming that the camera has no skew, compute its intrinsic parameters $`K`$ using Least Squares given the set of 3D - 2D correspondences in the data/correspondences.txt file. Note that the first three columns of the file provide the $`X, Y, Z`$ coordinates of the points in the world, meanwhile
+the last two columns are the $`x,y`$ corresponding pixel locations. 
+
+    Implement a script to solve for the instrinsics in Python. Your script should take as input the path to the correspondences.txt file, and print the estimated
+    matrix $`K`$. Name your script `calibration.py` and save it in the scripts directory of this assignment within
+    your repository. Also, you should explain in your report how you formulated a system of equations and how you solved for the instrisic parameters. Provide the resulting value for $`K`$ in your report as well.
+
+    > Note: The 3D and 2D points are in very different scales, and this can make your system of equations poorly conditioned. As suggested in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book, it is recommended that you normalize the data before solving for instrinsic parameters, and that you then unnormalize the estimated parameters to get the values in the right scale.
+
+## Part V. Estimating depth from images (only for students taking CPSC-559)
+
+### Questions / Tasks
+
 
 **Once you get to the end of the assignment, remember to commit your code, push to GitLab, and indicate
 in your assignment report the commit SHA for the final version of the code that you wish to be evaluated on.**
