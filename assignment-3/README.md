@@ -713,7 +713,7 @@ To work on the problem of estimating the depth of an object in an image, the ass
 
 1. Data from a RealSense camera in numpy format: [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing). The data includes:
     - Image captured by the camera and converted to grayscale format (i.e., the data is a 2D matrix of 8-bit integer pixel values)
-    - Aligned depth image (transformed to match the grayscale image). The data is a 2D matrix of floats (in meters).
+    - Depth image (aligned with the grayscale image). The data is a 2D matrix of floats (in meters).
     - The width of the images 
     - The height of the images
     - The intrinsics matrix K for the camera that captured the grayscale image
