@@ -767,7 +767,7 @@ parameters ($`K`$) of the camera used to get the grayscale image, and the positi
     Then, you should be able to run the script, providing the book's height, select the book in the grayscale image, and see the estimated depth printed in the terminal:
 
     ```bash
-    $ ./process_images.py images.npz <book's height>
+    $ ./process_images.py images.npz <book_height>
     Loading images.npz
     (...)
     Estimated depth: ... <- your result
@@ -793,7 +793,7 @@ the difference between the latter result and your estimated depth from the grays
     Thus, the output of your process_images.py script should now look like:
 
     ```bash
-    $ ./process_images.py images.npz <book's height>
+    $ ./process_images.py images.npz <book_height>
     Loading images.npz
     (...)
     Estimated depth: ... <- your result from V-2
