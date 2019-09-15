@@ -732,11 +732,11 @@ To work on the problem of estimating the depth of an object in an image, the ins
     
 The above process resulted in the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) data file, which you should download to complete this part of the assignment. The data includes:
 
-    - The image captured by the camera and converted to grayscale format (i.e., the data is a 2D matrix of 8-bit integer pixel values).
-    - The depth image (aligned with the grayscale image). The data is a 2D matrix of floats (in meters).
-    - The width of the images.
-    - The height of the images.
-    - The intrinsics matrix K for the camera that captured the grayscale image.
+- The image captured by the camera and converted to grayscale format (i.e., the data is a 2D matrix of 8-bit integer pixel values).
+- The depth image (aligned with the grayscale image). The data is a 2D matrix of floats (in meters).
+- The width of the images.
+- The height of the images.
+- The intrinsics matrix K for the camera that captured the grayscale image.
 
 To load the data from the image.npz file, you can use the sample script `depth/process_images.py`. This script shows you how extract the different components of the image.npz file in Python, visualize the images, and select a region of interest in the grayscale image.
 
