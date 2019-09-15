@@ -709,27 +709,28 @@ However, it sometimes happens that one only cares about observing the world from
 In general, it is impossible based on an image alone to estimate the absolute scale of a scene observed through the picture. However, if we know the true size of an object in the world,
 we can take advantage of this piece of information to estimate how far the object is from the camera (i.e., its depth). This is your goal for this part of the assignment.
 
-To work on the problem of estimating the depth of an object in an image, the assignment provides you:
+To work on the problem of estimating the depth of an object in an image, the instructor followed the steps below to gather data from a RealSense camera -- like the one in Shutter. The data was generated with the `depth/save_images.py` script within this assignment, by following the steps below:
 
-1. Data from a RealSense camera -- like the one in Shutter -- in numpy format: [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing). The data includes:
-    - Image captured by the camera and converted to grayscale format (i.e., the data is a 2D matrix of 8-bit integer pixel values).
-    - Depth image (aligned with the grayscale image). The data is a 2D matrix of floats (in meters).
+1. First, the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros.git) was installed in the catkin_repository of the assignment.
+2. Second, the driver for the RealSense D435 camera was started to stream images through the ROS network:
+    ```bash
+    $ roslaunch realsense2_camera rs_camera.launch align_depth:=true
+    ```
+3. Third, a Hartly and Zisserman's book was placed on the table, as shown in the pointcloud below.
+    <img src="docs/book3d.png" width="300"/>
+    <br>
+4. Fourth, the depth/save_images.py script was run to save to disk what the camera was currently observing. The resulting depth (left) and gray (right) images are shown below:
+    <img src="docs/book.png" width="600"/>
+    <br>
+
+The above process resulted in the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) data file, which you should download to complete this part of the assignment. The data includes:
+    - The image captured by the camera and converted to grayscale format (i.e., the data is a 2D matrix of 8-bit integer pixel values).
+    - The depth image (aligned with the grayscale image). The data is a 2D matrix of floats (in meters).
     - The width of the images.
     - The height of the images.
     - The intrinsics matrix K for the camera that captured the grayscale image.
-2. Script with which the data was generated (see `depth/save_images.py` within this assignment). The process to capture the data was as follows:
-    - First, the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros.git) was installed in the catkin_repository of the assignment.
-    - Second, the driver for the RealSense D435 camera was started to stream images through the ROS network:
-        ```bash
-        $ roslaunch realsense2_camera rs_camera.launch align_depth:=true
-        ```
-    - Third, a Hartly and Zisserman's book was placed on the table, as shown in the pointcloud below.
-        <img src="docs/book3d.png" width="300"/>
-        <br>
-    - Fourth, the depth/save_images.py script was run to save to disk what the camera was currently observing. The resulting depth (left) and gray (right) images are shown below: <br>
-        <img src="docs/book.png" width="600"/>
-        <br>
-3. Sample script to load the data. See the `depth/process_images.py` script.
+
+To load the data from the image.npz file, you can use the sample script `depth/process_images.py`. This script shows you how extract the different components of the image.npz file in Python, visualize the images, and select a region of interest in the grayscale image.
 
 
 ### Questions / Tasks
