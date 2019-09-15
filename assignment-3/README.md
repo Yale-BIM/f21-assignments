@@ -686,7 +686,7 @@ into the camera image.
 
 ## Part IV. Solving for the intrinsics (only for students taking CPSC-559)
 
-Full camera calibration consists of findings the intrinsic and extrinsic camera parameters
+[Full camera calibration](https://www.mathworks.com/help/vision/ug/camera-calibration.html) consists of findings the intrinsic and extrinsic camera parameters
 that define the projective operation $`\mathbf{x} = P\mathbf{X}`$, where $`\mathbf{X}=[X\ Y\ Z\ 1]^T`$ is a point in homogeneous coordinates in the world coordinate frame and $`\mathbf{x}`$ is the point's projection on the image. 
 However, it sometimes happens that one only cares about observing the world from a camera and an external coordinate frame is irrelevant for the application. In these situations, we only care about the intrinsic camera parameters $`K`$, such that $`\mathbf{x} = K[X\ Y\ Z]^T`$.
 
