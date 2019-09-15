@@ -655,9 +655,9 @@ into the camera image.
     rotate(vector, angle) is a function that implements III-6c. Modify your virtual camera node to compute at least 20 3D points equally distributed along the edge
     of the sphere that is seen by the camera.
 
-    **e.** Add code to your node that projects the 3D points from III-6d onto the image.
+    **e.** Add code to your virtual camera node that projects the 3D points from III-6d onto the image.
 
-    **f.** Draw a blue contour for the sphere on your image using OpenCV. The contour should connect the projected points on the image:
+    **f.** Draw a blue contour for the sphere on your image using OpenCV in your virtual camera node. The contour should connect the projected points on the image:
 
     ```python
     # Example
@@ -676,10 +676,10 @@ into the camera image.
     **g.** Restart ROS and re-run the generate_target.launch with the ball updating at a lower speed, and being closer to the camera:
     
     ```bash
-    $ roslaunch shutter_lookat generate_target.launch target_x_plane:=0.5 publish_rate:=10
+    $ roslaunch shutter_lookat generate_target.launch target_x_plane:=0.5 publish_rate:=1 # the publish rate for the target is in Hz
     ```
 
-    Then restart your virtual_camera.py node and take a picture of your resulting image when the target is nearby the edge of the image. The image show show
+    Then restart your virtual_camera.py node and take a picture of your resulting image when the target is nearby one of the corners of the image. The image should show
     the target being elongated; not having a perfectly circlular shape anymore. Include this image in your report and explain why the target does not
     appear to be  perfectly round, especially towards the edge of the image.
 
