@@ -720,7 +720,7 @@ To work on the problem of estimating the depth of an object in an image, the ins
     ```
 
     The aligned depth option told the driver to generate depth images that are aligned with the RGB images captured by the camera. This means
-    that the depth of a pixel $`(x,y)`$ in the RGB image can be obtained from the same location in the depth image. 
+    that the depth of a pixel (x,y) in the RGB image can be obtained from the same location in the depth image. 
 
 3. Third, a Hartly and Zisserman's book was placed on the table, as shown in the pointcloud below.
 
