@@ -671,7 +671,7 @@ into the camera image.
 
     <kbd>
     <img src="docs/ball_outline.png" width="300"/>
-    </kbd>
+    </kbd><br>
 
     **g.** Restart ROS and re-run the generate_target.launch with the ball updating at a lower speed, and being closer to the camera:
     
@@ -693,14 +693,13 @@ However, it sometimes happens that one only cares about observing the world from
 ### Questions / Tasks
 
 
-- **IV-1.** Assuming that the camera has no skew, compute its intrinsic parameters $`K`$ using Least Squares given the set of 3D - 2D correspondences in the data/correspondences.txt file. Note that the first three columns of the file provide the $`X, Y, Z`$ coordinates of the points in the world, meanwhile
-the last two columns are the $`x,y`$ corresponding pixel locations. 
+- **IV-1.** Assuming that the camera has no skew, compute its intrinsic parameters $`K`$ using Least Squares given the set of 3D - 2D correspondences in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ coordinates of the points in the world, meanwhile the last two columns are the $`x,y`$ corresponding pixel locations. 
 
     Implement a script to solve for the instrinsics in Python. Your script should take as input the path to the correspondences.txt file, and print the estimated
-    matrix $`K`$. Name your script `calibration.py` and save it in the scripts directory of this assignment within
+    matrix $`K`$. Name your script `calibrate_K.py` and save it in the `calibration` directory of this assignment within
     your repository. 
     
-    Explain in your report how your calibrate.py script should be run, how you formulated a system of equations to solve for $`K`$, and how you solved the system. Provide the resulting value for $`K`$ in your report as well.
+    Explain in your report how your calibrate_K.py script should be run, how you formulated a system of equations to solve for $`K`$, and how you solved the system. Provide the resulting value for $`K`$ in your report as well.
 
     > Tip: The 3D and 2D points are in very different scales, and this can make your system of equations poorly conditioned. As suggested in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book, it is recommended that you normalize the data before solving for instrinsic parameters, and that you then unnormalize the estimated parameters to get the values in the right scale.
 
