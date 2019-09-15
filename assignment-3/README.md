@@ -698,9 +698,11 @@ the last two columns are the $`x,y`$ corresponding pixel locations.
 
     Implement a script to solve for the instrinsics in Python. Your script should take as input the path to the correspondences.txt file, and print the estimated
     matrix $`K`$. Name your script `calibration.py` and save it in the scripts directory of this assignment within
-    your repository. Also, you should explain in your report how you formulated a system of equations and how you solved for the instrisic parameters. Provide the resulting value for $`K`$ in your report as well.
+    your repository. 
+    
+    Explain in your report how your calibrate.py script should be run, how you formulated a system of equations to solve for $`K`$, and how you solved the system. Provide the resulting value for $`K`$ in your report as well.
 
-    > Note: The 3D and 2D points are in very different scales, and this can make your system of equations poorly conditioned. As suggested in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book, it is recommended that you normalize the data before solving for instrinsic parameters, and that you then unnormalize the estimated parameters to get the values in the right scale.
+    > Tip: The 3D and 2D points are in very different scales, and this can make your system of equations poorly conditioned. As suggested in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book, it is recommended that you normalize the data before solving for instrinsic parameters, and that you then unnormalize the estimated parameters to get the values in the right scale.
 
 ## Part V. Estimating depth from images (only for students taking CPSC-559)
 
