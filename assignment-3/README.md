@@ -24,10 +24,7 @@ This is the third assignment for Yale's CPSC-459/559 Building Interactive Machin
     * [Questions / Tasks](#questions--tasks-1)
 * [Part III. Making a virtual camera](#part-iii-making-a-virtual-camera)
     * [Questions / Tasks](#questions--tasks-2)
-* [Part IV. Solving for the intrinsics](#part-iv-solving-for-the-intrinsics)  (only for students taking CPSC-559)
-    * [Questions / Tasks](#questions---tasks-3)
-* [Part V. Estimating depth from images](#part-v-estimating-depth-from-images) (only for students taking CPSC-559)
-    * [Questions / Tasks](#questions---tasks-4)
+* [Parts IV and V](#parts-iv-and-v)  (only for students taking CPSC-559)
 
 ## Introduction 
 This assignment will provide you practical experience with the [tf](ros.org/wiki/tf) ROS package, 
@@ -689,6 +686,9 @@ into the camera image.
     appear to be  perfectly round, especially towards the edge of the image.
 
 
+## Parts IV and V
+
+Parts IV and V of the assignment are only for students taking CPSC-559 (graduate version of the course). See the tasks/questions in the [ExtraQuestions-CPSC559.md](ExtraQuestions-CPSC559.md) document.
 
 **Once you get to the end of the assignment, remember to commit your code, push to GitLab, and indicate
 in your assignment report the commit SHA for the final version of the code that you wish to be evaluated on.**

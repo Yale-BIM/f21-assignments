@@ -1,7 +1,8 @@
+# Assignment 3 (Extra questions for CPSC-559)
+
+The sections below for Assignment 3 are only meant to be completed/answered by students taking CPSC-559. Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. However, their answers to the questions in Part IV and Part V of the assignment 3 will not be considered during grading.
 
 ## Part IV. Solving for the intrinsics
-
-> NOTE: This part of the assignment is only for students taking CPSC-559. Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. However, their answers to the questions of Part IV will not be considered during grading.
 
 [Full camera calibration](https://www.mathworks.com/help/vision/ug/camera-calibration.html) consists of findings the intrinsic and extrinsic camera parameters
 that define the projective operation $`\mathbf{x} = P\mathbf{X}`$, where $`\mathbf{X}=[X\ Y\ Z\ 1]^T`$ is a point in homogeneous coordinates in the world coordinate frame and $`\mathbf{x}`$ is the point's projection on the image. 
@@ -22,8 +23,6 @@ Explain in your report how your calibrate_K.py script should be run, how you for
 
 
 ## Part V. Estimating depth from images
-
-> NOTE: This part of the assignment is only for students taking CPSC-559. Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. However, their answers to the questions of Part V will not be considered during grading.
 
 In general, it is impossible to estimate the absolute scale of a scene based only on an image of it. However, if we know the true size of an object in the world,
 we can take advantage of this piece of information to estimate how far the object is from the camera (i.e., its depth). This is your goal for this part of the assignment.
@@ -145,3 +144,6 @@ the difference between the latter result and your estimated depth from the grays
 
     **e.** Run your process_images.py script on the new images.npz file. Include in your report a screenshot of the depth and grayscale images shown by your
     script when it loads the images.npz file. Also report the estimated depths for the object (with the grayscale image only, and using the depth image).
+
+**Once you get to the end of the assignment, remember to commit your code, push to GitLab, and indicate
+in your assignment report the commit SHA for the final version of the code that you wish to be evaluated on.**
