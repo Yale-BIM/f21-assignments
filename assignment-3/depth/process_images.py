@@ -15,11 +15,11 @@ images_file = sys.argv[1]
 print("Loading {}".format(images_file))
 data = np.load(images_file)
 
-gray=data['gray']      # gray image captured by the camera
-depth=data['depth']    # aligned depth image (transformed to match the gray image)
-width=data['width']    # images width
-height=data['height']  # images height
-K=data['K']            # camera intrinsic parameters
+gray=data['gray']              # gray image captured by the camera
+depth=data['depth']            # aligned depth image (transformed to match the gray image)
+width=data['width']            # images width
+height=data['height']          # images height
+K=np.reshape(data['K'], (3,3)) # camera intrinsic parameters
 
 # -------------------------------------------------------------------------------
 # display the depth image
