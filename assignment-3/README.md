@@ -688,12 +688,12 @@ into the camera image.
 
 [Full camera calibration](https://www.mathworks.com/help/vision/ug/camera-calibration.html) consists of findings the intrinsic and extrinsic camera parameters
 that define the projective operation $`\mathbf{x} = P\mathbf{X}`$, where $`\mathbf{X}=[X\ Y\ Z\ 1]^T`$ is a point in homogeneous coordinates in the world coordinate frame and $`\mathbf{x}`$ is the point's projection on the image. 
-However, it sometimes happens that one only cares about observing the world from a camera and an external coordinate frame is irrelevant for the application. In these situations, we only care about the intrinsic camera parameters $`K`$, such that $`\mathbf{x} = K[X\ Y\ Z]^T`$.
+However, it sometimes happens that one only cares about observing the world from a camera and an external coordinate frame is irrelevant for the application. In these situations, we only care about the intrinsic camera parameters $`K`$, such that $`\mathbf{x} = K[I|\bold{0}][X\ Y\ Z\ 1]^T`$, where $`I`$ is the $`3 \times 3`$ identity matrix and $`\bold{0}`$ is the 3-dimensional zero vector.
 
 ### Questions / Tasks
 
 
-- **IV-1.** Assume that a camera has no skew and no distortion, as the virtual camera that you implemented for Shutter in Part III of this assignment. Then, compute the camera's intrinsic parameters $`K`$ using Least Squares. To this end, you should use the set of 3D - 2D correspondences in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ 3D coordinates of the points, meanwhile the last two columns are the corresponding pixel locations $`x, y`$. Note that by convention, we assume that the pixel locations are in homogeneous coordinates as well with the last component being 1, i.e., $`[x, y, 1]`$.
+- **IV-1.** Assume that a camera has no skew and no distortion, as the virtual camera that you implemented for Shutter in Part III of this assignment. Then, compute the camera's intrinsic parameters $`K`$ using Least Squares. To this end, you should use the set of 3D - 2D correspondences in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ 3D coordinates of the points, meanwhile the last two columns are the corresponding pixel locations $`x, y`$. 
 
     Implement a script to solve for the instrinsics in Python. Your script should take as input the path to the correspondences.txt file, and print the estimated
     matrix $`K`$. Name your script `calibrate_K.py` and save it in the `calibration` directory of this assignment within
