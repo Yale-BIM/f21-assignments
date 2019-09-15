@@ -632,7 +632,11 @@ the node should also print a warning message:
 it draws the true outline of the spherical target as seen by the camera. To this end, you should
 first compute a direction vector $`\bold{q'}`$ from the center of the target to the edge of the sphere seen by the camera. Then, you will be able to
 draw the target's true shape by rotating the vector along a rotation axis in the direction of the target, and projecting the resulting points along the edge 
-into the camera image. The steps below guide you through most of this process:
+into the camera image.
+
+    <img src="docs/diagram_a3.png" width="500"/>
+
+    The steps below guide you through most of this process:
 
     **a.** To get started, let $`\bold{t} = [t_x\ t_y\ t_z]^T`$ be the vector from the camera center to the center of the target 
     in the camera coordinate frame. Additionally, let the camera coordinate frame be oriented such that the $`z`$ axis points
@@ -647,13 +651,13 @@ into the camera image. The steps below guide you through most of this process:
 
     > Tip. [Wikipedia](https://en.wikipedia.org/wiki/Axis%E2%80%93angle_representation) is an easy place to learn more about the axis-angle parameterization of rotations.
 
-    **d.** Points along the edge of the sphere (as seen by the camera), can now be computed as: $`\bold{p} + rotate(\bold{q'}, \alpha)`$, where
-    rotate is a function that implements III-6c. Modify your virtual camera node to compute at least 20 3D points equally distributed along the edge
+    **d.** Points along the edge of the sphere (as seen by the camera), can now be computed as: $`\bold{t} + rotate(\bold{q'}, \alpha)`$, where
+    rotate(vector, angle) is a function that implements III-6c. Modify your virtual camera node to compute at least 20 3D points equally distributed along the edge
     of the sphere that is seen by the camera.
 
-    **e.** Add code to your node that projects the 3D points from III-6d onto the image.
+    **e.** Add code to your virtual camera node that projects the 3D points from III-6d onto the image.
 
-    **f.** Draw a blue contour for the sphere on your image using OpenCV. The contour should connect the projected points on the image:
+    **f.** Draw a blue contour for the sphere on your image using OpenCV in your virtual camera node. The contour should connect the projected points on the image:
 
     ```python
     # Example
@@ -667,22 +671,42 @@ into the camera image. The steps below guide you through most of this process:
 
     <kbd>
     <img src="docs/ball_outline.png" width="300"/>
-    </kbd>
+    </kbd><br>
 
     **g.** Restart ROS and re-run the generate_target.launch with the ball updating at a lower speed, and being closer to the camera:
     
     ```bash
-    $ roslaunch shutter_lookat generate_target.launch target_x_plane:=0.5 publish_rate:=10
+    $ roslaunch shutter_lookat generate_target.launch target_x_plane:=0.5 publish_rate:=1 # the publish rate for the target is in Hz
     ```
 
-    Then restart your virtual_camera.py node and take a picture of your resulting image when the target is nearby the edge of the image. The image show show
+    Then restart your virtual_camera.py node and take a picture of your resulting image when the target is nearby one of the corners of the image. The image should show
     the target being elongated; not having a perfectly circlular shape anymore. Include this image in your report and explain why the target does not
     appear to be  perfectly round, especially towards the edge of the image.
 
 
-## Part IV. 
+## Part IV. Solving for the intrinsics (only for students taking CPSC-559)
+
+Full camera calibration consists of findings the intrinsic and extrinsic camera parameters
+that define the projective operation $`\mathbf{x} = P\mathbf{X}`$, where $`\mathbf{X}=[X\ Y\ Z\ 1]^T`$ is a point in homogeneous coordinates in the world coordinate frame. 
+However, it sometimes happens that one only cares about observing the world from a camera and an external coordinate frame is irrelevant for the application. In these situations, we only care about the intrinsic camera parameters $`K`$, such that $`\mathbf{x} = K[X\ Y\ Z]^T`$.
 
 ### Questions / Tasks
+
+
+- **IV-1.** Assuming that the camera has no skew, compute its intrinsic parameters $`K`$ using Least Squares given the set of 3D - 2D correspondences in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ coordinates of the points in the world, meanwhile the last two columns are the $`x,y`$ corresponding pixel locations. 
+
+    Implement a script to solve for the instrinsics in Python. Your script should take as input the path to the correspondences.txt file, and print the estimated
+    matrix $`K`$. Name your script `calibrate_K.py` and save it in the `calibration` directory of this assignment within
+    your repository. 
+    
+    Explain in your report how your calibrate_K.py script should be run, how you formulated a system of equations to solve for $`K`$, and how you solved the system. Provide the resulting value for $`K`$ in your report as well.
+
+    > Tip: The 3D and 2D points are in very different scales, and this can make your system of equations poorly conditioned. As suggested in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book, it is recommended that you normalize the data before solving for instrinsic parameters, and that you then unnormalize the estimated parameters to get the values in the right scale.
+
+## Part V. Estimating depth from images (only for students taking CPSC-559)
+
+### Questions / Tasks
+
 
 **Once you get to the end of the assignment, remember to commit your code, push to GitLab, and indicate
 in your assignment report the commit SHA for the final version of the code that you wish to be evaluated on.**
