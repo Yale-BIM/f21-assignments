@@ -709,7 +709,7 @@ However, it sometimes happens that one only cares about observing the world from
 In general, it is impossible based on an image alone to estimate the absolute scale of a scene observed through the picture. However, if we know the true size of an object in the world,
 we can take advantage of this piece of information to estimate how far the object is from the camera (i.e., its depth). This is your goal for this part of the assignment.
 
-To work on the problem of estimating the depth of an object in an image, the instructor followed the steps below to gather data from a RealSense camera -- like the one in Shutter. The data was generated with the `depth/save_images.py` script within this assignment, by following the steps below:
+To work on the problem of estimating the depth of an object in an image, the instructor followed the steps below to gather data from a RealSense camera -- like the one in Shutter.
 
 1. First, the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros.git) was installed in the catkin_repository of the assignment.
 
@@ -724,7 +724,7 @@ To work on the problem of estimating the depth of an object in an image, the ins
     <img src="docs/book3d.png" width="300"/>
     
 
-4. Fourth, the depth/save_images.py script was run to save to disk what the camera was currently observing. The resulting depth (left) and gray (right) images are shown below:
+4. Fourth, the `depth/save_images.py` script was run to save to disk what the camera was currently observing. The resulting depth (left) and gray (right) images are shown below:
     <img src="docs/book.png" width="600"/>
     
 The above process resulted in the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) data file, which you should download to complete this part of the assignment. The data includes:
