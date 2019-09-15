@@ -693,13 +693,13 @@ However, it sometimes happens that one only cares about observing the world from
 ### Questions / Tasks
 
 
-- **IV-1.** Assume that a camera has no skew and no distortion, as the virtual camera that you implemented for Shutter in Part III of this assignment. Then, compute the camera's intrinsic parameters $`K`$ by minimizing the error $`\sum_i \|\mathbf{x}_i - K[I|\bold{0}]\mathbf{X}_i\|^2`$ using Least Squares, where $`i`$ indexes a set of sample correspondences \<$`\mathbf{x}_i`$, $`\mathbf{X}_i`$\>. This set of 3D - 2D correspondences is provided for you in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ 3D coordinates of the points, meanwhile the last two columns are the corresponding pixel locations $`x, y`$. Assume that the pixel locations in homogeneous coordinates are simply $`[x, y, 1]`$.
+- **IV-1.** Assume that a camera has no skew and no distortion, as the virtual camera that you implemented for Shutter in Part III of this assignment. Then, compute the camera's intrinsic parameters $`K`$ by minimizing the $error = `\sum_i \|\mathbf{x}_i - K[I|\bold{0}]\mathbf{X}_i\|^2`$ using Least Squares, where $`i`$ indexes a set of sample correspondences \<$`\mathbf{x}_i`$, $`\mathbf{X}_i`$\>. This set of 3D - 2D correspondences is provided for you in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the $`X, Y, Z`$ 3D coordinates of the points, meanwhile the last two columns are the corresponding pixel locations $`x, y`$. Assume that the pixel locations in homogeneous coordinates are simply $`[x, y, 1]`$.
 
     Implement a script to solve for the instrinsics in Python. Your script should take as input the path to the correspondences.txt file, and print the estimated
-    matrix $`K`$. Name your script `calibrate_K.py` and save it in the `calibration` directory of this assignment within
+    matrix $`K`$ and the $`error`$ for your solution. Name your script `calibrate_K.py` and save it in the `calibration` directory of this assignment within
     your repository. 
     
-    Explain in your report how your calibrate_K.py script should be run, how you formulated a system of equations to solve for $`K`$, and how you solved the system in your implementation. Provide the resulting value for $`K`$ in your report as well as the squared error $`\sum_i \|\mathbf{x}_i - K[I|\bold{0}]\mathbf{X}_i\|^2`$.
+    Explain in your report how your calibrate_K.py script should be run, how you formulated a system of equations to solve for $`K`$, and how you solved the system in your implementation. Provide the resulting value for $`K`$ in your report as well as the $`error`$.
 
     > Note: It is allowed to use numeric libraries like numpy in your implementation. But even if you do, explain how you solved the problem in your report.
 
