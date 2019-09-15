@@ -24,9 +24,9 @@ This is the third assignment for Yale's CPSC-459/559 Building Interactive Machin
     * [Questions / Tasks](#questions--tasks-1)
 * [Part III. Making a virtual camera](#part-iii-making-a-virtual-camera)
     * [Questions / Tasks](#questions--tasks-2)
-* [Part IV. Solving for the intrinsics (only for students taking CPSC-559)](#part-iv-solving-for-the-intrinsics--only-for-students-taking-cpsc-559-)
+* [Part IV. Solving for the intrinsics](#part-iv-solving-for-the-intrinsics)  (only for students taking CPSC-559)
     * [Questions / Tasks](#questions---tasks-3)
-* [Part V. Estimating depth from images (only for students taking CPSC-559)](#part-v-estimating-depth-from-images--only-for-students-taking-cpsc-559-)
+* [Part V. Estimating depth from images](#part-v-estimating-depth-from-images-) (only for students taking CPSC-559)
     * [Questions / Tasks](#questions---tasks-4)
 
 ## Introduction 
@@ -688,6 +688,8 @@ into the camera image.
 
 ## Part IV. Solving for the intrinsics (only for students taking CPSC-559)
 
+> NOTE: This part of the assignment is only for students taking CPSC-559. Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. However, their answers to the questions of Part IV will not be considered in their evaluation of this assignment.
+
 [Full camera calibration](https://www.mathworks.com/help/vision/ug/camera-calibration.html) consists of findings the intrinsic and extrinsic camera parameters
 that define the projective operation $`\mathbf{x} = P\mathbf{X}`$, where $`\mathbf{X}=[X\ Y\ Z\ 1]^T`$ is a point in homogeneous coordinates in the world coordinate frame and $`\mathbf{x}`$ is the point's projection on the image. 
 However, it sometimes happens that one only cares about observing the world from a camera and an external coordinate frame is irrelevant for the application. In these situations, we only care about the intrinsic camera parameters $`K`$, such that $`\mathbf{x} = K[I|\bold{0}][X\ Y\ Z\ 1]^T`$, where $`I`$ is the $`3 \times 3`$ identity matrix and $`\bold{0}`$ is the 3-dimensional zero vector.
@@ -706,7 +708,9 @@ However, it sometimes happens that one only cares about observing the world from
     > Note: It is allowed to use numeric libraries like numpy in your implementation. But even if you do, explain how you solved the problem in your report.
 
 
-## Part V. Estimating depth from images (only for students taking CPSC-559)
+## Part V. Estimating depth from images
+
+> NOTE: This part of the assignment is only for students taking CPSC-559. Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. However, their answers to the questions of Part V will not be considered in their evaluation of this assignment.
 
 In general, it is impossible to estimate the absolute scale of a scene based only on an image of it. However, if we know the true size of an object in the world,
 we can take advantage of this piece of information to estimate how far the object is from the camera (i.e., its depth). This is your goal for this part of the assignment.
