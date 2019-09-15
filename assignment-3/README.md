@@ -651,8 +651,8 @@ into the camera image.
 
     > Tip. [Wikipedia](https://en.wikipedia.org/wiki/Axis%E2%80%93angle_representation) is an easy place to learn more about the axis-angle parameterization of rotations.
 
-    **d.** Points along the edge of the sphere (as seen by the camera), can now be computed as: $`\bold{p} + rotate(\bold{q'}, \alpha)`$, where
-    rotate is a function that implements III-6c. Modify your virtual camera node to compute at least 20 3D points equally distributed along the edge
+    **d.** Points along the edge of the sphere (as seen by the camera), can now be computed as: $`\bold{t} + rotate(\bold{q'}, \alpha)`$, where
+    rotate(vector, angle) is a function that implements III-6c. Modify your virtual camera node to compute at least 20 3D points equally distributed along the edge
     of the sphere that is seen by the camera.
 
     **e.** Add code to your node that projects the 3D points from III-6d onto the image.
