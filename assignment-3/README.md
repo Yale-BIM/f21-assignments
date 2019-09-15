@@ -712,11 +712,11 @@ we can take advantage of this piece of information to estimate how far the objec
 To work on the problem of estimating the depth of an object in an image, the assignment provides you:
 
 1. Data from a RealSense camera in numpy format: [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing). The data includes:
-    - Image captured by the camera and converted to grayscale format (i.e., the data is a 2D matrix of 8-bit integer pixel values)
+    - Image captured by the camera and converted to grayscale format (i.e., the data is a 2D matrix of 8-bit integer pixel values).
     - Depth image (aligned with the grayscale image). The data is a 2D matrix of floats (in meters).
-    - The width of the images 
-    - The height of the images
-    - The intrinsics matrix K for the camera that captured the grayscale image
+    - The width of the images.
+    - The height of the images.
+    - The intrinsics matrix K for the camera that captured the grayscale image.
 2. Script with which the data was generated (see `depth/save_images.py` within this assignment). The process to capture the data was as follows:
     - First, the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros.git) was installed in the catkin_repository of the assignment.
     - Second, the camera driver was started to stream images through the ROS network:
