@@ -743,8 +743,10 @@ To load the data from the image.npz file, you can use the sample script `depth/p
 
 ### Questions / Tasks
 
-- **V-1.** The book has a true height of 24.5 cm. How can you compute how far the book is from the camera in the grayscale image of the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) file? Explain your report, assuming that you know the intrinsic camera
-parameters ($`K`$) know the position of the top-left ($`\bold{x_1} = (x_1,y_1)`$) and bottom-right ($`\bold{x_2} = (x_2,y_2)`$) corners of a box surrounding the the's front cover in the image as illustrated in the image below.
+- **V-1.** The book has a true height of $`h=24.5`$ cm. How can you compute how far the book is from the camera in the grayscale image of the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) file? Explain your report, given the books true height, the intrinsic camera
+parameters ($`K`$) of the camera used to get the grayscale image, and the position of the top-left ($`\bold{x_1} = (x_1,y_1)`$) and bottom-right ($`\bold{x_2} = (x_2,y_2)`$) corners of a box surrounding the book's front cover in the image, as illustrated in the image below.
+
+    <img src="docs/book_select.png" width="300">
 
 **Once you get to the end of the assignment, remember to commit your code, push to GitLab, and indicate
 in your assignment report the commit SHA for the final version of the code that you wish to be evaluated on.**
