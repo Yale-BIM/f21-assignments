@@ -727,7 +727,7 @@ To work on the problem of estimating the depth of an object in an image, this as
         <kbd>
         <img src="docs/book3d.png" width="300"/>
         </kbd><br>
-    - Fourth, the depth/save_images.py script was run to save to disk what the camera was currently observing. The resulting depth and gray images are shown below:
+    - Fourth, the depth/save_images.py script was run to save to disk what the camera was currently observing. The resulting depth and gray images are shown below: <br>
         <kbd>
         <img src="docs/book.png" width="600"/>
         </kbd><br>
