@@ -724,13 +724,11 @@ To work on the problem of estimating the depth of an object in an image, this as
         $ roslaunch realsense2_camera rs_camera.launch align_depth:=true
         ```
     - Third, a Hartly and Zisserman's book was placed on the table, as shown in the pointcloud below.
-        <kbd>
         <img src="docs/book3d.png" width="300"/>
-        </kbd><br>
+        <br>
     - Fourth, the depth/save_images.py script was run to save to disk what the camera was currently observing. The resulting depth and gray images are shown below: <br>
-        <kbd>
         <img src="docs/book.png" width="600"/>
-        </kbd><br>
+        <br>
 3. Sample script to load the data. See the `depth/process_images.py` script.
 
 
