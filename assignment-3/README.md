@@ -712,17 +712,21 @@ we can take advantage of this piece of information to estimate how far the objec
 To work on the problem of estimating the depth of an object in an image, the instructor followed the steps below to gather data from a RealSense camera -- like the one in Shutter. The data was generated with the `depth/save_images.py` script within this assignment, by following the steps below:
 
 1. First, the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros.git) was installed in the catkin_repository of the assignment.
+
 2. Second, the driver for the RealSense D435 camera was started to stream images through the ROS network:
     ```bash
     $ roslaunch realsense2_camera rs_camera.launch align_depth:=true
     ```
+    The aligned depth option told the driver to generate depth images that are aligned with the RGB images captured by the camera. This means
+    that the depth of a pixel $`(x,y)`$ in the RGB image can be obtained from the $`(x,y)`$ element in the depth image. 
+
 3. Third, a Hartly and Zisserman's book was placed on the table, as shown in the pointcloud below.
     <img src="docs/book3d.png" width="300"/>
-    <br>
+    
+
 4. Fourth, the depth/save_images.py script was run to save to disk what the camera was currently observing. The resulting depth (left) and gray (right) images are shown below:
     <img src="docs/book.png" width="600"/>
-    <br>
-
+    
 The above process resulted in the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) data file, which you should download to complete this part of the assignment. The data includes:
     - The image captured by the camera and converted to grayscale format (i.e., the data is a 2D matrix of 8-bit integer pixel values).
     - The depth image (aligned with the grayscale image). The data is a 2D matrix of floats (in meters).
