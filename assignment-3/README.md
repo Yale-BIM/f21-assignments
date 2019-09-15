@@ -26,7 +26,7 @@ This is the third assignment for Yale's CPSC-459/559 Building Interactive Machin
     * [Questions / Tasks](#questions--tasks-2)
 * [Part IV. Solving for the intrinsics](#part-iv-solving-for-the-intrinsics)  (only for students taking CPSC-559)
     * [Questions / Tasks](#questions---tasks-3)
-* [Part V. Estimating depth from images](#part-v-estimating-depth-from-images-) (only for students taking CPSC-559)
+* [Part V. Estimating depth from images](#part-v-estimating-depth-from-images) (only for students taking CPSC-559)
     * [Questions / Tasks](#questions---tasks-4)
 
 ## Introduction 
