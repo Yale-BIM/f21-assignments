@@ -662,7 +662,7 @@ This version of the code is what will be used to evaluate this assignment.
 - **V-Q3.** Record your screen (e.g., with [kazam](https://launchpad.net/kazam)) as the 
 robot is changing its pose in RViz and reaching the desired poses. Turn this video into an animated
 gif, e.g., with ffmpeg and imagemagick as indicated in 
-[this code snipped](https://gitlab.com/snippets/1743818), and include it to your README.md file
+[this code snippet](https://gitlab.com/snippets/1743818), and include it to your README.md file
 to demonstrate the execution of the switch_poses.py node in your documentation. 
 
     NOTE: We suggest that you add the animated gif to your repository so that all of your documentation
