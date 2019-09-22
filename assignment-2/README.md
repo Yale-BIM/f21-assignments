@@ -66,7 +66,7 @@ You assignment will be evaluated over 100pts, based on the content of your repor
 - Report (70 pts)
     * Part I (10 pts): I-Q1 (5 pts) + I-Q2 (5 pts)
     * Part II (22 pts): II-Q1 (6 pts) + II-Q2 (3 pts) + II-Q3 (3 pts) + II-Q4 (3 pts) + II-Q5 (3 pts) + II-Q6 (1 pts) + II-Q7 (3 pts)     
-    * Part III (8 pts): III-Q1 (5 pts) + III-Q2 (5 pts)
+    * Part III (8 pts): III-Q1 (4 pts) + III-Q2 (4 pts)
     * Part IV (22 pts): IV-Q1 (4 pts) + IV-Q2 (3 pts) + IV-Q3 (5 pts) + IV-Q4 (5 pts) + IV-Q5 (5 pts)
     * Part V (8 pts): V-Q1 (4 pts) + V-Q3(4 pts)
 - Code (30 pts)
@@ -516,7 +516,7 @@ change the pose of the robot programmatically. The robot should iterate between 
     * joint_3: 0.41 rad
     * joint_4: -1 rad
     
-- Pose 2 (*low_pose*):
+- Pose 3 (*low_pose*):
     * joint_1: 0 rad 
     * joint_2: -1.45 rad
     * joint_3: 1.45 rad
@@ -662,7 +662,7 @@ This version of the code is what will be used to evaluate this assignment.
 - **V-Q3.** Record your screen (e.g., with [kazam](https://launchpad.net/kazam)) as the 
 robot is changing its pose in RViz and reaching the desired poses. Turn this video into an animated
 gif, e.g., with ffmpeg and imagemagick as indicated in 
-[this code snipped](https://gitlab.com/snippets/1743818), and include it to your README.md file
+[this code snippet](https://gitlab.com/snippets/1743818), and include it to your README.md file
 to demonstrate the execution of the switch_poses.py node in your documentation. 
 
     NOTE: We suggest that you add the animated gif to your repository so that all of your documentation
