@@ -198,10 +198,13 @@ topics:      /camera/color/image_raw   371 msgs    : sensor_msgs/Image
 And play the bag to see its content: 
 
 ```bash
-$ rosparam set use_sim_time true # this line is necessary for rosbag play to simulate the time in the bag when it's played
+# set the use_sim_time parameter so that rosbag play simulates the original time in the bag when it is played
+$ rosparam set use_sim_time true 
+
+# play the bag
 $ rosbag play --clock left-seq1.bag
 
-# and in another terminal run:
+# and in another terminal visualize the images
 $ rosrun rqt_image_view rqt_image_view # visualize the /camera/color/image_raw topic
 ```
 
