@@ -373,7 +373,7 @@ class of the kalman_filter.py script. The methods should set the A and C
 parameters of the transition and measurement model of the filter used by the KalmanFilterNode. Use [numpy
 arrays](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.array.html) to represent the A and C matrices.
 
-    Note that you do not need to implement the logic that passes the A and C parameters to the filter. This is
+    > NOTE: You do not have to implement the logic that passes the A and C parameters to the filter. This is
     already done for you in the main loop of the KalmanFIlterNode class.
     
 - **IV-8.** Implement the `initialize_process_covariance()` and `initialize_measurement_covariance()` methods
