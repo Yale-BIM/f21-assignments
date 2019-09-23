@@ -480,7 +480,7 @@ previously in this assignment in the README.md file.
      in GitLab's markdown can be found [here](https://docs.gitlab.com/ee/user/markdown.html#images).
      
 
-## Part V. Real-Time Filtering (5 extra points)
+## Part V. Real-Time Filtering
 
 You will now run your filter on images captured by the Shutter robot. To this end, you should
 find a uniform color, but non-red object to track in this part of the assignment. Then, use
