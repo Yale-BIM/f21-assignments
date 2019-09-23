@@ -506,6 +506,8 @@ as indicated below. Note that the bim laptops in AKW411 already have the [RealSe
     $ roslaunch realsense2_camera rs_camera.launch align_depth:=true # check that you can run the camera driver from ROS and visualize the images, e.g., using rqt_image_view
     ```
 
+    > NOTE: If you've already setup the realsense2_camera package in your repository because you completed the CPSC-559 extra questions for Assignment 3, then you don't need to set it up again. You should already be able to launch the rs_camera.launch script after sourcing your workspace setup.bash.
+
 ### Questions / Tasks
 
 - **V-1.** Change the hue arguments of the filter_colored_target.launch so that your code 
