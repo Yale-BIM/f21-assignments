@@ -443,7 +443,8 @@ rqt_image_view to visualize the images being streamed through your network and d
     ```
 
     Once it looks like your filter is tracking the target, include the filter parameters that you are using
-     for this part of the assignment in your report. 
+     for this part of the assignment in your report. Also, indicate the playback_speed that you ended up using for adjusting your 
+     filter parameters.
      
 - **IV-12.** Tune the parameters of your filter such that it can track the blue square when the argument
 add_observation_noise is set to true in filter_colored_target.launch:
