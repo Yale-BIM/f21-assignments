@@ -66,16 +66,15 @@ document for CPSC-659 assignments.
 
 #### Evaluation
 
-You assignment will be evaluated based on the content of your report and your code:
+The assignment will be evaluated based on the content of your report and your code:
 
-
-- Report (20 pts + 3 extra pts)
-    - Part IV (25 pts + 3 extra pts): IV-1 (5 pts) + IV-2 (5 pts) + IV-3 (5 pts) + IV-4 (4 pts) + IV-11 (3 pts) + IV-12 (3 pts) + IV-14 (3 extra pts)
-- Code (75 pts + 2 extra pts)
-    * Part I (10 pts) 
+- Report (26 pts)
+    - Part IV (26 pts): IV-1 (5 pts) + IV-2 (5 pts) + IV-3 (5 pts) + IV-4 (3 pts) + IV-11 (3 pts) + IV-12 (3 pts) + IV-14 (2)
+- Code (74 pts)
+    * Part I (8 pts) 
     * Part II (5 pts)
     * Part III (30 pts): III-1 (10 pts) + III-2 (10 pts) + III-3 (5 pts) + III-4 (5 pts)
-    * Part IV (30 pts + 2 extra pts): IV-5 (6 pts) + IV-6 (6 pts) + IV-7 (4 pts) + IV-8 (2 pts) + IV-9 (2 pts) + IV-10 (5 pts) + IV-12 (2 pts) + IV-13 (3 pts) + IV-14 (2 extra pts)
+    * Part IV (31 pts): IV-5 (6 pts) + IV-6 (6 pts) + IV-7 (4 pts) + IV-8 (2 pts) + IV-9 (2 pts) + IV-10 (5 pts) + IV-12 (2 pts) + IV-13 (2 pts) + IV-14 (2)
 
 #### Further Reading
 
