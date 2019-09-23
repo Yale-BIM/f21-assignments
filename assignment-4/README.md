@@ -169,7 +169,7 @@ can use the `rosmsg` tool to this end:
 Commit the changes that you made to generate your new message type in the shutter_track_target package.
 
 ## Part II. Get Data 
-Download the ROS bag [left-seq1.bag](https://drive.google.com/open?id=1k694YrMM54QAK85AZ_a-F7jWmtWQ1TEn) from Google 
+Download the ROS bag [left-seq1.bag](https://drive.google.com/file/d/1AZl6zNYjEhPcag_MfPq39N-kdJJmEBIS/view?usp=sharing) from Google 
 Drive. Then, place it inside a `data` directory within the shutter_track_target package:
 
 ```bash
