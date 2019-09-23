@@ -173,7 +173,7 @@ Download the ROS bag [left-seq1.bag](https://drive.google.com/file/d/1AZl6zNYjEh
 Drive. Then, place it inside a `data` directory within the shutter_track_target package:
 
 ```bash
-$ cd shutter_track_target
+$ roscd shutter_track_target
 $ mkdir data
 $ cd data
 $ mv <path-to-bag> . # move the bag to the data directory
@@ -198,9 +198,11 @@ topics:      /camera/color/image_raw   371 msgs    : sensor_msgs/Image
 And play the bag to see its content: 
 
 ```bash
-$ rosparam set use_sim_time true # necessary if the use_sim_time parameter is not set in ROS or it is set to false
+$ rosparam set use_sim_time true # this line is necessary for rosbag play to simulate the time in the bag when it's played
 $ rosbag play --clock left-seq1.bag
-$ rosrun rqt_image_view rqt_image_view # visualize the /camera/color/image_raw
+
+# and in another terminal run:
+$ rosrun rqt_image_view rqt_image_view # visualize the /camera/color/image_raw topic
 ```
 
 You should then see an image sequence of Burton moving two colored squares as in the figure below:
