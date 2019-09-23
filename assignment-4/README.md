@@ -71,14 +71,16 @@ document for CPSC-659 assignments.
 The assignment will be evaluated based on the content of your report and your code:
 
 - Report (26 pts)
-    - Part IV (26 pts): IV-1 (5 pts) + IV-2 (5 pts) + IV-3 (2 pts) + IV-4 (3 pts) + IV-11 (3 pts) + IV-12 (3 pts)
-    - Part V (5 pt): V-1 (5 pts)
+    - Part IV (23 pts): IV-1 (6 pts) + IV-2 (4 pts) + IV-3 (3 pts) + IV-4 (3 pts) + IV-12 (4 pts) + IV-13 (3 pts)
+    - Part V (3 pts): V-1 (3 pts)
 - Code (74 pts)
     * Part I (6 pts) 
     * Part II (5 pts)
     * Part III (30 pts): III-1 (10 pts) + III-2 (10 pts) + III-3 (5 pts) + III-4 (5 pts)
-    * Part IV (28 pts): IV-5 (5 pts) + IV-6 (6 pts) + IV-7 (4 pts) + IV-8 (2 pts) + IV-9 (2 pts) + IV-10 (5 pts) + IV-12 (2 pts) + IV-13 (2 pts) 
-    * Part V (5 pts): V-1 (5 pts)
+    * Part IV (31 pts): IV-5 (5 pts) + IV-6 (5 pts) + IV-7 (4 pts) + IV-8 (4 pts) + IV-9 (3 pts) + IV-10 (4 pts) + IV-13 (3 pts) + IV-14 (3 pts) 
+    * Part V (2 pts): V-1 (2 pts)
+
+Students taking CPSC-459 are evaluated over 100 pts; those taking CPSC-559 are evaluated over 115 pts. 
 
 #### Further Reading
 
@@ -393,12 +395,12 @@ target.
     an Observation message argument. This argument provides the latest observed position of the target as received
     through the "/observation" topic in the KalmanFilterNode.
 
-- **IV-9.** Implement the `initialize_mu_and_sigma()` method within the KalmanFilterNode class of the
+- **IV-10.** Implement the `initialize_mu_and_sigma()` method within the KalmanFilterNode class of the
 kalman_filter.py script. This method should set the initial values for the filter belief based on the latest
 observed target position. Again, note that this observation is passed to the `initialize_mu_and_sigma()` method
 as an input argument.
 
-- **IV-10.** Once you have finished the prior tasks, complete the filter_colored_target.launch file within the shutter_track_target/launch directory.
+- **IV-11.** Once you have finished the prior tasks, complete the filter_colored_target.launch file within the shutter_track_target/launch directory.
 The launch file should run your kalman_filter.py script after playing a bag, running rqt_image_view, and 
 running your detect_visual_target.py script.
 
@@ -432,7 +434,7 @@ running your detect_visual_target.py script.
     <img src="docs/filtering.png" width="400"/>
  
 
-- **IV-11.** Tune the parameters of your filter (initial belief, R, and Q) such that you can effectively 
+- **IV-12.** Tune the parameters of your filter (initial belief, R, and Q) such that you can effectively 
 track the blue square in the image sequence within the left-seq1.bag. Use the filtered_colored_target.launch
 file to quickly launch rosbag, rqt_image_view, detect_visual_target.py and kalman_filter.py. As the bag plays, use
 rqt_image_view to visualize the images being streamed through your network and debug your code.
@@ -449,7 +451,7 @@ rqt_image_view to visualize the images being streamed through your network and d
      for this part of the assignment in your report. Also, indicate the playback_speed that you ended up using for adjusting your 
      filter parameters.
      
-- **IV-12.** Tune the parameters of your filter such that it can track the blue square when the argument
+- **IV-13.** Tune the parameters of your filter such that it can track the blue square when the argument
 add_observation_noise is set to true in filter_colored_target.launch:
 
     ```bash
@@ -466,7 +468,7 @@ add_observation_noise is set to true in filter_colored_target.launch:
     gif, name it "filtered_blue_square_with_extra_noise.gif", and include it in the `docs` directory within the
      shutter_track_target package. Commit the gif to your repository.
      
-- **IV-13.** Write a README.md Markdown file inside the shutter_track_target repository that explains
+- **IV-14.** Write a README.md Markdown file inside the shutter_track_target repository that explains
 what the detect_visual_target.py and kalman_filter.py nodes do, and how the filtered_colored_target.launch script
 works. To provide visual support to the explanation of how the launch file works, include the gifs that you generated
 previously in this assignment in the README.md file.
@@ -475,7 +477,7 @@ previously in this assignment in the README.md file.
      in GitLab's markdown can be found [here](https://docs.gitlab.com/ee/user/markdown.html#images).
      
 
-## Part V. Real-Time Filtering
+## Part V. Real-Time Filtering (5 extra points)
 
 You will now run your filter on images captured by the Shutter robot. To this end, you should
 find a uniform color, but non-red object to track in this part of the assignment. Then, use
@@ -520,7 +522,9 @@ your tracker is following it.
     Submit your bag through Canvas. Additionally, indicate in your report all the parameters that you used in your system to effectively track your object
     (e.g., hue range for generating observations, blob detector parameters, Kalman Filter parameters, etc.). 
 
+## Part VI
 
+Part VI of the assignment is only for students taking CPSC-559 (graduate version of the course). See the tasks/questions in the [ExtraQuestions-CPSC559.md](ExtraQuestions-CPSC559.md) document.
 
 Once you've finished the assignment, **add the commit SHA** that you would like to be evaluate on to your report.
 
