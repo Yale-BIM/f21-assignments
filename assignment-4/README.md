@@ -1,6 +1,6 @@
-# Assignment 2
+# Assignment 4
 
-This is the third assignment for Yale's CPSC-459/559 Building Interactive Machines course.
+This is the fourth assignment for Yale's CPSC-459/559 Building Interactive Machines course.
 
 ## Table of Contents
 
@@ -11,6 +11,7 @@ This is the third assignment for Yale's CPSC-459/559 Building Interactive Machin
     * [Deliverables](#deliverables)
     * [Evaluation](#evaluation)
     * [Further Reading](#further-reading)
+* [Setup](#setup)
 * [Part I. Creating a Custom ROS Message Type](#part-i-creating-a-custom-ros-message-type)
     * [Questions / Tasks](#questions--tasks)
 * [Part II. Get Data](#part-ii-get-data)
@@ -23,15 +24,13 @@ This is the third assignment for Yale's CPSC-459/559 Building Interactive Machin
 
 ## Introduction 
 This assignment will provide you practical experience with custom messages in ROS, low-level image processing,
- and Kalman filters.
-
+ and filtering.
 
 #### System Requirements
 As for the prior assignments, you should have access to a computer with `Ubuntu 18.04` and `ROS Melodic` to complete the homework. 
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
 You will use git to save your work to your [GitLab](http://www.gitlab.com) repository.
-
 
 #### Background Knowledge
 
@@ -49,7 +48,6 @@ If you are not, please check [this tutorial](https://docs.scipy.org/doc/numpy/us
 We refer to `vectors` or column matrices with bold lower-case letters (e.g., $`\bold{x}`$).
 Other `matrices`, such as linear transformations, and `scalars` are written with regular
 font weight. 
-
 
 #### Deliverables
 
@@ -85,19 +83,37 @@ You assignment will be evaluated based on the content of your report and your co
 Application of Kalman Filtering to a fun entertainment application.
 
 - [Discriminative Training of Kalman Filters](http://www.roboticsproceedings.org/rss01/p38.pdf):
-Describes systematic ways of tuning Kalman Filters given ground truth data.
+Describes systematic ways for tuning Kalman Filters given ground truth data.
+
+
+## Setup
+Before you start implementing or answering questions for this assignment, please update
+your repository to pull the latest changes from the assignments repository and update
+the shutter-ros repository:
+
+```bash
+# update your repository with the latest version of the assignment
+$ cd <path-to-your-repository-in-your-workspace>
+$ git pull upstream master
+
+# update the shutter-ros repository 
+$ roscd shutter_bringup
+$ git pull
+
+# finally, re-build your catkin workspace 
+$ cd <path-to-your-catkin-workspace-root-directory>
+$ catkin_make -DCMAKE_BUILD_TYPE=Release
+```
 
 
 ## Part I. Creating a Custom ROS Message Type
 ROS uses [messages](http://wiki.ros.org/msg) of various types to transmit information between nodes. For example, in the 
-past you have worked [TransformStamped](http://docs.ros.org/kinetic/api/geometry_msgs/html/msg/TransformStamped.html) 
+past you have worked with [TransformStamped](http://docs.ros.org/kinetic/api/geometry_msgs/html/msg/TransformStamped.html) 
 messages and [PoseStamped](http://docs.ros.org/kinetic/api/geometry_msgs/html/msg/PoseStamped.html). Now, you 
 will create your own custom message type.
 
 To get started, read [this tutorial on Creating Messages and Services](http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv) 
-in ROS.
-Then, follow the steps below to make your own message type as in the tutorial. This message type will serve in the next parts
- of the assignment to send information about a detected visual target.
+in ROS. Then, follow the steps below to make your own message type as in the tutorial. This message type will serve in the next parts of the assignment to send information about a detected visual target.
 
 1. Create a `msg` directory within the `shutter_track_target` ROS repository of this assignment. This directory
 will hold your new message definition.
