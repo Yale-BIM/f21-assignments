@@ -238,8 +238,8 @@ blobs of a given color: see the shutter_track_target/scripts/detect_visual_targe
 to understand how it works in general. 
 
 For the next parts of this assignment, do NOT edit the init() and image_callback() functions of the DetectTarget class
-in the detect_visual_target.py node. Only edit the filter_image(), compute_keypoints_for_blobs(), and publish_observation()
-functions as indicated in the tasks below. 
+in the detect_visual_target.py node. **Only edit the filter_image(), compute_keypoints_for_blobs(), and publish_observation()
+functions** as indicated in the tasks below. 
 
 ### Questions / Tasks
 Complete the detect_visual_target.py node by implementing the filter_image(), compute_keypoints_for_blobs(), and publish_observation()
