@@ -249,7 +249,7 @@ functions. Afterwards, make an animated video of the visual output of your node,
 Afterwards, implement the `filter_image()` function in the detect_visual_target.py node so that the function:
 
     1. Converts the input `cv_image` to the HSV color space with OpenCV.
-    2. Filters the image in the HSV color space using the [cv2.inRange]() function from OpenCV. 
+    2. Filters the image in the HSV color space using the [cv2.inRange]() function from OpenCV and the input `lower_hue_value` and `higher_hue_value`. 
     3. Finally, returns the image (mask) output by the inRange() function.
     
     *Tip:* This [tutorial](https://pythonprogramming.net/color-filter-python-opencv-tutorial/) provides
@@ -264,10 +264,10 @@ Afterwards, implement the `filter_image()` function in the detect_visual_target.
     
     You should then be able to visualize the output topic `/observation_image` for debugging purposes with 
     `rqt_image_view`. The output image (or mask) should have high values for the pixels corresponding to the blue 
-    square in the input image, as shown below.
+    square in the input image, as shown in the left image below. The right image corresponds to the corresponding image_raw
+    photo from the bag.
     
-    <img src="docs/mask1.png" width="400"/>
-    <img src="docs/mask2.png" width="400"/>
+    <img src="docs/color_thresholding.png" width="400"/>
     <br>
 
 - **III-2.** Read this other [tutorial on Blob Detection](https://www.learnopencv.com/blob-detection-using-opencv-python-c/)
