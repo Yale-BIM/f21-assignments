@@ -75,7 +75,7 @@ The assignment will be evaluated based on the content of your report and your co
 - Report (26 pts + 15 pts for CPSC-559 only)
     - Part IV (23 pts): IV-1 (6 pts) + IV-2 (4 pts) + IV-3 (3 pts) + IV-4 (3 pts) + IV-12 (4 pts) + IV-13 (3 pts)
     - Part V (3 pts): V-1 (3 pts)
-    - Part IV (15 pts for CPSC-559 only): IV-1 (5 pts) + IV-2 (4 pts) + IV-3 (6 pts)
+    - Part VI (15 pts for CPSC-559 only): IV-1 (5 pts) + IV-2 (4 pts) + IV-3 (6 pts)
 - Code (74 pts)
     * Part I (6 pts) 
     * Part II (5 pts)
