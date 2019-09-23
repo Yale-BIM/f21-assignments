@@ -350,7 +350,7 @@ the main logic for a filtering node, and will help you debug your filter visuall
 
 - **IV-1.** Please write down the mathematical equation for the filter's linear transition model, including
 Gaussian noise, in your report. Note that because you are not moving the target, but tracking will be
-happening only based on the observed target position, your filter will have no control $`\bold{u}`$.
+happening only based on the observed target position, your filter's transition model should have no control $`\bold{u}`$ component.
 
 - **IV-2.** Please write down the mathematical equation for the filter's measurement model, including Gaussian
 noise, in your report.
