@@ -324,9 +324,9 @@ this assigment. The Chapter is available in Canvas (under the Files section).
 
 
 The `filter state` 
-$`\bold{x} \in \mathbb{R}^6`$ should contain $`\bold{x} = [p_x, p_y, v_x, v_y, a_x, a_y]^T`$, 
-where $`\mathbf{p} = (p_x, p_y)`$ corresponds to the estimated position of the target in an image, 
-$`\mathbf{v} = (v_x, v_y)`$ is its estimated velocity, and $`\mathbf{a} = (a_x, a_y)`$ is its estimated acceleration.
+$`\bold{x} \in \mathbb{R}^6`$ should contain $`\bold{x} = [p_x\ p_y\ v_x\ v_y\ a_x\ a_y]^T`$, 
+where $`\mathbf{p} = [p_x\ p_y]^T`$ corresponds to the estimated position of the target in an image, 
+$`\mathbf{v} = [v_x\ v_y]^T`$ is its estimated velocity, and $`\mathbf{a} = [a_x\ a_y]^T`$ is its estimated acceleration.
 
 The `transition model` of the filter should include additive gaussian noise and 
 follow the [equations of motion](https://en.wikipedia.org/wiki/Equations_of_motion):
