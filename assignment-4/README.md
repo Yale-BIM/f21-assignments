@@ -320,7 +320,7 @@ gif, name it "keypoints.gif", and include it in the `docs` directory within the
 You will now implement a linear Kalman filter to track a visual target in image space. Please read Sections 3.2.1
  and 3.2.2 from
 Chapter 3 of the [Probabilistic Robotics book](http://www.probabilistic-robotics.org/) before starting with 
-this assigment. The Chapter is available as a Course Reserve in the CPSC-659 Canvas website.
+this assigment. The Chapter is available in Canvas (under the Files section).
 
 
 The `filter state` 
