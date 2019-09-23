@@ -12,4 +12,4 @@ In this part of the assignment, you should think about how to implemennt a parti
 
 - **VI-2.** If you were to implement a particle filter for tracking your object in Part V, can you use the same transition (motion) model as in your Kalman Filter implementation? Explain in your report.
 
-- **IV-3.** If you were to implement a particle filter for tracking your object in Part V, would it be beneficial to modify your measurement model from the one that you used for your Kalman Filter implementation? If yes, explain why and how you would modify your measurement model. If no, explain why as well in your report.
+- **VI-3.** If you were to implement a particle filter for tracking your object in Part V, would it be beneficial to modify your measurement model from the one that you used for your Kalman Filter implementation? If yes, explain why and how you would modify your measurement model. If no, explain why as well in your report.
