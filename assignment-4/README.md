@@ -129,6 +129,7 @@ should define the following fields for the message type:
     - **header** (of type [std_msgs/Header](http://docs.ros.org/api/std_msgs/html/msg/Header.html))
     - **x** (of type float64 -- built-in [primitive message type](http://wiki.ros.org/msg) --)
     - **y** (of type float64 -- built-in [primitive message type](http://wiki.ros.org/msg) --)
+    <br>
     
 3. Edit the package.xml and CMakeLists.txt files in the shutter_track_target package to define your
 new message type as in the [tutorial on Creating Messages and Services](http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv).
@@ -141,7 +142,7 @@ new message type as in the [tutorial on Creating Messages and Services](http://w
 
     ```bash
     $ cd <catkin_workspace>
-    $ catkin_make
+    $ catkin_make -DCMAKE_BUILD_TYPE=Release
     ```
     
     *Tip:* If for some reason catkin_make fails to generate your message, check the CMakeLists.txt and
@@ -159,7 +160,7 @@ can use the `rosmsg` tool to this end:
     float64 x
     float64 y
     ```
-    (the output of rosmsg should be as in the code snipped above)
+    (the output of rosmsg should be as in the code snippet above)
     
 
 ### Questions / Tasks
