@@ -22,7 +22,7 @@ This is the fourth assignment for Yale's CPSC-459/559 Building Interactive Machi
     * [Questions / Tasks](#questions--tasks-3)
 * [Part V. Real-Time Filtering](#part-v-real-time-filtering)
    * [Questions / Tasks](#questions--tasks-4)
-* [Part VI. Non-Parametric Filtering](ExtraQuestions-CSPC559.md) (only for students taking CPSC-559)
+* [Part VI. Non-Parametric Filtering](assignment-4/ExtraQuestions-CSPC559.md) (only for students taking CPSC-559)
 
 ## Introduction 
 This assignment will provide you practical experience with custom messages in ROS, low-level image processing,
@@ -528,7 +528,7 @@ your tracker is following it.
 
 ## Part VI
 
-Part VI of the assignment is only for students taking CPSC-559 (graduate version of the course). See the tasks/questions in the [ExtraQuestions-CPSC559.md](ExtraQuestions-CPSC559.md) document.
+Part VI of the assignment is only for students taking CPSC-559 (graduate version of the course). See the tasks/questions in the [ExtraQuestions-CPSC559.md](assignment-4/ExtraQuestions-CPSC559.md) document.
 
 Once you've finished the assignment, **add the commit SHA** that you would like to be evaluate on to your report.
 
