@@ -282,7 +282,6 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
     3. Uses the SimpleBlobDetector to detect blobs on the `filtered_image` mask that is input to the function.
     
     4. Returns the detected list of keypoints, as output by the SimpleBlobDetector.
-    <br>
     
     *Tip:* You can read more about how the SimpleBlobDetector algorithm works on the [official OpenCV documentation](https://docs.opencv.org/2.4/modules/features2d/doc/common_interfaces_of_feature_detectors.html#SimpleBlobDetector%20:%20public%20FeatureDetector).
 
@@ -291,7 +290,7 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
     blob detector such that the blue square is detected well in the left-seq1.bag
     image sequence. The result should look similar to the image below:
     
-    <img src="docs/keypoint.png" width="400"/>
+    <img src="docs/keypoint.png" width="300"/>
     <br>
     
     The thin red circle corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
