@@ -350,7 +350,7 @@ the main logic for a filtering node, and will help you debug your filter visuall
 
 - **IV-1.** Please write down the mathematical equation for the filter's linear transition model, including
 Gaussian noise, in your report. Note that because you are not moving the target, but tracking will be
-happening only based on the observed target position, your filter will have no control $`\bold{u}`$.
+happening only based on the observed target position, your filter's transition model should have no control $`\bold{u}`$ component.
 
 - **IV-2.** Please write down the mathematical equation for the filter's measurement model, including Gaussian
 noise, in your report.
@@ -373,7 +373,7 @@ class of the kalman_filter.py script. The methods should set the A and C
 parameters of the transition and measurement model of the filter used by the KalmanFilterNode. Use [numpy
 arrays](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.array.html) to represent the A and C matrices.
 
-    Note that you do not need to implement the logic that passes the A and C parameters to the filter. This is
+    > NOTE: You do not have to implement the logic that passes the A and C parameters to the filter. This is
     already done for you in the main loop of the KalmanFIlterNode class.
     
 - **IV-8.** Implement the `initialize_process_covariance()` and `initialize_measurement_covariance()` methods
@@ -407,7 +407,7 @@ running your detect_visual_target.py script.
     - **higher_hue_value:** Max. hue value for the colored target that is tracked.
     - **playback_speed:** Speed at which to play the bag (1.0 simulates real time play back).
     
-    Do NOT modify these arguments in the launch file, nor the way how the bag is launched and
+    > Do NOT modify the above arguments in the launch file, nor the way how the bag is launched and
     the detect_visual_target.py node is run.
     
     Once you have completed the launch file, you should be able to run it as:
@@ -422,14 +422,12 @@ running your detect_visual_target.py script.
     - /camera/color/image_raw topic: the original image sequence
     - /observation_image topic: the detected target position
     - /tracked_image topic: the tracked target
+    <br>
     
-    The images sent over the /tracked_image topic display two trajectories:
+    The images sent over the /tracked_image topic display two trajectories: the red line connects the observed locations for the target (as received through the /observations topic); and the thinner green line connects the estimated location for the target (from the Kalman Filter belief).
     
     <img src="docs/filtering.png" width="400"/>
  
-    The red line connects the observed locations for the target (as received through the /observations topic).
-    The thinner green line connects the estimated location for the target (from the Kalman Filter belief).
-
 
 - **IV-11.** Tune the parameters of your filter (initial belief, R, and Q) such that you can effectively 
 track the blue square in the image sequence within the left-seq1.bag. Use the filtered_colored_target.launch
@@ -445,7 +443,8 @@ rqt_image_view to visualize the images being streamed through your network and d
     ```
 
     Once it looks like your filter is tracking the target, include the filter parameters that you are using
-     for this part of the assignment in your report. 
+     for this part of the assignment in your report. Also, indicate the playback_speed that you ended up using for adjusting your 
+     filter parameters.
      
 - **IV-12.** Tune the parameters of your filter such that it can track the blue square when the argument
 add_observation_noise is set to true in filter_colored_target.launch:
