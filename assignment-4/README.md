@@ -266,9 +266,9 @@ Afterwards, implement the `filter_image()` function in the detect_visual_target.
     You should then be able to visualize the output topic `/observation_image` for debugging purposes with 
     `rqt_image_view`. The output image (or mask) should have high values for the pixels corresponding to the blue 
     square in the input image, as shown in the left image below. The right image shows the corresponding image_raw
-    photo from the bag.
+    photo from the bag as a reference.
     
-    <img src="docs/color_thresholding.png" width="600"/>
+    <img src="docs/color_thresholding.png" width="450"/>
     <br>
 
 - **III-2.** Read this other [tutorial on Blob Detection](https://www.learnopencv.com/blob-detection-using-opencv-python-c/)
@@ -281,7 +281,7 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
     
     3. Uses the SimpleBlobDetector to detect blobs on the `filtered_image` mask that is input to the function.
     
-    4. Returns the detected list of keypoints.
+    4. Returns the detected list of keypoints, as output by the SimpleBlobDetector.
     
     *Tip:* You can read more about how the SimpleBlobDetector algorithm works on the [official OpenCV documentation](https://docs.opencv.org/2.4/modules/features2d/doc/common_interfaces_of_feature_detectors.html#SimpleBlobDetector%20:%20public%20FeatureDetector).
 
@@ -293,9 +293,9 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
     <img src="docs/keypoint.png" width="400"/>
     <br>
     
-    The thin red circle in the right image above corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
-    found by OpenCV blob's detection algorithm. The position of this keypoint is what the node outputs
-    through the "/observation" topic (see the next task).
+    The thin red circle corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
+    found by OpenCV blob's detection algorithm. The position of this keypoint is what your node should output
+    through the "/observation" topic, as described in the next task.
 
 - **III-3.** Finally, implement the `publish_observation()` function in the detect_visual_target.py node.
 This function receives a `tuple (x,y)` corresponding to the location of the biggest keypoint 
