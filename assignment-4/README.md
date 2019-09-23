@@ -267,7 +267,7 @@ Afterwards, implement the `filter_image()` function in the detect_visual_target.
     square in the input image, as shown in the left image below. The right image corresponds to the corresponding image_raw
     photo from the bag.
     
-    <img src="docs/color_thresholding.png" width="400"/>
+    <img src="docs/color_thresholding.png" width="600"/>
     <br>
 
 - **III-2.** Read this other [tutorial on Blob Detection](https://www.learnopencv.com/blob-detection-using-opencv-python-c/)
@@ -289,8 +289,7 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
     blob detector such that the blue square is detected well in the left-seq1.bag
     image sequence. The result should look similar to the image below:
     
-    <img src="docs/keypoint1.png" width="400"/>
-    <img src="docs/keypoint2.png" width="400"/>
+    <img src="docs/keypoint.png" width="400"/>
     <br>
     
     The thin red circle in the right image above corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
