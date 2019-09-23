@@ -471,24 +471,22 @@ previously in this assignment in the README.md file.
      > *Tip:* More information on including images 
      in GitLab's markdown can be found [here](https://docs.gitlab.com/ee/user/markdown.html#images).
      
-- **IV-14. (5 extra points)** Change the hue arguments of the filter_colored_target.launch so that you
-can track the square in the left-seq1.bag sequence:
+- **IV-14.** Change the hue arguments of the filter_colored_target.launch so that your code 
+can track the red square in the left-seq1.bag sequence:
 
     ```bash
-    # play the bag at half real-time speed
     $ roslaunch shutter_track_target filter_colored_target.launch lower_hue_value:=<min_value> higher_hue_value:=<max_value> [playback_speed:=0.5]
     ```
     
     You may also want to tune the parameters of your filter if tracking is not working well with the red target.
     
-    Once it looks like your filter is tracking the red target, include the filter parameters that you are using
+    Once it looks like your filter is tracking the red target well, include the filter parameters that you are using
      for this part of the assignment as well as the hue values that allow you to detect the red square in your report.  
      
     Finally, make a video of rqt_image_view that shows the images sent
     through the /tracked_image topic for at least 5 seconds with add_observation_noise:=true. 
-    Turn this video into an animated
-    gif, name it "filtered_red_square.gif", and include it in the `docs` directory within the
-     shutter_track_target package. Commit the gif to your repository.
+    Turn this video into an animated gif, name it "filtered_red_square.gif", and include it in the `docs` directory within the
+    shutter_track_target package. Commit the gif to your repository.
 
 
 Once you've finished the assignment, **add the commit SHA** that you would like to be evaluate on to your report.
