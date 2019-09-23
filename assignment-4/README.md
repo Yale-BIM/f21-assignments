@@ -468,7 +468,7 @@ what the detect_visual_target.py and kalman_filter.py nodes do, and how the filt
 works. To provide visual support to the explanation of how the launch file works, include the gifs that you generated
 previously in this assignment in the README.md file.
    
-     > More information on including images 
+     > *Tip:* More information on including images 
      in GitLab's markdown can be found [here](https://docs.gitlab.com/ee/user/markdown.html#images).
      
 - **IV-14. (5 extra points)** Change the hue arguments of the filter_colored_target.launch so that you
