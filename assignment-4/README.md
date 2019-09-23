@@ -211,7 +211,7 @@ $ rosrun rqt_image_view rqt_image_view # visualize the /camera/color/image_raw t
 You should then see an image sequence of Burton moving two colored squares as in the figure below:
 
 <img src="docs/left-seq1.png" width="400"/>
-<br> <br>
+<br>
 
 > NOTE: ROS nodes use the /clock topic to gather information about time (see [here](http://wiki.ros.org/Clock) for more information).
 When the `use_sim_time` parameter is set to true in the ROS parameter server, ROS will stop publishing your computer's system clock
