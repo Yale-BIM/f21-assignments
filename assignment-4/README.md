@@ -22,7 +22,7 @@ This is the fourth assignment for Yale's CPSC-459/559 Building Interactive Machi
     * [Questions / Tasks](#questions--tasks-3)
 * [Part V. Real-Time Filtering](#part-v-real-time-filtering)
    * [Questions / Tasks](#questions--tasks-4)
-
+* [Part VI. Non-Parametric Filtering](ExtraQuestions-CSPC559.md) (only for students taking CPSC-559)
 
 ## Introduction 
 This assignment will provide you practical experience with custom messages in ROS, low-level image processing,
@@ -61,6 +61,8 @@ with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this
 [simple assignment template](https://www.overleaf.com/latex/templates/simple-assignment-template/mzkqqqjypzvd) 
 in [LaTeX](https://www.latex-project.org/).
 
+- **ROS Bag:** You are expected to submit a ROS bag to Canvas (see Part V of this assignment).
+
 - **Code:** Finally, you are expected to push code for this assignment to your 
 [GitLab](http://www.gitlab.com) repository as indicated in the [general instructions](../README.md) 
 document for CPSC-659 assignments. 
@@ -70,9 +72,10 @@ document for CPSC-659 assignments.
 
 The assignment will be evaluated based on the content of your report and your code:
 
-- Report (26 pts)
+- Report (26 pts + 15 pts for CPSC-559 only)
     - Part IV (23 pts): IV-1 (6 pts) + IV-2 (4 pts) + IV-3 (3 pts) + IV-4 (3 pts) + IV-12 (4 pts) + IV-13 (3 pts)
     - Part V (3 pts): V-1 (3 pts)
+    - Part IV (15 pts for CPSC-559 only): IV-1 (5 pts) + IV-2 (4 pts) + IV-3 (6 pts)
 - Code (74 pts)
     * Part I (6 pts) 
     * Part II (5 pts)
@@ -518,6 +521,7 @@ your tracker is following it.
     - /observation
     - /clock
     - /rosout
+    <br>
 
     Submit your bag through Canvas. Additionally, indicate in your report all the parameters that you used in your system to effectively track your object
     (e.g., hue range for generating observations, blob detector parameters, Kalman Filter parameters, etc.). 

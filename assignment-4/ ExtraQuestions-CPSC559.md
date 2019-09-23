@@ -2,7 +2,7 @@
 
 The sections below for Assignment 4 are only meant to be completed/answered by students taking CPSC-559. Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. However, their answers to the questions in Part VI of the Assignment 4 will not be considered during grading.
 
-## Part VI. Non-parametric filtering
+## Part VI. Non-Parametric Filtering
 
 In this part of the assignment, you should think about how to implemennt a particle filter for your object tracking program (Part V). No code needs to be implemented, but answers must be included in your final report.
 
