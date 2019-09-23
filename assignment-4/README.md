@@ -307,7 +307,7 @@ through the "/observation" topic (self.obs_pub variable).
     that is passed to the publish_observation() function. This will ensure that the time stamp and frame of the Observation message
     matches the time stamp and frame of the image that it was generated from.
     
-    Once you think that your detect_visual_target.py node is properly detecting targets of a given color
+    Once your detect_visual_target.py node is properly detecting targets of a given color
     and publishing observations, commit the script to your repository.
 
 - **III-4.** As in II-1, make a video of rqt_image_view that shows the content of the /observation_image
