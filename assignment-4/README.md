@@ -422,14 +422,12 @@ running your detect_visual_target.py script.
     - /camera/color/image_raw topic: the original image sequence
     - /observation_image topic: the detected target position
     - /tracked_image topic: the tracked target
+    <br>
     
-    The images sent over the /tracked_image topic display two trajectories:
+    The images sent over the /tracked_image topic display two trajectories: the red line connects the observed locations for the target (as received through the /observations topic); and the thinner green line connects the estimated location for the target (from the Kalman Filter belief).
     
     <img src="docs/filtering.png" width="400"/>
  
-    The red line connects the observed locations for the target (as received through the /observations topic).
-    The thinner green line connects the estimated location for the target (from the Kalman Filter belief).
-
 
 - **IV-11.** Tune the parameters of your filter (initial belief, R, and Q) such that you can effectively 
 track the blue square in the image sequence within the left-seq1.bag. Use the filtered_colored_target.launch
