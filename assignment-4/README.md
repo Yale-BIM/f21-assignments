@@ -282,18 +282,19 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
     3. Uses the SimpleBlobDetector to detect blobs on the `filtered_image` mask that is input to the function.
     
     4. Returns the detected list of keypoints, as output by the SimpleBlobDetector.
+    <br>
     
-        *Tip:* You can read more about how the SimpleBlobDetector algorithm works on the [official OpenCV documentation](https://docs.opencv.org/2.4/modules/features2d/doc/common_interfaces_of_feature_detectors.html#SimpleBlobDetector%20:%20public%20FeatureDetector).
+    *Tip:* You can read more about how the SimpleBlobDetector algorithm works on the [official OpenCV documentation](https://docs.opencv.org/2.4/modules/features2d/doc/common_interfaces_of_feature_detectors.html#SimpleBlobDetector%20:%20public%20FeatureDetector).
 
-        Once you've implemented the compute_keypoints_for_blobs() function, you can run the detect_visual_target.py 
+    Once you've implemented the compute_keypoints_for_blobs() function, you can run the detect_visual_target.py 
     node to debug your code for this part of the assignment, as in the task III-1. Edit the parameters of the 
     blob detector such that the blue square is detected well in the left-seq1.bag
     image sequence. The result should look similar to the image below:
     
-        <img src="docs/keypoint.png" width="400"/>
-        <br>
+    <img src="docs/keypoint.png" width="400"/>
+    <br>
     
-        The thin red circle corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
+    The thin red circle corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
     found by OpenCV blob's detection algorithm. The position of this keypoint is what your node should output
     through the "/observation" topic, as described in the next task.
 
