@@ -407,7 +407,7 @@ running your detect_visual_target.py script.
     - **higher_hue_value:** Max. hue value for the colored target that is tracked.
     - **playback_speed:** Speed at which to play the bag (1.0 simulates real time play back).
     
-    Do NOT modify these arguments in the launch file, nor the way how the bag is launched and
+    > Do NOT modify the above arguments in the launch file, nor the way how the bag is launched and
     the detect_visual_target.py node is run.
     
     Once you have completed the launch file, you should be able to run it as:
