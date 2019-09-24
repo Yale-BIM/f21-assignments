@@ -516,16 +516,17 @@ the rs_camera.launch script to get images from the robot, move your object in fr
 your tracker is following it. 
 
     Once it looks like your filter is tracking your object well, make a rosbag of your system while you move your object in front of the robot's camera and your filter
-    tracks its position. The bag should be at least 8 seconds long, and **only** include the following topics:
+    tracks its position. The bag should be around 5 seconds long, and **only** include the following topics:
 
-    - /camera/color/image_raw
     - /tracked_image
-    - /observation
+    - /observation_image
     - /clock
     - /rosout
-    - /tf
-    - /tf_static
-    <br>
+
+    > *Tip 1:* This assignment provides you of an example launch file to record the above bag. See the `assignment-4/shutter_track_target/launch/record_bag.launch` file.
+
+    > *Tip 2:* Double check the content of your bag with the `rosbag info` and `rosbag play` commands before submitting your assignment to make sure that the tracked_image and observation_image topics contain example images of your filter tracking your desired object. As a reference, the bag should include at
+    least 200 images for each of these topics.
 
     Submit your bag through Canvas. Additionally, indicate in your report all the parameters that you used in your system to effectively track your object
     (e.g., hue range for generating observations, blob detector parameters, Kalman Filter parameters, etc.). 
