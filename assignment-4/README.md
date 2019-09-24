@@ -20,7 +20,9 @@ This is the fourth assignment for Yale's CPSC-459/559 Building Interactive Machi
     * [Questions / Tasks](#questions--tasks-2)
 * [Part IV. Filtering the Target's Position](#part-iv-filtering-the-targets-position)
     * [Questions / Tasks](#questions--tasks-3)
-
+* [Part V. Real-Time Filtering](#part-v-real-time-filtering)
+   * [Questions / Tasks](#questions--tasks-4)
+* [Part VI. Non-Parametric Filtering](assignment-4/ExtraQuestions-CSPC559.md) (only for students taking CPSC-559)
 
 ## Introduction 
 This assignment will provide you practical experience with custom messages in ROS, low-level image processing,
@@ -59,6 +61,8 @@ with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this
 [simple assignment template](https://www.overleaf.com/latex/templates/simple-assignment-template/mzkqqqjypzvd) 
 in [LaTeX](https://www.latex-project.org/).
 
+- **ROS Bag:** You are expected to submit a ROS bag to Canvas (see Part V of this assignment).
+
 - **Code:** Finally, you are expected to push code for this assignment to your 
 [GitLab](http://www.gitlab.com) repository as indicated in the [general instructions](../README.md) 
 document for CPSC-659 assignments. 
@@ -66,16 +70,20 @@ document for CPSC-659 assignments.
 
 #### Evaluation
 
-You assignment will be evaluated based on the content of your report and your code:
+The assignment will be evaluated based on the content of your report and your code:
 
-
-- Report (20 pts + 3 extra pts)
-    - Part IV (25 pts + 3 extra pts): IV-1 (5 pts) + IV-2 (5 pts) + IV-3 (5 pts) + IV-4 (4 pts) + IV-11 (3 pts) + IV-12 (3 pts) + IV-14 (3 extra pts)
-- Code (75 pts + 2 extra pts)
-    * Part I (10 pts) 
+- Report / Other Deliverables (26 pts + 15 pts for CPSC-559 only)
+    - Part IV (23 pts): IV-1 (6 pts) + IV-2 (4 pts) + IV-3 (3 pts) + IV-4 (3 pts) + IV-12 (4 pts) + IV-13 (3 pts)
+    - Part V (3 pts): V-1 (3 pts)
+    - Part VI (15 pts for CPSC-559 only): IV-1 (5 pts) + IV-2 (4 pts) + IV-3 (6 pts)
+- Code (74 pts)
+    * Part I (6 pts) 
     * Part II (5 pts)
     * Part III (30 pts): III-1 (10 pts) + III-2 (10 pts) + III-3 (5 pts) + III-4 (5 pts)
-    * Part IV (30 pts + 2 extra pts): IV-5 (6 pts) + IV-6 (6 pts) + IV-7 (4 pts) + IV-8 (2 pts) + IV-9 (2 pts) + IV-10 (5 pts) + IV-12 (2 pts) + IV-13 (3 pts) + IV-14 (2 extra pts)
+    * Part IV (31 pts): IV-5 (5 pts) + IV-6 (5 pts) + IV-7 (4 pts) + IV-8 (4 pts) + IV-9 (3 pts) + IV-10 (4 pts) + IV-13 (3 pts) + IV-14 (3 pts) 
+    * Part V (2 pts): V-1 (2 pts)
+
+Students taking CPSC-459 are evaluated over 100 pts; those taking CPSC-559 are evaluated over 115 pts. 
 
 #### Further Reading
 
@@ -390,12 +398,12 @@ target.
     an Observation message argument. This argument provides the latest observed position of the target as received
     through the "/observation" topic in the KalmanFilterNode.
 
-- **IV-9.** Implement the `initialize_mu_and_sigma()` method within the KalmanFilterNode class of the
+- **IV-10.** Implement the `initialize_mu_and_sigma()` method within the KalmanFilterNode class of the
 kalman_filter.py script. This method should set the initial values for the filter belief based on the latest
 observed target position. Again, note that this observation is passed to the `initialize_mu_and_sigma()` method
 as an input argument.
 
-- **IV-10.** Once you have finished the prior tasks, complete the filter_colored_target.launch file within the shutter_track_target/launch directory.
+- **IV-11.** Once you have finished the prior tasks, complete the filter_colored_target.launch file within the shutter_track_target/launch directory.
 The launch file should run your kalman_filter.py script after playing a bag, running rqt_image_view, and 
 running your detect_visual_target.py script.
 
@@ -429,7 +437,7 @@ running your detect_visual_target.py script.
     <img src="docs/filtering.png" width="400"/>
  
 
-- **IV-11.** Tune the parameters of your filter (initial belief, R, and Q) such that you can effectively 
+- **IV-12.** Tune the parameters of your filter (initial belief, R, and Q) such that you can effectively 
 track the blue square in the image sequence within the left-seq1.bag. Use the filtered_colored_target.launch
 file to quickly launch rosbag, rqt_image_view, detect_visual_target.py and kalman_filter.py. As the bag plays, use
 rqt_image_view to visualize the images being streamed through your network and debug your code.
@@ -446,7 +454,7 @@ rqt_image_view to visualize the images being streamed through your network and d
      for this part of the assignment in your report. Also, indicate the playback_speed that you ended up using for adjusting your 
      filter parameters.
      
-- **IV-12.** Tune the parameters of your filter such that it can track the blue square when the argument
+- **IV-13.** Tune the parameters of your filter such that it can track the blue square when the argument
 add_observation_noise is set to true in filter_colored_target.launch:
 
     ```bash
@@ -463,33 +471,68 @@ add_observation_noise is set to true in filter_colored_target.launch:
     gif, name it "filtered_blue_square_with_extra_noise.gif", and include it in the `docs` directory within the
      shutter_track_target package. Commit the gif to your repository.
      
-- **IV-13.** Write a README.md Markdown file inside the shutter_track_target repository that explains
+- **IV-14.** Write a README.md Markdown file inside the shutter_track_target repository that explains
 what the detect_visual_target.py and kalman_filter.py nodes do, and how the filtered_colored_target.launch script
 works. To provide visual support to the explanation of how the launch file works, include the gifs that you generated
 previously in this assignment in the README.md file.
    
-     > More information on including images 
+     > *Tip:* More information on including images 
      in GitLab's markdown can be found [here](https://docs.gitlab.com/ee/user/markdown.html#images).
      
-- **IV-14. (5 extra points)** Change the hue arguments of the filter_colored_target.launch so that you
-can track the square in the left-seq1.bag sequence:
+
+## Part V. Real-Time Filtering
+
+You will now run your filter on images captured by the Shutter robot. To this end, you should
+find a **uniform color, but non-red object** to track in this part of the assignment. Then, use
+one of the laptops in AKW411 to run your code and track the object.
+
+To get started, setup the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros) in your repository
+as indicated below. Note that the bim laptops in AKW411 already have the [RealSense driver](https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md) installed for you to access the robot's camera through USB.
+
+1. Test that the camera is connected to the laptop over usb and is accessible from your account:
 
     ```bash
-    # play the bag at half real-time speed
-    $ roslaunch shutter_track_target filter_colored_target.launch lower_hue_value:=<min_value> higher_hue_value:=<max_value> [playback_speed:=0.5]
+    $ realsense_viewer # and enable the RGB camera to verify that images can be received from the camera
     ```
-    
-    You may also want to tune the parameters of your filter if tracking is not working well with the red target.
-    
-    Once it looks like your filter is tracking the red target, include the filter parameters that you are using
-     for this part of the assignment as well as the hue values that allow you to detect the red square in your report.  
-     
-    Finally, make a video of rqt_image_view that shows the images sent
-    through the /tracked_image topic for at least 5 seconds with add_observation_noise:=true. 
-    Turn this video into an animated
-    gif, name it "filtered_red_square.gif", and include it in the `docs` directory within the
-     shutter_track_target package. Commit the gif to your repository.
 
+2. Install the realsense2_camera package in your catkin workspace:
+
+    ```bash
+    $ roscd; cd ../src # go to the src folder of your workspace
+    $ git clone https://github.com/IntelRealSense/realsense-ros.git # clone the realsense2_camera repository into your workspace's src folder
+    $ cd realsense-ros; git checkout 2.2.8 # get a stable version of the realsense2_camera code
+    $ roscd; cd .. # go back to the root of your catkin workspace
+    $ catkin_make -DCMAKE_BUILD_TYPE=Release # compile your catkin workspace
+    $ roslaunch realsense2_camera rs_camera.launch align_depth:=true # check that you can run the camera driver from ROS and visualize the images, e.g., using rqt_image_view
+    ```
+
+    > NOTE: If you've already setup the realsense2_camera package in your repository because you completed the CPSC-559 extra questions for Assignment 3, then you don't need to set it up again. You should already be able to launch the rs_camera.launch script after sourcing your workspace setup.bash.
+
+### Questions / Tasks
+
+- **V-1.** Change the hue arguments of the filter_colored_target.launch so that your code 
+can track your object as seen by the robot's camera. To test that tracking is working, start
+the rs_camera.launch script to get images from the robot, move your object in front of the camera, and see how well
+your tracker is following it. 
+
+    Once it looks like your filter is tracking your object well, make a rosbag of your system while you move your object in front of the robot's camera and your filter
+    tracks its position. The bag should be at least 8 seconds long, and **only** include the following topics:
+
+    - /camera/color/image_raw
+    - /tracked_image
+    - /observation
+    - /clock
+    - /rosout
+    - /tf
+    - /tf_static
+    <br>
+
+    Submit your bag through Canvas. Additionally, indicate in your report all the parameters that you used in your system to effectively track your object
+    (e.g., hue range for generating observations, blob detector parameters, Kalman Filter parameters, etc.). 
+
+## Part VI
+
+Part VI of the assignment is only for students taking CPSC-559 (graduate version of the course). See the tasks/questions in the [ExtraQuestions-CPSC559.md](assignment-4/ExtraQuestions-CPSC559.md) document.
 
 Once you've finished the assignment, **add the commit SHA** that you would like to be evaluate on to your report.
 
