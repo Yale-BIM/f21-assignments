@@ -523,6 +523,8 @@ your tracker is following it.
     - /observation
     - /clock
     - /rosout
+    - /tf
+    - /tf_static
     <br>
 
     Submit your bag through Canvas. Additionally, indicate in your report all the parameters that you used in your system to effectively track your object
