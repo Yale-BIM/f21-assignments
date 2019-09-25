@@ -61,7 +61,7 @@ To load the data from the image.npz file, you can use the sample script `depth/p
 
 ### Questions / Tasks
 
-- **V-1.** The book has a true height of $`h=24.5`$ cm as is placed in front of the camera, oriented roughly such that its cover is parallel to the $`XY`$ plane of the camera's coordinate frame. How can you compute how far the book is from the camera's center in the grayscale image of the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) file? That is, how can you get an estimate of the $`Z`$ coordinate of the book's cover in the camera's coordinate frame? Explain your answer to this question in your report, given the book's true height, the intrinsic 
+- **V-1.** The book has a true height of $`h=24.5`$ cm and is placed in front of the camera, oriented roughly such that its cover is parallel to the $`XY`$ plane of the camera's coordinate frame. How can you compute how far the book is from the camera's center in the grayscale image of the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) file? That is, how can you get an estimate of the $`Z`$ coordinate of the book's cover in the camera's coordinate frame? Explain your answer to this question in your report, given the book's true height, the intrinsic 
 parameters ($`K`$) of the camera used to get the grayscale image, and the position of the top-left ($`\bold{x_1} = (x_1,y_1)`$) and bottom-right ($`\bold{x_2} = (x_2,y_2)`$) corners of a box surrounding the book's front cover in the image, as illustrated in the image below.
 
     <img src="docs/book_select.png" width="300"/>
