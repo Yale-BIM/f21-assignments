@@ -24,17 +24,16 @@ This is the fourth assignment for Yale's CPSC-459/559 Building Interactive Machi
 
 ## Introduction 
 This assignment will provide you practical experience with deep learning. In particular, you'll become
-familiar with [TensorFlow's Keras API](https://www.tensorflow.org/guide/keras).
+familiar with [TensorFlow's Keras API](https://www.tensorflow.org/api_docs/python/tf/keras).
 
 
 #### System Requirements
-This assignment can all be completed using Python 2.7 in Ubuntu 16.04 (or 18.04). Potentially,
- it can also be completed in OS X or Windows (except for the extra credit). For training neural networks,
-we recommend that you use cloud services if your don't have access to a local GPU.
+This assignment should be completed using Python 2.7 in Ubuntu 18.04. For training neural networks,
+we recommend that you use cloud services if your don't have access to a local GPU. For the last part of the assignment, 
+you should have access to a computer with `ROS Melodic`.
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
-You will use git to save your work to your [GitLab](http://www.gitlab.com) repository.
-
+You will use git to save your work to your [GitLab](http://www.gitlab.com) repository. 
 
 #### Background Knowledge
 
@@ -87,7 +86,7 @@ to canvas.
 document for CPSC-659 assignments. 
 
 > NOTE: If you are using late days to submit this assignment after the official deadline,
-you should let Sherry and Marynel know about this before the deadline is due! Otherwise, you
+you should let Marynel and Tim know about this before the deadline is due! Otherwise, you
 won't be able to submit your report through Canvas.
 
 #### Evaluation
