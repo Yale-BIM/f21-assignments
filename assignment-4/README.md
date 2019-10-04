@@ -492,7 +492,7 @@ as indicated below. Note that the bim laptops in AKW411 already have the [RealSe
 1. Test that the camera is connected to the laptop over usb and is accessible from your account:
 
     ```bash
-    $ realsense_viewer # and enable the RGB camera to verify that images can be received from the camera
+    $ realsense-viewer # and enable the RGB camera to verify that images can be received from the camera
     ```
 
 2. Install the realsense2_camera package in your catkin workspace:
