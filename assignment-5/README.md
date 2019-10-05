@@ -792,11 +792,12 @@ function of the threshold to better understand if 0.5 is a good value for your c
         plt.show()
     ```
     
-    The script should print to the screen the "Best threshold" (from the set ```python [x/100.0 for x in range(0,100,2)]```) 
-    for predicting faces with your trained model given the ROC values. Once your script is
-    working as desired, commit it to your repository. In addition, add to your report what was the best
-    threshold that you found for your model when you ran the script on the 64x64_data.npz file and the ROC curve that your plot_roc_curve.py script 
-    displayed when running.
+    As indicated above, the script should print to the screen the "Best threshold" (from the set ```python [x/100.0 for x in range(0,100,2)]```) 
+    for predicting faces with your trained model given the ROC values. You can try it by running it with the 64x64_data.npz file and your trained model
+    from III-1. 
+    
+    Once your script is working as desired, commit it to your repository. In addition, add to your report the ROC curve that your script 
+    displayed when running on the 64x64_data.npz file and what was the best threshold found given the TRP and FPR values computer for your model. 
    
 - **III-3.** Complete the make_predictions() function in the 
 `window_detection.py` script within your assignment-5/face_detection directory
