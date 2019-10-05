@@ -335,7 +335,7 @@ the train_and_test_saddle_function.py script.
     
 - **II-2.** Complete the `build_linear_model()` function in
 the train_and_test_saddle_function.py script. This function should implement
-a simple Neural Network model (with one hidden layer) using the [Keras API](https://www.tensorflow.org/guide/keras#functional_api):
+a simple Neural Network model (with one hidden layer) using the [Keras API](https://www.tensorflow.org/guide/keras):
 
     ```python
     input = tf.keras.layers.Input(shape=(num_inputs,), name="inputs")
@@ -347,7 +347,7 @@ a simple Neural Network model (with one hidden layer) using the [Keras API](http
     The function should return the [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model)
     specified above.
 
-    > In general, we suggest that you use [TF's Keras Functional API](https://www.tensorflow.org/guide/keras#functional_api)
+    > In general, we suggest that you use [TF's Keras Functional API](https://www.tensorflow.org/guide/keras/functional)
     to build your model as in the script above.
 
 - **II-3.** Complete the `train_model()` function in
@@ -408,7 +408,7 @@ function should train the network's weights using the [model's fit function](htt
     - **tf.keras.callbacks.ModelCheckpoint:** Callback that saves the model after every epoch (see
     more information [here](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ModelCheckpoint)).
     Because we set "save_best_only = True", the callback would only save the model if the
-    validation loss is smaller than the prior best validation loss.
+    validation loss is smaller than the prior best validation loss.<br>
     
     We suggest that, as a first try, you use the [Adam optimizer](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam)
     when you train neural works with gradient descent. The optimizer tends to work well for many problems. You can read the
