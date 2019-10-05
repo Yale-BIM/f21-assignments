@@ -695,14 +695,13 @@ train your model using the 64x64_data.npz dataset:
     
     - **lr:** learning rate
     - **epochs:** number of epochs to train for
-    - **batch_size:** batch size used for training 
+    - **batch_size:** batch size used for training<br/><br/>
 
     Commit your modified train_face_detection.py
-    script to your repository once you are happy with your model. **Submit your weights.h5 and 
-    normalization_params.npz files to Canvas as part of your assignment.**
+    script to your repository once you are happy with your model. **Submit your best weights.h5 file to Canvas as part of your assignment.**
     
     **NOTE:** The `performance` of your model will be evaluated using the `evaluate_face_detection.py` script
-    within the assignment-3/face_detection directory. The script will be run on a test set (that is not provided
+    within the assignment-5/face_detection directory. The script will be run on a test set (that is not provided
     as part of this assignment) but that you can assume comes from the same image distribution as
     the data that is provided in the 64x64_data.npz file. The expectation is that your model should
     reach at least **90% accuracy** on the (unseen) test set.
