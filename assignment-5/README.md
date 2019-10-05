@@ -792,7 +792,7 @@ function of the threshold to better understand if 0.5 is a good value for your c
         plt.show()
     ```
     
-    As indicated above, the script should print to the screen the "Best threshold" (from the set ```python [x/100.0 for x in range(0,100,2)]```) 
+    As indicated above, the script should print to the screen the "Best threshold" (from the set ```[x/100.0 for x in range(0,100,2)]```) 
     for predicting faces with your trained model given the ROC values. You can try it by running it with the 64x64_data.npz file and your trained model
     from III-1. 
     
