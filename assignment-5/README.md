@@ -473,8 +473,7 @@ Open a new terminal window, activate your virtual environment, and run:
     
     Then, go to the URL that the script provides (e.g., http://localhost:6006) in your favorite
     browser. The `SCALARS` tab of the TensorBoard interface should then show various training curves
-    (e.g., epoch_loss for the loss after every epoch in the training set, and epoch_val_loss for the
-    loss in the validation set). The `GRAPHS` tab of the TensorBoard interface should show a 
+    (e.g., epoch_loss for the loss after every epoch in the training and validation sets). The `GRAPHS` tab of the TensorBoard interface should show a 
     [computation graph](https://www.tensorflow.org/guide/graph_viz) for your simple neural network model.
     
     Make a screenshot of your computation graph and include it in your project report.
