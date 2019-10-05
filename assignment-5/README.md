@@ -729,7 +729,7 @@ train your model using the 64x64_data.npz dataset:
     - **TPR:** The number of correct face predictions over the total number of positive (face) examples
     in the input data.
     - **FPR:** The number of false (or incorrect) face predictions over the total number of negative examples in the
-    input data.
+    input data.<br/><br/>
 
     You should organize the main file of your plot_roc_curve.py script as follows:
     
@@ -776,7 +776,7 @@ train your model using the 64x64_data.npz dataset:
         index = ... # index of the threshold for which (fpr, tpr) get closest to (0,1) in the Euclidean sense
         print "Best threshold was: {} (TPR = {}, FPR = {})".format(thresholds[index], tpr[index], fpr[index])
   
-        # plot the ROC curve
+        # plot the ROC curve with matplotlib (remember to import it as "import matplotlib.pyplot as plt")
         plt.plot(fpr, tpr)
         plt.scatter(fpr[index], tpr[index], s=20, c='r')
         plt.xlabel('False positive rate')
