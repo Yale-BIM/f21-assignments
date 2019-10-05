@@ -866,7 +866,7 @@ As a bonus in this assignment, you can get 2 extra points (to be considered in y
 
 For example, you can change the [face of the robot](https://shutter-ros.readthedocs.io/en/latest/packages/shutter_face.html) or make it speak some word depending on the number of faces in its field of view.
 
-> Note: You should consult with Marynel what you plan to implement as a reaction on the robot to make sure that (a) it is not too hard to make it work, and (b) it is safe for the robot.
+> Note: You should consult with Marynel what you plan to implement as a reaction on the robot to get advice on how to make it work, and ensure that it is safe for the robot.
 
 Your deliverables for this part of the assignment are:
 
