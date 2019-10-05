@@ -516,9 +516,9 @@ model` and train its weights further (e.g., to resume training or for fine-tunin
     sys.exit(0)
     ```
         
-    > Note that the load_model() function above is passed the compile argument as `compile=False`.
+    > Note that the load_model() function above is passed the argument `compile=False`.
     This means that the model should not be compiled after loading, because the train_model() function
-    that you implemented before does this already.
+    that you implemented before did this already.
         
     c. Test your code. Your script should now be able to load a model from a file and continue training
     its weights thereafter:
@@ -528,7 +528,7 @@ model` and train its weights further (e.g., to resume training or for fine-tunin
     ```
     
     The model that you trained before for task II-6 should be stored as best_monkey_weights.h5
-    within the folder corresponding to your training session in assignments-3/function_approximation/logs.
+    within the folder corresponding to your training session in assignments-5/function_approximation/logs.
     You can pass this model as argument to your train_and_test_saddle_function.py to test the new
     functionality that you just implemented.
     
