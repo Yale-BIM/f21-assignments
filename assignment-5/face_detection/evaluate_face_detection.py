@@ -9,12 +9,11 @@ import tensorflow as tf
 
 from train_face_detection import normalize_data_per_row, load_data_from_npz_file
 
-def main(input_file, weights_file, norm_file):
+def main(input_file, weights_file):
     """
     Evaluate the model on the given input data
     :param input_file: npz data
     :param weights_file: h5 file with model definition and weights
-    :param norm_file: normalization params
     """
     # load data
     input, target = load_data_from_npz_file(input_file)
@@ -50,15 +49,12 @@ if __name__ == "__main__":
                         type=str, required=True)
     parser.add_argument("--logs_dir", help="logs directory",
                         type=str, required=True)
-    parser.add_argument("--norm_filename", help="name for the normalization params file",
-                        type=str, default="normalization_params.npz")
     parser.add_argument("--weights_filename", help="name for the weights file",
                         type=str, default="weights.h5")
     args = parser.parse_args()
 
     weights_path = os.path.join(args.logs_dir, args.weights_filename)
-    norm_path = os.path.join(args.logs_dir, args.norm_filename)
-
+    
     # run the main function
-    main(args.input, weights_path, norm_path)
+    main(args.input, weights_path)
     sys.exit(0)
