@@ -97,15 +97,14 @@ You assignment will be evaluated based on the content of your report and your co
 - Report (48 pts)
     * Part II (33 pts): II-6 (10 pts) + II-7 (4 pts) + II-9 (10 pts) + II-10 (5 pts) + II-11 (4 pts)
     * Part III (15 pts): III-2 (3 pts) + III-3 (5 pts) + III-4 (7 pts)
-    * Part IV (0.5 pts extra credit)
 - Code (52 pts)
     * Part I (2 pts)
     * Part II (24 pts): II-1 (4 pts) + II-2 (2 pts) + II-3 (2 pts) + II-4 (4 pts) + II-5 (4 pts) + II-8 (2 pts) + II-8 (6 pts)
     * Part III (26 pts): III-1 (12 pts) + III-2 (4 pts) + III-3 (10 pts)
-    * Part IV (1.5 pts extra credit)
 
-The extra credit is valid both for students taking the undergraduate and graduate version of the course. The extra
-credit (2 pts maximum) will be counted for the final course grade (over 100 pts).
+Note on Part IV of the assignment: Part IV provides extra credit, which is valid for all students (CPSC 459 or 559). The extra
+credit (2 pts) will be counted for the final course grade (over 100 pts) and requires all deliverables of Part IV to be submitted
+as part of the assignment. 
 
 #### Further Reading
 
@@ -875,6 +874,8 @@ Your deliverables for this part of the assignment are:
 repository within the assignment-5 folder.
 2. An explanation in your report of the system that you implemented for the robot, and how it should be run by the course instructors.
 3. A short mp4 video that demonstrates your system reacting to different number of face detections. You can use [HandBrake](https://handbrake.fr/) to make your video small and convert it to mp4. Submit your video through Canvas.
+
+Note that all the deliverables are required to obtain the 2 extra points. Incomplete systems will not receive extra credit.
 
 Once you've finished the assignment, **add the commit SHA** that you would like to be evaluate on to your report.
 
