@@ -28,8 +28,6 @@ def normalize_data_per_row(data):
 
     # sanity checks!
     assert len(data.shape) == 4, "Expected the input data to be a 4D matrix"
-    assert data.shape[1:] == mean.shape, "Data - Mean size mismatch ({} vs {})".format(data.shape[1:], mean.shape)
-    assert data.shape[1:] == stdev.shape, "Data - StDev size mismatch ({} vs {})".format(data.shape[1:], stdev.shape)
 
     # TODO. Complete.
 
