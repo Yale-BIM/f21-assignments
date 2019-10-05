@@ -136,6 +136,7 @@ def main(input_file, weights_file):
                              scales=[50, 100, 150, 200, 250])
 
     print "DETECTIONS:"
+    np.set_printoptions(precision=2, suppress=True)
     print boxes
 
     # visualize the detections
