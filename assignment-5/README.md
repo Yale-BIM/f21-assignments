@@ -594,7 +594,7 @@ classifier.
 
 1. Download a subset of the [Face Detection Dataset and Benchmark](http://vis-www.cs.umass.edu/fddb/) 
 from [this link](https://drive.google.com/open?id=1JIIalRu5WZQ01p-S6mBxzHV8ZMqAJcdH) and place it in 
-the assignment-3/face_detection directory (there is no need to commit the data to your repository).
+the assignment-5/face_detection directory (note that you should not commit the data to your repository).
 
    > The data is provided as a [numpy npz file](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.savez.html) for this assignment. 
    The .npz file format is a zipped archive of files named after the variables they contain. 
