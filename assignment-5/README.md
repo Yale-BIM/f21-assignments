@@ -419,6 +419,8 @@ function should train the network's weights using the [model's fit function](htt
 should output predictions for the given input matrix (test_input) using the `model.predict()` function.
 The official documentation for the predict() function can be found [here](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model#predict).
 
+    > Remember that whatever transformation that you apply to your data at training time, should be applied at test time as well for your model to work in practice.
+
 - **II-5.** Complete the `compute_average_L2_error()` function in the train_and_test_saddle_function.py script.
 The function should compute the average [L2 difference](http://mathworld.wolfram.com/L2-Norm.html) between the ground truth 
 (test_target) and the predicted values (predicted_targets) that are input to the function. The average
