@@ -712,7 +712,7 @@ train your model using the 64x64_data.npz dataset:
 - **III-2.** Make a copy of the evaluate_face_detection.py script and name it `plot_roc_curve.py`:
 
     ```bash
-    (venv) $ cd assignment-3/face_detection
+    (venv) $ cd assignment-5/face_detection
     (venv) $ cp evaluate_face_detection.py plot_roc_curve.py
     ```
     
@@ -723,8 +723,7 @@ train your model using the 64x64_data.npz dataset:
    
     <img src="docs/roc.png" alt="ROC curve"/>
         
-    The curve shows the performance of the model based on the False Positive Rate (FPR) and the
-    True Positive Rate (TPR), which are defined as:
+    The curve shows the performance of the model based on the True Positive Rate (TPR) and False Positive Rate (FPR), which are defined as:
     
     - **TPR:** The number of correct face predictions over the total number of positive (face) examples
     in the input data.
@@ -746,7 +745,7 @@ train your model using the 64x64_data.npz dataset:
         # load data
         input, target = load_data_from_npz_file(input_file)
         N = input.shape[0]
-        ... # load normalization params, normalize the inputs, output predictions on "prob" variable
+        ... # normalize the inputs, output predictions on "eval_out" variable
   
         # generate roc thresholds
         thresholds = [x/100.0 for x in range(0,100,2)]
@@ -758,8 +757,8 @@ train your model using the 64x64_data.npz dataset:
         for t in thresholds:
       
             # turn predicted probabilities to 0-1 values based on the threshold
-            prediction = np.zeros(prob.shape)
-            prediction[prob > t] = 1
+            prediction = np.zeros(eval_out.shape)
+            prediction[eval_out > t] = 1
           
             # compute tpr and fpr based on the predictions and the target values from the dataset     
             # TO-DO. complete
@@ -791,7 +790,7 @@ train your model using the 64x64_data.npz dataset:
     threshold that you found for your model when you ran the script on the 64x64_data.npz file.
    
 - **III-3.** Complete the make_predictions() function in the 
-`window_detection.py` script within your assignment-3/face_detection directory
+`window_detection.py` script within your assignment-5/face_detection directory
 to run your face classifier on a sliding window over an input image. The script should enable you to
 detect multiple faces on the input by sliding a window of various scales. 
 For example, given the following input image from the Yale Computer Science website:
@@ -835,9 +834,8 @@ For example, given the following input image from the Yale Computer Science webs
     
     Test your window_detection.py script using the best threshold for the predicted probabilities
     from part III-2 and the images "cs50_2.jpg" and "shaocrew_0.jpg" 
-    within the assignment-3/docs directory. It is OK if your model makes mistakes, as 
-    long as your code uses the best classification threshold from the ROC
-     curve. Include in your report:
+    within the assignment-5/docs directory. It is OK if your model makes mistakes, as 
+    long as your code uses the best classification threshold from the ROC curve. Include in your report:
      
     - images of your bounding boxes predictions (after non maximum suppression) on "cs50_2.jpg" 
     and "shaocrew_0.jpg". 
@@ -848,9 +846,9 @@ For example, given the following input image from the Yale Computer Science webs
 - **III-4.** Explain in your report how could you change the structure of your neural network
 to detect faces in a more efficient way.
 
-- **III-5. (5pt extra credit)** Create a ROS package named "shutter_face_detection" within the
-assignment 3 directory. Within this package, create a ROS node (Python script) named `detect_faces.py`
-that runs your face classification model over images received through the the topic "/virtual_camera/image_raw". 
+## Part IV. Testing Your Face Classifier in Real-Time
+
+Create a ROS package named "deep_face_detector" within the assignment 5 directory. Within this package, create a ROS node (Python script) named `detect_faces.py` that runs your face classification model over images received through the the topic "/camera/color/image_raw". 
 
     The node should:
     
@@ -859,25 +857,21 @@ that runs your face classification model over images received through the the to
 the input image.
     - get the path to your model's weights/parameters using the [rospy.get_param()](http://wiki.ros.org/rospy/Overview/Parameter%20Server) function,
     so that the path to the files is not hardcoded and can be changed upon node execution.
-
-    **NOTE:** You will need ROS with Ubuntu 16.04 (or 18.04) to test your node. You can use a rosbag,
-    like the one used for tracking in assignment-2, to test your face classifier as it already
-    provides images through the /virtual_camera/image_raw topic. Or you can
-    use [another node](https://gitlab.com/cpsc659-bim/assignments/f18-assignments/snippets/1763147) to
-    load a video with OpenCV and stream its images over ROS through that same topic.
+    - publish through the /detected_face topic
     
     It is OK if your node runs slow. Once your node is working, take a screen shot of an image that was processed with it and
-    add it to a `README.md` file in the assignment-3/shutter_face_detection directory. The README.md should serve
+    add it to a `README.md` file in the assignment-5/shutter_face_detection directory. The README.md should serve
     to document your ROS package. It should briefly explain how your node works and how it should be run.
 
     Commit to your repository all of the package files (package.xml, CMakeLists.txt, your detect_faces.py
     node and any other code needed to run your model). You do not need to add your model's 
-    weights.h5 and normalization_params.npz to the repository, as you are submitting that 
-    already through Canvas (part III-1).
+    weights.h5 to the repository, as you are submitting that already through Canvas (part III-1).
 
-- **III-6. (3pt extra credit)** Run your detect_faces.py node (from part III-5) on images
-received through Shutter's ZED camera. For this part of the assignment, you will have to run your
-code in one of the machines in AKW 410 that are connected to a Jetson TX2 Develoment Kit computer. 
+### Questions / Tasks
+
+- **IV-2.** Run your detect_faces.py node (from part IV-1) on images
+received through Shutter's RealSense camera. For this part of the assignment, you will have to run your
+code in one of the machines in AKW 411. 
 
     Add to your report a picture of one of the images that you processed on the Jetson TX2 Development Kit.
     Also, indicate in your report how long it took for your node to process one image from the ZED camera.
