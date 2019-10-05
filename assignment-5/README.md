@@ -14,6 +14,7 @@ This is the fourth assignment for Yale's CPSC-459/559 Building Interactive Machi
     * [Deliverables](#deliverables)
     * [Evaluation](#evaluation)
     * [Further Reading](#further-reading)
+* [Setup](#setup)
 * [Part I. Set Up TensorFlow Locally](#part-i-set-up-tensorflow-locally)
     * [Questions / Tasks](#questions--tasks)
 * [Part II. Approximating a Non-Linear Function](#part-ii-approximating-a-non-linear-function)
@@ -106,6 +107,25 @@ You assignment will be evaluated based on the content of your report and your co
 - [SqueezeNet](https://arxiv.org/abs/1602.07360) - A small network for image classification
 - [Tiny Darknet](https://pjreddie.com/darknet/tiny-darknet/) - An even smaller network for image classification
 
+
+## Setup
+Before you start implementing or answering questions for this assignment, please update
+your repository to pull the latest changes from the assignments repository and update
+the shutter-ros repository:
+
+```bash
+# update your repository with the latest version of the assignment
+$ cd <path-to-your-repository-in-your-workspace>
+$ git pull upstream master
+
+# update the shutter-ros repository 
+$ roscd shutter_bringup
+$ git pull
+
+# finally, re-build your catkin workspace 
+$ cd <path-to-your-catkin-workspace-root-directory>
+$ catkin_make -DCMAKE_BUILD_TYPE=Release
+```
 
 ## Part I. Set Up TensorFlow Locally
 
@@ -241,7 +261,7 @@ $`z = x^3 - 3xy^2`$. Your code should leverage [TensorFlow's
 Keras API](https://www.tensorflow.org/guide/keras).
 
 To get you started, this assignment provides two files within the 
-`assignment-3/function_approximation` directory:
+`assignment-5/function_approximation` directory:
 
 - *train_and_test_saddle_function.py:* main file that you will complete in this part of the assignment.
 - *saddle_function_utils:* code to generate data and help you visualize results.
@@ -251,7 +271,7 @@ with the `visualize_training_data` option, you should be able to visualize the d
 script generates for you:
 
 ```bash
-$ cd assignment-3/function_approximation
+$ cd assignment-5/function_approximation
 $ ./train_and_test_saddle_function.py --visualize_training_data
 ```
 
