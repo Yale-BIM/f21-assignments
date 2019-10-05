@@ -89,7 +89,7 @@ def visualize_boxes(image, boxes):
     cv2.waitKey(0)
 
 
-def make_predictions(im, model, mean, stdev, scales=[50], stride = 10):
+def make_predictions(im, model, scales=[50], stride = 10):
     """
     Make predictions on the input image
     :param im: input image
@@ -107,12 +107,11 @@ def make_predictions(im, model, mean, stdev, scales=[50], stride = 10):
     return np.empty((0,5))
 
 
-def main(input_file, weights_file, norm_file):
+def main(input_file, weights_file):
     """
     Evaluate the model on the given input data
     :param input_file: npz data
     :param weights_file: h5 file with model definition and weights
-    :param norm_file: normalization params
     """
 
     # load the input image
@@ -130,10 +129,6 @@ def main(input_file, weights_file, norm_file):
         new_h = int(new_w * height / width)
 
     resized_im = cv2.resize(input_image, (new_w, new_h))
-
-    # load normalization params
-    mean, stdev = load_normalization_params(norm_file)
-    print "Loaded normalization parameters from {}".format(norm_file)
 
     # load the model
     model = tf.keras.models.load_model(weights_file)
@@ -157,15 +152,12 @@ if __name__ == "__main__":
                         type=str, required=True)
     parser.add_argument("--logs_dir", help="logs directory",
                         type=str, required=True)
-    parser.add_argument("--norm_filename", help="name for the normalization params file",
-                        type=str, default="normalization_params.npz")
     parser.add_argument("--weights_filename", help="name for the weights file",
                         type=str, default="weights.h5")
     args = parser.parse_args()
 
     weights_path = os.path.join(args.logs_dir, args.weights_filename)
-    norm_path = os.path.join(args.logs_dir, args.norm_filename)
 
     # run the main function
-    main(args.input, weights_path, norm_path)
+    main(args.input, weights_path)
     sys.exit(0)
