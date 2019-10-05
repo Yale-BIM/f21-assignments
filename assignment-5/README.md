@@ -112,7 +112,7 @@ You assignment will be evaluated based on the content of your report and your co
 The first thing that you will need to start working on deep learning is installing TensorFlow in the
 machine that you are using to develop code. Follow the instructions below, which are based on the [official 
 TensorFlow installation page](https://www.tensorflow.org/install/pip?lang=python2), 
-to set up TensorFlow v. 1.11 with Python 2.7.
+to set up TensorFlow v. 2.0.0 with Python 2.7.
 
 1. Check that [pip]() in installed in your machine:
 
@@ -205,21 +205,21 @@ do is create a `requirements.txt` file with all of the dependencies for a projec
 used to install all required Python models with pip.
 
     For this part of the assignment, **create a requirements.txt** file so that you remember what needs
-    to be installed to run your assignment. The file should be placed within the assignment-3 directory
+    to be installed to run your assignment. The file should be placed within the assignment-5 directory
     of your private assignments repository. Below is an example of how the requirements.txt file would 
     look like:
     
     ```text
-    tensorflow==1.11.0
-    opencv-python==3.4.3.18
+    tensorflow==2.0.0
+    opencv-python==4.1.1.26
     matplotlib==2.1.1
     ```
     
     or if you installed `tensorflow-gpu` before,
     
     ```text
-    tensorflow-gpu==1.11.0
-    opencv-python==3.4.3.18
+    tensorflow-gpu==2.0.0
+    opencv-python==4.1.1.26
     matplotlib==2.1.1
     ```
     
