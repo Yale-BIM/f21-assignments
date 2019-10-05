@@ -538,7 +538,7 @@ return a [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/model
 to the build_linear_model() function that you implemented before. The difference between these functions, though, 
 is that build_nonlinear_model()
  should implement a more complex neural network capable of approximating the monkey saddle surface
-with an **average L2 error of 150 of less on the test set**.
+with an **average L2 error of 150 or less on the test set**.
 
     ```python
     def build_nonlinear_model(num_inputs):
@@ -576,7 +576,7 @@ with an **average L2 error of 150 of less on the test set**.
     - The screenshot of the plot after training;
     - what average L2 error did you get on the test set this time;
     - a description of the neural network model that you used to approximate the monkey saddle surface; and
-    - whatever parameters you used for training it (e.g., batch size, learning rate, and number of epochs).
+    - whatever parameters you used for training it (e.g., batch size, learning rate, and number of epochs).<br/><br/>
     
 - **II-10.** Train your nonlinear neural network such that it `overfits` on the training data. 
 
