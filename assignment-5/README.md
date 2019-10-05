@@ -408,7 +408,7 @@ function should train the network's weights using the [model's fit function](htt
     - **tf.keras.callbacks.ModelCheckpoint:** Callback that saves the model after every epoch (see
     more information [here](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ModelCheckpoint)).
     Because we set "save_best_only = True", the callback would only save the model if the
-    validation loss is smaller than the prior best validation loss.<br>
+    validation loss is smaller than the prior best validation loss.<br/><br/>
     
     We suggest that, as a first try, you use the [Adam optimizer](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam)
     when you train neural works with gradient descent. The optimizer tends to work well for many problems. You can read the
@@ -461,7 +461,7 @@ script so that you can easily visualize the predictions made by your model:
     first time with a learning rate of 1e-2 and for 500 epochs. Then, add to your report:
     - the screenshot of the plot that you took;
     - the average L2 error that you got on the testing set after training as indicated; and 
-    - an explanation of why the neural network is performing poorly.<br>
+    - an explanation of why the neural network is performing poorly.<br/><br/>
     
 - **II-7.** Visualize the learning curves and your model using [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard).
 Open a new terminal window, activate your virtual environment, and run:
