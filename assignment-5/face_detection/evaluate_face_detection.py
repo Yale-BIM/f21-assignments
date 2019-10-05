@@ -9,19 +9,6 @@ import tensorflow as tf
 
 from train_face_detection import normalize_data_per_row, load_data_from_npz_file
 
-
-def load_normalization_params(norm_file):
-    """
-    Function to load normalization parameters
-    :param norm_file: file path
-    :return: mean and stdev
-    """
-    norm_data = np.load(norm_file)
-    mean = norm_data['mean']
-    stdev = norm_data['stdev']
-    return mean, stdev
-
-
 def main(input_file, weights_file, norm_file):
     """
     Evaluate the model on the given input data
@@ -37,11 +24,8 @@ def main(input_file, weights_file, norm_file):
                                                                                       target.shape[0])  # sanity check!
     print "Loaded {} testing examples.".format(N)
 
-    # load normalization params
-    mean, stdev = load_normalization_params(norm_file)
-
     # normalize the inputs
-    norm_input = normalize_data_per_row(input, mean, stdev)
+    norm_input = normalize_data_per_row(input)
 
     # load keras model from file
     model = tf.keras.models.load_model(weights_file)
