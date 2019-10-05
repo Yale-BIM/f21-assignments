@@ -4,9 +4,9 @@ There are many ways to train models with Google Cloud, e.g., using a virtual mac
 cloud ML Engine, etc. Here, we recommend that you use a Virtual Machine (VM) as that is the closest
 setup to working with a local machine.
 
-> All the students that are registered to CPSC-659 will receive a $50 credit for Google Cloud
-to use throughout the course (for assignments or their final project). The credit will be associated
-to the student's Yale email. Please try to use the resources judiciously.
+> All the students that are enrolled in CPSC-459/559 will receive a $50 credit for Google Cloud
+to use for assignment 5 or their final project. The credit will be associated
+to the student's Yale email. Students should use the resources judiciously. 
 
 ## WARNING. Make Sure to Stop Your VM Instances!
 
