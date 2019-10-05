@@ -93,8 +93,6 @@ def make_predictions(im, model, scales=[50], stride = 10):
     Make predictions on the input image
     :param im: input image
     :param model: keras model
-    :param mean: mean for input normalization
-    :param stdev: st. dev for input normalization
     :param scales: list of scales for the sliding window in pixels (e.g., [50] corresponds to one window of 50x50 pixels)
     :param stride: stride for the sliding window (in pixels)
     :return: numpy array of Nx5 dimension, where N is the number of detected faces (>=0) and the 5 columns
@@ -134,7 +132,7 @@ def main(input_file, weights_file):
     print "Loaded keras model from {}".format(weights_file)
 
     # make predictions on windows within the image
-    boxes = make_predictions(resized_im, model, mean, stdev,
+    boxes = make_predictions(resized_im, model, 
                              scales=[50, 100, 150, 200, 250])
 
     print "DETECTIONS:"
