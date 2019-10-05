@@ -647,7 +647,7 @@ train_face_detection.py script so that it:
 
    a. Splits the input data into a training and validation set.
    
-   b. Computes normalization parameters for the inputs based on the training data.
+   b. Normalizes the training data such that the pixel values are floats in [0,1] rather than integers in [0,255].
    
    c. Builds a convolutional neural network model with the TensorFlow Keras API to predict 
    whether the input image corresponds to the face of a person or not. The output of the
@@ -658,23 +658,13 @@ train_face_detection.py script so that it:
    These arguments are all defined in the bottom section of the script, when they are
    added to the [ArgumentParser](https://docs.python.org/2/library/argparse.html).
    
-   The script should have saved two main files to disk after finishing training:
+   The script should have saved one file to disk after finishing training:
    
    - **weights.h5:** model parameters. 
    
        > We highly recommend that you use the 
        [tf.keras.callbacks.ModelCheckpoint]() function to generate the best weights.h5 
        file based on validation data, as in Part II of this assignment.
-   
-   - **normalization_params.npz:** npz file with mean and st. dev. for the inputs so that the data
-   can be whitened before passing it to your neural network. 
-   
-       >Assuming that the variables `mean` and
-       `stdev` contain the normalization parameters, then you can generate the normalization_params.npz
-       file with the numpy [savez method](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.savez.html) as follows:
-       ```python
-       np.savez(<output_path>, mean=mean, stdev=stdev)
-       ```
        
    Many different convolutional neural networks have been proposed in the past for image classification. 
    If you are unsure of what model to implement, we suggest that you look at the
@@ -705,14 +695,13 @@ train your model using the 64x64_data.npz dataset:
     
     - **lr:** learning rate
     - **epochs:** number of epochs to train for
-    - **batch_size:** batch size used for training 
+    - **batch_size:** batch size used for training<br/><br/>
 
     Commit your modified train_face_detection.py
-    script to your repository once you are happy with your model. **Submit your weights.h5 and 
-    normalization_params.npz files to Canvas as part of your assignment.**
+    script to your repository once you are happy with your model. **Submit your best weights.h5 file to Canvas as part of your assignment.**
     
     **NOTE:** The `performance` of your model will be evaluated using the `evaluate_face_detection.py` script
-    within the assignment-3/face_detection directory. The script will be run on a test set (that is not provided
+    within the assignment-5/face_detection directory. The script will be run on a test set (that is not provided
     as part of this assignment) but that you can assume comes from the same image distribution as
     the data that is provided in the 64x64_data.npz file. The expectation is that your model should
     reach at least **90% accuracy** on the (unseen) test set.
