@@ -14,6 +14,7 @@ This is the fourth assignment for Yale's CPSC-459/559 Building Interactive Machi
     * [Deliverables](#deliverables)
     * [Evaluation](#evaluation)
     * [Further Reading](#further-reading)
+* [Setup](#setup)
 * [Part I. Set Up TensorFlow Locally](#part-i-set-up-tensorflow-locally)
     * [Questions / Tasks](#questions--tasks)
 * [Part II. Approximating a Non-Linear Function](#part-ii-approximating-a-non-linear-function)
@@ -24,17 +25,16 @@ This is the fourth assignment for Yale's CPSC-459/559 Building Interactive Machi
 
 ## Introduction 
 This assignment will provide you practical experience with deep learning. In particular, you'll become
-familiar with [TensorFlow's Keras API](https://www.tensorflow.org/guide/keras).
+familiar with [TensorFlow's Keras API](https://www.tensorflow.org/api_docs/python/tf/keras).
 
 
 #### System Requirements
-This assignment can all be completed using Python 2.7 in Ubuntu 16.04 (or 18.04). Potentially,
- it can also be completed in OS X or Windows (except for the extra credit). For training neural networks,
-we recommend that you use cloud services if your don't have access to a local GPU.
+This assignment should be completed using Python 2.7 in Ubuntu 18.04. For training neural networks,
+we recommend that you use cloud services if your don't have access to a local GPU. For the last part of the assignment, 
+you should have access to a computer with `ROS Melodic`.
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
-You will use git to save your work to your [GitLab](http://www.gitlab.com) repository.
-
+You will use git to save your work to your [GitLab](http://www.gitlab.com) repository. 
 
 #### Background Knowledge
 
@@ -87,7 +87,7 @@ to canvas.
 document for CPSC-659 assignments. 
 
 > NOTE: If you are using late days to submit this assignment after the official deadline,
-you should let Sherry and Marynel know about this before the deadline is due! Otherwise, you
+you should let Marynel and Tim know about this before the deadline is due! Otherwise, you
 won't be able to submit your report through Canvas.
 
 #### Evaluation
@@ -108,12 +108,31 @@ You assignment will be evaluated based on the content of your report and your co
 - [Tiny Darknet](https://pjreddie.com/darknet/tiny-darknet/) - An even smaller network for image classification
 
 
+## Setup
+Before you start implementing or answering questions for this assignment, please update
+your repository to pull the latest changes from the assignments repository and update
+the shutter-ros repository:
+
+```bash
+# update your repository with the latest version of the assignment
+$ cd <path-to-your-repository-in-your-workspace>
+$ git pull upstream master
+
+# update the shutter-ros repository 
+$ roscd shutter_bringup
+$ git pull
+
+# finally, re-build your catkin workspace 
+$ cd <path-to-your-catkin-workspace-root-directory>
+$ catkin_make -DCMAKE_BUILD_TYPE=Release
+```
+
 ## Part I. Set Up TensorFlow Locally
 
 The first thing that you will need to start working on deep learning is installing TensorFlow in the
 machine that you are using to develop code. Follow the instructions below, which are based on the [official 
 TensorFlow installation page](https://www.tensorflow.org/install/pip?lang=python2), 
-to set up TensorFlow v. 1.11 with Python 2.7.
+to set up TensorFlow v. 2.0.0 with Python 2.7.
 
 1. Check that [pip]() in installed in your machine:
 
@@ -126,8 +145,6 @@ to set up TensorFlow v. 1.11 with Python 2.7.
     ```bash
     sudo apt install python-dev python-pip
     ```
-    
-    > If you are using OS X or Windows, see [the official TensorFlow install instructions](https://www.tensorflow.org/install/pip).
 
 2. Check that [virtualenv](https://virtualenv.pypa.io/en/stable/) is already installed:
 
@@ -138,18 +155,15 @@ to set up TensorFlow v. 1.11 with Python 2.7.
     If virtualenv is NOT installed in your machine, install it:
     
     ```bash
-    sudo pip install -U virtualenv # system-wide install
+    sudo apt install virtualenv
     ```
-    
-    > Again, if you are using OS X or Windows, see [the official TensorFlow install instructions](https://www.tensorflow.org/install/pip).
-
   
 3. Create a [virtual environment](https://realpython.com/python-virtual-environments-a-primer/) 
 named `venv` with virtualenv:
 
     ```bash
-    $ cd assignment-3 # enter this assignments directory within your assignments private repository
-    $ virtualenv -p python2.7 venv
+    $ cd assignment-5 # enter this assignments directory within your assignments private repository
+    $ virtualenv --system-site-packages -p python2.7 venv
     ```
     
 4. Activate your virtual environment:
@@ -175,7 +189,7 @@ named `venv` with virtualenv:
         ```
         
     - If your machine has a GPU with CUDA Compute Capability 3.5 or higher and 
-    you have CUDA 9.0 installed in your system (see [here](https://www.tensorflow.org/install/gpu) for 
+    you have CUDA 10.0 installed in your system (see [here](https://www.tensorflow.org/install/gpu) for 
     more details on setting up CUDA for TF):
     
         ```bash
@@ -188,7 +202,9 @@ named `venv` with virtualenv:
     (venv) $ python -c "import tensorflow as tf; print(tf.__version__)"
     ```
     
-    The command should print "1.11.0".
+    The command should print "2.0.0".
+
+    > If you've installed tensorflow-gpu, you can check that the GPU is being recognized properly by calling the `tf.test.is_gpu_available()` function after importing tensorflow as tf. If you are having trouble installing Tensorflow with GPU support, see the official installation guide [here](https://www.tensorflow.org/install/gpu#ubuntu_1804_cuda_10).
 
 8. Install opencv and matplotlib:
 
@@ -209,21 +225,21 @@ do is create a `requirements.txt` file with all of the dependencies for a projec
 used to install all required Python models with pip.
 
     For this part of the assignment, **create a requirements.txt** file so that you remember what needs
-    to be installed to run your assignment. The file should be placed within the assignment-3 directory
+    to be installed to run your assignment. The file should be placed within the assignment-5 directory
     of your private assignments repository. Below is an example of how the requirements.txt file would 
     look like:
     
     ```text
-    tensorflow==1.11.0
-    opencv-python==3.4.3.18
+    tensorflow==2.0.0
+    opencv-python==4.1.1.26
     matplotlib==2.1.1
     ```
     
     or if you installed `tensorflow-gpu` before,
     
     ```text
-    tensorflow-gpu==1.11.0
-    opencv-python==3.4.3.18
+    tensorflow-gpu==2.0.0
+    opencv-python==4.1.1.26
     matplotlib==2.1.1
     ```
     
@@ -245,7 +261,7 @@ $`z = x^3 - 3xy^2`$. Your code should leverage [TensorFlow's
 Keras API](https://www.tensorflow.org/guide/keras).
 
 To get you started, this assignment provides two files within the 
-`assignment-3/function_approximation` directory:
+`assignment-5/function_approximation` directory:
 
 - *train_and_test_saddle_function.py:* main file that you will complete in this part of the assignment.
 - *saddle_function_utils:* code to generate data and help you visualize results.
@@ -255,7 +271,7 @@ with the `visualize_training_data` option, you should be able to visualize the d
 script generates for you:
 
 ```bash
-$ cd assignment-3/function_approximation
+$ cd assignment-5/function_approximation
 $ ./train_and_test_saddle_function.py --visualize_training_data
 ```
 
@@ -280,7 +296,7 @@ the train_and_test_saddle_function.py script.
         :return: mean and standard deviation per variable as row matrices of dimension [1 x num_variables]
         """
         mean = ...  # numpy array with num_variables elements 
-        stdev = ... # numpy array with num_varianles elements
+        stdev = ... # numpy array with num_variables elements
         return mean, stdev
     ```
     
@@ -314,11 +330,12 @@ the train_and_test_saddle_function.py script.
      
     For example, if an example
     feature is $`x`$, then you want to transform it into $`(x - \mu)/\sigma`$,
-    where $`\sigma`$ corresponds to the standard deviation for that feature.
+    where $`\mu`$ is the expected value for that feature and $`\sigma`$ corresponds to the feature's standard deviation based on
+    the input data.
     
 - **II-2.** Complete the `build_linear_model()` function in
 the train_and_test_saddle_function.py script. This function should implement
-a simple Neural Network model (with one hidden layer) using the [Keras API](https://www.tensorflow.org/guide/keras#functional_api):
+a simple Neural Network model (with one hidden layer) using the [Keras API](https://www.tensorflow.org/guide/keras):
 
     ```python
     input = tf.keras.layers.Input(shape=(num_inputs,), name="inputs")
@@ -330,7 +347,7 @@ a simple Neural Network model (with one hidden layer) using the [Keras API](http
     The function should return the [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model)
     specified above.
 
-    > In general, we suggest that you use [TF's Keras Functional API](https://www.tensorflow.org/guide/keras#functional_api)
+    > In general, we suggest that you use [TF's Keras Functional API](https://www.tensorflow.org/guide/keras/functional)
     to build your model as in the script above.
 
 - **II-3.** Complete the `train_model()` function in
@@ -391,7 +408,7 @@ function should train the network's weights using the [model's fit function](htt
     - **tf.keras.callbacks.ModelCheckpoint:** Callback that saves the model after every epoch (see
     more information [here](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ModelCheckpoint)).
     Because we set "save_best_only = True", the callback would only save the model if the
-    validation loss is smaller than the prior best validation loss.
+    validation loss is smaller than the prior best validation loss.<br/><br/>
     
     We suggest that, as a first try, you use the [Adam optimizer](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam)
     when you train neural works with gradient descent. The optimizer tends to work well for many problems. You can read the
@@ -401,6 +418,8 @@ function should train the network's weights using the [model's fit function](htt
 - **II-4.** Complete the `test_model()` function in the train_and_test_saddle_function.py script. The function
 should output predictions for the given input matrix (test_input) using the `model.predict()` function.
 The official documentation for the predict() function can be found [here](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model#predict).
+
+    > Remember that whatever transformation that you apply to your data at training time, should be applied at test time as well for your model to work in practice.
 
 - **II-5.** Complete the `compute_average_L2_error()` function in the train_and_test_saddle_function.py script.
 The function should compute the average [L2 difference](http://mathworld.wolfram.com/L2-Norm.html) between the ground truth 
@@ -436,26 +455,25 @@ script so that you can easily visualize the predictions made by your model:
     ```    
     
     The optional parameters `lr`, `epochs`, and `batch_size` correspond to the learning rate,
-    number of epochs, and bath size to use at training time.
+    number of epochs, and bath size that are used at training time.
     
     Make a screenshot of the plot that you get after training your simple neural network for the
     first time with a learning rate of 1e-2 and for 500 epochs. Then, add to your report:
     - the screenshot of the plot that you took;
     - the average L2 error that you got on the testing set after training as indicated; and 
-    - an explanation of why the neural network is performing poorly.
+    - an explanation of why the neural network is performing poorly.<br/><br/>
     
 - **II-7.** Visualize the learning curves and your model using [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard).
 Open a new terminal window, activate your virtual environment, and run:
 
     ```bash
-    (venv) $ cd assignment-3 # go to the assignment-3 directory within your private repository
+    (venv) $ cd assignment-5 # go to the assignment-5 directory within your private repository
     (venv) $ tensorboard --logdir function_approximation/logs
     ```
     
     Then, go to the URL that the script provides (e.g., http://localhost:6006) in your favorite
     browser. The `SCALARS` tab of the TensorBoard interface should then show various training curves
-    (e.g., epoch_loss for the loss after every epoch in the training set, and epoch_val_loss for the
-    loss in the validation set). The `GRAPHS` tab of the TensorBoard interface should show a 
+    (e.g., epoch_loss for the loss after every epoch in the training and validation sets). The `GRAPHS` tab of the TensorBoard interface should show a 
     [computation graph](https://www.tensorflow.org/guide/graph_viz) for your simple neural network model.
     
     Make a screenshot of your computation graph and include it in your project report.
@@ -498,9 +516,9 @@ model` and train its weights further (e.g., to resume training or for fine-tunin
     sys.exit(0)
     ```
         
-    > Note that the load_model() function above is passed the compile argument as `compile=False`.
+    > Note that the load_model() function above is passed the argument `compile=False`.
     This means that the model should not be compiled after loading, because the train_model() function
-    that you implemented before does this already.
+    that you implemented before did this already.
         
     c. Test your code. Your script should now be able to load a model from a file and continue training
     its weights thereafter:
@@ -510,7 +528,7 @@ model` and train its weights further (e.g., to resume training or for fine-tunin
     ```
     
     The model that you trained before for task II-6 should be stored as best_monkey_weights.h5
-    within the folder corresponding to your training session in assignments-3/function_approximation/logs.
+    within the folder corresponding to your training session in assignments-5/function_approximation/logs.
     You can pass this model as argument to your train_and_test_saddle_function.py to test the new
     functionality that you just implemented.
     
@@ -520,7 +538,7 @@ return a [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/model
 to the build_linear_model() function that you implemented before. The difference between these functions, though, 
 is that build_nonlinear_model()
  should implement a more complex neural network capable of approximating the monkey saddle surface
-with an **average L2 error of 150 of less on the test set**.
+with an **average L2 error of 150 or less on the test set**.
 
     ```python
     def build_nonlinear_model(num_inputs):
@@ -558,16 +576,16 @@ with an **average L2 error of 150 of less on the test set**.
     - The screenshot of the plot after training;
     - what average L2 error did you get on the test set this time;
     - a description of the neural network model that you used to approximate the monkey saddle surface; and
-    - whatever parameters you used for training it (e.g., batch size, learning rate, and number of epochs).
+    - whatever parameters you used for training it (e.g., batch size, learning rate, and number of epochs).<br/><br/>
     
 - **II-10.** Train your nonlinear neural network such that it `overfits` on the training data. 
 
     After training, include a picture
-    in your report of the plots from TensorBoard corresponding to the `mean absolute error` on the training and validation
+    in your report of the plots from TensorBoard corresponding to the `mean absolute error` (mae) on the training and validation
     sets. Explain how you concluded that your model overfit in the report.
     
 - **II-11.** What happens with the loss per epoch on the training set if you train with a batch size of 1?
-Intuitively, why is the phenomenon (or phenomena) that you observe occurring?
+Explain why does the loss per epoch graph look different than with a bigger batch size (e.g., than with a batch size of 100).
 
 ## Part III. Building a Face Classifier
 
@@ -576,7 +594,7 @@ classifier.
 
 1. Download a subset of the [Face Detection Dataset and Benchmark](http://vis-www.cs.umass.edu/fddb/) 
 from [this link](https://drive.google.com/open?id=1JIIalRu5WZQ01p-S6mBxzHV8ZMqAJcdH) and place it in 
-the assignment-3/face_detection directory (there is no need to commit the data to your repository).
+the assignment-5/face_detection directory (note that you should not commit the data to your repository).
 
    > The data is provided as a [numpy npz file](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.savez.html) for this assignment. 
    The .npz file format is a zipped archive of files named after the variables they contain. 
@@ -586,7 +604,7 @@ the assignment-3/face_detection directory (there is no need to commit the data t
    Check that you can open the data in python and that it has inputs and target values:
    
    ```bash
-   (venv) $ cd assignment-3/face_detection/ # go to the assignment-3/face_detection directory within your private repository
+   (venv) $ cd assignment-5/face_detection/ # go to the assignment-5/face_detection directory within your private repository
    (venv) $ python 
    Python 2.7.15rc1 (default, Apr 15 2018, 21:51:34) 
    [GCC 7.3.0] on linux2
@@ -607,7 +625,7 @@ the assignment-3/face_detection directory (there is no need to commit the data t
    
    <img src="docs/face_example.png" alt="Face example from the dataset"/>
    
-2. Read the `train_face_detection.py` skeleton code in the assignment-3/face_detection directory. 
+2. Read the `train_face_detection.py` skeleton code in the assignment-5/face_detection directory. 
 This code is provided to get you started on building your custom face classifier. You should be able to run the code
 and load the training data with the following command:
 

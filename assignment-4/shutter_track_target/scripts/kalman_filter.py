@@ -79,7 +79,7 @@ class KalmanFilterNode():
 
         # Subscribers
         self.obs_sub = rospy.Subscriber("/observation", Observation, self.obs_callback, queue_size=5)
-        self.im_sub = rospy.Subscriber("/virtual_camera/image_raw", Image, self.im_callback, queue_size=5)
+        self.im_sub = rospy.Subscriber("/camera/color/image_raw", Image, self.im_callback, queue_size=5)
 
         # Main loop
         while not rospy.is_shutdown():

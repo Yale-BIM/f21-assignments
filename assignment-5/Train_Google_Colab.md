@@ -12,7 +12,7 @@ You should have completed the train_and_test_saddle_function.py
 script and pushed it to your private Gitlab repository before training the model as explained below.
 
 1. If you haven't done this already in your local machine, create a SSH key pair for
-Gitlab as in [this tutorial](https://docs.gitlab.com/ee/ssh/). Leave the passphrase empty.
+Gitlab as in [this tutorial](https://docs.gitlab.com/ee/ssh/#generating-a-new-ssh-key-pair). Leave the passphrase empty.
 
 2. Open Google Colab: [https://research.google.com/colaboratory/](https://research.google.com/colaboratory/)
 

@@ -548,7 +548,7 @@ function from the tf2 API with the time of the target's pose, rospy.Time(0), or 
     message when a class instance is initialized and save it as a member of the instance for future use. When the images are then created, you
     would just need to copy the header of the image message into the pre-computed camerainfo_msg, and publish it. While in practice
     organizing the code this way won't make your program in this part of the assignment much faster given the speed of computers today, thinking about ways 
-    to optimize the operation of your ROS nodes so that the same computation is not repeated over an over unnecessarily is important for real-time systems.
+    to optimize the operation of your ROS nodes so that the same computation is not repeated over and over unnecessarily is important for real-time systems.
     
     **e.** Finally, check that your node is publishing CameraInfo messages through the 
     /virtual_camera/camera_info topic with the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) tool.

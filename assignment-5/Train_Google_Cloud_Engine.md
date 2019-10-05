@@ -4,9 +4,9 @@ There are many ways to train models with Google Cloud, e.g., using a virtual mac
 cloud ML Engine, etc. Here, we recommend that you use a Virtual Machine (VM) as that is the closest
 setup to working with a local machine.
 
-> All the students that are registered to CPSC-659 will receive a $50 credit for Google Cloud
-to use throughout the course (for assignments or their final project). The credit will be associated
-to the student's Yale email. Please try to use the resources judiciously.
+> All the students that are enrolled in CPSC-459/559 will receive a $50 credit for Google Cloud
+to use for assignment 5 or their final project. The credit will be associated
+to the student's Yale email. Students should use the resources judiciously. 
 
 ## WARNING. Make Sure to Stop Your VM Instances!
 
@@ -29,7 +29,7 @@ for the course assignments.
 3. Finally, follow the steps in [this tutorial](https://cloud.google.com/compute/docs/quickstart-linux) to create a Virtual Machine. 
 To work on the assignment-3, we suggest that you use the following custom configuration for your machine:
 
-    - **Name:** cpsc659-assignments
+    - **Name:** bim-assignments
     - **Region:** us-east1 (South Carolina)
     - **Zone:** us-east1-c
     - **Machine Type:** 4 vCPU, 16 GB Memory
@@ -48,8 +48,8 @@ To work on the assignment-3, we suggest that you use the following custom config
     
 ## The cpsc659-a3-tensorflow image
 
-You can use the `cpsc659-a3-tensorflow` image in Google Cloud to work on assignment-3 for
-CPSC-659. This boot disk image is already set up with:
+You can use the `cpsc659-a3-tensorflow` image in Google Cloud to work on the course's Assignment 5. 
+This boot disk image is already set up with:
 
 - Tensorflow 1.11
 - CUDA 10
@@ -77,12 +77,12 @@ $ chown <user>:<user> 64x64_data.npz
 ```
 
 > Note that you also don't need to create a virtual environment to work on your
-assignment in the VM. You have sudo accesss and can install any python library in the
+assignment in the VM. You have sudo accesss and can install any Python library that you need in the
 whole system.
 
 ## Working With Your VM in Google Cloud
 
-Once you've created your VM in Google Cloud. You can download your code from Gitlab per usual
+Once you've created your VM in Google Cloud. You can download your code from Gitlab as usual
 and commit back things to your repository as necessary. 
 
 ### TensorBoard 
