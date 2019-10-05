@@ -710,7 +710,12 @@ train your model using the 64x64_data.npz dataset:
     In general, we recommend that you use [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard) 
     to monitor the performance of your model in a validation set as it trains.
     
-- **III-2.** Make a copy of the evaluate_face_detection.py script and name it `plot_roc_curve.py`:
+- **III-2.** The binary accuracy metric that you used before, assumed that a face was found when the output
+probability of your network was greater than 0.5 for a given input. But, is this the best threshold 
+to decide that your network found a face? You will now inspect how accuracy changes as a 
+function of the threshold to better understand if 0.5 is a good value for your classifier.
+
+    To start, make a copy of the evaluate_face_detection.py script and name it `plot_roc_curve.py`:
 
     ```bash
     (venv) $ cd assignment-5/face_detection
