@@ -853,7 +853,7 @@ For example, given the following input image from the Yale Computer Science webs
     what could you do to address these issues in the future.
     
 - **III-4.** Explain in your report how could you change the structure of your neural network
-to detect faces in a more efficient way.
+to detect faces in a more efficient way than with a windowed approach.
 
 ## Part IV. Testing Your Face Classifier in Real-Time
 
