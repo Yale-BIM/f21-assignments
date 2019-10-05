@@ -19,13 +19,11 @@ def load_data_from_npz_file(file_path):
     return data['input'], data['target']
 
 
-def normalize_data_per_row(data, mean, stdev):
+def normalize_data_per_row(data):
     """
     Normalize a give matrix of data (samples must be organized per row)
     :param data: input data
-    :param mean: mean for normalization
-    :param stdev: standard deviation for normalization
-    :return: whitened data, (data - mean) / stdev
+    :return: normalized data with pixel values in [0,1]
     """
 
     # sanity checks!
