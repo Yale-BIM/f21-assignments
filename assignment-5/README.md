@@ -790,7 +790,8 @@ train your model using the 64x64_data.npz dataset:
     The script should print to the screen the "Best threshold" that was found given the ROC values
     for the thresholds ```python [x/100.0 for x in range(0,100,2)]```. Once your script is
     working as desired, commit it to your repository. In addition, add to your report what was the best
-    threshold that you found for your model when you ran the script on the 64x64_data.npz file.
+    threshold that you found for your model when you ran the script on the 64x64_data.npz file and the ROC curve that your plot_roc_curve.py script 
+    displayed when running.
    
 - **III-3.** Complete the make_predictions() function in the 
 `window_detection.py` script within your assignment-5/face_detection directory
