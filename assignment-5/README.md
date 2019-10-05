@@ -746,7 +746,9 @@ train your model using the 64x64_data.npz dataset:
         # load data
         input, target = load_data_from_npz_file(input_file)
         N = input.shape[0]
-        ... # normalize the inputs, output predictions on "eval_out" variable
+        ... # normalize the inputs
+        
+        ... # output model predictions on "prob" variable
   
         # generate roc thresholds
         thresholds = [x/100.0 for x in range(0,100,2)]
@@ -758,8 +760,8 @@ train your model using the 64x64_data.npz dataset:
         for t in thresholds:
       
             # turn predicted probabilities to 0-1 values based on the threshold
-            prediction = np.zeros(eval_out.shape)
-            prediction[eval_out > t] = 1
+            prediction = np.zeros(prob.shape)
+            prediction[prob > t] = 1
           
             # compute tpr and fpr based on the predictions and the target values from the dataset     
             # TO-DO. complete
