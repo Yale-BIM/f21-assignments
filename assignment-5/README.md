@@ -125,8 +125,6 @@ to set up TensorFlow v. 1.11 with Python 2.7.
     ```bash
     sudo apt install python-dev python-pip
     ```
-    
-    > If you are using OS X or Windows, see [the official TensorFlow install instructions](https://www.tensorflow.org/install/pip).
 
 2. Check that [virtualenv](https://virtualenv.pypa.io/en/stable/) is already installed:
 
@@ -137,18 +135,15 @@ to set up TensorFlow v. 1.11 with Python 2.7.
     If virtualenv is NOT installed in your machine, install it:
     
     ```bash
-    sudo pip install -U virtualenv # system-wide install
+    sudo apt install virtualenv
     ```
-    
-    > Again, if you are using OS X or Windows, see [the official TensorFlow install instructions](https://www.tensorflow.org/install/pip).
-
   
 3. Create a [virtual environment](https://realpython.com/python-virtual-environments-a-primer/) 
 named `venv` with virtualenv:
 
     ```bash
-    $ cd assignment-3 # enter this assignments directory within your assignments private repository
-    $ virtualenv -p python2.7 venv
+    $ cd assignment-5 # enter this assignments directory within your assignments private repository
+    $ virtualenv --system-site-packages -p python2.7 venv
     ```
     
 4. Activate your virtual environment:
@@ -174,7 +169,7 @@ named `venv` with virtualenv:
         ```
         
     - If your machine has a GPU with CUDA Compute Capability 3.5 or higher and 
-    you have CUDA 9.0 installed in your system (see [here](https://www.tensorflow.org/install/gpu) for 
+    you have CUDA 10.0 installed in your system (see [here](https://www.tensorflow.org/install/gpu) for 
     more details on setting up CUDA for TF):
     
         ```bash
@@ -187,7 +182,7 @@ named `venv` with virtualenv:
     (venv) $ python -c "import tensorflow as tf; print(tf.__version__)"
     ```
     
-    The command should print "1.11.0".
+    The command should print "2.0.0".
 
 8. Install opencv and matplotlib:
 
