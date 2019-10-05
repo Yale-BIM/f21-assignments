@@ -9,7 +9,6 @@ import cv2
 import copy
 
 from train_face_detection import normalize_data_per_row
-from evaluate_face_detection import load_normalization_params
 
 
 def non_max_suppression(boxes, overlapThresh):
