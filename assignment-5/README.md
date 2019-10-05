@@ -381,7 +381,7 @@ function should train the network's weights using the [model's fit function](htt
         # compile the model: define optimizer, loss, and metrics
         model.compile(optimizer=tf.keras.optimizers.Adam(lr=learning_rate),
                      loss='mse',
-                     metrics=['mae'])
+                     metrics=['mse'])
     
         # tensorboard callback
         logs_dir = 'logs/log_{}'.format(datetime.datetime.now().strftime("%m-%d-%Y-%H-%M"))
