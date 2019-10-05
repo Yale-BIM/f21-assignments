@@ -870,7 +870,7 @@ For example, you can change the [face of the robot](https://shutter-ros.readthed
 
 Your deliverables for this part of the assignment are:
 
-1. All relevant code (ROS packages, configuration files, etc.), which should be included in your
+1. All relevant code (ROS packages, configuration files, etc.), which should be committed and pushed to your
 repository within the assignment-5 folder.
 2. An explanation in your report of the system that you implemented for the robot, and how it should be run by the course instructors.
 3. A short mp4 video that demonstrates your system reacting to different number of face detections. You can use [HandBrake](https://handbrake.fr/) to make your video small and convert it to mp4. Submit your video through Canvas.
