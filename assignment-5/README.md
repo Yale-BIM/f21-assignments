@@ -604,7 +604,7 @@ the assignment-5/face_detection directory (note that you should not commit the d
    Check that you can open the data in python and that it has inputs and target values:
    
    ```bash
-   (venv) $ cd assignment-3/face_detection/ # go to the assignment-3/face_detection directory within your private repository
+   (venv) $ cd assignment-5/face_detection/ # go to the assignment-5/face_detection directory within your private repository
    (venv) $ python 
    Python 2.7.15rc1 (default, Apr 15 2018, 21:51:34) 
    [GCC 7.3.0] on linux2
