@@ -455,13 +455,13 @@ script so that you can easily visualize the predictions made by your model:
     ```    
     
     The optional parameters `lr`, `epochs`, and `batch_size` correspond to the learning rate,
-    number of epochs, and bath size to use at training time.
+    number of epochs, and bath size that are used at training time.
     
     Make a screenshot of the plot that you get after training your simple neural network for the
     first time with a learning rate of 1e-2 and for 500 epochs. Then, add to your report:
     - the screenshot of the plot that you took;
     - the average L2 error that you got on the testing set after training as indicated; and 
-    - an explanation of why the neural network is performing poorly.
+    - an explanation of why the neural network is performing poorly.<br>
     
 - **II-7.** Visualize the learning curves and your model using [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard).
 Open a new terminal window, activate your virtual environment, and run:
