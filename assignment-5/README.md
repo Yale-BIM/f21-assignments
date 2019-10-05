@@ -863,9 +863,9 @@ to detect faces in a more efficient way than with a windowed approach.
 
 As a bonus in this assignment, you can get 2 extra points (to be considered in your final course grade) if you implement a ROS node that:
 - runs your face classifier taking as input the image from Shutter's RealSense camera, and 
-- makes the robot react in some way to detected faces. 
+- makes the robot react in different ways depending on the number of detected faces. 
 
-For example, you can change the [face of the robot](https://shutter-ros.readthedocs.io/en/latest/packages/shutter_face.html) based on whether a human face is detected in front of it, or make it speak some word depending on the number of faces in its field of view.
+For example, you can change the [face of the robot](https://shutter-ros.readthedocs.io/en/latest/packages/shutter_face.html) or make it speak some word depending on the number of faces in its field of view.
 
 > Note: You should consult with Marynel what you plan to implement as a reaction on the robot to make sure that (a) it is not too hard to make it work, and (b) it is safe for the robot.
 
@@ -874,7 +874,7 @@ Your deliverables for this part of the assignment are:
 1. All relevant code (ROS packages, configuration files, etc.), which should be included in your
 repository within the assignment-5 folder.
 2. An explanation in your report of the system that you implemented for the robot, and how it should be run by the course instructors.
-3. A short mp4 video that demonstrates your system reacting to face detections. You can use [HandBrake](https://handbrake.fr/) to make your video small and convert it to mp4. Submit your video through Canvas.
+3. A short mp4 video that demonstrates your system reacting to different number of face detections. You can use [HandBrake](https://handbrake.fr/) to make your video small and convert it to mp4. Submit your video through Canvas.
 
 Once you've finished the assignment, **add the commit SHA** that you would like to be evaluate on to your report.
 
