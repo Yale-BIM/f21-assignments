@@ -658,23 +658,13 @@ train_face_detection.py script so that it:
    These arguments are all defined in the bottom section of the script, when they are
    added to the [ArgumentParser](https://docs.python.org/2/library/argparse.html).
    
-   The script should have saved two main files to disk after finishing training:
+   The script should have saved one file to disk after finishing training:
    
    - **weights.h5:** model parameters. 
    
        > We highly recommend that you use the 
        [tf.keras.callbacks.ModelCheckpoint]() function to generate the best weights.h5 
        file based on validation data, as in Part II of this assignment.
-   
-   - **normalization_params.npz:** npz file with mean and st. dev. for the inputs so that the data
-   can be whitened before passing it to your neural network. 
-   
-       >Assuming that the variables `mean` and
-       `stdev` contain the normalization parameters, then you can generate the normalization_params.npz
-       file with the numpy [savez method](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.savez.html) as follows:
-       ```python
-       np.savez(<output_path>, mean=mean, stdev=stdev)
-       ```
        
    Many different convolutional neural networks have been proposed in the past for image classification. 
    If you are unsure of what model to implement, we suggest that you look at the
