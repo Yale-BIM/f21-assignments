@@ -704,7 +704,8 @@ train your model using the 64x64_data.npz dataset:
     within the assignment-5/face_detection directory. The script will be run on a test set (that is not provided
     as part of this assignment) but that you can assume comes from the same image distribution as
     the data that is provided in the 64x64_data.npz file. The expectation is that your model should
-    reach at least **90% accuracy** on the (unseen) test set.
+    reach at least **0.9 (or 90%) binary accuracy** on the (unseen) test set. You can read more about
+    binary accuracy in the [official TensorFlow documentation](https://www.tensorflow.org/api_docs/python/tf/keras/metrics/binary_accuracy).
     
     In general, we recommend that you use [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard) 
     to monitor the performance of your model in a validation set as it trains.
