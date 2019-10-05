@@ -625,7 +625,7 @@ the assignment-5/face_detection directory (note that you should not commit the d
    
    <img src="docs/face_example.png" alt="Face example from the dataset"/>
    
-2. Read the `train_face_detection.py` skeleton code in the assignment-3/face_detection directory. 
+2. Read the `train_face_detection.py` skeleton code in the assignment-5/face_detection directory. 
 This code is provided to get you started on building your custom face classifier. You should be able to run the code
 and load the training data with the following command:
 
