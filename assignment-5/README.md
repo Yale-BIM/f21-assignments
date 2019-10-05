@@ -94,19 +94,23 @@ won't be able to submit your report through Canvas.
 
 You assignment will be evaluated based on the content of your report and your code.
 
-- Report (48 pts + 3 extra pts)
+- Report (48 pts)
     * Part II (33 pts): II-6 (10 pts) + II-7 (4 pts) + II-9 (10 pts) + II-10 (5 pts) + II-11 (4 pts)
-    * Part III (15 pts + 3 extra pts): III-2 (3 pts) + III-3 (5 pts) + III-4 (7 pts) + III-6 (3 pts extra credit)
-- Code (52 pts + 5 extra pts)
+    * Part III (15 pts): III-2 (3 pts) + III-3 (5 pts) + III-4 (7 pts)
+    * Part IV (0.5 pts extra credit)
+- Code (52 pts)
     * Part I (2 pts)
     * Part II (24 pts): II-1 (4 pts) + II-2 (2 pts) + II-3 (2 pts) + II-4 (4 pts) + II-5 (4 pts) + II-8 (2 pts) + II-8 (6 pts)
-    * Part III (26 pts + 5 extra pts): III-1 (12 pts) + III-2 (4 pts) + III-3 (10 pts) + III-5 (5 pts extra credit)
+    * Part III (26 pts): III-1 (12 pts) + III-2 (4 pts) + III-3 (10 pts)
+    * Part IV (1.5 pts extra credit)
+
+The extra credit is valid both for students taking the undergraduate and graduate version of the course. The extra
+credit (2 pts maximum) will be counted for the final course grade (over 100 pts).
 
 #### Further Reading
 
 - [SqueezeNet](https://arxiv.org/abs/1602.07360) - A small network for image classification
 - [Tiny Darknet](https://pjreddie.com/darknet/tiny-darknet/) - An even smaller network for image classification
-
 
 ## Setup
 Before you start implementing or answering questions for this assignment, please update
@@ -855,40 +859,21 @@ For example, given the following input image from the Yale Computer Science webs
 - **III-4.** Explain in your report how could you change the structure of your neural network
 to detect faces in a more efficient way than with a windowed approach.
 
-## Part IV. Testing Your Face Classifier in Real-Time
+## Part IV. Testing Your Face Classifier in Real-Time (3 extra points)
 
-Create a ROS package named "deep_face_detector" within the assignment 5 directory. Within this package, create a ROS node (Python script) named `detect_faces.py` that runs your face classification model over images received through the the topic "/camera/color/image_raw". 
+As a bonus in this assignment, you can get 2 extra points (to be considered in your final course grade) if you implement a ROS node that:
+- runs your face classifier taking as input the image from Shutter's RealSense camera, and 
+- makes the robot react in some way to detected faces. 
+For example, you can change the [face of the robot](https://shutter-ros.readthedocs.io/en/latest/) based on whether a human face is detected in front of it, or make it speak some word depending on the number of faces in its field of view.
 
-    The node should:
-    
-    - detect faces using the sliding window approach of part III-3 of this assignment.
-    - display the result visually by rendering the detection boxes (after non maximum suppression) on 
-the input image.
-    - get the path to your model's weights/parameters using the [rospy.get_param()](http://wiki.ros.org/rospy/Overview/Parameter%20Server) function,
-    so that the path to the files is not hardcoded and can be changed upon node execution.
-    - publish through the /detected_face topic
-    
-    It is OK if your node runs slow. Once your node is working, take a screen shot of an image that was processed with it and
-    add it to a `README.md` file in the assignment-5/shutter_face_detection directory. The README.md should serve
-    to document your ROS package. It should briefly explain how your node works and how it should be run.
+> Note: You should consult with Marynel or Tim what you plan to implement as a reaction on the robot to make sure that (a) it is not too hard to make it work, and (b) it is safe for the robot.
 
-    Commit to your repository all of the package files (package.xml, CMakeLists.txt, your detect_faces.py
-    node and any other code needed to run your model). You do not need to add your model's 
-    weights.h5 to the repository, as you are submitting that already through Canvas (part III-1).
+Your deliverables for this part of the assignment are:
 
-### Questions / Tasks
-
-- **IV-2.** Run your detect_faces.py node (from part IV-1) on images
-received through Shutter's RealSense camera. For this part of the assignment, you will have to run your
-code in one of the machines in AKW 411. 
-
-    Add to your report a picture of one of the images that you processed on the Jetson TX2 Development Kit.
-    Also, indicate in your report how long it took for your node to process one image from the ZED camera.
-
-    > You will need to set up an appointment on a weekday (during regular working hours)
-    with Sherry or Marynel before the assignment is due to complete this last extra credit. 
-    They will explain to you how to stream images from the ZED camera to the Jetson computer.
-    
+1. All relevant code (ROS packages, configuration files, etc.), which should be included in your
+repository within the assignment-5 folder.
+2. An explanation in your report of the system that you implemented for the robot, and how it should be run by the course instructors.
+3. A short mp4 video that demonstrates your system reacting to face detections. You can use [HandBrake](https://handbrake.fr/) to make your video small and convert it to mp4. Submit your video through Canvas.
 
 Once you've finished the assignment, **add the commit SHA** that you would like to be evaluate on to your report.
 
