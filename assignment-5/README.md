@@ -296,7 +296,7 @@ the train_and_test_saddle_function.py script.
         :return: mean and standard deviation per variable as row matrices of dimension [1 x num_variables]
         """
         mean = ...  # numpy array with num_variables elements 
-        stdev = ... # numpy array with num_varianles elements
+        stdev = ... # numpy array with num_variables elements
         return mean, stdev
     ```
     
@@ -330,7 +330,8 @@ the train_and_test_saddle_function.py script.
      
     For example, if an example
     feature is $`x`$, then you want to transform it into $`(x - \mu)/\sigma`$,
-    where $`\sigma`$ corresponds to the standard deviation for that feature.
+    where $`\mu`$ is the expected value for that feature and $`\sigma`$ corresponds to the feature's standard deviation based on
+    the input data.
     
 - **II-2.** Complete the `build_linear_model()` function in
 the train_and_test_saddle_function.py script. This function should implement
