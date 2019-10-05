@@ -647,7 +647,7 @@ train_face_detection.py script so that it:
 
    a. Splits the input data into a training and validation set.
    
-   b. Computes normalization parameters for the inputs based on the training data.
+   b. Normalizes the training data such that the pixel values are floats in [0,1] rather than integers in [0,255].
    
    c. Builds a convolutional neural network model with the TensorFlow Keras API to predict 
    whether the input image corresponds to the face of a person or not. The output of the
