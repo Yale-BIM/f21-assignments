@@ -585,7 +585,7 @@ with an **average L2 error of 150 or less on the test set**.
     sets. Explain how you concluded that your model overfit in the report.
     
 - **II-11.** What happens with the loss per epoch on the training set if you train with a batch size of 1?
-Intuitively, why is the phenomenon (or phenomena) that you observe occurring?
+Explain why does the loss per epoch graph look different than with a bigger batch size (e.g., than with a batch size of 100).
 
 ## Part III. Building a Face Classifier
 
