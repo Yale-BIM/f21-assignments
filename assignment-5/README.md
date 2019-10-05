@@ -381,7 +381,7 @@ function should train the network's weights using the [model's fit function](htt
         # compile the model: define optimizer, loss, and metrics
         model.compile(optimizer=tf.keras.optimizers.Adam(lr=learning_rate),
                      loss='mse',
-                     metrics=['mse'])
+                     metrics=['mae'])
     
         # tensorboard callback
         logs_dir = 'logs/log_{}'.format(datetime.datetime.now().strftime("%m-%d-%Y-%H-%M"))
@@ -581,7 +581,7 @@ with an **average L2 error of 150 or less on the test set**.
 - **II-10.** Train your nonlinear neural network such that it `overfits` on the training data. 
 
     After training, include a picture
-    in your report of the plots from TensorBoard corresponding to the `mean absolute error` on the training and validation
+    in your report of the plots from TensorBoard corresponding to the `mean absolute error` (mae) on the training and validation
     sets. Explain how you concluded that your model overfit in the report.
     
 - **II-11.** What happens with the loss per epoch on the training set if you train with a batch size of 1?
