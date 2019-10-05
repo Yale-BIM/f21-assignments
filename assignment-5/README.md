@@ -184,6 +184,8 @@ named `venv` with virtualenv:
     
     The command should print "2.0.0".
 
+    > If you've installed tensorflow-gpu, you can check that the GPU is being recognized properly by calling the `tf.test.is_gpu_available()` function after importing tensorflow as tf. If you are having trouble installing Tensorflow with GPU support, see the official installation guide [here](https://www.tensorflow.org/install/gpu#ubuntu_1804_cuda_10).
+
 8. Install opencv and matplotlib:
 
     ```bash
