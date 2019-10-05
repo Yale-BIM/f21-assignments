@@ -467,7 +467,7 @@ script so that you can easily visualize the predictions made by your model:
 Open a new terminal window, activate your virtual environment, and run:
 
     ```bash
-    (venv) $ cd assignment-3 # go to the assignment-3 directory within your private repository
+    (venv) $ cd assignment-5 # go to the assignment-5 directory within your private repository
     (venv) $ tensorboard --logdir function_approximation/logs
     ```
     
