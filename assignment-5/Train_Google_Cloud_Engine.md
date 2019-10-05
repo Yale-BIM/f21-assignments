@@ -29,7 +29,7 @@ for the course assignments.
 3. Finally, follow the steps in [this tutorial](https://cloud.google.com/compute/docs/quickstart-linux) to create a Virtual Machine. 
 To work on the assignment-3, we suggest that you use the following custom configuration for your machine:
 
-    - **Name:** cpsc659-assignments
+    - **Name:** bim-assignments
     - **Region:** us-east1 (South Carolina)
     - **Zone:** us-east1-c
     - **Machine Type:** 4 vCPU, 16 GB Memory
