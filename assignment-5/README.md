@@ -859,7 +859,7 @@ For example, given the following input image from the Yale Computer Science webs
 - **III-4.** Explain in your report how could you change the structure of your neural network
 to detect faces in a more efficient way than with a windowed approach.
 
-## Part IV. Testing Your Face Classifier in Real-Time (3 extra points)
+## Part IV. Testing Your Face Classifier in Real-Time (2 extra points on final course grade)
 
 As a bonus in this assignment, you can get 2 extra points (to be considered in your final course grade) if you implement a ROS node that:
 - runs your face classifier taking as input the image from Shutter's RealSense camera, and 
