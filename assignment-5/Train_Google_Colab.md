@@ -16,7 +16,7 @@ Gitlab as in [this tutorial](https://docs.gitlab.com/ee/ssh/#generating-a-new-ss
 
 2. Open Google Colab: [https://research.google.com/colaboratory/](https://research.google.com/colaboratory/)
 
-3. Upload the assignment-3/pynb/cpsc659_PII_git_example.ipynb notebook to Google Colab by selecting
+3. Upload the assignment-5/pynb/bim_git_example.ipynb notebook to Google Colab by selecting
 File -> Upload Notebook.
 
     <img src="docs/colab_upload_python_notebook.png"/>
