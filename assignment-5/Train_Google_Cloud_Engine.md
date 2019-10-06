@@ -36,7 +36,7 @@ To work on the assignment-3, we suggest that you use the following custom config
     - **Generation:** First (Skylake CPU)
     - **Machine Type:** n1-standard-4 (4 vCPU, 15 GB Memory)
     - **GPU Type:** 1 x NVidia Tesla K80
-    - **Book disk:** cpsc659-a3-tensorflow (should be found under the project "CPSC659-A3" in the "Custom Images" options)
+    - **Book disk:** bim-a5 (should be found under the project "bim-a5" in the "Custom Images" options)
     - **Boot disk type:** SSD persistent disk (30 GB)
     - **Firewall**: Select "Allow HTTP traffic" and "Allow HTTPS traffic"
 
@@ -50,10 +50,10 @@ To work on the assignment-3, we suggest that you use the following custom config
     
 ## The cpsc659-a3-tensorflow image
 
-You can use the `cpsc659-a3-tensorflow` image in Google Cloud to work on the course's Assignment 5. 
+You can use the `bim-a5` image in Google Cloud to work on Assignment 5. 
 This boot disk image is already set up with:
 
-- Tensorflow 1.11
+- Tensorflow 2.0.0
 - CUDA 10
 - Opencv
 - Matplotlib
@@ -78,9 +78,6 @@ $ sudo mv /home/marynel_vazquez/64x64_data.npz .
 $ chown <user>:<user> 64x64_data.npz 
 ```
 
-> Note that you also don't need to create a virtual environment to work on your
-assignment in the VM. You have sudo accesss and can install any Python library that you need in the
-whole system.
 
 ## Working With Your VM in Google Cloud
 
