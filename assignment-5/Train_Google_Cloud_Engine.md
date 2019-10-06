@@ -29,16 +29,18 @@ for the course assignments.
 3. Finally, follow the steps in [this tutorial](https://cloud.google.com/compute/docs/quickstart-linux) to create a Virtual Machine. 
 To work on the assignment-3, we suggest that you use the following custom configuration for your machine:
 
-    - **Name:** bim-assignments
-    - **Region:** us-east1 (South Carolina)
-    - **Zone:** us-east1-c
-    - **Machine Type:** 4 vCPU, 16 GB Memory
-    - **GPUs:** 1 x NVidia Tesla K80
+    - **Name:** bim-a5
+    - **Region:** us-central1 (Iowa)
+    - **Zone:** us-central1-c
+    - **Machine Family:** General Purpose
+    - **Generation:** First (Skylake CPU)
+    - **Machine Type:** n1-standard-4 (4 vCPU, 15 GB Memory)
+    - **GPU Type:** 1 x NVidia Tesla K80
     - **Book disk:** cpsc659-a3-tensorflow (should be found under the project "CPSC659-A3" in the "Custom Images" options)
-    - **Boot disk type:** Standard persistent disk (30 GB)
+    - **Boot disk type:** SSD persistent disk (30 GB)
     - **Firewall**: Select "Allow HTTP traffic" and "Allow HTTPS traffic"
 
-    > The cost for such a virtual machine should be around $0.50 per hour.
+    > The cost for such a virtual machine should be around $0.455 per hour.
     
 4. You should then be able to connect to your virtual machine over SSH on your browser.
 
