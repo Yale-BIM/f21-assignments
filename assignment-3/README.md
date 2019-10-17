@@ -77,7 +77,7 @@ You assignment will be evaluated based on the content of your report and your co
     - Part IV (8 pts): IV-1 (8 pts)
     - Part V (10 pts): V-1 (5 pts) + V-3 (1 pts) + V-4a (1 pts) + V-4e (3 pts)
 - Code (55 pts)
-    * Part II-1 (15 pts) 
+    * Part II-1 (10 pts) 
     * Part III (38 pts): Virtual Camera and III-2 (20 pts) + III-3 (8 pts) + III-5 (2 pts) + III-6d (4 pts) + III-6e (2 pts) + III-6f (2 pts) 
     * Part V (10 pts): V-2 (3 pts) + V-3 (5 pts) + V-4d (2 pts) 
 
