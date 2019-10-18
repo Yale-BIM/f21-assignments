@@ -72,12 +72,12 @@ You assignment will be evaluated based on the content of your report and your co
 
 - Report / Other Deliverables (45 pts)
     - Part I (20 pts): I-1 (5 pts) + I-2 (2 pts) + I-3 (5 pts) + I-4 (8 pts)
-    - Part II (10 pts): II-2 (5 pts) 
+    - Part II (5 pts): II-2 (5 pts) 
     - Part III (22 pts): III-1 (5pts), III-4 (5 pts) + III-6a (3 pts) + III-6b (2 pts) + III-6c (4 pts) + III-6g (3 pts)
     - Part IV (10 pts): IV-1 (10 pts)
     - Part V (10 pts): V-1 (5 pts) + V-3 (1 pts) + V-4a (1 pts) + V-4e (3 pts)
 - Code (55 pts)
-    * Part II-1 (10 pts) 
+    * Part II-1 (15 pts) 
     * Part III (38 pts): Virtual Camera and III-2 (20 pts) + III-3 (8 pts) + III-5 (2 pts) + III-6d (4 pts) + III-6e (2 pts) + III-6f (2 pts) 
     * Part V (10 pts): V-2 (3 pts) + V-3 (5 pts) + V-4d (2 pts) 
 
