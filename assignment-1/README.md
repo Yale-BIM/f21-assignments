@@ -43,25 +43,27 @@ You assignment will be evaluated based on the content of your repository and you
 
 ## Part I. Set up Gitlab Repository
 
-1. Create an account in [GitLab](https://gitlab.com/users/sign_in#register-pane). Associate the account to your Yale email. 
+1. Create a free account in [GitHub](https://github.com/) using your Yale email. 
 
-	> If you already have a GitLab account associated to your Yale email, you can skip this step.
+	> If you already have a GitHub account associated to your Yale email, you can skip this step.
 
-2. Create an empty, `private project` in GitLab called *cpsc459-assignments* or  *cpsc559-assignments* based on whether you are fulfilling the undergrad (CPSC 459) or graduate (CPSC 559) requirements for the course. The GiLab project will be used to store your assignment's code.
+2. Setup SSH keys for your GitHub account so that you can download and commit your code without having to provide your password all the time. Follow [these instructions](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+to generate a new SSH key in your machine and [upload your public key](https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account) to GitHub.
 
-2. Open the project page, copy the HTTPS URL, and paste it in a terminal to `clone your project` into your machine. For example:
+	> If you already setup an SSH key for your GitHub account, you can skip this step.
+
+3. Create an empty, `private repository` in GitHub called *cpsc459-assignments* or  *cpsc559-assignments* based on whether you are fulfilling the undergrad (CPSC 459) or graduate (CPSC 559) requirements for the course. The GiLab project will be used to store your assignment's code.
+
+4. Open the repository page, copy the SSH URL, and paste it in a terminal to `clone your project` into your machine. For example:
 
     ```bash
     # Example
-    $ git clone https://gitlab.com/<username>/cpsc459-assignments.git <username>-cpsc459-assignments
+    $ git clone https://github.com/<username>/cpsc459-assignments.git <username>-cpsc459-assignments
     ```
 
-	where \<username\> is your GitLab username.
+	where \<username\> is your GitHub username.
 
-	> Alternatively, you can clone your project with SSH if you've [setup SSK Keys](https://docs.gitlab.com/ee/ssh/). Cloning with SSH has the advantage that you don't have to type your password for every future commit.
-
-
-3. Change your directory to your cloned repository.
+5. Change your directory to your cloned repository.
 
     ```bash
     # Example
@@ -73,13 +75,13 @@ You assignment will be evaluated based on the content of your repository and you
     (...)
     ```
 
-4. Create a `new remote called upstream` that points to the 
-[assignments repository](https://gitlab.com/cpsc459-bim/assignments/f19-assignments.git)
+6. Create a `new remote called upstream` that points to the 
+[assignments repository](https://github.com/Yale-BIM/f20-assignments.git)
 which contains the set of assignments and starter code.
 
     ```bash
     # Example
-    $ git remote add upstream https://gitlab.com/cpsc459-bim/assignments/f19-assignments.git
+    $ git remote add upstream https://github.com/Yale-BIM/f20-assignments.git
     ```
 
     > NOTE: A Git remote is a pair of alias and URL (link) to another Git repository.
@@ -89,7 +91,7 @@ which contains the set of assignments and starter code.
     > repository located at https://gitlab.com/cpsc459-bim/assignments/f19-assignments.git
     > and name it as upstream.
     
-5. Get the latest `commits from upstream` and merge them into your own local repository.
+7. Get the latest `commits from upstream` and merge them into your own local repository.
 
     ```bash
     # Example
@@ -98,21 +100,21 @@ which contains the set of assignments and starter code.
     
 	You should then have separate folders for each of the assignments in your repository.
 
-6. Synchronize commits from your local repository to your online Git repository in gitlab.com.
+8. Synchronize commits from your local repository to your remote Git repository in github.com.
 
     ```bash
     # Example
     $ git push origin master
     ```
 
-7. Verify that the commits from upstream are now present in your own GitLab project by checking the project's page in GitLab.
+7. Verify that the commits from upstream are now present in your own GitHub project by checking the project's page in GitLab.
 
 8. Ensure that your repository in GitLab has visibility set to **private** in 
-Settings -> General -> Permissions.
+Settings -> Manage Access.
 
-9. Add the course instructor and the T.F. as members of your GitLab repository in Settings -> Members. In the role permission field, choose the [Guest role](https://docs.gitlab.com/ee/user/permissions.html) for the instructor and the T.F.
+9. Add the course instructor and the T.F. as members of your GitLab repository in Settings -> Manage Access. In the Manage access section, choose "Invite a collaborator", and add the Yale usernames for the instructor and teaching fellow(s).
 
-	The instructor's GitLab username is `marynelv`. The teaching fellow's is `TimAdamson21`.
+	> The instructor's email is `marynel.vazquez _at_ yale.edu`, and the teaching fellows' emails are `debasmita.ghose _at_ yale.edu` and `sydney.thompson _at_ yale.edu` with `_at_` meaning `@`.
     
 ### Tasks
 
@@ -186,14 +188,14 @@ e.g., using [Overleaf](https://www.overleaf.com/edu/yale#!overview).
 
 ### Tasks
 
-1. Edit the title of the README.md at the top-level of your repository to add your name. That is, change "# CPSC-459/559 Fall 2019. Assignments" to "# CPSC-459/559 Fall 2019. Assignments - \<name\>" where \<name\> is your full name. Commit the file and push to your remote GitLab repository.
+1. Edit the title of the README.md at the top-level of your repository to add your name. That is, change "# CPSC-459/559 Fall 2020. Assignments" to "# CPSC-459/559 Fall 2020. Assignments - \<name\>" where \<name\> is your full name. Commit the file and push to your remote GitHub repository.
 
-	> After pushing, you should be able to see the change in the README.md within the GitLab web interface.
+	> After pushing, you should be able to see the change in the README.md within the GitHub web interface.
 
 2. Create a pdf report for this assignment using this [template](https://www.overleaf.com/latex/templates/assignment-template-for-yale-cpsc-459-559/nbysxxygbysk) in Overleaf.
 	
 	* Change the header of the template to add your name, id, email. Update the assignment number (i.e., change "X" for "1").
-	* Once you've pushed your assignment to your own repository in GitLab, add the commit hash of your repository to the report (e.g., add it below the title).
+	* Once you've pushed your assignment to your own repository in GitHub, add the commit hash of your repository to the report (e.g., add it below the title).
 	* Export the report to `pdf` and upload to Canvas.
 
 
