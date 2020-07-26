@@ -483,7 +483,7 @@ previously in this assignment in the README.md file.
 ## Part V. Real-Time Filtering
 
 You will now run your filter on images captured by the Shutter robot. To this end, you should
-find a **uniform color, but non-red object** to track in this part of the assignment. Then, use
+find a **uniform color, but non-blue object** to track in this part of the assignment. Then, use
 one of the laptops in AKW411 to run your code and track the object.
 
 To get started, setup the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros) in your repository
