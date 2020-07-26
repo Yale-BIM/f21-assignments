@@ -533,7 +533,7 @@ your tracker is following it.
 
 ## Part VI
 
-Part VI of the assignment is only for students taking CPSC-559 (graduate version of the course). See the tasks/questions in the [ExtraQuestions-CPSC559.md](assignment-4/ExtraQuestions-CPSC559.md) document.
+Part VI of the assignment is only for students taking CPSC-559 (graduate version of the course). See the tasks/questions in the [ExtraQuestions-CPSC559.md](ExtraQuestions-CPSC559.md) document.
 
 Once you've finished the assignment, **add the commit SHA** that you would like to be evaluate on to your report.
 
