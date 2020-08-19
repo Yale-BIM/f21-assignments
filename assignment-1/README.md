@@ -86,9 +86,9 @@ which contains the set of assignments and starter code.
 
     > NOTE: A Git remote is a pair of alias and URL (link) to another Git repository.
     > By default, your freshly cloned local repository will have a remote named 
-    > origin that points to your online Git repository in GitLab. 
+    > origin that points to your online Git repository in GitHub. 
     > The example above tells your local Git repository to track another remote Git 
-    > repository located at https://gitlab.com/cpsc459-bim/assignments/f19-assignments.git
+    > repository located at https://github.com/Yale-BIM/f20-assignments.git
     > and name it as upstream.
     
 7. Get the latest `commits from upstream` and merge them into your own local repository.
@@ -107,18 +107,18 @@ which contains the set of assignments and starter code.
     $ git push origin master
     ```
 
-7. Verify that the commits from upstream are now present in your own GitHub project by checking the project's page in GitLab.
+7. Verify that the commits from upstream are now present in your own GitHub project by checking the project's page in GitHub.
 
-8. Ensure that your repository in GitLab has visibility set to **private** in 
+8. Ensure that your repository in GitHub has visibility set to **private** in 
 Settings -> Manage Access.
 
-9. Add the course instructor and the T.F. as members of your GitLab repository in Settings -> Manage Access. In the Manage access section, choose "Invite a collaborator", and add the Yale usernames for the instructor and teaching fellow(s).
+9. Add the course instructor and the T.F. as members of your GitHub repository in Settings -> Manage Access. In the Manage access section, choose "Invite a collaborator", and add the Yale usernames for the instructor and teaching fellow(s).
 
 	> The instructor's email is `marynel.vazquez _at_ yale.edu`, and the teaching fellows' emails are `debasmita.ghose _at_ yale.edu` and `sydney.thompson _at_ yale.edu` with `_at_` meaning `@`.
     
 ### Tasks
 
-1. Once you've finished setting up your repository, fill and submit this [Repository Record Form](	https://forms.gle/5sHvKwZJFfeopTqa8). Your response will be used to check that your repository exists, has been setup properly, and that the instructor and T.F. have access to it.
+1. Once you've finished setting up your repository, fill and submit this [Repository Record Form](https://forms.gle/JXQa7KvcGSRNz47y5). Your response will be used to check that your repository exists, has been setup properly, and that the instructor and T.F.(s) have access to it.
 
 ## Working on your assignment
 
@@ -133,17 +133,17 @@ Once your repository is setup, you will need to follow the steps below when work
 	
 	If a merge conflict happens, always use latest
 	commit from upstream. Your work is safe as long you commit and push 
-	your code to GitLab regularly. 
+	your code to GitHub regularly. 
 	
 	Once you have resolved any merge conflicts and all commits from
 	upstream are merged successfully to your own master branch, push it 
-	back to your own GitLab repository:
+	back to your own GitHub repository:
 	
 	```bash
 	$ git push origin master
 	```
 	
-	> NOTE: Please consult your T.F. if you have difficulty resolving merge conflict(s).
+	> NOTE: Please consult your T.F.(s) if you have difficulty resolving merge conflict(s).
 
 3. Read the README.md file inside the assignments folder for the instructions on what you have to do.
 4. Do the assignment. 
@@ -154,14 +154,14 @@ Once your repository is setup, you will need to follow the steps below when work
     $ git add <list-of-files-to-be-saved>
     $ git commit -m "<commit-message>"
     ```
-6. Push your work to GitLab to keep a remote copy.
+6. Push your work to GitHub to keep a remote copy.
 
     ```bash
     # Example
     $ git push
     ```
 
-    > Your final version of the assignment should be pushed to GitLab before the deadline!
+    > Your final version of the assignment should be pushed to GitHub before the deadline!
     
 7. Write the corresponding assignment report, 
 e.g., using [Overleaf](https://www.overleaf.com/edu/yale#!overview). 
@@ -177,9 +177,7 @@ e.g., using [Overleaf](https://www.overleaf.com/edu/yale#!overview).
     i. Gather the specific `commit hash` (SHA) of the version of the code in GitLab
     that you would like to be evaluated on. Add it to the top of your report. 
     
-    > To see all of your commits, go to your repository's GitLab page and open 
-    Repository -> Commits. Copy the commit SHA for the final version of the code
-    and paste it in the report.
+    > To see all of your commits, go to your repository's GitHub page and click where it says "X commits" (right below the download "Code" button in the interface). Copy the commit SHA for the final version of the code and paste it in the report.
         
     ii. Generate a `pdf of your LaTeX report`.
     
