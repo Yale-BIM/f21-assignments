@@ -30,7 +30,7 @@ System (ROS)](http://www.ros.org/) and [git](https://git-scm.com/).
 #### System Requirements
 You should have access to a computer with `Ubuntu 18.04` and `ROS Melodic` to complete the homework. 
 The instructions below assume that you are using a [bash shell](https://www.gnu.org/software/bash/) 
-to do the assignment, and that have installed the *desktop-full* Melodic version of ROS 
+to do the assignment, and that you have installed the *desktop-full* Melodic version of ROS 
 using `apt-get` as in this guide: 
 [http://wiki.ros.org/melodic/Installation/Ubuntu](http://wiki.ros.org/melodic/Installation/Ubuntu).
 
@@ -83,7 +83,7 @@ found in [https://answers.ros.org/questions/](https://answers.ros.org/questions/
 
 ## Part I - Set up your workspace to work with Shutter
 
-*Catkin* is the build system for ROS. To understand what it is for and why it exists, 
+*Catkin* is the official build system for ROS. To understand what it is for and why it exists, 
 read sections 1, 2 and 4 of Catkin's conceptual overview document: 
 [http://wiki.ros.org/catkin/conceptual_overview](http://wiki.ros.org/catkin/conceptual_overview).
 
@@ -148,6 +148,7 @@ in your home directory. Follow the steps in this tutorial:
     launch
     package.xml
     README.md
+    (...)
     ```
     
     > Each ROS package must have its own folder. This means that there cannot be
@@ -189,7 +190,7 @@ You will need sudo access to complete this step.
     Sourcing this file will `overlay` the install space onto your environment. 
     
     > Overlaying refers to building and using a ROS package from source on top of an existing version
-    of that same package (e.g., installed to the system in /opt/ros/melodic). For more information
+    of that same package (e.g., installed at the system level in /opt/ros/melodic). For more information
     on overlaying, read [this tutorial](http://wiki.ros.org/catkin/Tutorials/workspace_overlaying).
     
     > Add ```source ~/catkin_ws/devel/setup.bash``` at the end of your `.bashrc` file
@@ -232,7 +233,7 @@ of nodes and programs that are pre-requisites of a ROS-based system.
 with [roslaunch](http://wiki.ros.org/roslaunch).
 
     ```bash
-    $ roslaunch shutter_bringup shutter.launch simulation:=true 
+    $ roslaunch shutter_bringup shutter_sim.launch 
     ```
 
     > The term *bring up* is often used in ROS to denote the process of starting 
@@ -247,7 +248,6 @@ with [roslaunch](http://wiki.ros.org/roslaunch).
     to the [ROS Parameter Server](http://wiki.ros.org/roscpp/Overview/Parameter%20Server).
     The model has information about the the joints of the robot 
     and its sensors, including specific properties and relative placement. 
-    The shutter face renderer will also run and open.
     
     > The ROS Parameter Server is a shared, multi-variate dictionary that is accessible via network APIs. 
     Nodes use this server to store and retrieve parameters at runtime. As it is not designed for 
@@ -255,7 +255,7 @@ with [roslaunch](http://wiki.ros.org/roslaunch).
     It is meant to be globally viewable so that tools can easily inspect the configuration state of 
     the system and modify if necessary. 
     
-    The shutter.launch script runs three [ROS nodes](http://wiki.ros.org/Nodes) as three 
+    The shutter_sim.launch script runs three [ROS nodes](http://wiki.ros.org/Nodes) as three 
     independent processes:
     
     1. */arbotix*: robot driver from the [arbotix_python ROS package](https://github.com/marynelv/arbotix_ros).
