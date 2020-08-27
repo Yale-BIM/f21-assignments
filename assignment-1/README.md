@@ -32,14 +32,11 @@ If you do not have much experience working with a Linux shell, please read this
 * **Code:** You are expected to push code for this assignment to your
 GitLab repository as indicated in Part I.
 
-* **Report:** You are expected to submit a pdf to Canvas with answers to the questions/tasks in Part II of the assignment. This report should have the specific commit SHA of the version of the code that you would like to be evaluated on. 
-
 ### Evaluation
 
-You assignment will be evaluated based on the content of your repository and your report:
+You assignment will be evaluated based on the content of your repository:
 
-* Part I (1 pt)
-* Part II (1 pt)
+* Part I (2 pt)
 
 ## Part I. Set up Gitlab Repository
 
@@ -118,7 +115,7 @@ Settings -> Manage Access.
     
 ### Tasks
 
-1. Once you've finished setting up your repository, fill and submit this [Repository Record Form](https://forms.gle/JXQa7KvcGSRNz47y5). Your response will be used to check that your repository exists, has been setup properly, and that the instructor and T.F.(s) have access to it.
+1. Once you've finished setting up your repository, fill and submit this [Repository Record Form](https://forms.gle/atTsChCUDzm32wWdA). Your response will be used to check that your repository exists, has been setup properly, and that the instructor and T.F.(s) have access to it.
 
 ## Working on your assignment
 
@@ -163,38 +160,27 @@ Once your repository is setup, you will need to follow the steps below when work
 
     > Your final version of the assignment should be pushed to GitHub before the deadline!
     
-7. Write the corresponding assignment report, 
-e.g., using [Overleaf](https://www.overleaf.com/edu/yale#!overview). 
-
-    > A LaTeX template is provided below to help you get
-    started with your assignment reports. Feel free to edit this template and
-    modify it to suit your needs for this.
+7. Write the corresponding assignment report if one needs to be submitted.
     
 8. Repeat steps 3-6 as many times as necessary while you work on the assignment.
 
 9. When you are ready to submit your assignment,
     
     i. Gather the specific `commit hash` (SHA) of the version of the code in GitLab
-    that you would like to be evaluated on. Add it to the top of your report. 
+    that you would like to be evaluated on and add it to the top of your report if a report is requested for the assignment. 
     
     > To see all of your commits, go to your repository's GitHub page and click where it says "X commits" (right below the download "Code" button in the interface). Copy the commit SHA for the final version of the code and paste it in the report.
-        
-    ii. Generate a `pdf of your LaTeX report`.
     
-    iii. Submit the report (with the commit SHA) as a pdf to [Canvas](https://yale.instructure.com/courses/51663). If the assignment
-    asks for other documents, submit them to Canvas as wel.
+    ii. Submit the report (with the commit SHA) as a pdf to [Canvas](https://yale.instructure.com/courses/51663). If the assignment
+    asks for other documents, submit them to Canvas as well.
+
+    > Most assignments will appear twice in Canvas: once for the submission of the report, once for the submission of code. The report and any other extra file that is requested should be submitted to the Report assignment; your code in GitHub should be submitted to the Code assignment. Assignment 1 only has a Code assignment in Canvas.
 
 ### Tasks
 
 1. Edit the title of the README.md at the top-level of your repository to add your name. That is, change "# CPSC-459/559 Fall 2020. Assignments" to "# CPSC-459/559 Fall 2020. Assignments - \<name\>" where \<name\> is your full name. Commit the file and push to your remote GitHub repository.
 
 	> After pushing, you should be able to see the change in the README.md within the GitHub web interface.
-
-2. Create a pdf report for this assignment using this [template](https://www.overleaf.com/latex/templates/assignment-template-for-yale-cpsc-459-559/nbysxxygbysk) in Overleaf.
-	
-	* Change the header of the template to add your name, id, email. Update the assignment number (i.e., change "X" for "1").
-	* Once you've pushed your assignment to your own repository in GitHub, add the commit hash of your repository to the report (e.g., add it below the title).
-	* Export the report to `pdf` and upload to Canvas.
 
 
 	
