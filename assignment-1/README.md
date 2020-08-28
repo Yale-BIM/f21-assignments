@@ -36,7 +36,7 @@ GitLab repository as indicated in Part I.
 
 You assignment will be evaluated based on the content of your repository:
 
-* Part I (2 pt)
+* Part I (2 pt): 1 pt for setting up your GitHub repository, and 1 pt for updating the README.md file.
 
 ## Part I. Set up Gitlab Repository
 
@@ -182,7 +182,13 @@ Once your repository is setup, you will need to follow the steps below when work
 
 	> After pushing, you should be able to see the change in the README.md within the GitHub web interface.
 
+2. Submit your code to [Gradescope](https://www.gradescope.com/) using your school credentials. Note that you can also access Gradescope via Canvas (see the Assignment 1 page). 
 
+	a. Create a new submission for Assignment 1 in Gradescope. Select your GitHub repository (you may need to provide Gradescope access to your GitHub account before being able to select your repository)
+
+	b. Check that the public tests for this assignment complete successfully. If you see errors come up in Gradescope, please check your repository. 
+
+Note that this assignment only has public tests to familiarize you with the process of submitting code through Gradescope, but others might have private tests. Private tests are tests for which you won't get access to until after the submission date. Also, note that this assignment does not ask you to submit a report as part of the deliverables, but the other assignments will. In the future, you will have to submit twice through Gradescope: once to submit your code, which will also run public tests to verify that your code is in a minimum state to be evaluated; and a second time to submit your report.
 	
 	
 
