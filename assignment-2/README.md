@@ -35,7 +35,7 @@ using `apt-get` as in this guide:
 [http://wiki.ros.org/melodic/Installation/Ubuntu](http://wiki.ros.org/melodic/Installation/Ubuntu).
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
-You will use git to save your work to your [GitLab](http://www.gitlab.com) repository, as explained in 
+You will use git to save your work to your [GitHub](http://www.github.com) repository, as explained in 
 [Assignment 1](../assignment-1).
 
 #### Background Knowledge
@@ -51,13 +51,11 @@ At the bare minimum, you should be familiar with the commands `cd`, `ls`, `rm`, 
 - **Report:** You are expected to submit a pdf to Canvas with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of the version of the code
-that you would like to be evaluated on. Though not mandatory, it is recommended that you generate the report pdf 
-with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this 
-[assignment template](https://www.overleaf.com/latex/templates/assignment-template-for-yale-cpsc-459-559/nbysxxygbysk) 
-in [LaTeX](https://www.latex-project.org/).
+that you would like to be evaluated on. The report is a PDF form which is available [here](https://drive.google.com/file/d/1q8nBtjtUPkEglAuNDQ9SNCGl38t_Ty5d/view?usp=sharing). 
+
 
 - **Code:** You are also expected to push code for this assignment to your 
-[GitLab](http://www.gitlab.com) repository as in [Assignment 1](../assignment-1). 
+[GitHub](http://www.github.com) repository as in [Assignment 1](../assignment-1). 
 
 #### Evaluation
 
@@ -207,7 +205,6 @@ and answer the following questions in your assignment report:
 
 - **I-1.** What other directory was automatically created in ~/catkin_ws when you executed 
 `catkin_make` and what is this directory for?
-
 - **I-2.** The command `catkin_make` should have generated 3 types of setup files (setup.bash,
 setup.sh, setup.zsh). What is the difference between these setup files?
 
