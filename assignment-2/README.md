@@ -51,7 +51,7 @@ At the bare minimum, you should be familiar with the commands `cd`, `ls`, `rm`, 
 - **Report:** You are expected to submit a pdf to Canvas with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of the version of the code
-that you would like to be evaluated on. The report is a PDF form which is available [here](https://drive.google.com/file/d/1q8nBtjtUPkEglAuNDQ9SNCGl38t_Ty5d/view?usp=sharing). 
+that you would like to be evaluated on. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/1q8nBtjtUPkEglAuNDQ9SNCGl38t_Ty5d/view?usp=sharing). Use the latest version of [Adobe Acrobat Reader](https://get.adobe.com/reader/) to fill this PDF. You are expected to fill out answers in the form of text or images as indicated by the fields in the PDF in the space provided for each answer. 
 
 
 - **Code:** You are also expected to push code for this assignment to your 
