@@ -9,7 +9,7 @@ This is the first assignment for Yale's CPSC 459/559 Building Interactive Machin
     * [Background Knowledge](#background-knowledge)
     * [Deliverables](#deliverables)
     * [Evaluation](#evaluation)
-  * [Part I\. Set up Gitlab Repository](#part-i-set-up-gitlab-repository)
+  * [Part I\. Set up Github Repository](#part-i-set-up-github-repository)
     * [Tasks](#tasks)
   * [Working on your assignment](#working-on-your-assignment)
     * [Tasks](#tasks-1)
@@ -30,7 +30,7 @@ If you do not have much experience working with a Linux shell, please read this
 ### Deliverables
 
 * **Code:** You are expected to push code for this assignment to your
-GitLab repository as indicated in Part I.
+GitHub repository as indicated in Part I.
 
 ### Evaluation
 
@@ -38,7 +38,7 @@ You assignment will be evaluated based on the content of your repository:
 
 * Part I (2 pt): 1 pt for setting up your GitHub repository, and 1 pt for updating the README.md file.
 
-## Part I. Set up Gitlab Repository
+## Part I. Set up GitHub Repository
 
 1. Create a free account in [GitHub](https://github.com/) using your Yale email. 
 
@@ -166,7 +166,7 @@ Once your repository is setup, you will need to follow the steps below when work
 
 9. When you are ready to submit your assignment,
     
-    i. Gather the specific `commit hash` (SHA) of the version of the code in GitLab
+    i. Gather the specific `commit hash` (SHA) of the version of the code in GitHub
     that you would like to be evaluated on and add it to the top of your report if a report is requested for the assignment. 
     
     > To see all of your commits, go to your repository's GitHub page and click where it says "X commits" (right below the download "Code" button in the interface). Copy the commit SHA for the final version of the code and paste it in the report.
