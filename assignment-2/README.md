@@ -620,7 +620,7 @@ and run it again.
     > You can leave roscore and all other nodes running while you edit your code.
     
 9. Save your work by adding and committing your node to your local repository and 
-pushing your code to GitLab.
+pushing your code to GitHub.
 
     ```bash
     # add files to your repository to track their changes over time
@@ -630,17 +630,17 @@ pushing your code to GitLab.
     # commit changes
     $ git commit -m "<some useful log message>"
 
-    # push changes to your master branch in GitLab
+    # push changes to your master branch in GitHub
     $ git push origin master
     ```
     
-    > Continously committing your work and pushing to Gitlab will ensure that your
+    > Continously committing your work and pushing to GitHub will ensure that your
     code is backed up and readily accessible at any time in the future.
     
 ### Questions / Tasks
 
 - **V-Q1.** Add a README.md file in 
-[GitLab flavored markdown](https://docs.gitlab.com/ee/user/markdown.html) format to your 
+[GitHub flavored markdown](https://github.github.com/gfm/) format to your 
 shutter_poses package. This file should explain how the switch_poses.py node works. What does it do? What topics does it subscribe to? What does it publish?
 
     > Documenting ROS packages and nodes is good practice!
@@ -659,6 +659,6 @@ to demonstrate the execution of the switch_poses.py node in your documentation.
     GitLab when your README.md file is rendered on the web. 
 
      > More information on including images 
-     in GitLab's markdown can be found [here](https://docs.gitlab.com/ee/user/markdown.html#images).
+     in GitHub's markdown can be found [here](https://github.github.com/gfm/#images).
 
 
