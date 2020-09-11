@@ -1,0 +1,8 @@
+<launch>
+  <!-- run robot simulation -->
+  <include file="$(find shutter_bringup)/launch/shutter_sim.launch"/>
+  <!-- run student's code -->
+  <node name="switch_poses" pkg="shutter_poses" type="switch_poses.py"/>
+  <!-- run tests -->
+  <test test-name="public_pose_switcher" pkg="shutter_poses_tests" type="test_pose_switcher_public.py"/>
+</launch>

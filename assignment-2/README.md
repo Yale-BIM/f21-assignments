@@ -639,6 +639,27 @@ pushing your code to GitHub.
     > Continously committing your work and pushing to GitHub will ensure that your
     code is backed up and readily accessible at any time in the future.
     
+#### Running Public Tests on Your Code
+    
+This assignment provides you two public tests that you can run on your code to verify basic functionality.
+The tests are written with [rostest](wiki.ros.org/rostest/), an integration test suite for ROS. 
+We will be using both the provided public tests and a set of private tests to evaluate your code. 
+It is important that you verify that your code works with the public tests before you submit. To run the tests, stop
+all your running ROS nodes and then execute:
+
+    ```bash
+    rosrun shutter_poses_tests test_pose_switcher_public.launch
+    ```
+    
+If you would like additional information on the tests to be printed on the terminal as they run, 
+include the `--text` flag:
+   ```bash
+   rosrun --text shutter_poses_tests test_pose_switcher_public.launch
+   ```
+
+If the tests are failing, you could add additional logging to your node for debugging purposes. 
+To log messages, use `rospy.loginfo('message')` in your switch_poses.py node.
+    
 ### Questions / Tasks
 
 - **V-Q1.** Add a README.md file in 
