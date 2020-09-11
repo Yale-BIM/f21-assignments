@@ -648,13 +648,13 @@ It is important that you verify that your code works with the public tests befor
 all your running ROS nodes and then execute:
 
     ```bash
-    rosrun shutter_poses_tests test_pose_switcher_public.launch
+    rostest shutter_poses_tests test_pose_switcher_public.launch
     ```
     
 If you would like additional information on the tests to be printed on the terminal as they run, 
 include the `--text` flag:
    ```bash
-   rosrun --text shutter_poses_tests test_pose_switcher_public.launch
+   rostest --text shutter_poses_tests test_pose_switcher_public.launch
    ```
 
 If the tests are failing, you could add additional logging to your node for debugging purposes. 
