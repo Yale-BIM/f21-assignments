@@ -646,7 +646,6 @@ The tests are written with [rostest](wiki.ros.org/rostest/), an integration test
 We will be using both the provided public tests and a set of private tests to evaluate your code. 
 It is important that you verify that your code works with the public tests before you submit. To run the tests, stop
 all your running ROS nodes and then execute:
-
     ```bash
     rostest shutter_poses_tests test_pose_switcher_public.launch
     ```
