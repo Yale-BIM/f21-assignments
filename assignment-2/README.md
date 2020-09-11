@@ -670,7 +670,7 @@ Once you are done with the questions above, commit your code to GitHub, and subm
 code to the `Assignment2-Code` assignment in Gradescope. Check that the public tests for this assignment complete successfully. 
 If you see errors come up in Gradescope, please check your repository. 
 
-Lastly, submit your assignment report for this assignment to the `Assignment2-Report` assignment in Gradescope.
+Lastly, submit your assignment report to the `Assignment2-Report` assignment in Gradescope.
 The report should be provided in pdf format using the [template](https://drive.google.com/file/d/1q8nBtjtUPkEglAuNDQ9SNCGl38t_Ty5d/view?usp=sharing) 
 indicated at the beginning of the assignment.
 
