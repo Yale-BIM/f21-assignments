@@ -551,7 +551,7 @@ directory of your git repository.
 3. Customize your package by editing the package.xml file that was created by catkin_create_pkg 
 in your package. Add a better description of the package and author information.
 
-4. Create a python node in your new package. Name the node "test_poses.py" and save it
+4. Create a python node in your new package. Name the node "switch_poses.py" and save it
 in the scripts folder of your package.
 
     ```bash
