@@ -48,11 +48,14 @@ At the bare minimum, you should be familiar with the commands `cd`, `ls`, `rm`, 
 
 #### Deliverables
 
-- **Report:** You are expected to submit a pdf to Canvas with answers to the questions/tasks at 
+- **Report:** You are expected to submit a pdf to Gradescope with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
-to understand and/or run your code, as well as the specific commit SHA of the version of the code
-that you would like to be evaluated on. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/1q8nBtjtUPkEglAuNDQ9SNCGl38t_Ty5d/view?usp=sharing). Use the latest version of [Adobe Acrobat Reader](https://get.adobe.com/reader/) to fill this PDF. You are expected to fill out answers in the form of text or images as indicated by the fields in the PDF in the space provided for each answer. 
+to understand and/or run your code, as well as the specific commit SHA of your final version of 
+the code for this assignment. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/1q8nBtjtUPkEglAuNDQ9SNCGl38t_Ty5d/view?usp=sharing). 
 
+    Use the latest version of [Adobe Acrobat Reader](https://get.adobe.com/reader/) to fill this PDF. 
+    You are expected to fill out answers in the form of text or images as indicated by the fields in the PDF
+    for each answer. 
 
 - **Code:** You are also expected to push code for this assignment to your 
 [GitHub](http://www.github.com) repository as in [Assignment 1](../assignment-1). 
@@ -61,14 +64,13 @@ that you would like to be evaluated on. The report is a fillable PDF which is av
 
 You assignment will be evaluated over 100pts, based on the content of your report and your code:
 
-- Report (70 pts)
+- Report (62 pts)
     * Part I (10 pts): I-Q1 (5 pts) + I-Q2 (5 pts)
     * Part II (22 pts): II-Q1 (6 pts) + II-Q2 (3 pts) + II-Q3 (3 pts) + II-Q4 (3 pts) + II-Q5 (3 pts) + II-Q6 (1 pts) + II-Q7 (3 pts)     
     * Part III (8 pts): III-Q1 (4 pts) + III-Q2 (4 pts)
     * Part IV (22 pts): IV-Q1 (4 pts) + IV-Q2 (3 pts) + IV-Q3 (5 pts) + IV-Q4 (5 pts) + IV-Q5 (5 pts)
-    * Part V (8 pts): V-Q1 (4 pts) + V-Q3(4 pts)
-- Code (30 pts)
-    * Part v (30 pts)
+- Code (38 pts)
+    * Part V (38 pts): V-Q1 (4 pts) + V-Q2 (30 pts) + V-Q3(4 pts)
 
 
 #### Further Reading and Tutorials 
@@ -247,7 +249,7 @@ with [roslaunch](http://wiki.ros.org/roslaunch).
     and its sensors, including specific properties and relative placement. 
     
     > The ROS Parameter Server is a shared, multi-variate dictionary that is accessible via network APIs. 
-    Nodes use this server to store and retrieve parameters at runtime. As it is not designed for 
+    Nodes use this server to store and retrieve parameters at runtime. Because it is not designed for 
     high-performance, it is best used for static, non-binary data such as configuration parameters. 
     It is meant to be globally viewable so that tools can easily inspect the configuration state of 
     the system and modify if necessary. 
@@ -275,8 +277,8 @@ exchange information between nodes.
     $ rosrun rqt_graph rqt_graph
     ```
     
-    Uncheck the "Debug" option under "Hide" in rqt_graph,
-    and select "Nodes/Topics(all)" to visualize all of the nodes that are sharing information
+    Uncheck the "Group" options (e.g., "Namespaces" and "Actions") in rqt_graph, uncheck the "Debug" option 
+    under "Hide", and select "Nodes/Topics(all)" to visualize all of the nodes that are sharing information
     in the graph. You should see a total of 5 `ROS nodes` (displayed as ellipses) in the graph: /arbotix, 
     /robot_state_publisher, /motor_stopper, /rqt_gui_py_node_XXXX, and /rosout. 
     
@@ -399,7 +401,7 @@ then see a simplified model of the robot in rviz, as in the figure below.
     The information in the /tf topic is updated by the /robot_state_publisher node based
     on the messages that /arbotix publishes to the /joint_states topic.
     
-    > As indicated in the user guide, you can zoom in, pan, and rotate the view of the 
+    > As indicated in the rviz user guide, you can zoom in, pan, and rotate the view of the 
     robot in rviz with your mouse.
     
     
@@ -428,7 +430,7 @@ in your report.
     
 Shutter's body has 5 key links ("base_link", "shoulder_link", "biceps_link", 
 "forearm_link", and "wrist_link") and 4 revolute [joints](http://wiki.ros.org/urdf/XML/joint). The joints are implemented in the real
-robot with [dynamixel MX-64M and MX-28M motors](http://www.robotis.us/dynamixel/). These motors count with
+robot with [dynamixel MX-64M and MX-28M motors](http://www.robotis.us/dynamixel/). These motors have 
 magnetic encoders that provide the arbotix driver an estimate of their current position. 
  
 Each joint in the robot connects two links:
@@ -560,7 +562,7 @@ in the scripts folder of your package.
     ```
     
     You should now have a new empty file named "switch_poses.py" in the 
-    <username>-cpsc459-assignments/assignment-2/shutter_poses/scripts directory.
+    \<username\>-cpsc459-assignments/assignment-2/shutter_poses/scripts directory.
 
 5. Make the file into an executable python script. Add ```#!/usr/bin/env python``` as first
 line to your file and change permissions with 
@@ -645,20 +647,30 @@ shutter_poses package. This file should explain how the switch_poses.py node wor
 
     > Documenting ROS packages and nodes is good practice!
 
-- **V-Q2.** Add the `commit SHA` that corresponds to the final version of your code to your report.
-This version of the code is what will be used to evaluate this assignment.
+- **V-Q2.** Add the `commit SHA` that corresponds to the final version of your code to your report. The commit SHA 
+serves as extra documentation for your assignment.
 
-- **V-Q3.** Record your screen (e.g., with [kazam](https://launchpad.net/kazam)) as the 
-robot is changing its pose in RViz and reaching the desired poses. Turn this video into an animated
+- **V-Q3.** Record your screen as the 
+robot is changing its pose in RViz and reaching the desired poses. For example, 
+in Ubuntu you can use [kazam](https://launchpad.net/kazam) to record your screen. Once you got
+a video that shows the robot moving through the poses, turn this video into an animated
 gif, e.g., with ffmpeg and imagemagick as indicated in 
-[this code snippet](https://gitlab.com/snippets/1743818), and include it to your README.md file
-to demonstrate the execution of the switch_poses.py node in your documentation. 
+[this code snippet](https://gitlab.com/snippets/1743818), and include it in your README.md file
+for the shutter_poses package. This way your README.md will demonstrate the execution of the 
+switch_poses.py node in your documentation. 
 
-    NOTE: We suggest that you add the animated gif to your repository so that all of your documentation
+    NOTE: You should add the animated gif to your repository so that all of your documentation
     is contained in a single place and the animated gif is displayed in 
     GitHub when your README.md file is rendered on the web. 
 
      > More information on including images 
      in GitHub's markdown can be found [here](https://github.github.com/gfm/#images).
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+Once you are done with the questions above, commit your code to GitHub, and submit the 
+code to the `Assignment2-Code` assignment in Gradescope. Check that the public tests for this assignment complete successfully. 
+If you see errors come up in Gradescope, please check your repository. 
 
+Lastly, submit your assignment report for this assignment to the `Assignment2-Report` assignment in Gradescope.
+The report should be provided in pdf format using the [template](https://drive.google.com/file/d/1q8nBtjtUPkEglAuNDQ9SNCGl38t_Ty5d/view?usp=sharing) 
+indicated at the beginning of the assignment.
 
