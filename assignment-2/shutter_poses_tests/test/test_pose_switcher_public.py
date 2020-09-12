@@ -62,7 +62,7 @@ class TestPoseSwitcher(unittest.TestCase):
                 continue
 
             success = True
-        assert(success)
+        self.assertTrue(success)
 
     def test_joint_1(self):
         """Check that joint 1 is close enough to zero, since this is true for all required poses"""
