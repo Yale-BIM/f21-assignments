@@ -51,7 +51,7 @@ At the bare minimum, you should be familiar with the commands `cd`, `ls`, `rm`, 
 - **Report:** You are expected to submit a pdf to Gradescope with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of your final version of 
-the code for this assignment. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/1q8nBtjtUPkEglAuNDQ9SNCGl38t_Ty5d/view?usp=sharing). 
+the code for this assignment. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/1qs5ZYjUSoWSLMkt8OQg-jMdyZ9Brvn1U/view?usp=sharing). 
 
     Use the latest version of [Adobe Acrobat Reader](https://get.adobe.com/reader/) to fill this PDF. 
     You are expected to fill out answers in the form of text or images as indicated by the fields in the PDF
@@ -693,6 +693,6 @@ code to the `Assignment2-Code` assignment in Gradescope. Check that the public t
 If you see errors come up in Gradescope, please check your repository. 
 
 Lastly, submit your assignment report to the `Assignment2-Report` assignment in Gradescope.
-The report should be provided in pdf format using the [template](https://drive.google.com/file/d/1q8nBtjtUPkEglAuNDQ9SNCGl38t_Ty5d/view?usp=sharing) 
+The report should be provided in pdf format using the [template](https://drive.google.com/file/d/1qs5ZYjUSoWSLMkt8OQg-jMdyZ9Brvn1U/view?usp=sharing) 
 indicated at the beginning of the assignment.
 
