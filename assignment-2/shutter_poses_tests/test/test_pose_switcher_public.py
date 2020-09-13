@@ -71,7 +71,10 @@ class TestPoseSwitcher(unittest.TestCase):
         while not rospy.is_shutdown() and joint is None and time.time() < timeout_t:
             joint = self.joint_1
 
-        self.assertAlmostEqual(joint, 0.0, places=4)
+        self.assertIsNotNone(joint, "Received no command for joint 1 in a lapse of 5 seconds")
+        self.assertAlmostEqual(joint, 0.0, places=4, msg="The command for joint 1 was not 0.0 radians, "
+                                                         "but {} radians. Check the value that is being "
+                                                         "commanded".format(joint))
 
 
 if __name__ == '__main__':
