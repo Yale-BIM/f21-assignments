@@ -660,6 +660,9 @@ $ rostest --text shutter_poses_tests test_pose_switcher_public.launch
 
 If the tests are failing, you could add additional logging to your node for debugging purposes. 
 To log messages, use `rospy.loginfo('message')` in your switch_poses.py node.
+
+   > Note that these ROS integration tests will be automatically run by Gradescope when you submit your code to the system. A few other public tests will be executed as well. Try submitting your assignment early so that you have time to correct any issues that might arise from the tests.
+   
     
 ### Questions / Tasks
 
