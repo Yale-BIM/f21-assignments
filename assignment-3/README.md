@@ -35,18 +35,18 @@ a bit of geometry, e.g., to transform points across coordinate frames.
 As for the first assignment, you should have access to a computer with `Ubuntu 18.04` and `ROS Melodic` to complete the homework. 
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
-You will use git to save your work to your [GitLab](http://www.gitlab.com) repository.
+You will use git to save your work to your [GitHab](http://www.githab.com) repository.
 
 #### Background Knowledge
 
-This assignment assumes that you have already completed the [first](https://gitlab.com/cpsc459-bim/assignments/f19-assignments/tree/master/assignment-1) and [second](https://gitlab.com/cpsc459-bim/assignments/f19-assignments/tree/master/assignment-2) assignments and,
+This assignment assumes that you have already completed the [first](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-1) and [second](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-2) assignments and,
 thus, have set up your repository and catkin workspace. You are also expected to have experience with Linux shells 
 (e.g., [bash](https://www.gnu.org/software/bash/)), [git](https://git-scm.com/), and
 the [Robot Operating System (ROS)](http://www.ros.org/). This includes being familiar with
 the `roscore`, `rosrun`, `roslaunch`, `rostopic`, `rosmsg`, `rosnode`, `rqt_graph`, and `rviz` tools. You
 should also know how to bring up a simulation of the Shutter robot in ROS, and
 control the position of its joints one at a time. If
-you are unfamiliar with any of these tools, programs, or procedures, please revisit [assignment-2](https://gitlab.com/cpsc459-bim/assignments/f19-assignments/tree/master/assignment-2).
+you are unfamiliar with any of these tools, programs, or procedures, please revisit [assignment-2](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-2).
 
 #### Deliverables
 
@@ -64,7 +64,7 @@ Parts III of this assignment).
 - **images.npz:** Students taking CPSC-559 are also expected to submit a Numpy NPZ file with data for Part V-3 of this assignment.
 
 - **Code:** Finally, you are expected to push code for this assignment to your 
-[GitLab](http://www.gitlab.com) repository as explained in the [first](https://gitlab.com/cpsc459-bim/assignments/f19-assignments/tree/master/assignment-1) assignment.
+[GitHab](http://www.githab.com) repository as explained in the [first](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-1) assignment.
 
 #### Evaluation
 
