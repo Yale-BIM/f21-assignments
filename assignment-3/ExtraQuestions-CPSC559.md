@@ -30,14 +30,17 @@ Shutter in Part III of this assignment. Then, your goal is to compute the camera
     using Least Squares, where i indexes a set of sample correspondences 
     ![equation](https://latex.codecogs.com/png.latex?%3C%20%5Cmathbf%7Bx%7D_i%2C%5Cmathbf%7BX%7D_i%20%3E) <!--$`< \mathbf{x}_i,\mathbf{X}_i >`$-->
     and ![equation](https://latex.codecogs.com/gif.latex?f%28K%2C%5Cmathbf%7BX%7D_i%29) implements the projection of the world
-    point in the camera frame onto the image. Note that this projection operation corresponds to ![equation](https://latex.codecogs.com/gif.latex?K%5BI%7C%5Cbold%7B0%7D%5D%5Cmathbf%7BX%7D_i)
-    in homogeneous coordinates.
+    point in the camera frame onto the image. Note that this projection operation corresponds to 
+    ![equation](https://latex.codecogs.com/gif.latex?K%5BI%7C%5Cbold%7B0%7D%5D%5Chat%7B%5Cmathbf%7BX%7D%7D_i)
+    with ![equation](https://latex.codecogs.com/gif.latex?%5Chat%7B%5Cmathbf%7BX%7D%7D_i) the 3D point 
+    ![equation](https://latex.codecogs.com/gif.latex?%5Cmathbf%7BX%7D_i) in homogeneous coordinates.
     
     The set of 3D - 2D correspondences that you should use for this problem is provided in the 
     `calibration/correspondences.txt` file of this assignment. The first three columns of the file provide the 
     ![equation](https://latex.codecogs.com/png.latex?X%2C%20Y%2C%20Z)<!--$` X, Y, Z `$--> 3D coordinates of the points, 
     meanwhile the last two columns are the corresponding pixel locations ![equation](https://latex.codecogs.com/png.latex?x%2C%20y). <!--$`x, y`$-->
-    You can convert pixel locations to homogeneous coordinates by adding a 1 at the end: ![equation](https://latex.codecogs.com/png.latex?%5Bx%2C%20y%2C%201%5D)<!--$`[x, y, 1]`$-->.
+    You can convert pixel and 3D world locations to homogeneous coordinates by simply adding a 1 at the end.
+    For example: ![equation](https://latex.codecogs.com/png.latex?%5Bx%2C%20y%2C%201%5D)<!--$`[x, y, 1]`$-->.
 
     You should implement your solution to this calibration problem in the `calibration/calibrate_K.py` script that is 
     provided as part of this assignment. In particular, you should complete the `compute_K()` function within the script, 
