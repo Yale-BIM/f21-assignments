@@ -54,7 +54,9 @@ Shutter in Part III of this assignment. Then, your goal is to compute the camera
     ![equation](https://latex.codecogs.com/png.latex?error)<!--$`error`$-->.
 
     Explain in your report how you formulated a system of equations to solve for ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$-->, and 
-    how you implemented your solution in the `calibrate_K.py` script. 
+    how you implemented your solution in the `calibrate_K.py` script. The pdf template allows you to upload an image
+    with your explanation, which can either be an image of a hand-drawn solution (e.g., if you solved the problem in a notebook)
+    or an image of a solution that you typed in a word processing program like a Google Doc. 
 
     > Note: It is allowed to use numeric libraries like numpy in your implementation. But even if you do, explain how you solved the problem in your report.
 
@@ -64,7 +66,8 @@ Shutter in Part III of this assignment. Then, your goal is to compute the camera
 In general, it is impossible to estimate the absolute scale of a scene based only on an image of it. However, if we know the true size of an object in the world,
 we can take advantage of this piece of information to estimate how far the object is from the camera (i.e., its depth). This is your goal for this part of the assignment.
 
-To work on the problem of estimating the depth of an object in an image, the instructor followed the steps below to gather data from a RealSense camera -- like the one in Shutter.
+To work on the problem of estimating the depth of an object in an image, the instructor followed the steps below to 
+gather data from a RealSense camera -- like the one in a real Shutter robot.
 
 1. First, the [RealSense driver](https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md) and the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros.git) were installed to use the camera in Ubuntu. 
 
@@ -105,21 +108,17 @@ parameters (![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$-->) of 
 
     > Tip: We recommend that you draw the geometric relations of the known and unknown variables for this problem. Include this drawing in your report to help explain your answer to this question. 
 
-- **VI-2.** Modify the `docs/process_images.py` script to implement your solution to the task V-1. To this end, first add an additional input argument to the script for gathering the height of the object of interest (in this case, the book):
+- **VI-2.** Modify the `docs/process_images.py` script to implement your solution to the task VI-1. To this end, first 
+add an additional input argument to the script for gathering the height of the object of interest (in this case, the book):
 
     ```python
     object_height = float(sys.argv[2]) # new argument in the script
     ```
 
-    Second, write code at the end of the script to compute the depth based on the `image_coordinates` provided for the object when the script runs. Finally,
-    print the result:
-
-    ```python
-    Z = ... # compute Z
-    print("Estimated depth: {}m".format(Z))
-    ```
-
-    Then, you should be able to run the script, providing the book's height, select the book in the grayscale image, and see the estimated depth printed in the terminal:
+    Second, complete the `compute_depth_from_gray_image()` function in the `process_images.py` script with your solution 
+    to calculate the depth based on the `image_coordinates` provided for the object when the script runs. When
+    you are done implementing your solution, you should be able to: (1) run the script, providing the book's height;  
+    (2) select the book in the grayscale image; and (3) see the estimated depth printed in the terminal:
 
     ```bash
     $ ./process_images.py images.npz <book_height>
@@ -128,30 +127,30 @@ parameters (![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$-->) of 
     Estimated depth: ... <- your result
     ```
 
-    Write in your report the resulting depth value that you computed for the book. And don't forget to commit your modified script to your repository!
+    Write in your report the resulting depth value that you computed for the book. And don't forget to commit your 
+    modified script to your repository!
 
     > Tip: The book is not perfectly parallel to the horizontal and vertical axes of the camera's frame, thus the book does not appear in the image as a perfect rectangle. This is OK for this part of the assignment, though. The important detail when selecting the book in the image is that the top and bottom part of the green rectangle align as best as possible with the top and bottom edge of the book's cover.
 
-- **VI-3.** Add code to the end of your process_images.py script to compare your estimated value from V-2 with the average depth of the book in the depth image. To this end, first gather the depth values corresponding to the book from the depth image, and filter out zero values (these cells of the depth image correspond to
-pixels in the grayscale image for which depth could not be estimated). Then compute the average depth of the resulting filtered values, and
-the difference between the latter result and your estimated depth from the grayscale image alone.
+- **VI-3.** Add code to the `process_images.py` script to compare your estimated value from V-2 with the average depth of 
+the book in the depth image. To this end, complete the `compute_depth_from_depth_image()` function in the script such that:
 
-    Once the above steps are implemented, your process_images.py script should print the estimated depth from the depth image, and the
-    difference between the two depth estimates:
-
-    ```python
-    # Example
-    print("Estimated depth from depth image: {}m".format(average_depth)) # where average_depth is computed from the depth image
-    print("Difference between estimates: {}".format(average_depth - Z))
-    ```
-
-    Thus, the output of your process_images.py script should now look like:
+    a. it gathers the depth values corresponding to the book from the depth image,
+    b. filters out zero values (these cells of the depth image correspond to pixels in the grayscale image for which depth could not be estimated), and
+    c. computes the average depth of the resulting filtered values. This average depth should be returned by the function.
+     
+    Once you are done implementing the function, you should be able to run the script again, and measure the absolute 
+    difference between the latter result (Part VI-3) and your estimated depth from the grayscale image alone (VI-2).
 
     ```bash
+    # Example output
     $ ./process_images.py images.npz <book_height>
     Loading images.npz
     (...)
     Estimated depth: ... <- your result from V-2
     Estimated depth from depth image: ... <- result from V-3
-    Difference between estimates: ... <- result from V-3
+    Absolute difference between estimates: ... <- result from V-3
     ```
+  
+    Save in your report your estimated depth from the depth image (from part V-3) and the absolute difference between
+    the estimates. Also, don't forget to commit and push your latest version of the code to your GitHub repository!
