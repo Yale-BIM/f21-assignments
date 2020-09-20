@@ -76,13 +76,13 @@ You assignment will be evaluated based on the content of your report and your co
     - Part I (20 pts): I-1 (5 pts) + I-2 (2 pts) + I-3 (5 pts) + I-4 (8 pts)
     - Part II (5 pts): II-2 (5 pts) 
     - Part III (10 pts): III-1 (5pts), III-4 (5 pts)
-    - Part IV (12 pts): III-6a (3 pts) + III-6b (2 pts) + III-6c (4 pts) + III-6g (3 pts)
+    - Part IV (12 pts): IV-1 (3 pts) + IV-2 (2 pts) + IV-3 (4 pts) + IV-6 (3 pts)
     - Part V (10 pts): V-1 (10 pts)
     - Part VI (10 pts): VI-1 (8 pts) + VI-3 (2 pts)
 - Code
     * Part II-1 (15 pts) 
     * Part III (30 pts): Virtual Camera and III-2 (20 pts) + III-3 (8 pts) + III-5 (2 pts) 
-    * Part IV (8 pts): III-6d (4 pts) + III-6e (2 pts) + III-6f (2 pts)
+    * Part IV (8 pts): IV-4 (4 pts) + IV-5 (4 pts)
     * Part VI (10 pts): VI-2 (4 pts) + VI-3 (6 pts)
 
 Students taking CPSC-459 will be evaluated over 100 pts. Those taking CPSC-559, will be evaluated over 130 pts.
@@ -702,10 +702,13 @@ with the vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)
 ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20&plus;%20rotate%28%5Cbold%7Bq%27%7D%2C%20%5Calpha%29), <!--$`\bold{t} + rotate(\bold{q'}, \alpha)`$-->
 where `rotate()` is a function that implements IV-3. Modify the `draw_image()` function in your new 
 `fancy_virtual_camera.py` script to compute 20 3D points equally distributed along the edge of the sphere that is 
-seen by the camera. The code that computes these points should be added to the function after it renders the red
-circle with fixed radius from Part III of this assignment.
+seen by the camera. The code that computes these points should replace the prior computation for the red circle from Part III.
 
-    > Tip. The radius of the sphere in the world is provided through the /target message. See the `radius` field.
+    Note that the radius of the sphere in the world is provided through the /target message (see the `radius` field). You
+    should pass this value from the target callback to the `draw_image()` function using the optional keyworded arguments `kwargs`.
+    More specifically, you should pass the value using the `radius` keyword: `draw_image(x, y, z, K, width, height, radius=target_msg.radius)`.
+    
+    > Tip: If you are not familiar with keyworded variable length arguments in Python, check [this guide](https://book.pythontips.com/en/latest/args_and_kwargs.html).
 
 - **IV-5.**  Add a few lines of code to the `draw_image()` function such that it draws a blue contour for the sphere on the image using OpenCV. The contour should connect the projected points on the image:
 
@@ -716,8 +719,7 @@ circle with fixed radius from Part III of this assignment.
     cv2.drawContours(image, [pixel_array], 0, (255,0,0), 3)
     ```
 
-    The resulting image should now show both the original circle (that was drawn for Part III) and the blue polygon on top, 
-    as shown below:
+    The resulting image should now show only the blue polygon (no red circle), as shown below:
     
     <p align="center">
     <kbd>
