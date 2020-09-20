@@ -21,7 +21,7 @@ def project_3D_point(x, y, z, K):
     pass  # change this pass for an appropriate return statement, e.g., return pixel_x, pixel_y
 
 
-def draw_image(x, y, z, K, width, height):
+def draw_image(x, y, z, K, width, height, **kwargs):
     """
     Project the target and create a virtual camera image
     :param x: x coordinate of the 3D point (in the camera frame)
@@ -30,6 +30,7 @@ def draw_image(x, y, z, K, width, height):
     :param K: 3x3 numpy array with intrinsic camera parameters
     :param width: desired image width
     :param height: desired image height
+    :param kwargs: extra parameters for the function (used in Part IV of the assignment)
     :return: color image as a numpy array. The image should have dimensions height x width x 3 and be of type uint8.
     """
 

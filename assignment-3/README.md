@@ -491,9 +491,11 @@ a new message from the /target topic is received.
 moving in a circular path in the image (as in the Figure below). If this is not the case, please check your implementation of the
 virtual_camera.py script.
 
+<p align="center">
 <kbd>
 <img src="docs/projected_moving_object.gif" width="300"/>
 </kbd>
+</p>
 
 ### Questions / Tasks
 
@@ -567,7 +569,7 @@ function from the tf2 API with the time of the target's pose, rospy.Time(0), or 
                                               image_height,
                                               cx, cy,
                                               fx, fy)
-    self.camerainfo_pub.publish(camerainfo_msg)
+    camerainfo_pub.publish(camerainfo_msg)
     ```
 
     > Note: If the code of your node was organized into a class structure, then you could create the camerainfo_msg
@@ -644,11 +646,11 @@ when the target is behind the camera? How and why is the image changed? To visua
 can launch the `generate_target.launch` script with the optional parameter `target_x_plane:=<x>`, where \<x\> corresponds to the target's
 x coordinate on the robot's "base_footprint" frame. Then inspect the images that your node generates.
 
-- **III-5.** Your virtual camera could see behind it, but real cameras don't do that. Modify your virtual_camera.py node so that 
-the part of your code that computes the projection of the target and draws the circle only executes if the target is in front of the camera. 
-That is, these parts of your program should only execute if the Z component of the target's position in the camera coordinate frame is positive. 
-If the Z component is zero or negative, have your node instead publish an empty (white) image along with the CameraInfo message. In the latter case,
-the node should also print a warning message:
+- **III-5.** Your virtual camera could see behind it, but real cameras don't do that. Modify the `draw_image()` function 
+in the virtual_camera.py node so that the part of your code that computes the projection of the target and draws the circle only 
+executes if the target is in front of the camera. That is, these parts of your program should only execute if the Z component of 
+the target's position in the camera coordinate frame is positive. If the Z component is zero or negative, the function 
+should instead return an empty (white) image. In the latter case, the function should also print a warning message:
 
     ```python
     # example warning
