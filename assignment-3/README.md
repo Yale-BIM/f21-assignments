@@ -383,9 +383,9 @@ given the increased complexity of this node in comparison previous examples.
     object are not displayed in the same place, check your code and edit as necessary.
     
     - Save your work by adding and committing your publish_target_relative_to_realsense_camera.py
-    node and the generage_target.launch script to your local repository. Push your code to GitLab.
+    node and the generage_target.launch script to your local repository. Push your code to GitHub.
      
-        > Remember that continously committing your work and pushing to Gitlab will ensure that your
+        > Remember that continously committing your work and pushing to Github will ensure that your
         code is backed up and readily accessible in the future.
     
 - **II-2.** Stop any ROS processes that you are running, relaunch your new
@@ -690,5 +690,5 @@ into the camera image.
 
 Parts IV and V of the assignment are only for students taking CPSC-559 (graduate version of the course). See the tasks/questions in the [ExtraQuestions-CPSC559.md](ExtraQuestions-CPSC559.md) document.
 
-**Once you get to the end of the assignment, remember to commit your code, push to GitLab, and indicate
+**Once you get to the end of the assignment, remember to commit your code, push to Github, and indicate
 in your assignment report the commit SHA for the final version of the code that you wish to be evaluated on.**
