@@ -682,25 +682,32 @@ points along the edge into the camera image.
 ### Questions 
 
 - **IV-1.** To get started, let ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20%3D%20%5Bt_x%5C%20t_y%5C%20t_z%5D%5ET)<!--$`\bold{t} = [t_x\ t_y\ t_z]^T`$--> be the vector from the camera center to the center of the target 
-in the camera coordinate frame. Additionally, let the camera coordinate frame be oriented such that the ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$--> axis points
+in the camera coordinate frame (as shown in the image in the last section). 
+Additionally, let the camera coordinate frame be oriented such that the ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$--> axis points
 forward. How can you mathematically calculate a vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%7D)<!--$`\bold{q}`$--> perpendicular to both ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)<!--$`\bold{t}`$--> and the horizontal axis of the
 camera coordinate frame? Explain in your report.
 
-- **IV-2.**  Now that you have computed a vector perpendicular to the direction towards the target (as seen by the camera), explain
+- **IV-2.**  Now that you have computed a vector perpendicular to the direction towards the target (as seen by the camera), 
 how you can scale this vector to have a length equal to the radius ![equation](https://latex.codecogs.com/png.latex?R)<!--$`R`$--> of the moving 3D sphere. Provide the equation that scales ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%7D)<!--$`\bold{q}`$--> as desired while
 preserving its direction in your report.
 
-- **IV-3.**  Let ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> be the scaled vector from question III-6b. Explain mathematically in your report how can rotate this vector by an angle ![equation](https://latex.codecogs.com/png.latex?%5Calpha)<!--$`\alpha`$--> along a normalized rotation axis aligned with the vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)<!--$`\bold{t}`$--> from question III-6a.
+- **IV-3.**  Let ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> be the scaled vector 
+from question IV-2. Explain mathematically in your report how can rotate this vector by an 
+angle ![equation](https://latex.codecogs.com/png.latex?%5Calpha)<!--$`\alpha`$--> along a normalized rotation axis aligned 
+with the vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)<!--$`\bold{t}`$--> from question IV-1.
 
     > Tip. [Wikipedia](https://en.wikipedia.org/wiki/Axis%E2%80%93angle_representation) is an easy place to learn more about the axis-angle parameterization of rotations.
 
-- **IV-4.**  Points along the edge of the sphere (as seen by the camera), can now be computed as: ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20&plus;%20rotate%28%5Cbold%7Bq%27%7D%2C%20%5Calpha%29)<!--$`\bold{t} + rotate(\bold{q'}, \alpha)`$-->, where
-rotate(vector, angle) is a function that implements III-6c. Modify your virtual camera node to compute at least 20 3D points equally distributed along the edge
-of the sphere that is seen by the camera.
+- **IV-4.**  Points along the edge of the sphere (as seen by the camera), can now be computed as: 
+![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20&plus;%20rotate%28%5Cbold%7Bq%27%7D%2C%20%5Calpha%29), <!--$`\bold{t} + rotate(\bold{q'}, \alpha)`$-->
+where `rotate()` is a function that implements IV-3. Modify the `draw_image()` function in your new 
+`fancy_virtual_camera.py` script to compute 20 3D points equally distributed along the edge of the sphere that is 
+seen by the camera. The code that computes these points should be added to the function after it renders the red
+circle with fixed radius from Part III of this assignment.
 
-- **IV-5.**  Update the `draw_image()` function to have it compute the 3D points from III-6d onto the image after rendering the red circle of fixed radius.
+    > Tip. The radius of the sphere in the world is provided through the /target message. See the `radius` field.
 
-- **IV-6.**  Add a few lines of code to the `draw_image()` function such that it draws a blue contour for the sphere on the image using OpenCV. The contour should connect the projected points on the image:
+- **IV-5.**  Add a few lines of code to the `draw_image()` function such that it draws a blue contour for the sphere on the image using OpenCV. The contour should connect the projected points on the image:
 
     ```python
     # Example
@@ -709,7 +716,7 @@ of the sphere that is seen by the camera.
     cv2.drawContours(image, [pixel_array], 0, (255,0,0), 3)
     ```
 
-    The resulting image should now show both the original circle (that was drawn for part III) and the blue polygon on top, 
+    The resulting image should now show both the original circle (that was drawn for Part III) and the blue polygon on top, 
     as shown below:
     
     <p align="center">
@@ -718,14 +725,14 @@ of the sphere that is seen by the camera.
     </kbd>
     </p>
 
-- **IV-7.**  Restart ROS and re-run the generate_target.launch with the ball updating at a lower speed, and being closer to the camera:
+- **IV-6.**  Restart ROS and re-run the generate_target.launch with the ball updating at a lower speed, and being closer to the camera:
     
     ```bash
     $ roslaunch shutter_lookat generate_target.launch target_x_plane:=0.5 publish_rate:=1 # the publish rate for the target is in Hz
     ```
     
     Then restart your virtual_camera.py node and take a picture of your resulting image when the target is nearby one of the corners of the image. The image should show
-    the target being elongated; not having a perfectly circlular shape anymore. Include this image in your report and explain why the target does not
+    the target being elongated; not having a perfectly circular shape anymore. Include this image in your report and explain why the target does not
     appear to be a perfect circle, especially towards the edge of the image.
 
 
