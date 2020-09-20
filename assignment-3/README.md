@@ -35,7 +35,7 @@ a bit of geometry, e.g., to transform points across coordinate frames.
 As for the first assignment, you should have access to a computer with `Ubuntu 18.04` and `ROS Melodic` to complete the homework. 
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
-You will use git to save your work to your [GitHab](http://www.githab.com) repository.
+You will use git to save your work to your [GitHub](http://www.github.com) repository.
 
 #### Background Knowledge
 
@@ -46,25 +46,27 @@ the [Robot Operating System (ROS)](http://www.ros.org/). This includes being fam
 the `roscore`, `rosrun`, `roslaunch`, `rostopic`, `rosmsg`, `rosnode`, `rqt_graph`, and `rviz` tools. You
 should also know how to bring up a simulation of the Shutter robot in ROS, and
 control the position of its joints one at a time. If
-you are unfamiliar with any of these tools, programs, or procedures, please revisit [assignment-2](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-2).
+you are unfamiliar with any of these tools, programs, or procedures, please revisit [assignment-2](https://gitlab.com/cpsc459-bim/assignments/f19-assignments/tree/master/assignment-2).
 
 #### Deliverables
 
-- **Report:** You are expected to submit a pdf to Canvas with answers to the questions/tasks at 
+- **Report:** You are expected to submit a pdf to Gradescope with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
-to understand and/or run your code, as well as the specific commit SHA of the version of the code
-that you would like to be evaluated on. It is recommended that you generate this pdf 
-with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this 
-[assignment template](https://www.overleaf.com/latex/templates/assignment-template-for-yale-cpsc-459-559/nbysxxygbysk) 
-in [LaTeX](https://www.latex-project.org/).
+to understand and/or run your code, as well as the specific commit SHA of your final version of 
+the code for this assignment. The report is a fillable PDF which is available [here](). 
 
-- **ROS Bag:** You are expected to submit a [ROS bags](http://wiki.ros.org/Bags) to Canvas (see 
-Parts III of this assignment).
+    Use the latest version of [Adobe Acrobat Reader DC](https://get.adobe.com/reader/) to fill this PDF in Windows or OSX. 
+    In Ubuntu 18.04, you can install Acrobat Reader DC with [wine](https://en.wikipedia.org/wiki/Wine_(software)) by following [these instructions](https://linuxconfig.org/how-to-install-latest-adobe-acrobat-reader-dc-on-ubuntu-18-04-bionic-beaver-linux-with-wine).
+    Note that you might need to install [Windows 7 fonts](https://www.w7df.com/p/windows-7.html) in Ubuntu for the Reader program to work properly (see [these instructions](https://askubuntu.com/a/1103305) to install the fonts).
+    You are expected to fill out the fields in the report with your answers in text form or as images, as indicated by the PDF. 
 
-- **images.npz:** Students taking CPSC-559 are also expected to submit a Numpy NPZ file with data for Part V-3 of this assignment.
+- **ROS Bag:** You are expected to provide a link to [ROS bags](http://wiki.ros.org/Bags) in your
+ assignment report (see Parts III of this assignment). ROS bags can be hosted in [Google drive](https://drive.google.com) 
+ or [Box](https://yale.account.box.com) -- you should ensure that the teaching staff can access your ROS bags.
 
 - **Code:** Finally, you are expected to push code for this assignment to your 
-[GitHab](http://www.githab.com) repository as explained in the [first](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-1) assignment.
+[GitHub](http://www.github.com) repository as explained in 
+the [first assignment](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-1).
 
 #### Evaluation
 
@@ -134,13 +136,14 @@ have a single axis of rotation and, thus, exibit just one Degree of Freedom. The
 of links that are connected to it.
 
 <p align="center">
-<img src="https://www.mathworks.com/help/physmod/sm/mech/ug/revolute.gif" width="280" alt="Revolute joint from mathworks.com"/><br/>
-Revolute Joint (image from Mathworks.com)
+<img src="https://circuitdigest.com/sites/default/files/inlineimages/Revolute-Joint.gif" width="280" alt="Revolute joint from circuitdigest.com"/><br/>
+Revolute Joint (image from circuitdigest.com)
 </p>
 
-In general, we like to think about Degrees of Freedom (DoF) as the number of independent position 
-variables that would have to be specified in order to locate all parts of a robot.
+In general, we think about Degrees of Freedom (DoF) as the number of independent  
+variables that need to be specified in order to locate all parts of a robot.
 Shutter, has 4 servos in its arm, each of which implements a revolute joint.
+For each joint, we can set its pose by defining it's current angular position. 
 Thus, Shutter has 4 DoF. 
 
 
@@ -385,7 +388,7 @@ given the increased complexity of this node in comparison previous examples.
     - Save your work by adding and committing your publish_target_relative_to_realsense_camera.py
     node and the generage_target.launch script to your local repository. Push your code to GitHub.
      
-        > Remember that continously committing your work and pushing to Github will ensure that your
+        > Remember that continously committing your work and pushing to GitHub will ensure that your
         code is backed up and readily accessible in the future.
     
 - **II-2.** Stop any ROS processes that you are running, relaunch your new
@@ -690,5 +693,5 @@ into the camera image.
 
 Parts IV and V of the assignment are only for students taking CPSC-559 (graduate version of the course). See the tasks/questions in the [ExtraQuestions-CPSC559.md](ExtraQuestions-CPSC559.md) document.
 
-**Once you get to the end of the assignment, remember to commit your code, push to Github, and indicate
+**Once you get to the end of the assignment, remember to commit your code, push to GitHub, and indicate
 in your assignment report the commit SHA for the final version of the code that you wish to be evaluated on.**
