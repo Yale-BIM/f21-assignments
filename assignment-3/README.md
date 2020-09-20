@@ -72,16 +72,18 @@ the [first assignment](https://github.com/Yale-BIM/f20-assignments/tree/master/a
 
 You assignment will be evaluated based on the content of your report and your code:
 
-- Report / Other Deliverables (45 pts)
+- Report / Other Deliverables
     - Part I (20 pts): I-1 (5 pts) + I-2 (2 pts) + I-3 (5 pts) + I-4 (8 pts)
     - Part II (5 pts): II-2 (5 pts) 
-    - Part III (22 pts): III-1 (5pts), III-4 (5 pts) + III-6a (3 pts) + III-6b (2 pts) + III-6c (4 pts) + III-6g (3 pts)
-    - Part IV (10 pts): IV-1 (10 pts)
-    - Part V (10 pts): V-1 (8 pts) + V-3 (2 pts)
-- Code (55 pts)
+    - Part III (10 pts): III-1 (5pts), III-4 (5 pts)
+    - Part IV (12 pts): III-6a (3 pts) + III-6b (2 pts) + III-6c (4 pts) + III-6g (3 pts)
+    - Part V (10 pts): V-1 (10 pts)
+    - Part VI (10 pts): VI-1 (8 pts) + VI-3 (2 pts)
+- Code
     * Part II-1 (15 pts) 
-    * Part III (38 pts): Virtual Camera and III-2 (20 pts) + III-3 (8 pts) + III-5 (2 pts) + III-6d (4 pts) + III-6e (2 pts) + III-6f (2 pts) 
-    * Part V (10 pts): V-2 (4 pts) + V-3 (6 pts)
+    * Part III (30 pts): Virtual Camera and III-2 (20 pts) + III-3 (8 pts) + III-5 (2 pts) 
+    * Part IV (8 pts): III-6d (4 pts) + III-6e (2 pts) + III-6f (2 pts)
+    * Part VI (10 pts): VI-2 (4 pts) + VI-3 (6 pts)
 
 Students taking CPSC-459 will be evaluated over 100 pts. Those taking CPSC-559, will be evaluated over 130 pts.
 
@@ -348,7 +350,7 @@ Let's now publish the position of the moving object as a ROS tf frame.
 the position of a simulated moving object as a ROS tf frame ("target") relative
 to the robot's "camera_color_optical_frame" frame. 
 
-    - Create a new ROS node in Python within the script directory of the `shutter_lookat` package.
+    - Create a new ROS node in Python within the `scripts` directory of the `shutter_lookat` package.
 The node should be named `publish_target_relative_to_realsense_camera.py`. The python script should have executable permissions.
 
     - Within your new node:
@@ -405,20 +407,56 @@ given the increased complexity of this node in comparison previous examples.
     
 ## Part III. Making a virtual camera
 Assume that the moving object from Part II of this assignment is a sphere. Now, you will 
-work on projecting the simulated object on a virtual image captured from Shutter. Close all ROS nodes
-and launch the generate_target.launch script again before starting this part of the assignment.
+work on projecting the simulated object on a virtual image captured from Shutter. Close all ROS nodes before
+starting this part of the assignment.
 
-1. Copy your publish_target_relative_to_realsense_camera.py script into a new file, called `virtual_camera.py`. Place
-the new file in the `scripts` directory of the shutter_lookat package. Edit the name of your node (e.g., in the `rospy.init_node()` function)
-and any other relevant documentation in your code to indicate that the program implements a virtual camera for Shutter.
+1. Inspect the `virtual_camera.py` node that is provided as part of this assignment within the `shutter_lookat/scripts`
+directory.  
 
-2. Edit your node such that it repeats the steps below every time a new message from the /target topic is received:
+2. Complete the `project_3D_point()` function at the top of the script. This function receives the coordinates of a 
+3D point with coordinates x, y, z in the camera frame and computes the projected location for this point onto the image
+using the camera's intrinsic matrix K.
 
-    **a.** Compute the target's pose in the "camera_color_optical_frame" frame (as in Part II of this assignment).
+3. Complete the `draw_image()` function at the top of the script. This function receives the coordinates of a 
+3D point in the camera frame and renders an image with a circle representing the projected location of the point onto the image
+plane.
 
-    **b.** Project the position of the moving object to the image of a virtual camera positioned 
-    in the "camera_color_optical_frame" frame. The projection operation should use the following
-    intrinsic camera calibration parameters:
+    a. The `draw_image()` function should first create an empty image using the [OpenCV library](https://opencv.org/). 
+    The image should have white background and dimensions of width x height pixels. An example on how you can create an image 
+    with opencv is provided below:
+    
+    ```python
+    # Example code
+    import cv2          # import opencv
+    import numpy as np  # import numpy
+    
+    # create image
+    image = np.zeros((height, width, 3), np.uint8) # width and height are the dimensions of the image
+    # color image
+    image[:,:] = (255,255,255) # (B, G, R)
+    ```
+   
+    b. The `draw_image()` function should then compute the projected location for the 3D target onto the image.
+    To this end, the `draw_image()` function should call the `project_3D_point()` function, passing the 3D coordinates
+    and intrinsic camera matrix K.
+    
+    c. The `draw_image()` function should draw the outline of a red circle on the image. 
+    The position of the center of the circle should match the position of the projected 3D point in the image. Make
+    the radius of the circle 12 pixels, and its outline 3 pixels wide.
+    
+    ```python
+    # Example code
+    cv2.circle(image, (x,y), radius, (0,0,255), outline_width) # (x,y) is the projected location of the target on the image
+    ```
+    
+    > Tip: See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
+    for more examples on drawing basic figures.
+
+    d. The `draw_image()` function should return the image with the drawn circle.
+
+4. Edit the `__init__()` function of the `virtual_camera.py` node to define an instance variable K of type numpy array. 
+This array should correspond to the 3x3 intrinsic camera matrix of your virtual camera. In particular, it should be defined 
+based on the following parameters:
 
     ```python
     cx=320       # x-coordinate of principal point in terms of pixel dimensions
@@ -427,40 +465,19 @@ and any other relevant documentation in your code to indicate that the program i
     fy=349       # focal length in terms of pixel dimensions in the y direction
     # note: assume there's no skew.
     ```
-    
+   
     > Tip: If you are unsure of what the above parameters mean, read more about projective cameras 
     in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book.
 
-    **c.** Create an image with white background using the [OpenCV library](https://opencv.org/) 
-    in your node. This image will become the output of the simulated camera that you are building
-    for Shutter. The image should be in VGA format, i.e., have a
-    dimension of 640 x 480 pixels.
-    
-    ```python
-    # Example code
-    import cv2          # import opencv
-    import numpy as np  # import numpy
-    
-    # create image
-    image = np.zeros((height,width,3), np.uint8) # width and height are the dimensions of the image
-    # color image
-    image[:,:] = (255,255,255) # (B, G, R)
-    ```
-        
-    **d.** Draw the outline of a red circle on the image. The position of the center of the circle
-    should match the position of the projected moving object in the image, such that as
-    the object moves, the projected circle also moves. Make
-    the radius of the circle 12 pixels, and its outline 3 pixels wide.
-    
-    ```python
-    # Example code
-    cv2.circle(image,(x,y), radius, (0,0,255), outline_width) # (x,y) is the projected location of the object
-    ```
-    
-    > See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
-    for more examples on drawing basic figures.
+5. Edit the `target_callback()` function in the `virtual_camera.py` node such that it repeats the steps below every time 
+a new message from the /target topic is received. 
 
-    **e.** Publish the image that you created with OpenCV as a [sensor_msgs/Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html) message in ROS. You
+    **a.** Compute the target's pose in the "camera_color_optical_frame" frame (as in Part II of this assignment).
+
+    **b.** Call the `draw_image()` function to create a virtual camera image that shows the projected location of the target
+    as a circle. The resulting image should have dimensions of 640 x 480 pixels.
+   
+    **c.** Publishes the image that you created with OpenCV as a [sensor_msgs/Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html) message in ROS. You
     can use the [cv_bridge](http://wiki.ros.org/cv_bridge) library to convert the OpenCV image to
     an Image message. Note that the Image message should have a `header` with the current time as
     stamp and the "camera_color_optical_frame" frame as frame_id. The Image message should be published by your node
@@ -468,8 +485,8 @@ and any other relevant documentation in your code to indicate that the program i
     
     > Tip: Examples on converting OpenCV images to ROS messages can be found
     in [this tutorial](http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython).
-
-3. Visualize the images that your node is publishing using the 
+    
+6. Visualize the images that your node is publishing using the 
 [rqt_image_view](http://wiki.ros.org/rqt_image_view) tool. You should see the red circle
 moving in a circular path in the image (as in the Figure below). If this is not the case, please check your implementation of the
 virtual_camera.py script.
@@ -607,7 +624,6 @@ the virtual camera that you already implemented is working correctly.
     Inspect your ROS bag with the [rosbag info](http://wiki.ros.org/rosbag/Commandline#rosbag_info) tool to verify that it contains messages
     for all of the following topics:
         
-        * /arm_controller/follow_joint_trajectory/status
         * /diagnostics
         * /joint_states 
         * /motors_enabled
@@ -636,11 +652,26 @@ the node should also print a warning message:
 
     ```python
     # example warning
-    print("Warning: Target is behind the camera (z={})".format(z)) # z is the z coordinate for the target's center point relative to the camera frame
+    rospy.logwarn("Warning: Target is behind the camera (z={})".format(z)) # z is the z coordinate for the target's center point relative to the camera frame
     ```
 
-- **III-6.** You will now modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
-it draws the true outline of the spherical target as seen by the camera. To this end, you should
+## Part IV. Making a fancier virtual camera
+You will now modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
+it draws the true outline of the spherical target as seen by the camera. 
+
+1. Copy your virtual_camera.py script into a new script called `fancy_virtual_camera.py`. The new script
+should be located within the `shutter_lookat/scripts` directory.
+
+2. Edit the name of your new node (e.g., in the `rospy.init_node()` function)
+and any other relevant documentation in your code to indicate that the program implements a fancier virtual camera for 
+Shutter.
+
+Follow the questions/tasks below to modify the new node's `draw_image()` function to output a better image 
+for your camera.
+
+### Questions 
+
+- **IV-1.** To this end, you should
 first compute a direction vector $`\bold{q'}`$ from the center of the target to the edge of the sphere seen by the camera. Then, you will be able to
 draw the target's true shape by rotating the vector along a rotation axis in the direction of the target, and projecting the resulting points along the edge 
 into the camera image.
@@ -695,9 +726,9 @@ into the camera image.
     appear to be  perfectly round, especially towards the edge of the image.
 
 
-## Parts IV and V
+## Parts V and VI
 
-Parts IV and V of the assignment are only for students taking CPSC-559 (graduate version of the course). See the tasks/questions in the [ExtraQuestions-CPSC559.md](ExtraQuestions-CPSC559.md) document.
+Parts V and VI of the assignment are only for students taking CPSC-559 (graduate version of the course). See the tasks/questions in the [ExtraQuestions-CPSC559.md](ExtraQuestions-CPSC559.md) document.
 
 **Once you get to the end of the assignment, remember to commit your code, push to GitHub, and indicate
 in your assignment report the commit SHA for the final version of the code that you wish to be evaluated on.**
