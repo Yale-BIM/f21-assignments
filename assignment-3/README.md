@@ -672,7 +672,7 @@ Shutter.
 
 ### Questions 
 
-Solve the questions below and complete the corresponding programming tasks to modify your `fancy_virtual_camera.py` node 
+Solve the questions below and complete the corresponding programming tasks on your `fancy_virtual_camera.py` node 
 such that it outputs better images of the target for your camera. In brief, you will need to modify the `draw_image()` function in the new node 
 such that it computes a direction vector ![equation](https://latex.codecogs.com/gif.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> 
 from the center of the 3D target to the edge of the sphere seen by the camera. Then, you will be able to draw the target's 
@@ -704,7 +704,8 @@ with the vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)
 ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20&plus;%20rotate%28%5Cbold%7Bq%27%7D%2C%20%5Calpha%29), <!--$`\bold{t} + rotate(\bold{q'}, \alpha)`$-->
 where `rotate()` is a function that implements IV-3. Modify the `draw_image()` function in your new 
 `fancy_virtual_camera.py` script to compute 20 3D points equally distributed along the edge of the sphere that is 
-seen by the camera. The code that computes these points should replace the prior computation for the red circle from Part III.
+seen by the camera. The code that computes these points should replace the prior computation for the red circle from Part III
+in your new `fancy_virtual_camera.py` script.
 
     Note that the radius of the sphere in the world is provided through the /target message (see the `radius` field). You
     should pass this value from the target callback to the `draw_image()` function using the optional keyworded arguments `kwargs`.
@@ -721,7 +722,7 @@ seen by the camera. The code that computes these points should replace the prior
     cv2.drawContours(image, [pixel_array], 0, (255,0,0), 3)
     ```
 
-    The resulting image should now show only the blue polygon (no red circle), as shown below:
+    The resulting image should now show the blue polygon (and no red circle), as shown below:
     
     <p align="center">
     <kbd>
@@ -735,8 +736,8 @@ seen by the camera. The code that computes these points should replace the prior
     $ roslaunch shutter_lookat generate_target.launch target_x_plane:=0.5 publish_rate:=1 # the publish rate for the target is in Hz
     ```
     
-    Then restart your virtual_camera.py node and take a picture of your resulting image when the target is nearby one of the corners of the image. The image should show
-    the target being elongated; not having a perfectly circular shape anymore. Include this image in your report and explain why the target does not
+    Then restart your `fancy_virtual_camera.py` node and take a picture of your resulting camera image when the target is nearby one of the corners of the image. 
+    The image should show the target being elongated; not having a perfectly circular shape anymore. Include this image in your report and explain why the target does not
     appear to be a perfect circle, especially towards the edge of the image.
 
 
