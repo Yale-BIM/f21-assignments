@@ -152,5 +152,6 @@ the book in the depth image. To this end, complete the `compute_depth_from_depth
     Absolute difference between estimates: ... <- result from V-3
     ```
   
-    Save in your report your estimated depth from the depth image (from part V-3) and the absolute difference between
-    the estimates. Also, don't forget to commit and push your latest version of the code to your GitHub repository!
+    Save in your report your estimated depth from the depth image (from Part VI-3) and the absolute difference between
+    the estimates from the gray and depth images. Also, don't forget to commit and push your latest version of the 
+    code to your GitHub repository!
