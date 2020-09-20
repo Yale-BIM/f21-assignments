@@ -617,7 +617,7 @@ the virtual camera that you already implemented is working correctly.
     The bag should have all of the messages that are streamed in your system for a duration of 8 seconds.
     
     ```bash
-    $ rosbag record -O assignment3_part3-3.bag -a --duration 8 
+    $ rosbag record -O <your-name>_a3p3-3.bag -a --duration 8 
     ```
     
     > You can see a description of the arguments that `rosbag record` accepts [here](http://wiki.ros.org/rosbag/Commandline#record). Make sure to start 
@@ -628,7 +628,6 @@ the virtual camera that you already implemented is working correctly.
         
         * /diagnostics
         * /joint_states 
-        * /motors_enabled
         * /rosout   
         * /target  
         * /target_marker 
@@ -637,7 +636,8 @@ the virtual camera that you already implemented is working correctly.
         * /virtual_camera/camera_info    
         * /virtual_camera/image_raw 
     
-    Make sure to **submit your ROS bag to Canvas** as part of this assignment. You don't need to and 
+    Upload your ROS bag to Google Drive or Box and make it accessible to anybody with the link. Then, 
+    **provide a link to your ROS bag in your report** for this assignment. You don't need to and 
     you shouldn't commit the bag to your repository! Otherwise, you will make your repository
     unnecessarily heavy.
 
