@@ -93,7 +93,7 @@ Students taking CPSC-459 will be evaluated over 100 pts. Those taking CPSC-559, 
 ## Preliminaries
 
 ### Notation
-We refer to `vectors` or column matrices with bold lower-case letters (e.g., $`\bold{x}`$).
+We refer to `vectors` or column matrices with bold lower-case letters (e.g., ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bx%7D) <!--$`\bold{x}`$-->).
 Other `matrices`, such as linear transformations, and `scalars` are written with regular
 font weight. 
 
@@ -136,15 +136,13 @@ have a single axis of rotation and, thus, exibit just one Degree of Freedom. The
 of links that are connected to it.
 
 <p align="center">
-<img src="https://circuitdigest.com/sites/default/files/inlineimages/Revolute-Joint.gif" width="280" alt="Revolute joint from circuitdigest.com"/><br/>
+<img src="https://circuitdigest.com/sites/default/files/inlineimages/Revolute-Joint.gif" width="150" alt="Revolute joint from circuitdigest.com"/><br/>
 Revolute Joint (image from circuitdigest.com)
 </p>
 
-In general, we think about Degrees of Freedom (DoF) as the number of independent  
-variables that need to be specified in order to locate all parts of a robot.
-Shutter, has 4 servos in its arm, each of which implements a revolute joint.
-For each joint, we can set its pose by defining it's current angular position. 
-Thus, Shutter has 4 DoF. 
+In general, we think about Degrees of Freedom (DoF) as the number of independent variables 
+that need to be specified in order to locate all parts of a robot.
+Shutter, has 4 servos in its arm, each of which implements a revolute joint. Thus, Shutter has 4 DoF. 
 
 
 ### 3D Transformations
@@ -216,21 +214,22 @@ and ![equation](https://latex.codecogs.com/png.latex?r_%7B13%7D%2C%20r_%7B23%7D%
 ### Transforms in ROS
 
 The [tf](http://wiki.ros.org/tf) library in ROS represents transforms and coordinate frames 
-in a `tree structure` buffered in time. The tree is a directed graph with a root, and where any two 
-vertices are connected by one path. The nodes of this graph corresponds to coordinate frames,
+in a `tree structure` buffered in time. The tree is a directed graph with a root. Any two 
+vertices in it are connected by one path. The nodes of the graph correspond to coordinate frames,
 each associated with a link, and the edges correspond to transforms between pairs of frames. 
+
+<p align="center">
+<img src="http://wiki.ros.org/tf/Debugging%20tools?action=AttachFile&do=get&target=frames2.png" width="350" alt="Example tf tree from wiki.ros.org"/><br/>
+Example tf tree (image from wiki.ros.org)
+</p>
 
 Any directed edge in the tf tree has a `parent` frame (source node), and a `child` frame 
 (target node). Let the parent frame be ![equation](https://latex.codecogs.com/png.latex?P)<!--$`P`$--> and the child be ![equation](https://latex.codecogs.com/png.latex?C)<!--$`C`$-->. Then, the transform
 stored in the edge parent -> child corresponds to ![equation](https://latex.codecogs.com/png.latex?%5E%7BP%7D_%7BC%7DT)<!--$`^{P}_{C}T`$-->.
 
-<!-- todo: add image of nodes and edge with transform -->
-
 The tf library quickly computes the net transform between two nodes (frames) 
 by multiplying the edges connecting them. To traverse up a directed edge from a child to a parent node, 
 tf uses the inverse of the transformation that is stored in the edge.
-
-<!-- todo: say something about querying transforms over time here? -->
 
 ## Setup
 Before you start implementing or answering questions for this assignment, please update
