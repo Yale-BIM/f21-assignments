@@ -101,7 +101,7 @@ To load the data from the image.npz file, you can use the sample script `depth/p
 
 ### Questions / Tasks
 
-- **VI-1.** The book has a true height of ![equation](https://latex.codecogs.com/png.latex?h=24.5)<!--$`h=24.5`$--> cm and is placed in front of the camera, oriented roughly such that its cover is parallel to the ![equation](https://latex.codecogs.com/png.latex?XY)<!--$`XY`$--> plane of the camera's coordinate frame. How can you compute how far the book is from the camera's center in the grayscale image of the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) file? That is, how can you get an estimate of the ![equation](https://latex.codecogs.com/png.latex?Z)<!--$`Z`$--> coordinate of the book's cover in the camera's coordinate frame? Explain your answer to this question in your report, given the book's true height, the intrinsic 
+- **VI-1.** The book has a true height of h=0.245 meters and is placed in front of the camera, oriented roughly such that its cover is parallel to the ![equation](https://latex.codecogs.com/png.latex?XY)<!--$`XY`$--> plane of the camera's coordinate frame. How can you compute how far the book is from the camera's center in the grayscale image of the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) file? That is, how can you get an estimate of the ![equation](https://latex.codecogs.com/png.latex?Z)<!--$`Z`$--> coordinate of the book's cover in the camera's coordinate frame? Explain your answer to this question in your report, given the book's true height, the intrinsic 
 parameters (![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$-->) of the camera used to get the grayscale image, and the position of the top-left ![equation](https://latex.codecogs.com/png.latex?%5Cleft%28%5Cbold%7Bx_1%7D%20%3D%20%28x_1%2Cy_1%29%5Cright%29)<!--$`\left(\bold{x_1} = (x_1,y_1)\right)`$--> and bottom-right ![equation](https://latex.codecogs.com/png.latex?%5Cleft%28%5Cbold%7Bx_2%7D%20%3D%20%28x_2%2Cy_2%29%5Cright%29)<!--$`\left(\bold{x_2} = (x_2,y_2)\right)`$--> corners of a box surrounding the book's front cover in the image, as illustrated in the image below.
 
     <img src="docs/book_select.png" width="300"/>
@@ -117,7 +117,7 @@ add an additional input argument to the script for gathering the height of the o
 
     Second, complete the `compute_depth_from_gray_image()` function in the `process_images.py` script with your solution 
     to calculate the depth based on the `image_coordinates` provided for the object when the script runs. When
-    you are done implementing your solution, you should be able to: (1) run the script, providing the book's height;  
+    you are done implementing your solution, you should be able to: (1) run the script, providing the book's height; 
     (2) select the book in the grayscale image; and (3) see the estimated depth printed in the terminal:
 
     ```bash
