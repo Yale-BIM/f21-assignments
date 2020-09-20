@@ -675,7 +675,9 @@ from the center of the target to the edge of the sphere seen by the camera. Then
 true shape by rotating the vector along a rotation axis in the direction of the target, and projecting the resulting 
 points along the edge into the camera image.
 
+<p align="center">
 <img src="docs/diagram_a3.png" width="500"/>
+</p>
 
 ### Questions 
 
