@@ -605,9 +605,11 @@ the virtual camera that you already implemented is working correctly.
     Camera plugin with the red ball of the simulated moving object (as in the Figure below). 
     If this is not the case, check and correct your implementation of the virtual_camera.py node.
        
+    <p align="center">
     <kbd>
     <img src="docs/rviz_camera.png" width="300"/>
     </kbd>
+    </p>
 
     > Tip: If parts of the robot are displayed in the camera plugin image, then you can remove them by temporarily disabling the RobotModel plugin in Rviz.
     
@@ -662,24 +664,24 @@ You will now modify your virtual_camera.py node so that instead of drawing a cir
 it draws the true outline of the spherical target as seen by the camera. 
 
 1. Copy your virtual_camera.py script into a new script called `fancy_virtual_camera.py`. The new script
-should be located within the `shutter_lookat/scripts` directory.
+should be located within the `shutter_lookat/scripts` directory. It should have executable permissions.
 
-2. Change the name of the new node (e.g., in the `rospy.init_node()` function) to `fancy_virtual_camera`
+2. Change the name of the new node in the `rospy.init_node()` function to `fancy_virtual_camera`
 and edit any other relevant documentation in your code to indicate that the program implements a fancier virtual camera for 
 Shutter.
 
-Solve the questions in the next section and complete the corresponding programming tasks to modify the new 
-node's `draw_image()` function such that it outputs a better image of the target for your camera. To this end, 
-you will first compute a direction vector ![equation](https://latex.codecogs.com/gif.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> 
-from the center of the target to the edge of the sphere seen by the camera. Then, you will be able to draw the target's 
+### Questions 
+
+Solve the questions below and complete the corresponding programming tasks to modify the new 
+node's `draw_image()` function such that it outputs a better image of the target for your camera. In brief, 
+you will need to compute a direction vector ![equation](https://latex.codecogs.com/gif.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> 
+from the center of the 3D target to the edge of the sphere seen by the camera. Then, you will be able to draw the target's 
 true shape by rotating the vector along a rotation axis in the direction of the target, and projecting the resulting 
-points along the edge into the camera image.
+3D points along the edge of the sphere onto the camera image.
 
 <p align="center">
 <img src="docs/diagram_a3.png" width="500"/>
 </p>
-
-### Questions 
 
 - **IV-1.** To get started, let ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20%3D%20%5Bt_x%5C%20t_y%5C%20t_z%5D%5ET)<!--$`\bold{t} = [t_x\ t_y\ t_z]^T`$--> be the vector from the camera center to the center of the target 
 in the camera coordinate frame (as shown in the image in the last section). 
