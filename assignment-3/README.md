@@ -299,7 +299,7 @@ provide the transformation with both the rotation and translation components.
 bring up the robot? Please explain which node(s) contribute to generating the tf tree.
 
     > Tip: You should inspect what nodes and topics are being published in your ROS system,
-    e.g., with the [rqt_graph](http://wiki.ros.org/rqt_graph) tool. You can also read the shutter.launch script
+    e.g., with the [rqt_graph](http://wiki.ros.org/rqt_graph) tool. You can also read the shutter_sim.launch script
     in the shutter_bringup package (and any subsequent script that it launches) 
     to understand how the robot's tf tree is being generated.
 
@@ -325,7 +325,7 @@ with the translation and rotation of the transform ![equation](https://latex.cod
 You will use code that is already provided in this assignment to learn how to publish tf
 data as described above. To get started, follow the steps below:
 
-1. Inspect the `generate_target.py` Python script in the scripts directory of the `shutter_lookat` 
+1. Inspect the `generate_target.py` Python script in the `scripts` directory of the `shutter_lookat` 
 package that is provided as part of this assignment. You should understand how the script creates a 
 simulated moving object and publishes its position relative to the "base_footprint" frame of 
 Shutter through the `/target` topic.

@@ -6,6 +6,7 @@ from shutter_lookat.msg import Target
 from geometry_msgs.msg import PoseStamped
 from visualization_msgs.msg import Marker
 
+
 class SimulatedObject(object):
     """
     Simulated object that moves on a circular path in front of the robot.
@@ -29,7 +30,6 @@ class SimulatedObject(object):
         :param publish_rate: node's publish rate
         """
         self.angle += 2.0 * np.pi / 300  # 1 full revolution in 10 secs at 30 Hz
-
 
 
 def generate_target():
