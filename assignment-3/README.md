@@ -672,9 +672,9 @@ Shutter.
 
 ### Questions 
 
-Solve the questions below and complete the corresponding programming tasks to modify the new 
-node's `draw_image()` function such that it outputs a better image of the target for your camera. In brief, 
-you will need to compute a direction vector ![equation](https://latex.codecogs.com/gif.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> 
+Solve the questions below and complete the corresponding programming tasks to modify your `fancy_virtual_camera.py` node 
+such that it outputs better images of the target for your camera. In brief, you will need to modify the `draw_image()` function in the new node 
+such that it computes a direction vector ![equation](https://latex.codecogs.com/gif.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> 
 from the center of the 3D target to the edge of the sphere seen by the camera. Then, you will be able to draw the target's 
 true shape by rotating the vector along a rotation axis in the direction of the target, and projecting the resulting 
 3D points along the edge of the sphere onto the camera image.
