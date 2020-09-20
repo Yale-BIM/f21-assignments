@@ -219,7 +219,7 @@ vertices in it are connected by one path. The nodes of the graph correspond to c
 each associated with a link, and the edges correspond to transforms between pairs of frames. 
 
 <p align="center">
-<img src="http://wiki.ros.org/tf/Debugging%20tools?action=AttachFile&do=get&target=frames2.png" width="350" alt="Example tf tree from wiki.ros.org"/><br/>
+<img src="http://wiki.ros.org/tf/Debugging%20tools?action=AttachFile&do=get&target=frames2.png" width="400" alt="Example tf tree from wiki.ros.org"/><br/>
 Example tf tree (image from wiki.ros.org)
 </p>
 
@@ -259,8 +259,9 @@ users keep track of multiple coordinate frames over time in ROS.
 tutorial from ROS. You should familiarize yourself with the `view_frames` and `tf_echo` tools. 
 You should also learn to visualize the transforms in /tf and /tf_static with [RViz](http://wiki.ros.org/rviz).
 
+<!--
     > If you are using the bim laptops, then `ros-melodic-turtle-tf2`, `ros-melodic-tf2-tools`, and `ros-melodic-tf` should already be installed in the computer.
-
+-->
 
 ### Questions / Tasks
 Now that you know how to use basic tf tools, bring up a simulation of the robot Shutter. 
