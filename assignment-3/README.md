@@ -284,10 +284,16 @@ frame and the *camera_color_optical_frame* frame?
 between the *camera_link* frame (![equation](https://latex.codecogs.com/png.latex?C)<!--$`C`$-->) and the *camera_color_optical_frame* frame (![equation](https://latex.codecogs.com/png.latex?O)<!--$`O`$-->)? Please
 provide the transformation with both the rotation and translation components.
 
-    > Tip: You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool to query
+    > Tip 1: You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool to query
     transformations. You will then need to assemble the $`4 \times 4`$ homogenous transformation matrix 
     from these values. We recommend [this primer](http://wiki.ogre3d.org/Quaternion+and+Rotation+Primer) from Ogre
     if you are confused about different rotation representations.
+
+    > Tip 2: We recommend that you visualize the frames of interest in RViz to ensure that the transformation that
+    you are computing is in the right direction. Note that 
+    ![equation](https://latex.codecogs.com/png.latex?%5E%7BC%7D_%7BO%7DT) is not the same as
+    ![equation](https://latex.codecogs.com/png.latex?%5E%7BO%7D_%7BC%7DT).
+
 
 - **I-4.** How are the transformations in the /tf and /tf_static topics generated after you 
 bring up the robot? Please explain which node(s) contribute to generating the tf tree.
