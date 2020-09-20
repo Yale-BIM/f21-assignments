@@ -24,7 +24,9 @@ This is the third assignment for Yale's CPSC-459/559 Building Interactive Machin
     * [Questions / Tasks](#questions--tasks-1)
 * [Part III. Making a virtual camera](#part-iii-making-a-virtual-camera)
     * [Questions / Tasks](#questions--tasks-2)
-* [Parts IV and V](#parts-iv-and-v)  (only for students taking CPSC-559)
+* [Part IV. Making a fancier virtual camera](#part-iv-making-a-fancier-virtual-camera)
+    * [Questions / Tasks](#questions--tasks-3)
+* [Parts V and VI](#parts-v-and-vi)  (only for students taking CPSC-559)
 
 ## Introduction 
 This assignment will provide you practical experience with the [tf](ros.org/wiki/tf) ROS package, 
@@ -670,7 +672,7 @@ should be located within the `shutter_lookat/scripts` directory. It should have 
 and edit any other relevant documentation in your code to indicate that the program implements a fancier virtual camera for 
 Shutter.
 
-### Questions 
+### Questions / Tasks
 
 Solve the questions below and complete the corresponding programming tasks on your `fancy_virtual_camera.py` node 
 such that it outputs better images of the target for your camera. In brief, you will need to modify the `draw_image()` function in the new node 

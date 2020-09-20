@@ -1,30 +1,51 @@
 # Assignment 3 (Extra questions for CPSC-559)
 
-The sections below for Assignment 3 are only meant to be completed/answered by students taking CPSC-559. Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. However, their answers to the questions in Part IV and Part V of the assignment 3 will not be considered during grading.
+The sections below for Assignment 3 are only meant to be completed/answered by students taking CPSC-559. 
+Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. 
+However, their answers to the questions in Part V and Part VI of the assignment 3 will not be considered during grading.
 
-## Part IV. Solving for the intrinsics
+## Part V. Solving for the intrinsics
 
-[Full camera calibration](https://www.mathworks.com/help/vision/ug/camera-calibration.html) consists of findings the intrinsic and extrinsic camera parameters
-that define the projective operation ![equation](https://latex.codecogs.com/png.latex?%5Cmathbf%7Bx%7D%20%3D%20P%5Cmathbf%7BX%7D)<!--$`\mathbf{x} = P\mathbf{X}`$-->, where ![equation](https://latex.codecogs.com/png.latex?%5Cmathbf%7BX%7D%3D%5BX%5C%20Y%5C%20Z%5C%201%5D%5ET)<!--$`\mathbf{X}=[X\ Y\ Z\ 1]^T`$--> is a point in homogeneous coordinates in the world coordinate frame and ![equation](https://latex.codecogs.com/png.latex?%5Cmathbf%7Bx%7D)<!--$`\mathbf{x}`$--> is the point's projection on the image. 
-However, it sometimes happens that one only cares about observing the world from a camera and an external coordinate frame is irrelevant for the application. In these situations, we only care about the intrinsic camera parameters ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$-->, such that ![equation](https://latex.codecogs.com/png.latex?%5Cmathbf%7Bx%7D%20%3D%20K%5BI%7C%5Cbold%7B0%7D%5D%5BX%5C%20Y%5C%20Z%5C%201%5D%5ET)<!--$`\mathbf{x} = K[I|\bold{0}][X\ Y\ Z\ 1]^T`$-->, where ![equation](https://latex.codecogs.com/png.latex?I)<!--$`I`$--> is the ![equation](https://latex.codecogs.com/png.latex?3%20%5Ctimes%203)<!--$`3 \times 3`$--> identity matrix and ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7B0%7D)<!--$`\bold{0}`$--> is the 3-dimensional zero vector.
+[Full camera calibration](https://www.mathworks.com/help/vision/ug/camera-calibration.html) consists of findings the 
+intrinsic and extrinsic camera parameters
+that define the projective operation 
+![equation](https://latex.codecogs.com/png.latex?%5Cmathbf%7Bx%7D%20%3D%20P%5Cmathbf%7BX%7D), <!--$`\mathbf{x} = P\mathbf{X}`$--> 
+where ![equation](https://latex.codecogs.com/png.latex?%5Cmathbf%7BX%7D%3D%5BX%5C%20Y%5C%20Z%5C%201%5D%5ET) <!--$`\mathbf{X}=[X\ Y\ Z\ 1]^T`$--> 
+is a point in homogeneous coordinates in the world coordinate frame and 
+![equation](https://latex.codecogs.com/png.latex?%5Cmathbf%7Bx%7D)<!--$`\mathbf{x}`$--> 
+is the point's projection on the image. However, it sometimes happens that one only cares about observing the world from 
+a camera and an external coordinate frame is irrelevant for the application. In these situations, we only care about 
+the intrinsic camera parameters ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$-->, such 
+that ![equation](https://latex.codecogs.com/png.latex?%5Cmathbf%7Bx%7D%20%3D%20K%5BI%7C%5Cbold%7B0%7D%5D%5BX%5C%20Y%5C%20Z%5C%201%5D%5ET)<!--$`\mathbf{x} = K[I|\bold{0}][X\ Y\ Z\ 1]^T`$-->, where ![equation](https://latex.codecogs.com/png.latex?I)<!--$`I`$--> is the ![equation](https://latex.codecogs.com/png.latex?3%20%5Ctimes%203)<!--$`3 \times 3`$--> identity matrix 
+and ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7B0%7D)<!--$`\bold{0}`$--> is the 3-dimensional zero vector.
 
 ### Questions / Tasks
 
 
-- **IV-1.** Assume that a camera has no skew and no lens distortion, as the virtual camera that you implemented for Shutter in Part III of this assignment. Then, compute the camera's intrinsic parameters ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$--> by minimizing <br>
-![equation](https://latex.codecogs.com/png.latex?error%20%3D%20%5Csum_i%20%5C%7C%5Cmathbf%7Bx%7D_i%20-%20K%5BI%7C%5Cbold%7B0%7D%5D%5Cmathbf%7BX%7D_i%5C%7C%5E2)<!--$`error = \sum_i \|\mathbf{x}_i - K[I|\bold{0}]\mathbf{X}_i\|^2`$--> <br>
-using Least Squares, where i indexes a set of sample correspondences ![equation](https://latex.codecogs.com/png.latex?%3C%20%5Cmathbf%7Bx%7D_i%2C%5Cmathbf%7BX%7D_i%20%3E)<!--$`< \mathbf{x}_i,\mathbf{X}_i >`$-->. This set of 3D - 2D correspondences is provided for you in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the ![equation](https://latex.codecogs.com/png.latex?X%2C%20Y%2C%20Z)<!--$` X, Y, Z `$--> 3D coordinates of the points, meanwhile the last two columns are the corresponding pixel locations ![equation](https://latex.codecogs.com/png.latex?x%2C%20y)<!--$`x, y`$-->. Assume that the pixel locations in homogeneous coordinates are simply ![equation](https://latex.codecogs.com/png.latex?%5Bx%2C%20y%2C%201%5D)<!--$`[x, y, 1]`$-->.
+- **V-1.** Assume that a camera has no skew and no lens distortion, as the virtual camera that you implemented for 
+Shutter in Part III of this assignment. Then, your goal is to compute the camera's intrinsic parameters ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$--> by minimizing:
+    <p align="center">
+    ![equation](https://latex.codecogs.com/png.latex?error%20%3D%20%5Csum_i%20%5C%7C%5Cmathbf%7Bx%7D_i%20-%20K%5BI%7C%5Cbold%7B0%7D%5D%5Cmathbf%7BX%7D_i%5C%7C%5E2)<!--$`error = \sum_i \|\mathbf{x}_i - K[I|\bold{0}]\mathbf{X}_i\|^2`$-->
+    </p>
+    using Least Squares, where i indexes a set of sample correspondences ![equation](https://latex.codecogs.com/png.latex?%3C%20%5Cmathbf%7Bx%7D_i%2C%5Cmathbf%7BX%7D_i%20%3E)<!--$`< \mathbf{x}_i,\mathbf{X}_i >`$-->. This set of 3D - 2D correspondences is provided for you in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the ![equation](https://latex.codecogs.com/png.latex?X%2C%20Y%2C%20Z)<!--$` X, Y, Z `$--> 3D coordinates of the points, meanwhile the last two columns are the corresponding pixel locations ![equation](https://latex.codecogs.com/png.latex?x%2C%20y)<!--$`x, y`$-->. Assume that the pixel locations in homogeneous coordinates are simply ![equation](https://latex.codecogs.com/png.latex?%5Bx%2C%20y%2C%201%5D)<!--$`[x, y, 1]`$-->.
 
-    Implement a script to solve for the instrinsics in Python. Your script should take as input the path to the correspondences.txt file, and print the estimated
-    matrix ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$--> and the ![equation](https://latex.codecogs.com/png.latex?error)<!--$`error`$--> for your solution. Name your script `calibrate_K.py` and save it in the `calibration` directory of this assignment within
-    your repository. 
+    Solve the above problem in the `calibration/calibrate_K.py` script that is provided as part of this assignment. In 
+    particular, you should complete the `compute_K()` function within the script, such that when you run the script as:
+    
+    ```bash
+    $ ./calibrate_K.py correspondences.txt
+    ```
+    
+    the script prints your solution for ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$--> and the resulting 
+    ![equation](https://latex.codecogs.com/png.latex?error)<!--$`error`$-->.
 
-    Explain in your report how your calibrate_K.py script should be run, how you formulated a system of equations to solve for ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$-->, and how you solved the system in your implementation. Provide the resulting value for ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$--> in your report as well as the ![equation](https://latex.codecogs.com/png.latex?error)<!--$`error`$-->, as defined above.
+    Explain in your report how you formulated a system of equations to solve for ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$-->, and 
+    how you implemented solved the system in your implementation. Provide the resulting value for ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$--> in your report as well as the ![equation](https://latex.codecogs.com/png.latex?error)<!--$`error`$-->, as defined above.
 
     > Note: It is allowed to use numeric libraries like numpy in your implementation. But even if you do, explain how you solved the problem in your report.
 
 
-## Part V. Estimating depth from images
+## Part VI. Estimating depth from images
 
 In general, it is impossible to estimate the absolute scale of a scene based only on an image of it. However, if we know the true size of an object in the world,
 we can take advantage of this piece of information to estimate how far the object is from the camera (i.e., its depth). This is your goal for this part of the assignment.
@@ -63,14 +84,14 @@ To load the data from the image.npz file, you can use the sample script `depth/p
 
 ### Questions / Tasks
 
-- **V-1.** The book has a true height of ![equation](https://latex.codecogs.com/png.latex?h=24.5)<!--$`h=24.5`$--> cm and is placed in front of the camera, oriented roughly such that its cover is parallel to the ![equation](https://latex.codecogs.com/png.latex?XY)<!--$`XY`$--> plane of the camera's coordinate frame. How can you compute how far the book is from the camera's center in the grayscale image of the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) file? That is, how can you get an estimate of the ![equation](https://latex.codecogs.com/png.latex?Z)<!--$`Z`$--> coordinate of the book's cover in the camera's coordinate frame? Explain your answer to this question in your report, given the book's true height, the intrinsic 
+- **VI-1.** The book has a true height of ![equation](https://latex.codecogs.com/png.latex?h=24.5)<!--$`h=24.5`$--> cm and is placed in front of the camera, oriented roughly such that its cover is parallel to the ![equation](https://latex.codecogs.com/png.latex?XY)<!--$`XY`$--> plane of the camera's coordinate frame. How can you compute how far the book is from the camera's center in the grayscale image of the [image.npz](https://drive.google.com/file/d/1BFibFGBLJeYvgxtBnxHRJxfHfbAcOjO_/view?usp=sharing) file? That is, how can you get an estimate of the ![equation](https://latex.codecogs.com/png.latex?Z)<!--$`Z`$--> coordinate of the book's cover in the camera's coordinate frame? Explain your answer to this question in your report, given the book's true height, the intrinsic 
 parameters (![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$-->) of the camera used to get the grayscale image, and the position of the top-left ![equation](https://latex.codecogs.com/png.latex?%5Cleft%28%5Cbold%7Bx_1%7D%20%3D%20%28x_1%2Cy_1%29%5Cright%29)<!--$`\left(\bold{x_1} = (x_1,y_1)\right)`$--> and bottom-right ![equation](https://latex.codecogs.com/png.latex?%5Cleft%28%5Cbold%7Bx_2%7D%20%3D%20%28x_2%2Cy_2%29%5Cright%29)<!--$`\left(\bold{x_2} = (x_2,y_2)\right)`$--> corners of a box surrounding the book's front cover in the image, as illustrated in the image below.
 
     <img src="docs/book_select.png" width="300"/>
 
     > Tip: We recommend that you draw the geometric relations of the known and unknown variables for this problem. Include this drawing in your report to help explain your answer to this question. 
 
-- **V-2.** Modify the `docs/process_images.py` script to implement your solution to the task V-1. To this end, first add an additional input argument to the script for gathering the height of the object of interest (in this case, the book):
+- **VI-2.** Modify the `docs/process_images.py` script to implement your solution to the task V-1. To this end, first add an additional input argument to the script for gathering the height of the object of interest (in this case, the book):
 
     ```python
     object_height = float(sys.argv[2]) # new argument in the script
@@ -97,7 +118,7 @@ parameters (![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$-->) of 
 
     > Tip: The book is not perfectly parallel to the horizontal and vertical axes of the camera's frame, thus the book does not appear in the image as a perfect rectangle. This is OK for this part of the assignment, though. The important detail when selecting the book in the image is that the top and bottom part of the green rectangle align as best as possible with the top and bottom edge of the book's cover.
 
-- **V-3.** Add code to the end of your process_images.py script to compare your estimated value from V-2 with the average depth of the book in the depth image. To this end, first gather the depth values corresponding to the book from the depth image, and filter out zero values (these cells of the depth image correspond to
+- **VI-3.** Add code to the end of your process_images.py script to compare your estimated value from V-2 with the average depth of the book in the depth image. To this end, first gather the depth values corresponding to the book from the depth image, and filter out zero values (these cells of the depth image correspond to
 pixels in the grayscale image for which depth could not be estimated). Then compute the average depth of the resulting filtered values, and
 the difference between the latter result and your estimated depth from the grayscale image alone.
 
