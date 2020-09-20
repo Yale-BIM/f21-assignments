@@ -101,11 +101,11 @@ font weight.
 
 In this course, all reasoning in space is done in a 
 [right hand system](http://mathworld.wolfram.com/Right-HandRule.html). The orientation
-of the cross product between $`\bold{i} = [1, 0, 0]^T`$ (in the direction of the $`x`$ axis) and 
-$`\bold{j} = [0, 1, 0]^T`$ ($`y`$ axis) is determined by
-placing $`\bold{i}`$ and $`\bold{j}`$ tail-to-tail, flattening the right hand, extending it in the direction
-of $`\bold{i}`$, and then curling the fingers towards $`\bold{j}`$. The thumb then points in the direction
-of $`\bold{k} = \bold{i} \times \bold{j} = [0,0,1]^T`$ (corresponding to the $`z`$ axis). 
+of the cross product between ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bi%7D%20%3D%20%5B1%2C%200%2C%200%5D%5ET) <!--$`\bold{i} = [1, 0, 0]^T`$--> (in the direction of the ![equation](https://latex.codecogs.com/png.latex?x) <!--$`x`$-->axis) and 
+![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bj%7D%20%3D%20%5B0%2C%201%2C%200%5D%5ET)<!--$`\bold{j} = [0, 1, 0]^T`$--> (![equation](https://latex.codecogs.com/png.latex?y)<!--$`y`$--> axis) is determined by
+placing ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bi%7D)<!--$`\bold{i}`$--> and ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bj%7D)<!--$`\bold{j}`$--> tail-to-tail, flattening the right hand, extending it in the direction
+of ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bi%7D)<!--$`\bold{i}`$-->, and then curling the fingers towards ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bj%7D)<!--$`\bold{j}`$-->. The thumb then points in the direction
+of ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bk%7D%20%3D%20%5Cbold%7Bi%7D%20%5Ctimes%20%5Cbold%7Bj%7D%20%3D%20%5B0%2C0%2C1%5D%5ET)<!--$`\bold{k} = \bold{i} \times \bold{j} = [0,0,1]^T`$--> (corresponding to the ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$--> axis). 
 
 <p align="center">
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Right_hand_rule_cross_product.svg"
@@ -157,61 +157,61 @@ links or its base. Similarly, 3D transformations can help infer the location of 
 with respect to a camera that observes it.
 
 Following [ROS conventions](http://wiki.ros.org/tf/Overview/Transformations), 
-we refer to a point $`\mathbf{p}`$ within a frame $`B`$ as $`^{B}\mathbf{p}`$. 
-We also refer to the relationship between any two frames $`A`$ and $`B`$ as 
+we refer to a point ![equation](https://latex.codecogs.com/png.latex?%5Cmathbf%7Bp%7D)<!--$`\mathbf{p}`$--> within a frame ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> as ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D%5Cmathbf%7Bp%7D)<!--$`^{B}\mathbf{p}`$-->. 
+We also refer to the relationship between any two frames ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> and ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> as 
 a 6 Degrees of Freedom (DoF) transformation: 
 a rotation followed by a translation. Specifically,
-the pose of $`A`$ in $`B`$ is given by the rotation of $`A`$'s coordinate axes in $`B`$
- and the translation from $`B`$'s origin to $`A`$'s origin. 
+the pose of ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> in ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> is given by the rotation of ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$-->'s coordinate axes in ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->
+ and the translation from ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->'s origin to ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$-->'s origin. 
 
->- **Translations:** A 3D translation can be represented by a vector $`\bold{t} = [t_1, t_2, t_3]`$
-    or by a $`4 \times 4`$ matrix:<br>
-    $`t =
+>- **Translations:** A 3D translation can be represented by a vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20%3D%20%5Bt_1%2C%20t_2%2C%20t_3%5D)<!--$`\bold{t} = [t_1, t_2, t_3]`$-->
+    or by a ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> matrix:<br>
+    ![equation](https://latex.codecogs.com/png.latex?t%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%26%200%20%26%20t_1%5C%5C%200%20%26%201%20%26%200%20%26%20t_2%5C%5C%200%20%26%200%20%26%201%20%26%20t_3%5C%5C%200%20%26%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D)<!--$`t =
     \begin{bmatrix}
     1 & 0 & 0 & t_1\\
     0 & 1 & 0 & t_2\\
     0 & 0 & 1 & t_3\\
     0 & 0 & 0 & 1
-    \end{bmatrix}
-    `$<br>
-    The scalars $`t_1`$, $`t_2`$, and $`t_3`$ correspond to the displacements in $`x`$,
-    $`y`$, and $`z`$, respectively. Thus, a translation has 3 DoF. Note that
-    representing translations with $`4 \times 4`$ matrices as above is helpful 
+    \end{bmatrix}`$--><br>
+    The scalars ![equation](https://latex.codecogs.com/png.latex?t_1)<!--$`t_1`$-->, ![equation](https://latex.codecogs.com/png.latex?t_2)<!--$`t_2`$-->, and ![equation](https://latex.codecogs.com/png.latex?t_3)<!--$`t_3`$--> correspond to the displacements in ![equation](https://latex.codecogs.com/png.latex?x)<!--$`x`$-->,
+    ![equation](https://latex.codecogs.com/png.latex?y)<!--$`y`$-->, and ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$-->, respectively. Thus, a translation has 3 DoF. Note that
+    representing translations with ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> matrices as above is helpful 
     for transforming points in homogeneous coordinates.<br>
 >- **Rotations:** A 3D rotation has 3 DoF as well. Each DoF corresponds to a rotation around one of the axes of the 
-    coordinate frame. We can represent rotations also as $`4 \times 4`$ transformation matrices:<br>
-    $`R = 
+    coordinate frame. We can represent rotations also as ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> transformation matrices:<br>
+    ![equation](https://latex.codecogs.com/png.latex?R%20%3D%20%5Cbegin%7Bbmatrix%7D%20r_%7B11%7D%20%26%20r_%7B12%7D%20%26%20r_%7B13%7D%20%26%200%5C%5C%20r_%7B21%7D%20%26%20r_%7B22%7D%20%26%20r_%7B23%7D%20%26%200%5C%5C%20r_%7B31%7D%20%26%20r_%7B32%7D%20%26%20r_%7B33%7D%20%26%200%5C%5C%200%20%26%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D)
+    <!--$`R = 
     \begin{bmatrix}
     r_{11} & r_{12} & r_{13} & 0\\
     r_{21} & r_{22} & r_{23} & 0\\
     r_{31} & r_{32} & r_{33} & 0\\
     0 & 0 & 0 & 1
-    \end{bmatrix}
-    `$<br>
-    Note that the $`3 \times 3`$ submatrix of $`R`$ with the elements $`r_{11}`$ ... $`r_{33}`$
+    \end{bmatrix}`$-->
+    <br>
+    Note that the ![equation](https://latex.codecogs.com/png.latex?3%20%5Ctimes%203) <!--$`3 \times 3`$--> submatrix of ![equation](https://latex.codecogs.com/png.latex?R)<!--$`R`$--> with the elements ![equation](https://latex.codecogs.com/png.latex?r_%7B11%7D%20%5Cldots%20r_%7B33%7D) <!--$`r_{11}`$ ... $`r_{33}`$-->
     is an [orthogonal matrix](https://en.wikipedia.org/wiki/Orthogonal_matrix).<br>    
     It is important to know that [ROS uses quaternions](http://wiki.ros.org/tf2/Tutorials/Quaternions) 
     to represent rotations, but there are many other useful representations (e.g., 
     [Euler angles](https://en.wikipedia.org/wiki/Euler_angles)).
 
 ### Changing the Frame of a Point
-Let $`^{A}\mathbf{p}`$ be a 3D point in the $`A`$ frame. Its position in 
-$`B`$ can be expressed as $`^{B}\mathbf{p} = ^{B}_{A}T\ ^{A}\mathbf{p}`$, where 
-$`^{B}_{A}T = ^{B}_{A}(t \times R)`$ is the $`4 \times 4`$ transformation matrix that
-results from right-multiplying the translation matrix $`^{B}_{A}t`$ by the rotation
-matrix $`^{B}_{A}R`$. In particular,
+Let ![equation](https://latex.codecogs.com/png.latex?%5E%7BA%7D%5Cmathbf%7Bp%7D)<!--$`^{A}\mathbf{p}`$--> be a 3D point in the ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> frame. Its position in 
+![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> can be expressed as ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D%5Cmathbf%7Bp%7D%20%3D%20%5E%7BB%7D_%7BA%7DT%5C%20%5E%7BA%7D%5Cmathbf%7Bp%7D)<!--$`^{B}\mathbf{p} = ^{B}_{A}T\ ^{A}\mathbf{p}`$-->, where 
+![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7DT%20%3D%20%5E%7BB%7D_%7BA%7D%28t%20%5Ctimes%20R%29)<!--$`^{B}_{A}T = ^{B}_{A}(t \times R)`$--> is the ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> transformation matrix that
+results from right-multiplying the translation matrix ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7Dt)<!--$`^{B}_{A}t`$--> by the rotation
+matrix ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7DR)<!--$`^{B}_{A}R`$-->. In particular,
  
-- $`^{B}_{A}t`$ is the $`4 \times 4`$ transformation matrix that encodes the
- translation between the frames $`A`$ and $`B`$. The values $`t_1, t_2, t_3`$ of
-the translation $`^{B}_{A}t`$ are the origin of the frame $`A`$ in $`B`$.
-- $`^{B}_{A}R`$ is the  $`4 \times 4`$ rotation matrix corresponding to the orientation of $`A`$'s coordinate axes in 
-$`B`$. 
+- ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7Dt)<!--$`^{B}_{A}t`$--> is the ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> transformation matrix that encodes the
+ translation between the frames ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> and ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->. The values ![equation](https://latex.codecogs.com/png.latex?t_1%2C%20t_2%2C%20t_3)<!--$`t_1, t_2, t_3`$--> of
+the translation ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7Dt)<!--$`^{B}_{A}t`$--> are the origin of the frame ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> in ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->.
+- ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7DR)<!--$`^{B}_{A}R`$--> is the  ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> rotation matrix corresponding to the orientation of ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$-->'s coordinate axes in 
+![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->. 
 
-Note that the 3D vector with elements $`r_{11}, r_{21}, r_{31}`$ 
-from the first column of the rotation matrix $`^{B}_{A}R`$ has the same direction as the $`x`$ axis of $`A`$ 
-in the $`B`$ frame. Similarly, the elements $`r_{12}, r_{22}, r_{32}`$
-and $`r_{13}, r_{23}, r_{33}`$ have the same direction of the $`y`$ and $`z`$ axes of 
-$`A`$ in $`B`$, respectively.
+Note that the 3D vector with elements ![equation](https://latex.codecogs.com/png.latex?r_%7B11%7D%2C%20r_%7B21%7D%2C%20r_%7B31%7D)<!--$`r_{11}, r_{21}, r_{31}`$--> 
+from the first column of the rotation matrix ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7DR)<!--$`^{B}_{A}R`$--> has the same direction as the ![equation](https://latex.codecogs.com/png.latex?x)<!--$`x`$--> axis of ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> 
+in the ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> frame. Similarly, the elements ![equation](https://latex.codecogs.com/png.latex?r_%7B12%7D%2C%20r_%7B22%7D%2C%20r_%7B32%7D)<!--$`r_{12}, r_{22}, r_{32}`$-->
+and ![equation](https://latex.codecogs.com/png.latex?r_%7B13%7D%2C%20r_%7B23%7D%2C%20r_%7B33%7D)<!--$`r_{13}, r_{23}, r_{33}`$--> have the same direction of the ![equation](https://latex.codecogs.com/png.latex?y)<!--$`y`$--> and ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$--> axes of 
+![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> in ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->, respectively.
 
 ### Transforms in ROS
 
@@ -221,8 +221,8 @@ vertices are connected by one path. The nodes of this graph corresponds to coord
 each associated with a link, and the edges correspond to transforms between pairs of frames. 
 
 Any directed edge in the tf tree has a `parent` frame (source node), and a `child` frame 
-(target node). Let the parent frame be $`P`$ and the child be $`C`$. Then, the transform
-stored in the edge parent -> child corresponds to $`^{P}_{C}T`$.
+(target node). Let the parent frame be ![equation](https://latex.codecogs.com/png.latex?P)<!--$`P`$--> and the child be ![equation](https://latex.codecogs.com/png.latex?C)<!--$`C`$-->. Then, the transform
+stored in the edge parent -> child corresponds to ![equation](https://latex.codecogs.com/png.latex?%5E%7BP%7D_%7BC%7DT)<!--$`^{P}_{C}T`$-->.
 
 <!-- todo: add image of nodes and edge with transform -->
 
@@ -280,8 +280,8 @@ Include this image in your report.
 - **I-2.** Based on the tf tree from I-1, which frames are between the robot's *base_footprint* 
 frame and the *camera_color_optical_frame* frame?
 
-- **I-3.** Based on the tf tree, what is the $`4 \times 4`$ transformation $`^{C}_{O}T`$
-between the *camera_link* frame ($`C`$) and the *camera_color_optical_frame* frame ($`O`$)? Please
+- **I-3.** Based on the tf tree, what is the ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> transformation ![equation](https://latex.codecogs.com/png.latex?%5E%7BC%7D_%7BO%7DT)<!--$`^{C}_{O}T`$-->
+between the *camera_link* frame (![equation](https://latex.codecogs.com/png.latex?C)<!--$`C`$-->) and the *camera_color_optical_frame* frame (![equation](https://latex.codecogs.com/png.latex?O)<!--$`O`$-->)? Please
 provide the transformation with both the rotation and translation components.
 
     > Tip: You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool to query
@@ -314,7 +314,7 @@ message has:
 and the `frame_id` of the parent frame for the transformation;
 - a `child_frame_id`, corresponding to the name of the child frame; and
 - a `transform`, of type [geometry_msgs/Transform](http://docs.ros.org/jade/api/geometry_msgs/html/msg/Transform.html),
-with the translation and rotation of the transform <sup>parent</sup><sub>child</sub>$`T`$.
+with the translation and rotation of the transform ![equation](https://latex.codecogs.com/png.latex?%5E%7B%5Ctext%7Bparent%7D%7D_%7B%5Ctext%7Bchild%7D%7DT)<!--<sup>parent</sup><sub>child</sub>$`T`$-->.
 
 You will use code that is already provided in this assignment to learn how to publish tf
 data as described above. To get started, follow the steps below:
