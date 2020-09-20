@@ -91,7 +91,7 @@ if __name__ == '__main__':
     # compute depth from gray image (Part IV-2)
 
     object_height = ...  # complete!
-    Z_gray = compute_depth_from_gray_image(image_coordinates, K, object_height)
+    Z_gray = compute_depth_from_gray_image(gray, image_coordinates, K, object_height)
     print("Estimated depth: {}m".format(Z_gray))
 
     # -------------------------------------------------------------------------------
