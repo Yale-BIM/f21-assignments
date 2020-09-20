@@ -24,23 +24,34 @@ and ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7B0%7D)<!--$`\bold{
 
 - **V-1.** Assume that a camera has no skew and no lens distortion, as the virtual camera that you implemented for 
 Shutter in Part III of this assignment. Then, your goal is to compute the camera's intrinsic parameters ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$--> by minimizing:
-    <p align="center">
-    ![equation](https://latex.codecogs.com/png.latex?error%20%3D%20%5Csum_i%20%5C%7C%5Cmathbf%7Bx%7D_i%20-%20K%5BI%7C%5Cbold%7B0%7D%5D%5Cmathbf%7BX%7D_i%5C%7C%5E2)<!--$`error = \sum_i \|\mathbf{x}_i - K[I|\bold{0}]\mathbf{X}_i\|^2`$-->
-    </p>
-    using Least Squares, where i indexes a set of sample correspondences ![equation](https://latex.codecogs.com/png.latex?%3C%20%5Cmathbf%7Bx%7D_i%2C%5Cmathbf%7BX%7D_i%20%3E)<!--$`< \mathbf{x}_i,\mathbf{X}_i >`$-->. This set of 3D - 2D correspondences is provided for you in the `calibration/correspondences.txt` file of this assignment. Note that the first three columns of the file provide the ![equation](https://latex.codecogs.com/png.latex?X%2C%20Y%2C%20Z)<!--$` X, Y, Z `$--> 3D coordinates of the points, meanwhile the last two columns are the corresponding pixel locations ![equation](https://latex.codecogs.com/png.latex?x%2C%20y)<!--$`x, y`$-->. Assume that the pixel locations in homogeneous coordinates are simply ![equation](https://latex.codecogs.com/png.latex?%5Bx%2C%20y%2C%201%5D)<!--$`[x, y, 1]`$-->.
+    
+    ![equation](https://latex.codecogs.com/gif.latex?error%20%3D%20%5Csum_i%20%5C%7C%5Cmathbf%7Bx%7D_i%20-%20f%28K%2C%5Cmathbf%7BX%7D_i%29%5C%7C%5E2)<!--$`error = \sum_i \|\mathbf{x}_i - K[I|\bold{0}]\mathbf{X}_i\|^2`$-->
+    
+    using Least Squares, where i indexes a set of sample correspondences 
+    ![equation](https://latex.codecogs.com/png.latex?%3C%20%5Cmathbf%7Bx%7D_i%2C%5Cmathbf%7BX%7D_i%20%3E) <!--$`< \mathbf{x}_i,\mathbf{X}_i >`$-->
+    and ![equation](https://latex.codecogs.com/gif.latex?f%28K%2C%5Cmathbf%7BX%7D_i%29) implements the projection of the world
+    point in the camera frame onto the image. Note that this projection operation corresponds to ![equation](https://latex.codecogs.com/gif.latex?K%5BI%7C%5Cbold%7B0%7D%5D%5Cmathbf%7BX%7D_i)
+    in homogeneous coordinates.
+    
+    The set of 3D - 2D correspondences that you should use for this problem is provided in the 
+    `calibration/correspondences.txt` file of this assignment. The first three columns of the file provide the 
+    ![equation](https://latex.codecogs.com/png.latex?X%2C%20Y%2C%20Z)<!--$` X, Y, Z `$--> 3D coordinates of the points, 
+    meanwhile the last two columns are the corresponding pixel locations ![equation](https://latex.codecogs.com/png.latex?x%2C%20y). <!--$`x, y`$-->
+    You can convert pixel locations to homogeneous coordinates by adding a 1 at the end: ![equation](https://latex.codecogs.com/png.latex?%5Bx%2C%20y%2C%201%5D)<!--$`[x, y, 1]`$-->.
 
-    Solve the above problem in the `calibration/calibrate_K.py` script that is provided as part of this assignment. In 
-    particular, you should complete the `compute_K()` function within the script, such that when you run the script as:
+    You should implement your solution to this calibration problem in the `calibration/calibrate_K.py` script that is 
+    provided as part of this assignment. In particular, you should complete the `compute_K()` function within the script, 
+    such that when you run the script as:
     
     ```bash
     $ ./calibrate_K.py correspondences.txt
     ```
     
-    the script prints your solution for ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$--> and the resulting 
+    it prints your solution for ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$--> and the resulting 
     ![equation](https://latex.codecogs.com/png.latex?error)<!--$`error`$-->.
 
     Explain in your report how you formulated a system of equations to solve for ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$-->, and 
-    how you implemented solved the system in your implementation. Provide the resulting value for ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$--> in your report as well as the ![equation](https://latex.codecogs.com/png.latex?error)<!--$`error`$-->, as defined above.
+    how you implemented your solution in the `calibrate_K.py` script. 
 
     > Note: It is allowed to use numeric libraries like numpy in your implementation. But even if you do, explain how you solved the problem in your report.
 
