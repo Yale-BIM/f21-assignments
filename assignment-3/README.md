@@ -668,19 +668,16 @@ should be located within the `shutter_lookat/scripts` directory.
 and edit any other relevant documentation in your code to indicate that the program implements a fancier virtual camera for 
 Shutter.
 
-Follow the questions/tasks below to modify the new node's `draw_image()` function to output a better image 
-for your camera.
-
-### Questions 
-
-Compute a direction vector ![equation](https://latex.codecogs.com/gif.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> 
+Solve the questions in the next section and complete the corresponding programming tasks to modify the new 
+node's `draw_image()` function such that it outputs a better image of the target for your camera. To this end, 
+you will first compute a direction vector ![equation](https://latex.codecogs.com/gif.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> 
 from the center of the target to the edge of the sphere seen by the camera. Then, you will be able to draw the target's 
 true shape by rotating the vector along a rotation axis in the direction of the target, and projecting the resulting 
 points along the edge into the camera image.
 
 <img src="docs/diagram_a3.png" width="500"/>
 
-The steps below guide you through most of this process:
+### Questions 
 
 - **IV-1.** To get started, let ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20%3D%20%5Bt_x%5C%20t_y%5C%20t_z%5D%5ET)<!--$`\bold{t} = [t_x\ t_y\ t_z]^T`$--> be the vector from the camera center to the center of the target 
 in the camera coordinate frame. Additionally, let the camera coordinate frame be oriented such that the ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$--> axis points
@@ -710,24 +707,24 @@ of the sphere that is seen by the camera.
     cv2.drawContours(image, [pixel_array], 0, (255,0,0), 3)
     ```
 
-The resulting image should now show both the original circle (that was drawn for part III) and the blue polygon on top, 
-as shown below:
-
-<p align="center">
-<kbd>
-<img src="docs/ball_outline.png" width="300"/>
-</kbd>
-</p>
+    The resulting image should now show both the original circle (that was drawn for part III) and the blue polygon on top, 
+    as shown below:
+    
+    <p align="center">
+    <kbd>
+    <img src="docs/ball_outline.png" width="300"/>
+    </kbd>
+    </p>
 
 - **IV-7.**  Restart ROS and re-run the generate_target.launch with the ball updating at a lower speed, and being closer to the camera:
     
     ```bash
     $ roslaunch shutter_lookat generate_target.launch target_x_plane:=0.5 publish_rate:=1 # the publish rate for the target is in Hz
     ```
-
-Then restart your virtual_camera.py node and take a picture of your resulting image when the target is nearby one of the corners of the image. The image should show
-the target being elongated; not having a perfectly circlular shape anymore. Include this image in your report and explain why the target does not
-appear to be a perfect circle, especially towards the edge of the image.
+    
+    Then restart your virtual_camera.py node and take a picture of your resulting image when the target is nearby one of the corners of the image. The image should show
+    the target being elongated; not having a perfectly circlular shape anymore. Include this image in your report and explain why the target does not
+    appear to be a perfect circle, especially towards the edge of the image.
 
 
 ## Parts V and VI
