@@ -664,8 +664,8 @@ it draws the true outline of the spherical target as seen by the camera.
 1. Copy your virtual_camera.py script into a new script called `fancy_virtual_camera.py`. The new script
 should be located within the `shutter_lookat/scripts` directory.
 
-2. Edit the name of your new node (e.g., in the `rospy.init_node()` function)
-and any other relevant documentation in your code to indicate that the program implements a fancier virtual camera for 
+2. Change the name of the new node (e.g., in the `rospy.init_node()` function) to `fancy_virtual_camera`
+and edit any other relevant documentation in your code to indicate that the program implements a fancier virtual camera for 
 Shutter.
 
 Follow the questions/tasks below to modify the new node's `draw_image()` function to output a better image 
@@ -673,35 +673,37 @@ for your camera.
 
 ### Questions 
 
-- **IV-1.** To this end, you should
-first compute a direction vector $`\bold{q'}`$ from the center of the target to the edge of the sphere seen by the camera. Then, you will be able to
-draw the target's true shape by rotating the vector along a rotation axis in the direction of the target, and projecting the resulting points along the edge 
-into the camera image.
+Edit the `draw_image()` function as described in the steps below.
+
+- **IV-1.** First, compute a direction vector ![equation](https://latex.codecogs.com/gif.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> 
+from the center of the target to the edge of the sphere seen by the camera. Then, you will be able to draw the target's 
+true shape by rotating the vector along a rotation axis in the direction of the target, and projecting the resulting 
+points along the edge into the camera image.
 
     <img src="docs/diagram_a3.png" width="500"/>
 
     The steps below guide you through most of this process:
 
-    **a.** To get started, let $`\bold{t} = [t_x\ t_y\ t_z]^T`$ be the vector from the camera center to the center of the target 
-    in the camera coordinate frame. Additionally, let the camera coordinate frame be oriented such that the $`z`$ axis points
-    forward. How can you mathematically calculate a vector $`\bold{q}`$ perpendicular to both $`\bold{t}`$ and the horizontal axis of the
+    **a.** To get started, let ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20%3D%20%5Bt_x%5C%20t_y%5C%20t_z%5D%5ET)<!--$`\bold{t} = [t_x\ t_y\ t_z]^T`$--> be the vector from the camera center to the center of the target 
+    in the camera coordinate frame. Additionally, let the camera coordinate frame be oriented such that the ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$--> axis points
+    forward. How can you mathematically calculate a vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%7D)<!--$`\bold{q}`$--> perpendicular to both ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)<!--$`\bold{t}`$--> and the horizontal axis of the
     camera coordinate frame? Explain in your report.
 
     **b.** Now that you have computed a vector perpendicular to the direction towards the target (as seen by the camera), explain
-    how you can scale this vector to have a length equal to the radius $`R`$ of the moving 3D sphere. Provide the equation that scales $`\bold{q}`$ as desired while
+    how you can scale this vector to have a length equal to the radius ![equation](https://latex.codecogs.com/png.latex?R)<!--$`R`$--> of the moving 3D sphere. Provide the equation that scales ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%7D)<!--$`\bold{q}`$--> as desired while
     preserving its direction in your report.
 
-    **c.** Let $`\bold{q'}`$ be the scaled vector from question III-6b. Explain mathematically in your report how can rotate this vector by an angle $`\alpha`$ along a normalized rotation axis aligned with the vector $`\bold{t}`$ from question III-6a.
+    **c.** Let ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> be the scaled vector from question III-6b. Explain mathematically in your report how can rotate this vector by an angle ![equation](https://latex.codecogs.com/png.latex?%5Calpha)<!--$`\alpha`$--> along a normalized rotation axis aligned with the vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)<!--$`\bold{t}`$--> from question III-6a.
 
     > Tip. [Wikipedia](https://en.wikipedia.org/wiki/Axis%E2%80%93angle_representation) is an easy place to learn more about the axis-angle parameterization of rotations.
 
-    **d.** Points along the edge of the sphere (as seen by the camera), can now be computed as: $`\bold{t} + rotate(\bold{q'}, \alpha)`$, where
+    **d.** Points along the edge of the sphere (as seen by the camera), can now be computed as: ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20&plus;%20rotate%28%5Cbold%7Bq%27%7D%2C%20%5Calpha%29)<!--$`\bold{t} + rotate(\bold{q'}, \alpha)`$-->, where
     rotate(vector, angle) is a function that implements III-6c. Modify your virtual camera node to compute at least 20 3D points equally distributed along the edge
     of the sphere that is seen by the camera.
 
-    **e.** Add code to your virtual camera node that projects the 3D points from III-6d onto the image.
+    **e.** Update the `draw_image()` function to have it compute the 3D points from III-6d onto the image after rendering the red circle of fixed radius.
 
-    **f.** Draw a blue contour for the sphere on your image using OpenCV in your virtual camera node. The contour should connect the projected points on the image:
+    **f.** Add a few lines of code to the `draw_image()` function such that it draws a blue contour for the sphere on the image using OpenCV. The contour should connect the projected points on the image:
 
     ```python
     # Example
@@ -710,12 +712,14 @@ into the camera image.
     cv2.drawContours(image, [pixel_array], 0, (255,0,0), 3)
     ```
 
-    The resulting image from your virtual camera should now show both the original circle (that was drawn for part III) and the blue polygon on top, 
+    The resulting image should now show both the original circle (that was drawn for part III) and the blue polygon on top, 
     as shown below:
 
+    <p align="center">
     <kbd>
     <img src="docs/ball_outline.png" width="300"/>
-    </kbd><br>
+    </kbd>
+    </p>
 
     **g.** Restart ROS and re-run the generate_target.launch with the ball updating at a lower speed, and being closer to the camera:
     
@@ -725,7 +729,7 @@ into the camera image.
 
     Then restart your virtual_camera.py node and take a picture of your resulting image when the target is nearby one of the corners of the image. The image should show
     the target being elongated; not having a perfectly circlular shape anymore. Include this image in your report and explain why the target does not
-    appear to be  perfectly round, especially towards the edge of the image.
+    appear to be a perfect circle, especially towards the edge of the image.
 
 
 ## Parts V and VI
