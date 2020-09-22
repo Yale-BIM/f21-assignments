@@ -39,7 +39,7 @@ class TestPublishTarget(unittest.TestCase):
         timeout_t = rospy.Time.now() + rospy.Duration.from_sec(5)  # 5 seconds in the future
         rate = rospy.Rate(10)
         while not rospy.is_shutdown() and not success and rospy.Time.now() < timeout_t:
-            if inspect_rostopic_info():
+            if inspect_rostopic_info(self.node_name):
                 success = True
             else:
                 rate.sleep()
