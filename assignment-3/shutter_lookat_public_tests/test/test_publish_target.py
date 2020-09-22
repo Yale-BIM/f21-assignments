@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-# Public tests for CPSC459/559 Assignment 2
+# Public tests for CPSC459/559 Assignment 3 - Part II
 
-PKG = "shutter_lookat_public_tess"
+PKG = "shutter_lookat_public_tests"
 NAME = 'test_publish_target'
 
 import sys
