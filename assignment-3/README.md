@@ -75,10 +75,10 @@ the [first assignment](https://github.com/Yale-BIM/f20-assignments/tree/master/a
 You assignment will be evaluated based on the content of your report and your code:
 
 - Report / Other Deliverables
-    - Part I (20 pts): I-1 (5 pts) + I-2 (2 pts) + I-3 (5 pts) + I-4 (8 pts)
+    - Part I (25 pts): I-1 (5 pts) + I-2 (5 pts) + I-3 (5 pts) + I-4 (10 pts)
     - Part II (5 pts): II-2 (5 pts) 
     - Part III (10 pts): III-1 (5pts), III-4 (5 pts)
-    - Part IV (12 pts): IV-1 (3 pts) + IV-2 (2 pts) + IV-3 (4 pts) + IV-6 (3 pts)
+    - Part IV (15 pts): IV-1 (3 pts) + IV-2 (5 pts) + IV-3 (4 pts) + IV-6 (3 pts)
     - Part V (10 pts): V-1 (10 pts)
     - Part VI (10 pts): VI-1 (8 pts) + VI-3 (2 pts)
 - Code
@@ -409,9 +409,9 @@ given the increased complexity of this node in comparison previous examples.
         > Remember that continously committing your work and pushing to GitHub will ensure that your
         code is backed up and readily accessible in the future.
     
-- **II-2.** Stop any ROS processes that you are running, relaunch your new
-    generate_target.launch script, and create a new image of the tf tree in ROS, 
-    e.g., using [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
+- **II-2.** Stop any ROS processes that you are running, relaunch the 
+    generate_target.launch script, run your `publish_target_relative_to_realsense_camera.py` node, and create a 
+    new image of the tf tree in ROS, e.g., using [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
     Add the image of the tf tree to your report.
     
     
