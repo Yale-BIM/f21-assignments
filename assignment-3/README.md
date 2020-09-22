@@ -343,6 +343,11 @@ script below, make sure that you are not running any other node in ROS.
 
     The launch script should then open RViz and display the robot and the moving target in front
     of it. The target should be displayed as a red ball.
+    
+    
+    > [Roslaunch](http://wiki.ros.org/roslaunch) is a tool for easily launching multiple
+    ROS nodes. Roslaunch scripts are written in XML format, according to [this specification](http://wiki.ros.org/roslaunch/XML).
+
    
 
 ### Questions / Tasks
@@ -381,22 +386,25 @@ given the increased complexity of this node in comparison previous examples.
             > Tip: An example on broadcasting tf transformations can be found in 
             [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29).
         
-    - Edit the `generate_target.launch` script in the shutter_lookat package so that
-    it runs your new node (publish_target_relative_to_realsense_camera.py) 
-    in addition to all of the nodes that it already launches.
-     
-        > [Roslaunch](http://wiki.ros.org/roslaunch) is a tool for easily launching multiple
-        ROS nodes. Roslaunch scripts are written in XML format, according to [this specification](http://wiki.ros.org/roslaunch/XML).
-
-    - Close all your nodes in ROS and launch the `generate_target.launch` script (which
-    now includes your node). 
+    - Close all your nodes in ROS, launch the `generate_target.launch` script, and launch your new node which publishes
+    the `target` frame. 
     
     - Add a TF display to RViz, and verify that the new `target` frame that you are publishing
     visually matches the position of the moving target (red ball). If the frame and the moving
     object are not displayed in the same place, check your code and edit as necessary.
     
+    - Run public tests for this part of this assignment to ensure that your node is operating as expected for this part
+    of the assignment:
+    
+        ```bash
+        $ rostest shutter_lookat_public_tests test_publish_target.launch
+        ```
+      
+        If you want to see how the tests are implemented, check the `shutter_lookat_public_tests` package that is 
+        provided as part of this assignment. 
+    
     - Save your work by adding and committing your publish_target_relative_to_realsense_camera.py
-    node and the generage_target.launch script to your local repository. Push your code to GitHub.
+    script to your local repository. Push your code to GitHub.
      
         > Remember that continously committing your work and pushing to GitHub will ensure that your
         code is backed up and readily accessible in the future.
