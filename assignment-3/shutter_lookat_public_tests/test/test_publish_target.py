@@ -6,13 +6,12 @@ NAME = 'test_publish_target'
 
 import sys
 import unittest
-import time
-import subprocess
 import tf2_ros
 
 import rospy
 import rostest
-from std_msgs.msg import Float64
+
+from utils import inspect_rostopic_info
 
 
 class TestPublishTarget(unittest.TestCase):
@@ -32,37 +31,6 @@ class TestPublishTarget(unittest.TestCase):
 
         rospy.init_node(NAME, anonymous=True)
 
-    def inspect_rostopic_info(self):
-        """
-        Helper function to check a node's connections
-        :return: True if the node subscribes to the target_topic
-        """
-        out = subprocess.Popen(['rosnode', 'info', self.node_name],
-                               stdout=subprocess.PIPE,
-                               stderr=subprocess.STDOUT)
-        stdout, stderr = out.communicate()
-
-        if stderr is not None:
-            print("Failed to run rosnode info. Error:\n{}".format(stderr.decode('utf-8')))
-            return False
-
-        stdout = stdout.decode('utf-8')
-        headers = ["Publications:", "Subscriptions:", "Services:", "Connections:"]
-
-        in_sub = False
-        for line in stdout.split('\n'):
-            line = line.strip()
-            # rospy.logwarn(line)  # print output of rosnode info
-            if line in headers:
-                in_sub = False
-                if line == "Subscriptions:":
-                    in_sub = True
-
-            if in_sub and line == "* /target [shutter_lookat/Target]":
-                return True
-
-        return False
-
     def test_node_connections(self):
         """
         Check the node's connections
@@ -71,7 +39,7 @@ class TestPublishTarget(unittest.TestCase):
         timeout_t = rospy.Time.now() + rospy.Duration.from_sec(5)  # 5 seconds in the future
         rate = rospy.Rate(10)
         while not rospy.is_shutdown() and not success and rospy.Time.now() < timeout_t:
-            if self.inspect_rostopic_info():
+            if inspect_rostopic_info():
                 success = True
             else:
                 rate.sleep()
