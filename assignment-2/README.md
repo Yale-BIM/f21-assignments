@@ -51,7 +51,7 @@ At the bare minimum, you should be familiar with the commands `cd`, `ls`, `rm`, 
 - **Report:** You are expected to submit a pdf to Gradescope with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of your final version of 
-the code for this assignment. The report is a fillable PDF which is available [here for CPSC 459 Students](https://drive.google.com/file/d/1mygTb6uOFQNj8mATt_Unyw-KMe30Eylj/view?usp=sharing) and [here for CPSC 559 Students](https://drive.google.com/file/d/1YjdOy_9w7emn3Tz96hDkjIlEJDxh7wUS/view?usp=sharing). 
+the code for this assignment. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/1BXj38I3-WQ6fG_sM7WoyLa616D1eC_WN/view?usp=sharing). 
 
     Use the latest version of [Adobe Acrobat Reader DC](https://get.adobe.com/reader/) to fill this PDF in Windows or OSX. 
     In Ubuntu 18.04, you can install Acrobat Reader DC with [wine](https://en.wikipedia.org/wiki/Wine_(software)) by following [these instructions](https://linuxconfig.org/how-to-install-latest-adobe-acrobat-reader-dc-on-ubuntu-18-04-bionic-beaver-linux-with-wine).
@@ -697,6 +697,6 @@ code to the `Assignment2-Code` assignment in Gradescope. Check that the public t
 If you see errors come up in Gradescope, please check your repository. 
 
 Lastly, submit your assignment report to the `Assignment2-Report` assignment in Gradescope.
-The report should be provided in pdf format using the [template for CPSC 459 Students](https://drive.google.com/file/d/1mygTb6uOFQNj8mATt_Unyw-KMe30Eylj/view?usp=sharing) and [template for CPSC 559 Students](https://drive.google.com/file/d/1YjdOy_9w7emn3Tz96hDkjIlEJDxh7wUS/view?usp=sharing).
+The report should be provided in pdf format using the [template](https://drive.google.com/file/d/1BXj38I3-WQ6fG_sM7WoyLa616D1eC_WN/view?usp=sharing).
 indicated at the beginning of the assignment.
 
