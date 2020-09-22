@@ -44,7 +44,7 @@ class TestPublishTarget(unittest.TestCase):
         print(stdout)
         return False
 
-    def check_node_connections(self):
+    def test_node_connections(self):
         """
         Check the node's connections
         """
@@ -63,7 +63,7 @@ class TestPublishTarget(unittest.TestCase):
         print("Verified that the publish_target_relative_to_realsense_camera.py node subscribes to the {} topic".
               format(self.target_topic))
 
-    def check_frame_exists(self):
+    def test_frame_exists(self):
         """
         Check that the target frame exists in the tf tree
         """
