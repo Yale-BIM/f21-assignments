@@ -19,5 +19,5 @@
 
     <!-- run tests -->
     <test test-name="publish_target" pkg="shutter_lookat_public_tests" type="test_publish_target.py"/>
-    
+
 </launch>

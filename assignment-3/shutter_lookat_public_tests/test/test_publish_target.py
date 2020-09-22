@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 # Public tests for CPSC459/559 Assignment 3 - Part II
 
 PKG = "shutter_lookat_public_tests"
@@ -41,7 +41,26 @@ class TestPublishTarget(unittest.TestCase):
                                stdout=subprocess.PIPE,
                                stderr=subprocess.STDOUT)
         stdout, stderr = out.communicate()
-        print(stdout)
+
+        if stderr is not None:
+            print("Failed to run rosnode info. Error:\n{}".format(stderr.decode('utf-8')))
+            return False
+
+        stdout = stdout.decode('utf-8')
+        headers = ["Publications:", "Subscriptions:", "Services:", "Connections:"]
+
+        in_sub = False
+        for line in stdout.split('\n'):
+            line = line.strip()
+            # rospy.logwarn(line)  # print output of rosnode info
+            if line in headers:
+                in_sub = False
+                if line == "Subscriptions:":
+                    in_sub = True
+
+            if in_sub and line == "* /target [shutter_lookat/Target]":
+                return True
+
         return False
 
     def test_node_connections(self):
