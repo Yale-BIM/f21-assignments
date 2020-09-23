@@ -736,7 +736,7 @@ in your new `fancy_virtual_camera.py` script.
     
     Use the code below when you implement these changes to `draw_image()`. In particular, add the functions at the top level 
     of the fancy virtual camera script - that is, outside any other class or function. When you submit your assignment, 
-    automated tests will check that the functions are working as expected in your evaluation.
+    automated tests will check that the functions are working as expected for your evaluation.
 
    ```python
    def compute_q(pt, radius):
