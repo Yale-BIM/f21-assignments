@@ -1,3 +1,4 @@
+import os
 import subprocess
 import rospy
 
@@ -31,3 +32,10 @@ def inspect_rostopic_info(node_name):
             return True
 
     return False
+
+def compute_import_path(*args):
+    test_dir = os.path.dirname(os.path.abspath(__file__))
+    import_dir = os.path.abspath(os.path.join(test_dir, '..', '..'))
+    for path in args:
+        import_dir = os.path.abspath(os.path.join(import_dir, path))
+    return import_dir
