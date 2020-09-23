@@ -52,13 +52,6 @@ Shutter in Part III of this assignment. Then, your goal is to compute the camera
     
     it prints your solution for ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$--> and the resulting 
     ![equation](https://latex.codecogs.com/png.latex?error)<!--$`error`$-->.
-
-    Explain in your report how you formulated a system of equations to solve for ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$-->, and 
-    how you implemented your solution in the `calibrate_K.py` script. The pdf template allows you to upload an image
-    with your explanation, which can either be an image of a hand-drawn solution (e.g., if you solved the problem in a notebook)
-    or an image of a solution that you typed in a word processing program like a Google Doc. 
-
-    > Note: It is allowed to use numeric libraries like numpy in your implementation. But even if you do, explain how you solved the problem in your report.
     
     Run public tests for this part of this assignment to ensure that your code is operating as expected:
 
@@ -66,6 +59,13 @@ Shutter in Part III of this assignment. Then, your goal is to compute the camera
      $ cd calibration
      $ python -m unittest test_calibrate_K
      ```
+
+    Explain in your report how you formulated a system of equations to solve for ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$-->, and 
+    how you implemented your solution in the `calibrate_K.py` script. The pdf template allows you to upload an image
+    with your explanation, which can either be an image of a hand-drawn solution (e.g., if you solved the problem in a notebook)
+    or an image of a solution that you typed in a word processing program like a Google Doc. 
+
+    > Note: It is allowed to use numeric libraries like numpy in your implementation. But even if you do, explain how you solved the problem in your report.
 
 
 ## Part VI. Estimating depth from images
