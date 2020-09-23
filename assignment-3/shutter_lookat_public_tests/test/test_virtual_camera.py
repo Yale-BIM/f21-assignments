@@ -7,7 +7,6 @@ NAME = 'test_virtual_camera'
 import sys
 import unittest
 import time
-import cv2
 import numpy as np
 
 import rospy
@@ -32,12 +31,17 @@ class TestVirtualCamera(unittest.TestCase):
         """
         super(TestVirtualCamera, self).__init__(*args)
 
-        self.node_name = "virtual_camera"                                # name of the node when launched for the tests
         self.camera_info_topic = "/virtual_camera/camera_info"           # camera info topic
         self.camera_image_topic = "/virtual_camera/image_raw"            # camera info topic
         self.target_topic = "/target"                                    # target topic
 
+        self.info_success = False
+        self.image_success = False
+
         rospy.init_node(NAME, anonymous=True)
+
+        self.node_name = rospy.get_param("~node_name", default="virtual_camera")  # node name
+
 
     def test_node_connections(self):
         """
@@ -65,18 +69,15 @@ class TestVirtualCamera(unittest.TestCase):
         """
         Check that the information is being published on /virtual_camera/camera_info
         """
-        self.info_success = False
-        # rospy.Subscriber(self.camera_info_topic, CameraInfo, self._camera_info_callback, queue_size=5)
+        rospy.Subscriber(self.camera_info_topic, CameraInfo, self._camera_info_callback, queue_size=5)
         timeout_t = rospy.Time.now() + rospy.Duration.from_sec(10)  # 10 seconds in the future
 
         # wait patiently for a message
-        i = 0
-        while not rospy.is_shutdown() and rospy.Time.now() < timeout_t and self.info_success == False:
-            self.info_success = True
+        while not rospy.is_shutdown() and rospy.Time.now() < timeout_t and not self.info_success:
             time.sleep(0.5)
 
-        self.assertTrue(self.info_success, "Failed to find camera info published on {}.".format(self.camera_info_topic))
-        print("Success. Heard camera info being published on {}!".format(self.camera_info_topic))
+        self.assertTrue(self.info_success, "Did not get any camera info message on {}.".format(self.camera_info_topic))
+        print("Success. Got at least one camera info message through the {} topic!".format(self.camera_info_topic))
 
     def _image_callback(self, msg):
         self.image_success = True
@@ -85,32 +86,36 @@ class TestVirtualCamera(unittest.TestCase):
         """
         Check that the information is being published on /virtual_camera/camera_image
         """
-        self.image_success = False
         rospy.Subscriber(self.camera_image_topic, Image, self._image_callback, queue_size=5)
         timeout_t = rospy.Time.now() + rospy.Duration.from_sec(10)  # 10 seconds in the future
 
         # wait patiently for a message
-        while not rospy.is_shutdown() and rospy.Time.now() < timeout_t and self.image_success == False:
+        while not rospy.is_shutdown() and rospy.Time.now() < timeout_t and not self.image_success:
             time.sleep(0.1)
 
-        self.assertTrue(self.image_success, "Failed to find image published on {}.".format(self.camera_image_topic))
-        print("Success. Heard image being published on {}!".format(self.camera_image_topic))
-
+        self.assertTrue(self.image_success, "Did not get any image message on {}.".format(self.camera_image_topic))
+        print("Success. Got at least one image message through the {} topic!".format(self.camera_image_topic))
 
     def test_draw_image(self):
         """
-        Check images from draw_images
+        Check the dimensions of the images output by draw_image()
         """
         x = -0.5 
         y = 0.5
         z = 1
-        K = np.array([[1,1,1],[1,1,1],[1,1,1]]) 
+        K = np.array([[1,1,1], [1,1,1], [1,1,1]])
         width = 256
         height = 128
-        image = draw_image(x,y,z, K, width, height)
-        
-        self.assertTrue(image.shape[0]==height, "Height of image is incorrect. Correct height: {}. Actual height: {}".format(height, image.shape[0]))
-        self.assertTrue(image.shape[1]==width, "Width of image is incorrect. Correct width: {}. Actual width: {}".format(width, image.shape[1]))
+        image = draw_image(x, y, z, K, width, height)
+
+        self.assertIsNotNone(image, "The draw_image() function returned None instead of a valid image.")
+        self.assertEqual(image.shape[0], height,
+                         "The height of image was incorrect. Correct height: {}. Actual height: {}".
+                         format(height, image.shape[0]))
+        self.assertEqual(image.shape[1], width,
+                         "The width of image was incorrect. Correct width: {}. Actual width: {}".
+                         format(width, image.shape[1]))
+
 
 if __name__ == '__main__':
     rostest.rosrun(PKG, NAME, TestVirtualCamera, sys.argv)

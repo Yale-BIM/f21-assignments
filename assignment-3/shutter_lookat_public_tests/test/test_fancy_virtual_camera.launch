@@ -14,14 +14,12 @@
     </node>
 
     <!-- run student's code -->
-    <node name="publish_target_relative_to_realsense_camera" pkg="shutter_lookat"
-          type="publish_target_relative_to_realsense_camera.py" />
     <node name="fancy_virtual_camera" pkg="shutter_lookat"
           type="fancy_virtual_camera.py" />
 
     <!-- run tests -->
-    <test test-name="test_fancy_virtual_camera" pkg="shutter_lookat_public_tests" type="test_fancy_virtual_camera.py">
-        <param name="radius" value="0.05"/>
+    <test test-name="test_fancy_virtual_camera" pkg="shutter_lookat_public_tests" type="test_virtual_camera.py">
+        <param name="node_name" value="fancy_virtual_camera"/>
     </test>
 
 </launch>

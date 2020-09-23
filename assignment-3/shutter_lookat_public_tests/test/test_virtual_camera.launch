@@ -14,8 +14,6 @@
     </node>
 
     <!-- run student's code -->
-    <node name="publish_target_relative_to_realsense_camera" pkg="shutter_lookat"
-          type="publish_target_relative_to_realsense_camera.py" />
     <node name="virtual_camera" pkg="shutter_lookat"
           type="virtual_camera.py" />
 

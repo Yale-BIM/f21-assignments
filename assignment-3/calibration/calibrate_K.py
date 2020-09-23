@@ -11,7 +11,7 @@ def compute_K(data_file):
     :return: K as a 3x3 numpy array, error
     """
     # Load data and solve for K...
-    return np.eye(3), 0.0  # Change this default return statement with your solution
+    return np.eye(3), np.inf  # Change this default return statement with your solution
 
 
 if __name__ == '__main__':
