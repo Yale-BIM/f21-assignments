@@ -18,7 +18,7 @@ from utils import inspect_rostopic_info, compute_import_path
 
 import_path = compute_import_path('shutter_lookat', 'scripts')
 sys.path.insert(1, import_path)
-from fancy_virtual_camera import draw_image, compute_q
+from fancy_virtual_camera import draw_image, compute_q, compute_rotation_axis, rotate_q
 
 class TestFancyVirtualCamera(unittest.TestCase):
     """
@@ -114,14 +114,34 @@ class TestFancyVirtualCamera(unittest.TestCase):
         q = np.array([0., 0.04966305, 0.00579493])
         q_computed = compute_q(pt, self.radius)
         q_computed = np.reshape(q_computed, (3))
-        
-        q_norm = np.linalg.norm(q)
-        q_computed_norm = np.linalg.norm(q_computed)
-        self.assertAlmostEqual(q_computed_norm, self.radius, places=3, msg="Computed q vector is not the right length. Correct length: {}. Actual length: {}".format(q_norm, self.radius))
-        
-        q_direction = q/q_norm
-        q_computed_direction = q_computed/q_computed_norm
-        self.assertTrue(np.allclose(q_direction, q_computed_direction), "Computed q vector does not point in the correct direction. Correct direction: {}. Actual direction {}".format(q_direction, q_computed_direction))
+
+        self.assertTrue(np.allclose(q, q_computed), "Computed q vector does not match expected value of q. Correct q: {}. Actual q {}".format(q, q_computed))
+
+    def test_compute_rotation_axis(self):
+        """
+        Test computation of rotation axis - IV-3.
+        """
+        pt = np.array([-0.06777152, -0.14803813, 1.2686999])
+        rotation_axis = compute_rotation_axis(pt)
+
+        self.assertEqual(len(rotation_axis), 3,
+                         msg="Rotation axis should be 3-dimensional. You returned a vector of shape {}".format(
+                             rotation_axis.shape))
+
+    def test_rotate_q(self):
+        """
+        Test rotation of q - IV - 4
+        """
+        pt = np.array([-0.06777152, -0.14803813, 1.2686999])
+        q = np.array([0., 0.04966305, 0.00579493])
+        rotation_axis = compute_rotation_axis(pt)
+        angle = 30.
+
+        rotated_q = rotate_q(q, rotation_axis, angle)
+
+        self.assertEqual(len(rotated_q), 3,
+                         msg="Rotation q should be 3-dimensional. You returned a vector of shape {}".format(
+                             q.shape))
 
 if __name__ == '__main__':
     rostest.rosrun(PKG, NAME, TestFancyVirtualCamera, sys.argv)
