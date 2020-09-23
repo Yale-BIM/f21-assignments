@@ -4,11 +4,6 @@
 import sys
 import unittest
 import numpy as np
-
-from utils import inspect_rostopic_info, compute_import_path
-
-import_path = compute_import_path('depth')
-sys.path.insert(1, import_path)        
 from process_images import compute_depth_from_gray_image, compute_depth_from_depth_image
 
 class TestDepth(unittest.TestCase):
