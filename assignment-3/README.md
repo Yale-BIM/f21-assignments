@@ -55,7 +55,7 @@ you are unfamiliar with any of these tools, programs, or procedures, please revi
 - **Report:** You are expected to submit a pdf to Gradescope with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of your final version of 
-the code for this assignment. The report is a fillable PDF which is available [here](). 
+the code for this assignment. The report is a fillable PDF which is available [here for CPSC 459 Students](https://drive.google.com/file/d/1mygTb6uOFQNj8mATt_Unyw-KMe30Eylj/view?usp=sharing) and [here for CPSC 559 Students](https://drive.google.com/file/d/1mygTb6uOFQNj8mATt_Unyw-KMe30Eylj/view?usp=sharing). 
 
     Use the latest version of [Adobe Acrobat Reader DC](https://get.adobe.com/reader/) to fill the PDF template in Windows or OSX. 
     In Ubuntu 18.04, you can install Acrobat Reader DC with [wine](https://en.wikipedia.org/wiki/Wine_(software)) by following [these instructions](https://linuxconfig.org/how-to-install-latest-adobe-acrobat-reader-dc-on-ubuntu-18-04-bionic-beaver-linux-with-wine).
@@ -75,10 +75,10 @@ the [first assignment](https://github.com/Yale-BIM/f20-assignments/tree/master/a
 You assignment will be evaluated based on the content of your report and your code:
 
 - Report / Other Deliverables
-    - Part I (20 pts): I-1 (5 pts) + I-2 (2 pts) + I-3 (5 pts) + I-4 (8 pts)
+    - Part I (25 pts): I-1 (5 pts) + I-2 (5 pts) + I-3 (5 pts) + I-4 (10 pts)
     - Part II (5 pts): II-2 (5 pts) 
     - Part III (10 pts): III-1 (5pts), III-4 (5 pts)
-    - Part IV (12 pts): IV-1 (3 pts) + IV-2 (2 pts) + IV-3 (4 pts) + IV-6 (3 pts)
+    - Part IV (15 pts): IV-1 (3 pts) + IV-2 (5 pts) + IV-3 (4 pts) + IV-6 (3 pts)
     - Part V (10 pts): V-1 (10 pts)
     - Part VI (10 pts): VI-1 (8 pts) + VI-3 (2 pts)
 - Code
@@ -343,6 +343,11 @@ script below, make sure that you are not running any other node in ROS.
 
     The launch script should then open RViz and display the robot and the moving target in front
     of it. The target should be displayed as a red ball.
+    
+    
+    > [Roslaunch](http://wiki.ros.org/roslaunch) is a tool for easily launching multiple
+    ROS nodes. Roslaunch scripts are written in XML format, according to [this specification](http://wiki.ros.org/roslaunch/XML).
+
    
 
 ### Questions / Tasks
@@ -381,29 +386,32 @@ given the increased complexity of this node in comparison previous examples.
             > Tip: An example on broadcasting tf transformations can be found in 
             [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29).
         
-    - Edit the `generate_target.launch` script in the shutter_lookat package so that
-    it runs your new node (publish_target_relative_to_realsense_camera.py) 
-    in addition to all of the nodes that it already launches.
-     
-        > [Roslaunch](http://wiki.ros.org/roslaunch) is a tool for easily launching multiple
-        ROS nodes. Roslaunch scripts are written in XML format, according to [this specification](http://wiki.ros.org/roslaunch/XML).
-
-    - Close all your nodes in ROS and launch the `generate_target.launch` script (which
-    now includes your node). 
+    - Close all your nodes in ROS, launch the `generate_target.launch` script, and launch your new node which publishes
+    the `target` frame. 
     
     - Add a TF display to RViz, and verify that the new `target` frame that you are publishing
     visually matches the position of the moving target (red ball). If the frame and the moving
     object are not displayed in the same place, check your code and edit as necessary.
     
+    - Run public tests for this part of this assignment to ensure that your node is operating as expected:
+    
+        ```bash
+        $ rostest shutter_lookat_public_tests test_publish_target.launch
+        ```
+      
+        If you want to see how the tests are implemented, check the `shutter_lookat_public_tests` package that is 
+        provided as part of this assignment. More specifically, the tests for Part II are implemented in 
+        `shutter_lookat_public_tests/test/test_publish_target.py`.
+    
     - Save your work by adding and committing your publish_target_relative_to_realsense_camera.py
-    node and the generage_target.launch script to your local repository. Push your code to GitHub.
+    script to your local repository. Push your code to GitHub.
      
         > Remember that continously committing your work and pushing to GitHub will ensure that your
         code is backed up and readily accessible in the future.
     
-- **II-2.** Stop any ROS processes that you are running, relaunch your new
-    generate_target.launch script, and create a new image of the tf tree in ROS, 
-    e.g., using [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
+- **II-2.**  Stop any ROS processes that you are running, relaunch the 
+    generate_target.launch script, run your `publish_target_relative_to_realsense_camera.py` node, and create a 
+    new image of the tf tree in ROS, e.g., using [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
     Add the image of the tf tree to your report.
     
     
@@ -721,7 +729,7 @@ in your new `fancy_virtual_camera.py` script.
     
     > Tip: If you are not familiar with keyworded variable length arguments in Python, check [this guide](https://book.pythontips.com/en/latest/args_and_kwargs.html).
     
-   Use the following code when you implement these changes to `draw_image()`.
+    Use the following code when you implement these changes to `draw_image()`.
 
    ```python
    def compute_q(pt, radius):
