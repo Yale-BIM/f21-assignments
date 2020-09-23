@@ -23,7 +23,7 @@ class TestCalibrateK(unittest.TestCase):
         """
         Check calculation of K
         """
-        K, error = compute_K(self.data_file)
+        K, error = compute_K(self.input_file)
         print('K: {}'.format(K.shape))
         self.assertTrue(K.shape == (3,3), "Shape of K is not (3,3)")
         self.assertFalse(np.isinf(error), "Error is not finite.")
