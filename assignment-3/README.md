@@ -748,15 +748,15 @@ in your new `fancy_virtual_camera.py` script.
    ```python
    def rotate_q(q, rotation_axis, angle):
        """
-       Compute normalized rotation axis in same direction
-       as vector t from question IV-1.
+       Rotate q around rotation_axis by the number of 
+       radians specified by angle.
        q: perpindicular vector from IV-1 and IV-2
        rotation_axis: normalized rotation axis from IV-3
        angle: angle of rotation in radians
        """
        # add your implementation here
-       rotated_point = np.array([0.,0.,0.])
-       return rotated_point
+       rotated_q = np.array([0.,0.,0.])
+       return rotated_q
    ```
 
 - **IV-5.**  Add a few lines of code to the `draw_image()` function such that it draws a blue contour for the sphere on the image using OpenCV. The contour should connect the projected points on the image:
