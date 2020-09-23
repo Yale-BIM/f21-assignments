@@ -660,6 +660,12 @@ should instead return an empty (white) image. In the latter case, the function s
     # example warning
     rospy.logwarn("Warning: Target is behind the camera (z={})".format(z)) # z is the z coordinate for the target's center point relative to the camera frame
     ```
+    
+    Run public tests for this part of this assignment to ensure that your node is operating as expected:
+
+     ```bash
+     $ rostest shutter_lookat_public_tests test_virtual_camera.launch
+     ```
 
 ## Part IV. Making a fancier virtual camera
 You will now modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
@@ -758,6 +764,12 @@ in your new `fancy_virtual_camera.py` script.
        rotated_q = np.array([0.,0.,0.])
        return rotated_q
    ```
+   
+   Run public tests for this part of this assignment to ensure that your node is operating as expected:
+
+     ```bash
+     $ rostest shutter_lookat_public_tests test_fancy_virtual_camera.launch
+     ```
 
 - **IV-5.**  Add a few lines of code to the `draw_image()` function such that it draws a blue contour for the sphere on the image using OpenCV. The contour should connect the projected points on the image:
 
