@@ -714,6 +714,50 @@ in your new `fancy_virtual_camera.py` script.
     More specifically, you should pass the value using the `radius` keyword: `draw_image(x, y, z, K, width, height, radius=target_msg.radius)`.
     
     > Tip: If you are not familiar with keyworded variable length arguments in Python, check [this guide](https://book.pythontips.com/en/latest/args_and_kwargs.html).
+    
+   Use the following code when you implement these changes to `draw_image()`.
+
+   ```python
+   def compute_q(pt, radius):
+       """
+       Compute q - a vector perpindicular to the target
+       direction and the horizontal axis of the camera
+       coordinate frame.
+       pt: the point at the center of the sphere in the
+           camera coordinate frame
+       radius: the radius of the ball 
+       """
+       # add your implementation here
+       q = np.array([0.,0.,0.])
+       return q
+   ```
+   
+   ```python
+   def compute_rotation_axis(pt):
+       """
+       Compute normalized rotation axis in same direction
+       as vector t from question IV-1.
+       pt: the point at the center of the sphere in the
+           camera coordinate frame
+       """
+       # add your implementation here
+       rotation_axis = np.array([0.,0.,0.])
+       return rotation_axis
+   ```
+   
+   ```python
+   def rotate_q(q, rotation_axis, angle):
+       """
+       Compute normalized rotation axis in same direction
+       as vector t from question IV-1.
+       q: perpindicular vector from IV-1 and IV-2
+       rotation_axis: normalized rotation axis from IV-3
+       angle: angle of rotation in radians
+       """
+       # add your implementation here
+       rotated_point = np.array([0.,0.,0.])
+       return rotated_point
+   ```
 
 - **IV-5.**  Add a few lines of code to the `draw_image()` function such that it draws a blue contour for the sphere on the image using OpenCV. The contour should connect the projected points on the image:
 
