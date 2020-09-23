@@ -65,8 +65,10 @@ Shutter in Part III of this assignment. Then, your goal is to compute the camera
     with your explanation, which can either be an image of a hand-drawn solution (e.g., if you solved the problem in a notebook)
     or an image of a solution that you typed in a word processing program like a Google Doc. 
 
-    > Note: It is allowed to use numeric libraries like numpy in your implementation. But even if you do, explain how you solved the problem in your report.
-
+    > Note: It is allowed to use numeric solvers from numpy in your implementation, but you should not use 
+    other numeric manipulation libraries as automated tests will not have additional dependencies.
+    Note that even if you do use solvers from numpy for your solution, you should explain how you solved 
+    the problem in your report.
 
 ## Part VI. Estimating depth from images
 

@@ -39,6 +39,8 @@ As for the first assignment, you should have access to a computer with `Ubuntu 1
 You should also have `git` installed in the machine that you are using to work on your assignment.
 You will use git to save your work to your [GitHub](http://www.github.com) repository.
 
+Lastly, you should use Python 2.7 to implement all your solutions (including extra questions for CPSC-559).
+
 #### Background Knowledge
 
 This assignment assumes that you have already completed the [first](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-1) and [second](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-2) assignments and,
@@ -669,11 +671,14 @@ should instead return an empty (white) image. In the latter case, the function s
     rospy.logwarn("Warning: Target is behind the camera (z={})".format(z)) # z is the z coordinate for the target's center point relative to the camera frame
     ```
     
-    Run public tests for this part of this assignment to ensure that your node is operating as expected:
+Run public tests for Part III of this assignment to ensure that your node is operating as expected:
 
-     ```bash
-     $ rostest shutter_lookat_public_tests test_virtual_camera.launch
-     ```
+ ```bash
+ $ rostest shutter_lookat_public_tests test_virtual_camera.launch
+ ```
+
+Note that the above tests will run automatically in Gradescope when you submit your code to the 
+`Assignment 3 - Code` assignment.
 
 ## Part IV. Making a fancier virtual camera
 You will now modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
@@ -700,7 +705,7 @@ true shape by rotating the vector along a rotation axis in the direction of the 
 </p>
 
 - **IV-1.** To get started, let ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20%3D%20%5Bt_x%5C%20t_y%5C%20t_z%5D%5ET)<!--$`\bold{t} = [t_x\ t_y\ t_z]^T`$--> be the vector from the camera center to the center of the target 
-in the camera coordinate frame (as shown in the image in the last section). 
+in the camera coordinate frame (as shown in the image above). 
 Additionally, let the camera coordinate frame be oriented such that the ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$--> axis points
 forward. How can you mathematically calculate a vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%7D)<!--$`\bold{q}`$--> perpendicular to both ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)<!--$`\bold{t}`$--> and the horizontal axis of the
 camera coordinate frame? Explain in your report.
@@ -729,7 +734,9 @@ in your new `fancy_virtual_camera.py` script.
     
     > Tip: If you are not familiar with keyworded variable length arguments in Python, check [this guide](https://book.pythontips.com/en/latest/args_and_kwargs.html).
     
-    Use the following code when you implement these changes to `draw_image()`.
+    Use the code below when you implement these changes to `draw_image()`. In particular, add the functions at the top level 
+    of the fancy virtual camera script - that is, outside any other class or function. When you submit your assignment, 
+    automated tests will check that the functions are working as expected in your evaluation.
 
    ```python
    def compute_q(pt, radius):
@@ -773,7 +780,7 @@ in your new `fancy_virtual_camera.py` script.
        return rotated_q
    ```
    
-   Run public tests for this part of this assignment to ensure that your node is operating as expected:
+   You can run public tests for this part of this assignment to ensure that your node is operating as expected:
 
      ```bash
      $ rostest shutter_lookat_public_tests test_fancy_virtual_camera.launch
