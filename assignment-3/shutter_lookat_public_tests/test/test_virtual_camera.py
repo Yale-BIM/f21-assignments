@@ -31,7 +31,6 @@ class TestVirtualCamera(unittest.TestCase):
         """
         super(TestVirtualCamera, self).__init__(*args)
 
-        self.node_name = "virtual_camera"                                # name of the node when launched for the tests
         self.camera_info_topic = "/virtual_camera/camera_info"           # camera info topic
         self.camera_image_topic = "/virtual_camera/image_raw"            # camera info topic
         self.target_topic = "/target"                                    # target topic
@@ -40,6 +39,9 @@ class TestVirtualCamera(unittest.TestCase):
         self.image_success = False
 
         rospy.init_node(NAME, anonymous=True)
+
+        self.node_name = rospy.get_param("~node_name", default="virtual_camera")  # node name
+
 
     def test_node_connections(self):
         """
