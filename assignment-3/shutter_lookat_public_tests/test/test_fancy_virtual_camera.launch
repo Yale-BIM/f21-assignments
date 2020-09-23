@@ -18,7 +18,7 @@
           type="fancy_virtual_camera.py" />
 
     <!-- run tests -->
-    <test test-name="test_fancy_virtual_camera" pkg="shutter_lookat_public_tests" type="test_fancy_virtual_camera.py">
+    <test test-name="test_fancy_virtual_camera" pkg="shutter_lookat_public_tests" type="test_virtual_camera.py">
         <param name="node_name" value="fancy_virtual_camera"/>
     </test>
 
