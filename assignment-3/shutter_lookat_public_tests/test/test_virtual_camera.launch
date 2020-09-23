@@ -14,7 +14,7 @@
     </node>
 
     <!-- run student's code -->
-    <node name="virtual_camera" pkg="shutter_lookat"
+    <node name="virtual_camera_node" pkg="shutter_lookat"
           type="virtual_camera.py" />
 
     <!-- run tests -->

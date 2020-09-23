@@ -40,7 +40,7 @@ class TestVirtualCamera(unittest.TestCase):
 
         rospy.init_node(NAME, anonymous=True)
 
-        self.node_name = rospy.get_param("~node_name", default="virtual_camera")  # node name
+        self.node_name = rospy.get_param("~node_name", default="virtual_camera_node")  # node name
 
 
     def test_node_connections(self):
