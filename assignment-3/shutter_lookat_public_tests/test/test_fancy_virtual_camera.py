@@ -66,7 +66,7 @@ class TestFancyVirtualCamera(unittest.TestCase):
         Check that the information is being published on /virtual_camera/camera_info
         """
         self.info_success = False
-        # rospy.Subscriber(self.camera_info_topic, CameraInfo, self._camera_info_callback, queue_size=5)
+        rospy.Subscriber(self.camera_info_topic, CameraInfo, self._camera_info_callback, queue_size=5)
         timeout_t = rospy.Time.now() + rospy.Duration.from_sec(10)  # 10 seconds in the future
 
         # wait patiently for a message
