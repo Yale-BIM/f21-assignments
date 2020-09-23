@@ -1,0 +1,25 @@
+<launch>
+
+    <!-- run robot simulation -->
+    <include file="$(find shutter_bringup)/launch/shutter_sim.launch"/>
+
+    <!-- look forward if desired -->
+    <node name="look_forward" pkg="shutter_lookat" type="look_forward.py"/>
+
+    <!-- generate the simulated moving object -->
+    <node name="generate_target" pkg="shutter_lookat" type="generate_target.py" output="screen">
+        <param name="x_value" value="1.5"/>
+	    <param name="radius" value="0.05"/>
+	    <param name="publish_rate" value="30"/>
+    </node>
+
+    <!-- run student's code -->
+    <node name="publish_target_relative_to_realsense_camera" pkg="shutter_lookat"
+          type="publish_target_relative_to_realsense_camera.py" />
+    <node name="virtual_camera" pkg="shutter_lookat"
+          type="virtual_camera.py" />
+
+    <!-- run tests -->
+    <test test-name="test_virtual_camera" pkg="shutter_lookat_public_tests" type="test_virtual_camera.py"/>
+
+</launch>

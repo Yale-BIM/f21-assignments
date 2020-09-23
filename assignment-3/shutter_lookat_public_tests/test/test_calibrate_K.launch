@@ -1,0 +1,11 @@
+<launch>
+
+    <!-- get parameters for test -->
+    <arg name="data_file" default="correspondences.txt"/>
+
+    <!-- run tests -->
+    <test test-name="test_calibrate_K" pkg="shutter_lookat_public_tests" type="test_calibrate_K.py">
+        <param name="data_file" value="$(arg data_file)"/>
+    </test>
+
+</launch>
