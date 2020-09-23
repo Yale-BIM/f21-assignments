@@ -668,6 +668,12 @@ should instead return an empty (white) image. In the latter case, the function s
     # example warning
     rospy.logwarn("Warning: Target is behind the camera (z={})".format(z)) # z is the z coordinate for the target's center point relative to the camera frame
     ```
+    
+    Run public tests for this part of this assignment to ensure that your node is operating as expected:
+
+     ```bash
+     $ rostest shutter_lookat_public_tests test_virtual_camera.launch
+     ```
 
 ## Part IV. Making a fancier virtual camera
 You will now modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
@@ -722,6 +728,56 @@ in your new `fancy_virtual_camera.py` script.
     More specifically, you should pass the value using the `radius` keyword: `draw_image(x, y, z, K, width, height, radius=target_msg.radius)`.
     
     > Tip: If you are not familiar with keyworded variable length arguments in Python, check [this guide](https://book.pythontips.com/en/latest/args_and_kwargs.html).
+    
+    Use the following code when you implement these changes to `draw_image()`.
+
+   ```python
+   def compute_q(pt, radius):
+       """
+       Compute q - a vector perpindicular to the target
+       direction and the horizontal axis of the camera
+       coordinate frame.
+       pt: the point at the center of the sphere in the
+           camera coordinate frame
+       radius: the radius of the ball 
+       """
+       # add your implementation here
+       q = np.array([0.,0.,0.])
+       return q
+   ```
+   
+   ```python
+   def compute_rotation_axis(pt):
+       """
+       Compute normalized rotation axis in same direction
+       as vector t from question IV-1.
+       pt: the point at the center of the sphere in the
+           camera coordinate frame
+       """
+       # add your implementation here
+       rotation_axis = np.array([0.,0.,0.])
+       return rotation_axis
+   ```
+   
+   ```python
+   def rotate_q(q, rotation_axis, angle):
+       """
+       Rotate q around rotation_axis by the number of 
+       radians specified by angle.
+       q: perpindicular vector from IV-1 and IV-2
+       rotation_axis: normalized rotation axis from IV-3
+       angle: angle of rotation in radians
+       """
+       # add your implementation here
+       rotated_q = np.array([0.,0.,0.])
+       return rotated_q
+   ```
+   
+   Run public tests for this part of this assignment to ensure that your node is operating as expected:
+
+     ```bash
+     $ rostest shutter_lookat_public_tests test_fancy_virtual_camera.launch
+     ```
 
 - **IV-5.**  Add a few lines of code to the `draw_image()` function such that it draws a blue contour for the sphere on the image using OpenCV. The contour should connect the projected points on the image:
 
