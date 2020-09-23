@@ -30,7 +30,7 @@ class TestFancyVirtualCamera(TestVirtualCamera):
         super(TestFancyVirtualCamera, self).__init__(*args)
 
         self.node_name = "fancy_virtual_camera_node"             # name of the node when launched for the tests
-        self.radius = rospy.get_param("~radius", default=0.1)    # ball radius
+        self.radius = rospy.get_param("~radius", default=0.05)   # ball radius
 
     def test_compute_q(self):
         """
