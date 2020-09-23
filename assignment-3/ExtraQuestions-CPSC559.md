@@ -59,6 +59,13 @@ Shutter in Part III of this assignment. Then, your goal is to compute the camera
     or an image of a solution that you typed in a word processing program like a Google Doc. 
 
     > Note: It is allowed to use numeric libraries like numpy in your implementation. But even if you do, explain how you solved the problem in your report.
+    
+    Run public tests for this part of this assignment to ensure that your code is operating as expected:
+
+     ```bash
+     $ cd calibration
+     $ python -m unittest test_calibrate_K
+     ```
 
 
 ## Part VI. Estimating depth from images
@@ -138,6 +145,13 @@ the book in the depth image. To this end, complete the `compute_depth_from_depth
     a. it gathers the depth values corresponding to the book from the depth image,
     b. filters out zero values (these cells of the depth image correspond to pixels in the grayscale image for which depth could not be estimated), and
     c. computes the average depth of the resulting filtered values. This average depth should be returned by the function.
+    
+    Run public tests for this part of this assignment to ensure that your code is operating as expected:
+
+     ```bash
+     $ cd depth
+     $ python -m unittest test_depth
+     ```
      
     Once you are done implementing the function, you should be able to run the script again, and measure the absolute 
     difference between the latter result (Part VI-3) and your estimated depth from the grayscale image alone (VI-2).
