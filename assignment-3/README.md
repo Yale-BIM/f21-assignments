@@ -791,7 +791,7 @@ in your new `fancy_virtual_camera.py` script.
     ```python
     # Example
     pixel_array = np.zeros((N,2), dtype=np.int32) # N is the number of points on the contour
-    (...) # compute the points as in III-6a - III-6e
+    (...) # compute the points as in IV-4
     cv2.drawContours(image, [pixel_array], 0, (255,0,0), 3)
     ```
 
