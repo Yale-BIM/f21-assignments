@@ -154,7 +154,7 @@ new message type as in the [tutorial on Creating Messages and Services](http://w
     ```
     
     *Tip:* If for some reason catkin_make fails to generate your message, check the CMakeLists.txt and
-    package.xml filtes that you edited in step 3.
+    package.xml files that you edited in step 3.
     
 5. Verify that your message type is built and that it has the 3 fields mentioned in the step 2 above. You
 can use the `rosmsg` tool to this end:
