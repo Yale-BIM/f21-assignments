@@ -65,7 +65,7 @@ in [LaTeX](https://www.latex-project.org/).
 
 - **Code:** Finally, you are expected to push code for this assignment to your 
 [GitHub](http://www.github.com) repository as indicated in the [general instructions](../README.md) 
-document for CPSC-659 assignments. 
+document for CPSC-559 assignments. 
 
 
 #### Evaluation
