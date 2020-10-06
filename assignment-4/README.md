@@ -32,7 +32,7 @@ This assignment will provide you practical experience with custom messages in RO
 As for the prior assignments, you should have access to a computer with `Ubuntu 18.04` and `ROS Melodic` to complete the homework. 
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
-You will use git to save your work to your [GitLab](http://www.gitlab.com) repository.
+You will use git to save your work to your [GitHub](http://www.github.com) repository.
 
 #### Background Knowledge
 
@@ -64,7 +64,7 @@ in [LaTeX](https://www.latex-project.org/).
 - **ROS Bag:** You are expected to submit a ROS bag to Canvas (see Part V of this assignment).
 
 - **Code:** Finally, you are expected to push code for this assignment to your 
-[GitLab](http://www.gitlab.com) repository as indicated in the [general instructions](../README.md) 
+[GitHub](http://www.github.com) repository as indicated in the [general instructions](../README.md) 
 document for CPSC-659 assignments. 
 
 
