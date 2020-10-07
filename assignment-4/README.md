@@ -475,7 +475,7 @@ add_observation_noise is set to true in filter_colored_target.launch:
      for this part of the assignment in your report.  In addition, make a video of rqt_image_view that shows the images sent
     through the /tracked_image topic for at least 5 seconds with add_observation_noise:=true. 
     Turn this video into an animated
-    gif, name it "filtered_blue_square_with_extra_noise.gif", and include it in the `docs` directory within the
+    gif, name it `filtered_blue_square_with_extra_noise.gif`, and include it in the `docs` directory within the
      shutter_track_target package. Commit the gif to your repository.
      
 - **IV-14.** Write a README.md Markdown file inside the shutter_track_target repository that explains
