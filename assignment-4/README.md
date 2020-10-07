@@ -61,7 +61,9 @@ with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this
 [simple assignment template](https://www.overleaf.com/latex/templates/simple-assignment-template/mzkqqqjypzvd) 
 in [LaTeX](https://www.latex-project.org/).
 
-- **ROS Bag:** You are expected to submit a ROS bag to Canvas (see Part V of this assignment).
+- **ROS Bag:** You are expected to provide a link to a ROS bag in your assignment report (see Part V of this assignment). 
+ROS bags can be hosted in [Google drive](https://drive.google.com/) or [Box](https://yale.account.box.com/) -- you 
+should ensure that the teaching staff can access your ROS bags.
 
 - **Code:** Finally, you are expected to push code for this assignment to your 
 [GitHub](http://www.github.com) repository as indicated in the [general instructions](../README.md) 
