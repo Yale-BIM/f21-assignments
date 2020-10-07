@@ -526,18 +526,18 @@ as indicated below. Note that the bim laptops in AKW411 already have the [RealSe
     
     Please name your bag `track_target.bag`.
 
-    Test that your bag recording by running `rostest shutter_track_target_public_tests test_bag_recording.launch`.
+    You can check that your bag has key topics by running the test: `$ rostest shutter_track_target_public_tests test_bag_recording.launch`.
 
-    > *Tip 1:* You may have to set the `use_sim_time` parameter back to false since you are no longer playing a bag.
-            This is included in the `play_video.launch` file, but if you create another launch file to record 
-            your bag or you start 
+    > *Tip 1:* For this part of the assignment, you should set the `use_sim_time` parameter back to false since you are no longer playing a bag.
+            The assignment provides you a script for playing a video through ROS for your convenience (see `play_video.py` within `shutter_track_target/scripts`) 
+            and a launch file for running this script (`play_video.launch` within `shutter_track_target/launch`).
 
-    > *Tip 2:* This assignment provides you of an example launch file to record the above bag. 
+    > *Tip 2:* This assignment provides you of an example launch file to record the `track_target.bag`. 
             See the `assignment-4/shutter_track_target/launch/record_bag.launch` file.
 
     > *Tip 3:* Double check the content of your bag with the `rosbag info` and `rosbag play` commands before 
-            submitting your assignment to make sure that the tracked_image and observation_image topics contain
-            example images of your filter tracking your desired object. As a reference, the bag should include at least
+            submitting your assignment to make sure that the tracked_image and observation_image topics show 
+            your filter tracking your desired object. As a reference, the bag should include at least
             200 images for each of these topics.
 
     Upload your ROS bag to Google Drive or Box and make it accessible to anybody with the link. Then, **provide a link to your ROS bag in your report for this assignment.** You don't need to and you shouldn't commit the bag to your repository! Otherwise, you will make your repository unnecessarily heavy. 
