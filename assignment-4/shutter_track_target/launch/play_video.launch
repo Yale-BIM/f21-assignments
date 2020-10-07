@@ -1,0 +1,13 @@
+<launch>
+   <!-- set use_sim_time to false -->
+    <param name="use_sim_time" value="false" />
+
+    <!-- arguments -->
+    <arg name="video_file" default="/path/to/video"/>
+
+    <!-- play the video -->
+    <node pkg="shutter_track_target" type="play_video.py" name="play_video" >
+        <param name="video_file" value="$(arg video_file)"/>
+    </node>
+
+</launch>
