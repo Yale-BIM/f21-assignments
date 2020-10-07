@@ -518,28 +518,27 @@ as indicated below. Note that the bim laptops in AKW411 already have the [RealSe
 
     - /tracked_image
     - /observation_image
-    - /clock
     - /rosout
 
-Please name your bag `track_target.bag`.
+    Please name your bag `track_target.bag`.
 
-Test that your bag recording by running `rostest shutter_track_target_public_tests test_bag_recording.launch`.
-
-    > *Tip 1:* You may have to set the `use_sim_time` parameter back to false since you are no longer playing a bag.
-               This is included in the `play_video.launch` file, but if you create another launch file to record 
-               your bag or you start 
+    Test that your bag recording by running `rostest shutter_track_target_public_tests test_bag_recording.launch`.
     
-    > *Tip 2:* This assignment provides you of an example launch file to record the above bag. 
-       See the `assignment-4/shutter_track_target/launch/record_bag.launch` file.
-
-    > *Tip 3:* Double check the content of your bag with the `rosbag info` and `rosbag play` commands before 
-      submitting your assignment to make sure that the tracked_image and observation_image topics contain
-      example images of your filter tracking your desired object. As a reference, the bag should include at least
-      200 images for each of these topics.
-
-    Submit your bag through Canvas. Additionally, indicate in your report all the parameters that you used in your
-    system to effectively track your object
-    (e.g., hue range for generating observations, blob detector parameters, Kalman Filter parameters, etc.). 
+        > *Tip 1:* You may have to set the `use_sim_time` parameter back to false since you are no longer playing a bag.
+                   This is included in the `play_video.launch` file, but if you create another launch file to record 
+                   your bag or you start 
+        
+        > *Tip 2:* This assignment provides you of an example launch file to record the above bag. 
+           See the `assignment-4/shutter_track_target/launch/record_bag.launch` file.
+    
+        > *Tip 3:* Double check the content of your bag with the `rosbag info` and `rosbag play` commands before 
+          submitting your assignment to make sure that the tracked_image and observation_image topics contain
+          example images of your filter tracking your desired object. As a reference, the bag should include at least
+          200 images for each of these topics.
+    
+        Submit your bag through Canvas. Additionally, indicate in your report all the parameters that you used in your
+        system to effectively track your object
+        (e.g., hue range for generating observations, blob detector parameters, Kalman Filter parameters, etc.). 
 
 ## Part VI
 
