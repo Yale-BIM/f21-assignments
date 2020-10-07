@@ -521,6 +521,7 @@ as indicated below. Note that the bim laptops in AKW411 already have the [RealSe
     - /rosout
 
     <br/>
+    
     Please name your bag `track_target.bag`.
 
     Test that your bag recording by running `rostest shutter_track_target_public_tests test_bag_recording.launch`.
