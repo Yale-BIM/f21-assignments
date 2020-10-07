@@ -327,7 +327,7 @@ through the "/observation" topic (self.obs_pub variable).
 
 - **III-4.** As in II-1, make a video of rqt_image_view that shows the content of the /observation_image
 topic as the left-seq1.bag rosbag plays for at least 5 seconds. Turn this video into an animated
-gif, name it "keypoints.gif", and include it in the `docs` directory within the
+gif, name it `keypoints.gif`, and include it in the `docs` directory within the
  shutter_track_target package. Commit the gif to your repository.
  
 
