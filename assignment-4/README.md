@@ -56,10 +56,7 @@ font weight.
 - **Report:** You are expected to submit a pdf to Canvas with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of the version of the code
-that you would like to be evaluated on. Though not mandatory, it is recommended that you generate this pdf 
-with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this 
-[simple assignment template](https://www.overleaf.com/latex/templates/simple-assignment-template/mzkqqqjypzvd) 
-in [LaTeX](https://www.latex-project.org/).
+that you would like to be evaluated on. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/1O2D53BI08oVKheD0E5-1Ddv4rRBcbfbc/view?usp=sharing) for CPSC 459 students and [here](https://drive.google.com/file/d/1hQ-sWeq0Os9r9pe4tL_28MF-p1vwt69u/view?usp=sharing) for CPSC 559 students
 
 - **ROS Bag:** You are expected to provide a link to a ROS bag in your assignment report (see Part V of this assignment). 
 ROS bags can be hosted in [Google drive](https://drive.google.com/) or [Box](https://yale.account.box.com/) -- you 
