@@ -240,7 +240,7 @@ with the command: `$ rosparam get use_sim_time`
 topic as the left-seq1.bag rosbag plays for at least 3 seconds. Turn this video into an animated
 gif, e.g., with ffmpeg and imagemagick as indicated in 
 [this code snippet](https://gitlab.com/snippets/1743818), and include it in a `docs` directory within the
- shutter_track_target package. Name the gif "input.gif" and commit it to your repository.
+ shutter_track_target package. Name the gif `input.gif` and commit it to your repository.
  
 
 ## Part III. Detecting a Visual Target
