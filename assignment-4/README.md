@@ -237,7 +237,7 @@ with the command: `$ rosparam get use_sim_time`
 topic as the left-seq1.bag rosbag plays for at least 3 seconds. Turn this video into an animated
 gif, e.g., with ffmpeg and imagemagick as indicated in 
 [this code snippet](https://gitlab.com/snippets/1743818), and include it in a `docs` directory within the
- shutter_track_target package. Name the gif "input.gif" and commit it to your repository.
+ shutter_track_target package. Name the gif `input.gif` and commit it to your repository.
  
 
 ## Part III. Detecting a Visual Target
@@ -324,7 +324,7 @@ through the "/observation" topic (self.obs_pub variable).
 
 - **III-4.** As in II-1, make a video of rqt_image_view that shows the content of the /observation_image
 topic as the left-seq1.bag rosbag plays for at least 5 seconds. Turn this video into an animated
-gif, name it "keypoints.gif", and include it in the `docs` directory within the
+gif, name it `keypoints.gif`, and include it in the `docs` directory within the
  shutter_track_target package. Commit the gif to your repository.
  
 
@@ -472,7 +472,7 @@ add_observation_noise is set to true in filter_colored_target.launch:
      for this part of the assignment in your report.  In addition, make a video of rqt_image_view that shows the images sent
     through the /tracked_image topic for at least 5 seconds with add_observation_noise:=true. 
     Turn this video into an animated
-    gif, name it "filtered_blue_square_with_extra_noise.gif", and include it in the `docs` directory within the
+    gif, name it `filtered_blue_square_with_extra_noise.gif`, and include it in the `docs` directory within the
      shutter_track_target package. Commit the gif to your repository.
      
 - **IV-14.** Write a README.md Markdown file inside the shutter_track_target repository that explains
