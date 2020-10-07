@@ -1,0 +1,4 @@
+<launch>
+    <!-- run tests -->
+    <test test-name="observation_msg" pkg="shutter_track_target_public_tests" type="test_observation_msg.py"/>
+</launch>

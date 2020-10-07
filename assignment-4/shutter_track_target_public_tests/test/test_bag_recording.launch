@@ -1,0 +1,18 @@
+<launch>
+
+    <!-- arguments -->
+    <arg name="bagfile" default="$(find shutter_track_target)/data/track_target.bag"/>
+    <arg name="add_observation_noise" default="false"/>
+    <arg name="lower_hue_value" default="100"/>
+    <arg name="higher_hue_value" default="140"/>
+    <arg name="playback_speed" default="1.0"/>
+
+    <!-- set use_sim_time to true -->
+    <param name="use_sim_time" value="true" />
+
+    <!-- play your bag -->
+    <node pkg="rosbag" type="play" name="player" output="screen" args="--clock -r $(arg playback_speed) $(arg bagfile)"/>
+
+    <!-- run tests -->
+    <test test-name="bag_recording" pkg="shutter_track_target_public_tests" type="test_bag_recording.py"/>
+</launch>

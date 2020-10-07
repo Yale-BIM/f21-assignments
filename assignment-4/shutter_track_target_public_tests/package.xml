@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>shutter_track_target_public_tests</name>
+  <version>0.0.0</version>
+  <description>The shutter_track_target_public_tests package</description>
+  <maintainer email="marynelv@todo.todo">marynelv</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>rostest</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>rostest</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>rostest</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <export>
+  </export>
+</package>
