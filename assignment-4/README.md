@@ -514,7 +514,7 @@ as indicated below. Note that the bim laptops in AKW411 already have the [RealSe
 
 - **V-1.** Run your completed Kalman Filter on your node, updating the hue arguments to track the object in your video. Make sure to look at rqt_image_view to ensure that your object is being tracked.
 
-    Once it looks like your filter is tracking your object well, make a gif of rqt_image_view showing the topic `/tracked_image`. Name this gif "new_object.gif". Include this gif in the README for `shutter_track_target` that you wrote in Part IV.
+    Once it looks like your filter is tracking your object well, make a gif of rqt_image_view showing the topic `/tracked_image`. Name this gif `new_object.gif`. Include this gif in the README for `shutter_track_target` that you wrote in Part IV.
     
     Make a rosbag of your system while the video is playing and you are tracking the object's position. The bag should be around 5 seconds long, and **only** include the following topics:
 
