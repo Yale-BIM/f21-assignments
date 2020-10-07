@@ -115,6 +115,11 @@ $ cd <path-to-your-catkin-workspace-root-directory>
 $ catkin_make -DCMAKE_BUILD_TYPE=Release
 ```
 
+## Tests
+
+A set of public tests has been provided for your code - they are a subset of the tests we will use to grade your code. Please run these tests before submitting your assignment.
+
+To run these tests, refer to the [README.md](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-4/shutter_track_target_public_tests) in the `shutter_track_target_public_tests` package.
 
 ## Part I. Creating a Custom ROS Message Type
 ROS uses [messages](http://wiki.ros.org/msg) of various types to transmit information between nodes. For example, in the 
