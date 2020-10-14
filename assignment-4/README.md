@@ -484,35 +484,21 @@ previously in this assignment in the README.md file.
 
 ## Part V. Real-Time Filtering
 
-You will now run your filter on images captured by the Shutter robot. To this end, you should
-find a **uniform color, but non-blue object** to track in this part of the assignment. Then, use
-one of the laptops in AKW411 to run your code and track the object.
+You will now run your filter on another video. This video should contain a **uniform color, but non-blue object**. Record this video from your computer, phone, or download a (non-copyrighted) video for this section. Ensure that this video is in `.mp4` format.
 
-To get started, setup the [realsense2_camera ROS package](https://github.com/IntelRealSense/realsense-ros) in your repository
-as indicated below. Note that the bim laptops in AKW411 already have the [RealSense driver](https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md) installed for you to access the robot's camera through USB.
+You can play the video through ROS using the provided `play_video.py` script within the `shutter_track_target/scripts` folder. For your convenience, we also provide you
+a launch file to run the script:
 
-1. Test that the camera is connected to the laptop over usb and is accessible from your account:
+```bash
+$ roslaunch shutter_track_target play_video.launch
+```
 
-    ```bash
-    $ realsense-viewer # and enable the RGB camera to verify that images can be received from the camera
-    ```
+You should update the default path to your video in the launch file, or pass the optional parameter `video_file` to update the value of this argument at run time.
 
-2. Install the realsense2_camera package in your catkin workspace:
-
-    ```bash
-    $ roscd; cd ../src # go to the src folder of your workspace
-    $ git clone https://github.com/IntelRealSense/realsense-ros.git # clone the realsense2_camera repository into your workspace's src folder
-    $ cd realsense-ros; git checkout 2.2.8 # get a stable version of the realsense2_camera code
-    $ roscd; cd .. # go back to the root of your catkin workspace
-    $ catkin_make -DCMAKE_BUILD_TYPE=Release # compile your catkin workspace
-    $ roslaunch realsense2_camera rs_camera.launch align_depth:=true # check that you can run the camera driver from ROS and visualize the images, e.g., using rqt_image_view
-    ```
-
-    > NOTE: If you've already setup the realsense2_camera package in your repository because you completed the CPSC-559 extra questions for Assignment 3, then you don't need to set it up again. You should already be able to launch the rs_camera.launch script after sourcing your workspace setup.bash.
 
 ### Questions / Tasks
 
-- **V-1.** Run your completed Kalman Filter on your node, updating the hue arguments to track the object in your video. Make sure to look at rqt_image_view to ensure that your object is being tracked.
+- **V-1.** Run your completed Kalman Filter node, updating the hue arguments to track the desired object in your video. Make sure to look at rqt_image_view to ensure that your object is being tracked properly.
 
     Once it looks like your filter is tracking your object well, make a gif of rqt_image_view showing the topic `/tracked_image`. Name this gif `new_object.gif`. Include this gif in the README for `shutter_track_target` that you wrote in Part IV.
     
@@ -524,24 +510,23 @@ as indicated below. Note that the bim laptops in AKW411 already have the [RealSe
 
     <br/>
     
-    Please name your bag `track_target.bag`.
+    Please name your bag `track_target.bag`. Then, check that it passes the public test for the bag: `$ rostest shutter_track_target_public_tests test_bag_recording.launch`.
+    Note that the test expects the bag to be stored within the `shutter_track_target/data` directory, but you should not commit the bag to your repository.
+    
+    Upload your ROS bag to Google Drive or Box and make it accessible to anybody with the link. Then, **provide a link to your ROS bag in your report for this assignment.** As mentioned before, you don't need to and you shouldn't commit the bag to your repository! Otherwise, you will make your repository unnecessarily heavy. 
+    
+    A couple of tips for this part of the assignment:
 
-    Test that your bag recording by running `rostest shutter_track_target_public_tests test_bag_recording.launch`.
+    > *Tip 1:* When you play your video, you should set the `use_sim_time` parameter back to false since you are no longer playing a bag. 
+            The `play_video.launch` file does this for you automatically.
 
-    > *Tip 1:* You may have to set the `use_sim_time` parameter back to false since you are no longer playing a bag.
-            This is included in the `play_video.launch` file, but if you create another launch file to record 
-            your bag or you start 
-
-    > *Tip 2:* This assignment provides you of an example launch file to record the above bag. 
+    > *Tip 2:* This assignment provides you of an example launch file to record the `track_target.bag`. 
             See the `assignment-4/shutter_track_target/launch/record_bag.launch` file.
 
     > *Tip 3:* Double check the content of your bag with the `rosbag info` and `rosbag play` commands before 
-            submitting your assignment to make sure that the tracked_image and observation_image topics contain
-            example images of your filter tracking your desired object. As a reference, the bag should include at least
+            submitting your assignment. Make sure that the /tracked_image and /observation_image topics show 
+            your filter tracking your desired object. As a reference, the bag should include at least
             200 images for each of these topics.
-
-    Upload your ROS bag to Google Drive or Box and make it accessible to anybody with the link. Then, **provide a link to your ROS bag in your report for this assignment.** You don't need to and you shouldn't commit the bag to your repository! Otherwise, you will make your repository unnecessarily heavy. 
-
 
 ## Part VI
 
