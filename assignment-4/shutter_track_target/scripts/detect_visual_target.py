@@ -74,10 +74,10 @@ class DetectTarget():
             print(e)
 
         # filter image in HSV space
-        filtered_image = self.filter_image(cv_image, self.lower_hue_value, self.higher_hue_value)
+        filtered_image = filter_image(cv_image, self.lower_hue_value, self.higher_hue_value)
 
         # detect blobs
-        keypoints = self.compute_keypoints_for_blobs(filtered_image)
+        keypoints = compute_keypoints_for_blobs(filtered_image)
 
         # Draw detected blobs as red circles.
         # cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS ensures the size of the circle corresponds to the size of blob
