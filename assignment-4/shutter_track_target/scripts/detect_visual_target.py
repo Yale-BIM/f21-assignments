@@ -8,6 +8,30 @@ from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
 
 
+def filter_image(cv_image, lower_hue_value, higher_hue_value):
+    """
+    Convert image to HSV color space and filter on a given hue range
+    :param cv_image: input image
+    :param lower_hue_value: min hue value
+    :param higher_hue_value: max hue value
+    :return: filtered image
+    """
+
+    # TODO. Remove the "return cv_image" line below and complete this function as indicated in the assignment's README.md file.
+    return cv_image
+
+
+def compute_keypoints_for_blobs(filtered_image):
+    """
+    Compute keypoints for blobs of a given color in the image.
+    :param cv_image: input image
+    :return: list of cv2.Keypoint object (see https://docs.opencv.org/2.4/modules/features2d/doc/common_interfaces_of_feature_detectors.html?highlight=keypoint)
+    """
+
+    # TODO. Remove the "return []" line below and complete this function as indicated in the assignment's README.md file
+    return []
+
+
 class DetectTarget():
     """ROS node that detects visual targets of a given color"""
 
@@ -91,30 +115,6 @@ class DetectTarget():
 
         obs_image_msg.header = image_msg.header
         self.obs_image_pub.publish(obs_image_msg)
-
-
-    def filter_image(self, cv_image, lower_hue_value, higher_hue_value):
-        """
-        Convert image to HSV color space and filter on a given hue range
-        :param cv_image: input image
-        :param lower_hue_value: min hue value
-        :param higher_hue_value: max hue value
-        :return: filtered image
-        """
-
-        # TODO. Remove the "return cv_image" line below and complete this function as indicated in the assignment's README.md file.
-        return cv_image
-
-
-    def compute_keypoints_for_blobs(self, filtered_image):
-        """
-        Compute keypoints for blobs of a given color in the image.
-        :param cv_image: input image
-        :return: list of cv2.Keypoint object (see https://docs.opencv.org/2.4/modules/features2d/doc/common_interfaces_of_feature_detectors.html?highlight=keypoint)
-        """
-
-        # TODO. Remove the "return []" line below and complete this function as indicated in the assignment's README.md file
-        return []
 
 
     def publish_observation(self, position_tuple, header):
