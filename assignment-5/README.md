@@ -285,7 +285,7 @@ as in the figure below:
 
 ### Questions/Tasks
 
-- **II-1.** Complete the `compute_normalization_parameters()` and `normalize_data_per_row()` functions in
+<!-- - **II-1.** Complete the `compute_normalization_parameters()` and `normalize_data_per_row()` functions in
 the train_and_test_saddle_function.py script.
 
     a. For the compute_normalization_parameters() function, you want to compute the mean
@@ -441,9 +441,9 @@ should be over all of the examples in each of the input matrices.
         average_l2_err = ... # Complete.
     
         return average_l2_err
-    ```
+    ``` -->
 
-- **II-6.** Uncomment the last line in the main() function of the train_and_test_saddle_function.py
+- **II-1.** Uncomment the last line in the main() function of the train_and_test_saddle_function.py
 script so that you can easily visualize the predictions made by your model:
 
     ```python
@@ -464,9 +464,9 @@ script so that you can easily visualize the predictions made by your model:
     first time with a learning rate of 1e-2 and for 500 epochs. Then, add to your report:
     - the screenshot of the plot that you took;
     - the average L2 error that you got on the testing set after training as indicated; and 
-    - an explanation of why the neural network is performing poorly.<br/><br/>
+    - an explanation of why the neural network is performing poorly.<br/><br/> 
     
-- **II-7.** Visualize the learning curves and your model using [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard).
+- **II-2.** Visualize the learning curves and your model using [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard).
 Open a new terminal window, activate your virtual environment, and run:
 
     ```bash
@@ -486,7 +486,7 @@ Open a new terminal window, activate your virtual environment, and run:
     This 30min [TensorBoard tutorial](https://www.youtube.com/watch?v=eBbEDRsCmv4)
     provides good examples on how the interface can help you debug many issues!
     
-- **II-8.** Modify the train_and_test_saddle_function.py script so that you can load a `pre-trained
+- **II-3.** Modify the train_and_test_saddle_function.py script so that you can load a `pre-trained
 model` and train its weights further (e.g., to resume training or for fine-tuning on a new task).
 
     a. Add a "load_model" argument to the argument parser at the end of the script:
@@ -535,7 +535,7 @@ model` and train its weights further (e.g., to resume training or for fine-tunin
     You can pass this model as argument to your train_and_test_saddle_function.py to test the new
     functionality that you just implemented.
     
-- **II-9.** Create a new function called `build_nonlinear_model()` in the train_and_test_saddle_function.py 
+- **II-4.** Complete the function called `build_nonlinear_model()` in the train_and_test_saddle_function.py 
 script. This function should have as argument the number of input features for the data and should
 return a [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model), similar
 to the build_linear_model() function that you implemented before. The difference between these functions, though, 
@@ -574,20 +574,20 @@ with an **average L2 error of 150 or less on the test set**.
     
     Change your nonlinear model, the learning rate, and number of epochs that you are training for
     until you achieve an average test error of 150 or less. Afterwards, take a new screenshot of the plot
-    that you get after training (as in task 6 above). Include in your report:
+    that you get after training (as in task 1 above). Include in your report:
      
     - The screenshot of the plot after training;
     - what average L2 error did you get on the test set this time;
     - a description of the neural network model that you used to approximate the monkey saddle surface; and
     - whatever parameters you used for training it (e.g., batch size, learning rate, and number of epochs).<br/><br/>
     
-- **II-10.** Train your nonlinear neural network such that it `overfits` on the training data. 
+- **II-5.** Train your nonlinear neural network such that it `overfits` on the training data. 
 
     After training, include a picture
     in your report of the plots from TensorBoard corresponding to the `mean absolute error` (mae) on the training and validation
     sets. Explain how you concluded that your model overfit in the report.
     
-- **II-11.** What happens with the loss per epoch on the training set if you train with a batch size of 1?
+- **II-6.** What happens with the loss per epoch on the training set if you train with a batch size of 1?
 Explain why does the loss per epoch graph look different than with a bigger batch size (e.g., than with a batch size of 100).
 
 ## Part III. Building a Face Classifier
@@ -665,7 +665,19 @@ train_face_detection.py script so that it:
    
    - **weights.h5:** model parameters. 
    
-       > We highly recommend that you use the 
+       > We tion that you implemented before. The difference between these functions, though, 
+is that build_nonlinear_model()
+ should implement a more complex neural network capable of approximating the monkey saddle surface
+with an **average L2 error of 150 or less on the test set**.
+
+    ```python
+    def build_nonlinear_model(num_inputs):
+    """
+    Build nonlinear NN model with Keras
+    :param num_inputs: number of input features for the model
+    :return: Keras model
+    """
+    ... # completehighly recommend that you use the 
        [tf.keras.callbacks.ModelCheckpoint]() function to generate the best weights.h5 
        file based on validation data, as in Part II of this assignment.
        
@@ -860,22 +872,22 @@ to detect faces in a more efficient way than with a windowed approach.
 
 ## Part IV. Testing Your Face Classifier in Real-Time (2 extra points on final course grade)
 
-As a bonus in this assignment, you can get 2 extra points (to be considered in your final course grade over 100 pts) if you implement a ROS package with a node that:
-- runs your face classifier taking as input the image from Shutter's RealSense camera, and 
+As a bonus in this assignment, you can get 2 extra points (to be considered in your final course grade over 100 pts) if you implement a ROS package with a node that runs your face classifier taking as input any image containing faces 
+<!-- - runs your face classifier taking as input any image containing faces the image from Shutter's RealSense camera , and 
 - makes the robot react in different ways depending on the number of detected faces. 
 
 For example, you can change the [face of the robot](https://shutter-ros.readthedocs.io/en/latest/packages/shutter_face.html) or make it speak some word depending on the number of faces in its field of view.
 
-> Note: You should consult with Marynel what you plan to implement as a reaction on the robot to get advice on how to make it work, and ensure that it is safe for the robot.
+> Note: You should consult with Marynel what you plan to implement as a reaction on the robot to get advice on how to make it work, and ensure that it is safe for the robot. -->
 
 Your deliverables for this part of the assignment are:
 
 1. All relevant code (ROS packages, configuration files, etc.), which should be committed and pushed to your
 repository within the assignment-5 folder.
-2. An explanation in your report of the system that you implemented for the robot, and how it should be run by the course instructors.
-3. A short mp4 video that demonstrates your system reacting to different number of face detections. You can use [HandBrake](https://handbrake.fr/) to make your video small and convert it to mp4. Submit your video through Canvas.
+2. An explanation in your report of the system that you implemented <!-- for the robot -->, and how it should be run by the course instructors.
+<!--3. A short mp4 video that demonstrates your system reacting to different number of face detections. You can use [HandBrake](https://handbrake.fr/) to make your video small and convert it to mp4. Submit your video through Canvas. 
 
-Note that all the deliverables are required to obtain the 2 extra points. Incomplete systems will not receive extra credit.
+Note that all the deliverables are required to obtain the 2 extra points. Incomplete systems will not receive extra credit. -->
 
 Once you've finished the assignment, **add the commit SHA** that you would like to be evaluate on to your report.
 
