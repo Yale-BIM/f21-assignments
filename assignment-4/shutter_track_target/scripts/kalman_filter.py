@@ -39,8 +39,11 @@ def KF_measurement_update_step(pred_mu, pred_Sigma, z, C, Q):
     return corrected_mu, corrected_Sigma
 
 
-class KalmanFilterNode():
+class KalmanFilterNode(object):
     """Kalman Filter node"""
+
+    def __new__(cls):
+        return super(KalmanFilterNode, cls).__new__(cls)
 
     def __init__(self):
         """
