@@ -259,8 +259,8 @@ Read the [Primer on Universal Function Approximation with Deep Learning](https:/
 by Brian Yung Rowe. 
 
 Once you've read the primer, you should complete the tasks below to approximate the 
-[monkey saddle surface](https://en.wikipedia.org/wiki/Monkey_saddle)  defined by the equation 
-$`z = x^3 - 3xy^2`$. Your code should leverage [TensorFlow's
+[monkey saddle surface](https://en.wikipedia.org/wiki/Monkey_saddle)  defined by the equation ![equation](https://latex.codecogs.com/gif.latex?z&space;=&space;x^3&space;-&space;3xy^2)
+<!-- $`z = x^3 - 3xy^2`$ -->. Your code should leverage [TensorFlow's
 Keras API](https://www.tensorflow.org/guide/keras).
 
 To get you started, this assignment provides two files within the 
