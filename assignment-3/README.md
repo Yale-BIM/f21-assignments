@@ -85,8 +85,8 @@ You assignment will be evaluated based on the content of your report and your co
     - Part VI (10 pts): VI-1 (8 pts) + VI-3 (2 pts)
 - Code
     * Part II-1 (15 pts) 
-    * Part III (30 pts): Virtual Camera (20 pts) + III-2 (8 pts) + III-5 (2 pts) 
-    * Part IV (8 pts): IV-4 (4 pts) + IV-5 (4 pts)
+    * Part III (26 pts): Virtual Camera (20 pts) + III-2 (4 pts) + III-5 (2 pts) 
+    * Part IV (4 pts): IV-4 (2 pts) + IV-5 (2 pts)
     * Part VI (10 pts): VI-2 (4 pts) + VI-3 (6 pts)
 
 Students taking CPSC-459 will be evaluated over 100 pts. Those taking CPSC-559, will be evaluated over 130 pts.
