@@ -34,7 +34,7 @@ we recommend that you use cloud services if your don't have access to a local GP
 you should have access to a computer with `ROS Melodic`.
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
-You will use git to save your work to your [GitLab](http://www.gitlab.com) repository. 
+You will use git to save your work to your [Github](http://www.githubcom) repository. 
 
 #### Background Knowledge
 
@@ -49,7 +49,7 @@ of the tasks using your local CPU, but it might be faster at times to train on t
 using hardware acceleration (e.g., GPU).
 
 > Whether or not you use the cloud to train your neural networks, the deliverables are the same.
-You should submit code in your private Gitlab repository. You should also submit a report 
+You should submit code in your private Github repository. You should also submit a report 
 and model parameter files to Canvas.
 
 ##### Training on Google Colaboratory
@@ -83,12 +83,12 @@ in [LaTeX](https://www.latex-project.org/).
 to canvas.
 
 - **Code:** Finally, you are expected to push code for this assignment to your 
-[GitLab](http://www.gitlab.com) repository as indicated in the [general instructions](../README.md) 
+[Github](http://www.github.com) repository as indicated in the [general instructions](../README.md) 
 document for CPSC-659 assignments. 
 
-> NOTE: If you are using late days to submit this assignment after the official deadline,
+<!-- NOTE: If you are using late days to submit this assignment after the official deadline,
 you should let Marynel and Tim know about this before the deadline is due! Otherwise, you
-won't be able to submit your report through Canvas.
+won't be able to submit your report through Canvas. -->
 
 #### Evaluation
 
@@ -259,8 +259,8 @@ Read the [Primer on Universal Function Approximation with Deep Learning](https:/
 by Brian Yung Rowe. 
 
 Once you've read the primer, you should complete the tasks below to approximate the 
-[monkey saddle surface](https://en.wikipedia.org/wiki/Monkey_saddle)  defined by the equation ![equation](https://latex.codecogs.com/gif.latex?z&space;=&space;x^3&space;-&space;3xy^2)
-<!-- $`z = x^3 - 3xy^2`$ -->. Your code should leverage [TensorFlow's
+[monkey saddle surface](https://en.wikipedia.org/wiki/Monkey_saddle)  defined by the equation ![equation](https://latex.codecogs.com/gif.latex?z&space;=&space;x^3&space;-&space;3xy^2).
+<!-- $`z = x^3 - 3xy^2`$ --> Your code should leverage [TensorFlow's
 Keras API](https://www.tensorflow.org/guide/keras).
 
 To get you started, this assignment provides two files within the 
