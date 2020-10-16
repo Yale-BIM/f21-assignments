@@ -9,15 +9,23 @@ import numpy as np
 import tensorflow as tf
 import saddle_function_utils as sfu
 
+
+
 def compute_normalization_parameters(data):
     """
     Compute normalization parameters (mean, st. dev.)
     :param data: matrix with data organized by rows [N x num_variables]
     :return: mean and standard deviation per variable as row matrices of dimension [1 x num_variables]
     """
-    # TO-DO. Remove the two lines below and complete this function by computing the real mean and std. dev for the data
-    mean = np.zeros((data.shape[1],))
-    stdev = np.ones((data.shape[1],))
+
+    mean = np.mean(data, axis=0)
+    stdev = np.std(data, axis=0)
+
+    # transpose mean and stdev in case they are (2,) arrays
+    if len(mean.shape) == 1:
+        mean = np.reshape(mean, (1,mean.shape[0]))
+    if len(stdev.shape) == 1:
+        stdev = np.reshape(stdev, (1,stdev.shape[0]))
 
     return mean, stdev
 
@@ -36,8 +44,8 @@ def normalize_data_per_row(data, mean, stdev):
     assert data.shape[1] == mean.shape[1], "Data - Mean size mismatch ({} vs {})".format(data.shape[1], mean.shape[1])
     assert data.shape[1] == stdev.shape[1], "Data - StDev size mismatch ({} vs {})".format(data.shape[1], stdev.shape[1])
 
-    # TODO. Complete. Replace the line below with code to whitten the data.
-    normalized_data = data
+    centered = data - np.tile(mean, (data.shape[0], 1))
+    normalized_data = np.divide(centered, np.tile(stdev, (data.shape[0],1)))
 
     return normalized_data
 
@@ -48,8 +56,22 @@ def build_linear_model(num_inputs):
     :param num_inputs: number of input features for the model
     :return: Keras model
     """
+    input = tf.keras.layers.Input(shape=(num_inputs,), name="inputs")
+    hidden1 = tf.keras.layers.Dense(64, use_bias=True)(input)
+    hidden2 = tf.keras.layers.Dense(128, use_bias=True)(hidden1)
+    output = tf.keras.layers.Dense(1, use_bias=True)(hidden2)
+    model = tf.keras.models.Model(inputs=input, outputs=output, name="monkey_model")
+    return model
+
+def build_non_linear_model(num_inputs):
+    """
+    Build NN model with Keras
+    :param num_inputs: number of input features for the model
+    :return: Keras model
+    """
     # TO-DO: Complete. Remove the None line below, define your model, and return it.
     return None
+
 
 
 def train_model(model, train_input, train_target, val_input, val_target, input_mean, input_stdev,
@@ -67,8 +89,19 @@ def train_model(model, train_input, train_target, val_input, val_target, input_m
     :param learning_rate: learning rate for gradient descent
     :param batch_size: batch size for training with gradient descent
     """
-    # TO-DO. Complete. Remove the pass line below, and add the necessary training code.
-    pass
+
+    # normalize
+    norm_train_input = normalize_data_per_row(train_input, input_mean, input_stdev)
+    norm_val_input = normalize_data_per_row(val_input, input_mean, input_stdev)
+
+    # compile the model: define optimizer, loss, and metrics
+    model.compile(optimizer=tf.keras.optimizers.Adam(lr=learning_rate),
+                 loss='mse',
+                 metrics=['mae'])
+
+    # do trianing for the specified number of epochs and with the given batch size
+    model.fit(norm_train_input, train_target, epochs=epochs, batch_size=batch_size,
+             validation_data=(norm_val_input, val_target))
 
 
 def test_model(model, test_input, test_target, input_mean, input_stdev, batch_size=60):
@@ -81,8 +114,13 @@ def test_model(model, test_input, test_target, input_mean, input_stdev, batch_si
     :param input_stdev: st. dev. for the variables in the inputs (for normalization)
     :return: predicted targets for the given inputs
     """
-    # TODO. Complete. Remove the return line below and add the necessary code to make predictions with the model.
-    return np.zeros(test_target.shape)
+    # normalize
+    norm_test_input = normalize_data_per_row(test_input, input_mean, input_stdev)
+
+    # evaluate
+    predicted_targets = model.predict(norm_test_input, batch_size=batch_size)
+
+    return predicted_targets
 
 
 def compute_average_L2_error(test_target, predicted_targets):
@@ -92,8 +130,11 @@ def compute_average_L2_error(test_target, predicted_targets):
     :param predicted_targets: matrix with predicted targets [N x 1]
     :return: average L2 error
     """
-    # TO-DO. Complete. Replace the line below with code that actually computes the average L2 error over the targets.
-    average_l2_err = 0
+    diff = predicted_targets - test_target
+    l2_err = np.sqrt(np.sum(np.power(diff, 2), axis=1))
+    assert l2_err.shape[0] == predicted_targets.shape[0], \
+        "Invalid dim {} vs {}".format(l2_err.shape, predicted_targets.shape)
+    average_l2_err = np.mean(l2_err)
 
     return average_l2_err
 
@@ -133,17 +174,17 @@ def main(num_examples, epochs, lr, visualize_training_data, build_fn=build_linea
     model = build_fn(train_input.shape[1])
 
     # train the model
-    print "\n\nTRAINING..."
+    print "\n\nTRAINING..." 
     train_model(model, train_input, train_target, val_input, val_target, mean, stdev,
                 epochs=epochs, learning_rate=lr, batch_size=batch_size)
 
     # test the model
-    print "\n\nTESTING..."
+    print "\n\nTESTING..." 
     predicted_targets = test_model(model, test_input, test_target, mean, stdev)
 
     # Report average L2 error
     l2_err = compute_average_L2_error(test_target, predicted_targets)
-    print "L2 Error on Testing Set: {}".format(l2_err)
+    print "L2 Error on Testing Set: {}".format(l2_err) 
 
     # visualize the result (uncomment the line below to plot the predictions)
     # sfu.plot_test_predictions(test_input, test_target, predicted_targets, title="Predictions")
@@ -164,13 +205,15 @@ if __name__ == "__main__":
                         type=float, default=50)
     parser.add_argument("--visualize_training_data", help="visualize training data",
                         action="store_true")
-    parser.add_argument("--build_fn", help="model to train (e.g., 'linear')",
+    parser.add_argument("--build_fn", help="model to train (e.g., 'linear', non-linear)",
                         type=str, default="linear")
     args = parser.parse_args()
 
     # define the model function that we will use to assemble the Neural Network
     if args.build_fn == "linear":
         build_fn = build_linear_model # function that builds linear model
+    elif args.build_fn == "non-linear":
+        build_fn = build_non_linear_model
     else:
         print "Invalid build function name {}".format(args.build_fn)
         sys.exit(1)
