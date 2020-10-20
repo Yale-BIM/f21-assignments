@@ -47,37 +47,6 @@ To work on the assignment-3, we suggest that you use the following custom config
     > To connect directly through a shell in your local machine, you will need to install the
     [gcloud sdk](https://cloud.google.com/sdk/gcloud/) and follow [these instructions](https://cloud.google.com/compute/docs/instances/connecting-to-instance)
     (see the section on "Connecting using the command line interface").
-    
-## The cpsc659-a3-tensorflow image
-
-You can use the `bim-a5` image in Google Cloud to work on Assignment 5. 
-This boot disk image is already set up with:
-
-- Tensorflow 2.0.0
-- CUDA 10
-- Opencv
-- Matplotlib
-    
-The image also has the 64x64_data.npz dataset for Part III of the assignment
-in the folder /home/marynel_vazquez. You don't need to waste time (and credits) 
-downloading the data again into your VM. Instead, move the data to your own home folder
-once you SSH into your VM:
-
-```bash
-# check the data is there
-$ ls /home/marynel_vazquez/ 
-64x64_data.npz
-
-# go to your home
-$ cd 
-
-# move the data to your home
-$ sudo mv /home/marynel_vazquez/64x64_data.npz . 
-
-# change permissions for the data (use your username instead of <user> below)
-$ chown <user>:<user> 64x64_data.npz 
-```
-
 
 ## Working With Your VM in Google Cloud
 
