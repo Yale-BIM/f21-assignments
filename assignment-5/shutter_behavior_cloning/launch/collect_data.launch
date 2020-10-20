@@ -1,0 +1,32 @@
+<launch>
+
+    <!-- make shutter look forward? -->
+    <arg name="look_forward" value="True"/>
+    <arg name="publish_rate" default="1"/>
+    <arg name="save_state_actions" default="False"/>
+    <arg name="output_file" default="$(find shutter_behavior_cloning)/data/state_action.txt"/>
+
+    <!-- bring up the robot -->
+    <include file="$(find shutter_bringup)/launch/shutter_sim.launch" />
+
+    <!-- generate the simulated moving object -->
+    <node name="generate_random_target" pkg="shutter_behavior_cloning" type="generate_random_target.py" output="screen">
+	  <param name="publish_rate" value="$(arg publish_rate)"/>
+    </node>
+
+    <!-- visualize the moving object in rviz -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find shutter_lookat)/config/rviz_target.cfg.rviz"/>
+
+    <!-- look forward if desired -->
+    <group if="$(arg look_forward)">
+        <node name="look_forward" pkg="shutter_lookat" type="look_forward.py"/>
+    </group>
+
+    <!-- run the expert -->
+    <node name="expert_opt" pkg="shutter_behavior_cloning" type="expert_opt.py" output="screen">
+	    <param name="publish_rate" value="$(arg publish_rate)"/>
+        <param name="output_file" value="$(arg output_file)"/>
+        <param name="save_state_actions" value="$(arg save_state_actions)"/>
+    </node>
+
+</launch>
