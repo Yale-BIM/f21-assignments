@@ -132,8 +132,6 @@ class ExpertNode(object):
         # joint publishers
         self.joint1_pub = rospy.Publisher('/joint_1/command', Float64, queue_size=5)    # command for base rotation
         self.joint3_pub = rospy.Publisher('/joint_3/command', Float64, queue_size=5)    # command for robot tilt
-        self.delta1_pub = rospy.Publisher('/joint_1/delta', Float64, queue_size=5)
-        self.delta3_pub = rospy.Publisher('/joint_3/delta', Float64, queue_size=5)
 
         # tf subscriber
         self.tf_buffer = tf2_ros.Buffer(rospy.Duration(1200.0))  # tf buffer length
@@ -181,7 +179,7 @@ class ExpertNode(object):
         """
         Helper function to compute the required motion to make the robot's camera look towards the target
         :param msg: target message
-        :return: joint1 offset, and joint3 offset
+        :return: new joint positions for joint1 and joint3
         """
 
         # transform the target to baselink if it's not in that frame already
@@ -228,8 +226,6 @@ class ExpertNode(object):
 
         T2 = transform_msg_to_T(transform)
 
-
-
         # compute the required motion for the robot using black-box optimization
         x0 = [-np.arctan2(p[1], p[0]), 0.0]
         res = least_squares(target_in_camera_frame, x0,
@@ -237,28 +233,8 @@ class ExpertNode(object):
                             args=(p, self.robot.joints[1].axis, self.robot.joints[3].axis, T1, T2))
         # print("result: {}, cost: {}".format(res.x, res.cost))
 
-        return -res.x[0], -res.x[1]
-
-    def target_callback(self, msg):
-        """
-        Target callback
-        :param msg: target message
-        """
-        if self.joint1 is None:
-            rospy.logwarn("Joint 1 is unknown. Waiting to receive joint states.")
-            return
-
-        if not self.move:
-            return
-
-        # compute the required motion to make the robot look towards the target
-        offsets = self.compute_joints_offset(msg)
-        if offsets is None:
-            # we are done. the node might not be ready yet...
-            return
-        else:
-            # upack results
-            offset_1, offset_3 = offsets
+        offset_1 = -res.x[0]
+        offset_3 = -res.x[1]
 
         # cap offset for joint3 based on joint limits
         if self.joint3 + offset_3 > self.robot.joints[3].limit.upper:
@@ -274,15 +250,31 @@ class ExpertNode(object):
         else:
             new_offset_3 = offset_3
 
-
-        # publish command
         new_j1 = self.joint1 + offset_1
         new_j3 = self.joint3 + new_offset_3
-        self.joint1_pub.publish(Float64(new_j1))
-        self.joint3_pub.publish(Float64(new_j3))
 
-        self.delta1_pub.publish(Float64(offset_1))
-        self.delta3_pub.publish(Float64(offset_3))
+        return new_j1, new_j3
+
+    def target_callback(self, msg):
+        """
+        Target callback
+        :param msg: target message
+        """
+        if self.joint1 is None:
+            rospy.logwarn("Joint 1 is unknown. Waiting to receive joint states.")
+            return
+
+        if not self.move:
+            return
+
+        # compute the required motion to make the robot look towards the target
+        joint_angles = self.compute_joints_offset(msg)
+        if joint_angles is None:
+            # we are done. the node might not be ready yet...
+            return
+        else:
+            # upack results
+            new_j1, new_j3 = joint_angles
 
         # write state and action (offset motion) to disk
         if self.fid is not None:
@@ -290,6 +282,10 @@ class ExpertNode(object):
                            (msg.header.frame_id, msg.pose.position.x, msg.pose.position.y, msg.pose.position.z,
                             self.joint1, self.joint3, new_j1, new_j3))
             self.fid.flush()
+
+        # publish command
+        self.joint1_pub.publish(Float64(new_j1))
+        self.joint3_pub.publish(Float64(new_j3))
 
 
 if __name__ == '__main__':
