@@ -36,48 +36,17 @@ To work on the assignment-3, we suggest that you use the following custom config
     - **Generation:** First (Skylake CPU)
     - **Machine Type:** n1-standard-4 (4 vCPU, 15 GB Memory)
     - **GPU Type:** 1 x NVidia Tesla K80
-    - **Book disk:** bim-a5 (should be found under the project "bim-a5" in the "Custom Images" options)
-    - **Boot disk type:** SSD persistent disk (30 GB)
+    - **Book disk:** Ubuntu 18.04
+    - **Boot disk type:** SSD persistent disk (50 GB)
     - **Firewall**: Select "Allow HTTP traffic" and "Allow HTTPS traffic"
 
-    > The cost for such a virtual machine should be around $0.455 per hour.
+    > The cost for such a virtual machine should be around $0.5 per hour.
     
 4. You should then be able to connect to your virtual machine over SSH on your browser.
 
     > To connect directly through a shell in your local machine, you will need to install the
     [gcloud sdk](https://cloud.google.com/sdk/gcloud/) and follow [these instructions](https://cloud.google.com/compute/docs/instances/connecting-to-instance)
     (see the section on "Connecting using the command line interface").
-    
-## The cpsc659-a3-tensorflow image
-
-You can use the `bim-a5` image in Google Cloud to work on Assignment 5. 
-This boot disk image is already set up with:
-
-- Tensorflow 2.0.0
-- CUDA 10
-- Opencv
-- Matplotlib
-    
-The image also has the 64x64_data.npz dataset for Part III of the assignment
-in the folder /home/marynel_vazquez. You don't need to waste time (and credits) 
-downloading the data again into your VM. Instead, move the data to your own home folder
-once you SSH into your VM:
-
-```bash
-# check the data is there
-$ ls /home/marynel_vazquez/ 
-64x64_data.npz
-
-# go to your home
-$ cd 
-
-# move the data to your home
-$ sudo mv /home/marynel_vazquez/64x64_data.npz . 
-
-# change permissions for the data (use your username instead of <user> below)
-$ chown <user>:<user> 64x64_data.npz 
-```
-
 
 ## Working With Your VM in Google Cloud
 
