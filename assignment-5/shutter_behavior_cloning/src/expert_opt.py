@@ -102,7 +102,6 @@ class ExpertNode(object):
         self.base_link = rospy.get_param("~base_link", "base_link")
         self.biceps_link = rospy.get_param("~biceps_link", "biceps_link")
         self.camera_link = rospy.get_param("~camera_link", "camera_color_optical_frame")
-        self.move = rospy.get_param("~move_init_value", True)
         self.save_state_actions = rospy.get_param("~save_state_actions", True)
 
         if self.save_state_actions:
@@ -175,7 +174,7 @@ class ExpertNode(object):
         self.joint1 = msg.position[joint1_idx]
         self.joint3 = msg.position[joint3_idx]
 
-    def compute_joints_offset(self, msg):
+    def compute_joints_position(self, msg):
         """
         Helper function to compute the required motion to make the robot's camera look towards the target
         :param msg: target message
@@ -268,7 +267,7 @@ class ExpertNode(object):
             return
 
         # compute the required motion to make the robot look towards the target
-        joint_angles = self.compute_joints_offset(msg)
+        joint_angles = self.compute_joints_position(msg)
         if joint_angles is None:
             # we are done. the node might not be ready yet...
             return
