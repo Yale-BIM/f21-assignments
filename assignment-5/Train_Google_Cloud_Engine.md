@@ -36,11 +36,11 @@ To work on the assignment-3, we suggest that you use the following custom config
     - **Generation:** First (Skylake CPU)
     - **Machine Type:** n1-standard-4 (4 vCPU, 15 GB Memory)
     - **GPU Type:** 1 x NVidia Tesla K80
-    - **Book disk:** bim-a5 (should be found under the project "bim-a5" in the "Custom Images" options)
-    - **Boot disk type:** SSD persistent disk (30 GB)
+    - **Book disk:** Ubuntu 18.04
+    - **Boot disk type:** SSD persistent disk (50 GB)
     - **Firewall**: Select "Allow HTTP traffic" and "Allow HTTPS traffic"
 
-    > The cost for such a virtual machine should be around $0.455 per hour.
+    > The cost for such a virtual machine should be around $0.5 per hour.
     
 4. You should then be able to connect to your virtual machine over SSH on your browser.
 
