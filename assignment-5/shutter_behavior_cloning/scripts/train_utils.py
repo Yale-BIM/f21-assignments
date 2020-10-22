@@ -5,6 +5,15 @@ Script that trains a NN policy for controlling the robot
 
 import sys
 import numpy as np
+import gdown
+
+# TODO - replace None in the MODEL_URL with the URL to your keras model in Google Drive.
+# Ensure that anybody can download the file and test this before submitting your assignment by running within a python
+# shell:
+#   $ import train_utils
+#   $ train_utils.download_keras_model("my_keras_model")
+# Then, you should have a copy of your model named my_keras_model in your local disk.
+MODEL_URL = None
 
 
 def load_data(input_file):
@@ -51,3 +60,19 @@ def load_data(input_file):
 
     return features, targets
 
+
+def download_keras_model(output_path, quiet=False):
+    """
+    Helper function to download a trained Keras model from Google Drive
+    :param output_path: output path for the model
+    :param quiet: print info?
+    :return: None if there was an error and the file could not be downloaded; output path otherwise.
+    """
+    if MODEL_URL is None:
+        print("MODEL_URL is not set in train_utils.py. Failed to download the model")
+        return None
+    out = gdown.download(MODEL_URL, output_path, quiet=quiet)
+    if out is None:
+        print("Failed to download {} from Google Drive. Check that the path is correct and the file can be downloaded "
+              "by anybody without having to log into Google".format(MODEL_URL))
+    return out

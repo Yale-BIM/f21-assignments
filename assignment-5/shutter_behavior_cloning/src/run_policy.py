@@ -20,8 +20,10 @@ class RunPolicyNode(object):
         self.biceps_link = rospy.get_param("~biceps_link", "biceps_link")
         self.camera_link = rospy.get_param("~camera_link", "camera_color_optical_frame")
 
-        # TODO - complete with node parameters to load up your model
-        self.model_file = ...
+        self.model_file = rospy.get_param("~model")  # required path to keras model file
+
+        # TODO - complete the line below to load up your model
+        self.model = ...
 
         # joint values
         self.joint1 = None
@@ -64,7 +66,8 @@ class RunPolicyNode(object):
         :return: tuple with new joint positions for joint1 and joint3, or None if the computation failed
         """
 
-        # TODO - remove None return statement and complete function with the logic that runs your policy...
+        # TODO - remove None return statement and complete function with the logic that runs your model to compute new
+        # joint positions 1 & 3 for the robot...
         return None
 
     def target_callback(self, msg):
@@ -74,8 +77,8 @@ class RunPolicyNode(object):
         """
         # check that the data is consistent with our model and that we have current joint information...
         if msg.header.frame_id != "base_footprint":
-            rospy.logerr("Expected the input target to be in the frame 'base_footprint' but got {} instead.".
-                         format(msg.header.frame_id))
+            rospy.logerr("Expected the input target to be in the frame 'base_footprint' but got the {} frame instead. "
+                         "Failed to command the robot".format(msg.header.frame_id))
             return
 
         if self.joint1 is None:

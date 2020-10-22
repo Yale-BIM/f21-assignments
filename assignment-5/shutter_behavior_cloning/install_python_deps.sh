@@ -1,1 +1,1 @@
-python -m pip install --user numpy scipy matplotlib ipython jupyter scikit-learn
+python -m pip install --user numpy scipy matplotlib ipython jupyter scikit-learn gdown
