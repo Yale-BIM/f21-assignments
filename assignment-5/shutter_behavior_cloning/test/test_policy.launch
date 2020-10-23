@@ -3,6 +3,7 @@
     <!-- make shutter look forward? -->
     <arg name="run_expert" default="False"/>
     <arg name="run_rviz" default="False"/>
+    <arg name="keras_model" default="$(find shutter_behavior_cloning)/data/model"/> <!-- change this to your model file -->
 
     <!-- bring up the robot -->
     <include file="$(find shutter_bringup)/launch/shutter_sim.launch" />
@@ -24,7 +25,9 @@
 
     <group unless="$(arg run_expert)">
         <!-- run model -->
-
+        <node name="run_policy" pkg="shutter_behavior_cloning" type="run_policy.py" output="screen">
+            <param name="model" value="$(arg keras_model)"/>
+        </node>
     </group>
 
     <!-- run tests -->
