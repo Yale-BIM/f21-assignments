@@ -114,7 +114,7 @@ def main(input_file, weights_file):
     # load the input image
     input_image = cv2.imread(input_file)
     assert input_image is not None, "Failed to load input image: {}".format(input_file)
-    print "Loaded image with dimensions {}".format(input_image.shape)
+    print("Loaded image with dimensions {}".format(input_image.shape))
 
     # resize the image in case it's huge. Max size is 600 pixels on the biggest dimension
     height, width, _ = input_image.shape
@@ -129,15 +129,15 @@ def main(input_file, weights_file):
 
     # load the model
     model = tf.keras.models.load_model(weights_file)
-    print "Loaded keras model from {}".format(weights_file)
+    print("Loaded keras model from {}".format(weights_file))
 
     # make predictions on windows within the image
     boxes = make_predictions(resized_im, model, 
                              scales=[50, 100, 150, 200, 250])
 
-    print "DETECTIONS:"
+    print("DETECTIONS:")
     np.set_printoptions(precision=2, suppress=True)
-    print boxes
+    print(boxes)
 
     # visualize the detections
     visualize_boxes(resized_im, boxes)
@@ -148,14 +148,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", help="input image",
                         type=str, required=True)
-    parser.add_argument("--logs_dir", help="logs directory",
+    parser.add_argument("--weights-path", help="path for the weights file",
                         type=str, required=True)
-    parser.add_argument("--weights_filename", help="name for the weights file",
-                        type=str, default="weights.h5")
     args = parser.parse_args()
 
-    weights_path = os.path.join(args.logs_dir, args.weights_filename)
-
     # run the main function
-    main(args.input, weights_path)
+    main(args.input, args.weights_path)
     sys.exit(0)

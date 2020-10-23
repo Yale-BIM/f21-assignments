@@ -448,7 +448,7 @@ This code is provided to get you started on building your custom face classifier
 and load the training data with the following command:
 
    ```bash
-   (venv) $ ./train_face_detection.py --input 64x64_data.npz
+   $ ./train_face_detection.py --input 64x64_data.npz
    Loaded 11038 training examples.
    ```
    
@@ -480,20 +480,7 @@ train_face_detection.py script so that it:
    
    - **weights.h5:** model parameters. 
    
-       > We tion that you implemented before. The difference between these functions, though, 
-is that build_nonlinear_model()
- should implement a more complex neural network capable of approximating the monkey saddle surface
-with an **average L2 error of 150 or less on the test set**.
-
-    ```python
-    def build_nonlinear_model(num_inputs):
-    """
-    Build nonlinear NN model with Keras
-    :param num_inputs: number of input features for the model
-    :return: Keras model
-    """
-    ... # completehighly recommend that you use the 
-       [tf.keras.callbacks.ModelCheckpoint]() function to generate the best weights.h5 
+       > We We highly recommend that you use the [tf.keras.callbacks.ModelCheckpoint]() function to generate the best weights.h5 
        file based on validation data, as in Part II of this assignment.
        
    Many different convolutional neural networks have been proposed in the past for image classification. 
@@ -503,7 +490,7 @@ with an **average L2 error of 150 or less on the test set**.
    the structure of your network according to the input data that is provided.
    
    For the loss and metric that you use while training your model, we 
-   suggest that you use `binary_crossentropy` and `binary_accuracy` respectively. You can set
+   suggest that you use `binary_crossentropy` and `binary_accuracy`, respectively. You can set
    this loss and metric when you compile your model. For example:
    
    ```python
@@ -514,11 +501,11 @@ with an **average L2 error of 150 or less on the test set**.
        
 ### Questions / Tasks
 
-- **III-1.** Implement your image classification model in the train_face_detection.py script, and
+- **II-1.** Implement your image classification model in the train_face_detection.py script, and
 train your model using the 64x64_data.npz dataset:
 
     ```bash
-    (venv) $ ./train_face_detection.py --input 64x64_data.npz [--lr 1e-4] [--epochs 100] [--batch_size 200]
+    $ ./train_face_detection.py --input 64x64_data.npz [--lr 1e-4] [--epochs 100] [--batch_size 200]
     ```
 
     Make sure to search for good hyper-parameter values:
@@ -528,19 +515,27 @@ train your model using the 64x64_data.npz dataset:
     - **batch_size:** batch size used for training<br/><br/>
 
     Commit your modified train_face_detection.py
-    script to your repository once you are happy with your model. **Submit your best weights.h5 file to Canvas as part of your assignment.**
+    script to your repository once you are happy with your model. 
+    **Upload your best weights.h5 file to Google Drive, share the file publicly through a link,
+    and add its URL to the `WEIGHT_FILE_URL` variable at top of the `face_detection/download_weights.py` script.**
+    
+    To test that your model weights URL is setup properly in the evaluate_face_detection.py script, run it as:
+    ```bash
+    $ ./download_weights.py
+    ```
+    The script should then download your weights file to your local drive.
     
     **NOTE:** The `performance` of your model will be evaluated using the `evaluate_face_detection.py` script
-    within the assignment-5/face_detection directory. The script will be run on a test set (that is not provided
+    within the `assignment-5/face_detection` directory. The script will be run on a test set (that is not provided
     as part of this assignment) but that you can assume comes from the same image distribution as
     the data that is provided in the 64x64_data.npz file. The expectation is that your model should
     reach at least **0.9 (or 90%) binary accuracy** on the (unseen) test set. You can read more about
-    binary accuracy in the [official TensorFlow documentation](https://www.tensorflow.org/api_docs/python/tf/keras/metrics/binary_accuracy).
+    binary accuracy in the [official TensorFlow documentation]https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/keras/metrics/BinaryAccuracy).
     
     In general, we recommend that you use [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard) 
     to monitor the performance of your model in a validation set as it trains.
     
-- **III-2.** The binary accuracy metric that you used before, assumed that a face was found when the output
+- **II-2.** The binary accuracy metric that you used before, assumed that a face was found when the output
 probability of your network was greater than 0.5 for a given input. But, is this the best threshold 
 to decide that your network found a face? You will now inspect how accuracy changes as a 
 function of the threshold to better understand if 0.5 is a good value for your classifier.
@@ -548,18 +543,19 @@ function of the threshold to better understand if 0.5 is a good value for your c
     To start, make a copy of the evaluate_face_detection.py script and name it `plot_roc_curve.py`:
 
     ```bash
-    (venv) $ cd assignment-5/face_detection
-    (venv) $ cp evaluate_face_detection.py plot_roc_curve.py
+    $ cd assignment-5/face_detection
+    $ cp evaluate_face_detection.py plot_roc_curve.py
     ```
     
-    Then, edit the new plot_roc_curve.py script so that instead of evaluating the model on a given
-    test set, it computes predictions for all of the examples on the input data. Based on these
-    predictions and the target values, the script should then plot a [Receiver Operating Characteristic (ROC)](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) 
-    curve like the one below:
+    Then, edit the new `plot_roc_curve.py` script so that instead of evaluating the model on a given input data,
+    it computes predictions for all of the examples on that input set. Then, based on these predictions and the target values, it plots a 
+    [Receiver Operating Characteristic (ROC)](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) 
+    curve. An example ROC curve is shown below:
    
     <img src="docs/roc.png" alt="ROC curve"/>
         
-    The curve shows the performance of the model based on the True Positive Rate (TPR) and False Positive Rate (FPR), which are defined as:
+    The curve shows the performance of the model based on the True Positive Rate (TPR) and False Positive Rate (FPR), 
+    which are defined as:
     
     - **TPR:** The number of correct face predictions over the total number of positive (face) examples
     in the input data.
@@ -568,19 +564,23 @@ function of the threshold to better understand if 0.5 is a good value for your c
 
     You should organize the main file of your plot_roc_curve.py script as follows:
     
+    1. Change the `evaluate()` function so that it returns: a list of TPR values, a list of FPR values, 
+    a list of thresholds, and the index of the best threshold found from the list.
+    2. Add code to the `main()` function to print the best threshold and plot your ROC curve.
+    
+    An example is shown below:
+    
     ```python
     # Example code
-  
-    def main(input_file, weights_file, norm_file):
+    import matplotlib.pyplot as plt
+
+    def evaluate(input_features, target, model):
         """
-        Evaluate the model on the given input data
-        :param input_file: npz data
-        :param weights_file: h5 file with model definition and weights
-        :param norm_file: normalization params
+        Helper function to evaluate model
+        :param input_features: input tensor
+        :param target: target tensor
+        :param model: Keras model
         """
-        # load data
-        input, target = load_data_from_npz_file(input_file)
-        N = input.shape[0]
         ... # normalize the inputs
         
         ... # output model predictions on "prob" variable
@@ -609,9 +609,24 @@ function of the threshold to better understand if 0.5 is a good value for your c
         # pick threshold that minimizes l2 distance to top-left corner of the graph (fpr = 0, tpr = 1)
         # TODO. Complete.
         index = ... # index of the threshold for which (fpr, tpr) get closest to (0,1) in the Euclidean sense
-        print "Best threshold was: {} (TPR = {}, FPR = {})".format(thresholds[index], tpr[index], fpr[index])
+        
+        return tpr, fpr, thresholds, index
   
-        # plot the ROC curve with matplotlib (remember to import it as "import matplotlib.pyplot as plt")
+    def main(input_file, weights_file):
+        """
+        Evaluate the model on the given input data
+        :param input_file: npz data
+        :param weights_file: path to h5 file with model definition and weights
+        """
+        ... # load data
+  
+        ... # load keras model from file
+        
+        tpr, fpr, thresholds, index = evaluate(input_features, target, model)
+  
+        print("Best threshold was: {} (TPR = {}, FPR = {})".format(thresholds[index], tpr[index], fpr[index]))
+  
+        # plot the ROC curve with matplotlib
         plt.plot(fpr, tpr)
         plt.scatter(fpr[index], tpr[index], s=20, c='r')
         plt.xlabel('False positive rate')
@@ -620,16 +635,18 @@ function of the threshold to better understand if 0.5 is a good value for your c
         plt.ylim([0,1])
         plt.title('ROC Curve')
         plt.show()
+        
     ```
     
-    As indicated above, the script should print to the screen the "Best threshold" for predicting faces from the set ```[x/100.0 for x in range(0,100,2)]```, given the ROC values. You can try your script by running it with the 64x64_data.npz file and your trained model
-    from III-1. 
+    As indicated above, the script should print to the screen the "Best threshold" for predicting faces from the 
+    set ```[x/100.0 for x in range(0,100,2)]```, given the ROC values. You can try your script by running it with the 
+    64x64_data.npz file and your trained model from III-1. 
     
     Once your script is working as desired, commit it to your repository. In addition, add to your report the ROC curve that your script 
-    displayed when running on the 64x64_data.npz file and what was the best threshold found given the TRP and FPR values computer for your model. 
+    displayed when running on the 64x64_data.npz file and what was the best threshold found given the TRP and FPR values computed for your model. 
    
-- **III-3.** Complete the make_predictions() function in the 
-`window_detection.py` script within your assignment-5/face_detection directory
+- **II-3.** Complete the make_predictions() function in the 
+`window_detection.py` script within your `assignment-5/face_detection` directory
 to run your face classifier on a sliding window over an input image. The script should enable you to
 detect multiple faces on the input by sliding a window of various scales. 
 For example, given the following input image from the Yale Computer Science website:
@@ -639,7 +656,7 @@ For example, given the following input image from the Yale Computer Science webs
     The script should output face predictions to the screen:
     
     ```bash
-    (venv) $ ./window_detection.py --input cs50_2.jpg --logs_dir <path-to-logs-folder>
+    $ ./window_detection.py --input cs50_2.jpg --weights-path <path-to-logs-folder>
     ...
     DETECTIONS:
     [[ 280.           70.          330.          120.            0.97373563]
@@ -682,27 +699,42 @@ For example, given the following input image from the Yale Computer Science webs
     - if your model missed out faces or had too many false positives, explain in your report
     what could you do to address these issues in the future.
     
-- **III-4.** Explain in your report how could you change the structure of your neural network
+- **II-4.** Explain in your report how could you change the structure of your neural network
 to detect faces in a more efficient way than with a windowed approach.
 
-## Part IV. Testing Your Face Classifier in Real-Time (2 extra points on final course grade)
+## Part III. Imitation Learning (2 extra points)
 
-As a bonus in this assignment, you can get 2 extra points (to be considered in your final course grade over 100 pts) if you implement a ROS package with a node that runs your face classifier taking as input any image containing faces 
-<!-- - runs your face classifier taking as input any image containing faces the image from Shutter's RealSense camera , and 
-- makes the robot react in different ways depending on the number of detected faces. 
+In this last part of the assignment, you will gain practical experience with Behavioral Cloning. That is, you will use
+supervised learning to estimate a motion policy for Shutter.
 
-For example, you can change the [face of the robot](https://shutter-ros.readthedocs.io/en/latest/packages/shutter_face.html) or make it speak some word depending on the number of faces in its field of view.
+Your expert -- which you aim to learn to imitate -- will be the `expert_opt.py` node within the 
+`shutter_behavior_cloning/src` directory. This expert uses optimization to align the face of the robot towards a target.
+In practice, this type of behavior could be useful for the robot to convey attention towards a moving person or object.
 
-> Note: You should consult with Marynel what you plan to implement as a reaction on the robot to get advice on how to make it work, and ensure that it is safe for the robot. -->
+To make it easy for you to run the expert and see it in action, this assignment provides you the `collect_data.launch` 
+launch file. For example, if you run it as:
+```bash
+$ roslaunch shutter_behavior_cloning collect_data.launch
+```
+Then, you should see the robot in RViz following the blue targets as below:
+<img src="docs/follow_blue_target.gif" width="600"/>
 
-Your deliverables for this part of the assignment are:
+### Questions / Tasks
 
-1. All relevant code (ROS packages, configuration files, etc.), which should be committed and pushed to your
-repository within the assignment-5 folder.
-2. An explanation in your report of the system that you implemented <!-- for the robot -->, and how it should be run by the course instructors.
-<!--3. A short mp4 video that demonstrates your system reacting to different number of face detections. You can use [HandBrake](https://handbrake.fr/) to make your video small and convert it to mp4. Submit your video through Canvas. 
+- **III-1.** Generate data for behavioral cloning. Run:
 
-Note that all the deliverables are required to obtain the 2 extra points. Incomplete systems will not receive extra credit. -->
+  ```bash
+  $ roslaunch shutter_behavior_cloning collect_data.launch save_state_actions:=True
+  ```
+  
+  As the launch script is running, you can check that example `state`-`action` pairs are being written
+  to `~/.ros/test_policy_output.txt`. For example, you can check this with:
+  
+  ```
+  $ tail -f ~/.ros/test_policy_output.txt
+  ```
+  
+  
 
 Once you've finished the assignment, **add the commit SHA** that you would like to be evaluate on to your report.
 

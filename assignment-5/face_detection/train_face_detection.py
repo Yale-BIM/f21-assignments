@@ -47,7 +47,7 @@ def main(npz_data_file, batch_size, epochs, lr, val, logs_dir):
     N = input.shape[0]
     assert N == target.shape[0], \
         "The input and target arrays had different amounts of data ({} vs {})".format(N, target.shape[0]) # sanity check!
-    print "Loaded {} training examples.".format(N)
+    print("Loaded {} training examples.".format(N))
 
     # TODO. Complete. Implement code to train a network for image classification
 
