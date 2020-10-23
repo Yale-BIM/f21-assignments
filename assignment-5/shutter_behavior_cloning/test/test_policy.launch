@@ -4,6 +4,7 @@
     <arg name="run_expert" default="False"/>
     <arg name="run_rviz" default="False"/>
     <arg name="model" default="$(find shutter_behavior_cloning)/data/model"/> <!-- change this to your model file -->
+    <arg name="normp" default=""/> <!-- change this to your normalization parameters file if you are using one -->
 
     <!-- bring up the robot -->
     <include file="$(find shutter_bringup)/launch/shutter_sim.launch" />
@@ -16,21 +17,22 @@
     <!-- look forward -->
     <node name="look_forward" pkg="shutter_lookat" type="look_forward.py"/>
 
+    <!-- run the expert if requested -->
     <group if="$(arg run_expert)">
-        <!-- run the expert -->
         <node name="expert_opt" pkg="shutter_behavior_cloning" type="expert_opt.py" output="screen">
             <param name="save_state_actions" value="False"/>
         </node>
     </group>
 
+    <!-- run learned model if the expert was not requested -->
     <group unless="$(arg run_expert)">
-        <!-- run model -->
         <node name="run_policy" pkg="shutter_behavior_cloning" type="run_policy.py" output="screen">
             <param name="model" value="$(arg model)"/>
+            <param name="norm_params" value="$(arg normp)"/>
         </node>
     </group>
 
-    <!-- run tests -->
+    <!-- run test trials and output log file to ~/.ros/test_policy_output.txt -->
     <test test-name="test_policy" pkg="shutter_behavior_cloning" type="test_policy.py" time-limit="180.0">
         <param name="publish_marker" value="$(arg run_rviz)"/>
     </test>

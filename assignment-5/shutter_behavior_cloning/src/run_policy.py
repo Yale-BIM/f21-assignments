@@ -20,9 +20,10 @@ class RunPolicyNode(object):
         self.biceps_link = rospy.get_param("~biceps_link", "biceps_link")
         self.camera_link = rospy.get_param("~camera_link", "camera_color_optical_frame")
 
-        self.model_file = rospy.get_param("~model")  # required path to keras model file
+        self.model_file = rospy.get_param("~model")              # required path to model file
+        self.normp_file = rospy.get_param("~norm_params", "")    # optional path to normalization parameters (empty str means no norm params)
 
-        # TODO - complete the line below to load up your model
+        # TODO - complete the line below to load up your model and create any necessary class instance variables
         self.model = ...
 
         # joint values
