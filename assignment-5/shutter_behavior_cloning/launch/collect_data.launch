@@ -24,7 +24,6 @@
 
     <!-- run the expert -->
     <node name="expert_opt" pkg="shutter_behavior_cloning" type="expert_opt.py" output="screen">
-	    <param name="publish_rate" value="$(arg publish_rate)"/>
         <param name="output_file" value="$(arg output_file)"/>
         <param name="save_state_actions" value="$(arg save_state_actions)"/>
     </node>

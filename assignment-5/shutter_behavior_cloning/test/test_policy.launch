@@ -1,0 +1,35 @@
+<launch>
+
+    <!-- make shutter look forward? -->
+    <arg name="run_expert" default="False"/>
+    <arg name="run_rviz" default="False"/>
+
+    <!-- bring up the robot -->
+    <include file="$(find shutter_bringup)/launch/shutter_sim.launch" />
+
+    <!-- visualize the moving object in rviz -->
+    <group if="$(arg run_rviz)">
+        <node name="rviz" pkg="rviz" type="rviz" args="-d $(find shutter_lookat)/config/rviz_target.cfg.rviz"/>
+    </group>
+
+    <!-- look forward -->
+    <node name="look_forward" pkg="shutter_lookat" type="look_forward.py"/>
+
+    <group if="$(arg run_expert)">
+        <!-- run the expert -->
+        <node name="expert_opt" pkg="shutter_behavior_cloning" type="expert_opt.py" output="screen">
+            <param name="save_state_actions" value="False"/>
+        </node>
+    </group>
+
+    <group unless="$(arg run_expert)">
+        <!-- run model -->
+
+    </group>
+
+    <!-- run tests -->
+    <test test-name="test_policy" pkg="shutter_behavior_cloning" type="test_policy.py" time-limit="180.0">
+        <param name="publish_marker" value="$(arg run_rviz)"/>
+    </test>
+
+</launch>

@@ -6,6 +6,36 @@ from geometry_msgs.msg import PoseStamped
 from visualization_msgs.msg import Marker
 
 
+# default volume for targets
+dflt_x_min = 0.5
+dflt_x_max = 3.5
+dflt_y_min = -3.0
+dflt_y_max = 3.0
+dflt_z_min = 3.0
+dflt_z_max = 0.0
+
+
+def random_pose(x_min, x_max, y_min, y_max, z_min, z_max):
+    """
+    Generate random target within a 3D space
+    :param x_min: minimum x
+    :param x_max: maximum x
+    :param y_min: minimum y
+    :param y_max: maximum y
+    :param z_min: minimum z
+    :param z_max: maximum z
+    :return PoseStamped with random pose
+    """
+    pose_msg = PoseStamped()
+    pose_msg.header.stamp = rospy.Time.now()
+    pose_msg.header.frame_id = "base_footprint"
+    pose_msg.pose.position.x = np.random.uniform(low=x_min, high=x_max, size=None)
+    pose_msg.pose.position.y = np.random.uniform(low=y_min, high=y_max, size=None)
+    pose_msg.pose.position.z = np.random.uniform(low=z_min, high=z_max, size=None)
+    pose_msg.pose.orientation.w = 1.0
+    return pose_msg
+
+
 def generate_random_target():
     """
     Main function. Publishes the target at a constant frame rate.
@@ -15,12 +45,12 @@ def generate_random_target():
     rospy.init_node('generate_random_target', anonymous=True)
 
     # Get ROS params
-    x_min = rospy.get_param("~x_min", default=0.5)
-    x_max = rospy.get_param("~x_max", default=3.5)
-    y_min = rospy.get_param("~y_min", default=-3.0)
-    y_max = rospy.get_param("~y_max", default=3.0)
-    z_min = rospy.get_param("~z_min", default=3.0)
-    z_max = rospy.get_param("~z_max", default=0.0)
+    x_min = rospy.get_param("~x_min", default=dflt_x_min)
+    x_max = rospy.get_param("~x_max", default=dflt_x_max)
+    y_min = rospy.get_param("~y_min", default=dflt_y_min)
+    y_max = rospy.get_param("~y_max", default=dflt_y_max)
+    z_min = rospy.get_param("~z_min", default=dflt_z_min)
+    z_max = rospy.get_param("~z_max", default=dflt_z_max)
     publish_rate = rospy.get_param("~publish_rate", default=1)
 
     # Define publishers
@@ -31,14 +61,8 @@ def generate_random_target():
     rate = rospy.Rate(publish_rate)
     while not rospy.is_shutdown():
 
-        # publish the location of the target as a Vector3Stamped
-        pose_msg = PoseStamped()
-        pose_msg.header.stamp = rospy.Time.now()
-        pose_msg.header.frame_id = "base_footprint"
-        pose_msg.pose.position.x = np.random.uniform(low=x_min, high=x_max, size=None)
-        pose_msg.pose.position.y = np.random.uniform(low=y_min, high=y_max, size=None)
-        pose_msg.pose.position.z = np.random.uniform(low=z_min, high=z_max, size=None)
-        pose_msg.pose.orientation.w = 1.0
+        # publish the location of the target as a PoseStamped
+        pose_msg = random_pose(x_min, x_max, y_min, y_max, z_min, z_max)
         target_pub.publish(pose_msg)
 
         # publish a marker to visualize the target in RViz

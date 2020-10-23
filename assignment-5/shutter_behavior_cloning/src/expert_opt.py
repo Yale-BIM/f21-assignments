@@ -58,6 +58,7 @@ def make_joint_rotation(angle, rotation_axis='x'):
     R = tft.rotation_matrix(angle, axis)
     return R
 
+
 def target_in_camera_frame(angles, target_pose, rotation_axis1, rotation_axis2, T1, T2):
     """
     Transform target to camera frame
@@ -122,6 +123,7 @@ class ExpertNode(object):
             self.fid = None
 
         # joint values
+        self.move = True
         self.joint1 = None
         self.joint3 = None
 
@@ -174,11 +176,11 @@ class ExpertNode(object):
         self.joint1 = msg.position[joint1_idx]
         self.joint3 = msg.position[joint3_idx]
 
-    def compute_joints_position(self, msg):
+    def get_p_T1_T2(self, msg):
         """
-        Helper function to compute the required motion to make the robot's camera look towards the target
+        Helper function for compute_joints_position()
         :param msg: target message
-        :return: new joint positions for joint1 and joint3
+        :return: target in baselink, transform from base_link to biceps, transform from biceps to camera
         """
 
         # transform the target to baselink if it's not in that frame already
@@ -188,11 +190,11 @@ class ExpertNode(object):
                                                             msg.header.frame_id,  # source frame
                                                             msg.header.stamp,
                                                             # get the transform at the time the pose was generated
-                                                            rospy.Duration(0.1))  # wait for 1 second
+                                                            rospy.Duration(1.0))  # wait for 1 second
                 pose_transformed = tf2_geometry_msgs.do_transform_pose(msg, transform)
             except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException) as e:
                 rospy.logwarn("Failed to compute new position for the robot because {}".format(e))
-                return
+                return None, None, None
         else:
             pose_transformed = msg
 
@@ -206,24 +208,34 @@ class ExpertNode(object):
                                                         self.base_link,  # source frame
                                                         msg.header.stamp,
                                                         # get the transform at the time the pose was generated
-                                                        rospy.Duration(0.1))  # wait for 1 second
+                                                        rospy.Duration(1.0))  # wait for 1 second
+            T1 = transform_msg_to_T(transform)
         except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException) as e:
             rospy.logwarn("Failed to compute new position for the robot because {}".format(e))
-            return
-
-        T1 = transform_msg_to_T(transform)
+            T1 = None
 
         try:
             transform = self.tf_buffer.lookup_transform(self.camera_link,
                                                         self.biceps_link,  # source frame
                                                         msg.header.stamp,
                                                         # get the transform at the time the pose was generated
-                                                        rospy.Duration(0.1))  # wait for 1 second
+                                                        rospy.Duration(1.0))  # wait for 1 second
+            T2 = transform_msg_to_T(transform)
         except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException) as e:
             rospy.logerr(e)
-            return
+            T2 = None
 
-        T2 = transform_msg_to_T(transform)
+        return p, T1, T2
+
+    def compute_joints_position(self, msg):
+        """
+        Helper function to compute the required motion to make the robot's camera look towards the target
+        :param msg: target message
+        :return: new joint positions for joint1 and joint3; or None if something went wrong
+        """
+        p, T1, T2 = self.get_p_T1_T2(msg)
+        if p is None or T1 is None or T2 is None:
+            return None
 
         # compute the required motion for the robot using black-box optimization
         x0 = [-np.arctan2(p[1], p[0]), 0.0]
