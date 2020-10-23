@@ -11,6 +11,7 @@ This is the fifth assignment for Yale's CPSC-459/559 Building Interactive Machin
     * [Preliminaries](#preliminaries)
        * [Training on Google Colaboratory](#training-on-google-colaboratory)
        * [Training on Google Cloud](#training-on-google-cloud)
+       * [Training on Amazon Web Services (AWS)](#training-on-amazon-web-services-aws)
     * [Deliverables](#deliverables)
     * [Evaluation](#evaluation)
     * [Further Reading](#further-reading)
