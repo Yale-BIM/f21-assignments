@@ -187,8 +187,8 @@ def main(num_examples, epochs, lr, visualize_training_data, build_fn=build_linea
     l2_err = compute_average_L2_error(test_target, predicted_targets)
     print("L2 Error on Testing Set: {}".format(l2_err))
 
-    # visualize the result (uncomment the line below to plot the predictions)
-    # sfu.plot_test_predictions(test_input, test_target, predicted_targets, title="Predictions")
+    # visualize the result
+    sfu.plot_test_predictions(test_input, test_target, predicted_targets, title="Predictions")
 
 
 if __name__ == "__main__":
