@@ -33,8 +33,9 @@ This assignment should be completed using Python 2.7 in Ubuntu 18.04. For traini
 we recommend that you use cloud services if your don't have access to a local GPU. For the last part of the assignment, 
 you should have access to a computer with `ROS Melodic`.
 
-You should also have `git` installed in the machine that you are using to work on your assignment.
-You will use git to save your work to your [Github](http://www.githubcom) repository. 
+You should also have `git` and `pip` installed in the machine that you are using to work on your assignment.
+You will use git to save your work to your [Github](http://www.githubcom) repository. The pip tool will be used to install
+Python dependencies.
 
 #### Background Knowledge
 
@@ -44,13 +45,13 @@ This assignment assumes that you have already completed the prior assignments an
 If you are not, please check [this tutorial](https://docs.scipy.org/doc/numpy/user/quickstart.html) before starting the assignment.
 
 #### Preliminaries
-You will be training Neural Networks for this assignment. It is possible to complete all
-of the tasks using your local CPU, but it might be faster at times to train on the cloud and
+You will be training supervised learning models, especially Neural Networks, for this assignment. 
+It is possible to complete all of the tasks using your local CPU, but it might be faster at times to train on the cloud and
 using hardware acceleration (e.g., GPU).
 
 > Whether or not you use the cloud to train your neural networks, the deliverables are the same.
-You should submit code in your private Github repository. You should also submit a report 
-and model parameter files to Canvas.
+You should submit code in your private Github repository. You should also submit a report to Gradescope
+and provide model parameter files through Google Drive.
 
 ##### Training on Google Colaboratory
 One option to train a network on the cloud is to use [Google Colaboratory](https://colab.research.google.com).
@@ -69,26 +70,28 @@ credits judiciously.
 A `quick tutorial` on using Google Cloud for this assignment is provided in the
 [Train_Google_Cloud_Engine.md](Train_Google_Cloud_Engine.md) file.
 
+
+##### Training on Amazon Web Services (AWS)
+Similar to Google Cloud, you can also use AWS to train your models on the cloud with hardware acceleration.
+This option is not free either, but can customize virtual machines with as many resources as you need. Use your 
+credits judiciously.
+
+A `quick tutorial` on using AWS for this assignment is provided in the
+[Train_AWS.md](Train_AWS.md) file.
+
 #### Deliverables
 
-- **Report:** You are expected to submit a pdf to Canvas with answers to the questions/tasks at 
+- **Report:** You are expected to submit a pdf to Gradescope with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of the version of the code
-that you would like to be evaluated on. Though not mandatory, it is recommended that you generate this pdf 
-with [Overleaf](https://www.overleaf.com/edu/yale#!overview) and this 
-[simple assignment template](https://www.overleaf.com/latex/templates/simple-assignment-template/mzkqqqjypzvd) 
-in [LaTeX](https://www.latex-project.org/).
+that you would like to be evaluated on. 
 
 - **Model weights and input normalization parameters:** You should upload trained models and parameters
-to canvas.
+to Google Drive and shared them with anybody who has access to the links.
 
 - **Code:** Finally, you are expected to push code for this assignment to your 
 [Github](http://www.github.com) repository as indicated in the [general instructions](../README.md) 
-document for CPSC-659 assignments. 
-
-<!-- NOTE: If you are using late days to submit this assignment after the official deadline,
-you should let Marynel and Tim know about this before the deadline is due! Otherwise, you
-won't be able to submit your report through Canvas. -->
+document for CPSC-459/CSPC-559 assignments. 
 
 #### Evaluation
 
@@ -102,24 +105,41 @@ You assignment will be evaluated based on the content of your report and your co
     * Part II (24 pts): II-1 (4 pts) + II-2 (2 pts) + II-3 (2 pts) + II-4 (4 pts) + II-5 (4 pts) + II-8 (2 pts) + II-8 (6 pts)
     * Part III (26 pts): III-1 (12 pts) + III-2 (4 pts) + III-3 (10 pts)
 
-Note on Part IV of the assignment: Part IV provides extra credit, which is valid for all students (CPSC 459 or 559). The extra
-credit (2 pts) will be counted for the final course grade (over 100 pts) and requires all deliverables of Part IV to be submitted
-as part of the assignment. 
+Note on Part V of the assignment: Part V provides extra credit, which is valid for all students (CPSC 459 or 559). The extra
+credit (2 pts) will be counted for the final course grade (over 100 pts) and requires students to submit a valid solution to Part V 
+to Gradescope. 
 
 #### Further Reading
 
+Below are some example Neural Networks to give you a starting point for implementing your own:
 - [SqueezeNet](https://arxiv.org/abs/1602.07360) - A small network for image classification
 - [Tiny Darknet](https://pjreddie.com/darknet/tiny-darknet/) - An even smaller network for image classification
 
 ## Setup
-Before you start implementing or answering questions for this assignment, please update
-your repository to pull the latest changes from the assignments repository and update
-the shutter-ros repository:
+Before you start implementing or answering questions for this assignment, please
+check that [pip](https://pip.pypa.io/en/stable/installing/) in installed in your machine:
+
+```bash
+$ pip --version
+```
+
+If it's not installed and you are using Ubuntu, then install it with:
+
+```bash
+sudo apt install python-dev python-pip
+```
+
+Then, update your repository to pull the latest changes from the assignments repository,
+install Python dependencies, and update the shutter-ros repository:
 
 ```bash
 # update your repository with the latest version of the assignment
 $ cd <path-to-your-repository-in-your-workspace>
 $ git pull upstream master
+
+# install Assignment-5 Python dependencies
+$ cd assignment-5
+$ ./install_python_deps.sh
 
 # update the shutter-ros repository 
 $ roscd shutter_bringup
@@ -130,136 +150,49 @@ $ cd <path-to-your-catkin-workspace-root-directory>
 $ catkin_make -DCMAKE_BUILD_TYPE=Release
 ```
 
-## Part I. Set Up TensorFlow Locally
+The above `install_python_deps.sh` script will install several Python packages
+that are required for this assignment, including TensorFlow v. 2.0.0b1. While
+the latter package is not the latest version of TensorFlow, it is compatible with Python 2.7 which
+makes it easy for you to load up Neural Network models into ROS nodes.
 
-The first thing that you will need to start working on deep learning is installing TensorFlow in the
-machine that you are using to develop code. Follow the instructions below, which are based on the [official 
-TensorFlow installation page](https://www.tensorflow.org/install/pip?lang=python2), 
-to set up TensorFlow v. 2.0.0 with Python 2.7.
+You can verify your TensorFlow installation as follows:
 
-1. Check that [pip]() in installed in your machine:
+```bash
+$ python -c "import tensorflow as tf; print(tf.__version__)"
+2.0.0-beta1
+```
 
-    ```bash
-    $ pip --version
-    ```
-    
-    If it's not installed and you are using Ubuntu, then install it with:
-    
-    ```bash
-    sudo apt install python-dev python-pip
-    ```
+**NOTE:** If your machine has a GPU with CUDA Compute Capability 3.5 or higher and 
+you have [CUDA 10.0](https://developer.nvidia.com/cuda-10.0-download-archive) plus 
+[cuDNN 7.4](https://developer.nvidia.com/cudnn) installed in your system, then you should install:
 
-2. Check that [virtualenv](https://virtualenv.pypa.io/en/stable/) is already installed:
+```bash
+python -m pip install -U --user tensorflow-gpu==2.0.0b1
+```
 
-    ```bash
-    $ virtualenv --version
-    ```
-    
-    If virtualenv is NOT installed in your machine, install it:
-    
-    ```bash
-    sudo apt install virtualenv
-    ```
-  
-3. Create a [virtual environment](https://realpython.com/python-virtual-environments-a-primer/) 
-named `venv` with virtualenv:
+to take advantage of hardware acceleration. You can test that your GPU is visible in TensorFlow
+by running the following commands on a Python shell:
 
-    ```bash
-    $ cd assignment-5 # enter this assignments directory within your assignments private repository
-    $ virtualenv --system-site-packages -p python2.7 venv
-    ```
-    
-4. Activate your virtual environment:
+```python
+>> import tensorflow as tf
+>> tf.test.is_gpu_available()
+```
 
-   ```bash
-   $ source ./venv/bin/activate
-   ```
-   
-   Now your terminal prompt should start with `(venv)` indicating that you are within the environment.
-    
-5. Upgrade pip within your virtual environment:
-   
-   ```bash
-   (venv) $ pip install --upgrade pip
-   ```
-   
-6. Install TensorFlow (TF):
-
-    - If your machine has no GPU:
-    
-        ```bash
-        (venv) $ pip install --upgrade tensorflow
-        ```
-        
-    - If your machine has a GPU with CUDA Compute Capability 3.5 or higher and 
-    you have CUDA 10.0 installed in your system (see [here](https://www.tensorflow.org/install/gpu) for 
-    more details on setting up CUDA for TF):
-    
-        ```bash
-        (venv) $ pip install --upgrade tensorflow-gpu
-        ```
-        
-7. Verify the install:
-
-    ```bash
-    (venv) $ python -c "import tensorflow as tf; print(tf.__version__)"
-    ```
-    
-    The command should print "2.0.0".
-
-    > If you've installed tensorflow-gpu, you can check that the GPU is being recognized properly by calling the `tf.test.is_gpu_available()` function after importing tensorflow as tf. If you are having trouble installing Tensorflow with GPU support, see the official installation guide [here](https://www.tensorflow.org/install/gpu#ubuntu_1804_cuda_10).
-
-8. Install opencv and matplotlib:
-
-    ```bash
-    (venv) $ pip install matplotlib opencv-python
-    ```
-
-> NOTE: Because you have installed the packages that you need to complete this assignment within 
-a virtual environment, you will always have to activate the environment before starting to run your code 
-(as in step 3 above). To exit your virtual environment at any time, you can run the command: 
-``` (venv) $ deactivate ```.
-
-### Questions / Tasks 
-
-- **I-1.** In general, committing virtual environments to your repository is bad practice (e.g., paths might differ
-in different computers and this may render your environment unusable). Instead, what people generally
-do is create a `requirements.txt` file with all of the dependencies for a project. This file can then be 
-used to install all required Python models with pip.
-
-    For this part of the assignment, **create a requirements.txt** file so that you remember what needs
-    to be installed to run your assignment. The file should be placed within the assignment-5 directory
-    of your private assignments repository. Below is an example of how the requirements.txt file would 
-    look like:
-    
-    ```text
-    tensorflow==2.0.0
-    opencv-python==4.1.1.26
-    matplotlib==2.1.1
-    ```
-    
-    or if you installed `tensorflow-gpu` before,
-    
-    ```text
-    tensorflow-gpu==2.0.0
-    opencv-python==4.1.1.26
-    matplotlib==2.1.1
-    ```
-    
-    Commit the requirements.txt file to your private assignments repository. 
-    
-    > NOTE: If you ever need to install the packages in a new 
-    virtual environment, then you can just run the command `(env) $ pip install -r requirements.txt`
-    within your virtual environment.
+The function should return True if TensorFlow can access your GPU. If the function
+returns False, check the errors that are printed in the Shell. Common errors include
+not having Cuda 10.0 installed in the system but a different version, not having CuDNN
+installed for Cuda 10.0, and not having CUDA system variables setup in your environment 
+(e.g., CUDADIR). See the [TensorFlow GPU support page](https://www.tensorflow.org/install/gpu) 
+for more information. 
 
 
-## Part II. Approximating a Non-Linear Function
+## Part I. Approximating a Non-Linear Function
 
 Read the [Primer on Universal Function Approximation with Deep Learning](https://cartesianfaith.com/2016/09/23/a-primer-on-universal-function-approximation-with-deep-learning-in-torch-and-r/) 
 by Brian Yung Rowe. 
 
 Once you've read the primer, you should complete the tasks below to approximate the 
-[monkey saddle surface](https://en.wikipedia.org/wiki/Monkey_saddle)  defined by the equation ![equation](https://latex.codecogs.com/gif.latex?z&space;=&space;x^3&space;-&space;3xy^2).
+[monkey saddle surface](https://en.wikipedia.org/wiki/Monkey_saddle) defined by the equation ![equation](https://latex.codecogs.com/gif.latex?z&space;=&space;x^3&space;-&space;3xy^2).
 <!-- $`z = x^3 - 3xy^2`$ --> Your code should leverage [TensorFlow's
 Keras API](https://www.tensorflow.org/guide/keras).
 
