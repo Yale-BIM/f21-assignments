@@ -204,7 +204,8 @@ To get you started, this assignment provides two files within the
 
 If you run the train_and_test_saddle_function.py script (which is incomplete at this point)
 with the `visualize_training_data` option, you should be able to visualize the data that the
-script generates for you:
+script generates for you and example predictions with a linear neural network model implemented with 
+[TensorFlow's Keras API](https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/keras):
 
 ```bash
 $ cd assignment-5/function_approximation
@@ -216,197 +217,79 @@ as in the figure below:
 
 <img src="docs/training-val-data.png" width="600"/>
 
+And, once the linear model is trained for a number of epochs with the 
+[Adam optimizer](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam), the script would show:
+
+<img src="docs/fit-linear.png" width="600"/>
+
+To see all the options that the train script already provides, run it as:
+
+```bash
+$ ./train_and_test_saddle_function.py --help
+usage: train_and_test_saddle_function.py [-h] [--n N]
+                                         [--batch_size BATCH_SIZE]
+                                         [--epochs EPOCHS] [--lr LR]
+                                         [--visualize_training_data]
+                                         [--build_fn BUILD_FN]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --n N                 total number of examples (including training, testing,
+                        and validation)
+  --batch_size BATCH_SIZE
+                        batch size used for training
+  --epochs EPOCHS       number of epochs for training
+  --lr LR               learning rate for training
+  --visualize_training_data
+                        visualize training data
+  --build_fn BUILD_FN   model to train (e.g., 'linear')
+```
+
+The optional parameters `lr`, `epochs`, and `batch_size` correspond to the learning rate,
+number of epochs, and bath size that are used at training time.
+
+Read the code in the training script to familiarize yourself with its functionality.
+
 ### Questions/Tasks
 
-<!-- - **II-1.** Complete the `compute_normalization_parameters()` and `normalize_data_per_row()` functions in
-the train_and_test_saddle_function.py script.
-
-    a. For the compute_normalization_parameters() function, you want to compute the mean
-    and standard deviation for the data that is input to the function:
-    
-    ```python
-    def compute_normalization_parameters(data):
-        """
-        Compute normalization parameters (mean, st. dev.)
-        :param data: matrix with data organized by rows [N x num_variables]
-        :return: mean and standard deviation per variable as row matrices of dimension [1 x num_variables]
-        """
-        mean = ...  # numpy array with num_variables elements 
-        stdev = ... # numpy array with num_variables elements
-        return mean, stdev
-    ```
-    
-    Note that the input `data`
-    is organized in a matrix where each row corresponds to an example. The columns of the data
-    matrix correspond to features of each of the input examples. The mean and standard deviation 
-    should be computed for each example feature independently.
-    
-    b. For the normalize_data_per_row() function, you want to use the mean and stdev from
-    (a) above to apply a whitening transformation to the data:
-    
-    ```python
-    def normalize_data_per_row(data, mean, stdev):
-        """
-        Normalize a give matrix of data (samples must be organized per row)
-        :param data: input data
-        :param mean: mean for normalization
-        :param stdev: standard deviation for normalization
-        :return: whitened data, (data - mean) / stdev
-        """
-    
-        # sanity checks!
-        assert len(data.shape) == 2, "Expected the input data to be a 2D matrix"
-        assert data.shape[1] == mean.shape[1], "Data - Mean size mismatch ({} vs {})".format(data.shape[1], mean.shape[1])
-        assert data.shape[1] == stdev.shape[1], "Data - StDev size mismatch ({} vs {})".format(data.shape[1], stdev.shape[1])
-    
-        normalized_data = ... # Complete.
-        
-        return normalized_data
-    ``` 
-     
-    For example, if an example
-    feature is $`x`$, then you want to transform it into $`(x - \mu)/\sigma`$,
-    where $`\mu`$ is the expected value for that feature and $`\sigma`$ corresponds to the feature's standard deviation based on
-    the input data.
-    
-- **II-2.** Complete the `build_linear_model()` function in
-the train_and_test_saddle_function.py script. This function should implement
-a simple Neural Network model (with one hidden layer) using the [Keras API](https://www.tensorflow.org/guide/keras):
+- **I-1.** Add callbacks to the [Keras model's fit function](https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/keras/Model#fit) 
+in the `train_model()` method of the train_and_test_saddle_function.py script:
 
     ```python
-    input = tf.keras.layers.Input(shape=(num_inputs,), name="inputs")
-    hidden1 = tf.keras.layers.Dense(64, use_bias=True)(input)
-    output = tf.keras.layers.Dense(1, use_bias=True)(hidden1)
-    model = tf.keras.models.Model(inputs=input, outputs=output, name="monkey_model")
+     # tensorboard callback
+     logs_dir = 'logs/log_{}'.format(datetime.datetime.now().strftime("%m-%d-%Y-%H-%M"))
+     tbCallBack = tf.keras.callbacks.TensorBoard(log_dir=logs_dir, write_graph=True)
+
+     checkpointCallBack = tf.keras.callbacks.ModelCheckpoint(os.path.join(logs_dir,'best_monkey_weights.h5'),
+                                                            monitor='mae',
+                                                            verbose=0,
+                                                            save_best_only=True,
+                                                            save_weights_only=False,
+                                                            mode='auto',
+                                                            save_freq=1)
+
+     # do training for the specified number of epochs and with the given batch size
+     model.fit(norm_train_input, train_target, epochs=epochs, batch_size=batch_size,
+              validation_data=(norm_val_input, val_target),
+              callbacks=[tbCallBack, checkpointCallBack]) # add this extra parameter to the fit function
     ```
 
-    The function should return the [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model)
-    specified above.
-
-    > In general, we suggest that you use [TF's Keras Functional API](https://www.tensorflow.org/guide/keras/functional)
-    to build your model as in the script above.
-
-- **II-3.** Complete the `train_model()` function in
-the train_and_test_saddle_function.py script. This function should first normalize the input
-features in the training and validation set using the normalize_data_per_row() function from step 1 above. 
-Then, train_model() should [compile](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model#compile) 
-the neural network model that is passed as input to the function, i.e., 
-define the optimizer to be used during training, loss, and relevant metrics. Finally, the train_model() 
-function should train the network's weights using the [model's fit function](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model#fit).
-
-    ```python
-    def train_model(model, train_input, train_target, val_input, val_target, input_mean, input_stdev,
-                epochs=20, learning_rate=0.01, batch_size=16):
-        """
-        Train the model on the given data
-        :param model: Keras model
-        :param train_input: train inputs
-        :param train_target: train targets
-        :param val_input: validation inputs
-        :param val_target: validation targets
-        :param input_mean: mean for the variables in the inputs (for normalization)
-        :param input_stdev: st. dev. for the variables in the inputs (for normalization)
-        :param epochs: epochs for gradient descent
-        :param learning_rate: learning rate for gradient descent
-        :param batch_size: batch size for training with gradient descent
-        """
-        # normalize
-        norm_train_input = normalize_data_per_row(train_input, input_mean, input_stdev)
-        norm_val_input = normalize_data_per_row(val_input, input_mean, input_stdev)
-   
-        # compile the model: define optimizer, loss, and metrics
-        model.compile(optimizer=tf.keras.optimizers.Adam(lr=learning_rate),
-                     loss='mse',
-                     metrics=['mae'])
-    
-        # tensorboard callback
-        logs_dir = 'logs/log_{}'.format(datetime.datetime.now().strftime("%m-%d-%Y-%H-%M"))
-        tbCallBack = tf.keras.callbacks.TensorBoard(log_dir=logs_dir, write_graph=True)
-    
-        checkpointCallBack = tf.keras.callbacks.ModelCheckpoint(os.path.join(logs_dir,'best_monkey_weights.h5'),
-                                                                monitor='val_loss',
-                                                                verbose=0,
-                                                                save_best_only=True,
-                                                                save_weights_only=False,
-                                                                mode='auto',
-                                                                period=1)
-    
-        # do trianing for the specified number of epochs and with the given batch size
-        model.fit(norm_train_input, train_target, epochs=epochs, batch_size=batch_size,
-                 validation_data=(norm_val_input, val_target),
-                 callbacks=[tbCallBack, checkpointCallBack])
-    ```
-
-    Note that the example above also adds two callbacks to the fit() function:
+    The callbacks perform the following operations during the training loop:
     
     - **tf.keras.callbacks.TensorBoard:** [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard) 
-    callback to write TensorBoard logs to a given directory.
+    write [TensorBoard](https://www.tensorflow.org/tensorboard) logs to a given directory.
     - **tf.keras.callbacks.ModelCheckpoint:** Callback that saves the model after every epoch (see
     more information [here](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/ModelCheckpoint)).
     Because we set "save_best_only = True", the callback would only save the model if the
     validation loss is smaller than the prior best validation loss.<br/><br/>
     
-    We suggest that, as a first try, you use the [Adam optimizer](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam)
-    when you train neural works with gradient descent. The optimizer tends to work well for many problems. You can read the
-    original paper with full details of how it works here: [Diederik P. Kingma, Jimmy Ba. Adam: A Method for Stochastic Optimization](https://arxiv.org/abs/1412.6980).
-    A bit more information about the TensorFlow implementation can be found here: [tf.train.AdamOptimizer](https://www.tensorflow.org/api_docs/python/tf/train/AdamOptimizer).
-    
-- **II-4.** Complete the `test_model()` function in the train_and_test_saddle_function.py script. The function
-should output predictions for the given input matrix (test_input) using the `model.predict()` function.
-The official documentation for the predict() function can be found [here](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model#predict).
-
-    > Remember that whatever transformation that you apply to your data at training time, should be applied at test time as well for your model to work in practice.
-
-- **II-5.** Complete the `compute_average_L2_error()` function in the train_and_test_saddle_function.py script.
-The function should compute the average [L2 difference](http://mathworld.wolfram.com/L2-Norm.html) between the ground truth 
-(test_target) and the predicted values (predicted_targets) that are input to the function. The average
-should be over all of the examples in each of the input matrices.
-
-    ```python
-    def compute_average_L2_error(test_target, predicted_targets):
-        """
-        Compute the average L2 error for the predictions
-        :param test_target: matrix with ground truth targets [N x 1]
-        :param predicted_targets: matrix with predicted targets [N x 1]
-        :return: average L2 error
-        """
-        
-        average_l2_err = ... # Complete.
-    
-        return average_l2_err
-    ``` -->
-
-- **II-1.** Uncomment the last line in the main() function of the train_and_test_saddle_function.py
-script so that you can easily visualize the predictions made by your model:
-
-    ```python
-    # visualize the result (uncomment the line below to plot the predictions)
-    sfu.plot_test_predictions(test_input, test_target, predicted_targets, title="Predictions")
-    ```
-
-    You should now be able to train your network and visualize the results for the test set:
+    Run the `train_and_test_saddle_function.py` script again to check that it is indeed saving model weights to a logs folder.
+    Also, check that you can visualize your training losses in TensorBoard by running it from another shell:
 
     ```bash
-    (venv) $ ./train_and_test_saddle_function.py [--lr 1e-1] [--epochs 10] [--batch_size 16]
-    ```    
-    
-    The optional parameters `lr`, `epochs`, and `batch_size` correspond to the learning rate,
-    number of epochs, and bath size that are used at training time.
-    
-    Make a screenshot of the plot that you get after training your simple neural network for the
-    first time with a learning rate of 1e-2 and for 500 epochs. Then, add to your report:
-    - the screenshot of the plot that you took;
-    - the average L2 error that you got on the testing set after training as indicated; and 
-    - an explanation of why the neural network is performing poorly.<br/><br/> 
-    
-- **II-2.** Visualize the learning curves and your model using [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard).
-Open a new terminal window, activate your virtual environment, and run:
-
-    ```bash
-    (venv) $ cd assignment-5 # go to the assignment-5 directory within your private repository
-    (venv) $ tensorboard --logdir function_approximation/logs
+    $ tensorboard --logdir <path_to_logs>
     ```
-    
+
     Then, go to the URL that the script provides (e.g., http://localhost:6006) in your favorite
     browser. The `SCALARS` tab of the TensorBoard interface should then show various training curves
     (e.g., epoch_loss for the loss after every epoch in the training and validation sets). The `GRAPHS` tab of the TensorBoard interface should show a 
@@ -419,8 +302,8 @@ Open a new terminal window, activate your virtual environment, and run:
     This 30min [TensorBoard tutorial](https://www.youtube.com/watch?v=eBbEDRsCmv4)
     provides good examples on how the interface can help you debug many issues!
     
-- **II-3.** Modify the train_and_test_saddle_function.py script so that you can load a `pre-trained
-model` and train its weights further (e.g., to resume training or for fine-tuning on a new task).
+- **I-2.** Modify the train_and_test_saddle_function.py script so that you can load a `pre-trained model` 
+and train its weights further (e.g., to resume training or for fine-tuning on a new task).
 
     a. Add a "load_model" argument to the argument parser at the end of the script:
         
@@ -454,7 +337,7 @@ model` and train its weights further (e.g., to resume training or for fine-tunin
         
     > Note that the load_model() function above is passed the argument `compile=False`.
     This means that the model should not be compiled after loading, because the train_model() function
-    that you implemented before did this already.
+    does this already.
         
     c. Test your code. Your script should now be able to load a model from a file and continue training
     its weights thereafter:
@@ -463,17 +346,16 @@ model` and train its weights further (e.g., to resume training or for fine-tunin
     (venv) $ ./train_and_test_saddle_function.py --load_model <path_to_model_h5_file> [--lr 1e-2] [--epochs 500] [--batch_size 16]
     ```
     
-    The model that you trained before for task II-6 should be stored as best_monkey_weights.h5
+    The model that you trained before for task I-1 should be stored as best_monkey_weights.h5
     within the folder corresponding to your training session in assignments-5/function_approximation/logs.
     You can pass this model as argument to your train_and_test_saddle_function.py to test the new
     functionality that you just implemented.
     
-- **II-4.** Complete the function called `build_nonlinear_model()` in the train_and_test_saddle_function.py 
+- **I-3.** Complete the function called `build_nonlinear_model()` in the train_and_test_saddle_function.py 
 script. This function should have as argument the number of input features for the data and should
 return a [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model), similar
 to the build_linear_model() function that you implemented before. The difference between these functions, though, 
-is that build_nonlinear_model()
- should implement a more complex neural network capable of approximating the monkey saddle surface
+is that build_nonlinear_model() should implement a more complex neural network capable of approximating the monkey saddle surface
 with an **average L2 error of 150 or less on the test set**.
 
     ```python
@@ -509,21 +391,21 @@ with an **average L2 error of 150 or less on the test set**.
     until you achieve an average test error of 150 or less. Afterwards, take a new screenshot of the plot
     that you get after training (as in task 1 above). Include in your report:
      
-    - The screenshot of the plot after training;
+    - The screenshot of the plot with test results after training;
     - what average L2 error did you get on the test set this time;
     - a description of the neural network model that you used to approximate the monkey saddle surface; and
     - whatever parameters you used for training it (e.g., batch size, learning rate, and number of epochs).<br/><br/>
     
-- **II-5.** Train your nonlinear neural network such that it `overfits` on the training data. 
+- **II-4.** Train your nonlinear neural network such that it `overfits` on the training data. 
 
     After training, include a picture
     in your report of the plots from TensorBoard corresponding to the `mean absolute error` (mae) on the training and validation
     sets. Explain how you concluded that your model overfit in the report.
     
-- **II-6.** What happens with the loss per epoch on the training set if you train with a batch size of 1?
+- **II-5.** What happens with the loss per epoch on the training set if you train with a batch size of 1?
 Explain why does the loss per epoch graph look different than with a bigger batch size (e.g., than with a batch size of 100).
 
-## Part III. Building a Face Classifier
+## Part II. Building a Face Classifier
 
 Now that you are familiar with training deep learning models, you will create your own face 
 classifier. 
