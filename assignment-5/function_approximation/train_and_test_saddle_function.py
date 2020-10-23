@@ -10,7 +10,6 @@ import tensorflow as tf
 import saddle_function_utils as sfu
 
 
-
 def compute_normalization_parameters(data):
     """
     Compute normalization parameters (mean, st. dev.)
@@ -63,7 +62,8 @@ def build_linear_model(num_inputs):
     model = tf.keras.models.Model(inputs=input, outputs=output, name="monkey_model")
     return model
 
-def build_non_linear_model(num_inputs):
+
+def build_nonlinear_model(num_inputs):
     """
     Build NN model with Keras
     :param num_inputs: number of input features for the model
@@ -71,7 +71,6 @@ def build_non_linear_model(num_inputs):
     """
     # TO-DO: Complete. Remove the None line below, define your model, and return it.
     return None
-
 
 
 def train_model(model, train_input, train_target, val_input, val_target, input_mean, input_stdev,
@@ -99,17 +98,19 @@ def train_model(model, train_input, train_target, val_input, val_target, input_m
                  loss='mse',
                  metrics=['mae'])
 
-    # do trianing for the specified number of epochs and with the given batch size
+    # TODO - Create callbacks for saving checkpoints and visualizing loss on TensorBoard
+
+    # do training for the specified number of epochs and with the given batch size
+    # TODO - Add callbacks to fit funciton
     model.fit(norm_train_input, train_target, epochs=epochs, batch_size=batch_size,
              validation_data=(norm_val_input, val_target))
 
 
-def test_model(model, test_input, test_target, input_mean, input_stdev, batch_size=60):
+def test_model(model, test_input, input_mean, input_stdev, batch_size=60):
     """
     Test a model on a given data
     :param model: trained model to perform testing on
     :param test_input: test inputs
-    :param test_target: test targets
     :param input_mean: mean for the variables in the inputs (for normalization)
     :param input_stdev: st. dev. for the variables in the inputs (for normalization)
     :return: predicted targets for the given inputs
@@ -174,21 +175,20 @@ def main(num_examples, epochs, lr, visualize_training_data, build_fn=build_linea
     model = build_fn(train_input.shape[1])
 
     # train the model
-    print "\n\nTRAINING..." 
+    print("\n\nTRAINING...")
     train_model(model, train_input, train_target, val_input, val_target, mean, stdev,
                 epochs=epochs, learning_rate=lr, batch_size=batch_size)
 
     # test the model
-    print "\n\nTESTING..." 
-    predicted_targets = test_model(model, test_input, test_target, mean, stdev)
+    print("\n\nTESTING...")
+    predicted_targets = test_model(model, test_input, mean, stdev)
 
     # Report average L2 error
     l2_err = compute_average_L2_error(test_target, predicted_targets)
-    print "L2 Error on Testing Set: {}".format(l2_err) 
+    print("L2 Error on Testing Set: {}".format(l2_err))
 
     # visualize the result (uncomment the line below to plot the predictions)
     # sfu.plot_test_predictions(test_input, test_target, predicted_targets, title="Predictions")
-
 
 
 if __name__ == "__main__":
@@ -213,7 +213,7 @@ if __name__ == "__main__":
     if args.build_fn == "linear":
         build_fn = build_linear_model # function that builds linear model
     else:
-        print "Invalid build function name {}".format(args.build_fn)
+        print("Invalid build function name {}".format(args.build_fn))
         sys.exit(1)
 
     # run the main function
