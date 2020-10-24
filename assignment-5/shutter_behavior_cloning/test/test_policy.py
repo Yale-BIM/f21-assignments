@@ -263,10 +263,10 @@ class TestPolicy(unittest.TestCase, ExpertNode):
 
         return diff1, diff3, None
 
-    def test_reaching_targets(self, max_ang_difference=0.00872665):
+    def test_reaching_targets(self, max_ang_difference=0.0035):
         """
         Test reaching the targets
-        :param max_ang_difference: maximum angular difference to consider a trial successful (in radians, dflt: 0.5 deg)
+        :param max_ang_difference: maximum angular difference to consider a trial successful (in radians, dflt: 0.2 deg)
         """
         headers = ["TRIAL", "X", "Y", "Z", "DIFFJ1", "DIFFJ3", "ACCEPTABLE"]
         self.fid.write("".join([x.ljust(12) for x in headers]) + "\n")

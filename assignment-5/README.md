@@ -708,33 +708,99 @@ In this last part of the assignment, you will gain practical experience with Beh
 supervised learning to estimate a motion policy for Shutter.
 
 Your expert -- which you aim to learn to imitate -- will be the `expert_opt.py` node within the 
-`shutter_behavior_cloning/src` directory. This expert uses optimization to align the face of the robot towards a target.
-In practice, this type of behavior could be useful for the robot to convey attention towards a moving person or object.
+`shutter_behavior_cloning/src` directory. This expert uses optimization to align the face of the robot towards a target
+by moving two of its joints: joint_1, and joint_3. In practice, this type of behavior could be 
+useful for the robot to convey attention towards a moving person or object in a real scenario.
 
 To make it easy for you to run the expert and see it in action, this assignment provides you the `collect_data.launch` 
 launch file. For example, if you run it as:
+
 ```bash
 $ roslaunch shutter_behavior_cloning collect_data.launch
 ```
+
 Then, you should see the robot in RViz following the blue targets as below:
 <img src="docs/follow_blue_target.gif" width="600"/>
 
+The above launch file can also be used to generate data for behavioral cloning:
+
+```bash
+$ roslaunch shutter_behavior_cloning collect_data.launch save_state_actions:=True
+```
+
+As the launch script is running, you can check that example `state`-`action` pairs are being written
+  to `shutter_behavior_cloning/data/state_action.txt`. For example, you can check this with:
+
+```
+$ tail -f state_action.txt
+# data from 19/10/2020 23:00:05
+base_footprint  1.1781  -0.1099 1.3627  0.0000  0.0000  -0.1202 -0.6751
+base_footprint  1.9321  -2.6038 0.6671  -0.1202 -0.6751 -0.8220 0.5598
+base_footprint  2.8652  -0.8011 2.2853  -0.9423 -0.1153 0.6589  -0.4528
+base_footprint  2.3123  1.8743  2.6313  -0.2833 -0.5681 0.9538  -0.0859
+(...)
+```
+
+The `state_action.txt` file contains comment lines that start with "#". Non-comment lines have 8 fields:
+1. frame_id for the target's position
+2. the target's x coordinate
+3. the target's y coordinate
+4. the target's z coordinate
+5. the current joint_1 
+6. the current joint_3
+7. the next joint_1 that the robot should have to point towards the target
+8. the next joint_3 that the robot should have to point towards the target
+
+Thus, the state representation for this imitation learning problem is 5-dimensional. 
+It corresponds to the target's position (X,Y,Z) and the current position for the robot's joint_1 and joint_3. 
+The output action is 2-dimensional. It corresponds to the new position for the robot's joints.
+
 ### Questions / Tasks
 
-- **III-1.** Generate data for behavioral cloning. Run:
+- **III-1.** Generate data for behavioral cloning as explained in the prior section, and implement a script to learn
+an imitation policy from this data using the TensorFlow Keras API. The script should be called `learn_policy.py` and 
+be placed within the `assignment-5/shutter_behavior_cloining/scripts` directory. 
 
-  ```bash
-  $ roslaunch shutter_behavior_cloning collect_data.launch save_state_actions:=True
-  ```
+    The script should:
+     
+    1. Take as input the path to your training data:  
+       ```bash
+       $ python learn_policy.py <path_to_training_data>
+       ```
+       
+    2. Load up the data and use it to train a neural network model that predicts the new joint positions for the robot 
+    (joint_1, and joint_3). For your convenience, this assignment provides you the `load_data()` function 
+    within the `assignment-5/shutter_behavior_cloning/scripts/train_utils.py` script to load up the `state_action.txt`
+    data.
+    
+    3. Save the model's weights to disk (as well as any feature normalization parameters if need be). The Keras model
+    should be saved to disk in HDF5 format using the [Keras model.save() function](https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/keras/Model#save).
+    The feature normalization parameters can be saved to disk in whatever format you like, so long as they are all saved
+    into a single file.
+    
+    Once you have trained your model, upload your saved files to Google Drive and make them accessible to anybody with
+    the link. Then, add this link to the top of the `assignment-5/shutter_behavior_cloning/scripts/train_utils.py` file
+    and test that they can be automatically downloaded using the `download_model_files()` function inside that same 
+    Python file.
+    
+    **NOTE 1:** You can test your model with the `test_policy.launch` file within 
+    `assignment-5/shutter_behavior_cloning/test`. For example:
+    ```bash
+    rostest shutter_behavior_cloning test_policy.launch model:=<path_to_model_hdf5> [normp:=<path_to_normalization_file>] run_rviz:=True
+    ```
+    The test will output the `~/.ros/test_policy_output.txt` file with: trial number, the target's x,y,z coordinates,
+    the difference (in radians) between the predicted joint_1 and joint_3 positions and the expert's output, and
+    and acceptable boolean value indicating if both differences are less than 0.0035 radians (0.2 degrees).
   
-  As the launch script is running, you can check that example `state`-`action` pairs are being written
-  to `~/.ros/test_policy_output.txt`. For example, you can check this with:
-  
-  ```
-  $ tail -f ~/.ros/test_policy_output.txt
-  ```
-  
-  
+    **NOTE 2:** When you submit your code to Gradescope, your model files will be downloaded from Google Drive automatically
+    and tested on the virtual robot on 100 trials. The number of trials for which you get an acceptable output (as 
+    defined above) will set 50% of your grade for this part of the assignment. The other 50% will be based on
+    whether your training script runs and your model can be downloaded successfully from Google Drive for testing.
+    
+    **NOTE 3:** The student(s) with the minimum average error: `avg(diff_j1 + diff_j3)` up to 5 point precision
+    will receive 2 extra points in their final course grade. Multiple submissions to this assignment are allowed
+    in Gradescope.
+    
 
 Once you've finished the assignment, **add the commit SHA** that you would like to be evaluate on to your report.
 
