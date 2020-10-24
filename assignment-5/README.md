@@ -11,6 +11,7 @@ This is the fifth assignment for Yale's CPSC-459/559 Building Interactive Machin
     * [Preliminaries](#preliminaries)
        * [Training on Google Colaboratory](#training-on-google-colaboratory)
        * [Training on Google Cloud](#training-on-google-cloud)
+       * [Training on Amazon Web Services (AWS)](#training-on-amazon-web-services-aws)
     * [Deliverables](#deliverables)
     * [Evaluation](#evaluation)
     * [Further Reading](#further-reading)
@@ -260,6 +261,7 @@ in the `train_model()` method of the train_and_test_saddle_function.py script:
      logs_dir = 'logs/log_{}'.format(datetime.datetime.now().strftime("%m-%d-%Y-%H-%M"))
      tbCallBack = tf.keras.callbacks.TensorBoard(log_dir=logs_dir, write_graph=True)
 
+     # save checkpoint callback
      checkpointCallBack = tf.keras.callbacks.ModelCheckpoint(os.path.join(logs_dir,'best_monkey_weights.h5'),
                                                             monitor='mae',
                                                             verbose=0,
