@@ -797,7 +797,8 @@ be placed within the `assignment-5/shutter_behavior_cloining/scripts` directory.
     **NOTE 2:** When you submit your code to Gradescope, your model files will be downloaded from Google Drive automatically
     and tested on the virtual robot on 100 trials. The number of trials for which you get an acceptable output (as 
     defined above) will set 50% of your grade for this part of the assignment. The other 50% will be based on
-    whether your training script runs and your model can be downloaded successfully from Google Drive for testing.
+    whether your training script runs as indicated in Part III-1 and 
+    your model can be downloaded successfully from Google Drive for testing.
     
     **NOTE 3:** The student(s) with the minimum average error: `avg(diff_j1 + diff_j3)` up to 5 point precision
     will receive 2 extra points in their final course grade. Multiple submissions to this assignment are allowed
