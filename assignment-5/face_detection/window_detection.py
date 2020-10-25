@@ -95,13 +95,13 @@ def make_predictions(im, model, scales=[50], stride = 10):
     :param model: keras model
     :param scales: list of scales for the sliding window in pixels (e.g., [50] corresponds to one window of 50x50 pixels)
     :param stride: stride for the sliding window (in pixels)
-    :return: numpy array of Nx5 dimension, where N is the number of detected faces (>=0) and the 5 columns
+    :return: numpy ndarray of Nx5 dimension, where N is the number of detected faces (>=0) and the 5 columns
     correspond to: min_x, min_y, max_x, max_y, prob. The bounding box of a face is defined the by top-left
     corner (min_x,min_y) and the bottom-right corner (max_x, max_y).
     """
 
-    # TO-DO. Remove the line below and complete the function so that it returns bounding boxes.
-    return np.empty((0,5))
+    # TO-DO. Remove the line below and complete the function so that it returns bounding boxes as a numpy.ndarray.
+    return None
 
 
 def main(input_file, weights_file):
