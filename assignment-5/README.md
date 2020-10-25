@@ -519,7 +519,7 @@ train your model using the 64x64_data.npz dataset:
 
     Commit your modified train_face_detection.py
     script to your repository once you are happy with your model. 
-    **Upload your best weights.h5 file to Google Drive, share the file publicly through a link,
+    **Upload your best weights.h5 file to Google Drive, share the file publicly with "Anyone with a link",
     and add its URL to the `WEIGHT_FILE_URL` variable at top of the `face_detection/download_weights.py` script.**
     
     To test that your model weights URL is setup properly in the evaluate_face_detection.py script, run it as:
@@ -781,8 +781,8 @@ be placed within the `assignment-5/shutter_behavior_cloining/scripts` directory.
     The feature normalization parameters can be saved to disk in whatever format you like, so long as they are all saved
     into a single file.
     
-    Once you have trained your model, upload your saved files to Google Drive and make them accessible to anybody with
-    the link. Then, add this link to the top of the `assignment-5/shutter_behavior_cloning/scripts/train_utils.py` file
+    Once you have trained your model, upload your saved files to Google Drive and make them accessible to "Anyone with 
+    the link". Then, add this link to the top of the `assignment-5/shutter_behavior_cloning/scripts/train_utils.py` file
     and test that they can be automatically downloaded using the `download_model_files()` function inside that same 
     Python file.
     
