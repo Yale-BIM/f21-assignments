@@ -85,7 +85,7 @@ A `quick tutorial` on using AWS for this assignment is provided in the
 - **Report:** You are expected to submit a pdf to Gradescope with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of the version of the code
-that you would like to be evaluated on. 
+that you would like to be evaluated on. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/11PYDt7UH5h8FWI3rrE9dzpAqHQvdRReY/view?usp=sharing).
 
 - **Model weights and input normalization parameters:** You should upload trained models and parameters
 to Google Drive and shared them with anybody who has access to the links.
