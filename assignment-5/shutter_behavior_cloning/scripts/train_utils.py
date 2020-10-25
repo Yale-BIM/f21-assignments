@@ -50,13 +50,13 @@ def load_data(input_file):
             else:
                 target_frame = line[0]
 
-            target_x.append(line[1])
-            target_y.append(line[2])
-            target_z.append(line[3])
-            joint_1.append(line[4])
-            joint_3.append(line[5])
-            action_1.append(line[6])
-            action_3.append(line[7])
+            target_x.append(float(line[1]))
+            target_y.append(float(line[2]))
+            target_z.append(float(line[3]))
+            joint_1.append(float(line[4]))
+            joint_3.append(float(line[5]))
+            action_1.append(float(line[6]))
+            action_3.append(float(line[7]))
 
     features = np.column_stack((target_x, target_y, target_z, joint_1, joint_3))
     targets = np.column_stack((action_1, action_3))
