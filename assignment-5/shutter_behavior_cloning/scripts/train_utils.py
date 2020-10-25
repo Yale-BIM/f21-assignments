@@ -75,7 +75,7 @@ def download_model_files(output_path=".", quiet=False, model_name="keras_model",
     """
     if MODEL_URL is None:
         print("MODEL_URL is not set in train_utils.py. Failed to download the model")
-        return None
+        return None, None
 
     out1 = gdown.download(MODEL_URL, os.path.join(output_path, model_name), quiet=quiet)
     if out1 is None:

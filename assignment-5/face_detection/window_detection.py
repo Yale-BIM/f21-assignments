@@ -88,7 +88,7 @@ def visualize_boxes(image, boxes):
     cv2.waitKey(0)
 
 
-def make_predictions(im, model, scales=[50], stride = 10):
+def make_predictions(im, model, scales=[50], stride=10):
     """
     Make predictions on the input image
     :param im: input image
