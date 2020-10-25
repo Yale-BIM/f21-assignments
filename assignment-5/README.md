@@ -98,11 +98,11 @@ document for CPSC-459/CSPC-559 assignments.
 
 You assignment will be evaluated based on the content of your report and your code.
 
-- Report (43 pts)
-    * Part I (28 pts): I-1 (4 pts) + I-2 (4 pts) + I-3 (10 pts) + I-4 (5 pts) + I-5 (5 pts)
+- Report (39 pts)
+    * Part I (24 pts): I-1 (4 pts) + I-3 (10 pts) + I-4 (5 pts) + I-5 (5 pts)
     * Part II (15 pts): II-2 (3 pts) + II-3 (5 pts) + II-4 (7 pts)
-- Code (57 pts)
-    * Part I (7 pts): I-1 (2 pts) + I-2 (2 pts) + I-3 (3 pts)
+- Code (61 pts)
+    * Part I (11 pts): I-1 (2 pts) + I-2 (6 pts) + I-3 (3 pts)
     * Part II (26 pts): II-1 (12 pts) + II-2 (4 pts) + II-3 (10 pts)
     * Part III (24 pts): III-1 (24 pts)
 
