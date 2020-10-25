@@ -521,6 +521,8 @@ train your model using the 64x64_data.npz dataset:
     script to your repository once you are happy with your model. 
     **Upload your best weights.h5 file to Google Drive, share the file publicly with "Anyone with a link",
     and add its URL to the `WEIGHT_FILE_URL` variable at top of the `face_detection/download_weights.py` script.**
+    For example, if your link is `https://drive.google.com/file/d/<file_id>/view?usp=sharing`, then add the 
+    following url download_weights.py: `WEIGHT_FILE_URL=https://drive.google.com/uc?id=<file_id>`
     
     To test that your model weights URL is setup properly in the evaluate_face_detection.py script, run it as:
     ```bash
@@ -593,6 +595,7 @@ function of the threshold to better understand if 0.5 is a good value for your c
         
         tpr = [] # list of true positive rate per threshold
         fpr = [] # list of false positive rate per threshold
+        N = ... # number of examples
       
         # compute the true positive rate and the false positive rate for each of the thresholds
         for t in thresholds:

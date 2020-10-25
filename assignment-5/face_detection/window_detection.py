@@ -98,6 +98,8 @@ def make_predictions(im, model, scales=[50], stride=10):
     :return: numpy ndarray of Nx5 dimension, where N is the number of detected faces (>=0) and the 5 columns
     correspond to: min_x, min_y, max_x, max_y, prob. The bounding box of a face is defined the by top-left
     corner (min_x,min_y) and the bottom-right corner (max_x, max_y).
+
+    :note Do not include visualization commands inside this function or the autograder won't run properly!
     """
 
     # TO-DO. Remove the line below and complete the function so that it returns bounding boxes as a numpy.ndarray.
