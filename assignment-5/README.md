@@ -483,8 +483,8 @@ train_face_detection.py script so that it:
    
    - **weights.h5:** model parameters. 
    
-       > We We highly recommend that you use the [tf.keras.callbacks.ModelCheckpoint]() function to generate the best weights.h5 
-       file based on validation data, as in Part II of this assignment.
+       > We highly recommend that you use the [tf.keras.callbacks.ModelCheckpoint]() function to generate the best weights.h5 
+       file based on validation data, as in Part I of this assignment.
        
    Many different convolutional neural networks have been proposed in the past for image classification. 
    If you are unsure of what model to implement, we suggest that you look at the

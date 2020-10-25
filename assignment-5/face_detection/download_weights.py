@@ -58,6 +58,7 @@ def main():
     if out is None:
         print("Failed to download {} from Google Drive. Check that the path is correct and the file can be downloaded "
               "by anybody without having to log into Google".format(WEIGHT_FILE_URL))
+        sys.exit(1)
 
 
 if __name__ == "__main__":
