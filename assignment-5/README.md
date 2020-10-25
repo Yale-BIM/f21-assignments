@@ -16,12 +16,12 @@ This is the fifth assignment for Yale's CPSC-459/559 Building Interactive Machin
     * [Evaluation](#evaluation)
     * [Further Reading](#further-reading)
 * [Setup](#setup)
-* [Part I. Set Up TensorFlow Locally](#part-i-set-up-tensorflow-locally)
-    * [Questions / Tasks](#questions--tasks)
-* [Part II. Approximating a Non-Linear Function](#part-ii-approximating-a-non-linear-function)
+* [Part I. Approximating a Non-Linear Function](#part-i-approximating-a-non-linear-function)
     * [Questions/Tasks](#questionstasks)
-* [Part III. Building a Face Classifier](#part-iii-building-a-face-classifier)
+* [Part II. Building a Face Classifier](#part-ii-building-a-face-classifier)
     * [Questions / Tasks](#questions--tasks-1)
+* [Part III. Imitation Learning (2 extra points)](#part-iii-imitation-learning-2-extra-points)
+     * [Questions / Tasks](#questions--tasks-1)
 
 
 ## Introduction 
