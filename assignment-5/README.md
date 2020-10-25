@@ -391,7 +391,8 @@ with an **average L2 error of 150 or less on the test set**.
     
     Change your nonlinear model, the learning rate, and number of epochs that you are training for
     until you achieve an average test error of 150 or less. Afterwards, take a new screenshot of the plot
-    that you get after training (as in task 1 above). Include in your report:
+    that you get after training. This plot should be similar to [docs/fit-linear.png](docs/fit-linear.png)
+    but show the result for your new nonlinear model. In summary, include in your report:
      
     - The screenshot of the plot with test results after training;
     - what average L2 error did you get on the test set this time;
