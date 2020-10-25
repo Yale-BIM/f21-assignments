@@ -98,17 +98,17 @@ document for CPSC-459/CSPC-559 assignments.
 
 You assignment will be evaluated based on the content of your report and your code.
 
-- Report (48 pts)
-    * Part II (33 pts): II-6 (10 pts) + II-7 (4 pts) + II-9 (10 pts) + II-10 (5 pts) + II-11 (4 pts)
-    * Part III (15 pts): III-2 (3 pts) + III-3 (5 pts) + III-4 (7 pts)
-- Code (52 pts)
-    * Part I (2 pts)
-    * Part II (24 pts): II-1 (4 pts) + II-2 (2 pts) + II-3 (2 pts) + II-4 (4 pts) + II-5 (4 pts) + II-8 (2 pts) + II-8 (6 pts)
-    * Part III (26 pts): III-1 (12 pts) + III-2 (4 pts) + III-3 (10 pts)
+- Report (43 pts)
+    * Part I (28 pts): II-1 (4 pts) + II-2 (4 pts) + II-3 (10 pts) + II-4 (5 pts) + II-5 (5 pts)
+    * Part II (15 pts): III-2 (3 pts) + III-3 (5 pts) + III-4 (7 pts)
+- Code (57 pts)
+    * Part I (7 pts): II-1 (2 pts) + II-2 (2 pts) + II-3 (3 pts)
+    * Part II (26 pts): III-1 (12 pts) + III-2 (4 pts) + III-3 (10 pts)
+    * Part III (24 pts): I-1 (24 pts)
 
-Note on Part V of the assignment: Part V provides extra credit, which is valid for all students (CPSC 459 or 559). The extra
-credit (2 pts) will be counted for the final course grade (over 100 pts) and requires students to submit a valid solution to Part V 
-to Gradescope. 
+Note on Part III of the assignment: Part III provides extra credit for those at the top of the leaderboard in Gradescope.
+The extra credit (2 pts) is valid for all students (CPSC 459 or 559) and will be counted for the final course grade 
+(over 100 pts for this assignment). 
 
 #### Further Reading
 
