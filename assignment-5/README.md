@@ -99,12 +99,12 @@ document for CPSC-459/CSPC-559 assignments.
 You assignment will be evaluated based on the content of your report and your code.
 
 - Report (43 pts)
-    * Part I (28 pts): II-1 (4 pts) + II-2 (4 pts) + II-3 (10 pts) + II-4 (5 pts) + II-5 (5 pts)
-    * Part II (15 pts): III-2 (3 pts) + III-3 (5 pts) + III-4 (7 pts)
+    * Part I (28 pts): I-1 (4 pts) + I-2 (4 pts) + I-3 (10 pts) + I-4 (5 pts) + I-5 (5 pts)
+    * Part II (15 pts): II-2 (3 pts) + II-3 (5 pts) + II-4 (7 pts)
 - Code (57 pts)
-    * Part I (7 pts): II-1 (2 pts) + II-2 (2 pts) + II-3 (3 pts)
-    * Part II (26 pts): III-1 (12 pts) + III-2 (4 pts) + III-3 (10 pts)
-    * Part III (24 pts): I-1 (24 pts)
+    * Part I (7 pts): I-1 (2 pts) + I-2 (2 pts) + I-3 (3 pts)
+    * Part II (26 pts): II-1 (12 pts) + II-2 (4 pts) + II-3 (10 pts)
+    * Part III (24 pts): III-1 (24 pts)
 
 Note on Part III of the assignment: Part III provides extra credit for those at the top of the leaderboard in Gradescope.
 The extra credit (2 pts) is valid for all students (CPSC 459 or 559) and will be counted for the final course grade 
@@ -398,13 +398,13 @@ with an **average L2 error of 150 or less on the test set**.
     - a description of the neural network model that you used to approximate the monkey saddle surface; and
     - whatever parameters you used for training it (e.g., batch size, learning rate, and number of epochs).<br/><br/>
     
-- **II-4.** Train your nonlinear neural network such that it `overfits` on the training data. 
+- **I-4.** Train your nonlinear neural network such that it `overfits` on the training data. 
 
     After training, include a picture
     in your report of the plots from TensorBoard corresponding to the `mean absolute error` (mae) on the training and validation
     sets. Explain how you concluded that your model overfit in the report.
     
-- **II-5.** What happens with the loss per epoch on the training set if you train with a batch size of 1?
+- **I-5.** What happens with the loss per epoch on the training set if you train with a batch size of 1?
 Explain why does the loss per epoch graph look different than with a bigger batch size (e.g., than with a batch size of 100).
 
 ## Part II. Building a Face Classifier
