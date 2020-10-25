@@ -26,7 +26,7 @@ def evaluate(input_features, target, model):
                   metrics=['binary_accuracy'])  # accuracy threshold is 0.5
 
     # run evaluation
-    eval_out = model.evaluate(x=norm_input, y=target, batch_size=input.shape[0])
+    eval_out = model.evaluate(x=norm_input, y=target, batch_size=input_features.shape[0])
 
     loss = eval_out[0]
     accuracy = eval_out[1]
