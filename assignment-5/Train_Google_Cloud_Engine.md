@@ -20,14 +20,15 @@ otherwise you will run out of credits.
 ## Getting Started with the Compute Engine of Google Cloud
 
 1. If you don't have a Google Cloud account already, create one. Go to the http://cloud.google.com/
-website and clock on "Compute. Build smarter, build faster". In the next page, click on `TRY IT FREE`
+website and click on "Compute. Build smarter, build faster". In the next page, click on `TRY IT FREE`
 and **log in with your Yale email.** If you are creating a new account, select "Individual" as account type.
 
 2. Once you have a Google Cloud account, go to your Console. Create a new project 
 for the course assignments.
    
 3. Finally, follow the steps in [this tutorial](https://cloud.google.com/compute/docs/quickstart-linux) to create a Virtual Machine. 
-To work on the assignment-3, we suggest that you use the following custom configuration for your machine:
+As a reference for Assignment 5, past editions of the course have used Virtual Machines from Google Cloud with the 
+following specifications:
 
     - **Name:** bim-a5
     - **Region:** us-central1 (Iowa)
@@ -48,6 +49,7 @@ To work on the assignment-3, we suggest that you use the following custom config
     [gcloud sdk](https://cloud.google.com/sdk/gcloud/) and follow [these instructions](https://cloud.google.com/compute/docs/instances/connecting-to-instance)
     (see the section on "Connecting using the command line interface").
 
+<!--
 ## Working With Your VM in Google Cloud
 
 Once you've created your VM in Google Cloud. You can download your code from Gitlab as usual
@@ -83,4 +85,4 @@ $ tensorboard --logdir <path_to_logs> --port 6006
     
 Finally, get the external IP of your VM from the google cloud VM console. Connect from your
 local machine by opening up the address http://<vm-external-ip>:6006/ in a browser.
-
+-->
