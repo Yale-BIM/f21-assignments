@@ -30,40 +30,70 @@ for more details.
     
 4. Once your EC2 instance is created, you should then be able to connect to your virtual machine over SSH on your browser.
 
-<!--
-## Working With Your VM in Google Cloud
+## Working With Your EC2 Instance
 
-Once you've created your VM in Google Cloud. You can download your code from Gitlab as usual
+Once you've created your EC2 instance, you can download your code from Gitlab as usual
 and commit back things to your repository as necessary. 
 
 ### TensorBoard 
-It is also possible to use port forwarding (as discussed in [here](https://stackoverflow.com/questions/45060922/tensorboard-execution-from-google-cloud-machine)) to 
-run TensorBoard on a Google Cloud VM and visualize your results on a local browser.
-To succeed running the steps below, you will need to install the [Google Cloud (gcloud) sdk](https://cloud.google.com/sdk/gcloud/).
 
-Run the following commands on a terminal in your host machine:
+To set up TensorBoard, we will need to find the public ip address of your new instance and enable port forwarding to 
 
-1.  Authenticate.
-    ```bash
-    $ gcloud auth login
-    ```
+#### Find External IP of Instance
+
+First, we need to set up the AWS command-line interface (CLI) to enable additional features around your new instance.
+
+1. Install the AWS CLI by following [these instructions](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html), choosing the option for your operating system.
+
+2. Get the name of your instance.
+   - Go to the [AWS EC2 console](https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Home:).
+   - Click on Instances.
+   - Find the instance you just created in the table.
+   - Copy the entry under Instance ID.
+
+3. Get public IP of instance by running
+   ```bash
+   aws ec2 describe-instances --instance-ids <instance_id> --query 'Reservations[*].Instances[*].PublicIpAddress' --output text
+   ```
+
+#### Opening Port for Visualization
+
+We need top open our chosen port so that tensorboard will be visable from your local machine.
+
+It is also possible to use port forwarding (as discussed [here](https://aws.amazon.com/blogs/mt/amazon-ec2-instance-port-forwarding-with-aws-systems-manager/)) to 
+run TensorBoard on an EC2 instance and visualize your results on a local browser.
+
+To set this up for your instance, follow these steps:
+
+1.  Open your EC2 instance in the [Amazon EC2console](https://console.aws.amazon.com/ec2/).
+
+2. In the Amazon EC2 console, choose Network & Security, then choose Security Groups.
+
+3. For Security Group, , choose the one that was created most recently (see the time stamp in the description).
+
+4. Choose the Inbound tab, and choose Edit.
+
+5. Choose Add Rule.
+
+6. In the new row, type the followings:
+
+   **Type** : Custom TCP Rule
+
+   **Protocol**: TCP
+
+   **Port Range**: 6006
+   
+   **Source**: <public_ip_of_your_machine>
+   
     
-2. Set firewall rules for allowing connections to your VM through the 6006 port.
-    ```bash
-    $ gcloud compute firewall-rules create tensorboard-port --allow tcp:6006
-    ```
-    
-3. Configure port forwarding.
-    ```bash
-    $ gcloud compute ssh <vm-name> --ssh-flag="-R" --ssh-flag="6006:localhost:6006"
-    ```
-    
-Then, start tensorboard on the VM in the port 6006:
+Then, start tensorboard on the instance in the port 6006:
 
 ```bash
 $ tensorboard --logdir <path_to_logs> --port 6006
 ```
     
-Finally, get the external IP of your VM from the google cloud VM console. Connect from your
-local machine by opening up the address http://<vm-external-ip>:6006/ in a browser.
--->
+Finally, connect to your instance from your local machine by opening up the address http://<instance-external-ip>:6006/ in a browser.
+
+### Additional Tutorials
+
+For additional, detailed information on how to set up tools for deep learning on AWS, refer to the [website](https://docs.aws.amazon.com/dlami/index.html) for setting up deep lerning Amazon Machine Instances (AMIs) or [this document](https://docs.aws.amazon.com/dlami/latest/devguide/dlami-dg.pdf#setup-jupyter), which has the tutorials in a single pdf. 
