@@ -120,7 +120,7 @@ class TestPolicy(unittest.TestCase, ExpertNode):
         self.base_link = rospy.get_param("~base_link", "base_link")
         self.biceps_link = rospy.get_param("~biceps_link", "biceps_link")
         self.camera_link = rospy.get_param("~camera_link", "camera_color_optical_frame")
-        self.max_wait = rospy.get_param("~max_wait", 5)  # in seconds
+        self.max_wait = rospy.get_param("~max_wait", 3)  # in seconds
         self.publish_marker = rospy.get_param("~publish_marker", True)
         self.output_file = rospy.get_param("~output_file", "test_policy_output.txt")
 
