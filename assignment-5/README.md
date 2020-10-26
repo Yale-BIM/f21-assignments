@@ -787,7 +787,9 @@ be placed within the `assignment-5/shutter_behavior_cloining/scripts` directory.
     Once you have trained your model, upload your saved files to Google Drive and make them accessible to "Anyone with 
     the link". Then, add this link to the top of the `assignment-5/shutter_behavior_cloning/scripts/train_utils.py` file
     and test that they can be automatically downloaded using the `download_model_files()` function inside that same 
-    Python file.
+    Python file. Remember that if Google gives you a link like 
+    `https://drive.google.com/file/d/<file_id>/view?usp=sharing`, then you should add 
+    `https://drive.google.com/uc?id=<file_id>` to the script for the evaluation with Gradescope to run successfully.
     
     **NOTE 1:** You can test your model with the `test_policy.launch` file within 
     `assignment-5/shutter_behavior_cloning/test`. For example:
@@ -796,7 +798,7 @@ be placed within the `assignment-5/shutter_behavior_cloining/scripts` directory.
     ```
     The test will output the `~/.ros/test_policy_output.txt` file with: trial number, the target's x,y,z coordinates,
     the difference (in radians) between the predicted joint_1 and joint_3 positions and the expert's output, and
-    and acceptable boolean value indicating if both differences are less than 0.0035 radians (0.2 degrees).
+    and acceptable boolean value indicating if both differences are less than 0.00872665 radians (0.5 degrees).
   
     **NOTE 2:** When you submit your code to Gradescope, your model files will be downloaded from Google Drive automatically
     and tested on the virtual robot on 100 trials. The number of trials for which you get an acceptable output (as 
