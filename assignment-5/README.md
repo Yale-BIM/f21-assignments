@@ -103,7 +103,7 @@ You assignment will be evaluated based on the content of your report and your co
     * Part II (15 pts): II-2 (3 pts) + II-3 (5 pts) + II-4 (7 pts)
 - Code (61 pts)
     * Part I (11 pts): I-1 (2 pts) + I-2 (6 pts) + I-3 (3 pts)
-    * Part II (26 pts): II-1 (12 pts) + II-2 (4 pts) + II-3 (6 pts)
+    * Part II (26 pts): II-1 (12 pts) + II-2 (4 pts) + II-3 (2 pts)
     * Part III (28 pts): III-1 (28 pts)
 
 Note on Part III of the assignment: Part III provides extra credit for those at the top of the leaderboard in Gradescope.
