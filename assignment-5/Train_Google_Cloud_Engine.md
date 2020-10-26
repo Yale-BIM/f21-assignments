@@ -49,7 +49,7 @@ following specifications:
     [gcloud sdk](https://cloud.google.com/sdk/gcloud/) and follow [these instructions](https://cloud.google.com/compute/docs/instances/connecting-to-instance)
     (see the section on "Connecting using the command line interface").
 
-<!--
+
 ## Working With Your VM in Google Cloud
 
 Once you've created your VM in Google Cloud. You can download your code from Gitlab as usual
@@ -82,7 +82,17 @@ Then, start tensorboard on the VM in the port 6006:
 ```bash
 $ tensorboard --logdir <path_to_logs> --port 6006
 ```
+
+Then open another terminal and run the command:
+```bash
+$ gcloud compute ssh <vm-name>  -- -NfL 6006:localhost:6006
+```
+
+Finally, in your browser navigate to the IP: 
+```
+http://localhost:6006/
+```
     
-Finally, get the external IP of your VM from the google cloud VM console. Connect from your
-local machine by opening up the address http://<vm-external-ip>:6006/ in a browser.
--->
+<!-- Finally, get the external IP of your VM from the google cloud VM console. Connect from your
+local machine by opening up the address http://<vm-external-ip>:6006/ in a browser. -->
+
