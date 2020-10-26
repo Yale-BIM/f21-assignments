@@ -15,7 +15,7 @@
     </group>
 
     <!-- look forward -->
-    <node name="look_forward" pkg="shutter_lookat" type="look_forward.py"/>
+    <node name="look_forward" pkg="shutter_behavior_cloning" type="look_forward.py"/>
 
     <!-- run the expert if requested -->
     <group if="$(arg run_expert)">
