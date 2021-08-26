@@ -10,8 +10,8 @@ For Assignments 1-4, it is essential that you have completed the set up instruct
 
 ## Honor Code
 
-Programming assignments are your individual responsibility, and plagiarism will not be tolerated. You are encouraged to discuss assignments with the instructor, 
-with the teaching staff, and with other students. However, you are required to implement and write any assignment on your own. Students should not copy, nor allow their work to be copied.
+Programming assignments are your individual responsibility, and plagiarism will not be tolerated. You are encouraged to discuss assignments with the instructor and 
+with the teaching staff. <u>If you discuss assignment problems with other students, you should indicate this explicitly in your assignment report.</u> Note that even in the latter case, you are required to implement and write any assignment on your own. Students should not copy, nor allow their work to be copied.
 
 
 
