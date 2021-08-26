@@ -5,12 +5,8 @@
   * [Introduction](#introduction)
     * [System Requirements](#system-requirements)
     * [Background Knowledge](#background-knowledge)
-    * [Deliverables](#deliverables)
-    * [Evaluation](#evaluation)
   * [Part I\. Set up Github Repository](#part-i-set-up-github-repository)
-    * [Tasks](#tasks)
-  * [Working on your assignment](#working-on-your-assignment)
-    * [Tasks](#tasks-1)
+  * [Part II\. Working on your assignment](#part-ii-working-on-your-assignment)
 
 ## Introduction
 The instructions below will teach you how to setup your main [git repository](https://git-scm.com/) for the course. Following these instructions early is essential for all future programming assignments. 
