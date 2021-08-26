@@ -6,7 +6,7 @@ Assignment repository for Yale's [CPSC-459/559 Building Interactive Machines](ht
 
 To get started with a given assignment, see the README.md file within the assignment directory. 
 
-For Assignments 1-4, it is essential that you have completed the set up instructions in the [Setup.md file](SETUP.md) included in this repository. The instructions explain how to setup a GitHub repository and the general procedure that should be followed by students when working on course assignments.
+For Assignments 1-4, it is essential that you have completed the set up instructions in the [SETUP.md](SETUP.md) file that is included in this repository. The instructions explain how to setup a GitHub repository and the general procedure that should be followed by students when working on course assignments.
 
 ## Honor Code
 
