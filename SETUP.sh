@@ -1,6 +1,4 @@
-# Assignment 1
-
-This is the first assignment for Yale's CPSC 459/559 Building Interactive Machines course. 
+# Setting Up Your GitHub Repo For CSPC459/559 Assignments
 
 ## Table of Contents
 
@@ -15,8 +13,7 @@ This is the first assignment for Yale's CPSC 459/559 Building Interactive Machin
     * [Tasks](#tasks-1)
 
 ## Introduction
-
-This assignment will teach you how to setup your main [git repository](https://git-scm.com/) for the course, and walk you through the process of creating an assignment report with [LaTeX](https://www.latex-project.org/) - a typesetting system often used for writing academic papers. These two tasks are essential for all future programming assignments. 
+The instructions below will teach you how to setup your main [git repository](https://git-scm.com/) for the course. Following these instructions early is essential for all future programming assignments. 
 
 ### System Requirements
 You should have access to a computer with [git](https://git-scm.com/). The instructions below assume that you are using a [bash shell](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) to do the assignment.
@@ -26,17 +23,6 @@ You should have access to a computer with [git](https://git-scm.com/). The instr
 
 If you do not have much experience working with a Linux shell, please read this 
 [introduction to bash](http://cs.lmu.edu/~ray/notes/bash/) by R. Toal. At the bare minimum, you should be familiar with the commands `cd`, `ls`, `rm` before starting Part I of the assignment.
-
-### Deliverables
-
-* **Code:** You are expected to push code for this assignment to your
-GitHub repository as indicated in Part I.
-
-### Evaluation
-
-You assignment will be evaluated based on the content of your repository:
-
-* Part I (2 pt): 1 pt for setting up your GitHub repository, and 1 pt for updating the README.md file.
 
 ## Part I. Set up GitHub Repository
 
@@ -73,12 +59,12 @@ to generate a new SSH key in your machine and [upload your public key](https://d
     ```
 
 6. Create a `new remote called upstream` that points to the 
-[assignments repository](https://github.com/Yale-BIM/f20-assignments.git)
+[assignments repository](https://github.com/Yale-BIM/f21-assignments.git)
 which contains the set of assignments and starter code.
 
     ```bash
     # Example
-    $ git remote add upstream https://github.com/Yale-BIM/f20-assignments.git
+    $ git remote add upstream https://github.com/Yale-BIM/f21-assignments.git
     ```
 
     > NOTE: A Git remote is a pair of alias and URL (link) to another Git repository.
@@ -109,17 +95,15 @@ which contains the set of assignments and starter code.
 8. Ensure that your repository in GitHub has visibility set to **private** in 
 Settings -> Manage Access.
 
-9. Add the course instructor and the T.F. as members of your GitHub repository in Settings -> Manage Access. In the Manage access section, choose "Invite a collaborator", and add the Yale usernames for the instructor and teaching fellow(s).
+9. Add the course instructor and the T.F.(s) as members of your GitHub repository in Settings -> Manage Access. In the Manage access section, choose "Invite a collaborator", and add the Yale usernames for the instructor and teaching fellow(s).
 
-	> The instructor's email is `marynel.vazquez _at_ yale.edu`, and the teaching fellows' emails are `debasmita.ghose _at_ yale.edu` and `sydney.thompson _at_ yale.edu` with `_at_` meaning `@`.
-    
-### Tasks
+	> The instructor's email is `marynel.vazquez _at_ yale.edu`, and the teaching fellows' emails are `nathan.tsoi _at_ yale.edu` and `sydney.thompson _at_ yale.edu` with `_at_` meaning `@`.
 
-1. Once you've finished setting up your repository, fill and submit this [Repository Record Form](https://forms.gle/atTsChCUDzm32wWdA). Your response will be used to check that your repository exists, has been setup properly, and that the instructor and T.F.(s) have access to it.
+10. Once you have finished setting up your repository, fill and submit this [Repository Record Form](https://forms.gle/QkChQbbVdR8b3xNx5). Your response will be used to check that your repository exists, has been setup properly, and that the instructor and T.F.(s) have access to it.
 
-## Working on your assignment
+## Part II. Working on your assignment
 
-Once your repository is setup, you will need to follow the steps below when working on an assignment:
+Once your repository is setup, you will need to follow the steps below when working on a given assignment:
 
 1. Go to the directory containing the assignment, e.g., `assignment-1`
 2. Pull updates from upstream:
@@ -130,7 +114,8 @@ Once your repository is setup, you will need to follow the steps below when work
 	
 	If a merge conflict happens, always use latest
 	commit from upstream. Your work is safe as long you commit and push 
-	your code to GitHub regularly. 
+	your code to GitHub regularly and only work on the assignments once they are 
+    officially "out" per the course [schedule](https://cpsc459-bim.gitlab.io/f21/schedule/). 
 	
 	Once you have resolved any merge conflicts and all commits from
 	upstream are merged successfully to your own master branch, push it 
@@ -171,24 +156,13 @@ Once your repository is setup, you will need to follow the steps below when work
     
     > To see all of your commits, go to your repository's GitHub page and click where it says "X commits" (right below the download "Code" button in the interface). Copy the commit SHA for the final version of the code and paste it in the report.
     
-    ii. Submit the report (with the commit SHA) as a pdf to [Canvas](https://yale.instructure.com/courses/51663). If the assignment
-    asks for other documents, submit them to Canvas as well.
+    ii. Submit the report (with the commit SHA) as a pdf to [Gradescope](https://www.gradescope.com/courses/299261). If the assignment
+    asks for other documents, submit them to Gradescope as well.
 
-    > Most assignments will appear twice in Canvas: once for the submission of the report, once for the submission of code. The report and any other extra file that is requested should be submitted to the Report assignment; your code in GitHub should be submitted to the Code assignment. Assignment 1 only has a Code assignment in Canvas.
-
-### Tasks
-
-1. Edit the title of the README.md at the top-level of your repository to add your name. That is, change "# CPSC-459/559 Fall 2020. Assignments" to "# CPSC-459/559 Fall 2020. Assignments - \<name\>" where \<name\> is your full name. Commit the file and push to your remote GitHub repository.
-
-	> After pushing, you should be able to see the change in the README.md within the GitHub web interface.
-
-2. Submit your code to [Gradescope](https://www.gradescope.com/) using your school credentials. Note that you can also access Gradescope via Canvas (see the Assignment 1 page). 
-
-	a. Create a new submission for Assignment 1 in Gradescope. Select your GitHub repository (you may need to provide Gradescope access to your GitHub account before being able to select your repository)
-
-	b. Check that the public tests for this assignment complete successfully. If you see errors come up in Gradescope, please check your repository. 
-
-Note that this assignment only has public tests to familiarize you with the process of submitting code through Gradescope, but others might have private tests. Private tests are tests for which you won't get access to until after the submission date. Also, note that this assignment does not ask you to submit a report as part of the deliverables, but the other assignments will. In the future, you will have to submit twice through Gradescope: once to submit your code, which will also run public tests to verify that your code is in a minimum state to be evaluated; and a second time to submit your report.
+    > Most assignments will appear twice in Gradescope: once for the submission of the report, once for the submission of code. The report and any other extra file that is requested should be submitted to the Report assignment; your code in GitHub should be submitted to the Code assignment. 
+ 
+Note that assignments may have public tests to familiarize you with the process of submitting code through Gradescope. They all have private tests to
+evaluate your submission. These private tests are tests for which you won't get access to until after the submission date. 
 	
 	
 
