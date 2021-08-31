@@ -1,6 +1,6 @@
-# Assignment 2
+# Assignment 1
 
-This is the second assignment for Yale's CPSC-459/559 Building Interactive Machines course.
+This is the first assignment for Yale's CPSC-459/559 Building Interactive Machines course.
 
 ## Table of Contents
 
@@ -28,15 +28,15 @@ This assignment will provide you practical experience using the [Robot Operating
 System (ROS)](http://www.ros.org/) and [git](https://git-scm.com/).
 
 #### System Requirements
-You should have access to a computer with `Ubuntu 18.04` and `ROS Melodic` to complete the homework. 
+You should have access to a computer with `Ubuntu 20.04` and `ROS Noetic` to complete the homework. 
 The instructions below assume that you are using a [bash shell](https://www.gnu.org/software/bash/) 
-to do the assignment, and that you have installed the *desktop-full* Melodic version of ROS 
+to do the assignment, and that you have installed the *desktop-full* Noetic version of ROS 
 using `apt-get` as in this guide: 
-[http://wiki.ros.org/melodic/Installation/Ubuntu](http://wiki.ros.org/melodic/Installation/Ubuntu).
+[http://wiki.ros.org/noetic/Installation/Ubuntu](http://wiki.ros.org/noetic/Installation/Ubuntu).
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
 You will use git to save your work to your [GitHub](http://www.github.com) repository, as explained in 
-[Assignment 1](../assignment-1).
+the [SETUP.md](../SETUP.md) file.
 
 #### Background Knowledge
 
@@ -54,12 +54,12 @@ to understand and/or run your code, as well as the specific commit SHA of your f
 the code for this assignment. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/1BXj38I3-WQ6fG_sM7WoyLa616D1eC_WN/view?usp=sharing). 
 
     Use the latest version of [Adobe Acrobat Reader DC](https://get.adobe.com/reader/) to fill this PDF in Windows or OSX. 
-    In Ubuntu 18.04, you can install Acrobat Reader DC with [wine](https://en.wikipedia.org/wiki/Wine_(software)) by following [these instructions](https://linuxconfig.org/how-to-install-latest-adobe-acrobat-reader-dc-on-ubuntu-18-04-bionic-beaver-linux-with-wine).
+    In Ubuntu 20.04, you can install Acrobat Reader DC with [wine](https://en.wikipedia.org/wiki/Wine_(software)) by following [these instructions](https://linuxconfig.org/how-to-install-latest-adobe-acrobat-reader-dc-on-ubuntu-18-04-bionic-beaver-linux-with-wine).
     Note that you might need to install [Windows 7 fonts](https://www.w7df.com/p/windows-7.html) in Ubuntu for the Reader program to work properly (see [these instructions](https://askubuntu.com/a/1103305) to install the fonts).
     You are expected to fill out the fields in the report with your answers in text form or as images, as indicated by the PDF. 
 
 - **Code:** You are also expected to push code for this assignment to your 
-[GitHub](http://www.github.com) repository as in [Assignment 1](../assignment-1). 
+[GitHub](http://www.github.com) repository as indicated in the [SETUP.md](../SETUP.md) file. 
 
 #### Evaluation
 
@@ -71,7 +71,7 @@ You assignment will be evaluated over 100pts, based on the content of your repor
     * Part III (8 pts): III-Q1 (4 pts) + III-Q2 (4 pts)
     * Part IV (22 pts): IV-Q1 (4 pts) + IV-Q2 (3 pts) + IV-Q3 (5 pts) + IV-Q4 (5 pts) + IV-Q5 (5 pts)
 - Code (38 pts)
-    * Part V (38 pts): V-Q1 (4 pts) + V-Q2 (30 pts) + V-Q3(4 pts)
+    * Part V (38 pts): V-Q1 (4 pts) + V-Q2 (30 pts) + V-Q3 (4 pts)
 
 
 #### Further Reading and Tutorials 
