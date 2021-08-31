@@ -1,6 +1,6 @@
-# Assignment 2
+# Assignment 3
 
-This is the second assignment for Yale's CPSC-459/559 Building Interactive Machines course.
+This is the third assignment for Yale's CPSC-459/559 Building Interactive Machines course.
 
 ## Table of Contents
 
@@ -10,693 +10,814 @@ This is the second assignment for Yale's CPSC-459/559 Building Interactive Machi
     * [Deliverables](#deliverables)
     * [Evaluation](#evaluation)
     * [Further Reading and Tutorials](#further-reading-and-tutorials)
-* [Part I - Set up your workspace to work with Shutter](#part-i---setting-up-your-workspace-to-work-with-shutter)
-    * [Questions / Tasks](#questions--tasks) 
-* [Part II - Bringing up Shutter](#part-ii---bringing-up-shutter)
-    * [Questions / Tasks](#questions--tasks-1) 
-* [Part III. Visualize the robot state in RViz](#part-iii-visualize-the-robot-state-in-rviz)
+* [Preliminaries](#preliminaries)
+    * [Notation](#notation)
+    * [Conventions](#conventions)
+    * [Kinematic Chains](#kinematic-chains)
+    * [3D Transformations](#3d-transformations)
+    * [Changing the Frame of a Point](#changing-the-frame-of-a-point)
+    * [Transforms in ROS](#transforms-in-ros)
+* [Setup](#setup)<br><br>
+* [Part I. Introduction to tf](#part-i-introduction-to-tf)
+    * [Questions / Tasks](#questions--tasks)
+* [Part II. Publishing tf messages](#part-ii-publishing-tf-messages)
+    * [Questions / Tasks](#questions--tasks-1)
+* [Part III. Making a virtual camera](#part-iii-making-a-virtual-camera)
     * [Questions / Tasks](#questions--tasks-2)
-* [Part IV. Control one robot joint at a time](#part-iv-control-one-robot-joint-at-a-time)
-    * [Questions / Tasks](#questions--tasks-3) 
-* [Part V. Create a ROS node to change joint positions programmatically](#part-v-create-a-ros-node-to-change-joint-positions-programmatically)
-    * [Questions / Tasks](#questions--tasks-4) 
+* [Part IV. Making a fancier virtual camera](#part-iv-making-a-fancier-virtual-camera)
+    * [Questions / Tasks](#questions--tasks-3)
+* [Parts V and VI](#parts-v-and-vi)  (only for students taking CPSC-559)
 
-
-## Introduction
-
-This assignment will provide you practical experience using the [Robot Operating 
-System (ROS)](http://www.ros.org/) and [git](https://git-scm.com/).
+## Introduction 
+This assignment will provide you practical experience with the [tf](ros.org/wiki/tf) ROS package, 
+the pinhole camera model, and inverse kinematics. You will also practice
+a bit of geometry, e.g., to transform points across coordinate frames.
 
 #### System Requirements
-You should have access to a computer with `Ubuntu 18.04` and `ROS Melodic` to complete the homework. 
-The instructions below assume that you are using a [bash shell](https://www.gnu.org/software/bash/) 
-to do the assignment, and that you have installed the *desktop-full* Melodic version of ROS 
-using `apt-get` as in this guide: 
-[http://wiki.ros.org/melodic/Installation/Ubuntu](http://wiki.ros.org/melodic/Installation/Ubuntu).
+As for the first assignment, you should have access to a computer with `Ubuntu 18.04` and `ROS Melodic` to complete the homework. 
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
-You will use git to save your work to your [GitHub](http://www.github.com) repository, as explained in 
-[Assignment 1](../assignment-1).
+You will use git to save your work to your [GitHub](http://www.github.com) repository.
+
+Lastly, you should use Python 2.7 to implement all your solutions (including extra questions for CPSC-559).
 
 #### Background Knowledge
 
-If you do not have much experience working with a Linux shell, please read this 
-[introduction to bash](http://cs.lmu.edu/~ray/notes/bash/) by R. Toal and 
-[What Is The Bashrc File Used For? ](https://www.lifewire.com/bashrc-file-4101947) by G. Newell. 
-At the bare minimum, you should be familiar with the commands `cd`, `ls`, `rm`, `mkdir`, `echo`, 
-`nano` before starting Part I of the assignment.
+This assignment assumes that you have already completed the [first](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-1) and [second](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-2) assignments and,
+thus, have set up your repository and catkin workspace. You are also expected to have experience with Linux shells 
+(e.g., [bash](https://www.gnu.org/software/bash/)), [git](https://git-scm.com/), and
+the [Robot Operating System (ROS)](http://www.ros.org/). This includes being familiar with
+the `roscore`, `rosrun`, `roslaunch`, `rostopic`, `rosmsg`, `rosnode`, `rqt_graph`, and `rviz` tools. You
+should also know how to bring up a simulation of the Shutter robot in ROS, and
+control the position of its joints one at a time. If
+you are unfamiliar with any of these tools, programs, or procedures, please revisit [assignment-2](https://gitlab.com/cpsc459-bim/assignments/f19-assignments/tree/master/assignment-2).
 
 #### Deliverables
 
 - **Report:** You are expected to submit a pdf to Gradescope with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of your final version of 
-the code for this assignment. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/1BXj38I3-WQ6fG_sM7WoyLa616D1eC_WN/view?usp=sharing). 
+the code for this assignment. The report is a fillable PDF which is available [here for CPSC 459 Students](https://drive.google.com/file/d/1ltrEf2Imwh04I87yDpLKiMksq4B8d-fQ/view?usp=sharing) and [here for CPSC 559 Students](https://drive.google.com/file/d/1QnU1UnOc3LD7ttinGCo7rjxWu8q_P5PH/view?usp=sharing). 
 
-    Use the latest version of [Adobe Acrobat Reader DC](https://get.adobe.com/reader/) to fill this PDF in Windows or OSX. 
+    Use the latest version of [Adobe Acrobat Reader DC](https://get.adobe.com/reader/) to fill the PDF template in Windows or OSX. 
     In Ubuntu 18.04, you can install Acrobat Reader DC with [wine](https://en.wikipedia.org/wiki/Wine_(software)) by following [these instructions](https://linuxconfig.org/how-to-install-latest-adobe-acrobat-reader-dc-on-ubuntu-18-04-bionic-beaver-linux-with-wine).
     Note that you might need to install [Windows 7 fonts](https://www.w7df.com/p/windows-7.html) in Ubuntu for the Reader program to work properly (see [these instructions](https://askubuntu.com/a/1103305) to install the fonts).
     You are expected to fill out the fields in the report with your answers in text form or as images, as indicated by the PDF. 
 
-- **Code:** You are also expected to push code for this assignment to your 
-[GitHub](http://www.github.com) repository as in [Assignment 1](../assignment-1). 
+- **ROS Bag:** You are expected to provide a link to [ROS bags](http://wiki.ros.org/Bags) in your
+ assignment report (see Parts III of this assignment). ROS bags can be hosted in [Google drive](https://drive.google.com) 
+ or [Box](https://yale.account.box.com) -- you should ensure that the teaching staff can access your ROS bags.
+
+- **Code:** Finally, you are expected to push code for this assignment to your 
+[GitHub](http://www.github.com) repository as explained in 
+the [first assignment](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-1).
 
 #### Evaluation
 
-You assignment will be evaluated over 100pts, based on the content of your report and your code:
+You assignment will be evaluated based on the content of your report and your code:
 
-- Report (62 pts)
-    * Part I (10 pts): I-Q1 (5 pts) + I-Q2 (5 pts)
-    * Part II (22 pts): II-Q1 (6 pts) + II-Q2 (3 pts) + II-Q3 (3 pts) + II-Q4 (3 pts) + II-Q5 (3 pts) + II-Q6 (1 pts) + II-Q7 (3 pts)     
-    * Part III (8 pts): III-Q1 (4 pts) + III-Q2 (4 pts)
-    * Part IV (22 pts): IV-Q1 (4 pts) + IV-Q2 (3 pts) + IV-Q3 (5 pts) + IV-Q4 (5 pts) + IV-Q5 (5 pts)
-- Code (38 pts)
-    * Part V (38 pts): V-Q1 (4 pts) + V-Q2 (30 pts) + V-Q3(4 pts)
+- Report / Other Deliverables
+    - Part I (25 pts): I-1 (5 pts) + I-2 (5 pts) + I-3 (5 pts) + I-4 (10 pts)
+    - Part II (5 pts): II-2 (5 pts) 
+    - Part III (10 pts): III-1 (3 pts) + III-3 (2 pts) + III-4 (5 pts)
+    - Part IV (15 pts): IV-1 (3 pts) + IV-2 (5 pts) + IV-3 (4 pts) + IV-6 (3 pts)
+    - Part V (10 pts): V-1 (10 pts)
+    - Part VI (10 pts): VI-1 (8 pts) + VI-3 (2 pts)
+- Code
+    * Part II-1 (15 pts) 
+    * Part III (26 pts): Virtual Camera (20 pts) + III-2 (4 pts) + III-5 (2 pts) 
+    * Part IV (4 pts): IV-4 (2 pts) + IV-5 (2 pts)
+    * Part VI (10 pts): VI-2 (4 pts) + VI-3 (6 pts)
+
+Students taking CPSC-459 will be evaluated over 100 pts. Those taking CPSC-559, will be evaluated over 130 pts.
+
+#### Further Reading and Tutorials
+
+- [tf: The Transform Library](http://wiki.ros.org/Papers/TePRA2013_Foote?action=AttachFile&do=get&target=TePRA2013_Foote.pdf)
+- [Introduction to Robotics: Mechanics and Control](https://www.pearson.com/us/higher-education/program/Craig-Introduction-to-Robotics-Mechanics-and-Control-4th-Edition/PGM91709.html) by J. Craig (see Chapters 3 and 4 for more information on manipulator kinematics)
+
+## Preliminaries
+
+### Notation
+We refer to `vectors` or column matrices with bold lower-case letters (e.g., ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bx%7D) <!--$`\bold{x}`$-->).
+Other `matrices`, such as linear transformations, and `scalars` are written with regular
+font weight. 
+
+### Conventions
+
+In this course, all reasoning in space is done in a 
+[right hand system](http://mathworld.wolfram.com/Right-HandRule.html). The orientation
+of the cross product between ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bi%7D%20%3D%20%5B1%2C%200%2C%200%5D%5ET) <!--$`\bold{i} = [1, 0, 0]^T`$--> (in the direction of the ![equation](https://latex.codecogs.com/png.latex?x) <!--$`x`$-->axis) and 
+![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bj%7D%20%3D%20%5B0%2C%201%2C%200%5D%5ET)<!--$`\bold{j} = [0, 1, 0]^T`$--> (![equation](https://latex.codecogs.com/png.latex?y)<!--$`y`$--> axis) is determined by
+placing ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bi%7D)<!--$`\bold{i}`$--> and ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bj%7D)<!--$`\bold{j}`$--> tail-to-tail, flattening the right hand, extending it in the direction
+of ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bi%7D)<!--$`\bold{i}`$-->, and then curling the fingers towards ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bj%7D)<!--$`\bold{j}`$-->. The thumb then points in the direction
+of ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bk%7D%20%3D%20%5Cbold%7Bi%7D%20%5Ctimes%20%5Cbold%7Bj%7D%20%3D%20%5B0%2C0%2C1%5D%5ET)<!--$`\bold{k} = \bold{i} \times \bold{j} = [0,0,1]^T`$--> (corresponding to the ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$--> axis). 
+
+<p align="center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Right_hand_rule_cross_product.svg"
+width="100" alt="Right hand system from Wikipedia.org"/><br>
+Right Hand System (image from Wikipedia.org)
+</p>
+
+We also use a [right hand rule](https://en.wikipedia.org/wiki/Right-hand_rule#Rotations) 
+for rotations: right fingers are curled in the direction of rotation and the right thumb 
+points in the positive direction of the axis.
+
+<p align="center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Right-hand_grip_rule.svg/220px-Right-hand_grip_rule.svg.png"
+width="75" alt="Right hand rule from Wikipedia.org"/><br>
+Right Hand Rule (image from Wikipedia.org)
+</p>
+
+### Kinematic Chains
+
+A kinematic chain is an assembly of rigid bodies or `links` connected by `joints`.
+The joints allow the links to move relative to one another
+and are typically instrumented with sensors, e.g., to measure the relative position of neihboring links.
+
+There are different types of joints but, in this assignment, we will focus on
+working with `revolute joints` because Shutter has 4 of them. Revolute joints
+have a single axis of rotation and, thus, exibit just one Degree of Freedom. The 
+`joint angle` of these revolute joints controls the displacement between the pair
+of links that are connected to it.
+
+<p align="center">
+<img src="https://circuitdigest.com/sites/default/files/inlineimages/Revolute-Joint.gif" width="150" alt="Revolute joint from circuitdigest.com"/><br/>
+Revolute Joint (image from circuitdigest.com)
+</p>
+
+In general, we think about Degrees of Freedom (DoF) as the number of independent variables 
+that need to be specified in order to locate all parts of a robot.
+Shutter, has 4 servos in its arm, each of which implements a revolute joint. Thus, Shutter has 4 DoF. 
 
 
-#### Further Reading and Tutorials 
+### 3D Transformations
 
-Feel free to read more about ROS in its [wiki](http://wiki.ros.org/) as you work on 
-this assignment or, later, if you want to gain a deeper understanding of any of the concepts 
-mentioned below. Additional tutorials can be found in [this page of the wiki](http://wiki.ros.org/ROS/Tutorials).
-Questions (and answers) to common problems or issues with ROS can also be 
-found in [https://answers.ros.org/questions/](https://answers.ros.org/questions/).
+3D spatial transformations map 3D points from one `coordinate system` (or `frame`) to another.
+They are particularly relevant for robotics and 3D vision applications, where the 
+elements of interest are in different locations in the world. For example, transformations
+are useful to know the position of the camera in Shutter relative to one of its 
+links or its base. Similarly, 3D transformations can help infer the location of an object 
+with respect to a camera that observes it.
 
-## Part I - Set up your workspace to work with Shutter
+Following [ROS conventions](http://wiki.ros.org/tf/Overview/Transformations), 
+we refer to a point ![equation](https://latex.codecogs.com/png.latex?%5Cmathbf%7Bp%7D)<!--$`\mathbf{p}`$--> within a frame ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> as ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D%5Cmathbf%7Bp%7D)<!--$`^{B}\mathbf{p}`$-->. 
+We also refer to the relationship between any two frames ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> and ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> as 
+a 6 Degrees of Freedom (DoF) transformation: 
+a rotation followed by a translation. Specifically,
+the pose of ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> in ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> is given by the rotation of ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$-->'s coordinate axes in ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->
+ and the translation from ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->'s origin to ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$-->'s origin. 
 
-*Catkin* is the official build system for ROS. To understand what it is for and why it exists, 
-read sections 1, 2 and 4 of Catkin's conceptual overview document: 
-[http://wiki.ros.org/catkin/conceptual_overview](http://wiki.ros.org/catkin/conceptual_overview).
+>- **Translations:** A 3D translation can be represented by a vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20%3D%20%5Bt_1%2C%20t_2%2C%20t_3%5D)<!--$`\bold{t} = [t_1, t_2, t_3]`$-->
+    or by a ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> matrix:<br>
+    ![equation](https://latex.codecogs.com/png.latex?t%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%26%200%20%26%20t_1%5C%5C%200%20%26%201%20%26%200%20%26%20t_2%5C%5C%200%20%26%200%20%26%201%20%26%20t_3%5C%5C%200%20%26%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D)<!--$`t =
+    \begin{bmatrix}
+    1 & 0 & 0 & t_1\\
+    0 & 1 & 0 & t_2\\
+    0 & 0 & 1 & t_3\\
+    0 & 0 & 0 & 1
+    \end{bmatrix}`$--><br>
+    The scalars ![equation](https://latex.codecogs.com/png.latex?t_1)<!--$`t_1`$-->, ![equation](https://latex.codecogs.com/png.latex?t_2)<!--$`t_2`$-->, and ![equation](https://latex.codecogs.com/png.latex?t_3)<!--$`t_3`$--> correspond to the displacements in ![equation](https://latex.codecogs.com/png.latex?x)<!--$`x`$-->,
+    ![equation](https://latex.codecogs.com/png.latex?y)<!--$`y`$-->, and ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$-->, respectively. Thus, a translation has 3 DoF. Note that
+    representing translations with ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> matrices as above is helpful 
+    for transforming points in homogeneous coordinates.<br>
+>- **Rotations:** A 3D rotation has 3 DoF as well. Each DoF corresponds to a rotation around one of the axes of the 
+    coordinate frame. We can represent rotations also as ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> transformation matrices:<br>
+    ![equation](https://latex.codecogs.com/png.latex?R%20%3D%20%5Cbegin%7Bbmatrix%7D%20r_%7B11%7D%20%26%20r_%7B12%7D%20%26%20r_%7B13%7D%20%26%200%5C%5C%20r_%7B21%7D%20%26%20r_%7B22%7D%20%26%20r_%7B23%7D%20%26%200%5C%5C%20r_%7B31%7D%20%26%20r_%7B32%7D%20%26%20r_%7B33%7D%20%26%200%5C%5C%200%20%26%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D)
+    <!--$`R = 
+    \begin{bmatrix}
+    r_{11} & r_{12} & r_{13} & 0\\
+    r_{21} & r_{22} & r_{23} & 0\\
+    r_{31} & r_{32} & r_{33} & 0\\
+    0 & 0 & 0 & 1
+    \end{bmatrix}`$-->
+    <br>
+    Note that the ![equation](https://latex.codecogs.com/png.latex?3%20%5Ctimes%203) <!--$`3 \times 3`$--> submatrix of ![equation](https://latex.codecogs.com/png.latex?R)<!--$`R`$--> with the elements ![equation](https://latex.codecogs.com/png.latex?r_%7B11%7D%20%5Cldots%20r_%7B33%7D) <!--$`r_{11}`$ ... $`r_{33}`$-->
+    is an [orthogonal matrix](https://en.wikipedia.org/wiki/Orthogonal_matrix).<br>    
+    It is important to know that [ROS uses quaternions](http://wiki.ros.org/tf2/Tutorials/Quaternions) 
+    to represent rotations, but there are many other useful representations (e.g., 
+    [Euler angles](https://en.wikipedia.org/wiki/Euler_angles)).
 
-Set up your Catkin workspace to work with the Shutter robot:
-
-1. Create a [workspace](http://wiki.ros.org/catkin/workspaces) called *catkin_ws* 
-in your home directory. Follow the steps in this tutorial: 
-[http://wiki.ros.org/catkin/Tutorials/create_a_workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
-
-    > The [tutorial](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
-    page has tabs for switching between ROS distributions. Follow the tutorial for the distribution of
-    ROS that you have installed in your system, i.e., Melodic.
-
-2. Download Shutter's codebase into your workspace's `src` directory.
-
-    ```bash
-    # Go to the src folder in your workspace
-    $ cd ~/catkin_ws/src
-
-    # Clone the Shutter packages from GitLab
-    $ git clone https://gitlab.com/interactive-machines/shutter/shutter-ros.git
+### Changing the Frame of a Point
+Let ![equation](https://latex.codecogs.com/png.latex?%5E%7BA%7D%5Cmathbf%7Bp%7D)<!--$`^{A}\mathbf{p}`$--> be a 3D point in the ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> frame. Its position in 
+![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> can be expressed as ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D%5Cmathbf%7Bp%7D%20%3D%20%5E%7BB%7D_%7BA%7DT%5C%20%5E%7BA%7D%5Cmathbf%7Bp%7D)<!--$`^{B}\mathbf{p} = ^{B}_{A}T\ ^{A}\mathbf{p}`$-->, where 
+![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7DT%20%3D%20%5E%7BB%7D_%7BA%7D%28t%20%5Ctimes%20R%29)<!--$`^{B}_{A}T = ^{B}_{A}(t \times R)`$--> is the ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> transformation matrix that
+results from right-multiplying the translation matrix ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7Dt)<!--$`^{B}_{A}t`$--> by the rotation
+matrix ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7DR)<!--$`^{B}_{A}R`$-->. In particular,
  
-    # Load git submodules with ROS dependencies
-    $ cd shutter-ros
-    $ git submodule init
-    $ git submodule update
-    ```
-    
-    > [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) are other,
-    external projects (Git repositories) that have been included in 
-    the shutter-ros repository. These projects are needed to run the robot's base code.
-    
-    You should now have a number of directories in ~/catkin_ws/src/shutter-ros, including:
-    
+- ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7Dt)<!--$`^{B}_{A}t`$--> is the ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> transformation matrix that encodes the
+ translation between the frames ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> and ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->. The values ![equation](https://latex.codecogs.com/png.latex?t_1%2C%20t_2%2C%20t_3)<!--$`t_1, t_2, t_3`$--> of
+the translation ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7Dt)<!--$`^{B}_{A}t`$--> are the origin of the frame ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> in ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->.
+- ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7DR)<!--$`^{B}_{A}R`$--> is the  ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> rotation matrix corresponding to the orientation of ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$-->'s coordinate axes in 
+![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->. 
+
+Note that the 3D vector with elements ![equation](https://latex.codecogs.com/png.latex?r_%7B11%7D%2C%20r_%7B21%7D%2C%20r_%7B31%7D)<!--$`r_{11}, r_{21}, r_{31}`$--> 
+from the first column of the rotation matrix ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7DR)<!--$`^{B}_{A}R`$--> has the same direction as the ![equation](https://latex.codecogs.com/png.latex?x)<!--$`x`$--> axis of ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> 
+in the ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> frame. Similarly, the elements ![equation](https://latex.codecogs.com/png.latex?r_%7B12%7D%2C%20r_%7B22%7D%2C%20r_%7B32%7D)<!--$`r_{12}, r_{22}, r_{32}`$-->
+and ![equation](https://latex.codecogs.com/png.latex?r_%7B13%7D%2C%20r_%7B23%7D%2C%20r_%7B33%7D)<!--$`r_{13}, r_{23}, r_{33}`$--> have the same direction of the ![equation](https://latex.codecogs.com/png.latex?y)<!--$`y`$--> and ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$--> axes of 
+![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> in ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->, respectively.
+
+### Transforms in ROS
+
+The [tf](http://wiki.ros.org/tf) library in ROS represents transforms and coordinate frames 
+in a `tree structure` buffered in time. The tree is a directed graph with a root. Any two 
+vertices in it are connected by one path. The nodes of the graph correspond to coordinate frames,
+each associated with a link, and the edges correspond to transforms between pairs of frames. 
+
+<p align="center">
+<img src="http://wiki.ros.org/tf/Debugging%20tools?action=AttachFile&do=get&target=frames2.png" width="400" alt="Example tf tree from wiki.ros.org"/><br/>
+Example tf tree (image from wiki.ros.org)
+</p>
+
+Any directed edge in the tf tree has a `parent` frame (source node), and a `child` frame 
+(target node). Let the parent frame be ![equation](https://latex.codecogs.com/png.latex?P)<!--$`P`$--> and the child be ![equation](https://latex.codecogs.com/png.latex?C)<!--$`C`$-->. Then, the transform
+stored in the edge parent -> child corresponds to ![equation](https://latex.codecogs.com/png.latex?%5E%7BP%7D_%7BC%7DT)<!--$`^{P}_{C}T`$-->.
+
+The tf library quickly computes the net transform between two nodes (frames) 
+by multiplying the edges connecting them. To traverse up a directed edge from a child to a parent node, 
+tf uses the inverse of the transformation that is stored in the edge.
+
+## Setup
+Before you start implementing or answering questions for this assignment, please update
+your repository to pull the latest changes from the assignments repository and update
+the shutter-ros repository:
+
+```bash
+# update your repository with the latest version of the assignment
+$ cd <path-to-your-repository-in-your-workspace>
+$ git pull upstream master
+
+# update the shutter-ros repository 
+$ roscd shutter_bringup
+$ git pull
+
+# finally, re-build your catkin workspace 
+$ cd <path-to-your-catkin-workspace-root-directory>
+$ catkin_make -DCMAKE_BUILD_TYPE=Release
+```
+
+
+## Part I. Introduction to tf
+This part of the assignment will help you understand how [tf](http://wiki.ros.org/tf) lets 
+users keep track of multiple coordinate frames over time in ROS. 
+
+1. Complete the [Introduction to tf2](http://wiki.ros.org/tf2/Tutorials/Introduction%20to%20tf2)
+tutorial from ROS. You should familiarize yourself with the `view_frames` and `tf_echo` tools. 
+You should also learn to visualize the transforms in /tf and /tf_static with [RViz](http://wiki.ros.org/rviz).
+
+<!--
+    > If you are using the bim laptops, then `ros-melodic-turtle-tf2`, `ros-melodic-tf2-tools`, and `ros-melodic-tf` should already be installed in the computer.
+-->
+
+### Questions / Tasks
+Now that you know how to use basic tf tools, bring up a simulation of the robot Shutter (as in [assignment-2](../assignment-2/README.md)). 
+You will inspect its tf tree with tf tools. 
+
+> NOTE: In [assignment-2](../assignment-2/README.md), you ran `roscore` before bringing up the robot to enable ROS nodes to communicate. 
+But you can also launch `shutter_sim.launch` directly, as you did in the tutorial. 
+If roscore isn't already running, roslaunch  will automatically start it. Try it!
+
+- **I-1.** Generate an image of the tf tree of Shutter with [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
+Include this image in your report.
+
+    > Tip: You can also generate the image with the 
+    [rqt_tf_tree](http://wiki.ros.org/rqt_tf_tree) interface if you prefer.
+
+- **I-2.** Based on the tf tree from I-1, which frames are between the robot's *base_footprint* 
+frame and the *camera_color_optical_frame* frame?
+
+- **I-3.** Based on the tf tree, what is the ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> transformation ![equation](https://latex.codecogs.com/png.latex?%5E%7BC%7D_%7BO%7DT)<!--$`^{C}_{O}T`$-->
+between the *camera_link* frame (![equation](https://latex.codecogs.com/png.latex?C)<!--$`C`$-->) and the *camera_color_optical_frame* frame (![equation](https://latex.codecogs.com/png.latex?O)<!--$`O`$-->)? Please
+provide the transformation with both the rotation and translation components.
+
+    > Tip 1: You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool to query
+    transformations. You will then need to assemble the ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> homogenous transformation matrix 
+    from these values. We recommend [this primer](http://wiki.ogre3d.org/Quaternion+and+Rotation+Primer) from Ogre
+    if you are confused about different rotation representations.
+
+    > Tip 2: We recommend that you visualize the frames of interest in RViz to ensure that the transformation that
+    you are computing is in the right direction. Note that 
+    ![equation](https://latex.codecogs.com/png.latex?%5E%7BC%7D_%7BO%7DT) is not the same as
+    ![equation](https://latex.codecogs.com/png.latex?%5E%7BO%7D_%7BC%7DT).
+
+
+- **I-4.** How are the transformations in the /tf and /tf_static topics generated after you 
+bring up the robot? Please explain which node(s) contribute to generating the tf tree.
+
+    > Tip: You should inspect what nodes and topics are being published in your ROS system,
+    e.g., with the [rqt_graph](http://wiki.ros.org/rqt_graph) tool. You can also read the shutter_sim.launch script
+    in the shutter_bringup package (and any subsequent script that it launches) 
+    to understand how the robot's tf tree is being generated.
+
+
+## Part II. Publishing tf messages
+As mentioned earlier, the [tf](http://wiki.ros.org/tf) library
+uses a tree structure to represent frames and transformations in ROS. These frames and transformations
+are created based on the messages streamed through the /tf and /tf_static topics. 
+
+By convention, the /tf and /tf_static topics 
+transmit messages of the type [tf2_msgs/TFMessage](http://docs.ros.org/jade/api/tf2_msgs/html/msg/TFMessage.html). In turn, these messages
+ contain a list of transformations encoded as 
+[geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) messages.
+Each [geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) 
+message has:
+
+- a `header`, with a `stamp` of when the transform was published 
+and the `frame_id` of the parent frame for the transformation;
+- a `child_frame_id`, corresponding to the name of the child frame; and
+- a `transform`, of type [geometry_msgs/Transform](http://docs.ros.org/jade/api/geometry_msgs/html/msg/Transform.html),
+with the translation and rotation of the transform ![equation](https://latex.codecogs.com/png.latex?%5E%7B%5Ctext%7Bparent%7D%7D_%7B%5Ctext%7Bchild%7D%7DT)<!--<sup>parent</sup><sub>child</sub>$`T`$-->.
+
+You will use code that is already provided in this assignment to learn how to publish tf
+data as described above. To get started, follow the steps below:
+
+1. Inspect the `generate_target.py` Python script in the `scripts` directory of the `shutter_lookat` 
+package that is provided as part of this assignment. You should understand how the script creates a 
+simulated moving object and publishes its position relative to the "base_footprint" frame of 
+Shutter through the `/target` topic.
+
+2. Visualize the moving target in [RViz](http://wiki.ros.org/rviz). Before running the launch
+script below, make sure that you are not running any other node in ROS.
+
     ```bash
-    $ cd ~/catkin_ws/src
-    $ ls -C1 shutter-ros
-    arbotix_ros
-    documentation
-    shutter_bringup
-    shutter_description
-    (...)
+    $ roslaunch shutter_lookat generate_target.launch
     ```
+
+    The launch script should then open RViz and display the robot and the moving target in front
+    of it. The target should be displayed as a red ball.
     
-    Some of these directories are standard folders, other are ROS catkin packages. 
-    A ROS catkin package contains:
     
-    1. A [catkin compliant package.xml](http://wiki.ros.org/catkin/package.xml) file
-    that contains basic information about the package, e.g., package name, description,
-    license, author, dependencies, etc.
+    > [Roslaunch](http://wiki.ros.org/roslaunch) is a tool for easily launching multiple
+    ROS nodes. Roslaunch scripts are written in XML format, according to [this specification](http://wiki.ros.org/roslaunch/XML).
+
+   
+
+### Questions / Tasks
+Let's now publish the position of the moving object as a ROS tf frame.
+
+- **II-1.** Follow the steps below to make a new ROS node that publishes 
+the position of a simulated moving object as a ROS tf frame ("target") relative
+to the robot's "camera_color_optical_frame" frame. 
+
+    - Create a new ROS node in Python within the `scripts` directory of the `shutter_lookat` package.
+The node should be named `publish_target_relative_to_realsense_camera.py`. The python script should have executable permissions.
+
+    - Within your new node:
     
-    2. A [CMakeLists.txt](http://wiki.ros.org/catkin/CMakeLists.txt) file that is 
-    used by catkin to build the software package.
-    
-    For example, the shutter_bringup package has the following files:
-    
-    ```bash
-    # Example
-    $ ls -C1 ~/catkin_ws/src/shutter-ros/shutter_bringup
-    CMakeLists.txt
-    config
-    launch
-    package.xml
-    README.md
-    (...)
-    ```
-    
-    > Each ROS package must have its own folder. This means that there cannot be
-    nested packages. Multiple packages cannot share the same directory.
-    
-    Read the README.md file in the root level of the 
-    [shutter-ros](https://gitlab.com/interactive-machines/shutter/shutter-ros.git) repository
-    to understand its content and general organization. You can also access the documentation for shutter-ros at [https://shutter-ros.readthedocs.io](https://shutter-ros.readthedocs.io). 
+        - Subscribe to the `/target` topic to receive the position of the
+simulated object relative to the "base_footprint" frame.
+
+            > Tip: We suggest that you organize the code of your node
+in a Python class, as in [this tutorial on a pytalker node](http://wiki.ros.org/ROSNodeTutorialPython#The_pytalker_node),
+given the increased complexity of this node in comparison previous examples.
+
+        - Transform the 3D pose of the moving object to the "camera_color_optical_frame" frame in Shutter.
+        For this, you will have to query the transformation between the "base_footprint" frame in which the target pose is provided
+        and the "camera_color_optical_frame" using the `lookup_transform` function from the tf2 API. 
+        Make sure to query the transformation at the time when the target pose was computed.
+
+            > Tip 1: You can take a look at this ROS tutorial on [writing a tf2 listener](http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20listener%20%28Python%29)
+            for some examples on using the tf2 API.
+             
+            > Tip 2: You can use the [tf2_geometry_msgs](http://wiki.ros.org/tf2_geometry_msgs) API to transform the pose of the object
+            as in [this post](https://answers.ros.org/question/222306/transform-a-pose-to-another-frame-with-tf2-in-python/).
+            
+        - Broadcast a tf transform between the "camera_color_optical_frame" frame (parent) and a new "target" frame (child) in tf. 
+        The target frame should match the pose of the simulated object in the camera_color_optical_frame.
         
-3. Install other third-party dependencies with [rosdep](http://docs.ros.org/independent/api/rosdep/html/).
-If rosdep is not found in your system, first install it and initialize it as 
-indicated [here](http://docs.ros.org/independent/api/rosdep/html/overview.html). 
-You will need sudo access to complete this step. 
- 
-    ```bash
-    # update rosdep 
-    $ rosdep update
-
-    # install dependencies for Shutter
-    $ cd ~/catkin_ws
-    $ rosdep install -y -r --ignore-src --rosdistro=melodic --from-paths src
-    ```
-
-    > If you don't have pip installed, follow [these instructions](https://linuxconfig.org/how-to-install-pip-on-ubuntu-18-04-bionic-beaver) to install it before installing the Python dependencies for shutter_face.
-
-           
-4. Build the packages in the src directory of your workspace with `catkin_make`. 
-
-    ```bash
-    # Build your workspace
-    $ cd ~/catkin_ws
-    $ catkin_make -DCMAKE_BUILD_TYPE=Release
-    ```
-
-    > You might want to select a different CMake build type other than Release (e.g. RelWithDebInfo or Debug).
-    More options can be found in [cmake.org](http://cmake.org/cmake/help/v2.8.12/cmake.html#variable:CMAKE_BUILD_TYPE). 
-
-    Now you should have a devel space in `~/catkin_ws/devel`, which contains its own setup.bash file.
-    Sourcing this file will `overlay` the install space onto your environment. 
+            > Tip: An example on broadcasting tf transformations can be found in 
+            [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29).
+        
+    - Close all your nodes in ROS, launch the `generate_target.launch` script, and launch your new node which publishes
+    the `target` frame. 
     
-    > Overlaying refers to building and using a ROS package from source on top of an existing version
-    of that same package (e.g., installed at the system level in /opt/ros/melodic). For more information
-    on overlaying, read [this tutorial](http://wiki.ros.org/catkin/Tutorials/workspace_overlaying).
+    - Add a TF display to RViz, and verify that the new `target` frame that you are publishing
+    visually matches the position of the moving target (red ball). If the frame and the moving
+    object are not displayed in the same place, check your code and edit as necessary.
     
-    > Add ```source ~/catkin_ws/devel/setup.bash``` at the end of your `.bashrc` file
-     to automatically set up your environment with your workspace every time you open a new shell.
-     Otherwise, make sure to source ~/catkin_ws/devel/setup.bash on every new shell that you want
-     to use to work with ROS. Sourcing setup.bash from your devel space will ensure that ROS 
-     can work properly with the code that you've added to and built in ~/catkin_ws.
-                  
-
-### Questions / Tasks
-
-Read more about catkin workspaces [here](http://wiki.ros.org/catkin/workspaces), 
-and answer the following questions in your assignment report:
-
-- **I-1.** What other directory was automatically created in ~/catkin_ws when you executed 
-`catkin_make` and what is this directory for?
-- **I-2.** The command `catkin_make` should have generated 3 types of setup files (setup.bash,
-setup.sh, setup.zsh). What is the difference between these setup files?
-
-
-## Part II - Bringing up Shutter
-
-Now that you have setup Shutter's code in your catkin workspace, you will simulate
-the Shutter robot and learn to use basic ROS tools to gather information about 
-[ROS nodes](http://wiki.ros.org/Nodes)
--- processes that perform computation in your ROS system -- and 
-[ROS messages](http://wiki.ros.org/Messages) -- data being sent from one node to another.
+    - Run public tests for this part of this assignment to ensure that your node is operating as expected:
+    
+        ```bash
+        $ rostest shutter_lookat_public_tests test_publish_target.launch
+        ```
+      
+        If you want to see how the tests are implemented, check the `shutter_lookat_public_tests` package that is 
+        provided as part of this assignment. More specifically, the tests for Part II are implemented in 
+        `shutter_lookat_public_tests/test/test_publish_target.py`.
+    
+    - Save your work by adding and committing your publish_target_relative_to_realsense_camera.py
+    script to your local repository. Push your code to GitHub.
      
-1. Open a new bash shell and start [roscore](http://wiki.ros.org/roscore). Roscore is a collection 
-of nodes and programs that are pre-requisites of a ROS-based system.
+        > Remember that continously committing your work and pushing to GitHub will ensure that your
+        code is backed up and readily accessible in the future.
+    
+- **II-2.**  Stop any ROS processes that you are running, relaunch the 
+    generate_target.launch script, run your `publish_target_relative_to_realsense_camera.py` node, and create a 
+    new image of the tf tree in ROS, e.g., using [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
+    Add the image of the tf tree to your report.
+    
+    
+## Part III. Making a virtual camera
+Assume that the moving object from Part II of this assignment is a sphere. Now, you will 
+work on projecting the simulated object on a virtual image captured from Shutter. Close all ROS nodes before
+starting this part of the assignment.
 
-    ```bash
-    $ roscore
+1. Inspect the `virtual_camera.py` node that is provided as part of this assignment within the `shutter_lookat/scripts`
+directory.  
+
+2. Complete the `project_3D_point()` function at the top of the script. This function receives the coordinates of a 
+3D point with coordinates x, y, z in the camera frame and computes the projected location for this point onto the image
+using the camera's intrinsic matrix K.
+
+3. Complete the `draw_image()` function at the top of the script. This function receives the coordinates of a 
+3D point in the camera frame and renders an image with a circle representing the projected location of the point onto the image
+plane.
+
+    a. The `draw_image()` function should first create an empty image using the [OpenCV library](https://opencv.org/). 
+    The image should have white background and dimensions of width x height pixels. An example on how you can create an image 
+    with opencv is provided below:
+    
+    ```python
+    # Example code
+    import cv2          # import opencv
+    import numpy as np  # import numpy
+    
+    # create image
+    image = np.zeros((height, width, 3), np.uint8) # width and height are the dimensions of the image
+    # color image
+    image[:,:] = (255,255,255) # (B, G, R)
     ```
-       
-    > You must have roscore running in order for ROS nodes to communicate.
-         
-2. Open another terminal, and *bring up* a simulated version of the Shutter robot 
-with [roslaunch](http://wiki.ros.org/roslaunch).
-
-    ```bash
-    $ roslaunch shutter_bringup shutter_sim.launch 
-    ```
-
-    > The term *bring up* is often used in ROS to denote the process of starting 
-    the base functionality of a robot.
+   
+    b. The `draw_image()` function should then compute the projected location for the 3D target onto the image.
+    To this end, the `draw_image()` function should call the `project_3D_point()` function, passing the 3D coordinates
+    and intrinsic camera matrix K.
     
-    > Roslaunch is a tool for easily launching multiple ROS nodes locally (or remotely
-    via [SSH](https://en.wikipedia.org/wiki/Secure_Shell)) and setting up parameters 
-    in ROS' [Parameter Server](http://wiki.ros.org/Parameter%20Server). You will make your
-    own launch file later in this assignment.
+    c. The `draw_image()` function should draw the outline of a red circle on the image. 
+    The position of the center of the circle should match the position of the projected 3D point in the image. Make
+    the radius of the circle 12 pixels, and its outline 3 pixels wide.
     
-    The shutter.launch file will then publish a 3D model of the robot (in [URDF format](http://wiki.ros.org/urdf))
-    to the [ROS Parameter Server](http://wiki.ros.org/roscpp/Overview/Parameter%20Server).
-    The model has information about the the joints of the robot 
-    and its sensors, including specific properties and relative placement. 
-    
-    > The ROS Parameter Server is a shared, multi-variate dictionary that is accessible via network APIs. 
-    Nodes use this server to store and retrieve parameters at runtime. Because it is not designed for 
-    high-performance, it is best used for static, non-binary data such as configuration parameters. 
-    It is meant to be globally viewable so that tools can easily inspect the configuration state of 
-    the system and modify if necessary. 
-    
-    The shutter_sim.launch script runs three [ROS nodes](http://wiki.ros.org/Nodes) as three 
-    independent processes:
-    
-    1. */arbotix*: robot driver from the [arbotix_python ROS package](https://github.com/marynelv/arbotix_ros).
-    The driver provides a basic ROS interface to the robot's 
-    [Arbotix RoboController](https://www.trossenrobotics.com/p/arbotix-robot-controller.aspx) 
-    in its base, or equivalent simulation functionality.
-    
-    2. */robot_state_publisher:* [state_publisher](http://wiki.ros.org/robot_state_publisher) node which 
-    publishes the position of the joints of the robot to [tf](ros.org/wiki/tf).
-    
-    3. */motor_stopper:* node to safely send joint commands to the robot. By safe, we mean that the commands can be interrupted if desired. 
-  
-    
-3. Use [rqt_graph](http://wiki.ros.org/rqt_graph) to visualize the 
-[nodes](http://wiki.ros.org/Nodes) that are currently running
-in your ROS system and the [topics](http://wiki.ros.org/Topics) that are being used to 
-exchange information between nodes.
-
-    ```bash
-    $ rosrun rqt_graph rqt_graph
+    ```python
+    # Example code
+    cv2.circle(image, (x,y), radius, (0,0,255), outline_width) # (x,y) is the projected location of the target on the image
     ```
     
-    Uncheck the "Group" options (e.g., "Namespaces" and "Actions") in rqt_graph, uncheck the "Debug" option 
-    under "Hide", and select "Nodes/Topics(all)" to visualize all of the nodes that are sharing information
-    in the graph. You should see a total of 5 `ROS nodes` (displayed as ellipses) in the graph: /arbotix, 
-    /robot_state_publisher, /motor_stopper, /rqt_gui_py_node_XXXX, and /rosout. 
-    
-    > The full name of the rqt_graph node includes numbers XXXX, which indicate that the
-    program was run as an anonymous node. The numbers were generated 
-    automatically when the node was initialized to provide the program a unique name, e.g.,
-    in case you want to run multiple versions of rqt_graph. More information about initializing nodes
-    in C++ or Python can be found 
-    [here](http://wiki.ros.org/roscpp/Overview/Initialization%20and%20Shutdown) or 
-    [here](http://wiki.ros.org/rospy/Overview/Initialization%20and%20Shutdown), respectively.
-    
-    The nodes are connected in the graph through `ROS topics` (displayed as squares). 
-    ROS topics are named buses over which data [messages](http://wiki.ros.org/Messages) are exchanged. 
-    There can be multiple publishers and subscribers to a topic. 
-    
-    > In general, nodes are not aware of who they are communicating with. 
-    Instead, nodes that are interested in data *subscribe* to the relevant topic; 
-    nodes that generate data *publish* to the relevant topic. 
-    
-    For example, the nodes /arbotix, /robot_state_publisher, and /rqt_gui_py_node_XXXX publish
-    messages to the /rosout topic. Thus, you should see a directed edge in the graph from
-    each of these nodes to the /rosout topic. Meanwhile, the 
-    node [/rosout](http://wiki.ros.org/rosout#rosapi) subscribes to the /rosout topic. This is 
-    illustrated in the graph with an edge that goes in the opposite direction: 
-    from the /rosout topic to the /rosout node.
-    
-    > The node [rosout](http://wiki.ros.org/rosout) implements a system-wide logging mechanism for messages
-    sent to the /rosout topic. The /rosout node subscribes to the /rosout topic to record
-    the messages into a log file.
-    
-    
+    > Tip: See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
+    for more examples on drawing basic figures.
 
-### Questions / Tasks
-    
-Answer the questions and complete the tasks below based on the status of your ROS system after 
-bringing up the robot.
-  
-- **II-Q1.** Based on the graph from rqt_graph, how many topics have at least one 
-subscriber and at least one publisher in your ROS system? 
+    d. The `draw_image()` function should return the image with the drawn circle.
 
-- **II-Q2.** Through which topic in specific are the /arbotix and 
-/robot_state_publisher node communicating in ROS?
-
-- **II-Q3.** Using the [rostopic command-line  tool](http://wiki.ros.org/rostopic), investigate what type 
-of [ROS message]() is being sent/received through the ROS topic that /arbotix and /robot_state_publisher 
-are using to communicate with one another?
-
-    *Tip:* Query information about a topic with:
-    ```bash
-    $ rostopic info <topic_name>
-    ```
-
-- **II-Q4.** What are the fields of the message type that is used to transmit information from 
-/arbotix to /robot_state_publisher?
-
-    *Tip:* Query information about a message type with the [rosmsg command-line  tool](http://wiki.ros.org/rosmsg):
-    ```bash
-    $ rosmsg show <message_type>
-    ```
-
-- **II-Q5.** Using the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) command-line tool 
-get one of the messages that is being sent from /arbotix to /robot_state_publisher. Include an example
-in your report.
-
-
-- **II-Q6.** Use the [rostopic hz](http://wiki.ros.org/rostopic#rostopic_hz) command-line tool 
-to find out at what rate are messages being published to the topic of question PII-Q2.
-
-- **II-Q7.** Besides the topic of question PII-Q2, through which other topics can the 
-/arbotix node publish messages? Provide a list of the topics and their respective 
-message types in your report.
-
-    *Tip:* The full list of topics through which /arbotix may publish messages 
-    will not necessarily show in rqt_graph, because not all of the topics have subscribers. 
-    To query full information about a node, use instead the 
-    [rosnode command-line tool](wiki.ros.org/rosnode):
-    ```bash
-    $ rosnode info <node_name>
-    ```
-
-
-## Part III. Visualize the robot state in RViz 
-
-First bring up Shutter as in Part II of this assignment (though there is no need to launch rqt_graph this time). 
-Then, follow the steps below to visualize a simplified version of the robot and its joints in [rivz](http://wiki.ros.org/rviz).
-
-> rviz is a 3D visualization environment for ROS. It helps visualize sensor data and robot 
-state information. 
-
-1. Read sections 4-7 of the [rviz User Guide](http://wiki.ros.org/rviz/UserGuide). The guide will 
-provide you an overview of the Panels, Displays, and configuration options available in rviz.
- 
-2. Run `rviz` in a new terminal. 
-
-    ```bash
-    $ rosrun rviz rviz
-    ```
- 
-    A graphical interface should then open up in your computer.
-    
-3. Change the `Fixed Frame` to "base_link" in rviz's Global Options panel. This will ensure
-that the robot's model is shown straight up in the middle of the 3D visualization area of rviz.
-    
-4. Change your background color to a light color (e.g., light gray) in the Global Options as well.
-    
-5. Add a `RobotModel display` to rviz. Click on the "Add" button in the Displays panel, and
-a window will pop up. Then, look for the "rviz" plugins folder, and select RobotModel. You should
-then see a simplified model of the robot in rviz, as in the figure below.
-
-    ![](docs/shutter_rviz_visualization.png)
-
-    The [RobotModel Display type](http://wiki.ros.org/rviz/DisplayTypes/RobotModel) shows
-    the [links](http://wiki.ros.org/urdf/XML/link) of the robot according to 
-    the URDF model published by the shutter.launch script (Part II - step 2 of this assignment).
-    Each link describes a rigid body in the robot with physical, geometrical, 
-    and visual features. 
-    
-    The RobotModel display also uses the [/tf](wiki.ros.org/tf) transform 
-    tree to position the links of the robot in their respective current location.
-    The information in the /tf topic is updated by the /robot_state_publisher node based
-    on the messages that /arbotix publishes to the /joint_states topic.
-    
-    > As indicated in the rviz user guide, you can zoom in, pan, and rotate the view of the 
-    robot in rviz with your mouse.
-    
-    
-### Questions / Tasks
-
-Inspect the robot model using the properties of the RobotModel Display in rviz. Then,
-answer the questions and complete the tasks below:
-
-- **III-Q1.** How many links does the robot model have? List them all in your report.
-    
-- **III-Q2.** Use the properties of the RobotModel Display panel to change the "alpha" 
-value of all of the links of the robot to 0.5, and show the coordinate axes for 5 key links in 
-the robot: "base_link", "shoulder_link", "biceps_link", "forearm_link", and "wrist_link". 
-The coordinate axes can be turned on and off with the "Show Axes" property of each of the links 
-in the RobotModel Display panel.
- 
-    Take a picture of the robot in rviz with the 5 set of axes visible and include it
-in your report.
-
-    > Each of the axes that you are visualizing is a coordinate frame (attached to a rigid body, i.e., a link)
-    in the robot. Their relative position and orientation is provided to rviz through the /tf topic. 
-    Additional information about tf can be found [here](http://wiki.ros.org/tf).
-
-
-## Part IV. Control one robot joint at a time
-    
-Shutter's body has 5 key links ("base_link", "shoulder_link", "biceps_link", 
-"forearm_link", and "wrist_link") and 4 revolute [joints](http://wiki.ros.org/urdf/XML/joint). The joints are implemented in the real
-robot with [dynamixel MX-64M and MX-28M motors](http://www.robotis.us/dynamixel/). These motors have 
-magnetic encoders that provide the arbotix driver an estimate of their current position. 
- 
-Each joint in the robot connects two links:
-- **joint 1:** Connects the "base_link" to the "shoulder_link"
-- **joint 2:** Connects the "shoulder_link" to the "bicepts_link"
-- **joint 3:** Connects the "bicepts_link" to the "forearm_link"
-- **joint 4:** Connects the "forearm_link" to the "wrist_link"
- 
-You will now learn to control the positions of these 4 joints with a graphical
-interface in order to change the pose of the robot.
-
-1. If the simulated robot or rviz are not running, bring up the robot and 
-rviz as in Parts II and III of this assignment.
-
-2. Control the position of the robot's joints with the `arbotix_gui` interface.
-
-    ```bash
-    $ rosrun arbotix_python arbotix_gui
-    ```
-    
-    By enabling and moving the sliders in the GUI, you will be sending requests to move the joints
-    through the /joint_X/command topics. The /arbotix driver, which listens to these topics,
-    will then send the new positions to the robot. 
-    
-    How does rviz update the visualization of the robot model? As the robot
-    starts moving, the /arbotix driver will publish the new joint positions, which then
-    get re-published in /tf as transformations by the /robot_state_publisher node. The /tf 
-    transformations and the robot URDF model are used by rviz to render the robot in motion.
-    
-### Questions / Tasks
-
-- **IV-Q1.** Now that you know that the robot has 4 joints, how can you get the current position
-of the joints through the command line? 
-
-    *Tip:* The current positions must be measured with magnetic encoders in the real 
-    robot (or simulated by the arbotix driver).
-
-- **IV-2.** How can you inspect through the command line the exact position that the 
-arbotix_gui is requesting for a joint as you move one of the sliders in the interface? For example, 
-if you enable joint_1 in the arbotix_gui and move the slider to rotate the robot around, 
-how can you get the exact angle that you are requesting that joint to have?
-
-- **IV-3.** What is the maximum and minimum angle in radians that you can set for joint_4 through
-the arbotix_gui?
-
-- **IV-4.** Take a screenshot of the robot in rviz when its joints are set to:
-    - joint_1: 0 rad
-    - joint_2: 0 rad
-    - joint_3: -1.57 rad
-    - joint_4: 0 rad
-    
-    Include the screenshot in your report.
-    
-- **IV-5.** What shell command can you use to request a new pose for a 
-joint of the robot? Before testing this command, close the arbotix_gui 
-so that it doesn't interfere with your pose request.
-
-    *Tip:* Use the [rostopic pub](http://wiki.ros.org/rostopic#rostopic_pub) command line tool.
-
-## Part V. Create a ROS node to change joint positions programmatically
-
-You will now create a custom package and write a ROS node in Python to 
-change the pose of the robot programmatically. The robot should iterate between the 3 poses below:
-
-- Pose 1 (*default_pose*):
-    * joint_1: 0 rad 
-    * joint_2: 0 rad
-    * joint_3: 0 rad
-    * joint_4: 0 rad
-    
-- Pose 2 (*pulled_back_pose*):
-    * joint_1: 0 rad 
-    * joint_2: -0.95 rad
-    * joint_3: 0.41 rad
-    * joint_4: -1 rad
-    
-- Pose 3 (*low_pose*):
-    * joint_1: 0 rad 
-    * joint_2: -1.45 rad
-    * joint_3: 1.45 rad
-    * joint_4: -1.53 rad
-
-More specifically, the robot should change pose from Pose 1 -> Pose 2 -> Pose 3 -> Pose 1 -> ... 
-and so on. The robot should wait about 5 seconds between changing poses.
-
-Follow the steps below to get started:
-
-1. Place your local git repository in the src directory of your workspace. For example,
-if you named your workspace ~/catkin_ws and cloned your repository in your home folder as 
-~/\<username\>-cpsc459-assignments, then move the repository to the ~/catkin_ws/src directory as follows:
-
-    ```bash 
-    # Example 
-    $ cd ~
-    $ mv <username>-cpsc459-assignments catkin_ws/src/
-    ```
-    
-    > Because you will create a ROS package for your code within your repository, placing
-    your repository in the src directory of your workspace will allow you to run your code
-    with `rosrun` from any location in your computer.
-    
-2. Create a new catkin package with the `catkin_create_pkg` tool from the [catkin_pkg](https://github.com/ros-infrastructure/catkin_pkg) ROS library.
-This package should be named "shutter_poses" and should be created within the assignment-2 
-directory of your git repository.
-
-    ```bash
-    # Example
-    $ cd ~/catkin_ws/src/<username>-cpsc459-assignments/assignment-2
-    $ catkin_create_pkg shutter_poses rospy std_msgs 
-    ```
-
-    > The rospy and std_msgs packages are added at the end of the catkin_create_pkg command
-    so that they are automatically defined as dependencies of your package. You can always
-    add/edit/remove dependencies by editing the package.xml and CMakeLists.txt files 
-    that are created within your package. See this 
-    [tutorial](http://wiki.ros.org/ROS/Tutorials/CreatingPackage) (Sec. 5 & 6) for examples.
-
-3. Customize your package by editing the package.xml file that was created by catkin_create_pkg 
-in your package. Add a better description of the package and author information.
-
-4. Create a python node in your new package. Name the node "switch_poses.py" and save it
-in the scripts folder of your package.
-
-    ```bash
-    # Example
-    $ roscd shutter_poses
-    $ mkdir scripts
-    $ touch switch_poses.py
-    ```
-    
-    You should now have a new empty file named "switch_poses.py" in the 
-    \<username\>-cpsc459-assignments/assignment-2/shutter_poses/scripts directory.
-
-5. Make the file into an executable python script. Add ```#!/usr/bin/env python``` as first
-line to your file and change permissions with 
-[chmod](https://www.howtoforge.com/tutorial/linux-chmod-command/) to allow it to run as an executable:
-
-    ```bash
-    # Example
-    $ chmod +x switch_poses.py
-    ```
-
-6. Structure the code in your node as in the publisher example of 
-[this tutorial](http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29#rospy_tutorials.2BAC8-Tutorials.2BAC8-WritingPublisherSubscriber.Writing_the_Publisher_Node)
-and write any necessary code to make the joints of the robot move according to the poses
-specified above. Don't worry about adjusting the speed of the servos as the robot is moving from one pose to the next as that is taken care by the robot's arbotix driver. 
-
-    In your node, you should first import rospy and any necessary message types at the top of the program. 
-    Then, define a function that will initialize the node and do most of the work. Finally,
-    call this function from your main function. Your program should then look like the example below:
+4. Edit the `__init__()` function of the `virtual_camera.py` node to define an instance variable K of type numpy array. 
+This array should correspond to the 3x3 intrinsic camera matrix of your virtual camera. In particular, it should be defined 
+based on the following parameters:
 
     ```python
-    #!/usr/bin/env python
-    
-    import rospy
-    from std_msgs.msg import Float64
-    # add any other python modules that you need here ...
-
-    # define joint positions per pose
-    poses_list = [
-       {'joint_1': 0, 'joint_2': 0, 'joint_3': 0, 'joint_4': 0},
-       ... # complete list of poses
-    ]
-
-    def pose_switcher():
-       # Define publishers and init your node here.
-       # Add a loop to request the robot to move its joints according to the 
-       # desired poses.
-       ...
-
-    if __name__ == '__main__':
-       try: 
-           pose_switcher()
-       except rospy.ROSInterruptException:
-           pass
+    cx=320       # x-coordinate of principal point in terms of pixel dimensions
+    cy=240       # y-coordinate of principal point in terms of pixel dimensions
+    fx=349       # focal length in terms of pixel dimensions in the x direction
+    fy=349       # focal length in terms of pixel dimensions in the y direction
+    # note: assume there's no skew.
     ```
-    
-7. Once you've finished writing your node, start roscore (as in Part II of this assignment), 
-bring up the robot (Part II), run rviz (Part III), and run your node with `rosrun`:
-
-    ```bash
-    # Example
-    rosrun shutter_poses switch_poses.py
-    ```
-    
-8. Check that the robot is behaving as expected in RViz. If not, close your node, edit your code,
-and run it again.
-
-    > You can leave roscore and all other nodes running while you edit your code.
-    
-9. Save your work by adding and committing your node to your local repository and 
-pushing your code to GitHub.
-
-    ```bash
-    # add files to your repository to track their changes over time
-    $ roscd shutter_poses
-    $ git add package.xml CMakeLists.txt scripts/switch_poses.py
-
-    # commit changes
-    $ git commit -m "<some useful log message>"
-
-    # push changes to your master branch in GitHub
-    $ git push origin master
-    ```
-    
-    > Continously committing your work and pushing to GitHub will ensure that your
-    code is backed up and readily accessible at any time in the future.
-    
-#### Running Public Tests on Your Code
-    
-This assignment provides you two public tests that you can run on your code to verify basic functionality.
-The tests are written with [rostest](wiki.ros.org/rostest/), an integration test suite for ROS. 
-We will be using both the provided public tests and a set of private tests to evaluate your code. 
-It is important that you verify that your code works with the public tests before you submit. To run the tests, stop
-all your running ROS nodes and then execute:
-    
-```
-$ rostest shutter_poses_tests test_pose_switcher_public.launch
-```
-    
-If you would like additional information on the tests to be printed on the terminal as they run, 
-include the `--text` flag:
-
-```
-$ rostest --text shutter_poses_tests test_pose_switcher_public.launch
-```
-
-If the tests are failing, you could add additional logging to your node for debugging purposes. 
-To log messages, use `rospy.loginfo('message')` in your switch_poses.py node.
-
-   > Note that these ROS integration tests will be automatically run by Gradescope when you submit your code to the system. A few other public tests will be executed as well. Try submitting your assignment early so that you have time to correct any issues that might arise from the tests.
    
+    > Tip: If you are unsure of what the above parameters mean, read more about projective cameras 
+    in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book.
+
+5. Edit the `target_callback()` function in the `virtual_camera.py` node such that it repeats the steps below every time 
+a new message from the /target topic is received. 
+
+    **a.** Compute the target's pose in the "camera_color_optical_frame" frame (as in Part II of this assignment).
+
+    **b.** Call the `draw_image()` function to create a virtual camera image that shows the projected location of the target
+    as a circle. The resulting image should have dimensions of 640 x 480 pixels.
+   
+    **c.** Publishes the image that you created with OpenCV as a [sensor_msgs/Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html) message in ROS. You
+    can use the [cv_bridge](http://wiki.ros.org/cv_bridge) library to convert the OpenCV image to
+    an Image message. Note that the Image message should have a `header` with the current time as
+    stamp and the "camera_color_optical_frame" frame as frame_id. The Image message should be published by your node
+    through the `/virtual_camera/image_raw` topic.
     
+    > Tip: Examples on converting OpenCV images to ROS messages can be found
+    in [this tutorial](http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython).
+    
+6. Visualize the images that your node is publishing using the 
+[rqt_image_view](http://wiki.ros.org/rqt_image_view) tool. You should see the red circle
+moving in a circular path in the image (as in the Figure below). If this is not the case, please check your implementation of the
+virtual_camera.py script.
+
+<p align="center">
+<kbd>
+<img src="docs/projected_moving_object.gif" width="300"/>
+</kbd>
+</p>
+
 ### Questions / Tasks
 
-- **V-Q1.** Add a README.md file in 
-[GitHub flavored markdown](https://github.github.com/gfm/) format to your 
-shutter_poses package. This file should explain how the switch_poses.py node works. What does it do? What topics does it subscribe to? What does it publish?
+- **III-1.** Explain in your report what is the difference between calling the `lookup_transform`
+function from the tf2 API with the time of the target's pose, rospy.Time(0), or rospy.Time.now() as third argument?
 
-    > Documenting ROS packages and nodes is good practice!
+    > Note: How you call the lookup_transform function can have an effect on the
+    rate of operation of your virtual_camera.py node and how often it can publish images. 
+    You can use the [rostopic hz](http://wiki.ros.org/rostopic) tool to check how fast messages are published by the node.
+    
+- **III-2.** Edit your virtual_camera.py script to enable your node to also publish 
+ calibration parameters. Sharing the parameters will help other programs 
+ reason geometrically about the images that your virtual camera generates. Note that the parameters should be published as a [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message through the `/virtual_camera/camera_info` topic, as indicated in the steps below.
 
-- **V-Q2.** Add the `commit SHA` that corresponds to the final version of your code to your report. The commit SHA 
-serves as extra documentation for your assignment.
+    **a.** Import the [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
+    into your virtual_camera.py script.
+    
+    ```python
+    # Example
+    from sensor_msgs.msg import CameraInfo
+    ```
+    
+    **b.** Create a function that builds CameraInfo messages from the calibration parameters
+    provided in Part III of this assignment. You can use the code snippet below to this end.
+    
+    ```python
+    def make_camera_info_message(stamp, frame_id, image_width, image_height, cx, cy, fx, fy):
+        """
+        Build CameraInfo message
+        :param stamp: timestamp for the message
+        :param frame_id: frame id of the camera
+        :param image_width: image width
+        :param image_height: image height
+        :param cx: x-coordinate of principal point in terms of pixel dimensions
+        :param cy: y-coordinate of principal point in terms of pixel dimensions
+        :param fx: focal length in terms of pixel dimensions in the x direction
+        :param fy: focal length in terms of pixel dimensions in the y direction
+        :return: CameraInfo message with the camera calibration parameters.
+        """
+        camera_info_msg = CameraInfo()
+        camera_info_msg.header.stamp = stamp
+        camera_info_msg.header.frame_id = frame_id
+        camera_info_msg.width = image_width
+        camera_info_msg.height = image_height
+        camera_info_msg.K = [fx, 0, cx, 0, fy, cy, 0, 0, 1]
+        camera_info_msg.D = [0, 0, 0, 0, 0]
+        camera_info_msg.R = [1, 0, 0, 0, 1, 0, 0, 0, 1]
+        camera_info_msg.P = [fx, 0, cx, 0, 0, fy, cy, 0, 0, 0, 1, 0]
+        camera_info_msg.distortion_model = "plumb_bob"
+        return camera_info_msg
+    ```
+    
+    > Note: Specific details about the fields of CameraInfo messages can be found 
+     in its [message definition](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html).
+    
+    **c.** Create a publisher for the CameraInfo messages in your node.
+    
+    ```python
+    # Example
+    camerainfo_pub = rospy.Publisher("/virtual_camera/camera_info", CameraInfo, queue_size=10)
+    ```
+    
+    **d.** Publish a CameraInfo message whenever your node publishes an Image message. The
+    CameraInfo message should have the same header as the Image message.
+    
+    ```python
+    # Example (assumes that image_msg is the Image message that your node publishes for the virtual camera)
+    camerainfo_msg = make_camera_info_message(image_msg.header.stamp,
+                                              image_msg.header.frame_id,
+                                              image_width,
+                                              image_height,
+                                              cx, cy,
+                                              fx, fy)
+    camerainfo_pub.publish(camerainfo_msg)
+    ```
 
-- **V-Q3.** Record your screen as the 
-robot is changing its pose in RViz and reaching the desired poses. For example, 
-in Ubuntu you can use [kazam](https://launchpad.net/kazam) to record your screen. Once you got
-a video that shows the robot moving through the poses, turn this video into an animated
-gif, e.g., with ffmpeg and imagemagick as indicated in 
-[this code snippet](https://gitlab.com/snippets/1743818), and include it in your README.md file
-for the shutter_poses package. This way your README.md will demonstrate the execution of the 
-switch_poses.py node in your documentation. 
+    > Note: If the code of your node was organized into a class structure, then you could create the camerainfo_msg
+    message when a class instance is initialized and save it as a member of the instance for future use. When the images are then created, you
+    would just need to copy the header of the image message into the pre-computed camerainfo_msg, and publish it. While in practice
+    organizing the code this way won't make your program in this part of the assignment much faster given the speed of computers today, thinking about ways 
+    to optimize the operation of your ROS nodes so that the same computation is not repeated over and over unnecessarily is important for real-time systems.
+    
+    **e.** Finally, check that your node is publishing CameraInfo messages through the 
+    /virtual_camera/camera_info topic with the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) tool.
 
-    NOTE: You should add the animated gif to your repository so that all of your documentation
-    is contained in a single place and the animated gif is displayed in 
-    GitHub when your README.md file is rendered on the web. 
+    > Remember to commit your code whenever you want to save a snapshot of your work. 
 
-     > More information on including images 
-     in GitHub's markdown can be found [here](https://github.github.com/gfm/#images).
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-Once you are done with the questions above, commit your code to GitHub, and submit the 
-code to the `Assignment2-Code` assignment in Gradescope. Check that the public tests for this assignment complete successfully. 
-If you see errors come up in Gradescope, please check your repository. 
+- **III-3.** You will now verify that the image and the camera parameters that your node publishes 
+are consistent with one another with the help of the RViz [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera). 
 
-Lastly, submit your assignment report to the `Assignment2-Report` assignment in Gradescope.
-The report should be provided in pdf format using the [template](https://drive.google.com/file/d/1BXj38I3-WQ6fG_sM7WoyLa616D1eC_WN/view?usp=sharing).
-indicated at the beginning of the assignment.
+    > The [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera) creates a new rendering
+window in RViz from the perspective of a camera using the CameraInfo message that your virtual_camera.py node publishes. 
+The plugin also lets you overlay other displays that you have enabled in RViz on the rendered image. Your goal is to use these overlays to verify that
+the virtual camera that you already implemented is working correctly. 
 
+    Close all running ROS nodes and re-launch the generate_target.launch script. Then run 
+    your virtual_camera.py node and, once RViz opens, add a Camera display to the RViz window.
+    Configure the camera plugin as follows:
+    
+        Image Topic: /virtual_camera/image_raw
+        Transport Hint: raw
+        Image Rendering: background
+        Overlay Alpha: 0.6
+        Zoom Factor: 1
+
+    The red circle from your /virtual_camera/image_raw image should then align in the RViz 
+    Camera plugin with the red ball of the simulated moving object (as in the Figure below). 
+    If this is not the case, check and correct your implementation of the virtual_camera.py node.
+       
+    <p align="center">
+    <kbd>
+    <img src="docs/rviz_camera.png" width="300"/>
+    </kbd>
+    </p>
+
+    > Tip: If parts of the robot are displayed in the camera plugin image, then you can remove them by temporarily disabling the RobotModel plugin in Rviz.
+    
+    Once the image that is published by the virtual_camera.py script is consistent 
+    with what the Camera plugin shows in RViz, record a ROS [bag](http://wiki.ros.org/Bags) 
+    as in [this tutorial](http://wiki.ros.org/rosbag/Tutorials/Recording%20and%20playing%20back%20data). 
+    The bag should have all of the messages that are streamed in your system for a duration of 8 seconds.
+    
+    ```bash
+    $ rosbag record -O <your-name>_a3p3-3.bag -a --duration 8 
+    ```
+    
+    > You can see a description of the arguments that `rosbag record` accepts [here](http://wiki.ros.org/rosbag/Commandline#record). Make sure to start 
+    the generate_target.launch file and your virtual camera before starting to record the bag, or the bag might end up being empty!
+    
+    Inspect your ROS bag with the [rosbag info](http://wiki.ros.org/rosbag/Commandline#rosbag_info) tool to verify that it contains messages
+    for all of the following topics:
+        
+        * /diagnostics
+        * /joint_states 
+        * /rosout   
+        * /target  
+        * /target_marker 
+        * /tf         
+        * /tf_static  
+        * /virtual_camera/camera_info    
+        * /virtual_camera/image_raw 
+    
+    Upload your ROS bag to Google Drive or Box and make it accessible to anybody with the link. Then, 
+    **provide a link to your ROS bag in your report** for this assignment. You don't need to and 
+    you shouldn't commit the bag to your repository! Otherwise, you will make your repository
+    unnecessarily heavy.
+
+- **III-4.** Explain in your report what happens with the projection of the target on the image
+when the target is behind the camera? How and why is the image changed? To visualize this result, you
+can launch the `generate_target.launch` script with the optional parameter `target_x_plane:=<x>`, where \<x\> corresponds to the target's
+x coordinate on the robot's "base_footprint" frame. Then inspect the images that your node generates.
+
+- **III-5.** Your virtual camera could see behind it, but real cameras don't do that. Modify the `draw_image()` function 
+in the virtual_camera.py node so that the part of your code that computes the projection of the target and draws the circle only 
+executes if the target is in front of the camera. That is, these parts of your program should only execute if the Z component of 
+the target's position in the camera coordinate frame is positive. If the Z component is zero or negative, the function 
+should instead return an empty (white) image. In the latter case, the function should also print a warning message:
+
+    ```python
+    # example warning
+    rospy.logwarn("Warning: Target is behind the camera (z={})".format(z)) # z is the z coordinate for the target's center point relative to the camera frame
+    ```
+    
+Run public tests for Part III of this assignment to ensure that your node is operating as expected:
+
+ ```bash
+ $ rostest shutter_lookat_public_tests test_virtual_camera.launch
+ ```
+
+Note that the above tests will run automatically in Gradescope when you submit your code to the 
+`Assignment 3 - Code` assignment.
+
+## Part IV. Making a fancier virtual camera
+You will now modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
+it draws the true outline of the spherical target as seen by the camera. 
+
+1. Copy your virtual_camera.py script into a new script called `fancy_virtual_camera.py`. The new script
+should be located within the `shutter_lookat/scripts` directory. It should have executable permissions.
+
+2. Change the name of the new node in the `rospy.init_node()` function to `fancy_virtual_camera`
+and edit any other relevant documentation in your code to indicate that the program implements a fancier virtual camera for 
+Shutter.
+
+### Questions / Tasks
+
+Solve the questions below and complete the corresponding programming tasks on your `fancy_virtual_camera.py` node 
+such that it outputs better images of the target for your camera. In brief, you will need to modify the `draw_image()` function in the new node 
+such that it computes a direction vector ![equation](https://latex.codecogs.com/gif.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> 
+from the center of the 3D target to the edge of the sphere seen by the camera. Then, you will be able to draw the target's 
+true shape by rotating the vector along a rotation axis in the direction of the target, and projecting the resulting 
+3D points along the edge of the sphere onto the camera image.
+
+<p align="center">
+<img src="docs/diagram_a3.png" width="500"/>
+</p>
+
+- **IV-1.** To get started, let ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20%3D%20%5Bt_x%5C%20t_y%5C%20t_z%5D%5ET)<!--$`\bold{t} = [t_x\ t_y\ t_z]^T`$--> be the vector from the camera center to the center of the target 
+in the camera coordinate frame (as shown in the image above). 
+Additionally, let the camera coordinate frame be oriented such that the ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$--> axis points
+forward. How can you mathematically calculate a vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%7D)<!--$`\bold{q}`$--> perpendicular to both ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)<!--$`\bold{t}`$--> and the horizontal axis of the
+camera coordinate frame? Explain in your report.
+
+- **IV-2.**  Now that you have computed a vector perpendicular to the direction towards the target (as seen by the camera), 
+how you can scale this vector to have a length equal to the radius ![equation](https://latex.codecogs.com/png.latex?R)<!--$`R`$--> of the moving 3D sphere. Provide the equation that scales ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%7D)<!--$`\bold{q}`$--> as desired while
+preserving its direction in your report.
+
+- **IV-3.**  Let ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> be the scaled vector 
+from question IV-2. Explain mathematically in your report how can rotate this vector by an 
+angle ![equation](https://latex.codecogs.com/png.latex?%5Calpha)<!--$`\alpha`$--> along a normalized rotation axis aligned 
+with the vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)<!--$`\bold{t}`$--> from question IV-1.
+
+    > Tip. [Wikipedia](https://en.wikipedia.org/wiki/Axis%E2%80%93angle_representation) is an easy place to learn more about the axis-angle parameterization of rotations.
+
+- **IV-4.**  Points along the edge of the sphere (as seen by the camera), can now be computed as: 
+![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20&plus;%20rotate%28%5Cbold%7Bq%27%7D%2C%20%5Calpha%29), <!--$`\bold{t} + rotate(\bold{q'}, \alpha)`$-->
+where `rotate()` is a function that implements IV-3. Modify the `draw_image()` function in your new 
+`fancy_virtual_camera.py` script to compute 20 3D points equally distributed along the edge of the sphere that is 
+seen by the camera. The code that computes these points should replace the prior computation for the red circle from Part III
+in your new `fancy_virtual_camera.py` script.
+
+    Note that the radius of the sphere in the world is provided through the /target message (see the `radius` field). You
+    should pass this value from the target callback to the `draw_image()` function using the optional keyworded arguments `kwargs`.
+    More specifically, you should pass the value using the `radius` keyword: `draw_image(x, y, z, K, width, height, radius=target_msg.radius)`.
+    
+    > Tip: If you are not familiar with keyworded variable length arguments in Python, check [this guide](https://book.pythontips.com/en/latest/args_and_kwargs.html).
+    
+    Use the code below when you implement these changes to `draw_image()`. In particular, add the functions at the top level 
+    of the fancy virtual camera script - that is, outside any other class or function. When you submit your assignment, 
+    automated tests will check that the functions are working as expected for your evaluation.
+
+   ```python
+   def compute_q(pt, radius):
+       """
+       Compute q - a vector perpindicular to the target
+       direction and the horizontal axis of the camera
+       coordinate frame.
+       pt: the point at the center of the sphere in the
+           camera coordinate frame
+       radius: the radius of the ball 
+       """
+       # add your implementation here
+       q = np.array([0.,0.,0.])
+       return q
+   ```
+   
+   ```python
+   def compute_rotation_axis(pt):
+       """
+       Compute normalized rotation axis in same direction
+       as vector t from question IV-1.
+       pt: the point at the center of the sphere in the
+           camera coordinate frame
+       """
+       # add your implementation here
+       rotation_axis = np.array([0.,0.,0.])
+       return rotation_axis
+   ```
+   
+   ```python
+   def rotate_q(q, rotation_axis, angle):
+       """
+       Rotate q around rotation_axis by the number of 
+       radians specified by angle.
+       q: perpindicular vector from IV-1 and IV-2
+       rotation_axis: normalized rotation axis from IV-3
+       angle: angle of rotation in radians
+       """
+       # add your implementation here
+       rotated_q = np.array([0.,0.,0.])
+       return rotated_q
+   ```
+   
+   You can run public tests for this part of this assignment to ensure that your node is operating as expected:
+
+     ```bash
+     $ rostest shutter_lookat_public_tests test_fancy_virtual_camera.launch
+     ```
+
+- **IV-5.**  Add a few lines of code to the `draw_image()` function such that it draws a blue contour for the sphere on the image using OpenCV. The contour should connect the projected points on the image:
+
+    ```python
+    # Example
+    pixel_array = np.zeros((N,2), dtype=np.int32) # N is the number of points on the contour
+    (...) # compute the points as in IV-4
+    cv2.drawContours(image, [pixel_array], 0, (255,0,0), 3)
+    ```
+
+    The resulting image should now show the blue polygon (and no red circle), as shown below:
+    
+    <p align="center">
+    <kbd>
+    <img src="docs/ball_outline.png" width="300"/>
+    </kbd>
+    </p>
+
+- **IV-6.**  Restart ROS and re-run the generate_target.launch with the ball updating at a lower speed, and being closer to the camera:
+    
+    ```bash
+    $ roslaunch shutter_lookat generate_target.launch target_x_plane:=0.5 publish_rate:=1 # the publish rate for the target is in Hz
+    ```
+    
+    Then restart your `fancy_virtual_camera.py` node and take a picture of your resulting camera image when the target is nearby one of the corners of the image. 
+    The image should show the target being elongated; not having a perfectly circular shape anymore. Include this image in your report and explain why the target does not
+    appear to be a perfect circle, especially towards the edge of the image.
+
+
+## Parts V and VI
+
+Parts V and VI of the assignment are only for students taking CPSC-559 (graduate version of the course). See the tasks/questions in the [ExtraQuestions-CPSC559.md](ExtraQuestions-CPSC559.md) document.
+
+**Once you get to the end of the assignment, remember to commit your code, push to GitHub, and indicate
+in your assignment report the commit SHA for the final version of your code. Your code and report should be submitted to 
+Gradescope.**

@@ -1,241 +1,95 @@
-# Assignment 3
+# Assignment 4
 
-This is the third assignment for Yale's CPSC-459/559 Building Interactive Machines course.
+This is the fourth assignment for Yale's CPSC-459/559 Building Interactive Machines course.
 
 ## Table of Contents
 
 * [Introduction](#introduction)
     * [System Requirements](#system-requirements)
     * [Background Knowledge](#background-knowledge)
+    * [Notation](#notation)
     * [Deliverables](#deliverables)
     * [Evaluation](#evaluation)
-    * [Further Reading and Tutorials](#further-reading-and-tutorials)
-* [Preliminaries](#preliminaries)
-    * [Notation](#notation)
-    * [Conventions](#conventions)
-    * [Kinematic Chains](#kinematic-chains)
-    * [3D Transformations](#3d-transformations)
-    * [Changing the Frame of a Point](#changing-the-frame-of-a-point)
-    * [Transforms in ROS](#transforms-in-ros)
-* [Setup](#setup)<br><br>
-* [Part I. Introduction to tf](#part-i-introduction-to-tf)
+    * [Further Reading](#further-reading)
+* [Setup](#setup)
+* [Part I. Creating a Custom ROS Message Type](#part-i-creating-a-custom-ros-message-type)
     * [Questions / Tasks](#questions--tasks)
-* [Part II. Publishing tf messages](#part-ii-publishing-tf-messages)
+* [Part II. Get Data](#part-ii-get-data)
     * [Questions / Tasks](#questions--tasks-1)
-* [Part III. Making a virtual camera](#part-iii-making-a-virtual-camera)
+* [Part III. Detecting a Visual Target](#part-iii-detecting-a-visual-target)
     * [Questions / Tasks](#questions--tasks-2)
-* [Part IV. Making a fancier virtual camera](#part-iv-making-a-fancier-virtual-camera)
+* [Part IV. Filtering the Target's Position](#part-iv-filtering-the-targets-position)
     * [Questions / Tasks](#questions--tasks-3)
-* [Parts V and VI](#parts-v-and-vi)  (only for students taking CPSC-559)
+* [Part V. Real-Time Filtering](#part-v-real-time-filtering)
+   * [Questions / Tasks](#questions--tasks-4)
+* [Part VI. Non-Parametric Filtering](assignment-4/ExtraQuestions-CSPC559.md) (only for students taking CPSC-559)
 
 ## Introduction 
-This assignment will provide you practical experience with the [tf](ros.org/wiki/tf) ROS package, 
-the pinhole camera model, and inverse kinematics. You will also practice
-a bit of geometry, e.g., to transform points across coordinate frames.
+This assignment will provide you practical experience with custom messages in ROS, low-level image processing,
+ and filtering.
 
 #### System Requirements
-As for the first assignment, you should have access to a computer with `Ubuntu 18.04` and `ROS Melodic` to complete the homework. 
+As for the prior assignments, you should have access to a computer with `Ubuntu 18.04` and `ROS Melodic` to complete the homework. 
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
 You will use git to save your work to your [GitHub](http://www.github.com) repository.
 
-Lastly, you should use Python 2.7 to implement all your solutions (including extra questions for CPSC-559).
-
 #### Background Knowledge
 
-This assignment assumes that you have already completed the [first](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-1) and [second](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-2) assignments and,
-thus, have set up your repository and catkin workspace. You are also expected to have experience with Linux shells 
+This assignment assumes that you have already completed the prior assignments and, thus, you
+have set up your catkin workspace. You are also expected to have experience with Linux shells 
 (e.g., [bash](https://www.gnu.org/software/bash/)), [git](https://git-scm.com/), and
 the [Robot Operating System (ROS)](http://www.ros.org/). This includes being familiar with
-the `roscore`, `rosrun`, `roslaunch`, `rostopic`, `rosmsg`, `rosnode`, `rqt_graph`, and `rviz` tools. You
-should also know how to bring up a simulation of the Shutter robot in ROS, and
-control the position of its joints one at a time. If
-you are unfamiliar with any of these tools, programs, or procedures, please revisit [assignment-2](https://gitlab.com/cpsc459-bim/assignments/f19-assignments/tree/master/assignment-2).
+the `roscore`, `rosrun`, `roslaunch`, `rosbag`, `rostopic`, `rosmsg`, `rosnode`, `rqt_image_view`, 
+and `rviz` tools. 
 
-#### Deliverables
+You are also expected to be familiar with the [numpy Python library](http://www.numpy.org/) for linear algebra. 
+If you are not, please check [this tutorial](https://docs.scipy.org/doc/numpy/user/quickstart.html) before starting the assignment.
 
-- **Report:** You are expected to submit a pdf to Gradescope with answers to the questions/tasks at 
-the end of each part of the assignment. This report should also have any information needed 
-to understand and/or run your code, as well as the specific commit SHA of your final version of 
-the code for this assignment. The report is a fillable PDF which is available [here for CPSC 459 Students](https://drive.google.com/file/d/1ltrEf2Imwh04I87yDpLKiMksq4B8d-fQ/view?usp=sharing) and [here for CPSC 559 Students](https://drive.google.com/file/d/1QnU1UnOc3LD7ttinGCo7rjxWu8q_P5PH/view?usp=sharing). 
-
-    Use the latest version of [Adobe Acrobat Reader DC](https://get.adobe.com/reader/) to fill the PDF template in Windows or OSX. 
-    In Ubuntu 18.04, you can install Acrobat Reader DC with [wine](https://en.wikipedia.org/wiki/Wine_(software)) by following [these instructions](https://linuxconfig.org/how-to-install-latest-adobe-acrobat-reader-dc-on-ubuntu-18-04-bionic-beaver-linux-with-wine).
-    Note that you might need to install [Windows 7 fonts](https://www.w7df.com/p/windows-7.html) in Ubuntu for the Reader program to work properly (see [these instructions](https://askubuntu.com/a/1103305) to install the fonts).
-    You are expected to fill out the fields in the report with your answers in text form or as images, as indicated by the PDF. 
-
-- **ROS Bag:** You are expected to provide a link to [ROS bags](http://wiki.ros.org/Bags) in your
- assignment report (see Parts III of this assignment). ROS bags can be hosted in [Google drive](https://drive.google.com) 
- or [Box](https://yale.account.box.com) -- you should ensure that the teaching staff can access your ROS bags.
-
-- **Code:** Finally, you are expected to push code for this assignment to your 
-[GitHub](http://www.github.com) repository as explained in 
-the [first assignment](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-1).
-
-#### Evaluation
-
-You assignment will be evaluated based on the content of your report and your code:
-
-- Report / Other Deliverables
-    - Part I (25 pts): I-1 (5 pts) + I-2 (5 pts) + I-3 (5 pts) + I-4 (10 pts)
-    - Part II (5 pts): II-2 (5 pts) 
-    - Part III (10 pts): III-1 (3 pts) + III-3 (2 pts) + III-4 (5 pts)
-    - Part IV (15 pts): IV-1 (3 pts) + IV-2 (5 pts) + IV-3 (4 pts) + IV-6 (3 pts)
-    - Part V (10 pts): V-1 (10 pts)
-    - Part VI (10 pts): VI-1 (8 pts) + VI-3 (2 pts)
-- Code
-    * Part II-1 (15 pts) 
-    * Part III (26 pts): Virtual Camera (20 pts) + III-2 (4 pts) + III-5 (2 pts) 
-    * Part IV (4 pts): IV-4 (2 pts) + IV-5 (2 pts)
-    * Part VI (10 pts): VI-2 (4 pts) + VI-3 (6 pts)
-
-Students taking CPSC-459 will be evaluated over 100 pts. Those taking CPSC-559, will be evaluated over 130 pts.
-
-#### Further Reading and Tutorials
-
-- [tf: The Transform Library](http://wiki.ros.org/Papers/TePRA2013_Foote?action=AttachFile&do=get&target=TePRA2013_Foote.pdf)
-- [Introduction to Robotics: Mechanics and Control](https://www.pearson.com/us/higher-education/program/Craig-Introduction-to-Robotics-Mechanics-and-Control-4th-Edition/PGM91709.html) by J. Craig (see Chapters 3 and 4 for more information on manipulator kinematics)
-
-## Preliminaries
-
-### Notation
-We refer to `vectors` or column matrices with bold lower-case letters (e.g., ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bx%7D) <!--$`\bold{x}`$-->).
+#### Notation
+We refer to `vectors` or column matrices with bold lower-case letters (e.g., ![equation](https://latex.codecogs.com/gif.latex?\bold{x})<!--$`\bold{x}`$-->).
 Other `matrices`, such as linear transformations, and `scalars` are written with regular
 font weight. 
 
-### Conventions
+#### Deliverables
 
-In this course, all reasoning in space is done in a 
-[right hand system](http://mathworld.wolfram.com/Right-HandRule.html). The orientation
-of the cross product between ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bi%7D%20%3D%20%5B1%2C%200%2C%200%5D%5ET) <!--$`\bold{i} = [1, 0, 0]^T`$--> (in the direction of the ![equation](https://latex.codecogs.com/png.latex?x) <!--$`x`$-->axis) and 
-![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bj%7D%20%3D%20%5B0%2C%201%2C%200%5D%5ET)<!--$`\bold{j} = [0, 1, 0]^T`$--> (![equation](https://latex.codecogs.com/png.latex?y)<!--$`y`$--> axis) is determined by
-placing ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bi%7D)<!--$`\bold{i}`$--> and ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bj%7D)<!--$`\bold{j}`$--> tail-to-tail, flattening the right hand, extending it in the direction
-of ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bi%7D)<!--$`\bold{i}`$-->, and then curling the fingers towards ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bj%7D)<!--$`\bold{j}`$-->. The thumb then points in the direction
-of ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bk%7D%20%3D%20%5Cbold%7Bi%7D%20%5Ctimes%20%5Cbold%7Bj%7D%20%3D%20%5B0%2C0%2C1%5D%5ET)<!--$`\bold{k} = \bold{i} \times \bold{j} = [0,0,1]^T`$--> (corresponding to the ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$--> axis). 
+- **Report:** You are expected to submit a pdf to Canvas/Gradescope with answers to the questions/tasks at 
+the end of each part of the assignment. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/1O2D53BI08oVKheD0E5-1Ddv4rRBcbfbc/view?usp=sharing) for CPSC 459 students and [here](https://drive.google.com/file/d/1hQ-sWeq0Os9r9pe4tL_28MF-p1vwt69u/view?usp=sharing) for CPSC 559 students
 
-<p align="center">
-<img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Right_hand_rule_cross_product.svg"
-width="100" alt="Right hand system from Wikipedia.org"/><br>
-Right Hand System (image from Wikipedia.org)
-</p>
+- **ROS Bag:** You are expected to provide a link to a ROS bag in your assignment report (see Part V of this assignment). 
+ROS bags can be hosted in [Google drive](https://drive.google.com/) or [Box](https://yale.account.box.com/) -- you 
+should ensure that the teaching staff can access your ROS bags.
 
-We also use a [right hand rule](https://en.wikipedia.org/wiki/Right-hand_rule#Rotations) 
-for rotations: right fingers are curled in the direction of rotation and the right thumb 
-points in the positive direction of the axis.
-
-<p align="center">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Right-hand_grip_rule.svg/220px-Right-hand_grip_rule.svg.png"
-width="75" alt="Right hand rule from Wikipedia.org"/><br>
-Right Hand Rule (image from Wikipedia.org)
-</p>
-
-### Kinematic Chains
-
-A kinematic chain is an assembly of rigid bodies or `links` connected by `joints`.
-The joints allow the links to move relative to one another
-and are typically instrumented with sensors, e.g., to measure the relative position of neihboring links.
-
-There are different types of joints but, in this assignment, we will focus on
-working with `revolute joints` because Shutter has 4 of them. Revolute joints
-have a single axis of rotation and, thus, exibit just one Degree of Freedom. The 
-`joint angle` of these revolute joints controls the displacement between the pair
-of links that are connected to it.
-
-<p align="center">
-<img src="https://circuitdigest.com/sites/default/files/inlineimages/Revolute-Joint.gif" width="150" alt="Revolute joint from circuitdigest.com"/><br/>
-Revolute Joint (image from circuitdigest.com)
-</p>
-
-In general, we think about Degrees of Freedom (DoF) as the number of independent variables 
-that need to be specified in order to locate all parts of a robot.
-Shutter, has 4 servos in its arm, each of which implements a revolute joint. Thus, Shutter has 4 DoF. 
+- **Code:** Finally, you are expected to push code for this assignment to your 
+[GitHub](http://www.github.com) repository as indicated in the [general instructions](../README.md) 
+document for CPSC-559 assignments. 
 
 
-### 3D Transformations
+#### Evaluation
 
-3D spatial transformations map 3D points from one `coordinate system` (or `frame`) to another.
-They are particularly relevant for robotics and 3D vision applications, where the 
-elements of interest are in different locations in the world. For example, transformations
-are useful to know the position of the camera in Shutter relative to one of its 
-links or its base. Similarly, 3D transformations can help infer the location of an object 
-with respect to a camera that observes it.
+The assignment will be evaluated based on the content of your report and your code:
 
-Following [ROS conventions](http://wiki.ros.org/tf/Overview/Transformations), 
-we refer to a point ![equation](https://latex.codecogs.com/png.latex?%5Cmathbf%7Bp%7D)<!--$`\mathbf{p}`$--> within a frame ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> as ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D%5Cmathbf%7Bp%7D)<!--$`^{B}\mathbf{p}`$-->. 
-We also refer to the relationship between any two frames ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> and ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> as 
-a 6 Degrees of Freedom (DoF) transformation: 
-a rotation followed by a translation. Specifically,
-the pose of ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> in ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> is given by the rotation of ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$-->'s coordinate axes in ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->
- and the translation from ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->'s origin to ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$-->'s origin. 
+- Report / Other Deliverables (26 pts + 15 pts for CPSC-559 only)
+    - Part IV (23 pts): IV-1 (6 pts) + IV-2 (4 pts) + IV-3 (3 pts) + IV-4 (3 pts) + IV-12 (4 pts) + IV-13 (3 pts)
+    - Part V (3 pts): V-1 (3 pts)
+    - Part VI (15 pts for CPSC-559 only): IV-1 (5 pts) + IV-2 (4 pts) + IV-3 (6 pts)
+- Code (74 pts)
+    * Part I (6 pts) 
+    * Part II (5 pts)
+    * Part III (30 pts): III-1 (10 pts) + III-2 (10 pts) + III-3 (5 pts) + III-4 (5 pts)
+    * Part IV (31 pts): IV-5 (5 pts) + IV-6 (5 pts) + IV-7 (4 pts) + IV-8 (4 pts) + IV-9 (3 pts) + IV-10 (4 pts) + IV-13 (3 pts) + IV-14 (3 pts) 
+    * Part V (2 pts): V-1 (2 pts)
 
->- **Translations:** A 3D translation can be represented by a vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20%3D%20%5Bt_1%2C%20t_2%2C%20t_3%5D)<!--$`\bold{t} = [t_1, t_2, t_3]`$-->
-    or by a ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> matrix:<br>
-    ![equation](https://latex.codecogs.com/png.latex?t%20%3D%20%5Cbegin%7Bbmatrix%7D%201%20%26%200%20%26%200%20%26%20t_1%5C%5C%200%20%26%201%20%26%200%20%26%20t_2%5C%5C%200%20%26%200%20%26%201%20%26%20t_3%5C%5C%200%20%26%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D)<!--$`t =
-    \begin{bmatrix}
-    1 & 0 & 0 & t_1\\
-    0 & 1 & 0 & t_2\\
-    0 & 0 & 1 & t_3\\
-    0 & 0 & 0 & 1
-    \end{bmatrix}`$--><br>
-    The scalars ![equation](https://latex.codecogs.com/png.latex?t_1)<!--$`t_1`$-->, ![equation](https://latex.codecogs.com/png.latex?t_2)<!--$`t_2`$-->, and ![equation](https://latex.codecogs.com/png.latex?t_3)<!--$`t_3`$--> correspond to the displacements in ![equation](https://latex.codecogs.com/png.latex?x)<!--$`x`$-->,
-    ![equation](https://latex.codecogs.com/png.latex?y)<!--$`y`$-->, and ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$-->, respectively. Thus, a translation has 3 DoF. Note that
-    representing translations with ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> matrices as above is helpful 
-    for transforming points in homogeneous coordinates.<br>
->- **Rotations:** A 3D rotation has 3 DoF as well. Each DoF corresponds to a rotation around one of the axes of the 
-    coordinate frame. We can represent rotations also as ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> transformation matrices:<br>
-    ![equation](https://latex.codecogs.com/png.latex?R%20%3D%20%5Cbegin%7Bbmatrix%7D%20r_%7B11%7D%20%26%20r_%7B12%7D%20%26%20r_%7B13%7D%20%26%200%5C%5C%20r_%7B21%7D%20%26%20r_%7B22%7D%20%26%20r_%7B23%7D%20%26%200%5C%5C%20r_%7B31%7D%20%26%20r_%7B32%7D%20%26%20r_%7B33%7D%20%26%200%5C%5C%200%20%26%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D)
-    <!--$`R = 
-    \begin{bmatrix}
-    r_{11} & r_{12} & r_{13} & 0\\
-    r_{21} & r_{22} & r_{23} & 0\\
-    r_{31} & r_{32} & r_{33} & 0\\
-    0 & 0 & 0 & 1
-    \end{bmatrix}`$-->
-    <br>
-    Note that the ![equation](https://latex.codecogs.com/png.latex?3%20%5Ctimes%203) <!--$`3 \times 3`$--> submatrix of ![equation](https://latex.codecogs.com/png.latex?R)<!--$`R`$--> with the elements ![equation](https://latex.codecogs.com/png.latex?r_%7B11%7D%20%5Cldots%20r_%7B33%7D) <!--$`r_{11}`$ ... $`r_{33}`$-->
-    is an [orthogonal matrix](https://en.wikipedia.org/wiki/Orthogonal_matrix).<br>    
-    It is important to know that [ROS uses quaternions](http://wiki.ros.org/tf2/Tutorials/Quaternions) 
-    to represent rotations, but there are many other useful representations (e.g., 
-    [Euler angles](https://en.wikipedia.org/wiki/Euler_angles)).
+Students taking CPSC-459 are evaluated over 100 pts; those taking CPSC-559 are evaluated over 115 pts. 
 
-### Changing the Frame of a Point
-Let ![equation](https://latex.codecogs.com/png.latex?%5E%7BA%7D%5Cmathbf%7Bp%7D)<!--$`^{A}\mathbf{p}`$--> be a 3D point in the ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> frame. Its position in 
-![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> can be expressed as ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D%5Cmathbf%7Bp%7D%20%3D%20%5E%7BB%7D_%7BA%7DT%5C%20%5E%7BA%7D%5Cmathbf%7Bp%7D)<!--$`^{B}\mathbf{p} = ^{B}_{A}T\ ^{A}\mathbf{p}`$-->, where 
-![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7DT%20%3D%20%5E%7BB%7D_%7BA%7D%28t%20%5Ctimes%20R%29)<!--$`^{B}_{A}T = ^{B}_{A}(t \times R)`$--> is the ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> transformation matrix that
-results from right-multiplying the translation matrix ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7Dt)<!--$`^{B}_{A}t`$--> by the rotation
-matrix ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7DR)<!--$`^{B}_{A}R`$-->. In particular,
- 
-- ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7Dt)<!--$`^{B}_{A}t`$--> is the ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> transformation matrix that encodes the
- translation between the frames ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> and ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->. The values ![equation](https://latex.codecogs.com/png.latex?t_1%2C%20t_2%2C%20t_3)<!--$`t_1, t_2, t_3`$--> of
-the translation ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7Dt)<!--$`^{B}_{A}t`$--> are the origin of the frame ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> in ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->.
-- ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7DR)<!--$`^{B}_{A}R`$--> is the  ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> rotation matrix corresponding to the orientation of ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$-->'s coordinate axes in 
-![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->. 
+#### Further Reading
 
-Note that the 3D vector with elements ![equation](https://latex.codecogs.com/png.latex?r_%7B11%7D%2C%20r_%7B21%7D%2C%20r_%7B31%7D)<!--$`r_{11}, r_{21}, r_{31}`$--> 
-from the first column of the rotation matrix ![equation](https://latex.codecogs.com/png.latex?%5E%7BB%7D_%7BA%7DR)<!--$`^{B}_{A}R`$--> has the same direction as the ![equation](https://latex.codecogs.com/png.latex?x)<!--$`x`$--> axis of ![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> 
-in the ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$--> frame. Similarly, the elements ![equation](https://latex.codecogs.com/png.latex?r_%7B12%7D%2C%20r_%7B22%7D%2C%20r_%7B32%7D)<!--$`r_{12}, r_{22}, r_{32}`$-->
-and ![equation](https://latex.codecogs.com/png.latex?r_%7B13%7D%2C%20r_%7B23%7D%2C%20r_%7B33%7D)<!--$`r_{13}, r_{23}, r_{33}`$--> have the same direction of the ![equation](https://latex.codecogs.com/png.latex?y)<!--$`y`$--> and ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$--> axes of 
-![equation](https://latex.codecogs.com/png.latex?A)<!--$`A`$--> in ![equation](https://latex.codecogs.com/png.latex?B)<!--$`B`$-->, respectively.
+- [Playing Catch and Juggling with a Humanoid Robot](https://www.disneyresearch.com/publication/playing-catch-and-juggling-with-a-humanoid-robot/):
+Application of Kalman Filtering to a fun entertainment application.
 
-### Transforms in ROS
+- [Discriminative Training of Kalman Filters](http://www.roboticsproceedings.org/rss01/p38.pdf):
+Describes systematic ways for tuning Kalman Filters given ground truth data.
 
-The [tf](http://wiki.ros.org/tf) library in ROS represents transforms and coordinate frames 
-in a `tree structure` buffered in time. The tree is a directed graph with a root. Any two 
-vertices in it are connected by one path. The nodes of the graph correspond to coordinate frames,
-each associated with a link, and the edges correspond to transforms between pairs of frames. 
-
-<p align="center">
-<img src="http://wiki.ros.org/tf/Debugging%20tools?action=AttachFile&do=get&target=frames2.png" width="400" alt="Example tf tree from wiki.ros.org"/><br/>
-Example tf tree (image from wiki.ros.org)
-</p>
-
-Any directed edge in the tf tree has a `parent` frame (source node), and a `child` frame 
-(target node). Let the parent frame be ![equation](https://latex.codecogs.com/png.latex?P)<!--$`P`$--> and the child be ![equation](https://latex.codecogs.com/png.latex?C)<!--$`C`$-->. Then, the transform
-stored in the edge parent -> child corresponds to ![equation](https://latex.codecogs.com/png.latex?%5E%7BP%7D_%7BC%7DT)<!--$`^{P}_{C}T`$-->.
-
-The tf library quickly computes the net transform between two nodes (frames) 
-by multiplying the edges connecting them. To traverse up a directed edge from a child to a parent node, 
-tf uses the inverse of the transformation that is stored in the edge.
 
 ## Setup
 Before you start implementing or answering questions for this assignment, please update
@@ -256,568 +110,436 @@ $ cd <path-to-your-catkin-workspace-root-directory>
 $ catkin_make -DCMAKE_BUILD_TYPE=Release
 ```
 
+## Tests
 
-## Part I. Introduction to tf
-This part of the assignment will help you understand how [tf](http://wiki.ros.org/tf) lets 
-users keep track of multiple coordinate frames over time in ROS. 
+A set of public tests has been provided for your code - they are a subset of the tests we will use to grade your code. Please run these tests before submitting your assignment.
 
-1. Complete the [Introduction to tf2](http://wiki.ros.org/tf2/Tutorials/Introduction%20to%20tf2)
-tutorial from ROS. You should familiarize yourself with the `view_frames` and `tf_echo` tools. 
-You should also learn to visualize the transforms in /tf and /tf_static with [RViz](http://wiki.ros.org/rviz).
+To run these tests, refer to the [README.md](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-4/shutter_track_target_public_tests) in the `shutter_track_target_public_tests` package.
 
-<!--
-    > If you are using the bim laptops, then `ros-melodic-turtle-tf2`, `ros-melodic-tf2-tools`, and `ros-melodic-tf` should already be installed in the computer.
--->
+## Part I. Creating a Custom ROS Message Type
+ROS uses [messages](http://wiki.ros.org/msg) of various types to transmit information between nodes. For example, in the 
+past you have worked with [TransformStamped](http://docs.ros.org/kinetic/api/geometry_msgs/html/msg/TransformStamped.html) 
+messages and [PoseStamped](http://docs.ros.org/kinetic/api/geometry_msgs/html/msg/PoseStamped.html). Now, you 
+will create your own custom message type.
 
-### Questions / Tasks
-Now that you know how to use basic tf tools, bring up a simulation of the robot Shutter (as in [assignment-2](../assignment-2/README.md)). 
-You will inspect its tf tree with tf tools. 
+To get started, read [this tutorial on Creating Messages and Services](http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv) 
+in ROS. Then, follow the steps below to make your own message type as in the tutorial. This message type will serve in the next parts of the assignment to send information about a detected visual target.
 
-> NOTE: In [assignment-2](../assignment-2/README.md), you ran `roscore` before bringing up the robot to enable ROS nodes to communicate. 
-But you can also launch `shutter_sim.launch` directly, as you did in the tutorial. 
-If roscore isn't already running, roslaunch  will automatically start it. Try it!
-
-- **I-1.** Generate an image of the tf tree of Shutter with [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
-Include this image in your report.
-
-    > Tip: You can also generate the image with the 
-    [rqt_tf_tree](http://wiki.ros.org/rqt_tf_tree) interface if you prefer.
-
-- **I-2.** Based on the tf tree from I-1, which frames are between the robot's *base_footprint* 
-frame and the *camera_color_optical_frame* frame?
-
-- **I-3.** Based on the tf tree, what is the ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> transformation ![equation](https://latex.codecogs.com/png.latex?%5E%7BC%7D_%7BO%7DT)<!--$`^{C}_{O}T`$-->
-between the *camera_link* frame (![equation](https://latex.codecogs.com/png.latex?C)<!--$`C`$-->) and the *camera_color_optical_frame* frame (![equation](https://latex.codecogs.com/png.latex?O)<!--$`O`$-->)? Please
-provide the transformation with both the rotation and translation components.
-
-    > Tip 1: You can use the [tf_echo](http://wiki.ros.org/tf#tf_echo) tool to query
-    transformations. You will then need to assemble the ![equation](https://latex.codecogs.com/png.latex?4%20%5Ctimes%204)<!--$`4 \times 4`$--> homogenous transformation matrix 
-    from these values. We recommend [this primer](http://wiki.ogre3d.org/Quaternion+and+Rotation+Primer) from Ogre
-    if you are confused about different rotation representations.
-
-    > Tip 2: We recommend that you visualize the frames of interest in RViz to ensure that the transformation that
-    you are computing is in the right direction. Note that 
-    ![equation](https://latex.codecogs.com/png.latex?%5E%7BC%7D_%7BO%7DT) is not the same as
-    ![equation](https://latex.codecogs.com/png.latex?%5E%7BO%7D_%7BC%7DT).
-
-
-- **I-4.** How are the transformations in the /tf and /tf_static topics generated after you 
-bring up the robot? Please explain which node(s) contribute to generating the tf tree.
-
-    > Tip: You should inspect what nodes and topics are being published in your ROS system,
-    e.g., with the [rqt_graph](http://wiki.ros.org/rqt_graph) tool. You can also read the shutter_sim.launch script
-    in the shutter_bringup package (and any subsequent script that it launches) 
-    to understand how the robot's tf tree is being generated.
-
-
-## Part II. Publishing tf messages
-As mentioned earlier, the [tf](http://wiki.ros.org/tf) library
-uses a tree structure to represent frames and transformations in ROS. These frames and transformations
-are created based on the messages streamed through the /tf and /tf_static topics. 
-
-By convention, the /tf and /tf_static topics 
-transmit messages of the type [tf2_msgs/TFMessage](http://docs.ros.org/jade/api/tf2_msgs/html/msg/TFMessage.html). In turn, these messages
- contain a list of transformations encoded as 
-[geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) messages.
-Each [geometry_msgs/TransformStamped](http://docs.ros.org/jade/api/geometry_msgs/html/msg/TransformStamped.html) 
-message has:
-
-- a `header`, with a `stamp` of when the transform was published 
-and the `frame_id` of the parent frame for the transformation;
-- a `child_frame_id`, corresponding to the name of the child frame; and
-- a `transform`, of type [geometry_msgs/Transform](http://docs.ros.org/jade/api/geometry_msgs/html/msg/Transform.html),
-with the translation and rotation of the transform ![equation](https://latex.codecogs.com/png.latex?%5E%7B%5Ctext%7Bparent%7D%7D_%7B%5Ctext%7Bchild%7D%7DT)<!--<sup>parent</sup><sub>child</sub>$`T`$-->.
-
-You will use code that is already provided in this assignment to learn how to publish tf
-data as described above. To get started, follow the steps below:
-
-1. Inspect the `generate_target.py` Python script in the `scripts` directory of the `shutter_lookat` 
-package that is provided as part of this assignment. You should understand how the script creates a 
-simulated moving object and publishes its position relative to the "base_footprint" frame of 
-Shutter through the `/target` topic.
-
-2. Visualize the moving target in [RViz](http://wiki.ros.org/rviz). Before running the launch
-script below, make sure that you are not running any other node in ROS.
+1. Create a `msg` directory within the `shutter_track_target` ROS repository of this assignment. This directory
+will hold your new message definition.
 
     ```bash
-    $ roslaunch shutter_lookat generate_target.launch
+    $ cd shutter_track_target
+    $ mkdir msg
     ```
-
-    The launch script should then open RViz and display the robot and the moving target in front
-    of it. The target should be displayed as a red ball.
     
-    
-    > [Roslaunch](http://wiki.ros.org/roslaunch) is a tool for easily launching multiple
-    ROS nodes. Roslaunch scripts are written in XML format, according to [this specification](http://wiki.ros.org/roslaunch/XML).
+2. Create a file in the shutter_track_target/msg directory named `Observation.msg`. The content of the file
+should define the following fields for the message type:
 
-   
+    - **header** (of type [std_msgs/Header](http://docs.ros.org/api/std_msgs/html/msg/Header.html))
+    - **x** (of type float64 -- built-in [primitive message type](http://wiki.ros.org/msg) --)
+    - **y** (of type float64 -- built-in [primitive message type](http://wiki.ros.org/msg) --)
+    <br>
+    
+3. Edit the package.xml and CMakeLists.txt files in the shutter_track_target package to define your
+new message type as in the [tutorial on Creating Messages and Services](http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv).
+
+    *Tip:* You need to add package dependencies to package.xml, as well as define your new message
+    type and dependencies in CMakeLists.txt. Don't forget to uncomment the generate_messages() function
+    in CMakeLists.txt as in the tutorial.
+
+4. Build your catkin workspace to generate the new message type
+
+    ```bash
+    $ cd <catkin_workspace>
+    $ catkin_make -DCMAKE_BUILD_TYPE=Release
+    ```
+    
+    *Tip:* If for some reason catkin_make fails to generate your message, check the CMakeLists.txt and
+    package.xml files that you edited in step 3.
+    
+5. Verify that your message type is built and that it has the 3 fields mentioned in the step 2 above. You
+can use the `rosmsg` tool to this end:
+
+    ```bash
+    $ rosmsg show shutter_track_target/Observation
+    std_msgs/Header header
+      uint32 seq
+      time stamp
+      string frame_id
+    float64 x
+    float64 y
+    ```
+    (the output of rosmsg should be as in the code snippet above)
+    
 
 ### Questions / Tasks
-Let's now publish the position of the moving object as a ROS tf frame.
 
-- **II-1.** Follow the steps below to make a new ROS node that publishes 
-the position of a simulated moving object as a ROS tf frame ("target") relative
-to the robot's "camera_color_optical_frame" frame. 
+- **I-1.** Add the Observation.msg, package.xml and CMakeLists.txt files to your repository.
+Commit the changes that you made to generate your new message type in the shutter_track_target package.
 
-    - Create a new ROS node in Python within the `scripts` directory of the `shutter_lookat` package.
-The node should be named `publish_target_relative_to_realsense_camera.py`. The python script should have executable permissions.
+## Part II. Get Data 
+Download the ROS bag [left-seq1.bag](https://drive.google.com/file/d/1AZl6zNYjEhPcag_MfPq39N-kdJJmEBIS/view?usp=sharing) from Google 
+Drive. Then, place it inside a `data` directory within the shutter_track_target package:
 
-    - Within your new node:
+```bash
+$ roscd shutter_track_target
+$ mkdir data
+$ cd data
+$ mv <path-to-bag> . # move the bag to the data directory
+```
+
+Inspect the bag to make sure that it was downloaded properly:
+
+```bash
+$ rosbag info left-seq1.bag
+path:        left-seq1.bag
+version:     2.0
+duration:    12.4s
+start:       Aug 02 2019 11:41:41.56 (1564760501.56)
+end:         Aug 02 2019 11:41:53.99 (1564760513.99)
+size:        326.2 MB
+messages:    371
+compression: none [371/371 chunks]
+types:       sensor_msgs/Image [060021388200f6f0f447d0fcd9c64743]
+topics:      /camera/color/image_raw   371 msgs    : sensor_msgs/Image
+```
+
+And play the bag to see its content: 
+
+```bash
+# set the use_sim_time parameter so that rosbag play simulates the original time in the bag when it is played
+$ rosparam set use_sim_time true 
+
+# play the bag
+$ rosbag play --clock left-seq1.bag
+
+# and in another terminal visualize the images
+$ rosrun rqt_image_view rqt_image_view # visualize the /camera/color/image_raw topic
+```
+
+You should then see an image sequence of Burton moving two colored squares as in the figure below:
+
+<img src="docs/left-seq1.png" width="400"/>
+<br>
+
+> NOTE: ROS nodes use the /clock topic to gather information about time (see [here](http://wiki.ros.org/Clock) for more information).
+When the `use_sim_time` parameter is set to true in the ROS parameter server, ROS will stop publishing your computer's system clock
+through /clock. And when a bag is played with the `--clock` option, rosbag play will publish a simulated time instead.
+If you are playing ROS bags and don't set use_sim_time parameter to true, then messages may be handled incorrectly by
+ROS nodes. You can check the value of the use_sim_time parameter in the [ROS parameter server](http://wiki.ros.org/Parameter%20Server)
+with the command: `$ rosparam get use_sim_time`
+
+### Questions / Tasks
+- **II-1.** Make a video of rqt_image_view that shows the content of the /camera/color/image_raw
+topic as the left-seq1.bag rosbag plays for at least 3 seconds. Turn this video into an animated
+gif, e.g., with ffmpeg and imagemagick as indicated in 
+[this code snippet](https://gitlab.com/snippets/1743818), and include it in a `docs` directory within the
+ shutter_track_target package. Name the gif `input.gif` and commit it to your repository.
+ 
+
+## Part III. Detecting a Visual Target
+You will now use simple image processing techniques to detect the blue square in the images within the left-seq1.bag.
+These detections will be observations for the location of the target, which you will then filter in the next part
+of the assignment.
+
+To get you started, this assignment provides the skeleton structure for a node that detects
+blobs of a given color: see the shutter_track_target/scripts/detect_visual_target.py script. Read the script
+to understand how it works in general. 
+
+For the next parts of this assignment, do NOT edit the init() and image_callback() functions of the DetectTarget class
+in the detect_visual_target.py node. **Only edit the filter_image(), compute_keypoints_for_blobs(), and publish_observation()
+functions** as indicated in the tasks below. 
+
+### Questions / Tasks
+Complete the detect_visual_target.py node by implementing the filter_image(), compute_keypoints_for_blobs(), and publish_observation()
+functions. Afterwards, make an animated video of the visual output of your node, as indicated below.
+
+- **III-1.** Read this [tutorial on Color Spaces in OpenCV](https://www.learnopencv.com/color-spaces-in-opencv-cpp-python/).
+Afterwards, implement the `filter_image()` function in the detect_visual_target.py node so that the function:
+
+    1. Converts the input `cv_image` to the HSV color space with OpenCV.
+    2. Filters the image in the HSV color space using the [cv2.inRange]() function from OpenCV and the input `lower_hue_value` and `higher_hue_value`. 
+    3. Finally, returns the image (mask) output by the inRange() function.
+    <br>
     
-        - Subscribe to the `/target` topic to receive the position of the
-simulated object relative to the "base_footprint" frame.
+    *Tip:* This [tutorial](https://pythonprogramming.net/color-filter-python-opencv-tutorial/) provides
+    an example on color filtering in OpenCV. 
+    
+    To check that your filter_image() function is working properly, run your node with the default hue range of 100-140:
+    
+    ```bash
+    # play the left-seq1.bag as in Part II of the assignment, and then run the node:
+    $ rosrun shutter_track_target detect_visual_target.py
+    ```
+    
+    You should then be able to visualize the output topic `/observation_image` for debugging purposes with 
+    `rqt_image_view`. The output image (or mask) should have high values for the pixels corresponding to the blue 
+    square in the input image, as shown in the left image below. The right image shows the corresponding image_raw
+    photo from the bag as a reference.
+    
+    <img src="docs/color_thresholding.png" width="450"/>
+    <br>
 
-            > Tip: We suggest that you organize the code of your node
-in a Python class, as in [this tutorial on a pytalker node](http://wiki.ros.org/ROSNodeTutorialPython#The_pytalker_node),
-given the increased complexity of this node in comparison previous examples.
+- **III-2.** Read this other [tutorial on Blob Detection](https://www.learnopencv.com/blob-detection-using-opencv-python-c/)
+and implement the `compute_keypoints_for_blobs()` function in the detect_visual_target.py node so that it:
 
-        - Transform the 3D pose of the moving object to the "camera_color_optical_frame" frame in Shutter.
-        For this, you will have to query the transformation between the "base_footprint" frame in which the target pose is provided
-        and the "camera_color_optical_frame" using the `lookup_transform` function from the tf2 API. 
-        Make sure to query the transformation at the time when the target pose was computed.
+    1. Creates a `cv2.SimpleBlobDetector_Params()` object with all of the parameters
+    for an OpenCV blob detector.
+    
+    2. Creates a SimpleBlobDetector object with the parameters from the previous step.
+    
+    3. Uses the SimpleBlobDetector to detect blobs on the `filtered_image` mask that is input to the function.
+    
+    4. Returns the detected list of keypoints, as output by the SimpleBlobDetector.
+    
+    *Tip:* You can read more about how the SimpleBlobDetector algorithm works on the [official OpenCV documentation](https://docs.opencv.org/2.4/modules/features2d/doc/common_interfaces_of_feature_detectors.html#SimpleBlobDetector%20:%20public%20FeatureDetector).
 
-            > Tip 1: You can take a look at this ROS tutorial on [writing a tf2 listener](http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20listener%20%28Python%29)
-            for some examples on using the tf2 API.
-             
-            > Tip 2: You can use the [tf2_geometry_msgs](http://wiki.ros.org/tf2_geometry_msgs) API to transform the pose of the object
-            as in [this post](https://answers.ros.org/question/222306/transform-a-pose-to-another-frame-with-tf2-in-python/).
-            
-        - Broadcast a tf transform between the "camera_color_optical_frame" frame (parent) and a new "target" frame (child) in tf. 
-        The target frame should match the pose of the simulated object in the camera_color_optical_frame.
-        
-            > Tip: An example on broadcasting tf transformations can be found in 
-            [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29).
-        
-    - Close all your nodes in ROS, launch the `generate_target.launch` script, and launch your new node which publishes
-    the `target` frame. 
+    Once you've implemented the compute_keypoints_for_blobs() function, you can run the detect_visual_target.py 
+    node to debug your code for this part of the assignment, as in the task III-1. Edit the parameters of the 
+    blob detector such that the blue square is detected well in the left-seq1.bag
+    image sequence. The result should look similar to the image below:
     
-    - Add a TF display to RViz, and verify that the new `target` frame that you are publishing
-    visually matches the position of the moving target (red ball). If the frame and the moving
-    object are not displayed in the same place, check your code and edit as necessary.
+    <img src="docs/keypoint.png" width="300"/>
+    <br>
     
-    - Run public tests for this part of this assignment to ensure that your node is operating as expected:
+    The thin red circle corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
+    found by OpenCV blob's detection algorithm. The position of this keypoint is what your node should output
+    through the "/observation" topic, as described in the next task.
+
+- **III-3.** Finally, implement the `publish_observation()` function in the detect_visual_target.py node.
+This function receives a `tuple (x,y)` corresponding to the location of the biggest keypoint 
+found by the blob detection algorithm. The function should publish this coordinate as an Observation message
+through the "/observation" topic (self.obs_pub variable). 
+
+    Before publishing the Observation message, make sure to set its 
+    `header field`. The header field should have the same values as the header variable 
+    that is passed to the publish_observation() function. This will ensure that the time stamp and frame of the Observation message
+    matches the time stamp and frame of the image that it was generated from.
     
-        ```bash
-        $ rostest shutter_lookat_public_tests test_publish_target.launch
-        ```
-      
-        If you want to see how the tests are implemented, check the `shutter_lookat_public_tests` package that is 
-        provided as part of this assignment. More specifically, the tests for Part II are implemented in 
-        `shutter_lookat_public_tests/test/test_publish_target.py`.
+    Once your detect_visual_target.py node is properly detecting targets of a given color
+    and publishing observations, commit the script to your repository.
+
+- **III-4.** As in II-1, make a video of rqt_image_view that shows the content of the /observation_image
+topic as the left-seq1.bag rosbag plays for at least 5 seconds. Turn this video into an animated
+gif, name it `keypoints.gif`, and include it in the `docs` directory within the
+ shutter_track_target package. Commit the gif to your repository.
+ 
+
+## Part IV. Filtering the Target's Position
+You will now implement a linear Kalman filter to track a visual target in image space. Please read Sections 3.2.1
+ and 3.2.2 from
+Chapter 3 of the [Probabilistic Robotics book](http://www.probabilistic-robotics.org/) before starting with 
+this assigment. The Chapter is available in Canvas (under the Files section).
+
+
+The `filter state` 
+![equation](https://latex.codecogs.com/gif.latex?\bold{x}&space;\in&space;\mathbb{R}^6)<!--$`\bold{x} \in \mathbb{R}^6`$--> should contain ![equation](https://latex.codecogs.com/gif.latex?\bold{x}&space;=&space;[p_x\&space;p_y\&space;v_x\&space;v_y\&space;a_x\&space;a_y]^T)<!--$`\bold{x} = [p_x\ p_y\ v_x\ v_y\ a_x\ a_y]^T`$-->, 
+where ![equation](https://latex.codecogs.com/gif.latex?\mathbf{p}&space;=&space;[p_x\&space;p_y]^T)<!--$`\mathbf{p} = [p_x\ p_y]^T`$--> corresponds to the estimated position of the target in an image, 
+![equation](https://latex.codecogs.com/gif.latex?\mathbf{v}&space;=&space;[v_x\&space;v_y]^T) <!--$`\mathbf{v} = [v_x\ v_y]^T`$--> is its estimated velocity, and ![equation](https://latex.codecogs.com/gif.latex?\mathbf{a}&space;=&space;[a_x\&space;a_y]^T)<!--$`\mathbf{a} = [a_x\ a_y]^T`$--> is its estimated acceleration.
+
+The `transition model` of the filter should include additive gaussian noise and 
+follow the [equations of motion](https://en.wikipedia.org/wiki/Equations_of_motion):
+
+- ![equation](https://latex.codecogs.com/gif.latex?\bold{p}_{t&plus;1}&space;=&space;\bold{p}_t&space;&plus;&space;\bold{v}_t&space;\Delta&space;t&space;&plus;&space;\frac{1}{2}&space;\bold{a}&space;(\Delta&space;t)^2)<!--$`\bold{p}_{t+1} = \bold{p}_t + \bold{v}_t \Delta t + \frac{1}{2} \bold{a} (\Delta t)^2`$-->
+- ![equation](https://latex.codecogs.com/gif.latex?\bold{v}_{t&plus;1}&space;=&space;\bold{v}_t&space;&plus;&space;\bold{a}_t&space;\Delta&space;t)<!--$`\bold{v}_{t+1} = \bold{v}_t + \bold{a}_t \Delta t`$-->
+- ![equation](https://latex.codecogs.com/gif.latex?\bold{a}_{t&plus;1}&space;=&space;\bold{a}_t)<!--$`\bold{a}_{t+1} = \bold{a}_t`$-->
+
+where ![equation](https://latex.codecogs.com/gif.latex?\Delta&space;t) <!--$`\Delta t`$--> is the elapsed time between updates.
+
+The `measurement model` of the filter should correct for the predicted state based on
+the observed position of the visual target. This observation is generated by your detect_visual_target.py
+node.
+
+You should implement your Kalman filter 
+within the `kalman_filter.py` script that is inside of the shutter_track_target/scripts 
+directory, as indicated in the tasks below. The kalman_filter.py script already provides you with
+the main logic for a filtering node, and will help you debug your filter visually. 
+ 
+### Questions / Tasks
+
+- **IV-1.** Please write down the mathematical equation for the filter's linear transition model, including
+Gaussian noise, in your report. Note that because you are not moving the target, but tracking will be
+happening only based on the observed target position, your filter's transition model should have no control ![equation](https://latex.codecogs.com/gif.latex?\bold{u}) <!--$`\bold{u}`$--> component.
+
+- **IV-2.** Please write down the mathematical equation for the filter's measurement model, including Gaussian
+noise, in your report.
+
+- **IV-3.** Please write down the mathematical equation that defines the Kalman gain in your report.
+
+- **IV-4.** What happens with the values in the Kalman gain if the covariance ![equation](https://latex.codecogs.com/gif.latex?Q)<!--$`Q`$--> for the measurement noise 
+grows?
+
+- **IV-5.** Complete the `KF_predict_step()` function at the top of the
+kalman_filter.py script such that its predict a new belief for the state (encoded by its mean and covariance) based
+on the prior belief and the transition model of the filter.
+
+- **IV-6.** Complete the `KF_measurement_update_step()` function in the kalman_filter.py script such that
+it corrects the belief of the state of the filter based on the latest observation and the filter's
+measurement model.
+
+- **IV-7.** Implement the `assemble_A_matrix()` and `assemble_C_matrix()` methods within the KalmanFilterNode
+class of the kalman_filter.py script. The methods should set the A and C
+parameters of the transition and measurement model of the filter used by the KalmanFilterNode. Use [numpy
+arrays](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.array.html) to represent the A and C matrices.
+
+    > NOTE: You do not have to implement the logic that passes the A and C parameters to the filter. This is
+    already done for you in the main loop of the KalmanFIlterNode class.
     
-    - Save your work by adding and committing your publish_target_relative_to_realsense_camera.py
-    script to your local repository. Push your code to GitHub.
+- **IV-8.** Implement the `initialize_process_covariance()` and `initialize_measurement_covariance()` methods
+within the KalmanFilterNode class of the kalman_filter.py script. These methods should set some fixed value
+for the Q and R covariances
+for the noise of the transition model and measurement model, respectively. Don't worry too much about the
+exact values that you set for the noise now, as you will have to tune these values later in the assignment.
+
+- **IV-9.** Implement the `assemble_observation_vector()` function within the KalmanFilterNode class of the
+kalman_filter.py script. This function should return a vector (numpy array) with the observed position for the
+target. 
+ 
+    To make this part of the assigment easy, note that the `assemble_observation_vector()` function has
+    an Observation message argument. This argument provides the latest observed position of the target as received
+    through the "/observation" topic in the KalmanFilterNode.
+
+- **IV-10.** Implement the `initialize_mu_and_sigma()` method within the KalmanFilterNode class of the
+kalman_filter.py script. This method should set the initial values for the filter belief based on the latest
+observed target position. Again, note that this observation is passed to the `initialize_mu_and_sigma()` method
+as an input argument.
+
+- **IV-11.** Once you have finished the prior tasks, complete the filter_colored_target.launch file within the shutter_track_target/launch directory.
+The launch file should run your kalman_filter.py script after playing a bag, running rqt_image_view, and 
+running your detect_visual_target.py script.
+
+    Note that the begining of the launch file already defines a set of arguments:
+    
+    - **bagfile:** path to the left-seq1.bag file.
+    - **add_observation_noise:** whether to add artificial noise to the observed target position.
+    - **lower_hue_value:** Min. hue value for the colored target that is tracked.
+    - **higher_hue_value:** Max. hue value for the colored target that is tracked.
+    - **playback_speed:** Speed at which to play the bag (1.0 simulates real time play back).
+    
+    > Do NOT modify the above arguments in the launch file, nor the way how the bag is launched and
+    the detect_visual_target.py node is run.
+    
+    Once you have completed the launch file, you should be able to run it as:
+    
+    ```bash
+    $ roslaunch shutter_track_target filter_colored_target.launch
+    ```
+    
+    An rqt_image_view window will then open that allows you to visualize the 3 images being streamed
+    through the ROS network: 
+    
+    - /camera/color/image_raw topic: the original image sequence
+    - /observation_image topic: the detected target position
+    - /tracked_image topic: the tracked target
+    <br>
+    
+    The images sent over the /tracked_image topic display two trajectories: the red line connects the observed locations for the target (as received through the /observations topic); and the thinner green line connects the estimated location for the target (from the Kalman Filter belief).
+    
+    <img src="docs/filtering.png" width="400"/>
+ 
+
+- **IV-12.** Tune the parameters of your filter (initial belief, R, and Q) such that you can effectively 
+track the blue square in the image sequence within the left-seq1.bag. Use the filtered_colored_target.launch
+file to quickly launch rosbag, rqt_image_view, detect_visual_target.py and kalman_filter.py. As the bag plays, use
+rqt_image_view to visualize the images being streamed through your network and debug your code.
+
+    Note you can slow down the speed at which rosbag plays the image sequence with the `playback_speed`
+    argument of the filtered_colored_target.launch file. For example,
+    
+    ```bash
+    # play the bag at half real-time speed
+    $ roslaunch shutter_track_target filter_colored_target.launch playback_speed:=0.5
+    ```
+
+    Once it looks like your filter is tracking the target, include the filter parameters that you are using
+     for this part of the assignment in your report. Also, indicate the playback_speed that you ended up using for adjusting your 
+     filter parameters.
      
-        > Remember that continously committing your work and pushing to GitHub will ensure that your
-        code is backed up and readily accessible in the future.
-    
-- **II-2.**  Stop any ROS processes that you are running, relaunch the 
-    generate_target.launch script, run your `publish_target_relative_to_realsense_camera.py` node, and create a 
-    new image of the tf tree in ROS, e.g., using [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
-    Add the image of the tf tree to your report.
-    
-    
-## Part III. Making a virtual camera
-Assume that the moving object from Part II of this assignment is a sphere. Now, you will 
-work on projecting the simulated object on a virtual image captured from Shutter. Close all ROS nodes before
-starting this part of the assignment.
+- **IV-13.** Tune the parameters of your filter such that it can track the blue square when the argument
+add_observation_noise is set to true in filter_colored_target.launch:
 
-1. Inspect the `virtual_camera.py` node that is provided as part of this assignment within the `shutter_lookat/scripts`
-directory.  
-
-2. Complete the `project_3D_point()` function at the top of the script. This function receives the coordinates of a 
-3D point with coordinates x, y, z in the camera frame and computes the projected location for this point onto the image
-using the camera's intrinsic matrix K.
-
-3. Complete the `draw_image()` function at the top of the script. This function receives the coordinates of a 
-3D point in the camera frame and renders an image with a circle representing the projected location of the point onto the image
-plane.
-
-    a. The `draw_image()` function should first create an empty image using the [OpenCV library](https://opencv.org/). 
-    The image should have white background and dimensions of width x height pixels. An example on how you can create an image 
-    with opencv is provided below:
-    
-    ```python
-    # Example code
-    import cv2          # import opencv
-    import numpy as np  # import numpy
-    
-    # create image
-    image = np.zeros((height, width, 3), np.uint8) # width and height are the dimensions of the image
-    # color image
-    image[:,:] = (255,255,255) # (B, G, R)
-    ```
-   
-    b. The `draw_image()` function should then compute the projected location for the 3D target onto the image.
-    To this end, the `draw_image()` function should call the `project_3D_point()` function, passing the 3D coordinates
-    and intrinsic camera matrix K.
-    
-    c. The `draw_image()` function should draw the outline of a red circle on the image. 
-    The position of the center of the circle should match the position of the projected 3D point in the image. Make
-    the radius of the circle 12 pixels, and its outline 3 pixels wide.
-    
-    ```python
-    # Example code
-    cv2.circle(image, (x,y), radius, (0,0,255), outline_width) # (x,y) is the projected location of the target on the image
+    ```bash
+    # play the bag at half real-time speed
+    $ roslaunch shutter_track_target filter_colored_target.launch add_observation_noise:=true [playback_speed:=0.5]
     ```
     
-    > Tip: See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
-    for more examples on drawing basic figures.
-
-    d. The `draw_image()` function should return the image with the drawn circle.
-
-4. Edit the `__init__()` function of the `virtual_camera.py` node to define an instance variable K of type numpy array. 
-This array should correspond to the 3x3 intrinsic camera matrix of your virtual camera. In particular, it should be defined 
-based on the following parameters:
-
-    ```python
-    cx=320       # x-coordinate of principal point in terms of pixel dimensions
-    cy=240       # y-coordinate of principal point in terms of pixel dimensions
-    fx=349       # focal length in terms of pixel dimensions in the x direction
-    fy=349       # focal length in terms of pixel dimensions in the y direction
-    # note: assume there's no skew.
-    ```
-   
-    > Tip: If you are unsure of what the above parameters mean, read more about projective cameras 
-    in Hartly & Zisserman's [Multiple View Geometry](http://www.robots.ox.ac.uk/~vgg/hzbook/) book.
-
-5. Edit the `target_callback()` function in the `virtual_camera.py` node such that it repeats the steps below every time 
-a new message from the /target topic is received. 
-
-    **a.** Compute the target's pose in the "camera_color_optical_frame" frame (as in Part II of this assignment).
-
-    **b.** Call the `draw_image()` function to create a virtual camera image that shows the projected location of the target
-    as a circle. The resulting image should have dimensions of 640 x 480 pixels.
-   
-    **c.** Publishes the image that you created with OpenCV as a [sensor_msgs/Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html) message in ROS. You
-    can use the [cv_bridge](http://wiki.ros.org/cv_bridge) library to convert the OpenCV image to
-    an Image message. Note that the Image message should have a `header` with the current time as
-    stamp and the "camera_color_optical_frame" frame as frame_id. The Image message should be published by your node
-    through the `/virtual_camera/image_raw` topic.
+    In the above command, the brackets [*] indicate optional arguments.
     
-    > Tip: Examples on converting OpenCV images to ROS messages can be found
-    in [this tutorial](http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython).
-    
-6. Visualize the images that your node is publishing using the 
-[rqt_image_view](http://wiki.ros.org/rqt_image_view) tool. You should see the red circle
-moving in a circular path in the image (as in the Figure below). If this is not the case, please check your implementation of the
-virtual_camera.py script.
+    Once it looks like your filter is tracking the target, include the filter parameters that you are using
+     for this part of the assignment in your report.  In addition, make a video of rqt_image_view that shows the images sent
+    through the /tracked_image topic for at least 5 seconds with add_observation_noise:=true. 
+    Turn this video into an animated
+    gif, name it `filtered_blue_square_with_extra_noise.gif`, and include it in the `docs` directory within the
+     shutter_track_target package. Commit the gif to your repository.
+     
+- **IV-14.** Write a README.md Markdown file inside the shutter_track_target repository that explains
+what the detect_visual_target.py and kalman_filter.py nodes do, and how the filtered_colored_target.launch script
+works. To provide visual support to the explanation of how the launch file works, include the gifs that you generated
+previously in this assignment in the README.md file.
+   
+     > *Tip:* More information on including images 
+     in GitHub's markdown can be found [here](https://guides.github.com/features/mastering-markdown/).
+     
 
-<p align="center">
-<kbd>
-<img src="docs/projected_moving_object.gif" width="300"/>
-</kbd>
-</p>
+## Part V. Real-Time Filtering
+
+You will now run your filter on another video. This video should contain a **uniform color, but non-blue object**. Record this video from your computer, phone, or download a (non-copyrighted) video for this section. Ensure that this video is in `.mp4` format.
+
+You can play the video through ROS using the provided `play_video.py` script within the `shutter_track_target/scripts` folder. For your convenience, we also provide you
+a launch file to run the script:
+
+```bash
+$ roslaunch shutter_track_target play_video.launch
+```
+
+You should update the default path to your video in the launch file, or pass the optional parameter `video_file` to update the value of this argument at run time.
+
 
 ### Questions / Tasks
 
-- **III-1.** Explain in your report what is the difference between calling the `lookup_transform`
-function from the tf2 API with the time of the target's pose, rospy.Time(0), or rospy.Time.now() as third argument?
+- **V-1.** Run your completed Kalman Filter node, updating the hue arguments to track the desired object in your video. Make sure to look at rqt_image_view to ensure that your object is being tracked properly.
 
-    > Note: How you call the lookup_transform function can have an effect on the
-    rate of operation of your virtual_camera.py node and how often it can publish images. 
-    You can use the [rostopic hz](http://wiki.ros.org/rostopic) tool to check how fast messages are published by the node.
+    Once it looks like your filter is tracking your object well, make a gif of rqt_image_view showing the topic `/tracked_image`. Name this gif `new_object.gif`. Include this gif in the README for `shutter_track_target` that you wrote in Part IV.
     
-- **III-2.** Edit your virtual_camera.py script to enable your node to also publish 
- calibration parameters. Sharing the parameters will help other programs 
- reason geometrically about the images that your virtual camera generates. Note that the parameters should be published as a [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message through the `/virtual_camera/camera_info` topic, as indicated in the steps below.
+    Make a rosbag of your system while the video is playing and you are tracking the object's position. The bag should be around 5 seconds long, and **only** include the following topics:
 
-    **a.** Import the [CameraInfo](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html) message
-    into your virtual_camera.py script.
+    - /tracked_image
+    - /observation_image
+    - /rosout
+
+    <br/>
     
-    ```python
-    # Example
-    from sensor_msgs.msg import CameraInfo
-    ```
+    Please name your bag `track_target.bag`. Then, check that it passes the public test for the bag: `$ rostest shutter_track_target_public_tests test_bag_recording.launch`.
+    Note that the test expects the bag to be stored within the `shutter_track_target/data` directory, but you should not commit the bag to your repository.
     
-    **b.** Create a function that builds CameraInfo messages from the calibration parameters
-    provided in Part III of this assignment. You can use the code snippet below to this end.
+    Upload your ROS bag to Google Drive or Box and make it accessible to anybody with the link. Then, **provide a link to your ROS bag in your report for this assignment.** As mentioned before, you don't need to and you shouldn't commit the bag to your repository! Otherwise, you will make your repository unnecessarily heavy. 
     
-    ```python
-    def make_camera_info_message(stamp, frame_id, image_width, image_height, cx, cy, fx, fy):
-        """
-        Build CameraInfo message
-        :param stamp: timestamp for the message
-        :param frame_id: frame id of the camera
-        :param image_width: image width
-        :param image_height: image height
-        :param cx: x-coordinate of principal point in terms of pixel dimensions
-        :param cy: y-coordinate of principal point in terms of pixel dimensions
-        :param fx: focal length in terms of pixel dimensions in the x direction
-        :param fy: focal length in terms of pixel dimensions in the y direction
-        :return: CameraInfo message with the camera calibration parameters.
-        """
-        camera_info_msg = CameraInfo()
-        camera_info_msg.header.stamp = stamp
-        camera_info_msg.header.frame_id = frame_id
-        camera_info_msg.width = image_width
-        camera_info_msg.height = image_height
-        camera_info_msg.K = [fx, 0, cx, 0, fy, cy, 0, 0, 1]
-        camera_info_msg.D = [0, 0, 0, 0, 0]
-        camera_info_msg.R = [1, 0, 0, 0, 1, 0, 0, 0, 1]
-        camera_info_msg.P = [fx, 0, cx, 0, 0, fy, cy, 0, 0, 0, 1, 0]
-        camera_info_msg.distortion_model = "plumb_bob"
-        return camera_info_msg
-    ```
-    
-    > Note: Specific details about the fields of CameraInfo messages can be found 
-     in its [message definition](http://docs.ros.org/api/sensor_msgs/html/msg/CameraInfo.html).
-    
-    **c.** Create a publisher for the CameraInfo messages in your node.
-    
-    ```python
-    # Example
-    camerainfo_pub = rospy.Publisher("/virtual_camera/camera_info", CameraInfo, queue_size=10)
-    ```
-    
-    **d.** Publish a CameraInfo message whenever your node publishes an Image message. The
-    CameraInfo message should have the same header as the Image message.
-    
-    ```python
-    # Example (assumes that image_msg is the Image message that your node publishes for the virtual camera)
-    camerainfo_msg = make_camera_info_message(image_msg.header.stamp,
-                                              image_msg.header.frame_id,
-                                              image_width,
-                                              image_height,
-                                              cx, cy,
-                                              fx, fy)
-    camerainfo_pub.publish(camerainfo_msg)
-    ```
+    A couple of tips for this part of the assignment:
 
-    > Note: If the code of your node was organized into a class structure, then you could create the camerainfo_msg
-    message when a class instance is initialized and save it as a member of the instance for future use. When the images are then created, you
-    would just need to copy the header of the image message into the pre-computed camerainfo_msg, and publish it. While in practice
-    organizing the code this way won't make your program in this part of the assignment much faster given the speed of computers today, thinking about ways 
-    to optimize the operation of your ROS nodes so that the same computation is not repeated over and over unnecessarily is important for real-time systems.
-    
-    **e.** Finally, check that your node is publishing CameraInfo messages through the 
-    /virtual_camera/camera_info topic with the [rostopic echo](http://wiki.ros.org/rostopic#rostopic_echo) tool.
+    > *Tip 1:* When you play your video, you should set the `use_sim_time` parameter back to false since you are no longer playing a bag. 
+            The `play_video.launch` file does this for you automatically.
 
-    > Remember to commit your code whenever you want to save a snapshot of your work. 
+    > *Tip 2:* This assignment provides you of an example launch file to record the `track_target.bag`. 
+            See the `assignment-4/shutter_track_target/launch/record_bag.launch` file.
 
-- **III-3.** You will now verify that the image and the camera parameters that your node publishes 
-are consistent with one another with the help of the RViz [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera). 
+    > *Tip 3:* Double check the content of your bag with the `rosbag info` and `rosbag play` commands before 
+            submitting your assignment. Make sure that the /tracked_image and /observation_image topics show 
+            your filter tracking your desired object. As a reference, the bag should include at least
+            200 images for each of these topics.
 
-    > The [Camera Plugin](http://wiki.ros.org/rviz/DisplayTypes/Camera) creates a new rendering
-window in RViz from the perspective of a camera using the CameraInfo message that your virtual_camera.py node publishes. 
-The plugin also lets you overlay other displays that you have enabled in RViz on the rendered image. Your goal is to use these overlays to verify that
-the virtual camera that you already implemented is working correctly. 
+## Part VI
 
-    Close all running ROS nodes and re-launch the generate_target.launch script. Then run 
-    your virtual_camera.py node and, once RViz opens, add a Camera display to the RViz window.
-    Configure the camera plugin as follows:
-    
-        Image Topic: /virtual_camera/image_raw
-        Transport Hint: raw
-        Image Rendering: background
-        Overlay Alpha: 0.6
-        Zoom Factor: 1
+Part VI of the assignment is only for students taking CPSC-559 (graduate version of the course). See the tasks/questions in the [ExtraQuestions-CPSC559.md](ExtraQuestions-CPSC559.md) document.
 
-    The red circle from your /virtual_camera/image_raw image should then align in the RViz 
-    Camera plugin with the red ball of the simulated moving object (as in the Figure below). 
-    If this is not the case, check and correct your implementation of the virtual_camera.py node.
-       
-    <p align="center">
-    <kbd>
-    <img src="docs/rviz_camera.png" width="300"/>
-    </kbd>
-    </p>
-
-    > Tip: If parts of the robot are displayed in the camera plugin image, then you can remove them by temporarily disabling the RobotModel plugin in Rviz.
-    
-    Once the image that is published by the virtual_camera.py script is consistent 
-    with what the Camera plugin shows in RViz, record a ROS [bag](http://wiki.ros.org/Bags) 
-    as in [this tutorial](http://wiki.ros.org/rosbag/Tutorials/Recording%20and%20playing%20back%20data). 
-    The bag should have all of the messages that are streamed in your system for a duration of 8 seconds.
-    
-    ```bash
-    $ rosbag record -O <your-name>_a3p3-3.bag -a --duration 8 
-    ```
-    
-    > You can see a description of the arguments that `rosbag record` accepts [here](http://wiki.ros.org/rosbag/Commandline#record). Make sure to start 
-    the generate_target.launch file and your virtual camera before starting to record the bag, or the bag might end up being empty!
-    
-    Inspect your ROS bag with the [rosbag info](http://wiki.ros.org/rosbag/Commandline#rosbag_info) tool to verify that it contains messages
-    for all of the following topics:
-        
-        * /diagnostics
-        * /joint_states 
-        * /rosout   
-        * /target  
-        * /target_marker 
-        * /tf         
-        * /tf_static  
-        * /virtual_camera/camera_info    
-        * /virtual_camera/image_raw 
-    
-    Upload your ROS bag to Google Drive or Box and make it accessible to anybody with the link. Then, 
-    **provide a link to your ROS bag in your report** for this assignment. You don't need to and 
-    you shouldn't commit the bag to your repository! Otherwise, you will make your repository
-    unnecessarily heavy.
-
-- **III-4.** Explain in your report what happens with the projection of the target on the image
-when the target is behind the camera? How and why is the image changed? To visualize this result, you
-can launch the `generate_target.launch` script with the optional parameter `target_x_plane:=<x>`, where \<x\> corresponds to the target's
-x coordinate on the robot's "base_footprint" frame. Then inspect the images that your node generates.
-
-- **III-5.** Your virtual camera could see behind it, but real cameras don't do that. Modify the `draw_image()` function 
-in the virtual_camera.py node so that the part of your code that computes the projection of the target and draws the circle only 
-executes if the target is in front of the camera. That is, these parts of your program should only execute if the Z component of 
-the target's position in the camera coordinate frame is positive. If the Z component is zero or negative, the function 
-should instead return an empty (white) image. In the latter case, the function should also print a warning message:
-
-    ```python
-    # example warning
-    rospy.logwarn("Warning: Target is behind the camera (z={})".format(z)) # z is the z coordinate for the target's center point relative to the camera frame
-    ```
-    
-Run public tests for Part III of this assignment to ensure that your node is operating as expected:
-
- ```bash
- $ rostest shutter_lookat_public_tests test_virtual_camera.launch
- ```
-
-Note that the above tests will run automatically in Gradescope when you submit your code to the 
-`Assignment 3 - Code` assignment.
-
-## Part IV. Making a fancier virtual camera
-You will now modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
-it draws the true outline of the spherical target as seen by the camera. 
-
-1. Copy your virtual_camera.py script into a new script called `fancy_virtual_camera.py`. The new script
-should be located within the `shutter_lookat/scripts` directory. It should have executable permissions.
-
-2. Change the name of the new node in the `rospy.init_node()` function to `fancy_virtual_camera`
-and edit any other relevant documentation in your code to indicate that the program implements a fancier virtual camera for 
-Shutter.
-
-### Questions / Tasks
-
-Solve the questions below and complete the corresponding programming tasks on your `fancy_virtual_camera.py` node 
-such that it outputs better images of the target for your camera. In brief, you will need to modify the `draw_image()` function in the new node 
-such that it computes a direction vector ![equation](https://latex.codecogs.com/gif.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> 
-from the center of the 3D target to the edge of the sphere seen by the camera. Then, you will be able to draw the target's 
-true shape by rotating the vector along a rotation axis in the direction of the target, and projecting the resulting 
-3D points along the edge of the sphere onto the camera image.
-
-<p align="center">
-<img src="docs/diagram_a3.png" width="500"/>
-</p>
-
-- **IV-1.** To get started, let ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20%3D%20%5Bt_x%5C%20t_y%5C%20t_z%5D%5ET)<!--$`\bold{t} = [t_x\ t_y\ t_z]^T`$--> be the vector from the camera center to the center of the target 
-in the camera coordinate frame (as shown in the image above). 
-Additionally, let the camera coordinate frame be oriented such that the ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$--> axis points
-forward. How can you mathematically calculate a vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%7D)<!--$`\bold{q}`$--> perpendicular to both ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)<!--$`\bold{t}`$--> and the horizontal axis of the
-camera coordinate frame? Explain in your report.
-
-- **IV-2.**  Now that you have computed a vector perpendicular to the direction towards the target (as seen by the camera), 
-how you can scale this vector to have a length equal to the radius ![equation](https://latex.codecogs.com/png.latex?R)<!--$`R`$--> of the moving 3D sphere. Provide the equation that scales ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%7D)<!--$`\bold{q}`$--> as desired while
-preserving its direction in your report.
-
-- **IV-3.**  Let ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> be the scaled vector 
-from question IV-2. Explain mathematically in your report how can rotate this vector by an 
-angle ![equation](https://latex.codecogs.com/png.latex?%5Calpha)<!--$`\alpha`$--> along a normalized rotation axis aligned 
-with the vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)<!--$`\bold{t}`$--> from question IV-1.
-
-    > Tip. [Wikipedia](https://en.wikipedia.org/wiki/Axis%E2%80%93angle_representation) is an easy place to learn more about the axis-angle parameterization of rotations.
-
-- **IV-4.**  Points along the edge of the sphere (as seen by the camera), can now be computed as: 
-![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20&plus;%20rotate%28%5Cbold%7Bq%27%7D%2C%20%5Calpha%29), <!--$`\bold{t} + rotate(\bold{q'}, \alpha)`$-->
-where `rotate()` is a function that implements IV-3. Modify the `draw_image()` function in your new 
-`fancy_virtual_camera.py` script to compute 20 3D points equally distributed along the edge of the sphere that is 
-seen by the camera. The code that computes these points should replace the prior computation for the red circle from Part III
-in your new `fancy_virtual_camera.py` script.
-
-    Note that the radius of the sphere in the world is provided through the /target message (see the `radius` field). You
-    should pass this value from the target callback to the `draw_image()` function using the optional keyworded arguments `kwargs`.
-    More specifically, you should pass the value using the `radius` keyword: `draw_image(x, y, z, K, width, height, radius=target_msg.radius)`.
-    
-    > Tip: If you are not familiar with keyworded variable length arguments in Python, check [this guide](https://book.pythontips.com/en/latest/args_and_kwargs.html).
-    
-    Use the code below when you implement these changes to `draw_image()`. In particular, add the functions at the top level 
-    of the fancy virtual camera script - that is, outside any other class or function. When you submit your assignment, 
-    automated tests will check that the functions are working as expected for your evaluation.
-
-   ```python
-   def compute_q(pt, radius):
-       """
-       Compute q - a vector perpindicular to the target
-       direction and the horizontal axis of the camera
-       coordinate frame.
-       pt: the point at the center of the sphere in the
-           camera coordinate frame
-       radius: the radius of the ball 
-       """
-       # add your implementation here
-       q = np.array([0.,0.,0.])
-       return q
-   ```
-   
-   ```python
-   def compute_rotation_axis(pt):
-       """
-       Compute normalized rotation axis in same direction
-       as vector t from question IV-1.
-       pt: the point at the center of the sphere in the
-           camera coordinate frame
-       """
-       # add your implementation here
-       rotation_axis = np.array([0.,0.,0.])
-       return rotation_axis
-   ```
-   
-   ```python
-   def rotate_q(q, rotation_axis, angle):
-       """
-       Rotate q around rotation_axis by the number of 
-       radians specified by angle.
-       q: perpindicular vector from IV-1 and IV-2
-       rotation_axis: normalized rotation axis from IV-3
-       angle: angle of rotation in radians
-       """
-       # add your implementation here
-       rotated_q = np.array([0.,0.,0.])
-       return rotated_q
-   ```
-   
-   You can run public tests for this part of this assignment to ensure that your node is operating as expected:
-
-     ```bash
-     $ rostest shutter_lookat_public_tests test_fancy_virtual_camera.launch
-     ```
-
-- **IV-5.**  Add a few lines of code to the `draw_image()` function such that it draws a blue contour for the sphere on the image using OpenCV. The contour should connect the projected points on the image:
-
-    ```python
-    # Example
-    pixel_array = np.zeros((N,2), dtype=np.int32) # N is the number of points on the contour
-    (...) # compute the points as in IV-4
-    cv2.drawContours(image, [pixel_array], 0, (255,0,0), 3)
-    ```
-
-    The resulting image should now show the blue polygon (and no red circle), as shown below:
-    
-    <p align="center">
-    <kbd>
-    <img src="docs/ball_outline.png" width="300"/>
-    </kbd>
-    </p>
-
-- **IV-6.**  Restart ROS and re-run the generate_target.launch with the ball updating at a lower speed, and being closer to the camera:
-    
-    ```bash
-    $ roslaunch shutter_lookat generate_target.launch target_x_plane:=0.5 publish_rate:=1 # the publish rate for the target is in Hz
-    ```
-    
-    Then restart your `fancy_virtual_camera.py` node and take a picture of your resulting camera image when the target is nearby one of the corners of the image. 
-    The image should show the target being elongated; not having a perfectly circular shape anymore. Include this image in your report and explain why the target does not
-    appear to be a perfect circle, especially towards the edge of the image.
+Once you've finished the assignment, **add the commit SHA** that you would like to be evaluate on to your report.
 
 
-## Parts V and VI
 
-Parts V and VI of the assignment are only for students taking CPSC-559 (graduate version of the course). See the tasks/questions in the [ExtraQuestions-CPSC559.md](ExtraQuestions-CPSC559.md) document.
 
-**Once you get to the end of the assignment, remember to commit your code, push to GitHub, and indicate
-in your assignment report the commit SHA for the final version of your code. Your code and report should be submitted to 
-Gradescope.**
+
+
+
+
+
+
