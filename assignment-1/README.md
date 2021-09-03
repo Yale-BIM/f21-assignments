@@ -101,7 +101,7 @@ in your home directory. Follow the steps in this tutorial:
 
     > The [tutorial](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
     page has tabs for switching between ROS distributions. Follow the tutorial for the distribution of
-    ROS that you have installed in your system, i.e., Melodic.
+    ROS that you have installed in your system, i.e., Noetic.
 
 2. Download Shutter's codebase into your workspace's `src` directory.
 
@@ -175,7 +175,7 @@ You will need sudo access to complete this step.
 
     # install dependencies for Shutter
     $ cd ~/catkin_ws
-    $ rosdep install -y -r --ignore-src --rosdistro=melodic --from-paths src
+    $ rosdep install -y -r --ignore-src --rosdistro=noetic --from-paths src
     ```
 
     > If you don't have pip installed, follow [these instructions](https://linuxconfig.org/how-to-install-pip-on-ubuntu-18-04-bionic-beaver) to install it before installing the Python dependencies for shutter_face.
@@ -196,7 +196,7 @@ You will need sudo access to complete this step.
     Sourcing this file will `overlay` the install space onto your environment. 
     
     > Overlaying refers to building and using a ROS package from source on top of an existing version
-    of that same package (e.g., installed at the system level in /opt/ros/melodic). For more information
+    of that same package (e.g., installed at the system level in /opt/ros/noetic). For more information
     on overlaying, read [this tutorial](http://wiki.ros.org/catkin/Tutorials/workspace_overlaying).
     
     > Add ```source ~/catkin_ws/devel/setup.bash``` at the end of your `.bashrc` file
@@ -258,7 +258,7 @@ with [roslaunch](http://wiki.ros.org/roslaunch).
     Nodes use this server to store and retrieve parameters at runtime. Because it is not designed for 
     high-performance, it is best used for static, non-binary data such as configuration parameters. 
     It is meant to be globally viewable so that tools can easily inspect the configuration state of 
-    the system and modify if necessary. 
+    the system and modify it if necessary. 
     
     The shutter_sim.launch script runs three [ROS nodes](http://wiki.ros.org/Nodes) as three 
     independent processes:
