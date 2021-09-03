@@ -10,7 +10,7 @@ This is the first assignment for Yale's CPSC-459/559 Building Interactive Machin
     * [Deliverables](#deliverables)
     * [Evaluation](#evaluation)
     * [Further Reading and Tutorials](#further-reading-and-tutorials)
-* [Part I - Set up your workspace to work with Shutter](#part-i---setting-up-your-workspace-to-work-with-shutter)
+* [Part I - Set up your workspace to work with Shutter](#part-i---set-up-your-workspace-to-work-with-shutter)
     * [Questions / Tasks](#questions--tasks) 
 * [Part II - Bringing up Shutter](#part-ii---bringing-up-shutter)
     * [Questions / Tasks](#questions--tasks-1) 
@@ -35,6 +35,9 @@ using `apt-get` as in this guide:
 [http://wiki.ros.org/noetic/Installation/Ubuntu](http://wiki.ros.org/noetic/Installation/Ubuntu). If you get an
 error from Ubuntu about failing to verify the public key for the ROS ppa repository, update your key as indicated
 in [this post](https://answers.ros.org/question/325039/apt-update-fails-cannot-install-pkgs-key-not-working/).
+
+   > Note that we have also included an example script called `install_ros_noetic.sh` within this repository
+   to show you the key commands that you need to run to install ROS in Ubuntu 20.04.
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
 You will use git to save your work to your [GitHub](http://www.github.com) repository, as explained in 
