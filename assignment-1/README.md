@@ -32,7 +32,9 @@ You should have access to a computer with `Ubuntu 20.04` and `ROS Noetic` to com
 The instructions below assume that you are using a [bash shell](https://www.gnu.org/software/bash/) 
 to do the assignment, and that you have installed the *desktop-full* Noetic version of ROS 
 using `apt-get` as in this guide: 
-[http://wiki.ros.org/noetic/Installation/Ubuntu](http://wiki.ros.org/noetic/Installation/Ubuntu).
+[http://wiki.ros.org/noetic/Installation/Ubuntu](http://wiki.ros.org/noetic/Installation/Ubuntu). If you get an
+error from Ubuntu about failing to verify the public key for the ROS ppa repository, update your key as indicated
+in [this post](https://answers.ros.org/question/325039/apt-update-fails-cannot-install-pkgs-key-not-working/).
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
 You will use git to save your work to your [GitHub](http://www.github.com) repository, as explained in 
