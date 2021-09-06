@@ -20,4 +20,5 @@ rosdep update
 # install extra software needed for shutter
 sudo apt install python3-pip
 
-pip install --user wxPython
+# install wxPython for the arbotix-gui. Typically, you can do `pip install --user wxPython` but this takes a while to compile
+pip install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-20.04 wxPython
