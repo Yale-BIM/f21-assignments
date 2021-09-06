@@ -36,8 +36,9 @@ using `apt-get` as in this guide:
 error from Ubuntu about failing to verify the public key for the ROS ppa repository, update your key as indicated
 in [this post](https://answers.ros.org/question/325039/apt-update-fails-cannot-install-pkgs-key-not-working/).
 
-   > Note that we have also included an example script called `install_ros_noetic.sh` within this repository
-   to show you the key commands that you need to run to install ROS in Ubuntu 20.04.
+   > Note that this assignment includes an example script called `install_ros_noetic.sh` 
+   to show you all the commands that you need to run to install ROS in Ubuntu 20.04 and assignment dependencies.
+   All these dependencies are already installed in the BIM laptops that registered students have access to remotely.
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
 You will use git to save your work to your [GitHub](http://www.github.com) repository, as explained in 
@@ -451,7 +452,14 @@ interface in order to change the pose of the robot.
 1. If the simulated robot or rviz are not running, bring up the robot and 
 rviz as in Parts II and III of this assignment.
 
-2. Control the position of the robot's joints with the `arbotix_gui` interface.
+2. Control the position of the robot's joints with the `arbotix_gui` interface. First, install `wxPython` if it's not installed already
+in your computer. For example, you can install it with:
+
+    ```bash
+    pip3 install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-20.04 wxPython
+    ```
+    
+    Then, run the `arbotix_gui` ROS node:
 
     ```bash
     $ rosrun arbotix_python arbotix_gui
