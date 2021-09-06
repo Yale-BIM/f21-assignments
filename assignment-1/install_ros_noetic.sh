@@ -13,6 +13,11 @@ echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 
 # install extra deps
-sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential 
 sudo rosdep init
 rosdep update
+
+# install extra software needed for shutter
+sudo apt install python3-pip
+
+pip install --user wxPython
