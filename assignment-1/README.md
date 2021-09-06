@@ -75,9 +75,9 @@ You assignment will be evaluated over 100pts, based on the content of your repor
     * Part I (10 pts): I-Q1 (5 pts) + I-Q2 (5 pts)
     * Part II (22 pts): II-Q1 (6 pts) + II-Q2 (3 pts) + II-Q3 (3 pts) + II-Q4 (3 pts) + II-Q5 (3 pts) + II-Q6 (1 pts) + II-Q7 (3 pts)     
     * Part III (8 pts): III-Q1 (4 pts) + III-Q2 (4 pts)
-    * Part IV (22 pts): IV-Q1 (4 pts) + IV-Q2 (3 pts) + IV-Q3 (5 pts) + IV-Q4 (5 pts) + IV-Q5 (5 pts)
-- Code (38 pts)
-    * Part V (38 pts): V-Q1 (4 pts) + V-Q2 (30 pts) + V-Q3 (4 pts)
+    * Part IV (26 pts): IV-Q1 (5 pts) + IV-Q2 (4 pts) + IV-Q3 (6 pts) + IV-Q4 (6 pts) + IV-Q5 (5 pts)
+- Code (34 pts)
+    * Part V (34 pts): V-Q1 (4 pts) + V-Q2 (30 pts) 
 
 
 #### Further Reading and Tutorials 
@@ -687,29 +687,12 @@ shutter_poses package. This file should explain how the switch_poses.py node wor
     > Documenting ROS packages and nodes is good practice!
 
 - **V-Q2.** Add the `commit SHA` that corresponds to the final version of your code to your report. The commit SHA 
-serves as extra documentation for your assignment.
-
-- **V-Q3.** Record your screen as the 
-robot is changing its pose in RViz and reaching the desired poses. For example, 
-in Ubuntu you can use [kazam](https://launchpad.net/kazam) to record your screen. Once you got
-a video that shows the robot moving through the poses, turn this video into an animated
-gif, e.g., with ffmpeg and imagemagick as indicated in 
-[this code snippet](https://gitlab.com/snippets/1743818), and include it in your README.md file
-for the shutter_poses package. This way your README.md will demonstrate the execution of the 
-switch_poses.py node in your documentation. 
-
-    NOTE: You should add the animated gif to your repository so that all of your documentation
-    is contained in a single place and the animated gif is displayed in 
-    GitHub when your README.md file is rendered on the web. 
-
-     > More information on including images 
-     in GitHub's markdown can be found [here](https://github.github.com/gfm/#images).
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+serves as extra documentation for your assignment.                                                                                                                                                                                                                                                                    
 Once you are done with the questions above, commit your code to GitHub, and submit the 
-code to the `Assignment2-Code` assignment in Gradescope. Check that the public tests for this assignment complete successfully. 
+code to the `Assignment1-Code` assignment in Gradescope. Check that the public tests for this assignment complete successfully. 
 If you see errors come up in Gradescope, please check your repository. 
 
-Lastly, submit your assignment report to the `Assignment2-Report` assignment in Gradescope.
+Lastly, submit your assignment report to the `Assignment1-Report` assignment in Gradescope.
 The report should be provided in pdf format using the [template](https://drive.google.com/file/d/1BXj38I3-WQ6fG_sM7WoyLa616D1eC_WN/view?usp=sharing).
 indicated at the beginning of the assignment.
 
