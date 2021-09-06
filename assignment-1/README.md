@@ -547,12 +547,12 @@ if you named your workspace ~/catkin_ws and cloned your repository in your home 
     with `rosrun` from any location in your computer.
     
 2. Create a new catkin package with the `catkin_create_pkg` tool from the [catkin_pkg](https://github.com/ros-infrastructure/catkin_pkg) ROS library.
-This package should be named "shutter_poses" and should be created within the assignment-2 
+This package should be named "shutter_poses" and should be created within the assignment-1 
 directory of your git repository.
 
     ```bash
     # Example
-    $ cd ~/catkin_ws/src/<username>-cpsc459-assignments/assignment-2
+    $ cd ~/catkin_ws/src/<username>-cpsc459-assignments/assignment-1
     $ catkin_create_pkg shutter_poses rospy std_msgs 
     ```
 
@@ -576,9 +576,9 @@ in the scripts folder of your package.
     ```
     
     You should now have a new empty file named "switch_poses.py" in the 
-    \<username\>-cpsc459-assignments/assignment-2/shutter_poses/scripts directory.
+    \<username\>-cpsc459-assignments/assignment-1/shutter_poses/scripts directory.
 
-5. Make the file into an executable python script. Add ```#!/usr/bin/env python``` as first
+5. Make the file into an executable python script. Add ```#!/usr/bin/env python3``` as first
 line to your file and change permissions with 
 [chmod](https://www.howtoforge.com/tutorial/linux-chmod-command/) to allow it to run as an executable:
 
@@ -597,7 +597,7 @@ specified above. Don't worry about adjusting the speed of the servos as the robo
     call this function from your main function. Your program should then look like the example below:
 
     ```python
-    #!/usr/bin/env python
+    #!/usr/bin/env python3
     
     import rospy
     from std_msgs.msg import Float64
