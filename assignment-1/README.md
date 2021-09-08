@@ -10,7 +10,7 @@ This is the first assignment for Yale's CPSC-459/559 Building Interactive Machin
     * [Deliverables](#deliverables)
     * [Evaluation](#evaluation)
     * [Further Reading and Tutorials](#further-reading-and-tutorials)
-* [Part I - Set up your workspace to work with Shutter](#part-i---setting-up-your-workspace-to-work-with-shutter)
+* [Part I - Set up your workspace to work with Shutter](#part-i---set-up-your-workspace-to-work-with-shutter)
     * [Questions / Tasks](#questions--tasks) 
 * [Part II - Bringing up Shutter](#part-ii---bringing-up-shutter)
     * [Questions / Tasks](#questions--tasks-1) 
@@ -32,7 +32,13 @@ You should have access to a computer with `Ubuntu 20.04` and `ROS Noetic` to com
 The instructions below assume that you are using a [bash shell](https://www.gnu.org/software/bash/) 
 to do the assignment, and that you have installed the *desktop-full* Noetic version of ROS 
 using `apt-get` as in this guide: 
-[http://wiki.ros.org/noetic/Installation/Ubuntu](http://wiki.ros.org/noetic/Installation/Ubuntu).
+[http://wiki.ros.org/noetic/Installation/Ubuntu](http://wiki.ros.org/noetic/Installation/Ubuntu). If you get an
+error from Ubuntu about failing to verify the public key for the ROS ppa repository, update your key as indicated
+in [this post](https://answers.ros.org/question/325039/apt-update-fails-cannot-install-pkgs-key-not-working/).
+
+   > Note that this assignment includes an example script called `install_ros_noetic.sh` 
+   to show you all the commands that you need to run to install ROS in Ubuntu 20.04 and assignment dependencies.
+   All these dependencies are already installed in the BIM laptops that registered students have access to remotely.
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
 You will use git to save your work to your [GitHub](http://www.github.com) repository, as explained in 
@@ -53,8 +59,8 @@ the end of each part of the assignment. This report should also have any informa
 to understand and/or run your code, as well as the specific commit SHA of your final version of 
 the code for this assignment. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/1BXj38I3-WQ6fG_sM7WoyLa616D1eC_WN/view?usp=sharing). 
 
-    Use the latest version of [Adobe Acrobat Reader DC](https://get.adobe.com/reader/) to fill this PDF in Windows or OSX. 
-    In Ubuntu 20.04, you can install Acrobat Reader DC with [wine](https://en.wikipedia.org/wiki/Wine_(software)) by following [these instructions](https://linuxconfig.org/how-to-install-latest-adobe-acrobat-reader-dc-on-ubuntu-18-04-bionic-beaver-linux-with-wine).
+    Use the latest version of [Adobe Acrobat Reader DC](https://get.adobe.com/reader/) to fill this PDF in Windows or OSX. You can get Reader DC for Windows and OSX from the [Yale Software Library](https://software.yale.edu/software/adobe-reader-dc).
+    In Ubuntu 20.04, you can install Acrobat Reader DC with [wine](https://en.wikipedia.org/wiki/Wine_(software)) by following [these instructions](https://linuxconfig.org/how-to-install-adobe-acrobat-reader-on-ubuntu-20-04-focal-fossa-linux).
     Note that you might need to install [Windows 7 fonts](https://www.w7df.com/p/windows-7.html) in Ubuntu for the Reader program to work properly (see [these instructions](https://askubuntu.com/a/1103305) to install the fonts).
     You are expected to fill out the fields in the report with your answers in text form or as images, as indicated by the PDF. 
 
@@ -69,9 +75,9 @@ You assignment will be evaluated over 100pts, based on the content of your repor
     * Part I (10 pts): I-Q1 (5 pts) + I-Q2 (5 pts)
     * Part II (22 pts): II-Q1 (6 pts) + II-Q2 (3 pts) + II-Q3 (3 pts) + II-Q4 (3 pts) + II-Q5 (3 pts) + II-Q6 (1 pts) + II-Q7 (3 pts)     
     * Part III (8 pts): III-Q1 (4 pts) + III-Q2 (4 pts)
-    * Part IV (22 pts): IV-Q1 (4 pts) + IV-Q2 (3 pts) + IV-Q3 (5 pts) + IV-Q4 (5 pts) + IV-Q5 (5 pts)
-- Code (38 pts)
-    * Part V (38 pts): V-Q1 (4 pts) + V-Q2 (30 pts) + V-Q3 (4 pts)
+    * Part IV (26 pts): IV-Q1 (5 pts) + IV-Q2 (4 pts) + IV-Q3 (6 pts) + IV-Q4 (6 pts) + IV-Q5 (5 pts)
+- Code (34 pts)
+    * Part V (34 pts): V-Q1 (4 pts) + V-Q2 (30 pts) 
 
 
 #### Further Reading and Tutorials 
@@ -96,7 +102,7 @@ in your home directory. Follow the steps in this tutorial:
 
     > The [tutorial](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
     page has tabs for switching between ROS distributions. Follow the tutorial for the distribution of
-    ROS that you have installed in your system, i.e., Melodic.
+    ROS that you have installed in your system, i.e., Noetic.
 
 2. Download Shutter's codebase into your workspace's `src` directory.
 
@@ -170,7 +176,7 @@ You will need sudo access to complete this step.
 
     # install dependencies for Shutter
     $ cd ~/catkin_ws
-    $ rosdep install -y -r --ignore-src --rosdistro=melodic --from-paths src
+    $ rosdep install -y -r --ignore-src --rosdistro=noetic --from-paths src
     ```
 
     > If you don't have pip installed, follow [these instructions](https://linuxconfig.org/how-to-install-pip-on-ubuntu-18-04-bionic-beaver) to install it before installing the Python dependencies for shutter_face.
@@ -191,7 +197,7 @@ You will need sudo access to complete this step.
     Sourcing this file will `overlay` the install space onto your environment. 
     
     > Overlaying refers to building and using a ROS package from source on top of an existing version
-    of that same package (e.g., installed at the system level in /opt/ros/melodic). For more information
+    of that same package (e.g., installed at the system level in /opt/ros/noetic). For more information
     on overlaying, read [this tutorial](http://wiki.ros.org/catkin/Tutorials/workspace_overlaying).
     
     > Add ```source ~/catkin_ws/devel/setup.bash``` at the end of your `.bashrc` file
@@ -253,7 +259,7 @@ with [roslaunch](http://wiki.ros.org/roslaunch).
     Nodes use this server to store and retrieve parameters at runtime. Because it is not designed for 
     high-performance, it is best used for static, non-binary data such as configuration parameters. 
     It is meant to be globally viewable so that tools can easily inspect the configuration state of 
-    the system and modify if necessary. 
+    the system and modify it if necessary. 
     
     The shutter_sim.launch script runs three [ROS nodes](http://wiki.ros.org/Nodes) as three 
     independent processes:
@@ -446,7 +452,14 @@ interface in order to change the pose of the robot.
 1. If the simulated robot or rviz are not running, bring up the robot and 
 rviz as in Parts II and III of this assignment.
 
-2. Control the position of the robot's joints with the `arbotix_gui` interface.
+2. Control the position of the robot's joints with the `arbotix_gui` interface. First, install `wxPython` if it's not installed already
+in your computer. For example, you can install it with:
+
+    ```bash
+    pip3 install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-20.04 wxPython
+    ```
+    
+    Then, run the `arbotix_gui` ROS node:
 
     ```bash
     $ rosrun arbotix_python arbotix_gui
@@ -534,12 +547,12 @@ if you named your workspace ~/catkin_ws and cloned your repository in your home 
     with `rosrun` from any location in your computer.
     
 2. Create a new catkin package with the `catkin_create_pkg` tool from the [catkin_pkg](https://github.com/ros-infrastructure/catkin_pkg) ROS library.
-This package should be named "shutter_poses" and should be created within the assignment-2 
+This package should be named "shutter_poses" and should be created within the assignment-1 
 directory of your git repository.
 
     ```bash
     # Example
-    $ cd ~/catkin_ws/src/<username>-cpsc459-assignments/assignment-2
+    $ cd ~/catkin_ws/src/<username>-cpsc459-assignments/assignment-1
     $ catkin_create_pkg shutter_poses rospy std_msgs 
     ```
 
@@ -563,9 +576,9 @@ in the scripts folder of your package.
     ```
     
     You should now have a new empty file named "switch_poses.py" in the 
-    \<username\>-cpsc459-assignments/assignment-2/shutter_poses/scripts directory.
+    \<username\>-cpsc459-assignments/assignment-1/shutter_poses/scripts directory.
 
-5. Make the file into an executable python script. Add ```#!/usr/bin/env python``` as first
+5. Make the file into an executable python script. Add ```#!/usr/bin/env python3``` as first
 line to your file and change permissions with 
 [chmod](https://www.howtoforge.com/tutorial/linux-chmod-command/) to allow it to run as an executable:
 
@@ -584,7 +597,7 @@ specified above. Don't worry about adjusting the speed of the servos as the robo
     call this function from your main function. Your program should then look like the example below:
 
     ```python
-    #!/usr/bin/env python
+    #!/usr/bin/env python3
     
     import rospy
     from std_msgs.msg import Float64
@@ -674,29 +687,12 @@ shutter_poses package. This file should explain how the switch_poses.py node wor
     > Documenting ROS packages and nodes is good practice!
 
 - **V-Q2.** Add the `commit SHA` that corresponds to the final version of your code to your report. The commit SHA 
-serves as extra documentation for your assignment.
-
-- **V-Q3.** Record your screen as the 
-robot is changing its pose in RViz and reaching the desired poses. For example, 
-in Ubuntu you can use [kazam](https://launchpad.net/kazam) to record your screen. Once you got
-a video that shows the robot moving through the poses, turn this video into an animated
-gif, e.g., with ffmpeg and imagemagick as indicated in 
-[this code snippet](https://gitlab.com/snippets/1743818), and include it in your README.md file
-for the shutter_poses package. This way your README.md will demonstrate the execution of the 
-switch_poses.py node in your documentation. 
-
-    NOTE: You should add the animated gif to your repository so that all of your documentation
-    is contained in a single place and the animated gif is displayed in 
-    GitHub when your README.md file is rendered on the web. 
-
-     > More information on including images 
-     in GitHub's markdown can be found [here](https://github.github.com/gfm/#images).
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+serves as extra documentation for your assignment.                                                                                                                                                                                                                                                                    
 Once you are done with the questions above, commit your code to GitHub, and submit the 
-code to the `Assignment2-Code` assignment in Gradescope. Check that the public tests for this assignment complete successfully. 
+code to the `Assignment1-Code` assignment in Gradescope. Check that the public tests for this assignment complete successfully. 
 If you see errors come up in Gradescope, please check your repository. 
 
-Lastly, submit your assignment report to the `Assignment2-Report` assignment in Gradescope.
+Lastly, submit your assignment report to the `Assignment1-Report` assignment in Gradescope.
 The report should be provided in pdf format using the [template](https://drive.google.com/file/d/1BXj38I3-WQ6fG_sM7WoyLa616D1eC_WN/view?usp=sharing).
 indicated at the beginning of the assignment.
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Public tests for CPSC459/559 Assignment 1
 
 PKG = "shutter_poses_tests"
