@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Public tests for CPSC459/559 Assignment 2
+# Public tests for CPSC459/559 Assignment 1
 
 PKG = "shutter_poses_tests"
 NAME = 'test_pose_switcher_public'
