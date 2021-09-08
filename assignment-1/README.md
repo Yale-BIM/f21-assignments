@@ -77,7 +77,7 @@ You assignment will be evaluated over 100pts, based on the content of your repor
     * Part III (8 pts): III-Q1 (4 pts) + III-Q2 (4 pts)
     * Part IV (26 pts): IV-Q1 (5 pts) + IV-Q2 (4 pts) + IV-Q3 (6 pts) + IV-Q4 (6 pts) + IV-Q5 (5 pts)
 - Code (34 pts)
-    * Part V (34 pts): V-Q1 (4 pts) + V-Q2 (30 pts) 
+    * Part V (34 pts): V-Tasks (30 pts) + V-Q1 (4 pts) 
 
 
 #### Further Reading and Tutorials 
