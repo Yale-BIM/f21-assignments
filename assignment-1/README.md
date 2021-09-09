@@ -57,7 +57,7 @@ At the bare minimum, you should be familiar with the commands `cd`, `ls`, `rm`, 
 - **Report:** You are expected to submit a pdf to Gradescope with answers to the questions/tasks at 
 the end of each part of the assignment. This report should also have any information needed 
 to understand and/or run your code, as well as the specific commit SHA of your final version of 
-the code for this assignment. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/1BXj38I3-WQ6fG_sM7WoyLa616D1eC_WN/view?usp=sharing). 
+the code for this assignment. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/1xHcnfnZk2zAyPR9Fy3uq69hk9mbxLfUY/view?usp=sharing). 
 
     Use the latest version of [Adobe Acrobat Reader DC](https://get.adobe.com/reader/) to fill this PDF in Windows or OSX. You can get Reader DC for Windows and OSX from the [Yale Software Library](https://software.yale.edu/software/adobe-reader-dc).
     In Ubuntu 20.04, you can install Acrobat Reader DC with [wine](https://en.wikipedia.org/wiki/Wine_(software)) by following [these instructions](https://linuxconfig.org/how-to-install-adobe-acrobat-reader-on-ubuntu-20-04-focal-fossa-linux).
@@ -693,6 +693,6 @@ code to the `Assignment1-Code` assignment in Gradescope. Check that the public t
 If you see errors come up in Gradescope, please check your repository. 
 
 Lastly, submit your assignment report to the `Assignment1-Report` assignment in Gradescope.
-The report should be provided in pdf format using the [template](https://drive.google.com/file/d/1BXj38I3-WQ6fG_sM7WoyLa616D1eC_WN/view?usp=sharing).
+The report should be provided in pdf format using the [template](https://drive.google.com/file/d/1xHcnfnZk2zAyPR9Fy3uq69hk9mbxLfUY/view?usp=sharing).
 indicated at the beginning of the assignment.
 
