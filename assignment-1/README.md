@@ -71,7 +71,7 @@ the code for this assignment. The report is a fillable PDF which is available [h
 
 You assignment will be evaluated over 100pts, based on the content of your report and your code:
 
-- Report (62 pts)
+- Report (66 pts)
     * Part I (10 pts): I-Q1 (5 pts) + I-Q2 (5 pts)
     * Part II (22 pts): II-Q1 (6 pts) + II-Q2 (3 pts) + II-Q3 (3 pts) + II-Q4 (3 pts) + II-Q5 (3 pts) + II-Q6 (1 pts) + II-Q7 (3 pts)     
     * Part III (8 pts): III-Q1 (4 pts) + III-Q2 (4 pts)
