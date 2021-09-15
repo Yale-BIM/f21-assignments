@@ -93,7 +93,7 @@ Settings -> Manage Access.
 
 9. Add the course instructor and the T.F.(s) as members of your GitHub repository in Settings -> Manage Access. In the Manage access section, choose "Invite a collaborator", and add the Yale usernames for the instructor and teaching fellow(s).
 
-	> The instructor's email is `marynel.vazquez _at_ yale.edu`, and the teaching fellows' emails are `nathan.tsoi _at_ yale.edu` and `sydney.thompson _at_ yale.edu` with `_at_` meaning `@`.
+	> The instructor's email is `marynel.vazquez _at_ yale.edu`, and the teaching fellows' emails are `nathan.tsoi _at_ yale.edu` with `_at_` meaning `@`.
 
 10. Once you have finished setting up your repository, fill and submit this [Repository Record Form](https://forms.gle/QkChQbbVdR8b3xNx5). Your response will be used to check that your repository exists, has been setup properly, and that the instructor and T.F.(s) have access to it.
 
