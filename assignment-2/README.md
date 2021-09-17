@@ -60,7 +60,7 @@ to understand and/or run your code, as well as the specific commit SHA of your f
 the code for this assignment. The report is a fillable PDF which is available [here for CPSC 459 Students](https://drive.google.com/file/d/1ltrEf2Imwh04I87yDpLKiMksq4B8d-fQ/view?usp=sharing) and [here for CPSC 559 Students](https://drive.google.com/file/d/1QnU1UnOc3LD7ttinGCo7rjxWu8q_P5PH/view?usp=sharing). 
 
     Use the latest version of [Adobe Acrobat Reader DC](https://get.adobe.com/reader/) to fill this PDF in Windows or OSX. You can get Reader DC for Windows and OSX from the [Yale Software Library](https://software.yale.edu/software/adobe-reader-dc).
-    In Ubuntu 20.04, you can install Acrobat Reader DC with [wine](https://en.wikipedia.org/wiki/Wine_(software)) by following [these instructions](https://linuxconfig.org/how-to-install-adobe-acrobat-reader-on-ubuntu-20-04-focal-fossa-linux).
+    In Ubuntu 20.04, you can install Acrobat Reader DC with [wine](https://en.wikipedia.org/wiki/Wine_(software)) by following [these instructions](https://linuxconfig.org/how-to-install-adobe-acrobat-reader-dc-wine-on-ubuntu-20-04-focal-fossa-linux).
     Note that you might need to install [Windows 7 fonts](https://www.w7df.com/p/windows-7.html) in Ubuntu for the Reader program to work properly (see [these instructions](https://askubuntu.com/a/1103305) to install the fonts).
     You are expected to fill out the fields in the report with your answers in text form or as images, as indicated by the PDF.
 
