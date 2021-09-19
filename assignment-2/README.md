@@ -468,7 +468,7 @@ plane.
     cv2.circle(image, (x,y), radius, (0,0,255), outline_width) # (x,y) is the projected location of the target on the image
     ```
     
-    > Tip: See the official [OpenCV documentation](https://docs.opencv.org/3.1.0/dc/da5/tutorial_py_drawing_functions.html) 
+    > Tip: See the official [OpenCV documentation](https://docs.opencv.org/4.2.0/dc/da5/tutorial_py_drawing_functions.html) 
     for more examples on drawing basic figures.
 
     d. The `draw_image()` function should return the image with the drawn circle.
@@ -496,10 +496,10 @@ a new message from the /target topic is received.
     **b.** Call the `draw_image()` function to create a virtual camera image that shows the projected location of the target
     as a circle. The resulting image should have dimensions of 640 x 480 pixels.
    
-    **c.** Publishes the image that you created with OpenCV as a [sensor_msgs/Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html) message in ROS. You
+    **c.** Publishes the image that you created with OpenCV as a [sensor_msgs/Image](http://docs.ros.org/noetic/api/sensor_msgs/html/msg/Image.html) message in ROS. You
     can use the [cv_bridge](http://wiki.ros.org/cv_bridge) library to convert the OpenCV image to
     an Image message. Note that the Image message should have a `header` with the current time as
-    stamp and the "camera_color_optical_frame" frame as frame_id. The Image message should be published by your node
+    `stamp` and the "camera_color_optical_frame" frame as `frame_id`. The Image message should be published by your node
     through the `/virtual_camera/image_raw` topic.
     
     > Tip: Examples on converting OpenCV images to ROS messages can be found
@@ -523,7 +523,7 @@ function from the tf2 API with the time of the target's pose, rospy.Time(0), or 
 
     > Note: How you call the lookup_transform function can have an effect on the
     rate of operation of your virtual_camera.py node and how often it can publish images. 
-    You can use the [rostopic hz](http://wiki.ros.org/rostopic) tool to check how fast messages are published by the node.
+    You can use the [rostopic hz](http://wiki.ros.org/rostopic) tool to check how fast messages are published by a node.
     
 - **III-2.** Edit your virtual_camera.py script to enable your node to also publish 
  calibration parameters. Sharing the parameters will help other programs 
@@ -657,7 +657,7 @@ the virtual camera that you already implemented is working correctly.
         * /virtual_camera/camera_info    
         * /virtual_camera/image_raw 
     
-    Upload your ROS bag to Google Drive or Box and make it accessible to anybody with the link. Then, 
+    Upload your ROS bag to Google Drive or Box and <u>make it accessible to anybody with the link</u>. Then, 
     **provide a link to your ROS bag in your report** for this assignment. You don't need to and 
     you shouldn't commit the bag to your repository! Otherwise, you will make your repository
     unnecessarily heavy.
@@ -685,7 +685,7 @@ Run public tests for Part III of this assignment to ensure that your node is ope
  ```
 
 Note that the above tests will run automatically in Gradescope when you submit your code to the 
-`Assignment 3 - Code` assignment.
+`Assignment 2 - Code` assignment.
 
 ## Part IV. Making a fancier virtual camera
 You will now modify your virtual_camera.py node so that instead of drawing a circle with a fixed radius for the target, 
@@ -713,12 +713,12 @@ true shape by rotating the vector along a rotation axis in the direction of the 
 
 - **IV-1.** To get started, let ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20%3D%20%5Bt_x%5C%20t_y%5C%20t_z%5D%5ET)<!--$`\bold{t} = [t_x\ t_y\ t_z]^T`$--> be the vector from the camera center to the center of the target 
 in the camera coordinate frame (as shown in the image above). 
-Additionally, let the camera coordinate frame be oriented such that the ![equation](https://latex.codecogs.com/png.latex?z)<!--$`z`$--> axis points
-forward. How can you mathematically calculate a vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%7D)<!--$`\bold{q}`$--> perpendicular to both ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)<!--$`\bold{t}`$--> and the horizontal axis of the
+Additionally, let the camera coordinate frame be oriented such that the ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bz%7D)<!--$`\bold{z}`$--> axis points
+forward. How can you mathematically calculate a vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%7D)<!--$`\bold{q}`$--> perpendicular to both ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)<!--$`\bold{t}`$--> and the horizontal axis ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bx%7D)<!--$`\bold{x}`$--> of the
 camera coordinate frame? Explain in your report.
 
 - **IV-2.**  Now that you have computed a vector perpendicular to the direction towards the target (as seen by the camera), 
-how you can scale this vector to have a length equal to the radius ![equation](https://latex.codecogs.com/png.latex?R)<!--$`R`$--> of the moving 3D sphere. Provide the equation that scales ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%7D)<!--$`\bold{q}`$--> as desired while
+how can you scale this vector to have a length equal to the radius ![equation](https://latex.codecogs.com/png.latex?R)<!--$`R`$--> of the moving 3D sphere? Provide the equation that scales ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%7D)<!--$`\bold{q}`$--> as desired while
 preserving its direction in your report.
 
 - **IV-3.**  Let ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bq%27%7D)<!--$`\bold{q'}`$--> be the scaled vector 
@@ -726,7 +726,7 @@ from question IV-2. Explain mathematically in your report how can rotate this ve
 angle ![equation](https://latex.codecogs.com/png.latex?%5Calpha)<!--$`\alpha`$--> along a normalized rotation axis aligned 
 with the vector ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D)<!--$`\bold{t}`$--> from question IV-1.
 
-    > Tip. [Wikipedia](https://en.wikipedia.org/wiki/Axis%E2%80%93angle_representation) is an easy place to learn more about the axis-angle parameterization of rotations.
+    > Tip. [Wikipedia](https://en.wikipedia.org/wiki/Axis%E2%80%93angle_representation) is a convenient place to learn more about the axis-angle parameterization of rotations.
 
 - **IV-4.**  Points along the edge of the sphere (as seen by the camera), can now be computed as: 
 ![equation](https://latex.codecogs.com/png.latex?%5Cbold%7Bt%7D%20&plus;%20rotate%28%5Cbold%7Bq%27%7D%2C%20%5Calpha%29), <!--$`\bold{t} + rotate(\bold{q'}, \alpha)`$-->
