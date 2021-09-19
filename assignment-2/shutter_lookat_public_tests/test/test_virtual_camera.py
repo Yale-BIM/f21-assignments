@@ -1,5 +1,5 @@
-#!/usr/bin/env python2.7
-# Public tests for CPSC459/559 Assignment 3 - Part III
+#!/usr/bin/env python3
+# Public tests for CPSC459/559 Assignment 2 - Part III
 
 PKG = "shutter_lookat_public_tests"
 NAME = 'test_virtual_camera'
