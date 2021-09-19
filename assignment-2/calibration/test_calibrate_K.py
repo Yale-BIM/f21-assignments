@@ -1,5 +1,5 @@
-#!/usr/bin/env python2.7
-# Public tests for 559 Assignment 3 - Part V
+#!/usr/bin/env python3
+# Public tests for 559 Assignment 2 - Part V
 
 import unittest
 import numpy as np
