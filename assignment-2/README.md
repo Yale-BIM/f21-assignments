@@ -375,7 +375,8 @@ simulated object relative to the "base_footprint" frame.
 
             > Tip: We suggest that you organize the code of your node
 in a Python class, as in [this tutorial on a pytalker node](http://wiki.ros.org/ROSNodeTutorialPython#The_pytalker_node),
-given the increased complexity of this node in comparison previous examples.
+given the increased complexity of this node in comparison previous examples. For Ubuntu 20.04, make sure to use 
+`#!/usr/bin/env python3` instead of `#!/usr/bin/env python` to define your node as a Python executable, as Ubuntu 20.04 and ROS Noetic are meant to work with Python 3.
 
         - Transform the 3D pose of the moving object to the "camera_color_optical_frame" frame in Shutter.
         For this, you will have to query the transformation between the "base_footprint" frame in which the target pose is provided
