@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Complete this script with your solution to Part V of Assignment 3
+# Complete this script with your solution to Part V of Assignment 2
 import sys
 import numpy as np
 
