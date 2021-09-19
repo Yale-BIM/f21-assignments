@@ -268,7 +268,7 @@ these two versions of the library, check this [migration guide](http://wiki.ros.
 tf, but is more efficient. Although tf2 has general backward compatibility, you want to avoid mixing function calls of tf and tf2 within a single ROS node -- this can break your code.
 
 1. Complete the [Introduction to tf2](http://wiki.ros.org/tf2/Tutorials/Introduction%20to%20tf2)
-tutorial from ROS. You should familiarize yourself with the `view_frames` and `tf_echo` tools. 
+tutorial from ROS. You should familiarize yourself with the `view_frames.py` and `tf_echo` tools from [tf2_tools](http://wiki.ros.org/tf2_tools). 
 You should also learn to visualize tf transforms in with [RViz](http://wiki.ros.org/rviz).
 
 <!--
@@ -283,7 +283,7 @@ You will inspect its tf tree with tf tools.
 But you can also launch `shutter_sim.launch` directly, as you did in the tutorial. 
 If roscore isn't already running, roslaunch  will automatically start it. Try it!
 
-- **I-1.** Generate an image of the tf tree of Shutter with [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
+- **I-1.** Generate an image of the tf tree of Shutter with [view_frames.py](http://wiki.ros.org/tf2_tools). 
 Include this image in your report.
 
     > Tip: You can also generate the image with the 
@@ -420,7 +420,7 @@ given the increased complexity of this node in comparison previous examples. For
     
 - **II-2.**  Stop any ROS processes that you are running, relaunch the 
     generate_target.launch script, run your `publish_target_relative_to_realsense_camera.py` node, and create a 
-    new image of the tf tree in ROS, e.g., using [view_frames](http://wiki.ros.org/tf/Debugging%20tools#Viewing_TF_trees). 
+    new image of the tf tree in ROS, e.g., using [view_frames.py](http://wiki.ros.org/tf2_tools) or [rqt_tf_tree](http://wiki.ros.org/rqt_tf_tree). 
     Add the image of the tf tree to your report.
     
     
