@@ -393,7 +393,7 @@ given the increased complexity of this node in comparison previous examples. For
         The target frame should match the pose of the simulated object in the camera_color_optical_frame.
         
             > Tip: An example on broadcasting tf transformations can be found in 
-            [this tutorial](http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28Python%29).
+            [this tutorial](http://wiki.ros.org/tf2/Tutorials/Writing%20a%20tf2%20broadcaster%20%28Python%29).
         
     - Close all your nodes in ROS, launch the `generate_target.launch` script, and launch your new node which publishes
     the `target` frame. 
