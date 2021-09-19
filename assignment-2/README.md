@@ -755,7 +755,8 @@ in your new `fancy_virtual_camera.py` script.
            camera coordinate frame
        radius: the radius of the ball 
        """
-       # add your implementation here
+       # replace the line that defines q below with your implementation for this function
+       # but make sure to return a numpy array as the example q below
        q = np.array([0.,0.,0.])
        return q
    ```
@@ -768,7 +769,7 @@ in your new `fancy_virtual_camera.py` script.
        pt: the point at the center of the sphere in the
            camera coordinate frame
        """
-       # add your implementation here
+       # replace the line below with your implementation for this function
        rotation_axis = np.array([0.,0.,0.])
        return rotation_axis
    ```
@@ -782,7 +783,7 @@ in your new `fancy_virtual_camera.py` script.
        rotation_axis: normalized rotation axis from IV-3
        angle: angle of rotation in radians
        """
-       # add your implementation here
+       # replace the line below with your implementation for this function
        rotated_q = np.array([0.,0.,0.])
        return rotated_q
    ```
