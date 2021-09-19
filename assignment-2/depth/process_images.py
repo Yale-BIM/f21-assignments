@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Example script to load the data, visualize the images, and capture clicks to identify the book
 # Run the script as: ./process_images.py images.npz
 
