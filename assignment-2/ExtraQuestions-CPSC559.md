@@ -57,7 +57,7 @@ Shutter in Part III of this assignment. Then, your goal is to compute the camera
 
      ```bash
      $ cd calibration
-     $ python -m unittest test_calibrate_K
+     $ python3 -m unittest test_calibrate_K
      ```
 
     Explain in your report how you formulated a system of equations to solve for ![equation](https://latex.codecogs.com/png.latex?K)<!--$`K`$-->, and 
@@ -152,7 +152,7 @@ the book in the depth image. To this end, complete the `compute_depth_from_depth
 
      ```bash
      $ cd depth
-     $ python -m unittest test_depth
+     $ python3 -m unittest test_depth
      ```
      
     Once you are done implementing the function, you should be able to run the script again, and measure the absolute 
