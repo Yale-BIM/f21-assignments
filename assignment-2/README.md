@@ -258,8 +258,14 @@ $ catkin_make -DCMAKE_BUILD_TYPE=Release
 
 
 ## Part I. Introduction to tf
-This part of the assignment will help you understand how [tf](http://wiki.ros.org/tf) lets 
+This part of the assignment will help you understand how [tf](https://wiki.ros.org/tf2) lets 
 users keep track of multiple coordinate frames over time in ROS. 
+
+> NOTE: When this tutorial refers to `tf`,
+it refers to the second version of the tf package (also known as tf2). This is important because if you look online for information about
+tf, you might find information for tf (version 1) and tf2 (version 2). For a detailed list of differences between
+these two versions of the library, check this [migration guide](http://wiki.ros.org/tf2/Migration). In general, tf2 provides the same functionality of 
+tf, but is more efficient. Although tf2 has general backward compatibility, you want to avoid mixing function calls of tf and tf2 within a single ROS node -- this can break your code.
 
 1. Complete the [Introduction to tf2](http://wiki.ros.org/tf2/Tutorials/Introduction%20to%20tf2)
 tutorial from ROS. You should familiarize yourself with the `view_frames` and `tf_echo` tools. 
@@ -311,7 +317,7 @@ bring up the robot? Please explain which node(s) contribute to generating the tf
 
 
 ## Part II. Publishing tf messages
-As mentioned earlier, the [tf](http://wiki.ros.org/tf) library
+As mentioned earlier, the [tf](https://wiki.ros.org/tf2) library
 uses a tree structure to represent frames and transformations in ROS. These frames and transformations
 are created based on the messages streamed through the /tf and /tf_static topics. 
 
