@@ -1,8 +1,8 @@
-# Assignment 3 (Extra questions for CPSC-559)
+# Assignment 2 (Extra questions for CPSC-559)
 
-The sections below for Assignment 3 are only meant to be completed/answered by students taking CPSC-559. 
+The sections below for Assignment 2 are only meant to be completed/answered by students taking CPSC-559. 
 Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. 
-However, their answers to the questions in Part V and Part VI of the assignment 3 will not be considered during grading.
+However, their answers to the questions in Part V and Part VI of the Assignment 2 will not be considered during grading.
 
 ## Part V. Solving for the intrinsics
 
