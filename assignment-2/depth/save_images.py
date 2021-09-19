@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Simple script to save color and depth images captured by a realsense camera
 
 import sys
