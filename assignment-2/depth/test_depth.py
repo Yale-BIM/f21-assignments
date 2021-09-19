@@ -1,5 +1,5 @@
-#!/usr/bin/env python2.7
-# Public tests for CPSC459/559 Assignment 3 - Part VI
+#!/usr/bin/env python3
+# Public tests for CPSC459/559 Assignment 2 - Part VI
 
 import sys
 import unittest
