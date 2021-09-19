@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 # Complete this script with your solution to Part V of Assignment 3
 import sys
 import numpy as np
