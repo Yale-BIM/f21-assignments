@@ -429,6 +429,8 @@ Assume that the moving object from Part II of this assignment is a sphere. Now, 
 work on projecting the simulated object on a virtual image captured from Shutter. Close all ROS nodes before
 starting this part of the assignment.
 
+0. Install OpenCV and [cv_bridge](http://wiki.ros.org/cv_bridge) in Ubuntu 20.04 if they are not already installed: `sudo apt install ros-noetic-cv-bridge python3-cv-bridge`
+
 1. Inspect the `virtual_camera.py` node that is provided as part of this assignment within the `shutter_lookat/scripts`
 directory.  
 
