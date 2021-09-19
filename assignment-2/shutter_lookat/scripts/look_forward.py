@@ -57,14 +57,14 @@ class LookForwardNode():
 
         # current joint position
         joint_position = msg.position[idx]
-        print "joint position: {}".format(joint_position)
+        print("joint position: {}".format(joint_position))
 
         if np.fabs(joint_position - self.desired_joint_position) < 1e-2:
             self.joint_reached_desired_position = True
         else:
             self.joint_reached_desired_position = False
 
-        print "reached? {}".format(self.joint_reached_desired_position)
+        print("reached? {}".format(self.joint_reached_desired_position))
 
 
 if __name__ == '__main__':
