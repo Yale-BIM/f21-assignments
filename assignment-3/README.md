@@ -1,6 +1,6 @@
 # Assignment 4
 
-This is the fourth assignment for Yale's CPSC-459/559 Building Interactive Machines course.
+This is the third assignment for Yale's CPSC-459/559 Building Interactive Machines course.
 
 ## Table of Contents
 
@@ -29,7 +29,7 @@ This assignment will provide you practical experience with custom messages in RO
  and filtering.
 
 #### System Requirements
-As for the prior assignments, you should have access to a computer with `Ubuntu 18.04` and `ROS Melodic` to complete the homework. 
+As for the prior assignments, you should have access to a computer with `Ubuntu 20.04` and `ROS Noetic` to complete this homework. 
 
 You should also have `git` installed in the machine that you are using to work on your assignment.
 You will use git to save your work to your [GitHub](http://www.github.com) repository.
@@ -58,11 +58,10 @@ the end of each part of the assignment. The report is a fillable PDF which is av
 
 - **ROS Bag:** You are expected to provide a link to a ROS bag in your assignment report (see Part V of this assignment). 
 ROS bags can be hosted in [Google drive](https://drive.google.com/) or [Box](https://yale.account.box.com/) -- you 
-should ensure that the teaching staff can access your ROS bags.
+should ensure that the teaching staff can access your ROS bags by making them accessible to anyone with the link. Do not share this link with other students.
 
 - **Code:** Finally, you are expected to push code for this assignment to your 
-[GitHub](http://www.github.com) repository as indicated in the [general instructions](../README.md) 
-document for CPSC-559 assignments. 
+[GitHub](http://www.github.com) repository as for other assignments. 
 
 
 #### Evaluation
@@ -112,18 +111,18 @@ $ catkin_make -DCMAKE_BUILD_TYPE=Release
 
 ## Tests
 
-A set of public tests has been provided for your code - they are a subset of the tests we will use to grade your code. Please run these tests before submitting your assignment.
+A set of public tests has been provided for your code - they are a subset of the tests that will be used to grade your code. Please run the public tests before submitting your assignment.
 
-To run these tests, refer to the [README.md](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-4/shutter_track_target_public_tests) in the `shutter_track_target_public_tests` package.
+To run these tests, refer to the [README.md](https://github.com/Yale-BIM/f20-assignments/tree/master/assignment-3/shutter_track_target_public_tests) in the `shutter_track_target_public_tests` package.
 
 ## Part I. Creating a Custom ROS Message Type
 ROS uses [messages](http://wiki.ros.org/msg) of various types to transmit information between nodes. For example, in the 
 past you have worked with [TransformStamped](http://docs.ros.org/kinetic/api/geometry_msgs/html/msg/TransformStamped.html) 
-messages and [PoseStamped](http://docs.ros.org/kinetic/api/geometry_msgs/html/msg/PoseStamped.html). Now, you 
+messages and [PoseStamped](http://docs.ros.org/kinetic/api/geometry_msgs/html/msg/PoseStamped.html) messages. Now, you 
 will create your own custom message type.
 
 To get started, read [this tutorial on Creating Messages and Services](http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv) 
-in ROS. Then, follow the steps below to make your own message type as in the tutorial. This message type will serve in the next parts of the assignment to send information about a detected visual target.
+in ROS. In particular, focus on understanding Sections 1-3 of the tutorial, as they describe how to create a new message type and how to check that this new type was set up properly in your workspace. Then, follow the steps below to make your own message type, similar to the steps in the tutorial. This message type will serve in the next parts of the assignment to send information about a detected visual target through ROS.
 
 1. Create a `msg` directory within the `shutter_track_target` ROS repository of this assignment. This directory
 will hold your new message definition.
@@ -139,14 +138,14 @@ should define the following fields for the message type:
     - **header** (of type [std_msgs/Header](http://docs.ros.org/api/std_msgs/html/msg/Header.html))
     - **x** (of type float64 -- built-in [primitive message type](http://wiki.ros.org/msg) --)
     - **y** (of type float64 -- built-in [primitive message type](http://wiki.ros.org/msg) --)
-    <br>
+    <br><br>
     
 3. Edit the package.xml and CMakeLists.txt files in the shutter_track_target package to define your
 new message type as in the [tutorial on Creating Messages and Services](http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv).
 
-    *Tip:* You need to add package dependencies to package.xml, as well as define your new message
-    type and dependencies in CMakeLists.txt. Don't forget to uncomment the generate_messages() function
-    in CMakeLists.txt as in the tutorial.
+    *Tip:* You need to add package dependencies to package.xml as well as define your new message
+    type and dependencies in the CMakeLists.txt file. Don't forget to uncomment the generate_messages() function
+    in CMakeLists.txt, as in the tutorial.
 
 4. Build your catkin workspace to generate the new message type
 
@@ -176,11 +175,11 @@ can use the `rosmsg` tool to this end:
 ### Questions / Tasks
 
 - **I-1.** Add the Observation.msg, package.xml and CMakeLists.txt files to your repository.
-Commit the changes that you made to generate your new message type in the shutter_track_target package.
+Commit the changes that you made to generate your new message type within the `shutter_track_target` package.
 
 ## Part II. Get Data 
 Download the ROS bag [left-seq1.bag](https://drive.google.com/file/d/1AZl6zNYjEhPcag_MfPq39N-kdJJmEBIS/view?usp=sharing) from Google 
-Drive. Then, place it inside a `data` directory within the shutter_track_target package:
+Drive. Then, place it inside a `data` directory within the `shutter_track_target` package:
 
 ```bash
 $ roscd shutter_track_target
@@ -226,16 +225,16 @@ You should then see an image sequence of Burton moving two colored squares as in
 > NOTE: ROS nodes use the /clock topic to gather information about time (see [here](http://wiki.ros.org/Clock) for more information).
 When the `use_sim_time` parameter is set to true in the ROS parameter server, ROS will stop publishing your computer's system clock
 through /clock. And when a bag is played with the `--clock` option, rosbag play will publish a simulated time instead.
-If you are playing ROS bags and don't set use_sim_time parameter to true, then messages may be handled incorrectly by
-ROS nodes. You can check the value of the use_sim_time parameter in the [ROS parameter server](http://wiki.ros.org/Parameter%20Server)
+If you are playing ROS bags and don't set the `use_sim_time` parameter to true, then messages may be handled incorrectly by
+ROS nodes. You can check the value of the `use_sim_time` parameter in the [ROS parameter server](http://wiki.ros.org/Parameter%20Server)
 with the command: `$ rosparam get use_sim_time`
 
 ### Questions / Tasks
-- **II-1.** Make a video of rqt_image_view that shows the content of the /camera/color/image_raw
-topic as the left-seq1.bag rosbag plays for at least 3 seconds. Turn this video into an animated
-gif, e.g., with ffmpeg and imagemagick as indicated in 
+- **II-1.** Make a video of `rqt_image_view` that shows the content of the `/camera/color/image_raw`
+topic as left-seq1.bag plays for at least 3 seconds. Turn this video into an animated
+gif, e.g., with [ffmpeg](https://www.ffmpeg.org/) and [imagemagick](https://imagemagick.org/) as indicated in 
 [this code snippet](https://gitlab.com/snippets/1743818), and include it in a `docs` directory within the
- shutter_track_target package. Name the gif `input.gif` and commit it to your repository.
+ `shutter_track_target` package. Name the gif `input.gif` and commit it to your repository.
  
 
 ## Part III. Detecting a Visual Target
@@ -244,29 +243,29 @@ These detections will be observations for the location of the target, which you 
 of the assignment.
 
 To get you started, this assignment provides the skeleton structure for a node that detects
-blobs of a given color: see the shutter_track_target/scripts/detect_visual_target.py script. Read the script
+blobs of a given color: see the [shutter_track_target/scripts/detect_visual_target.py](https://github.com/Yale-BIM/f21-assignments/blob/master/assignment-3/shutter_track_target/scripts/detect_visual_target.py) script. Read the script
 to understand how it works in general. 
 
-For the next parts of this assignment, do NOT edit the init() and image_callback() functions of the DetectTarget class
-in the detect_visual_target.py node. **Only edit the filter_image(), compute_keypoints_for_blobs(), and publish_observation()
+For the next parts of this assignment, do NOT edit the `init()` and `image_callback()` functions of the `DetectTarget` class
+in the `detect_visual_target.py` node. **Only edit the `filter_image()`, `compute_keypoints_for_blobs()`, and `publish_observation()`
 functions** as indicated in the tasks below. 
 
 ### Questions / Tasks
-Complete the detect_visual_target.py node by implementing the filter_image(), compute_keypoints_for_blobs(), and publish_observation()
+Complete the `detect_visual_target.py` node by implementing the `filter_image()`, `compute_keypoints_for_blobs()`, and `publish_observation()`
 functions. Afterwards, make an animated video of the visual output of your node, as indicated below.
 
 - **III-1.** Read this [tutorial on Color Spaces in OpenCV](https://www.learnopencv.com/color-spaces-in-opencv-cpp-python/).
-Afterwards, implement the `filter_image()` function in the detect_visual_target.py node so that the function:
+Afterwards, implement the `filter_image()` function in the `detect_visual_target.py` node so that the function:
 
-    1. Converts the input `cv_image` to the HSV color space with OpenCV.
-    2. Filters the image in the HSV color space using the [cv2.inRange]() function from OpenCV and the input `lower_hue_value` and `higher_hue_value`. 
+    1. Converts the input `cv_image` to the HSV color space with the OpenCV library.
+    2. Filters the image in the HSV color space using the [cv2.inRange](https://docs.opencv.org/4.2.0/da/d97/tutorial_threshold_inRange.html) function from OpenCV and the input `lower_hue_value` and `higher_hue_value`. 
     3. Finally, returns the image (mask) output by the inRange() function.
-    <br>
+    <br><br>
     
     *Tip:* This [tutorial](https://pythonprogramming.net/color-filter-python-opencv-tutorial/) provides
-    an example on color filtering in OpenCV. 
+    another example on color filtering in OpenCV. 
     
-    To check that your filter_image() function is working properly, run your node with the default hue range of 100-140:
+    To check that your `filter_image()` function is working properly, run your node with the default hue range of 100-140:
     
     ```bash
     # play the left-seq1.bag as in Part II of the assignment, and then run the node:
@@ -279,7 +278,7 @@ Afterwards, implement the `filter_image()` function in the detect_visual_target.
     photo from the bag as a reference.
     
     <img src="docs/color_thresholding.png" width="450"/>
-    <br>
+    <br><br>
 
 - **III-2.** Read this other [tutorial on Blob Detection](https://www.learnopencv.com/blob-detection-using-opencv-python-c/)
 and implement the `compute_keypoints_for_blobs()` function in the detect_visual_target.py node so that it:
@@ -287,17 +286,17 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
     1. Creates a `cv2.SimpleBlobDetector_Params()` object with all of the parameters
     for an OpenCV blob detector.
     
-    2. Creates a SimpleBlobDetector object with the parameters from the previous step.
+    2. Creates a `cv2.SimpleBlobDetector()` object with the parameters from the previous step.
     
-    3. Uses the SimpleBlobDetector to detect blobs on the `filtered_image` mask that is input to the function.
+    3. Uses the SimpleBlobDetector to detect blobs on the mask output by `filter_image()`, which is input to the `compute_keypoints_for_blobs()` function.
     
-    4. Returns the detected list of keypoints, as output by the SimpleBlobDetector.
+    4. Returns the detected list of keypoints, as output by the SimpleBlobDetector object.
     
-    *Tip:* You can read more about how the SimpleBlobDetector algorithm works on the [official OpenCV documentation](https://docs.opencv.org/2.4/modules/features2d/doc/common_interfaces_of_feature_detectors.html#SimpleBlobDetector%20:%20public%20FeatureDetector).
+    *Tip:* You can read more about how the SimpleBlobDetector algorithm works on the [official OpenCV documentation](https://docs.opencv.org/4.2.0/d0/d7a/classcv_1_1SimpleBlobDetector.html).
 
-    Once you've implemented the compute_keypoints_for_blobs() function, you can run the detect_visual_target.py 
+    Once you've implemented the `compute_keypoints_for_blobs()` function, you can run the `detect_visual_target.py` 
     node to debug your code for this part of the assignment, as in the task III-1. Edit the parameters of the 
-    blob detector such that the blue square is detected well in the left-seq1.bag
+    blob detector such that the **blue square** is detected well in the left-seq1.bag
     image sequence. The result should look similar to the image below:
     
     <img src="docs/keypoint.png" width="300"/>
@@ -305,35 +304,32 @@ and implement the `compute_keypoints_for_blobs()` function in the detect_visual_
     
     The thin red circle corresponds to a detected keypoint. The crossmark corresponds to the biggest keypoint
     found by OpenCV blob's detection algorithm. The position of this keypoint is what your node should output
-    through the "/observation" topic, as described in the next task.
+    through the `/observation` topic, as described in the next task.
 
-- **III-3.** Finally, implement the `publish_observation()` function in the detect_visual_target.py node.
+- **III-3.** Finally, implement the `publish_observation()` function in the `detect_visual_target.py` node.
 This function receives a `tuple (x,y)` corresponding to the location of the biggest keypoint 
 found by the blob detection algorithm. The function should publish this coordinate as an Observation message
-through the "/observation" topic (self.obs_pub variable). 
+through the `/observation` topic (`self.obs_pub` variable in the `DetectTarget()` class). 
 
     Before publishing the Observation message, make sure to set its 
     `header field`. The header field should have the same values as the header variable 
-    that is passed to the publish_observation() function. This will ensure that the time stamp and frame of the Observation message
+    that is passed to the `publish_observation()` function. This will ensure that the time stamp and frame of the Observation message
     matches the time stamp and frame of the image that it was generated from.
     
-    Once your detect_visual_target.py node is properly detecting targets of a given color
+    Once your `detect_visual_target.py` node is properly detecting targets of a given color
     and publishing observations, commit the script to your repository.
 
-- **III-4.** As in II-1, make a video of rqt_image_view that shows the content of the /observation_image
+- **III-4.** As in II-1, make a video of `rqt_image_view` that shows the content of the `/observation_image`
 topic as the left-seq1.bag rosbag plays for at least 5 seconds. Turn this video into an animated
 gif, name it `keypoints.gif`, and include it in the `docs` directory within the
- shutter_track_target package. Commit the gif to your repository.
+ `shutter_track_target` package. Commit the gif to your repository.
  
 
 ## Part IV. Filtering the Target's Position
-You will now implement a linear Kalman filter to track a visual target in image space. Please read Sections 3.2.1
- and 3.2.2 from
-Chapter 3 of the [Probabilistic Robotics book](http://www.probabilistic-robotics.org/) before starting with 
-this assigment. The Chapter is available in Canvas (under the Files section).
+You will now implement a linear Kalman filter to track a visual target in image space. Please read Sections 3.2.1 and 3.2.2 from Chapter 3 of the [Probabilistic Robotics book](http://www.probabilistic-robotics.org/) before starting with 
+this assigment. The Chapter is available in Canvas (under the Files section). Chapters 3.2.1 and 3.2.2 will remind you of how Kalman filters work.
 
-
-The `filter state` 
+For this assignment, the `filter state` 
 ![equation](https://latex.codecogs.com/gif.latex?\bold{x}&space;\in&space;\mathbb{R}^6)<!--$`\bold{x} \in \mathbb{R}^6`$--> should contain ![equation](https://latex.codecogs.com/gif.latex?\bold{x}&space;=&space;[p_x\&space;p_y\&space;v_x\&space;v_y\&space;a_x\&space;a_y]^T)<!--$`\bold{x} = [p_x\ p_y\ v_x\ v_y\ a_x\ a_y]^T`$-->, 
 where ![equation](https://latex.codecogs.com/gif.latex?\mathbf{p}&space;=&space;[p_x\&space;p_y]^T)<!--$`\mathbf{p} = [p_x\ p_y]^T`$--> corresponds to the estimated position of the target in an image, 
 ![equation](https://latex.codecogs.com/gif.latex?\mathbf{v}&space;=&space;[v_x\&space;v_y]^T) <!--$`\mathbf{v} = [v_x\ v_y]^T`$--> is its estimated velocity, and ![equation](https://latex.codecogs.com/gif.latex?\mathbf{a}&space;=&space;[a_x\&space;a_y]^T)<!--$`\mathbf{a} = [a_x\ a_y]^T`$--> is its estimated acceleration.
@@ -348,12 +344,12 @@ follow the [equations of motion](https://en.wikipedia.org/wiki/Equations_of_moti
 where ![equation](https://latex.codecogs.com/gif.latex?\Delta&space;t) <!--$`\Delta t`$--> is the elapsed time between updates.
 
 The `measurement model` of the filter should correct for the predicted state based on
-the observed position of the visual target. This observation is generated by your detect_visual_target.py
+the observed position of the visual target. This observation is generated by your `detect_visual_target.py`
 node.
 
 You should implement your Kalman filter 
-within the `kalman_filter.py` script that is inside of the shutter_track_target/scripts 
-directory, as indicated in the tasks below. The kalman_filter.py script already provides you with
+within the `kalman_filter.py` script that is inside of the [shutter_track_target/scripts](https://github.com/Yale-BIM/f21-assignments/tree/master/assignment-3/shutter_track_target/scripts) 
+directory, as indicated in the tasks below. The `kalman_filter.py` script already provides you with
 the main logic for a filtering node, and will help you debug your filter visually. 
  
 ### Questions / Tasks
@@ -371,43 +367,43 @@ noise, in your report.
 grows?
 
 - **IV-5.** Complete the `KF_predict_step()` function at the top of the
-kalman_filter.py script such that its predict a new belief for the state (encoded by its mean and covariance) based
+[kalman_filter.py](https://github.com/Yale-BIM/f21-assignments/blob/master/assignment-3/shutter_track_target/scripts/kalman_filter.py) script such that it predicts a new belief for the state (encoded by its mean and covariance) based
 on the prior belief and the transition model of the filter.
 
-- **IV-6.** Complete the `KF_measurement_update_step()` function in the kalman_filter.py script such that
+- **IV-6.** Complete the `KF_measurement_update_step()` function in the [kalman_filter.py](https://github.com/Yale-BIM/f21-assignments/blob/master/assignment-3/shutter_track_target/scripts/kalman_filter.py) script such that
 it corrects the belief of the state of the filter based on the latest observation and the filter's
 measurement model.
 
-- **IV-7.** Implement the `assemble_A_matrix()` and `assemble_C_matrix()` methods within the KalmanFilterNode
-class of the kalman_filter.py script. The methods should set the A and C
-parameters of the transition and measurement model of the filter used by the KalmanFilterNode. Use [numpy
+- **IV-7.** Implement the `assemble_A_matrix()` and `assemble_C_matrix()` methods within the `KalmanFilterNode`
+class of the [kalman_filter.py](https://github.com/Yale-BIM/f21-assignments/blob/master/assignment-3/shutter_track_target/scripts/kalman_filter.py) script. The methods should set the A and C
+parameters of the transition and measurement model of the filter used by the `KalmanFilterNode`. Use [numpy
 arrays](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.array.html) to represent the A and C matrices.
 
     > NOTE: You do not have to implement the logic that passes the A and C parameters to the filter. This is
-    already done for you in the main loop of the KalmanFIlterNode class.
+    already done for you in the main loop of the KalmanFilterNode class.
     
 - **IV-8.** Implement the `initialize_process_covariance()` and `initialize_measurement_covariance()` methods
-within the KalmanFilterNode class of the kalman_filter.py script. These methods should set some fixed value
+within the `KalmanFilterNode` class of the [kalman_filter.py](https://github.com/Yale-BIM/f21-assignments/blob/master/assignment-3/shutter_track_target/scripts/kalman_filter.py) script. These methods should set some fixed value
 for the Q and R covariances
 for the noise of the transition model and measurement model, respectively. Don't worry too much about the
 exact values that you set for the noise now, as you will have to tune these values later in the assignment.
 
-- **IV-9.** Implement the `assemble_observation_vector()` function within the KalmanFilterNode class of the
-kalman_filter.py script. This function should return a vector (numpy array) with the observed position for the
+- **IV-9.** Implement the `assemble_observation_vector()` function within the `KalmanFilterNode` class of the
+[kalman_filter.py](https://github.com/Yale-BIM/f21-assignments/blob/master/assignment-3/shutter_track_target/scripts/kalman_filter.py) script. This function should return a vector (numpy array) with the observed position for the
 target. 
  
-    To make this part of the assigment easy, note that the `assemble_observation_vector()` function has
+    > To make this part of the assigment easy, note that the `assemble_observation_vector()` function has
     an Observation message argument. This argument provides the latest observed position of the target as received
-    through the "/observation" topic in the KalmanFilterNode.
+    through the `/observation` topic in the `KalmanFilterNode`.
 
-- **IV-10.** Implement the `initialize_mu_and_sigma()` method within the KalmanFilterNode class of the
-kalman_filter.py script. This method should set the initial values for the filter belief based on the latest
+- **IV-10.** Implement the `initialize_mu_and_sigma()` method within the `KalmanFilterNode` class of the
+[kalman_filter.py](https://github.com/Yale-BIM/f21-assignments/blob/master/assignment-3/shutter_track_target/scripts/kalman_filter.py) script. This method should set the initial values for the filter belief based on the latest
 observed target position. Again, note that this observation is passed to the `initialize_mu_and_sigma()` method
 as an input argument.
 
-- **IV-11.** Once you have finished the prior tasks, complete the filter_colored_target.launch file within the shutter_track_target/launch directory.
-The launch file should run your kalman_filter.py script after playing a bag, running rqt_image_view, and 
-running your detect_visual_target.py script.
+- **IV-11.** Once you have finished the prior tasks, complete the `filter_colored_target.launch` file within the [shutter_track_target/launch](https://github.com/Yale-BIM/f21-assignments/tree/master/assignment-3/shutter_track_target/launch) directory.
+The launch file should run your `kalman_filter.py` script after playing a bag, run `rqt_image_view`, and 
+run your `detect_visual_target.py` script.
 
     Note that the begining of the launch file already defines a set of arguments:
     
@@ -417,8 +413,8 @@ running your detect_visual_target.py script.
     - **higher_hue_value:** Max. hue value for the colored target that is tracked.
     - **playback_speed:** Speed at which to play the bag (1.0 simulates real time play back).
     
-    > Do NOT modify the above arguments in the launch file, nor the way how the bag is launched and
-    the detect_visual_target.py node is run.
+    > Do NOT modify the above arguments in the launch file, nor the way how the bag is launched or how
+    the `detect_visual_target.py` node is run.
     
     Once you have completed the launch file, you should be able to run it as:
     
@@ -467,14 +463,14 @@ add_observation_noise is set to true in filter_colored_target.launch:
     In the above command, the brackets [*] indicate optional arguments.
     
     Once it looks like your filter is tracking the target, include the filter parameters that you are using
-     for this part of the assignment in your report.  In addition, make a video of rqt_image_view that shows the images sent
-    through the /tracked_image topic for at least 5 seconds with add_observation_noise:=true. 
+     for this part of the assignment in your report.  In addition, make a video of `rqt_image_view` that shows the images sent
+    through the `/tracked_image` topic for at least 5 seconds with `add_observation_noise:=true`. 
     Turn this video into an animated
     gif, name it `filtered_blue_square_with_extra_noise.gif`, and include it in the `docs` directory within the
-     shutter_track_target package. Commit the gif to your repository.
+     `shutter_track_target` package. Commit the gif to your repository.
      
-- **IV-14.** Write a README.md Markdown file inside the shutter_track_target repository that explains
-what the detect_visual_target.py and kalman_filter.py nodes do, and how the filtered_colored_target.launch script
+- **IV-14.** Write a README.md Markdown file inside the `shutter_track_target` repository that explains
+what the `detect_visual_target.py` and `kalman_filter.py` nodes do, and how the `filtered_colored_target.launch` script
 works. To provide visual support to the explanation of how the launch file works, include the gifs that you generated
 previously in this assignment in the README.md file.
    
@@ -500,7 +496,7 @@ You should update the default path to your video in the launch file, or pass the
 
 - **V-1.** Run your completed Kalman Filter node, updating the hue arguments to track the desired object in your video. Make sure to look at rqt_image_view to ensure that your object is being tracked properly.
 
-    Once it looks like your filter is tracking your object well, make a gif of rqt_image_view showing the topic `/tracked_image`. Name this gif `new_object.gif`. Include this gif in the README for `shutter_track_target` that you wrote in Part IV.
+    Once it looks like your filter is tracking your object well, make a gif of `rqt_image_view` showing the topic `/tracked_image`. Name this gif `new_object.gif` and store it in `shutter_track_target/docs`. Include this gif in the README for `shutter_track_target` that you wrote in Part IV.
     
     Make a rosbag of your system while the video is playing and you are tracking the object's position. The bag should be around 5 seconds long, and **only** include the following topics:
 
@@ -521,10 +517,10 @@ You should update the default path to your video in the launch file, or pass the
             The `play_video.launch` file does this for you automatically.
 
     > *Tip 2:* This assignment provides you of an example launch file to record the `track_target.bag`. 
-            See the `assignment-4/shutter_track_target/launch/record_bag.launch` file.
+            See the [assignment-3/shutter_track_target/launch/record_bag.launch](https://github.com/Yale-BIM/f21-assignments/blob/master/assignment-3/shutter_track_target/launch/record_bag.launch) file.
 
     > *Tip 3:* Double check the content of your bag with the `rosbag info` and `rosbag play` commands before 
-            submitting your assignment. Make sure that the /tracked_image and /observation_image topics show 
+            submitting your assignment. Make sure that the `/tracked_image` and `/observation_image` topics show 
             your filter tracking your desired object. As a reference, the bag should include at least
             200 images for each of these topics.
 

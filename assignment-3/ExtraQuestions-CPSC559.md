@@ -1,6 +1,6 @@
-# Assignment 4 (Extra questions for CPSC-559)
+# Assignment 3 (Extra questions for CPSC-559)
 
-The sections below for Assignment 4 are only meant to be completed/answered by students taking CPSC-559. Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. However, their answers to the questions in Part VI of the Assignment 4 will not be considered during grading.
+The sections below for Assignment 4 are only meant to be completed/answered by students taking CPSC-559. Students in CPSC-459 are welcome to try to solve the problems/tasks below and even come to office hours to discuss them. However, their answers to the questions in Part VI of the Assignment 3 will not be considered during grading.
 
 ## Part VI. Non-Parametric Filtering
 
