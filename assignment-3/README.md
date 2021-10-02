@@ -54,7 +54,7 @@ font weight.
 #### Deliverables
 
 - **Report:** You are expected to submit a pdf to Canvas/Gradescope with answers to the questions/tasks at 
-the end of each part of the assignment. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/1O2D53BI08oVKheD0E5-1Ddv4rRBcbfbc/view?usp=sharing) for CPSC 459 students and [here](https://drive.google.com/file/d/1hQ-sWeq0Os9r9pe4tL_28MF-p1vwt69u/view?usp=sharing) for CPSC 559 students
+the end of each part of the assignment. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/170NTiV_V4EDJdNTiH4iyZRZc7b18fohk/view?usp=sharing) for CPSC 459 students and [here](https://drive.google.com/file/d/1BHmVgG_wONIXlhWADDB0aUDiJ4dqRQKs/view?usp=sharing) for CPSC 559 students
 
 - **ROS Bag:** You are expected to provide a link to a ROS bag in your assignment report (see Part V of this assignment). 
 ROS bags can be hosted in [Google drive](https://drive.google.com/) or [Box](https://yale.account.box.com/) -- you 
