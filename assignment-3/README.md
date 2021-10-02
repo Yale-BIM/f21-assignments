@@ -1,4 +1,4 @@
-# Assignment 4
+# Assignment 3
 
 This is the third assignment for Yale's CPSC-459/559 Building Interactive Machines course.
 
