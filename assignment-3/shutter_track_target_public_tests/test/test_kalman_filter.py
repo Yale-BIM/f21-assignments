@@ -1,5 +1,5 @@
-#!/usr/bin/env python2.7
-# Public tests for CPSC459/559 Assignment 4 - Part I
+#!/usr/bin/env python3
+# Public tests for CPSC459/559 Assignment 3 - Part I
 
 PKG = "shutter_track_target_public_tests"
 NAME = 'test_kalman_filter'
