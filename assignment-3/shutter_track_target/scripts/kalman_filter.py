@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import copy
-import Queue
+import queue
 import cv2
 import numpy as np
 import rospy
@@ -73,8 +73,8 @@ class KalmanFilterNode(object):
         self.latest_observation_msg = None                 # latest PointStamped observation that was received by the node
         self.mutex = Lock()                                # mutex for the observation
         self.bridge = CvBridge()                           # OpenCV - ROS bridge
-        self.observed_positions = Queue.Queue(50)          # FIFO queue of observed positions (for visualization)
-        self.tracked_positions = Queue.Queue(50)           # FIFO queue of tracked positions (for visualization)
+        self.observed_positions = queue.Queue(50)          # FIFO queue of observed positions (for visualization)
+        self.tracked_positions = queue.Queue(50)           # FIFO queue of tracked positions (for visualization)
         last_time = None                                   # Last time-stamp of when a filter update was done
 
         # Publishers
