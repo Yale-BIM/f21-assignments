@@ -30,13 +30,13 @@ familiar with [TensorFlow's Keras API](https://www.tensorflow.org/api_docs/pytho
 
 
 #### System Requirements
-This assignment should be completed using Python 2.7 in Ubuntu 18.04. For training neural networks,
+This assignment should be completed using Python 3.6–3.9 in Ubuntu 20.04. For training neural networks,
 we recommend that you use cloud services if your don't have access to a local GPU. For the last part of the assignment, 
-you should have access to a computer with `ROS Melodic`.
+you should have access to a computer with `ROS Noetic`.
 
-You should also have `git` and `pip` installed in the machine that you are using to work on your assignment.
-You will use git to save your work to your [Github](http://www.githubcom) repository. The pip tool will be used to install
-Python dependencies.
+You should also have `git` and `pip3` installed in the machine that you are using to work on your assignment.
+You will use git to save your work to your [Github](http://www.github.com) repository. The pip3 tool will be used to install
+Python dependencies, and can be installed in Unbuntu 20.04 as in [this guide](https://linuxize.com/post/how-to-install-pip-on-ubuntu-20.04/). More details on installing pip3 are provided later in this document.
 
 #### Background Knowledge
 
@@ -48,7 +48,7 @@ If you are not, please check [this tutorial](https://docs.scipy.org/doc/numpy/us
 #### Preliminaries
 You will be training supervised learning models, especially Neural Networks, for this assignment. 
 It is possible to complete all of the tasks using your local CPU, but it might be faster at times to train on the cloud and
-using hardware acceleration (e.g., GPU).
+using hardware acceleration (e.g., a dedicated GPU).
 
 > Whether or not you use the cloud to train your neural networks, the deliverables are the same.
 You should submit code in your private Github repository. You should also submit a report to Gradescope
@@ -72,14 +72,6 @@ A `quick tutorial` on using Google Cloud for this assignment is provided in the
 [Train_Google_Cloud_Engine.md](Train_Google_Cloud_Engine.md) file.
 
 
-##### Training on Amazon Web Services (AWS)
-Similar to Google Cloud, you can also use AWS to train your models on the cloud with hardware acceleration.
-This option is not free either, but can customize virtual machines with as many resources as you need. Use your 
-credits judiciously.
-
-A `quick tutorial` on using AWS for this assignment is provided in the
-[Train_AWS.md](Train_AWS.md) file.
-
 #### Deliverables
 
 - **Report:** You are expected to submit a pdf to Gradescope with answers to the questions/tasks at 
@@ -88,11 +80,10 @@ to understand and/or run your code, as well as the specific commit SHA of the ve
 that you would like to be evaluated on. The report is a fillable PDF which is available [here](https://drive.google.com/file/d/11PYDt7UH5h8FWI3rrE9dzpAqHQvdRReY/view?usp=sharing).
 
 - **Model weights and input normalization parameters:** You should upload trained models and parameters
-to Google Drive and shared them with anybody who has access to the links.
+to Google Drive and share them with anybody who has access to the links.
 
 - **Code:** Finally, you are expected to push code for this assignment to your 
-[Github](http://www.github.com) repository as indicated in the [general instructions](../README.md) 
-document for CPSC-459/CSPC-559 assignments. 
+[Github](http://www.github.com) repository and submit it to Gradescope, as in all prior assignments.
 
 #### Evaluation
 
@@ -100,13 +91,13 @@ You assignment will be evaluated based on the content of your report and your co
 
 - Report (39 pts)
     * Part I (24 pts): I-1 (4 pts) + I-3 (10 pts) + I-4 (5 pts) + I-5 (5 pts)
-    * Part II (15 pts): II-2 (3 pts) + II-3 (5 pts) + II-4 (7 pts)
+    * Part II (8 pts): II-2 (8 pts)
 - Code (61 pts)
     * Part I (11 pts): I-1 (2 pts) + I-2 (6 pts) + I-3 (3 pts)
-    * Part II (26 pts): II-1 (12 pts) + II-2 (4 pts) + II-3 (2 pts)
+    * Part II (29 pts): II-1 (17 pts) + II-2 (12 pts) 
     * Part III (28 pts): III-1 (28 pts)
 
-Note on Part III of the assignment: Part III provides extra credit for those at the top of the leaderboard in Gradescope.
+**Note on Part III of the assignment:** Part III provides extra credit for those at the top of the leaderboard in Gradescope.
 The extra credit (2 pts) is valid for all students (CPSC 459 or 559) and will be counted for the final course grade 
 (over 100 pts for this assignment). 
 
@@ -118,16 +109,17 @@ Below are some example Neural Networks to give you a starting point for implemen
 
 ## Setup
 Before you start implementing or answering questions for this assignment, please
-check that [pip](https://pip.pypa.io/en/stable/installing/) in installed in your machine:
+check that [pip3](https://pip.pypa.io/en/stable/) is installed in your machine:
 
 ```bash
-$ pip --version
+$ pip3 --version
 ```
 
 If it's not installed and you are using Ubuntu, then install it with:
 
 ```bash
-sudo apt install python-dev python-pip
+$ sudo apt update
+$ sudo apt install python3-pip
 ```
 
 Then, update your repository to pull the latest changes from the assignments repository,
@@ -138,8 +130,8 @@ install Python dependencies, and update the shutter-ros repository:
 $ cd <path-to-your-repository-in-your-workspace>
 $ git pull upstream master
 
-# install Assignment-5 Python dependencies
-$ cd assignment-5
+# install Assignment-4 Python dependencies
+$ cd assignment-4
 $ ./install_python_deps.sh
 
 # update the shutter-ros repository 
@@ -152,23 +144,21 @@ $ catkin_make -DCMAKE_BUILD_TYPE=Release
 ```
 
 The above `install_python_deps.sh` script will install several Python packages
-that are required for this assignment, including TensorFlow v. 2.0.0b1. While
-the latter package is not the latest version of TensorFlow, it is compatible with Python 2.7 which
-makes it easy for you to load up Neural Network models into ROS nodes.
+that are required for this assignment, including TensorFlow v. 2.6.0. 
 
 You can verify your TensorFlow installation as follows:
 
 ```bash
-$ python -c "import tensorflow as tf; print(tf.__version__)"
-2.0.0-beta1
+$ python3 -c "import tensorflow as tf; print(tf.__version__)"
+2.6.0
 ```
 
 **NOTE:** If your machine has a GPU with CUDA Compute Capability 3.5 or higher and 
-you have [CUDA 10.0](https://developer.nvidia.com/cuda-10.0-download-archive) plus 
-[cuDNN 7.4](https://developer.nvidia.com/cudnn) installed in your system, then you should install:
+you have [CUDA 11.2](https://developer.nvidia.com/cuda-11.2-download-archive) plus 
+[cuDNN 8.1.0](https://developer.nvidia.com/cudnn) installed in your system, then you should install:
 
 ```bash
-python -m pip install -U --user tensorflow-gpu==2.0.0b1
+pip3 install --user tensorflow-gpu==2.6.0
 ```
 
 to take advantage of hardware acceleration. You can test that your GPU is visible in TensorFlow
@@ -181,9 +171,9 @@ by running the following commands on a Python shell:
 
 The function should return True if TensorFlow can access your GPU. If the function
 returns False, check the errors that are printed in the Shell. Common errors include
-not having Cuda 10.0 installed in the system but a different version, not having CuDNN
-installed for Cuda 10.0, and not having CUDA system variables setup in your environment 
-(e.g., CUDADIR). See the [TensorFlow GPU support page](https://www.tensorflow.org/install/gpu) 
+not having Cuda 11.2 installed in the system but a different version, not having CuDNN
+installed for Cuda 11.2, and not having CUDA system variables setup in your environment. 
+See the [TensorFlow GPU support page](https://www.tensorflow.org/install/gpu) 
 for more information. 
 
 
@@ -345,7 +335,7 @@ and train its weights further (e.g., to resume training or for fine-tuning on a 
     its weights thereafter:
     
     ```bash
-    (venv) $ ./train_and_test_saddle_function.py --load_model <path_to_model_h5_file> [--lr 1e-2] [--epochs 500] [--batch_size 16]
+    $ ./train_and_test_saddle_function.py --load_model <path_to_model_h5_file> [--lr 1e-2] [--epochs 500] [--batch_size 16]
     ```
     
     The model that you trained before for task I-1 should be stored as best_monkey_weights.h5
@@ -386,7 +376,7 @@ with an **average L2 error of 150 or less on the test set**.
     
     You should then be able to train and test your model as:
     ```bash
-    (venv) $ ./train_and_test_saddle_function.py --build_fn nonlinear [--lr 1e-1] [--epochs 10] [--batch_size 16]
+    $ ./train_and_test_saddle_function.py --build_fn nonlinear [--lr 1e-1] [--epochs 10] [--batch_size 16]
     ```
     
     Change your nonlinear model, the learning rate, and number of epochs that you are training for
@@ -425,8 +415,8 @@ the assignment-5/face_detection directory (note that you should not commit the d
    Check that you can open the data in python and that it has inputs and target values:
    
    ```bash
-   (venv) $ cd assignment-5/face_detection/ # go to the assignment-5/face_detection directory within your private repository
-   (venv) $ python 
+   $ cd assignment-5/face_detection/ # go to the assignment-5/face_detection directory within your private repository
+   $ python 
    Python 2.7.15rc1 (default, Apr 15 2018, 21:51:34) 
    [GCC 7.3.0] on linux2
    Type "help", "copyright", "credits" or "license" for more information.
@@ -531,7 +521,7 @@ train your model using the 64x64_data.npz dataset:
     The script should then download your weights file to your local drive.
     
     **NOTE:** The `performance` of your model will be evaluated using the `evaluate_face_detection.py` script
-    within the `assignment-5/face_detection` directory. The script will be run on a test set (that is not provided
+    within the `assignment-4/face_detection` directory. The script will be run on a test set (that is not provided
     as part of this assignment) but that you can assume comes from the same image distribution as
     the data that is provided in the 64x64_data.npz file. The expectation is that your model should
     reach at least **0.9 (or 90%) binary accuracy** on the (unseen) test set. You can read more about
@@ -548,7 +538,7 @@ function of the threshold to better understand if 0.5 is a good value for your c
     To start, make a copy of the evaluate_face_detection.py script and name it `plot_roc_curve.py`:
 
     ```bash
-    $ cd assignment-5/face_detection
+    $ cd assignment-4/face_detection
     $ cp evaluate_face_detection.py plot_roc_curve.py
     ```
     
@@ -650,63 +640,6 @@ function of the threshold to better understand if 0.5 is a good value for your c
     
     Once your script is working as desired, commit it to your repository. In addition, add to your report the ROC curve that your script 
     displayed when running on the 64x64_data.npz file and what was the best threshold found given the TRP and FPR values computed for your model. 
-   
-- **II-3.** Complete the make_predictions() function in the 
-`window_detection.py` script within your `assignment-5/face_detection` directory
-to run your face classifier on a sliding window over an input image. The script should enable you to
-detect multiple faces on the input by sliding a window of various scales. 
-For example, given the following input image from the Yale Computer Science website:
-
-    <img src="docs/cs50_2.jpg" width="600" alt="example input image"/>
-    
-    The script should output face predictions to the screen:
-    
-    ```bash
-    $ ./window_detection.py --input cs50_2.jpg --weights-path <path-to-logs-folder>
-    ...
-    DETECTIONS:
-    [[ 280.           70.          330.          120.            0.97373563]
-     [ 190.           10.          290.          110.            0.95309627]
-     [ 290.            0.          390.          100.            0.96896017]
-     [ 460.           40.          510.           90.            0.95603698]
-     [ 410.           20.          460.           70.            0.99236625]
-     [ 510.           10.          560.           60.            0.99526775]
-     [ 150.            0.          200.           50.            0.96062028]]
-    ```
-    where each row of the printed matrix contains [min_x, min_y, max_x, max_y, prob] for a given
-    face detection. The first
-    four columns are the top-left (min_x, min_y) and bottom-right (max_x, max_y) coordinates of 
-    the bounding box corresponding to a face detection. The last column is the detection probability
-    output by your model.
-
-    When the script finishes, it should also show an image with the boxes:
-
-    <img src="docs/faces.png" alt="example input image"/>
-    
-    **Tip:** When you slide a window over the image to make predictions, it is possible that 
-    many windows will fire over the same region in the image:
-    
-    <img src="docs/faces_before_maximum.png" alt="example input image"/>
-    
-    To help you group overlapping boxes together through `non maximum suppression`, the 
-    window_detection.py script provides the non_max_suppression() function. More information
-    about this procedure can be found 
-    in [this blog](https://www.pyimagesearch.com/2015/02/16/faster-non-maximum-suppression-python/)
-    by A. Rosebrock.
-    
-    Test your window_detection.py script using the best threshold for the predicted probabilities
-    from part III-2 and the images "cs50_2.jpg" and "shaocrew_0.jpg" 
-    within the assignment-5/docs directory. It is OK if your model makes mistakes, as 
-    long as your code uses the best classification threshold from the ROC curve. Include in your report:
-     
-    - images of your bounding boxes predictions (after non maximum suppression) on "cs50_2.jpg" 
-    and "shaocrew_0.jpg". 
-    
-    - if your model missed out faces or had too many false positives, explain in your report
-    what could you do to address these issues in the future.
-    
-- **II-4.** Explain in your report how could you change the structure of your neural network
-to detect faces in a more efficient way than with a windowed approach.
 
 ## Part III. Imitation Learning (2 extra points)
 
@@ -719,7 +652,7 @@ by moving two of its joints: joint_1, and joint_3. In practice, this type of beh
 useful for the robot to convey attention towards a moving person or object in a real scenario.
 
 To make it easy for you to run the expert and see it in action, this assignment provides you the `collect_data.launch` 
-launch file. For example, if you run it as:
+ file. For example, if you run it as:
 
 ```bash
 $ roslaunch shutter_behavior_cloning collect_data.launch
@@ -739,7 +672,7 @@ As the launch script is running, you can check that example `state`-`action` pai
 
 ```
 $ tail -f state_action.txt
-# data from 19/10/2020 23:00:05
+# data from 19/10/2021 23:00:05
 base_footprint  1.1781  -0.1099 1.3627  0.0000  0.0000  -0.1202 -0.6751
 base_footprint  1.9321  -2.6038 0.6671  -0.1202 -0.6751 -0.8220 0.5598
 base_footprint  2.8652  -0.8011 2.2853  -0.9423 -0.1153 0.6589  -0.4528
@@ -752,8 +685,8 @@ The `state_action.txt` file contains comment lines that start with "#". Non-comm
 2. the target's x coordinate
 3. the target's y coordinate
 4. the target's z coordinate
-5. the current joint_1 
-6. the current joint_3
+5. the robot's current joint_1 
+6. the robot's current joint_3
 7. the next joint_1 that the robot should have to point towards the target
 8. the next joint_3 that the robot should have to point towards the target
 
@@ -765,7 +698,7 @@ The output action is 2-dimensional. It corresponds to the new position for the r
 
 - **III-1.** Generate data for behavioral cloning as explained in the prior section, and implement a script to learn
 an imitation policy from this data using the TensorFlow Keras API. The script should be called `learn_policy.py` and 
-be placed within the `assignment-5/shutter_behavior_cloining/scripts` directory. 
+be placed within the `assignment-4/shutter_behavior_cloining/scripts` directory. 
 
     The script should:
      
@@ -776,23 +709,23 @@ be placed within the `assignment-5/shutter_behavior_cloining/scripts` directory.
        
     2. Load up the data and use it to train a neural network model that predicts the new joint positions for the robot 
     (joint_1, and joint_3). For your convenience, this assignment provides you the `load_data()` function 
-    within the `assignment-5/shutter_behavior_cloning/scripts/train_utils.py` script to load up the `state_action.txt`
+    within the `assignment-4/shutter_behavior_cloning/scripts/train_utils.py` script to load up the `state_action.txt`
     data.
     
     3. Save the model's weights to disk (as well as any feature normalization parameters if need be). The Keras model
-    should be saved to disk in HDF5 format using the [Keras model.save() function](https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/keras/Model#save).
+    should be saved to disk in HDF5 format using the [Keras model.save() function](https://www.tensorflow.org/versions/r2.6/api_docs/python/tf/keras/Model#save).
     The feature normalization parameters can be saved to disk in whatever format you like, so long as they are all saved
     into a single file.
     
     Once you have trained your model, upload your saved files to Google Drive and make them accessible to "Anyone with 
-    the link". Then, add this link to the top of the `assignment-5/shutter_behavior_cloning/scripts/train_utils.py` file
+    the link". Then, add this link to the top of the `assignment-4/shutter_behavior_cloning/scripts/train_utils.py` file
     and test that they can be automatically downloaded using the `download_model_files()` function inside that same 
     Python file. Remember that if Google gives you a link like 
     `https://drive.google.com/file/d/<file_id>/view?usp=sharing`, then you should add 
     `https://drive.google.com/uc?id=<file_id>` to the script for the evaluation with Gradescope to run successfully.
     
     **NOTE 1:** You can test your model with the `test_policy.launch` file within 
-    `assignment-5/shutter_behavior_cloning/test`. For example:
+    `assignment-4/shutter_behavior_cloning/test`. For example:
     ```bash
     rostest shutter_behavior_cloning test_policy.launch model:=<path_to_model_hdf5> [normp:=<path_to_normalization_file>] run_rviz:=True
     ```
