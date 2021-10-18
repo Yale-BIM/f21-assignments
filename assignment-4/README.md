@@ -1,6 +1,6 @@
-# Assignment 5
+# Assignment 4
 
-This is the fifth assignment for Yale's CPSC-459/559 Building Interactive Machines course.
+This is the fourth assignment for Yale's CPSC-459/559 Building Interactive Machines course.
 
 ## Table of Contents
 
@@ -409,17 +409,13 @@ the `assignment-4/face_detection` directory (note that you should not commit the
 
    > The data is provided as a [numpy npz file](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.savez.html) for this assignment. 
    The .npz file format is a zipped archive of files named after the variables they contain. 
-   The archive is not compressed and each file in the archive contains one variable in .npy format. 
-   For a description of the .npy format, see [numpy.lib.format](https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.lib.format.html#module-numpy.lib.format).
+   For a description of the .npy format, see [numpy.lib.format](https://numpy.org/doc/stable/reference/generated/numpy.lib.format.html#module-numpy.lib.format).
 
    Check that you can open the data in python and that it has inputs and target values:
    
    ```bash
-   $ cd assignment-5/face_detection/ # go to the assignment-5/face_detection directory within your private repository
-   $ python 
-   Python 2.7.15rc1 (default, Apr 15 2018, 21:51:34) 
-   [GCC 7.3.0] on linux2
-   Type "help", "copyright", "credits" or "license" for more information.
+   $ cd assignment-4/face_detection/ # go to the assignment-5/face_detection directory within your private repository
+   $ python3 
    >>> import numpy as np
    >>> data = np.load("64x64_data.npz")
    >>> data.files
