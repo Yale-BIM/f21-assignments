@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Script to download trained face detection weights from Google Drive
 
 import os

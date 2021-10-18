@@ -454,7 +454,8 @@ train_face_detection.py script so that it:
 
    a. Splits the input data into a training and validation set.
    
-   b. Normalizes the training data such that the pixel values are floats in [0,1] rather than integers in [0,255].
+   b. Normalizes the training data such that the pixel values are floats in [0,1] rather than integers in [0,255]. The normalization logic
+   should be implemented within the `normalize_data_per_row()` function of the `train_face_detection.py` script.
    
    c. Builds a convolutional neural network model with the TensorFlow Keras API to predict 
    whether the input image corresponds to the face of a person or not. The output of the
@@ -503,7 +504,7 @@ train your model using the 64x64_data.npz dataset:
     - **epochs:** number of epochs to train for
     - **batch_size:** batch size used for training<br/><br/>
 
-    Commit your modified train_face_detection.py
+    Commit your modified `train_face_detection.py`
     script to your repository once you are happy with your model. 
     **Upload your best weights.h5 file to Google Drive, share the file publicly with "Anyone with a link",
     and add its URL to the `WEIGHT_FILE_URL` variable at top of the `face_detection/download_weights.py` script.**

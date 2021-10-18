@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Script to run a model in a windowed approach on an input image
 import os
 import sys
