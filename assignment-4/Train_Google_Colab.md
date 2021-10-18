@@ -16,7 +16,7 @@ Gitlab as in [this tutorial](https://docs.gitlab.com/ee/ssh/#generating-a-new-ss
 
 2. Open Google Colab: [https://research.google.com/colaboratory/](https://research.google.com/colaboratory/)
 
-3. Upload the assignment-5/pynb/bim_git_example.ipynb notebook to Google Colab by selecting
+3. Upload the assignment-4/pynb/bim_git_example.ipynb notebook to Google Colab by selecting
 File -> Upload Notebook.
 
     <img src="docs/colab_upload_python_notebook.png"/>
@@ -64,8 +64,7 @@ TPU as hardware accelerator.
 
 2. **Google Colab works with Google Drive.**
 You can load files from your Google Drive account into Google Colab, as explained 
-[here (see the Mounting Google Drive locally section)](https://colab.research.google.com/notebooks/io.ipynb). You
-can also upload files from Colab to Drive, as in [here](https://stackoverflow.com/questions/48774285/how-to-download-file-created-in-colaboratory-workspace).
+[here (see the Mounting Google Drive locally section)](https://colab.research.google.com/notebooks/io.ipynb).
 
 3. **You can run TensorBoard on Google Colab.** You can use
 [tensorboardcolab](https://github.com/taomanwai/tensorboardcolab) to run TensorBoard on your
