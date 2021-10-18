@@ -734,7 +734,7 @@ to load up your model from disk using the model file path and normalization para
     **NOTE 1:** You can test your model with the `test_policy.launch` file within 
     `assignment-4/shutter_behavior_cloning/test`. For example:
     ```bash
-    rostest shutter_behavior_cloning test_policy.launch model:=<path_to_model_hdf5> [normp:=<path_to_normalization_file>] run_rviz:=True
+    rostest shutter_behavior_cloning test_policy.launch model:=<full_path_to_model_hdf5> [normp:=<full_path_to_normalization_file>] run_rviz:=True
     ```
     The test will output the `~/.ros/test_policy_output.txt` file with: trial number, the target's x,y,z coordinates,
     the difference (in radians) between the predicted joint_1 and joint_3 positions and the expert's output, and
