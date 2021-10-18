@@ -170,7 +170,7 @@ by running the following commands on a Python shell:
 ```
 
 The function should return True if TensorFlow can access your GPU. If the function
-returns False, check the errors that are printed in the Shell. Common errors include
+returns False, check the errors that are printed in the shell. Common errors include
 not having Cuda 11.2 installed in the system but a different version, not having CuDNN
 installed for Cuda 11.2, and not having CUDA system variables setup in your environment. 
 See the [TensorFlow GPU support page](https://www.tensorflow.org/install/gpu) 
@@ -184,11 +184,10 @@ by Brian Yung Rowe.
 
 Once you've read the primer, you should complete the tasks below to approximate the 
 [monkey saddle surface](https://en.wikipedia.org/wiki/Monkey_saddle) defined by the equation ![equation](https://latex.codecogs.com/gif.latex?z&space;=&space;x^3&space;-&space;3xy^2).
-<!-- $`z = x^3 - 3xy^2`$ --> Your code should leverage [TensorFlow's
-Keras API](https://www.tensorflow.org/guide/keras).
+<!-- $`z = x^3 - 3xy^2`$ --> Your code should leverage [TensorFlow's Keras API](https://www.tensorflow.org/guide/keras).
 
 To get you started, this assignment provides two files within the 
-`assignment-5/function_approximation` directory:
+`assignment-4/function_approximation` directory:
 
 - *train_and_test_saddle_function.py:* main file that you will complete in this part of the assignment.
 - *saddle_function_utils:* code to generate data and help you visualize results.
@@ -199,7 +198,7 @@ script generates for you and example predictions with a linear neural network mo
 [TensorFlow's Keras API](https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/keras):
 
 ```bash
-$ cd assignment-5/function_approximation
+$ cd assignment-4/function_approximation
 $ ./train_and_test_saddle_function.py --visualize_training_data
 ```
 
