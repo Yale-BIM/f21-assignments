@@ -39,7 +39,7 @@ def split_data(input, target, train_percent):
     assert input.shape[0] == target.shape[0], \
         "Number of inputs and targets do not match ({} vs {})".format(input.shape[0], target.shape[0])
 
-    indices = range(input.shape[0])
+    indices = list(range(input.shape[0]))
     np.random.shuffle(indices)
 
     num_train = int(input.shape[0]*train_percent)
