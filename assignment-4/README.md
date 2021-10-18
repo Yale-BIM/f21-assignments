@@ -728,8 +728,8 @@ to load up your model from disk using the model file path and normalization para
     self.model_file = rospy.get_param("~model")              # required path to model file
     self.normp_file = rospy.get_param("~norm_params", "")    # optional path to normalization parameters (empty str means no norm params)
     ```
-Also, update the `compute_joints_position()` function in line 63 to make a prediction for 
-the robot's joint position such that the `target_callback()` function can command the robot to move appropriately relative to the observed target.
+    Also, update the `compute_joints_position()` function in line 63 to make a prediction for 
+    the robot's joint position such that the `target_callback()` function can command the robot to move appropriately relative to the observed target.
 
     **NOTE 1:** You can test your model with the `test_policy.launch` file within 
     `assignment-4/shutter_behavior_cloning/test`. For example:
