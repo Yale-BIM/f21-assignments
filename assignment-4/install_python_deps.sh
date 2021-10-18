@@ -1,2 +1,8 @@
-python -m pip install -U --user numpy tensorflow==2.0.0b1 tensorboard==2.1.0 scipy matplotlib scikit-learn gdown urdf-parser-py
+# update pip if need be
+pip3 install --user -U pip
+
+# install tensorflow
+pip3 install -U --user numpy tensorflow==2.6.0 tensorboard==2.7.0 scipy matplotlib scikit-learn gdown
+
+# install additional deps
 sudo apt-get install python-tk  # required by tensorflow
