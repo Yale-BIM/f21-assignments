@@ -723,9 +723,13 @@ be placed within the `assignment-4/shutter_behavior_cloining/scripts` directory.
     
 - **III-2.** Complete the `assignment-4/shutter_behavior_cloining/scripts/run_policy.py` script so that it loads up 
 your model and computes new poses for Shutter to follow the target. More specifically, update lines 26-28 in the script
-to load up your model from disk using the model file path provided via the `self.model_file = rospy.get_param("~model")`
-argument to the node. Also, update the `compute_joints_position()` function in line 63 to make a prediction for 
-the robot's joint position such that the `target_callback()` function can command the robot to move accordingly.
+to load up your model from disk using the model file path and normalization params provided to the node via:
+    ```python
+    self.model_file = rospy.get_param("~model")              # required path to model file
+    self.normp_file = rospy.get_param("~norm_params", "")    # optional path to normalization parameters (empty str means no norm params)
+    ```
+Also, update the `compute_joints_position()` function in line 63 to make a prediction for 
+the robot's joint position such that the `target_callback()` function can command the robot to move appropriately relative to the observed target.
 
     **NOTE 1:** You can test your model with the `test_policy.launch` file within 
     `assignment-4/shutter_behavior_cloning/test`. For example:
