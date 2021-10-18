@@ -522,14 +522,14 @@ train your model using the 64x64_data.npz dataset:
     as part of this assignment) but that you can assume comes from the same image distribution as
     the data that is provided in the 64x64_data.npz file. The expectation is that your model should
     reach at least **0.9 (or 90%) binary accuracy** on the (unseen) test set. You can read more about
-    binary accuracy in the [official TensorFlow documentation](https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/keras/metrics/BinaryAccuracy).
+    binary accuracy in the [official TensorFlow documentation](https://www.tensorflow.org/versions/r2.6/api_docs/python/tf/keras/metrics/BinaryAccuracy).
     
     In general, we recommend that you use [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard) 
     to monitor the performance of your model in a validation set as it trains.
     
 - **II-2.** The binary accuracy metric that you used before, assumed that a face was found when the output
 probability of your network was greater than 0.5 for a given input. But, is this the best threshold 
-to decide that your network found a face? You will now inspect how accuracy changes as a 
+to decide that your network found a face? You will now inspect how performance changes as a 
 function of the threshold to better understand if 0.5 is a good value for your classifier.
 
     To start, make a copy of the evaluate_face_detection.py script and name it `plot_roc_curve.py`:
