@@ -346,9 +346,12 @@ and train its weights further (e.g., to resume training or for fine-tuning on a 
 - **I-3.** Complete the function called `build_nonlinear_model()` in the train_and_test_saddle_function.py 
 script. This function should have as argument the number of input features for the data and should
 return a [Keras model](https://www.tensorflow.org/api_docs/python/tf/keras/models/Model), similar
-to the build_linear_model() function that you implemented before. The difference between these functions, though, 
+to the `build_linear_model()` function that you implemented before. The difference between these functions, though, 
 is that build_nonlinear_model() should implement a more complex neural network capable of approximating the monkey saddle surface
-with an **average L2 error of 150 or less on the test set**.
+with an **average L2 error of 150 or less on the test set**. Note that this error is printed by the `train_and_test_saddle_function.py`
+script when it finishes running.
+
+   The `build_nonlinear_model()` function looks as follows in the `train_and_test_saddle_function.py` script:
 
     ```python
     def build_nonlinear_model(num_inputs):
