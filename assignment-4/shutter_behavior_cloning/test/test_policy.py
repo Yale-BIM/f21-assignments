@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 # Public tests to evaluate behavior cloning model
 
 PKG = "shutter_behavior_cloning"
