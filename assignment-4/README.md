@@ -95,7 +95,7 @@ You assignment will be evaluated based on the content of your report and your co
 - Code (61 pts)
     * Part I (11 pts): I-1 (2 pts) + I-2 (6 pts) + I-3 (3 pts)
     * Part II (29 pts): II-1 (17 pts) + II-2 (12 pts) 
-    * Part III (28 pts): III-1 (28 pts)
+    * Part III (28 pts): III-1 (14 pts) + III-2 (14 pts)
 
 **Note on Part III of the assignment:** Part III provides extra credit for those at the top of the leaderboard in Gradescope.
 The extra credit (2 pts) is valid for all students (CPSC 459 or 559) and will be counted for the final course grade 
@@ -669,7 +669,7 @@ As the launch script is running, you can check that example `state`-`action` pai
 
 ```
 $ tail -f state_action.txt
-# data from 19/10/2021 23:00:05
+# data from 17/10/2021 23:00:05
 base_footprint  1.1781  -0.1099 1.3627  0.0000  0.0000  -0.1202 -0.6751
 base_footprint  1.9321  -2.6038 0.6671  -0.1202 -0.6751 -0.8220 0.5598
 base_footprint  2.8652  -0.8011 2.2853  -0.9423 -0.1153 0.6589  -0.4528
@@ -721,6 +721,12 @@ be placed within the `assignment-4/shutter_behavior_cloining/scripts` directory.
     `https://drive.google.com/file/d/<file_id>/view?usp=sharing`, then you should add 
     `https://drive.google.com/uc?id=<file_id>` to the script for the evaluation with Gradescope to run successfully.
     
+- **III-2.** Complete the `assignment-4/shutter_behavior_cloining/scripts/run_policy.py` script so that it loads up 
+your model and computes new poses for Shutter to follow the target. More specifically, update lines 26-28 in the script
+to load up your model from disk using the model file path provided via the `self.model_file = rospy.get_param("~model")`
+argument to the node. Also, update the `compute_joints_position()` function in line 63 to make a prediction for 
+the robot's joint position such that the `target_callback()` function can command the robot to move accordingly.
+
     **NOTE 1:** You can test your model with the `test_policy.launch` file within 
     `assignment-4/shutter_behavior_cloning/test`. For example:
     ```bash
