@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Script to train and test a neural network with TF's Keras API for face detection
 
 import os
