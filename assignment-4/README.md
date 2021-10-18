@@ -90,8 +90,8 @@ to Google Drive and share them with anybody who has access to the links.
 You assignment will be evaluated based on the content of your report and your code.
 
 - Report (39 pts)
-    * Part I (24 pts): I-1 (4 pts) + I-3 (10 pts) + I-4 (5 pts) + I-5 (5 pts)
-    * Part II (8 pts): II-2 (8 pts)
+    * Part I (29 pts): I-1 (7 pts) + I-3 (10 pts) + I-4 (6 pts) + I-5 (6 pts)
+    * Part II (10 pts): II-2 (10 pts)
 - Code (61 pts)
     * Part I (11 pts): I-1 (2 pts) + I-2 (6 pts) + I-3 (3 pts)
     * Part II (29 pts): II-1 (17 pts) + II-2 (12 pts) 
