@@ -238,7 +238,8 @@ optional arguments:
 The optional parameters `lr`, `epochs`, and `batch_size` correspond to the learning rate,
 number of epochs, and bath size that are used at training time.
 
-Read the code in the training script to familiarize yourself with its functionality.
+Read the code in the training script to familiarize yourself with its functionality. We highly recommend that you also 
+watch [Nathan's video](https://yale.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=80140234-566a-417d-b4ad-adc201246740), where he walks you through the code in a Google Colab notebook, so that you understand how to work with Keras within the training script.
 
 ### Questions/Tasks
 
