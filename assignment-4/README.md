@@ -575,7 +575,7 @@ function of the threshold to better understand if 0.5 is a good value for your c
         :param input_features: input tensor
         :param target: target tensor
         :param model: Keras model
-        :return list of TPR, list of FPR, list of thresholds, index of best threshold as an int
+        :return: list of TPR, list of FPR, list of thresholds, index of best threshold as an int
         """
         ... # normalize the inputs
         
