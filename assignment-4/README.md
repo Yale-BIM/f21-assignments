@@ -338,7 +338,7 @@ and train its weights further (e.g., to resume training or for fine-tuning on a 
     ```
     
     The model that you trained before for task I-1 should be stored as best_monkey_weights.h5
-    within the folder corresponding to your training session in assignments-5/function_approximation/logs.
+    within the folder corresponding to your training session in assignments-4/function_approximation/logs.
     You can pass this model as argument to your train_and_test_saddle_function.py to test the new
     functionality that you just implemented.
     
