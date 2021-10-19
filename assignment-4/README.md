@@ -7,11 +7,9 @@ This is the fourth assignment for Yale's CPSC-459/559 Building Interactive Machi
 * [Introduction](#introduction)
     * [System Requirements](#system-requirements)
     * [Background Knowledge](#background-knowledge)
-    * [Notation](#notation)
     * [Preliminaries](#preliminaries)
        * [Training on Google Colaboratory](#training-on-google-colaboratory)
        * [Training on Google Cloud](#training-on-google-cloud)
-       * [Training on Amazon Web Services (AWS)](#training-on-amazon-web-services-aws)
     * [Deliverables](#deliverables)
     * [Evaluation](#evaluation)
     * [Further Reading](#further-reading)
@@ -184,7 +182,8 @@ by Brian Yung Rowe.
 
 Once you've read the primer, you should complete the tasks below to approximate the 
 [monkey saddle surface](https://en.wikipedia.org/wiki/Monkey_saddle) defined by the equation ![equation](https://latex.codecogs.com/gif.latex?z&space;=&space;x^3&space;-&space;3xy^2).
-<!-- $`z = x^3 - 3xy^2`$ --> Your code should leverage [TensorFlow's Keras API](https://www.tensorflow.org/guide/keras).
+<!-- $`z = x^3 - 3xy^2`$ --> 
+Your code should leverage [TensorFlow's Keras API](https://www.tensorflow.org/guide/keras).
 
 To get you started, this assignment provides two files within the 
 `assignment-4/function_approximation` directory:
@@ -460,7 +459,7 @@ train_face_detection.py script so that it:
    b. Normalizes the training data such that the pixel values are floats in [0,1] rather than integers in [0,255]. The normalization logic
    should be implemented within the `normalize_data_per_row()` function of the `train_face_detection.py` script.
    
-   c. Builds a convolutional neural network model with the TensorFlow Keras API to predict 
+   c. Builds a convolutional neural network model with TensorFlow's Keras API to predict 
    whether the input image corresponds to the face of a person or not. The output of the
    network should be a probability (i.e., a float between 0 and 1) corresponding to the 
    likelihood that the input image shows a human face.
