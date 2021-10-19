@@ -416,7 +416,7 @@ the `assignment-4/face_detection` directory (note that you should not commit the
    Check that you can open the data in python and that it has inputs and target values:
    
    ```bash
-   $ cd assignment-4/face_detection/ # go to the assignment-5/face_detection directory within your private repository
+   $ cd assignment-4/face_detection/ # go to the assignment-4/face_detection directory within your private repository
    $ python3 
    >>> import numpy as np
    >>> data = np.load("64x64_data.npz")
