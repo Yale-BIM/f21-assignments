@@ -22,7 +22,7 @@ This is the third assignment for Yale's CPSC-459/559 Building Interactive Machin
     * [Questions / Tasks](#questions--tasks-3)
 * [Part V. Real-Time Filtering](#part-v-real-time-filtering)
    * [Questions / Tasks](#questions--tasks-4)
-* [Part VI. Non-Parametric Filtering](assignment-3/ExtraQuestions-CSPC559.md) (only for students taking CPSC-559)
+* [Part VI. Non-Parametric Filtering](ExtraQuestions-CSPC559.md) (only for students taking CPSC-559)
 
 ## Introduction 
 This assignment will provide you practical experience with custom messages in ROS, low-level image processing,
